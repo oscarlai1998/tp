@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Xin Ru - Project Portfolio Page
 
 ## Overview
 
