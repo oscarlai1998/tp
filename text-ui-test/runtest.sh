@@ -7,7 +7,6 @@ cd ..
 ./gradlew clean shadowJar
 
 cd text-ui-test
-chmod a+x runtest.sh
 
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
