@@ -1,4 +1,4 @@
-package seedu.duke.module;
+package seedu.igraduate.module;
 
 public class MathModule extends Module {
 }

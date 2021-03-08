@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.igraduate;
 
 public class Ui {
     public void printsWelcomeMessage() {

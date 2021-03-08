@@ -1,10 +1,10 @@
-package seedu.duke;
+package seedu.igraduate;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Igraduate {
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.duke.Igraduate application.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
