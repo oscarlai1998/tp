@@ -5,7 +5,7 @@ import seedu.igraduate.module.Module;
 import java.util.ArrayList;
 
 /**
- * Handles underlying operations on modules ArrayList
+ * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
     /**
