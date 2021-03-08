@@ -1,5 +1,22 @@
 package seedu.igraduate.module;
 
-public class Module {
+import java.util.ArrayList;
 
+public class Module {
+    private String code;
+    private String name;
+    private String credit;
+    private String status;
+    private String grade;
+    private ArrayList<String> preRequisites;
+
+    public Module(String code, String name, String credit, String status, String grade,
+                  ArrayList<String> preRequisites) {
+        this.code = code;
+        this.name = name;
+        this.credit = credit;
+        this.status = status;
+        this.grade = grade;
+        this.preRequisites = preRequisites;
+    }
 }
