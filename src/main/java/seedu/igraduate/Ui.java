@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.igraduate;
 
 public class Ui {
     private static final int ERR_CODE = 0;
