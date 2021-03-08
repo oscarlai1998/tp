@@ -14,6 +14,12 @@ public class Parser {
         return in.nextLine();
     }
 
+    /**
+     * Parses user input and creates new instance of command to be executed.
+     *
+     * @param line user input.
+     * @return new instance of command object to be executed.
+     */
     public void parseCommand(String line) {
         int command = identifyCommand(line);
         switch (command) {
@@ -29,6 +35,7 @@ public class Parser {
             return; // Eventually return exitcommand object
         }
     }
+    
     /**
      * Parses user input and identifies the command to be executed.
      *
