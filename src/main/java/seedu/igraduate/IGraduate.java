@@ -2,9 +2,9 @@ package seedu.igraduate;
 
 import java.util.Scanner;
 
-public class Igraduate {
+public class IGraduate {
     /**
-     * Main entry-point for the java.duke.Igraduate application.
+     * Main entry-point for the java.duke.IGraduate application.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
