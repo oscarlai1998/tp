@@ -9,11 +9,6 @@ public class Parser {
     private static final int COMMAND_PROGRESS = 4;
     private static final int COMMAND_EXIT = 5;
 
-    public String getCommand() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
     /**
      * Parses user input and creates new instance of command to be executed.
      *
