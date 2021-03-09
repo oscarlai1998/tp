@@ -1,5 +1,27 @@
 package seedu.igraduate.command;
 
-public class Command {
+import seedu.igraduate.Storage;
+import seedu.igraduate.ModuleList;
+import seedu.igraduate.Ui;
 
+/**
+ * Parent class for more specific command child class.
+ * Contains basic information applicable to all command-related classes.
+ */
+public abstract class Command {
+    /**
+     * Executes command based on the corresponding command type.
+     *
+     * @param moduleList Module list consisting of all modules.
+     * @param ui User interface for printing result.
+     * @param storage Storage for storing module list data.
+     */
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage);
+
+    /**
+     * Returns a flag indicating whether the program should terminate after execution of current command.
+     *
+     * @return True if the program should be terminated after executing current command, False otherwise.
+     */
+    public abstract boolean isExit();
 }
