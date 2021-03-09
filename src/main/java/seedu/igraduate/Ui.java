@@ -22,7 +22,6 @@ public class Ui {
     public void printWelcomeMessage() {
         System.out.println(GREETING_MESSAGE);
         printBorderLine();
-
     }
 
     public void printExitMessage() {
@@ -35,7 +34,7 @@ public class Ui {
     }
 
     public void printEntireList(ArrayList<Module> modules) {
-        for(int i = 0; i < modules.size(); i++) {
+        for (int i = 0; i < modules.size(); i++) {
             printModuleDetails(modules.get(i));
         }
     }
