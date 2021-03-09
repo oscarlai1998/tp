@@ -9,7 +9,7 @@ import seedu.igraduate.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Todo: Add comments here
+     * Todo: Add comments here.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
