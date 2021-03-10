@@ -12,6 +12,7 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
@@ -27,6 +28,7 @@ public class IGraduate {
             ui.printErrorMessage(1); // Todo: Change to exception
             modules = new ModuleList();
         }
+        parser = new Parser(storage, modules, ui);
     }
 
     /**
@@ -39,7 +41,7 @@ public class IGraduate {
             try {
                 String fullCommand = ui.getCommand();
                 ui.printBorderLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {

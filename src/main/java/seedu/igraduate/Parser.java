@@ -1,10 +1,6 @@
 package seedu.igraduate;
 
-import seedu.igraduate.command.Command;
-import seedu.igraduate.command.AddCommand;
-import seedu.igraduate.command.DeleteCommand;
-import seedu.igraduate.command.ListCommand;
-import seedu.igraduate.command.ProgressCommand;
+import seedu.igraduate.command.*;
 
 public class Parser {
     private static final int COMMAND_ADD = 1;
@@ -13,22 +9,34 @@ public class Parser {
     private static final int COMMAND_PROGRESS = 4;
     private static final int COMMAND_EXIT = 5;
 
+    private Storage storage;
+    private ModuleList moduleList;
+    private Ui ui;
+
+    public Parser(Storage storage, ModuleList moduleList, Ui ui) {
+        this.storage = storage;
+        this.moduleList = moduleList;
+        this.ui = ui;
+    }
+
     /**
      * Parses user input and creates new instance of command to be executed.
      *
      * @param line user input.
      */
-    public static Command parseCommand(String line) throws Exception {
+    public Command parseCommand(String line) throws Exception {
         int command = identifyCommand(line);
         switch (command) {
         case COMMAND_ADD:
-            return new AddCommand(); // Eventually return addcommand object
+            return new AddCommand(this.storage, this.moduleList, this.ui);
         case COMMAND_DELETE:
-            return new DeleteCommand(); //Eventually return deletecommand object
+            return new DeleteCommand(this.storage, this.moduleList, this.ui);
         case COMMAND_LIST:
-            return new ListCommand(); // Eventually return listcommand object
+            return new ListCommand(this.storage, this.moduleList, this.ui);
         case COMMAND_PROGRESS:
-            return new ProgressCommand(); // Eventually return progresscommand object
+            return new ProgressCommand(this.storage, this.moduleList, this.ui);
+        case COMMAND_EXIT:
+            return new ExitCommand(this.storage, this.moduleList, this.ui);
         default:
             throw new Exception();
         }

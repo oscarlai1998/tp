@@ -20,7 +20,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes command based on the corresponding command type.
+     * Executes command based on the corresponding command type. To be overriden.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.

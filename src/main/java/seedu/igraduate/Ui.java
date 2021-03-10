@@ -55,6 +55,34 @@ public class Ui {
 
     }
 
+    public void printAddedModuleSuccess(String name, String type) {
+        System.out.println(String.format(MODULE_ADDED_MESSAGE, name, type));
+    }
+
+    public void printDeletedModuleSuccess(String name, String type) {
+        System.out.println(String.format(MODULE_DELETED_MESSAGE, name, type));
+    }
+
+    public void printModulesTakenMessage() {
+        System.out.println(MODULES_TAKEN_MESSAGE);
+        System.out.println(); // Print module names
+    }
+
+    public void printModulesRemainingMessage() {
+        System.out.println(MODULES_LEFT_MESSAGE);
+        System.out.println(); // Print module names
+    }
+
+    public void printProgressBar() {
+        System.out.println(); // Print progress bar
+        System.out.println(PROGRESS_MESSAGE);
+    }
+
+    /**
+     * Todo Add more errors as we encounter them. Make sure the integer tagged to each error is constant throughout.
+     *
+     * @param error
+     */
     public void printErrorMessage(int error) {
         switch (error) {
         // No fallthrough required

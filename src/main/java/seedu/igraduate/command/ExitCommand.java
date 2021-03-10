@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Todo: Add comments here.
+     * Prints exit message.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -22,7 +22,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        // Todo: Print exit message
+        ui.printExitMessage();
     }
 
     /**
