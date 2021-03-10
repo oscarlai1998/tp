@@ -2,8 +2,8 @@ package seedu.igraduate;
 
 import java.io.File;
 import java.nio.file.Paths;
-import seedu.igraduate.command.Command;
 
+import seedu.igraduate.command.Command;
 import seedu.igraduate.exception.InvalidCommandException;
 
 /**
@@ -43,12 +43,13 @@ public class IGraduate {
                 ui.printBorderLine();
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
-                ui.printBorderLine();
                 isExit = c.isExit();
             } catch (InvalidCommandException exception) {
                 System.out.println("Invalid input!");
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid number!");
+            } finally {
+                ui.printBorderLine();
             }
         }
     }
