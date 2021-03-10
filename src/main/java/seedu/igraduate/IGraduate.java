@@ -1,21 +1,58 @@
 package seedu.igraduate;
 
-import java.util.Scanner;
+import seedu.igraduate.command.Command;
 
+import java.io.File;
+import java.nio.file.Paths;
+
+/**
+ * IGraduate program.
+ */
 public class IGraduate {
-    /**
-     * Main entry-point for the java.duke.IGraduate application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+    private Storage storage;
+    private ModuleList modules;
+    private Ui ui;
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    /**
+     * Instantiates Storage, ModuleList and Ui components of the program.
+     *
+     * @param filePath The file path at which module data file is located, if exists.
+     */
+    public IGraduate(File filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            modules = new ModuleList(storage.loadModulesFromFile());
+        } catch (Exception e) {
+            ui.printErrorMessage(1); // Todo: Change to exception
+            modules = new ModuleList();
+        }
+    }
+
+    /**
+     * Runs IGraduate program.
+     */
+    public void run() {
+        ui.printWelcomeMessage();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.getCommand();
+                ui.printBorderLine();
+                Command c = Parser.parseCommand(fullCommand);
+                c.execute(modules, ui, storage);
+                isExit = c.isExit();
+            } catch (Exception e) {
+                ui.printErrorMessage(1); // Todo: Change to exception
+            } finally {
+                ui.printBorderLine();
+                break; // acts as safe point for test script to exit
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        File filePath = Paths.get("data/modules.json").toFile();
+        new IGraduate(filePath).run();
     }
 }
