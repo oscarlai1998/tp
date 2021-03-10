@@ -1,6 +1,11 @@
 package seedu.igraduate;
 
-import java.util.Scanner;
+import seedu.igraduate.command.Command;
+import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.ExitCommand;
+import seedu.igraduate.command.ListCommand;
+import seedu.igraduate.command.ProgressCommand;
 
 import seedu.igraduate.exception.InvalidCommandException;
 
@@ -15,18 +20,12 @@ public class Parser {
     private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
-
-    public static String getCommand() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
     /**
      * Parses user input and identifies the command to be executed.
      *
      * @param line user input.
      */
-    public static void parseCommand(String line) 
+    public static Command parseCommand(String line) 
             throws InvalidCommandException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
@@ -36,26 +35,22 @@ public class Parser {
 
         switch(command) {
         case COMMAND_ADD:
-            executeAddCommand(commands);
-            break;
+            return executeAddCommand(commands);
         case COMMAND_DELETE:
-            executeDeleteCommand(commands);
-            break;
+            return executeDeleteCommand(commands);
         case COMMAND_LIST:
-            executeListCommand(commands);
-            break;
+            return executeListCommand(commands);
         case COMMAND_PROGRESS:
-            executeProgressCommand(commands);
-            break;
+            return executeProgressCommand(commands);
         case COMMAND_EXIT:
         // Fallthrough
-            executeExitCommand(commands);
+            return executeExitCommand(commands);
         default:
             throw new InvalidCommandException();
         }
     }
 
-    public static void executeAddCommand(String[] commands) 
+    public static Command executeAddCommand(String[] commands) 
             throws InvalidCommandException {
         if (commands.length != COMMAND_ADD_LENGTH) {
             throw new InvalidCommandException();
@@ -64,41 +59,41 @@ public class Parser {
         String code = extractCodePerimeter(commands); 
         String type = extractTypePerimeter(commands);
         int credit = extractCreditPerimeter(commands);
-        System.out.println(String.format("Code: %s, type: %s, credit: %d", code, type, credit));
+        return new AddCommand();
     };
 
-    public static void executeDeleteCommand(String[] commands) 
+    public static Command executeDeleteCommand(String[] commands) 
             throws InvalidCommandException{
         if (commands.length != COMMAND_DELETE_LENGTH) {
             throw new InvalidCommandException();
         }
         String code = extractCodePerimeter(commands);
-        System.out.println(String.format("Code: %s", code));
+        return new DeleteCommand();
     }; 
 
-    public static void executeListCommand(String[] commands) 
+    public static Command executeListCommand(String[] commands) 
             throws InvalidCommandException {
         if (commands.length != COMMAND_LIST_LENGTH) {
             throw new InvalidCommandException();
         }
         String scope = extractScopePerimeter(commands);
-        System.out.println(String.format("Scope: %s", scope));
+        return new ListCommand(); 
     };
 
-    public static void executeProgressCommand(String[] commands) 
+    public static Command executeProgressCommand(String[] commands) 
             throws InvalidCommandException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) {
             throw new InvalidCommandException();
         }
-        System.out.println("Progress");
+        return new ProgressCommand();
     };
 
-    public static void executeExitCommand(String[] commands) 
+    public static Command executeExitCommand(String[] commands) 
             throws InvalidCommandException {
         if (commands.length != COMMAND_EXIT_LENGTH) {
             throw new InvalidCommandException();
         }
-        System.out.println("Exit");
+        return new ExitCommand();
     };
 
 
