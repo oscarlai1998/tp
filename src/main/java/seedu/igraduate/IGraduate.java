@@ -1,9 +1,10 @@
 package seedu.igraduate;
 
-import seedu.igraduate.command.Command;
-
 import java.io.File;
 import java.nio.file.Paths;
+import seedu.igraduate.command.Command;
+
+import seedu.igraduate.exception.InvalidCommandException;
 
 /**
  * IGraduate program.
@@ -18,6 +19,7 @@ public class IGraduate {
      *
      * @param filePath The file path at which module data file is located, if exists.
      */
+
     public IGraduate(File filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -41,12 +43,12 @@ public class IGraduate {
                 ui.printBorderLine();
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
-                isExit = c.isExit();
-            } catch (Exception e) {
-                ui.printErrorMessage(1); // Todo: Change to exception
-            } finally {
                 ui.printBorderLine();
-                break; // acts as safe point for test script to exit
+                isExit = c.isExit();
+            } catch (InvalidCommandException exception) {
+                System.out.println("Invalid input!");
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid number!");
             }
         }
     }
