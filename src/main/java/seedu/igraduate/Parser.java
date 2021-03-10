@@ -1,6 +1,10 @@
 package seedu.igraduate;
 
-import java.util.Scanner;
+import seedu.igraduate.command.Command;
+import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.ListCommand;
+import seedu.igraduate.command.ProgressCommand;
 
 public class Parser {
     private static final int COMMAND_ADD = 1;
@@ -14,19 +18,19 @@ public class Parser {
      *
      * @param line user input.
      */
-    public void parseCommand(String line) {
+    public static Command parseCommand(String line) throws Exception {
         int command = identifyCommand(line);
         switch (command) {
         case COMMAND_ADD:
-            return; // Eventually return addcommand object
+            return new AddCommand(); // Eventually return addcommand object
         case COMMAND_DELETE:
-            return; //Eventually return deletecommand object
+            return new DeleteCommand(); //Eventually return deletecommand object
         case COMMAND_LIST:
-            return; // Eventually return listcommand object
+            return new ListCommand(); // Eventually return listcommand object
         case COMMAND_PROGRESS:
-            return; // Eventually return progresscommand object
+            return new ProgressCommand(); // Eventually return progresscommand object
         default:
-            return; // Eventually return exitcommand object
+            throw new Exception();
         }
     }
 
@@ -36,7 +40,7 @@ public class Parser {
      * @param line user input.
      * @return integer corresponding to command type.
      */
-    public int identifyCommand(String line) {
+    public static int identifyCommand(String line) {
         if (line.trim().length() == 0) {
             System.out.println("Empty input!"); // Add exception class later
         }

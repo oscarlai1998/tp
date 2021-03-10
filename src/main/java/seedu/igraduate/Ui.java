@@ -8,6 +8,11 @@ import java.util.Scanner;
 public class Ui {
     private static final int ERR_CODE = 0;
 
+    private static final String LOGO = " _  ____               _             _       \n"
+            + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
+            + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
+            + "| | |_| | | | (_| | (_| | |_| | (_| | ||  __/\n"
+            + "|_|\\____|_|  \\__,_|\\__,_|\\__,_|\\__,_|\\__\\___|";
     private static final String GREETING_MESSAGE = "iGraduate starting up...\n Welcome to iGraduate, "
             + "your one stop study planning service!\n What would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
@@ -20,6 +25,7 @@ public class Ui {
     }
 
     public void printWelcomeMessage() {
+        System.out.println(LOGO);
         System.out.println(GREETING_MESSAGE);
         printBorderLine();
     }
@@ -43,7 +49,7 @@ public class Ui {
 
     }
 
-    public void printError(int error) {
+    public void printErrorMessage(int error) {
         switch (error) {
         // No fallthrough required
         case ERR_CODE:
