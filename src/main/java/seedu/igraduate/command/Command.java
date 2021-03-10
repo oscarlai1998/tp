@@ -9,6 +9,16 @@ import seedu.igraduate.Ui;
  * Contains basic information applicable to all command-related classes.
  */
 public abstract class Command {
+    protected final Storage storage;
+    protected final ModuleList moduleList;
+    protected final Ui ui;
+
+    public Command(Storage storage, ModuleList moduleList, Ui ui) {
+        this.storage = storage;
+        this.moduleList = moduleList;
+        this.ui = ui;
+    }
+
     /**
      * Executes command based on the corresponding command type.
      *

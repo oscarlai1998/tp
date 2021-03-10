@@ -9,6 +9,11 @@ import seedu.igraduate.Ui;
  */
 
 public class ProgressCommand extends Command {
+
+    public ProgressCommand(Storage storage, ModuleList moduleList, Ui ui) {
+        super(storage, moduleList, ui);
+    }
+
     /**
      * Todo: Add comments here.
      *

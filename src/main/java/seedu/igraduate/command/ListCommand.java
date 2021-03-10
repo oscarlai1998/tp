@@ -8,6 +8,11 @@ import seedu.igraduate.Ui;
  * Handles list command.
  */
 public class ListCommand extends Command {
+
+    public ListCommand(Storage storage, ModuleList moduleList, Ui ui) {
+        super(storage, moduleList, ui);
+    }
+
     /**
      * Todo: Add comments here.
      *

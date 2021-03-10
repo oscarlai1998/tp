@@ -8,6 +8,11 @@ import seedu.igraduate.Ui;
  * Handles add command.
  */
 public class AddCommand extends Command {
+
+    public AddCommand(Storage storage, ModuleList moduleList, Ui ui) {
+        super(storage, moduleList, ui);
+    }
+
     /**
      * Todo: Add comments here.
      *

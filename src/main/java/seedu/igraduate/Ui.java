@@ -14,6 +14,12 @@ public class Ui {
     private static final String BORDER_LINE = "___________________________________________________________";
     private static final String TEMPLATE_ERROR_MESSAGE = "Add more errors as we encounter them.";
 
+    private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
+    private static final String MODULE_DELETED_MESSAGE = "%s module %s has been deleted.";
+    private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
+    private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
+    private static final String PROGRESS_MESSAGE = "%dMCs/%dMCs Completed";
+
     public String getCommand() {
         Scanner in = new Scanner(System.in);
         return in.nextLine();
