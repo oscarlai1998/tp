@@ -2,8 +2,6 @@ package seedu.igraduate;
 
 import seedu.igraduate.command.*;
 
-import java.util.Scanner;
-
 public class Parser {
     private static final int COMMAND_ADD = 1;
     private static final int COMMAND_DELETE = 2;
