@@ -46,6 +46,7 @@ public class IGraduate {
                 ui.printErrorMessage(1); // Todo: Change to exception
             } finally {
                 ui.printBorderLine();
+                break; // acts as safe point for test script to exit
             }
         }
     }
