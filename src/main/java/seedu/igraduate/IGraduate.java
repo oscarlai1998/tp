@@ -6,7 +6,7 @@ import java.io.File;
 import java.nio.file.Paths;
 
 /**
- * IGraduate program
+ * IGraduate program.
  */
 public class IGraduate {
     private Storage storage;
@@ -14,7 +14,7 @@ public class IGraduate {
     private Ui ui;
 
     /**
-     * Instantiates Storage, ModuleList and Ui components of the program
+     * Instantiates Storage, ModuleList and Ui components of the program.
      *
      * @param filePath The file path at which module data file is located, if exists.
      */
@@ -30,7 +30,7 @@ public class IGraduate {
     }
 
     /**
-     * Runs IGraduate program
+     * Runs IGraduate program.
      */
     public void run() {
         ui.printWelcomeMessage();
