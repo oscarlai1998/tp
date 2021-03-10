@@ -1,21 +1,28 @@
 package seedu.igraduate;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
+import seedu.igraduate.exception.InvalidCommandException;
+
 public class IGraduate {
+    private Storage storage;
+    private ModuleList modules;
+
     /**
      * Main entry-point for the java.duke.IGraduate application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        while(true) {
+            String commandString = Parser.getCommand();
+            try {
+                Parser.parseCommand(commandString);
+            } catch (InvalidCommandException exception) {
+                System.out.println("Invalid input!");
+            } catch (NumberFormatException exception) {
+                System.out.println("Invalid number!");
+            }
+        }
     }
 }

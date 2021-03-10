@@ -23,7 +23,7 @@ public class ModuleList {
     /**
      * Assigns the existing ArrayList with modules data as the module storage.
      *
-     * @param modules ArrayList consists of existing modules data.
+     * @param arrayList ArrayList consists of existing modules data.
      */
     public ModuleList(ArrayList<Module> modules) {
         this.modules = modules;
