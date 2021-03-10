@@ -5,9 +5,9 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
 /**
- * Handles exit command.
+ * Handles done command.
  */
-public class ExitCommand extends Command {
+public class DoneCommand extends Command {
     /**
      * Todo: Add comments here.
      *
@@ -17,16 +17,16 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        // Todo: Print exit message
+        // Todo: Command action
     }
 
     /**
      * {@inheritDoc}
      *
-     * @return true
+     * @return false
      */
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 }

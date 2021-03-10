@@ -1,6 +1,10 @@
 package seedu.igraduate;
 
-import java.util.Scanner;
+import seedu.igraduate.command.Command;
+import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.ListCommand;
+import seedu.igraduate.command.ProgressCommand;
 
 public class Parser {
     private static final int COMMAND_ADD = 1;
@@ -9,33 +13,34 @@ public class Parser {
     private static final int COMMAND_PROGRESS = 4;
     private static final int COMMAND_EXIT = 5;
 
-    public String getCommand() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
-    }
-
-    public void parseCommand(String line) {
+    /**
+     * Parses user input and creates new instance of command to be executed.
+     *
+     * @param line user input.
+     */
+    public static Command parseCommand(String line) throws Exception {
         int command = identifyCommand(line);
         switch (command) {
         case COMMAND_ADD:
-            return; // Eventually return addcommand object
+            return new AddCommand(); // Eventually return addcommand object
         case COMMAND_DELETE:
-            return; //Eventually return deletecommand object
+            return new DeleteCommand(); //Eventually return deletecommand object
         case COMMAND_LIST:
-            return; // Eventually return listcommand object
+            return new ListCommand(); // Eventually return listcommand object
         case COMMAND_PROGRESS:
-            return; // Eventually return progresscommand object
+            return new ProgressCommand(); // Eventually return progresscommand object
         default:
-            return; // Eventually return exitcommand object
+            throw new Exception();
         }
     }
+
     /**
      * Parses user input and identifies the command to be executed.
      *
      * @param line user input.
      * @return integer corresponding to command type.
      */
-    public int identifyCommand(String line) {
+    public static int identifyCommand(String line) {
         if (line.trim().length() == 0) {
             System.out.println("Empty input!"); // Add exception class later
         }
