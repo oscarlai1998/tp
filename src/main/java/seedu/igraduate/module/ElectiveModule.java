@@ -7,4 +7,9 @@ public class ElectiveModule extends Module {
                           ArrayList<String> preRequisites) {
         super(code, name, credit, status, grade, preRequisites);
     }
+
+    @Override
+    public String toString() {
+        return "[E]" + super.toString();
+    }
 }
