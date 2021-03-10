@@ -25,15 +25,15 @@ public class Parser {
      *
      * @param line user input.
      */
-    public static Command parseCommand(String line) 
-            throws InvalidCommandException {
-        if (line.trim().length() == 0) {
+    public static Command parseCommand (String line) 
+            throws InvalidCommandException { 
+        if (line.trim().length() == 0) { 
             throw new InvalidCommandException();
         }
         String[] commands = line.split("\\s+");
         String command = commands[0].toLowerCase();
 
-        switch(command) {
+        switch (command) { 
         case COMMAND_ADD:
             return executeAddCommand(commands);
         case COMMAND_DELETE:
@@ -43,7 +43,7 @@ public class Parser {
         case COMMAND_PROGRESS:
             return executeProgressCommand(commands);
         case COMMAND_EXIT:
-        // Fallthrough
+            // Fallthrough
             return executeExitCommand(commands);
         default:
             throw new InvalidCommandException();
@@ -51,8 +51,8 @@ public class Parser {
     }
 
     public static Command executeAddCommand(String[] commands) 
-            throws InvalidCommandException {
-        if (commands.length != COMMAND_ADD_LENGTH) {
+            throws InvalidCommandException { 
+        if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new InvalidCommandException();
         }
 
@@ -60,61 +60,61 @@ public class Parser {
         String type = extractTypePerimeter(commands);
         int credit = extractCreditPerimeter(commands);
         return new AddCommand();
-    };
+    }
 
-    public static Command executeDeleteCommand(String[] commands) 
-            throws InvalidCommandException{
-        if (commands.length != COMMAND_DELETE_LENGTH) {
+    public static Command executeDeleteCommand(String[] commands)
+            throws InvalidCommandException { 
+        if (commands.length != COMMAND_DELETE_LENGTH) { 
             throw new InvalidCommandException();
         }
         String code = extractCodePerimeter(commands);
         return new DeleteCommand();
-    }; 
+    }
 
     public static Command executeListCommand(String[] commands) 
-            throws InvalidCommandException {
-        if (commands.length != COMMAND_LIST_LENGTH) {
+            throws InvalidCommandException { 
+        if (commands.length != COMMAND_LIST_LENGTH) { 
             throw new InvalidCommandException();
         }
         String scope = extractScopePerimeter(commands);
         return new ListCommand(); 
-    };
+    }
 
     public static Command executeProgressCommand(String[] commands) 
-            throws InvalidCommandException {
-        if (commands.length != COMMAND_PROGRESS_LENGTH) {
+            throws InvalidCommandException { 
+        if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new InvalidCommandException();
         }
         return new ProgressCommand();
-    };
+    }
 
     public static Command executeExitCommand(String[] commands) 
-            throws InvalidCommandException {
-        if (commands.length != COMMAND_EXIT_LENGTH) {
+            throws InvalidCommandException { 
+        if (commands.length != COMMAND_EXIT_LENGTH) { 
             throw new InvalidCommandException();
         }
         return new ExitCommand();
-    };
+    }
 
 
     public static String extractCodePerimeter(String[] commands) 
-            throws InvalidCommandException {
+            throws InvalidCommandException { 
         return commands[1].toUpperCase().trim();
     }
 
     public static String extractTypePerimeter(String[] commands) 
-            throws InvalidCommandException {
-        for (int i = 0; i < commands.length; i++) {
-            if (commands[i].equals("-t")) {
-                String type = commands[i+1].toLowerCase().trim();
-                switch(type) {
-                    case "core":
-                    case "ue":
-                    case "math":
-                    case "ge":
-                        return type;
-                    default: 
-                        throw new InvalidCommandException();
+            throws InvalidCommandException { 
+        for (int i = 0; i < commands.length; i++) { 
+            if (commands[i].equals("-t")) { 
+                String type = commands[i + 1].toLowerCase().trim();
+                switch (type) {
+                case "core":
+                case "ue":
+                case "math":
+                case "ge":
+                    return type;
+                default: 
+                    throw new InvalidCommandException();
                 }
             }
         }
@@ -125,7 +125,7 @@ public class Parser {
             throws NumberFormatException, InvalidCommandException {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
-                return Integer.parseInt(commands[i+1]);
+                return Integer.parseInt(commands[i + 1]);
             }
         }
         throw new InvalidCommandException();
