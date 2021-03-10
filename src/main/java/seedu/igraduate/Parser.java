@@ -1,6 +1,10 @@
 package seedu.igraduate;
 
-import seedu.igraduate.command.*;
+import seedu.igraduate.command.Command;
+import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.ListCommand;
+import seedu.igraduate.command.ProgressCommand;
 
 public class Parser {
     private static final int COMMAND_ADD = 1;
