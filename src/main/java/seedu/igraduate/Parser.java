@@ -20,12 +20,13 @@ public class Parser {
     private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
+    
     /**
      * Parses user input and identifies the command to be executed.
      *
      * @param line user input.
      */
-    public static Command parseCommand (String line) 
+    public static Command parseCommand(String line) 
             throws InvalidCommandException { 
         if (line.trim().length() == 0) { 
             throw new InvalidCommandException();
