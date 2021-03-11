@@ -33,7 +33,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    protected ArrayList<Module> loadModulesFromFile() 
+    public ArrayList<Module> loadModulesFromFile()
             throws IOException, FileNotFoundException, JsonSyntaxException {
         if (!filePath.exists()) {
             throw new FileNotFoundException();
@@ -51,7 +51,7 @@ public class Storage {
         return gson.fromJson(fileReader, type);
     }
 
-    protected void writeModulesToFile(ModuleList modules) throws JsonIOException, IOException {
+    public void writeModulesToFile(ModuleList modules) throws JsonIOException, IOException {
         // Creates parent directories if file does not exist
         if (!filePath.exists()) {
             filePath.getParentFile().mkdirs();
