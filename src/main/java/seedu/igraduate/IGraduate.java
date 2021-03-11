@@ -30,7 +30,6 @@ public class IGraduate {
             ui.printErrorMessage(1); // Todo: Change to exception
             modules = new ModuleList();
         }
-        parser = new Parser(storage, modules, ui);
     }
 
     /**

@@ -8,9 +8,24 @@ import seedu.igraduate.Ui;
  * Handles add command.
  */
 public class AddCommand extends Command {
+    protected String moduleCode;
+    protected String moduleType;
+    protected int moduleCredits;
 
     public AddCommand(Storage storage, ModuleList moduleList, Ui ui) {
         super(storage, moduleList, ui);
+    }
+
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
+    public void setModuleType(String moduleType) {
+        this.moduleType = moduleType;
+    }
+
+    public void setModuleCredits(int moduleCredits) {
+        this.moduleCredits = moduleCredits;
     }
 
     /**

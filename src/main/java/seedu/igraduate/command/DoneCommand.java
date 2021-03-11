@@ -8,6 +8,11 @@ import seedu.igraduate.Ui;
  * Handles done command.
  */
 public class DoneCommand extends Command {
+
+    public DoneCommand(Storage storage, ModuleList moduleList, Ui ui) {
+        super(storage, moduleList, ui);
+    }
+
     /**
      * Todo: Add comments here.
      *
