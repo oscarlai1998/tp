@@ -31,6 +31,8 @@ public class Ui {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private static final String INVALID_SYNTAX_MESSAGE = "Invalid syntax detected";  
+
     public String getCommand() throws InvalidCommandException {
         return SCANNER.nextLine();
     }
