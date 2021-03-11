@@ -27,4 +27,23 @@ public class ParserTest {
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
+
+    @Test
+    void executeDeleteCommand_tooFewParameters_exceptionThrown() {
+        String line = "Delete";
+        String[] components = line.split(" ");
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.createDeleteCommand(components));
+        assertEquals("The number of parameters"
+                + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
+    }
+
+    @Test
+    void executeListCommand_invalidParameter_exceptionThrown() {
+        String line = "done";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals("The number of parameters"
+            + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
+    }
 }
