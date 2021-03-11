@@ -41,18 +41,18 @@ public class Parser {
 
         switch (command) { 
         case COMMAND_ADD:
-            return executeAddCommand(commands);
+            return createAddCommand(commands);
         case COMMAND_DELETE:
-            return executeDeleteCommand(commands);
+            return createDeleteCommand(commands);
         case COMMAND_LIST:
-            return executeListCommand(commands);
+            return createListCommand(commands);
         case COMMAND_PROGRESS:
-            return executeProgressCommand(commands);
+            return createProgressCommand(commands);
         case COMMAND_DONE:
-            return executeDoneCommand(commands);
+            return createDoneCommand(commands);
         case COMMAND_EXIT:
             // Fallthrough
-            return executeExitCommand(commands);
+            return createExitCommand(commands);
         default:
             throw new InvalidCommandException();
         }
@@ -65,7 +65,7 @@ public class Parser {
      * @return new instance of AddCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeAddCommand(String[] commands)
+    public static Command createAddCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -84,7 +84,7 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeDeleteCommand(String[] commands)
+    public static Command createDeleteCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_DELETE_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -101,7 +101,7 @@ public class Parser {
      * @return new instance of ListCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeListCommand(String[] commands)
+    public static Command createListCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_LIST_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -118,7 +118,7 @@ public class Parser {
      * @return new instance of ProgressCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeProgressCommand(String[] commands)
+    public static Command createProgressCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -133,7 +133,7 @@ public class Parser {
      * @return new instance of DoneCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeDoneCommand(String[] commands)
+    public static Command createDoneCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_DONE_LENGTH) {
             throw new IncorrectParameterCountException();
@@ -150,7 +150,7 @@ public class Parser {
      * @return new instance of ExitCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeExitCommand(String[] commands)
+    public static Command createExitCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_EXIT_LENGTH) { 
             throw new IncorrectParameterCountException();
