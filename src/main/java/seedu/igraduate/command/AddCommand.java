@@ -46,17 +46,25 @@ public class AddCommand extends Command {
         // Todo: Command action
         switch (this.moduleType) {
         case CORE:
-            CoreModule coreModule = new CoreModule(this.moduleCode, MOD_NAME, this.moduleCredits, DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+            CoreModule coreModule = new CoreModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             moduleList.add(coreModule);
+            break;
         case UE:
-            ElectiveModule electiveModule = new ElectiveModule(this.moduleCode, MOD_NAME, this.moduleCredits, DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+            ElectiveModule electiveModule = new ElectiveModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             moduleList.add(electiveModule);
+            break;
         case MATH:
-            MathModule mathModule = new MathModule(this.moduleCode, MOD_NAME, this.moduleCredits, DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+            MathModule mathModule = new MathModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             moduleList.add(mathModule);
+            break;
         case GE:
-            GeModule geModule = new GeModule(this.moduleCode, MOD_NAME, this.moduleCredits, DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+            GeModule geModule = new GeModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             moduleList.add(geModule);
+            break;
         default:
             break;
         }
