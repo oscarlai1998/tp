@@ -29,8 +29,8 @@ public class Ui {
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
     private static final String PROGRESS_MESSAGE = "%dMCs/%dMCs Completed";
 
-
     private static final Scanner SCANNER = new Scanner(System.in);
+
     public String getCommand() throws InvalidCommandException {
         return SCANNER.nextLine();
     }
@@ -90,7 +90,7 @@ public class Ui {
     /**
      * Todo Add more errors as we encounter them. Make sure the integer tagged to each error is constant throughout.
      *
-     * @param error
+     * @param error integer representing the error.
      */
     public void printErrorMessage(int error) {
         switch (error) {

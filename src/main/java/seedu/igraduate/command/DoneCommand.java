@@ -9,10 +9,6 @@ import seedu.igraduate.Ui;
  */
 public class DoneCommand extends Command {
 
-    public DoneCommand(Storage storage, ModuleList moduleList, Ui ui) {
-        super(storage, moduleList, ui);
-    }
-
     /**
      * Todo: Add comments here.
      *
