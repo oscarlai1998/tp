@@ -26,7 +26,6 @@ public class IGraduate {
      *
      * @param filePath The file path at which module data file is located, if exists.
      */
-
     public IGraduate(File filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
