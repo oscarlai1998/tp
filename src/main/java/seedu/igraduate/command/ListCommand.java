@@ -8,6 +8,12 @@ import seedu.igraduate.Ui;
  * Handles list command.
  */
 public class ListCommand extends Command {
+    protected String scope;
+
+    public ListCommand(String scope) {
+        this.scope = scope;
+    }
+
     /**
      * Todo: Add comments here.
      *

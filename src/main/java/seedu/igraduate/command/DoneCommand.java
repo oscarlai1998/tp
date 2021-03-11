@@ -8,6 +8,7 @@ import seedu.igraduate.Ui;
  * Handles done command.
  */
 public class DoneCommand extends Command {
+
     /**
      * Todo: Add comments here.
      *

@@ -10,9 +10,12 @@ import seedu.igraduate.exception.InvalidCommandException;
  * IGraduate program.
  */
 public class IGraduate {
+    private static final int ERR_INVALID_INPUT = -1;
+
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
+    private Parser parser;
 
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
@@ -41,11 +44,11 @@ public class IGraduate {
             try {
                 String fullCommand = ui.getCommand();
                 ui.printBorderLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
             } catch (InvalidCommandException exception) {
-                System.out.println("Invalid input!");
+                ui.printErrorMessage(ERR_INVALID_INPUT);
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid number!");
             } finally {

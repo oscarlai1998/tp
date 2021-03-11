@@ -8,6 +8,12 @@ import seedu.igraduate.Ui;
  * Handles delete command.
  */
 public class DeleteCommand extends Command {
+    protected String moduleCode;
+
+    public DeleteCommand(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
     /**
      * Todo: Add comments here.
      *

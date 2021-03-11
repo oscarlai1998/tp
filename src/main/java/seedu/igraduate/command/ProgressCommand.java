@@ -7,7 +7,6 @@ import seedu.igraduate.Ui;
 /**
  * Handles progress command.
  */
-
 public class ProgressCommand extends Command {
     /**
      * Todo: Add comments here.
