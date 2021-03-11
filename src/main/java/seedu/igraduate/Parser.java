@@ -76,7 +76,7 @@ public class Parser {
         }
         String moduleCode = extractModuleCode(commands);
         String moduleType = extractModuleType(commands);
-        int moduleCredits = extractModuleCredits(commands);
+        double moduleCredits = extractModuleCredits(commands);
 
         return new AddCommand(moduleCode, moduleType, moduleCredits);
     }
@@ -191,11 +191,11 @@ public class Parser {
      * @throws NumberFormatException if number is not given as modular credits.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public static int extractModuleCredits(String[] commands)
+    public static double extractModuleCredits(String[] commands)
             throws NumberFormatException, InvalidCommandException {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
-                return Integer.parseInt(commands[i + 1]);
+                return Double.parseDouble(commands[i + 1]);
             }
         }
         throw new InvalidCommandException();

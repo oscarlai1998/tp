@@ -10,9 +10,9 @@ import seedu.igraduate.Ui;
 public class AddCommand extends Command {
     protected String moduleCode;
     protected String moduleType;
-    protected int moduleCredits;
+    protected double moduleCredits;
 
-    public AddCommand(String moduleCode, String moduleType, int moduleCredits) {
+    public AddCommand(String moduleCode, String moduleType, double moduleCredits) {
         this.moduleCode = moduleCode;
         this.moduleType = moduleType;
         this.moduleCredits = moduleCredits;
