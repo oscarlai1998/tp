@@ -30,8 +30,8 @@ public class IGraduate {
         storage = new Storage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
-        } catch (FileNotFoundException exeception) {
-            ui.printErrorMessage(exeception); // Todo: Change to exception
+        } catch (FileNotFoundException exception) {
+            ui.printErrorMessage(exception);
             modules = new ModuleList();
         } catch (JsonSyntaxException exception) {
             ui.printErrorMessage(exception);
