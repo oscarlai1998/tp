@@ -1,7 +1,11 @@
 package seedu.igraduate;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Paths;
+
+import com.google.gson.JsonSyntaxException;
 
 import seedu.igraduate.command.Command;
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -28,9 +32,13 @@ public class IGraduate {
         storage = new Storage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
-        } catch (Exception e) {
+        } catch (FileNotFoundException exeception) {
             ui.printErrorMessage(1); // Todo: Change to exception
             modules = new ModuleList();
+        } catch (JsonSyntaxException exception) {
+            ui.printErrorMessage(1);
+        } catch (IOException exception) {
+            ui.printErrorMessage(1);
         }
     }
 
@@ -50,7 +58,7 @@ public class IGraduate {
             } catch (InvalidCommandException exception) {
                 ui.printErrorMessage(ERR_INVALID_INPUT);
             } catch (NumberFormatException exception) {
-                System.out.println("Invalid number!");
+                ui.printErrorMessage(ERR_INVALID_INPUT);
             } catch (IncorrectParameterCountException exception) {
                 System.out.println(exception.getMessage());
             } finally {
