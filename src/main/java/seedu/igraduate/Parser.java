@@ -7,6 +7,7 @@ import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
 
+import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 
 public class Parser {
@@ -28,7 +29,7 @@ public class Parser {
      * @param line user input.
      */
     public static Command parseCommand(String line)
-            throws InvalidCommandException { 
+            throws InvalidCommandException, IncorrectParameterCountException {
         if (line.trim().length() == 0) { 
             throw new InvalidCommandException();
         }
@@ -113,9 +114,9 @@ public class Parser {
      * @throws InvalidCommandException if command format is not recognised.
      */
     public static Command executeProgressCommand(String[] commands)
-            throws InvalidCommandException { 
+            throws IncorrectParameterCountException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
-            throw new InvalidCommandException();
+            throw new IncorrectParameterCountException();
         }
         return new ProgressCommand();
     }
