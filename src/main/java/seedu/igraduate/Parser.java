@@ -67,7 +67,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of AddCommand class.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public Command executeAddCommand(String[] commands)
             throws InvalidCommandException { 
@@ -86,7 +86,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of DeleteCommand class.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public Command executeDeleteCommand(String[] commands)
             throws InvalidCommandException { 
@@ -103,7 +103,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ListCommand class.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public Command executeListCommand(String[] commands)
             throws InvalidCommandException { 
@@ -120,7 +120,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ProgressCommand class.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public Command executeProgressCommand(String[] commands)
             throws InvalidCommandException { 
@@ -135,7 +135,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ExitCommand class.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public Command executeExitCommand(String[] commands)
             throws InvalidCommandException { 
@@ -150,7 +150,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return module code.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractModuleCode(String[] commands)
             throws InvalidCommandException { 
@@ -162,7 +162,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return module type.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractModuleType(String[] commands)
             throws InvalidCommandException { 
@@ -188,8 +188,8 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return number of modular credits.
-     * @throws NumberFormatException
-     * @throws InvalidCommandException
+     * @throws NumberFormatException if number is not given as modular credits.
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public static int extractModuleCredits(String[] commands)
             throws NumberFormatException, InvalidCommandException {
@@ -210,7 +210,7 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return the option user selects.
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractListScope(String[] commands)
         throws InvalidCommandException {
