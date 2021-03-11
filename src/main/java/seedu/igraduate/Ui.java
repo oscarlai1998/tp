@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Ui {
     private static final int ERR_INVALID_INPUT = -1;
 
-    private static final String LOGO = " _  ____               _             _       \n"
+    private static final String LOGO = " _  ____               _             _\n"
             + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
             + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
             + "| | |_| | | | (_| | (_| | |_| | (_| | ||  __/\n"
