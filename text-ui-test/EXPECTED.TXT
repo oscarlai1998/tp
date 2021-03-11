@@ -7,3 +7,4 @@ iGraduate starting up...
  Welcome to iGraduate, your one stop study planning service!
  What would you like to do today?
 ___________________________________________________________
+___________________________________________________________
