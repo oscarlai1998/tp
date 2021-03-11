@@ -12,7 +12,7 @@ class IGraduateTest {
     void parseCommand_emptyCommand_exceptionThrown() {
         String line = "";
         Exception exception = assertThrows(InvalidCommandException.class, () -> Parser.parseCommand(line));
-        assertEquals("The command you have entered"
-        + " is incorrect. \nPlease double check and try again.", exception.getMessage());
+        assertEquals("The command you have entered" + " is incorrect. \nPlease double check and try again.",
+                exception.getMessage());
     }
 }
