@@ -32,7 +32,7 @@ public class ParserTest {
         String line = "Delete";
         String[] components = line.split(" ");
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.executeDeleteCommand(components));
+            () -> Parser.executeDeleteCommand(components));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
