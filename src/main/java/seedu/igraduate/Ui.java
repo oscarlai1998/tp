@@ -39,7 +39,6 @@ public class Ui {
 
     public void printExitMessage() {
         System.out.println(GOODBYE_MESSAGE);
-        printBorderLine();
     }
 
     public void printBorderLine() {
