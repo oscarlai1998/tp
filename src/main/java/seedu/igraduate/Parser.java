@@ -74,12 +74,11 @@ public class Parser {
         if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new InvalidCommandException();
         }
-        AddCommand addCommand = new AddCommand(this.storage, this.modules, this.ui);
-        addCommand.setModuleCode(extractModuleCode(commands));
-        addCommand.setModuleType(extractModuleType(commands));
-        addCommand.setModuleCredits(extractModuleCredits(commands));
+        String moduleCode = extractModuleCode(commands);
+        String moduleType = extractModuleType(commands);
+        int moduleCredits = extractModuleCredits(commands);
 
-        return addCommand;
+        return new AddCommand(moduleCode, moduleType, moduleCredits);
     }
 
     /**
@@ -95,10 +94,8 @@ public class Parser {
             throw new InvalidCommandException();
         }
         String code = extractModuleCode(commands);
-        DeleteCommand deleteCommand = new DeleteCommand(this.storage, this.modules, this.ui);
-        deleteCommand.setModuleCode(code);
 
-        return deleteCommand;
+        return new DeleteCommand(code);
     }
 
     /**
@@ -114,10 +111,8 @@ public class Parser {
             throw new InvalidCommandException();
         }
         String scope = extractListScope(commands);
-        ListCommand listCommand = new ListCommand(this.storage, this.modules, this.ui);
-        listCommand.setScope(scope);
 
-        return listCommand;
+        return new ListCommand(scope);
     }
 
     /**
@@ -132,7 +127,7 @@ public class Parser {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new InvalidCommandException();
         }
-        return new ProgressCommand(this.storage, this.modules, this.ui);
+        return new ProgressCommand();
     }
 
     /**
@@ -147,7 +142,7 @@ public class Parser {
         if (commands.length != COMMAND_EXIT_LENGTH) { 
             throw new InvalidCommandException();
         }
-        return new ExitCommand(this.storage, this.modules, this.ui);
+        return new ExitCommand();
     }
 
     /**

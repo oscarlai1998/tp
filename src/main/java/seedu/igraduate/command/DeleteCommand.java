@@ -10,11 +10,7 @@ import seedu.igraduate.Ui;
 public class DeleteCommand extends Command {
     protected String moduleCode;
 
-    public DeleteCommand(Storage storage, ModuleList moduleList, Ui ui) {
-        super(storage, moduleList, ui);
-    }
-
-    public void setModuleCode(String moduleCode) {
+    public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 

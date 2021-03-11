@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final int ERR_CODE = 0;
+    private static final int ERR_INVALID_INPUT = -1;
 
     private static final String LOGO = " _  ____               _             _       \n"
             + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
@@ -18,8 +18,10 @@ public class Ui {
             + "your one stop study planning service!\n What would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "___________________________________________________________";
+
     private static final String TEMPLATE_ERROR_MESSAGE = "Add more errors as we encounter them.";
-    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String INVALID_INPUT_MESSAGE = "I don't understand your command! Please consult the "
+            + "user guide for the accepted commands and their formats!";
 
     private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
     private static final String MODULE_DELETED_MESSAGE = "%s module %s has been deleted.";
@@ -27,6 +29,8 @@ public class Ui {
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
     private static final String PROGRESS_MESSAGE = "%dMCs/%dMCs Completed";
 
+
+    private static final Scanner SCANNER = new Scanner(System.in);
     public String getCommand() throws InvalidCommandException {
         return SCANNER.nextLine();
     }
@@ -63,6 +67,11 @@ public class Ui {
         System.out.println(String.format(MODULE_DELETED_MESSAGE, name, type));
     }
 
+    public void printAllModules() {
+        printModulesTakenMessage();
+        printModulesRemainingMessage();
+    }
+
     public void printModulesTakenMessage() {
         System.out.println(MODULES_TAKEN_MESSAGE);
         System.out.println(); // Print module names
@@ -86,8 +95,8 @@ public class Ui {
     public void printErrorMessage(int error) {
         switch (error) {
         // No fallthrough required
-        case ERR_CODE:
-            System.out.println(TEMPLATE_ERROR_MESSAGE);
+        case ERR_INVALID_INPUT:
+            System.out.println(INVALID_INPUT_MESSAGE);
             break;
         default:
             System.out.println("Some error");

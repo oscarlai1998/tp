@@ -10,11 +10,7 @@ import seedu.igraduate.Ui;
 public class ListCommand extends Command {
     protected String scope;
 
-    public ListCommand(Storage storage, ModuleList moduleList, Ui ui) {
-        super(storage, moduleList, ui);
-    }
-
-    public void setScope(String scope) {
+    public ListCommand(String scope) {
         this.scope = scope;
     }
 

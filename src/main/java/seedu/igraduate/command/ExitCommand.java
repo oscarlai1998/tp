@@ -9,11 +9,6 @@ import seedu.igraduate.Ui;
  */
 public class ExitCommand extends Command {
 
-
-    public ExitCommand(Storage storage, ModuleList moduleList, Ui ui) {
-        super(storage, moduleList, ui);
-    }
-
     /**
      * Prints exit message.
      *
