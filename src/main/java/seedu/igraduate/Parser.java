@@ -3,6 +3,7 @@ package seedu.igraduate;
 import seedu.igraduate.command.Command;
 import seedu.igraduate.command.AddCommand;
 import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
@@ -14,12 +15,14 @@ public class Parser {
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_PROGRESS = "progress";
+    private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
 
     private static final int COMMAND_ADD_LENGTH = 6;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
+    private static final int COMMAND_DONE_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     protected final ModuleList modules;
@@ -37,8 +40,7 @@ public class Parser {
      *
      * @param line user input.
      */
-    public Command parseCommand(String line)
-            throws InvalidCommandException { 
+    public Command parseCommand(String line) throws InvalidCommandException {
         if (line.trim().length() == 0) { 
             throw new InvalidCommandException();
         }
@@ -54,6 +56,8 @@ public class Parser {
             return executeListCommand(commands);
         case COMMAND_PROGRESS:
             return executeProgressCommand(commands);
+        case COMMAND_DONE:
+            return executeDoneCommand(commands);
         case COMMAND_EXIT:
             // Fallthrough
             return executeExitCommand(commands);
@@ -63,33 +67,31 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of relevant Command class to execute.
+     * Extracts relevant parameters and creates new instance of AddCommand class to execute.
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of AddCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeAddCommand(String[] commands)
-            throws InvalidCommandException { 
+    public Command executeAddCommand(String[] commands) throws InvalidCommandException {
         if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new InvalidCommandException();
         }
         String moduleCode = extractModuleCode(commands);
         String moduleType = extractModuleType(commands);
-        int moduleCredits = extractModuleCredits(commands);
+        double moduleCredits = extractModuleCredits(commands);
 
         return new AddCommand(moduleCode, moduleType, moduleCredits);
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of relevant Command class to execute.
+     * Extracts relevant parameters and creates new instance of DeleteCommand class to execute.
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of DeleteCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeDeleteCommand(String[] commands)
-            throws InvalidCommandException { 
+    public Command executeDeleteCommand(String[] commands) throws InvalidCommandException {
         if (commands.length != COMMAND_DELETE_LENGTH) { 
             throw new InvalidCommandException();
         }
@@ -99,14 +101,13 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of relevant Command class to execute.
+     * Extracts relevant parameters and creates new instance of ListCommand class to execute.
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ListCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeListCommand(String[] commands)
-            throws InvalidCommandException { 
+    public Command executeListCommand(String[] commands) throws InvalidCommandException {
         if (commands.length != COMMAND_LIST_LENGTH) { 
             throw new InvalidCommandException();
         }
@@ -116,14 +117,13 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of relevant Command class to execute.
+     * Creates new instance of ProgressCommand class to execute.
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ProgressCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeProgressCommand(String[] commands)
-            throws InvalidCommandException { 
+    public Command executeProgressCommand(String[] commands) throws InvalidCommandException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new InvalidCommandException();
         }
@@ -131,7 +131,23 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of relevant Command class to execute.
+     * Extracts relevant parameters and creates an instance of DoneCommand to execute.
+     *
+     * @param commands user input split into substrings with " " as delimiter.
+     * @return new instance of DoneCommand class.
+     * @throws InvalidCommandException if command format is not recognised.
+     */
+    public Command executeDoneCommand(String[] commands) throws InvalidCommandException {
+        if (commands.length != COMMAND_DONE_LENGTH) {
+            throw new InvalidCommandException();
+        }
+        String moduleCode = extractModuleCode(commands);
+
+        return new DoneCommand(moduleCode);
+    }
+    
+    /**
+     * Creates new instance of ExitCommand class to execute.
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return new instance of ExitCommand class.
@@ -150,10 +166,8 @@ public class Parser {
      *
      * @param commands user input split into substrings with " " as delimiter.
      * @return module code.
-     * @throws InvalidCommandException if command format is not recognised.
      */
-    public static String extractModuleCode(String[] commands)
-            throws InvalidCommandException { 
+    public static String extractModuleCode(String[] commands) {
         return commands[1].toUpperCase().trim();
     }
 
@@ -164,8 +178,7 @@ public class Parser {
      * @return module type.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public static String extractModuleType(String[] commands)
-            throws InvalidCommandException { 
+    public static String extractModuleType(String[] commands) throws InvalidCommandException {
         for (int i = 0; i < commands.length; i++) { 
             if (commands[i].equals("-t")) { 
                 String type = commands[i + 1].toLowerCase().trim();
@@ -191,8 +204,7 @@ public class Parser {
      * @throws NumberFormatException if number is not given as modular credits.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public static int extractModuleCredits(String[] commands)
-            throws NumberFormatException, InvalidCommandException {
+    public static int extractModuleCredits(String[] commands) throws NumberFormatException, InvalidCommandException {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
                 return Integer.parseInt(commands[i + 1]);
@@ -212,8 +224,7 @@ public class Parser {
      * @return the option user selects.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public static String extractListScope(String[] commands)
-        throws InvalidCommandException {
+    public static String extractListScope(String[] commands) throws InvalidCommandException {
         String scope = commands[1].trim().toLowerCase();
         switch (scope) {
         case "all":
