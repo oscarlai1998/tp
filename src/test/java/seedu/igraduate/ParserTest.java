@@ -27,4 +27,14 @@ public class ParserTest {
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
 
     }
+
+    @Test
+    void executeListCommand_invalidParameter_exceptionThrown() {
+        String line = "done";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals("The number of parameters"
+            + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
+
+    }
 }
