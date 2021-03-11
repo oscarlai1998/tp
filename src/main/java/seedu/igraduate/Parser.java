@@ -3,6 +3,7 @@ package seedu.igraduate;
 import seedu.igraduate.command.Command;
 import seedu.igraduate.command.AddCommand;
 import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
