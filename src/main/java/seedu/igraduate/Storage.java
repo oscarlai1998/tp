@@ -22,18 +22,18 @@ import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 public class Storage {
     private File filePath;
-    private final RuntimeTypeAdapterFactory<Module> MODULE_ADAPTOR_FACTORY = RuntimeTypeAdapterFactory
+    private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
             .of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core")
             .registerSubtype(ElectiveModule.class, "elective")
             .registerSubtype(GeModule.class, "ge")
             .registerSubtype(MathModule.class, "math");
 
-    public Storage (File filePath) {
+    public Storage(File filePath) {
         this.filePath = filePath;
     }
 
-    protected ArrayList<Module> loadModulesFromFile () 
+    protected ArrayList<Module> loadModulesFromFile() 
             throws IOException, FileNotFoundException, JsonSyntaxException {
         if (!filePath.exists()) {
             throw new FileNotFoundException();
@@ -44,14 +44,14 @@ public class Storage {
     }
 
     public ArrayList<Module> loadFromJson(Type type, File jsonFile) 
-            throws IOException{
-        Gson gson = new GsonBuilder().registerTypeAdapterFactory(MODULE_ADAPTOR_FACTORY).create();
+            throws IOException, FileNotFoundException {
+        Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         FileReader fileReader = new FileReader(jsonFile);
         return gson.fromJson(fileReader, type);
     }
 
-    protected void writeModulesToFile (ModuleList modules) throws JsonIOException, IOException {
+    protected void writeModulesToFile(ModuleList modules) throws JsonIOException, IOException {
         // Creates parent directories if file does not exist
         if (!filePath.exists()) {
             filePath.getParentFile().mkdirs();
@@ -61,7 +61,7 @@ public class Storage {
 
     public <T> void saveToJson(File jsonFile, ArrayList<T> objects) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
-                .registerTypeAdapterFactory(MODULE_ADAPTOR_FACTORY).create();
+                .registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         int arraySize = objects.size();
         int lastIndex = arraySize - 1;
