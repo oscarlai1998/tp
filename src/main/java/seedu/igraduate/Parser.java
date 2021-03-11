@@ -22,22 +22,12 @@ public class Parser {
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
-    protected final ModuleList modules;
-    protected final Ui ui;
-    protected final Storage storage;
-
-    public Parser(ModuleList modules, Ui ui, Storage storage) {
-        this.modules = modules;
-        this.ui = ui;
-        this.storage = storage;
-    }
-
     /**
      * Parses user input and identifies the command to be executed.
      *
      * @param line user input.
      */
-    public Command parseCommand(String line)
+    public static Command parseCommand(String line)
             throws InvalidCommandException { 
         if (line.trim().length() == 0) { 
             throw new InvalidCommandException();
@@ -69,7 +59,7 @@ public class Parser {
      * @return new instance of AddCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeAddCommand(String[] commands)
+    public static Command executeAddCommand(String[] commands)
             throws InvalidCommandException { 
         if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new InvalidCommandException();
@@ -88,7 +78,7 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeDeleteCommand(String[] commands)
+    public static Command executeDeleteCommand(String[] commands)
             throws InvalidCommandException { 
         if (commands.length != COMMAND_DELETE_LENGTH) { 
             throw new InvalidCommandException();
@@ -105,7 +95,7 @@ public class Parser {
      * @return new instance of ListCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeListCommand(String[] commands)
+    public static Command executeListCommand(String[] commands)
             throws InvalidCommandException { 
         if (commands.length != COMMAND_LIST_LENGTH) { 
             throw new InvalidCommandException();
@@ -122,7 +112,7 @@ public class Parser {
      * @return new instance of ProgressCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeProgressCommand(String[] commands)
+    public static Command executeProgressCommand(String[] commands)
             throws InvalidCommandException { 
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new InvalidCommandException();
@@ -137,7 +127,7 @@ public class Parser {
      * @return new instance of ExitCommand class.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public Command executeExitCommand(String[] commands)
+    public static Command executeExitCommand(String[] commands)
             throws InvalidCommandException { 
         if (commands.length != COMMAND_EXIT_LENGTH) { 
             throw new InvalidCommandException();

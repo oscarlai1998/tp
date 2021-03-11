@@ -15,7 +15,6 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
-    private Parser parser;
 
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
@@ -44,7 +43,7 @@ public class IGraduate {
             try {
                 String fullCommand = ui.getCommand();
                 ui.printBorderLine();
-                Command c = parser.parseCommand(fullCommand);
+                Command c = Parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
             } catch (InvalidCommandException exception) {
