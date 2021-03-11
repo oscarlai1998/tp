@@ -19,4 +19,15 @@ public class Module {
         this.grade = grade;
         this.preRequisites = preRequisites;
     }
+
+    public String toString() {
+        return new StringBuilder().append("Module{")
+                .append("code: ").append(code)
+                .append(", name: ").append(name)
+                .append(", credit: ").append(credit)
+                .append(", status: ").append(status)
+                .append(", grade: ").append(grade)
+                .append(", preRequisites: ").append(preRequisites)
+                .append("}").toString();
+    }
 }

@@ -18,8 +18,9 @@ public class Ui {
             + "your one stop study planning service!\n What would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "___________________________________________________________";
-    private static final String TEMPLATE_ERROR_MESSAGE = "Add more errors as we encounter them.";
     private static final Scanner SCANNER = new Scanner(System.in);
+
+    private static final String INVALID_SYNTAX_MESSAGE = "Invalid syntax detected";  
 
     public String getCommand() throws InvalidCommandException {
         return SCANNER.nextLine();
@@ -54,7 +55,7 @@ public class Ui {
         switch (error) {
         // No fallthrough required
         case ERR_CODE:
-            System.out.println(TEMPLATE_ERROR_MESSAGE);
+            System.out.println(INVALID_SYNTAX_MESSAGE);
             break;
         default:
             System.out.println("Some error");
