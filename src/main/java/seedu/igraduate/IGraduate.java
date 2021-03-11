@@ -4,6 +4,7 @@ import java.io.File;
 import java.nio.file.Paths;
 
 import seedu.igraduate.command.Command;
+import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 
 /**
@@ -50,6 +51,8 @@ public class IGraduate {
                 ui.printErrorMessage(ERR_INVALID_INPUT);
             } catch (NumberFormatException exception) {
                 System.out.println("Invalid number!");
+            } catch (IncorrectParameterCountException exception) {
+                System.out.println(exception.getMessage());
             } finally {
                 ui.printBorderLine();
             }

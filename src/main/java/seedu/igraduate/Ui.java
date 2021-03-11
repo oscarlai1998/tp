@@ -17,7 +17,7 @@ public class Ui {
     private static final String GREETING_MESSAGE = "iGraduate starting up...\n Welcome to iGraduate, "
             + "your one stop study planning service!\n What would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
-    private static final String BORDER_LINE = "___________________________________________________________";
+    private static final String BORDER_LINE = "------------------------------------------------------------";
 
     private static final String TEMPLATE_ERROR_MESSAGE = "Add more errors as we encounter them.";
     private static final String INVALID_INPUT_MESSAGE = "I don't understand your command! Please consult the "
