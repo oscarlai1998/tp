@@ -8,8 +8,6 @@ import java.nio.file.Paths;
 import com.google.gson.JsonSyntaxException;
 
 import seedu.igraduate.command.Command;
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InvalidCommandException;
 
 /**
  * IGraduate program.
@@ -31,13 +29,13 @@ public class IGraduate {
         storage = new Storage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
-        } catch (FileNotFoundException exeception) {
-            ui.printErrorMessage(1); // Todo: Change to exception
+        } catch (FileNotFoundException exception) {
+            ui.printErrorMessage(exception);
             modules = new ModuleList();
         } catch (JsonSyntaxException exception) {
-            ui.printErrorMessage(1);
+            ui.printErrorMessage(exception);
         } catch (IOException exception) {
-            ui.printErrorMessage(1);
+            ui.printErrorMessage(exception);
         }
     }
 
@@ -54,12 +52,8 @@ public class IGraduate {
                 Command c = Parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
-            } catch (InvalidCommandException exception) {
-                ui.printErrorMessage(ERR_INVALID_INPUT);
-            } catch (NumberFormatException exception) {
-                ui.printErrorMessage(ERR_INVALID_INPUT);
-            } catch (IncorrectParameterCountException exception) {
-                System.out.println(exception.getMessage());
+            } catch (Exception e) {
+                ui.printErrorMessage(e);
             } finally {
                 ui.printBorderLine();
             }

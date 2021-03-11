@@ -49,6 +49,15 @@ public class ModuleList {
     }
 
     /**
+     * Marks the specified module as taken.
+     *
+     * @param module Module to be marked as taken.
+     */
+    public void markAsTaken(Module module) {
+        module.setStatus("taken");
+    }
+
+    /**
      * Retrieves and returns the underlying ArrayList for storing modules.
      *
      * @return The task list used for storing all modules.

@@ -14,8 +14,8 @@ public class Ui {
             + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
             + "| | |_| | | | (_| | (_| | |_| | (_| | ||  __/\n"
             + "|_|\\____|_|  \\__,_|\\__,_|\\__,_|\\__,_|\\__\\___|";
-    private static final String GREETING_MESSAGE = "iGraduate starting up...\n Welcome to iGraduate, "
-            + "your one stop study planning service!\n What would you like to do today?";
+    private static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
+            + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "------------------------------------------------------------";
 
@@ -74,6 +74,11 @@ public class Ui {
         printModulesRemainingMessage();
     }
 
+    public void printMarkAsTakenMessage(Module module) {
+        System.out.println("Nice! I've marked this module as done:");
+        System.out.println("  " + module);
+    }
+
     public void printModulesTakenMessage() {
         System.out.println(MODULES_TAKEN_MESSAGE);
         System.out.println(); // Print module names
@@ -92,17 +97,9 @@ public class Ui {
     /**
      * Todo Add more errors as we encounter them. Make sure the integer tagged to each error is constant throughout.
      *
-     * @param error integer representing the error.
+     * @param exception Exception object caught.
      */
-    public void printErrorMessage(int error) {
-        switch (error) {
-        // No fallthrough required
-        case ERR_INVALID_INPUT:
-            System.out.println(INVALID_INPUT_MESSAGE);
-            break;
-        default:
-            System.out.println("Some error");
-            break;
-        }
+    public void printErrorMessage(Exception exception) {
+        System.out.println(exception.getMessage());
     }
 }
