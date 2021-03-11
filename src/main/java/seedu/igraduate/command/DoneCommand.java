@@ -8,6 +8,11 @@ import seedu.igraduate.Ui;
  * Handles done command.
  */
 public class DoneCommand extends Command {
+    protected String moduleCode;
+
+    public DoneCommand(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
 
     /**
      * Todo: Add comments here.
