@@ -38,9 +38,9 @@ public class DoneCommand extends Command {
         try {
             Module module = moduleList.getByCode(getModuleCode());
             moduleList.markAsTaken(module);
-            storage.writeModulesToFile(moduleList);
+            storage.saveModulesToFile(moduleList);
             ui.printMarkAsTakenMessage(module);
-        } catch (IOException e) {
+        } catch (IOException exception) {
             throw new SaveModuleFailException();
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
