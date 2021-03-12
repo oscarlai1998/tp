@@ -2,7 +2,7 @@ package seedu.igraduate.module;
 
 import java.util.ArrayList;
 
-public class Module {
+public abstract class Module {
     private String code;
     private String name;
     private double credit;

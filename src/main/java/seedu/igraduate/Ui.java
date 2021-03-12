@@ -44,13 +44,17 @@ public class Ui {
     }
 
     public void printEntireList(ArrayList<Module> modules) {
+        System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
+            System.out.println(i + 1 + ": ");
             printModuleDetails(modules.get(i));
+            System.out.println();
         }
     }
 
     public void printModuleDetails(Module module) {
-
+        String moduleDetails = module.toString();
+        System.out.println(moduleDetails);
     }
 
     public void printAddedModuleSuccess(Module module) {
