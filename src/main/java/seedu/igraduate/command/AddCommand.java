@@ -3,11 +3,15 @@ package seedu.igraduate.command;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
+import seedu.igraduate.exception.IncorrectModuleTypeException;
+import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 import seedu.igraduate.module.MathModule;
+import seedu.igraduate.module.Module;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -42,35 +46,43 @@ public class AddCommand extends Command {
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        // Todo: Command action
-        switch (this.moduleType) {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage)
+            throws SaveModuleFailException, IncorrectModuleTypeException {
+        try {
+            Module module = createModuleByType();
+            moduleList.add(module);
+            storage.saveModulesToFile(moduleList);
+            ui.printAddedModuleSuccess(module);
+        } catch (IOException e) {
+            throw new SaveModuleFailException();
+        } catch (IncorrectModuleTypeException e) {
+            throw new IncorrectModuleTypeException();
+        }
+    }
+
+    public Module createModuleByType() throws IncorrectModuleTypeException {
+        Module module;
+        switch (moduleType) {
         case CORE:
-            CoreModule coreModule = new CoreModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+            module = new CoreModule(moduleCode, MOD_NAME, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
-            moduleList.add(coreModule);
             break;
         case UE:
-            ElectiveModule electiveModule = new ElectiveModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+            module = new ElectiveModule(moduleCode, MOD_NAME, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
-            moduleList.add(electiveModule);
             break;
         case MATH:
-            MathModule mathModule = new MathModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+            module = new MathModule(moduleCode, MOD_NAME, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
-            moduleList.add(mathModule);
             break;
         case GE:
-            GeModule geModule = new GeModule(this.moduleCode, MOD_NAME, this.moduleCredits,
+            module = new GeModule(moduleCode, MOD_NAME, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
-            moduleList.add(geModule);
             break;
         default:
-            break;
+            throw new IncorrectModuleTypeException();
         }
-
-        ui.printAddedModuleSuccess(this.moduleCode, this.moduleType, this.moduleCredits);
-
+        return module;
     }
 
     /**
