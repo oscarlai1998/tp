@@ -4,8 +4,13 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.module.*;
 import seedu.igraduate.module.Module;
+import seedu.igraduate.module.CoreModule;
+import seedu.igraduate.module.MathModule;
+import seedu.igraduate.module.ElectiveModule;
+import seedu.igraduate.module.GeModule;
+
+
 
 /**
  * Handles delete command.
@@ -39,11 +44,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes modules from Module list
-     * @param moduleList module list consisting of all modules
-     * @param moduleCode module code
-     * @param ui User interface for printing result
-     * @throws ModuleNotFoundException
+     * Deletes modules from Module list.
+     * @param moduleList module list consisting of all modules.
+     * @param moduleCode module code.
+     * @param ui User interface for printing result.
+     * @throws ModuleNotFoundException if moduleCode is is not in list.
      */
     public void deleteModule(ModuleList moduleList, String moduleCode, Ui ui) throws ModuleNotFoundException {
         String moduleType = null;
