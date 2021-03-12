@@ -20,10 +20,9 @@ public class ParserTest {
 
     @Test
     void createAddCommand_tooManyParameters_exceptionThrown() {
-        String line = "Add CS2113 -t core -c 4 hoi";
-        String[] components = line.split(" ");
+        String line = "Add Introduction to Information Security -t core -mc 4 -c CS2107 -n prefab sprout";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.createAddCommand(components, components));
+            () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
@@ -45,5 +44,14 @@ public class ParserTest {
             () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
             + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
+    }
+
+    @Test
+    void createDoneCommand_tooFewParameters_exceptionThrown() {
+        String line = "done CS2107";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+                () -> Parser.parseCommand(line));
+        assertEquals("The number of parameters"
+                + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
 }
