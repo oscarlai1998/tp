@@ -21,7 +21,7 @@ public class Parser {
 
     private static final int COMMAND_ADD_LENGTH = 6;
     private static final int COMMAND_DELETE_LENGTH = 2;
-    private static final int COMMAND_LIST_LENGTH = 2;
+    private static final int COMMAND_LIST_LENGTH = 1;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
@@ -126,7 +126,6 @@ public class Parser {
         if (commandParameters.length != COMMAND_LIST_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-
         return new ListCommand();
     }
 

@@ -10,6 +10,7 @@ import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
+import java.util.ArrayList;
 
 
 /**
@@ -33,7 +34,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException {
         try {
-            if (!moduleList.isModuleValid(moduleCode)) {
+            ArrayList<Module> modules = moduleList.getModules();
+            if (!isModuleValid(modules,moduleCode)) {
                 throw new ModuleNotFoundException();
             }
             deleteModule(moduleList, moduleCode, ui);
@@ -67,7 +69,18 @@ public class DeleteCommand extends Command {
         ui.printDeletedModuleSuccess(moduleCode,moduleType);
     }
 
-
+    /**
+     * Determines if module is in module list.
+     *
+     * @param moduleCode Module code of module.
+     * @return false if modules does not contain moduleCode and true if modules contains moduleCode.
+     */
+    public boolean isModuleValid(ArrayList<Module> modules, String moduleCode) {
+        if (!modules.contains(moduleCode)) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * {@inheritDoc}

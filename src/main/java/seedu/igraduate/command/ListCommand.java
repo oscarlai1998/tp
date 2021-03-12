@@ -3,6 +3,7 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
+import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        // Todo: Command action
+        ArrayList<Module> modules = moduleList.getModules();
+        if (modules.isEmpty()) {
+            ui.printListEmptyMessage();
+            return;
+        }
         ui.printEntireList(moduleList.getModules());
     }
 
