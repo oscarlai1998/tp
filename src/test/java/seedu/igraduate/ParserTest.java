@@ -50,7 +50,7 @@ public class ParserTest {
     void createDoneCommand_tooFewParameters_exceptionThrown() {
         String line = "done CS2107";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
