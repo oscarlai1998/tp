@@ -18,9 +18,10 @@ public class Ui {
     private static final String BORDER_LINE = "------------------------------------------------------------";
 
     private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
-    private static final String MODULE_DELETED_MESSAGE = "%s module %s has been deleted.";
+    private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
+    private static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     private static final String PROGRESS_MESSAGE = "%dMCs/%dMCs Completed";
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -46,9 +47,8 @@ public class Ui {
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
-            System.out.println(i + 1 + ": ");
+            System.out.print(i + 1 + ": ");
             printModuleDetails(modules.get(i));
-            System.out.println();
         }
     }
 
@@ -58,11 +58,12 @@ public class Ui {
     }
 
     public void printAddedModuleSuccess(Module module) {
+        System.out.println("Module added to the list.");
         System.out.println(module);
     }
 
     public void printDeletedModuleSuccess(String name, String type) {
-        System.out.println(String.format(MODULE_DELETED_MESSAGE, name, type));
+        System.out.println(String.format(MODULE_DELETED_MESSAGE, type, name));
     }
 
     public void printAllModules() {
@@ -83,6 +84,10 @@ public class Ui {
     public void printModulesRemainingMessage() {
         System.out.println(MODULES_LEFT_MESSAGE);
         System.out.println(); // Print module names
+    }
+
+    public void printListEmptyMessage() {
+        System.out.println(EMPTY_LIST_MESSAGE);
     }
 
     public void printProgressBar() {
