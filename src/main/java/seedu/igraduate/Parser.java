@@ -181,7 +181,7 @@ public class Parser {
      * Extracts module code from user input. Method is called if user runs "Add" or
      * "Delete" command.
      *
-     * @param command parameters of user input, excluding command flags.
+     * @param commands parameters of user input, excluding command flags.
      * @return module code.
      */
     public static String extractModuleCode(String[] commands, boolean flag) 
