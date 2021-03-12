@@ -58,6 +58,16 @@ public class ModuleList {
     }
 
     /**
+     * Sets the specified module grade.
+     *
+     * @param module Module to be marked as taken.
+     * @param grade Grade obtained for the specified module.
+     */
+    public void setGrade(Module module, String grade) {
+        module.setGrade(grade);
+    }
+
+    /**
      * Retrieves and returns the underlying ArrayList for storing modules.
      *
      * @return The task list used for storing all modules.
