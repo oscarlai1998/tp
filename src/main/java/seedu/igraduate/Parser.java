@@ -73,7 +73,8 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of AddCommand class to
      * execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
+     * @param commandFlags flags of commands from user input. 
      * @return new instance of AddCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -94,7 +95,8 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of DeleteCommand class
      * to execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
+     * 
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -112,7 +114,7 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of ListCommand class to
      * execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of ListCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -129,7 +131,7 @@ public class Parser {
     /**
      * Creates new instance of ProgressCommand class to execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of ProgressCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -145,7 +147,8 @@ public class Parser {
      * Extracts relevant parameters and creates an instance of DoneCommand to
      * execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
+     * @param commandFlags flags of commands from user input. 
      * @return new instance of DoneCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -162,7 +165,7 @@ public class Parser {
     /**
      * Creates new instance of ExitCommand class to execute.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of ExitCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -178,7 +181,7 @@ public class Parser {
      * Extracts module code from user input. Method is called if user runs "Add" or
      * "Delete" command.
      *
-     * @param commandFlags user input split into substrings with " " as delimiter.
+     * @param command parameters of user input, excluding command flags.
      * @return module code.
      */
     public static String extractModuleCode(String[] commands, boolean flag) 
@@ -198,7 +201,7 @@ public class Parser {
     /**
      * Extracts module name from user input.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandParameters parameters of user input, excluding command flags.
      * @return module code.
      * @throws InvalidCommandException if command format is not recognised.
      */
@@ -209,7 +212,7 @@ public class Parser {
     /**
      * Extracts module type from user input. Method is called if user runs "Add" command.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandFlags flags of commands from user input. 
      * @return module type.
      * @throws InvalidCommandException if command format is not recognised.
      */
@@ -235,7 +238,7 @@ public class Parser {
     /**
      * Extracts module credits from user input.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandFlags flags of commands from user input. 
      * @return number of modular credits.
      * @throws NumberFormatException   if number is not given as modular credits.
      * @throws InvalidCommandException if command format is not recognised.
@@ -254,7 +257,7 @@ public class Parser {
      * Determines the option user selects if "List" command is run. Options are: 1.
      * List all modules 2. List modules taken 3. List modules not taken
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandFlags flags of commands from user input. 
      * @return the option user selects.
      * @throws InvalidCommandException if command format is not recognised.
      */
@@ -274,14 +277,14 @@ public class Parser {
     /**
      * Extracts module grade from user input.
      *
-     * @param commands user input split into substrings with " " as delimiter.
+     * @param commandFlags flags of commands from user input. 
      * @return module grade.
      * @throws InvalidCommandException if command format is not recognised.
      */
-    public static String extractModuleGrade(String[] commands) throws InvalidCommandException {
-        for (int i = 0; i < commands.length; i++) {
-            if (commands[i].equals("-g")) {
-                return commands[i + 1];
+    public static String extractModuleGrade(String[] commandFlags) throws InvalidCommandException {
+        for (int i = 0; i < commandFlags.length; i++) {
+            if (commandFlags[i].equals("-g")) {
+                return commandFlags[i + 1];
             }
         }
         throw new InvalidCommandException();
