@@ -19,11 +19,11 @@ public class Parser {
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
 
-    private static final int COMMAND_ADD_LENGTH = 6;
+    private static final int COMMAND_ADD_LENGTH = 8;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
-    private static final int COMMAND_DONE_LENGTH = 2;
+    private static final int COMMAND_DONE_LENGTH = 4;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     /**
@@ -41,18 +41,18 @@ public class Parser {
 
         switch (command) { 
         case COMMAND_ADD:
-            return executeAddCommand(commands);
+            return createAddCommand(commands);
         case COMMAND_DELETE:
-            return executeDeleteCommand(commands);
+            return createDeleteCommand(commands);
         case COMMAND_LIST:
-            return executeListCommand(commands);
+            return createListCommand(commands);
         case COMMAND_PROGRESS:
-            return executeProgressCommand(commands);
+            return createProgressCommand(commands);
         case COMMAND_DONE:
-            return executeDoneCommand(commands);
+            return createDoneCommand(commands);
         case COMMAND_EXIT:
             // Fallthrough
-            return executeExitCommand(commands);
+            return createExitCommand(commands);
         default:
             throw new InvalidCommandException();
         }
@@ -65,16 +65,17 @@ public class Parser {
      * @return new instance of AddCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeAddCommand(String[] commands)
+    public static Command createAddCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_ADD_LENGTH) { 
             throw new IncorrectParameterCountException();
         }
         String moduleCode = extractModuleCode(commands);
+        String moduleName = extractModuleName(commands);
         String moduleType = extractModuleType(commands);
         double moduleCredits = extractModuleCredits(commands);
 
-        return new AddCommand(moduleCode, moduleType, moduleCredits);
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
     /**
@@ -84,7 +85,7 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeDeleteCommand(String[] commands)
+    public static Command createDeleteCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_DELETE_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -101,7 +102,7 @@ public class Parser {
      * @return new instance of ListCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeListCommand(String[] commands)
+    public static Command createListCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_LIST_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -118,7 +119,7 @@ public class Parser {
      * @return new instance of ProgressCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeProgressCommand(String[] commands)
+    public static Command createProgressCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -133,14 +134,15 @@ public class Parser {
      * @return new instance of DoneCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeDoneCommand(String[] commands)
-            throws IncorrectParameterCountException {
+    public static Command createDoneCommand(String[] commands)
+            throws IncorrectParameterCountException, InvalidCommandException {
         if (commands.length != COMMAND_DONE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = extractModuleCode(commands);
+        String moduleGrade = extractModuleGrade(commands);
 
-        return new DoneCommand(moduleCode);
+        return new DoneCommand(moduleCode, moduleGrade);
     }
     
     /**
@@ -150,7 +152,7 @@ public class Parser {
      * @return new instance of ExitCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command executeExitCommand(String[] commands)
+    public static Command createExitCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_EXIT_LENGTH) { 
             throw new IncorrectParameterCountException();
@@ -166,6 +168,22 @@ public class Parser {
      */
     public static String extractModuleCode(String[] commands) {
         return commands[1].toUpperCase().trim();
+    }
+
+    /**
+     * Extracts module name from user input.
+     *
+     * @param commands user input split into substrings with " " as delimiter.
+     * @return module code.
+     * @throws InvalidCommandException if command format is not recognised.
+     */
+    public static String extractModuleName(String[] commands) throws InvalidCommandException {
+        for (int i = 0; i < commands.length; i++) {
+            if (commands[i].equals("-n")) {
+                return commands[i + 1];
+            }
+        }
+        throw new InvalidCommandException();
     }
 
     /**
@@ -232,5 +250,21 @@ public class Parser {
         default:
             throw new InvalidCommandException();
         }
-    } 
+    }
+
+    /**
+     * Extracts module grade from user input.
+     *
+     * @param commands user input split into substrings with " " as delimiter.
+     * @return module grade.
+     * @throws InvalidCommandException if command format is not recognised.
+     */
+    public static String extractModuleGrade(String[] commands) throws InvalidCommandException {
+        for (int i = 0; i < commands.length; i++) {
+            if (commands[i].equals("-g")) {
+                return commands[i + 1];
+            }
+        }
+        throw new InvalidCommandException();
+    }
 }

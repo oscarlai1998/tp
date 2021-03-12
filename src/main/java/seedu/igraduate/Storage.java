@@ -33,7 +33,7 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    protected ArrayList<Module> loadModulesFromFile() 
+    public ArrayList<Module> loadModulesFromFile()
             throws IOException, FileNotFoundException, JsonSyntaxException {
         if (!filePath.exists()) {
             throw new FileNotFoundException();
@@ -51,7 +51,7 @@ public class Storage {
         return gson.fromJson(fileReader, type);
     }
 
-    protected void writeModulesToFile(ModuleList modules) throws JsonIOException, IOException {
+    public void saveModulesToFile(ModuleList modules) throws JsonIOException, IOException {
         // Creates parent directories if file does not exist
         if (!filePath.exists()) {
             filePath.getParentFile().mkdirs();
@@ -59,17 +59,17 @@ public class Storage {
         saveToJson(filePath, modules.getModules());
     }
 
-    public <T> void saveToJson(File jsonFile, ArrayList<T> objects) throws IOException {
+    public void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
-        int arraySize = objects.size();
+        int arraySize = modules.size();
         int lastIndex = arraySize - 1;
 
         FileWriter fileWriter = new FileWriter(jsonFile);
         fileWriter.write("[\n");
         for (int i = 0; i < arraySize; i++) {
-            String json = gson.toJson(objects.get(i), Module.class);
+            String json = gson.toJson(modules.get(i), Module.class);
             fileWriter.write(json);
             if (i != lastIndex) {
                 fileWriter.write(", \n");

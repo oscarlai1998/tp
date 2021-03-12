@@ -19,7 +19,7 @@ class ModuleListTest {
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
         modules.add(geModule);
-        assertEquals("GER1000", modules.get("GER1000").getCode());
+        assertEquals("GER1000", modules.getByCode("GER1000").getCode());
     }
 
     @Test
@@ -48,6 +48,6 @@ class ModuleListTest {
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
         modules.add(geModule);
-        assertEquals(geModule, modules.get("GER1000"));
+        assertEquals(geModule, modules.getByCode("GER1000"));
     }
 }

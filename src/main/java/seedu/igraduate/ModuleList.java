@@ -49,6 +49,25 @@ public class ModuleList {
     }
 
     /**
+     * Marks the specified module as taken.
+     *
+     * @param module Module to be marked as taken.
+     */
+    public void markAsTaken(Module module) {
+        module.setStatus("taken");
+    }
+
+    /**
+     * Sets the specified module grade.
+     *
+     * @param module Module to be marked as taken.
+     * @param grade Grade obtained for the specified module.
+     */
+    public void setGrade(Module module, String grade) {
+        module.setGrade(grade);
+    }
+
+    /**
      * Retrieves and returns the underlying ArrayList for storing modules.
      *
      * @return The task list used for storing all modules.
@@ -67,13 +86,24 @@ public class ModuleList {
     }
 
     /**
+     * Retrieves specified module from module list based on index number.
+     *
+     * @param index Index number of module in module list.
+     * @return The retrieved module based on specified module code.
+     * @throws ModuleNotFoundException If the module specified is not in the list.
+     */
+    public Module getByIndex(int index) {
+        return modules.get(index);
+    }
+
+    /**
      * Retrieves specified module from module list.
      *
      * @param moduleCode Module code of module.
      * @return The retrieved module based on specified module code.
      * @throws ModuleNotFoundException If the module specified is not in the list.
      */
-    public Module get(String moduleCode) throws ModuleNotFoundException {
+    public Module getByCode(String moduleCode) throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
 
         if (moduleIndex == -1) {
