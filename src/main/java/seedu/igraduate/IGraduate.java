@@ -13,8 +13,6 @@ import seedu.igraduate.command.Command;
  * IGraduate program.
  */
 public class IGraduate {
-    private static final int ERR_INVALID_INPUT = -1;
-
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
