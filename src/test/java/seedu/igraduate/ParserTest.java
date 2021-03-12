@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.command.AddCommand;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 
@@ -18,11 +19,10 @@ public class ParserTest {
     }
 
     @Test
-    void executeAddCommand_tooManyParameters_exceptionThrown() {
-        String line = "Add CS2113 -t core -c 4 hoi";
-        String[] components = line.split(" ");
+    void createAddCommand_tooManyParameters_exceptionThrown() {
+        String line = "Add Introduction to Information Security -t core -mc 4 -c CS2107 -n prefab sprout";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.createAddCommand(components, components));
+            () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
@@ -44,6 +44,14 @@ public class ParserTest {
             () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
             + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
+    }
 
+    @Test
+    void createDoneCommand_tooFewParameters_exceptionThrown() {
+        String line = "done CS2107";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals("The number of parameters"
+                + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
 }
