@@ -105,7 +105,6 @@ public class Parser {
      */
     public static Command createDeleteCommand(String[] commandParameters) 
             throws IncorrectParameterCountException {
-        System.out.println(commandParameters.length);
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
@@ -162,7 +161,6 @@ public class Parser {
         if (commandFlags.length != COMMAND_DONE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-        System.out.println(commandFlags[1]);
         String moduleGrade = extractModuleGrade(commandFlags);
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
