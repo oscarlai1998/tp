@@ -71,6 +71,16 @@ public abstract class Module {
         }
     }
 
+    public boolean isDone() {
+        if (getStatusIcon().equals("✓")) {
+            return true;
+        } else if (getStatusIcon().equals("✘")) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %-8s %-35s %8s", getStatusIcon(), getCode(), getName(), getCredit());
