@@ -3,6 +3,9 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.module.*;
+import seedu.igraduate.module.Module;
 
 /**
  * Handles delete command.
@@ -23,13 +26,40 @@ public class DeleteCommand extends Command {
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        // Todo: Command action
-        //Check if valid
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException {
+        try {
+            if (!moduleList.isModuleValid(moduleCode)) {
+                throw new ModuleNotFoundException();
+            }
+            deleteModule(moduleList, moduleCode, ui);
+        } catch (ModuleNotFoundException e) {
+            throw new ModuleNotFoundException();
+        }
 
-        //Get Index
-        int index = moduleList.getModuleIndex(moduleCode);
+    }
 
+    /**
+     * Deletes modules from Module list
+     * @param moduleList module list consisting of all modules
+     * @param moduleCode module code
+     * @param ui User interface for printing result
+     * @throws ModuleNotFoundException
+     */
+    public void deleteModule(ModuleList moduleList, String moduleCode, Ui ui) throws ModuleNotFoundException {
+        String moduleType = null;
+        moduleList.delete(moduleList.getByCode(moduleCode));
+        int moduleIndex = moduleList.getModuleIndex(moduleCode);
+        Module module = moduleList.getByIndex(moduleIndex);
+        if (module instanceof CoreModule) {
+            moduleType = "Core";
+        } else if (module instanceof MathModule) {
+            moduleType = "Math";
+        } else if (module instanceof GeModule) {
+            moduleType = "GE";
+        } else if (module instanceof ElectiveModule) {
+            moduleType = "Elective";
+        }
+        ui.printDeletedModuleSuccess(moduleCode,moduleType);
     }
 
 
