@@ -58,6 +58,7 @@ public class Ui {
     }
 
     public void printAddedModuleSuccess(Module module) {
+        System.out.println("Module added to the list.");
         System.out.println(module);
     }
 
