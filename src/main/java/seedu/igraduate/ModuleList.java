@@ -1,5 +1,6 @@
 package seedu.igraduate;
 
+import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
@@ -48,6 +49,25 @@ public class ModuleList {
     }
 
     /**
+     * Marks the specified module as taken.
+     *
+     * @param module Module to be marked as taken.
+     */
+    public void markAsTaken(Module module) {
+        module.setStatus("taken");
+    }
+
+    /**
+     * Sets the specified module grade.
+     *
+     * @param module Module to be marked as taken.
+     * @param grade Grade obtained for the specified module.
+     */
+    public void setGrade(Module module, String grade) {
+        module.setGrade(grade);
+    }
+
+    /**
      * Retrieves and returns the underlying ArrayList for storing modules.
      *
      * @return The task list used for storing all modules.
@@ -66,12 +86,62 @@ public class ModuleList {
     }
 
     /**
+     * Retrieves specified module from module list based on index number.
+     *
+     * @param index Index number of module in module list.
+     * @return The retrieved module based on specified module code.
+     * @throws ModuleNotFoundException If the module specified is not in the list.
+     */
+    public Module getByIndex(int index) {
+        return modules.get(index);
+    }
+
+    /**
      * Retrieves specified module from module list.
      *
-     * @param index Index of module in the module list.
-     * @return The retrieved module based on specified index.
+     * @param moduleCode Module code of module.
+     * @return The retrieved module based on specified module code.
+     * @throws ModuleNotFoundException If the module specified is not in the list.
      */
-    public Module get(int index) {
-        return modules.get(index);
+    public Module getByCode(String moduleCode) throws ModuleNotFoundException {
+        int moduleIndex = getModuleIndex(moduleCode);
+
+        if (moduleIndex == -1) {
+            throw new ModuleNotFoundException();
+        }
+
+        return modules.get(moduleIndex);
+    }
+
+    /**
+     * Retrieves the index of module in module list.
+     *
+     * @param moduleCode Module code of module.
+     * @return The retrieved module index on specified module code.
+     */
+    public int getModuleIndex(String moduleCode) {
+        int index = -1;
+
+        for (int i = 0; i < modules.size(); i++) {
+            if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
+                index = i;
+                break;
+            }
+        }
+
+        return index;
+    }
+
+    /**
+     * Determines if module is in module list.
+     *
+     * @param moduleCode Module code of module
+     * @return false if module does not contain moduleCode and true if module contains moduleCode
+     */
+    public boolean isModuleValid(String moduleCode) {
+        if (!modules.contains(moduleCode)) {
+            return false;
+        }
+        return true;
     }
 }

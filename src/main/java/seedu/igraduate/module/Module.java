@@ -2,7 +2,7 @@ package seedu.igraduate.module;
 
 import java.util.ArrayList;
 
-public class Module {
+public abstract class Module {
     private String code;
     private String name;
     private double credit;
@@ -73,6 +73,6 @@ public class Module {
 
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %50s %8d", getStatusIcon(), getCode(), getName(), getCredit());
+        return String.format("[%s] %-8s %-35s %8s", getStatusIcon(), getCode(), getName(), getCredit());
     }
 }
