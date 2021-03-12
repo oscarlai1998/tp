@@ -22,7 +22,7 @@ public class ParserTest {
         String line = "Add CS2113 -t core -c 4 hoi";
         String[] components = line.split(" ");
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.executeAddCommand(components));
+            () -> Parser.createAddCommand(components));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
@@ -32,7 +32,7 @@ public class ParserTest {
         String line = "Delete";
         String[] components = line.split(" ");
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.executeDeleteCommand(components));
+            () -> Parser.createDeleteCommand(components));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
