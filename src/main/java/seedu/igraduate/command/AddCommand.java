@@ -19,6 +19,7 @@ import java.util.ArrayList;
  */
 public class AddCommand extends Command {
     protected String moduleCode;
+    protected String moduleName;
     protected String moduleType;
     protected Double moduleCredits;
 
@@ -26,14 +27,14 @@ public class AddCommand extends Command {
     private static final String UE = "ue";
     private static final String MATH = "math";
     private static final String GE = "ge";
-    private static final String MOD_NAME = "module name";
     private static final String DEFAULT_STATUS = "not taken";
     private static final String DEFAULT_GRADE = "nil";
 
     private ArrayList<String> preRequisites;
 
-    public AddCommand(String moduleCode, String moduleType, double moduleCredits) {
+    public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits) {
         this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
         this.moduleType = moduleType;
         this.moduleCredits = moduleCredits;
     }
@@ -64,19 +65,19 @@ public class AddCommand extends Command {
         Module module;
         switch (moduleType) {
         case CORE:
-            module = new CoreModule(moduleCode, MOD_NAME, moduleCredits,
+            module = new CoreModule(moduleCode, moduleName, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         case UE:
-            module = new ElectiveModule(moduleCode, MOD_NAME, moduleCredits,
+            module = new ElectiveModule(moduleCode, moduleName, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         case MATH:
-            module = new MathModule(moduleCode, MOD_NAME, moduleCredits,
+            module = new MathModule(moduleCode, moduleName, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         case GE:
-            module = new GeModule(moduleCode, MOD_NAME, moduleCredits,
+            module = new GeModule(moduleCode, moduleName, moduleCredits,
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         default:
