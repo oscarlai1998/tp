@@ -23,7 +23,7 @@ public class ParserTest {
         String line = "Add CS2113 -t core -c 4 hoi";
         String[] components = line.split(" ");
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.createAddCommand(components));
+            () -> Parser.createAddCommand(components, components));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }

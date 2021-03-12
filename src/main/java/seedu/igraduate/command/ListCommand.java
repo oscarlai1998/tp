@@ -4,6 +4,8 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
+import java.util.ArrayList;
+
 /**
  * Handles list command.
  */
@@ -24,6 +26,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
         // Todo: Command action
+        ui.printEntireList(moduleList.getModules());
     }
 
     /**
