@@ -101,4 +101,17 @@ public class ModuleList {
 
         return index;
     }
+
+    /**
+     * Determines if module is in module list.
+     *
+     * @param moduleCode Module code of module
+     * @return
+     */
+    public int isModuleValid(String moduleCode) {
+        if (!modules.contains(moduleCode)) {
+            return 1;
+        }
+        return 0;
+    }
 }

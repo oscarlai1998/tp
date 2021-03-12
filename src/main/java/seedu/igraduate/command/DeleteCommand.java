@@ -10,6 +10,7 @@ import seedu.igraduate.Ui;
 public class DeleteCommand extends Command {
     protected String moduleCode;
 
+
     public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
@@ -24,7 +25,14 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
         // Todo: Command action
+        //Check if valid
+
+        //Get Index
+        int index = moduleList.getModuleIndex(moduleCode);
+
     }
+
+
 
     /**
      * {@inheritDoc}
