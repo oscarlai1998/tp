@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException {
         try {
-            Module module = moduleList.get(getModuleCode());
+            Module module = moduleList.getByCode(getModuleCode());
             moduleList.markAsTaken(module);
             storage.writeModulesToFile(moduleList);
             ui.printMarkAsTakenMessage(module);
