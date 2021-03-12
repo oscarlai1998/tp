@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
 
     /**
-     * Todo: Add comments here.
+     * Print list of all modules.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.

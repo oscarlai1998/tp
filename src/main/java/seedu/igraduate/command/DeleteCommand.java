@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Todo: Add comments here.
+     * Deletes a module from moduleList.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -35,10 +35,12 @@ public class DeleteCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException {
         try {
             ArrayList<Module> modules = moduleList.getModules();
-            if (!isModuleValid(modules,moduleCode)) {
+            int moduleIndex = moduleList.getModuleIndex(moduleCode);
+            Module module = moduleList.getByIndex(moduleIndex);
+            if (!modules.contains(module)) {
                 throw new ModuleNotFoundException();
             }
-            deleteModule(moduleList, moduleCode, ui);
+            deleteModule(module, moduleList, moduleCode, ui);
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
         }
@@ -52,11 +54,9 @@ public class DeleteCommand extends Command {
      * @param ui User interface for printing result.
      * @throws ModuleNotFoundException if moduleCode is is not in list.
      */
-    public void deleteModule(ModuleList moduleList, String moduleCode, Ui ui) throws ModuleNotFoundException {
+    public void deleteModule(Module module, ModuleList moduleList, String moduleCode, Ui ui) throws ModuleNotFoundException {
         String moduleType = null;
-        moduleList.delete(moduleList.getByCode(moduleCode));
-        int moduleIndex = moduleList.getModuleIndex(moduleCode);
-        Module module = moduleList.getByIndex(moduleIndex);
+        moduleList.delete(module);
         if (module instanceof CoreModule) {
             moduleType = "Core";
         } else if (module instanceof MathModule) {
@@ -69,18 +69,6 @@ public class DeleteCommand extends Command {
         ui.printDeletedModuleSuccess(moduleCode,moduleType);
     }
 
-    /**
-     * Determines if module is in module list.
-     *
-     * @param moduleCode Module code of module.
-     * @return false if modules does not contain moduleCode and true if modules contains moduleCode.
-     */
-    public boolean isModuleValid(ArrayList<Module> modules, String moduleCode) {
-        if (!modules.contains(moduleCode)) {
-            return true;
-        }
-        return false;
-    }
 
     /**
      * {@inheritDoc}
