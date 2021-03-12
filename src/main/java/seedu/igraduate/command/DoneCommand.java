@@ -14,13 +14,19 @@ import java.io.IOException;
  */
 public class DoneCommand extends Command {
     protected String moduleCode;
+    protected String moduleGrade;
 
-    public DoneCommand(String moduleCode) {
+    public DoneCommand(String moduleCode, String moduleGrade) {
         this.moduleCode = moduleCode;
+        this.moduleGrade = moduleGrade;
     }
 
     public String getModuleCode() {
         return moduleCode;
+    }
+
+    public String getModuleGrade() {
+        return moduleGrade;
     }
 
     /**
@@ -36,11 +42,12 @@ public class DoneCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException {
         try {
-            Module module = moduleList.get(getModuleCode());
+            Module module = moduleList.getByCode(getModuleCode());
             moduleList.markAsTaken(module);
-            storage.writeModulesToFile(moduleList);
+            moduleList.setGrade(module, getModuleGrade());
+            storage.saveModulesToFile(moduleList);
             ui.printMarkAsTakenMessage(module);
-        } catch (IOException e) {
+        } catch (IOException exception) {
             throw new SaveModuleFailException();
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
