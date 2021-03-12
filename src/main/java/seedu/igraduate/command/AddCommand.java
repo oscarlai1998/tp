@@ -9,11 +9,13 @@ import seedu.igraduate.Ui;
  */
 public class AddCommand extends Command {
     protected String moduleCode;
+    protected String moduleName;
     protected String moduleType;
     protected double moduleCredits;
 
-    public AddCommand(String moduleCode, String moduleType, double moduleCredits) {
+    public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits) {
         this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
         this.moduleType = moduleType;
         this.moduleCredits = moduleCredits;
     }
