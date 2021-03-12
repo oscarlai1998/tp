@@ -74,7 +74,7 @@ public class Parser {
     /**
      * Extracts relevant parameters and creates new instance of AddCommand class to
      * execute.
-     * Format: "Add <module name> -c <module code> -t <module type> -mc <modular credits>"
+     * Format: "Add [module name] -c [module code] -t [module type] -mc [modular credits]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags flags of commands from user input. 
@@ -96,7 +96,7 @@ public class Parser {
     /**
      * Extracts relevant parameters and creates new instance of DeleteCommand class
      * to execute.
-     * Format: "Delete <module code>"
+     * Format: "Delete [module code]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * 
@@ -149,7 +149,7 @@ public class Parser {
     /**
      * Extracts relevant parameters and creates an instance of DoneCommand to
      * execute.
-     * Format: "done <module code> -g <grade>"
+     * Format: "done [module code] -g [grade]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags flags of commands from user input. 
