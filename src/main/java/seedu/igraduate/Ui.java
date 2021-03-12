@@ -53,8 +53,8 @@ public class Ui {
 
     }
 
-    public void printAddedModuleSuccess(String name, String type, double credit) {
-        System.out.println(String.format(MODULE_ADDED_MESSAGE, name, type, (int)credit));
+    public void printAddedModuleSuccess(Module module) {
+        System.out.println(module);
     }
 
     public void printDeletedModuleSuccess(String name, String type) {
