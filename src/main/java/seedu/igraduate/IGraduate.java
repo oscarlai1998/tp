@@ -1,11 +1,7 @@
 package seedu.igraduate;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Paths;
-
-import com.google.gson.JsonSyntaxException;
 
 import seedu.igraduate.command.Command;
 

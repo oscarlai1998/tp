@@ -5,7 +5,7 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
 import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.IncorrectModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.module.CoreModule;
@@ -58,27 +58,27 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, IncorrectModuleTypeException, ExistingModuleException {
+            throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException {
         try {
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
-        } catch (IncorrectModuleTypeException e) {
-            throw new IncorrectModuleTypeException();
+        } catch (InvalidModuleTypeException e) {
+            throw new InvalidModuleTypeException();
         } catch (ExistingModuleException e) {
             throw new ExistingModuleException();
         }
     }
 
     /**
-     * Create a module based on its category. 
-     * Types: Core, UE, Math, GE. 
-     * 
-     * @return the created module. 
-     * @throws IncorrectModuleTypeException if module type does not fit any categories. 
+     * Create a module based on its category.
+     * Types: Core, UE, Math, GE.
+     *
+     * @return the created module.
+     * @throws InvalidModuleTypeException if module type does not fit any categories.
      */
-    public Module createModuleByType() throws IncorrectModuleTypeException {
+    public Module createModuleByType() throws InvalidModuleTypeException {
         Module module;
         switch (moduleType) {
         case CORE:
@@ -98,7 +98,7 @@ public class AddCommand extends Command {
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         default:
-            throw new IncorrectModuleTypeException();
+            throw new InvalidModuleTypeException();
         }
         return module;
     }
