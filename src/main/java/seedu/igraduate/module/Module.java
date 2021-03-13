@@ -10,8 +10,6 @@ public abstract class Module {
     private String grade;
     private ArrayList<String> preRequisites;
 
-    private static double totalCompletedMCs = 0;
-
     public Module(String code, String name, double credit, String status, String grade,
                   ArrayList<String> preRequisites) {
         setCode(code);
@@ -35,9 +33,6 @@ public abstract class Module {
     }
 
     public void setStatus(String status) {
-        if (status.equalsIgnoreCase("taken")) {
-            totalCompletedMCs += getCredit();
-        }
         this.status = status;
     }
 
@@ -76,12 +71,9 @@ public abstract class Module {
         }
     }
 
-    public static double getTotalCompletedMCs() {
-        return totalCompletedMCs;
-    }
-
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-50s %8s", getStatusIcon(), getCode(), getName(), getCredit());
+        return String.format("[%s] %-8s %-50s %5s MC", getStatusIcon(), getCode(), getName(),
+                Math.round(getCredit()));
     }
 }
