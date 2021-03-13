@@ -1,6 +1,5 @@
 package seedu.igraduate;
 
-import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ public class Ui {
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "------------------------------------------------------------";
 
-    private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
@@ -26,7 +24,7 @@ public class Ui {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public String getCommand() throws InvalidCommandException {
+    public String getCommand() {
         return SCANNER.nextLine();
     }
 
