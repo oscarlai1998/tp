@@ -23,7 +23,7 @@ public class ProgressCommand extends Command {
             throws ModularCreditExceedsLimitException {
         DecimalFormat df = new DecimalFormat("0.00");
         double completedMCs = moduleList.getTotalCompletedMCs();
-        double percentageDone = (completedMCs / 160 ) * 100;
+        double percentageDone = (completedMCs / 160) * 100;
         String stringPercentageDone = df.format(percentageDone);
         if (percentageDone > 100) {
             throw new ModularCreditExceedsLimitException();
