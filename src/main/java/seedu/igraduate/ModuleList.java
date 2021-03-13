@@ -1,6 +1,7 @@
 package seedu.igraduate;
 
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.module.*;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
@@ -86,14 +87,12 @@ public class ModuleList {
     }
 
     /**
-     * Retrieves specified module from module list based on index number.
+     * Check if the current module list is empty.
      *
-     * @param index Index number of module in module list.
-     * @return The retrieved module based on specified module code.
-     * @throws ModuleNotFoundException If the module specified is not in the list.
+     * @return Boolean value indicating whether the module list is empty..
      */
-    public Module getByIndex(int index) {
-        return modules.get(index);
+    public boolean isEmpty() {
+        return modules.isEmpty();
     }
 
     /**
@@ -130,6 +129,26 @@ public class ModuleList {
         }
 
         return index;
+    }
+
+    /**
+     * Retrieves the module type of specified module.
+     *
+     * @param module Module object for finding type.
+     * @return The type of module specified.
+     */
+    public String getModuleType(Module module) {
+        String moduleType = "Undefined";
+        if (module instanceof CoreModule) {
+            moduleType = "Core";
+        } else if (module instanceof MathModule) {
+            moduleType = "Math";
+        } else if (module instanceof GeModule) {
+            moduleType = "GE";
+        } else if (module instanceof ElectiveModule) {
+            moduleType = "Elective";
+        }
+        return moduleType;
     }
 
 }

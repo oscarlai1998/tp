@@ -15,9 +15,10 @@ public class Ui {
     private static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
             + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
-    private static final String BORDER_LINE = "------------------------------------------------------------";
+    private static final String BORDER_LINE = "------------------------------------------------------------"
+            + "---------------";
 
-    private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
+    private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%dMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
@@ -26,7 +27,7 @@ public class Ui {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public String getCommand() throws InvalidCommandException {
+    public String getCommand() {
         return SCANNER.nextLine();
     }
 
@@ -58,7 +59,7 @@ public class Ui {
     }
 
     public void printAddedModuleSuccess(Module module) {
-        System.out.println("Module added to the list.");
+        System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getName(), module.getCredit()));
         System.out.println(module);
     }
 
@@ -90,31 +91,20 @@ public class Ui {
         System.out.println(EMPTY_LIST_MESSAGE);
     }
 
-    public void printProgressBar(float completedMCs, float percentageDone, String percentage) {
+    public void printProgressBar(double completedMCs, String percentage) {
         System.out.println("Progress:");
-        if (percentageDone == 100.0) {
-            System.out.println("██████████ 100%");
-        } else if (percentageDone >= 90.0 && percentageDone < 100.0) {
-            System.out.println("█████████░ " + percentage + "%");
-        } else if (percentageDone >= 80.0 && percentageDone < 90.0) {
-            System.out.println("████████░░ " + percentage + "%");
-        } else if (percentageDone >= 70.0 && percentageDone < 80.0) {
-            System.out.println("███████░░░ " + percentage + "%");
-        } else if (percentageDone >= 60.0 && percentageDone < 70.0) {
-            System.out.println("██████░░░░ " + percentage + "%");
-        } else if (percentageDone >= 50.0 && percentageDone < 80.0) {
-            System.out.println("█████░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 40.0 && percentageDone < 50.0) {
-            System.out.println("████░░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 30.0 && percentageDone < 40.0) {
-            System.out.println("███░░░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 20.0 && percentageDone < 30.0) {
-            System.out.println("██░░░░░░░░ " + percentage + "%");
-        } else if (percentageDone > 0.0 && percentageDone < 20.0) {
-            System.out.println("█░░░░░░░░░ " + percentage + "%");
-        } else if (percentageDone == 0.0) {
-            System.out.println("░░░░░░░░░░ 0%");
+        double completedMCsRatio = completedMCs % 10;
+        double uncompletedMCsRatio = 10 - completedMCsRatio;
+
+        for (int i = 0; i < 10; i++) {
+            if (i < completedMCsRatio) {
+                System.out.print("█");
+            } else if (i >= completedMCsRatio && i < uncompletedMCsRatio) {
+                System.out.print("░");
+            }
         }
+
+        System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
     }
 

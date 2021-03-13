@@ -21,12 +21,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
-        ArrayList<Module> modules = moduleList.getModules();
-        if (modules.isEmpty()) {
+        if (moduleList.isEmpty()) {
             ui.printListEmptyMessage();
-            return;
+        } else {
+            ui.printEntireList(moduleList.getModules());
         }
-        ui.printEntireList(moduleList.getModules());
     }
 
     /**

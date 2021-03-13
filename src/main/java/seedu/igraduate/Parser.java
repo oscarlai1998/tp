@@ -87,10 +87,11 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = extractModuleCode(commandFlags);
+        String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
 
-        return new AddCommand(moduleCode, commandParameters[1], moduleType, moduleCredits);
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
     /**
@@ -99,7 +100,6 @@ public class Parser {
      * Format: "Delete [module code]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
-     * 
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -108,8 +108,9 @@ public class Parser {
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        String moduleCode = commandParameters[1];
 
-        return new DeleteCommand(commandParameters[1]);
+        return new DeleteCommand(moduleCode);
     }
 
     /**
