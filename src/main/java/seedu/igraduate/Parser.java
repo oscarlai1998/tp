@@ -16,6 +16,7 @@ import seedu.igraduate.exception.InvalidCommandException;
  * A parse object correspomnds to the processing of one input by the user. 
  */
 public class Parser {
+    // Constants for command words
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_LIST = "list";
@@ -23,6 +24,7 @@ public class Parser {
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
 
+    // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_LENGTH = 6;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 1;
