@@ -3,9 +3,11 @@ package seedu.igraduate.command;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
+
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.IncorrectModuleTypeException;
 import seedu.igraduate.exception.SaveModuleFailException;
+
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
