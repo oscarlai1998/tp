@@ -2,6 +2,7 @@ package seedu.igraduate;
 
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+
 import seedu.igraduate.module.Module;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.CoreModule;

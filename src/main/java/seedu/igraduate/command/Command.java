@@ -4,13 +4,11 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.IncorrectModuleTypeException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
-import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.ExistingModuleException;
-
-import java.io.IOException;
 
 /**
  * Parent class for more specific command child class.
@@ -25,8 +23,8 @@ public abstract class Command {
      * @param storage Storage for storing module list data.
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
-        throws SaveModuleFailException, ModuleNotFoundException, IOException,
-        IncorrectModuleTypeException, ModularCreditExceedsLimitException, ExistingModuleException;
+        throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
+            ModularCreditExceedsLimitException, ExistingModuleException;
 
     /**
      * Returns a flag indicating whether the program should terminate after execution of current command.

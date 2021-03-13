@@ -2,6 +2,7 @@ package seedu.igraduate;
 
 import seedu.igraduate.exception.LoadModuleFailException;
 import seedu.igraduate.exception.SaveModuleFailException;
+
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
@@ -12,8 +13,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;

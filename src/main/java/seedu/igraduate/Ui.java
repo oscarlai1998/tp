@@ -1,6 +1,5 @@
 package seedu.igraduate;
 
-import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;

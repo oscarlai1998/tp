@@ -3,6 +3,7 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
+
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 
 import java.text.DecimalFormat;

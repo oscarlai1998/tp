@@ -3,9 +3,6 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
-import seedu.igraduate.module.Module;
-
-import java.util.ArrayList;
 
 /**
  * Handles list command.
