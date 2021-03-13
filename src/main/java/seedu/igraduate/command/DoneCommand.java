@@ -16,15 +16,32 @@ public class DoneCommand extends Command {
     protected String moduleCode;
     protected String moduleGrade;
 
+    /**
+     * Child class of the command class that contains the module code and grade. 
+     * Marks a module as done with the grade obtained. 
+     * 
+     * @param moduleCode module code. 
+     * @param moduleGrade grade obtained in the module. 
+     */
     public DoneCommand(String moduleCode, String moduleGrade) {
         this.moduleCode = moduleCode;
         this.moduleGrade = moduleGrade;
     }
 
+    /**
+     * Retrieves the module code. 
+     * 
+     * @return module code. 
+     */
     public String getModuleCode() {
         return moduleCode;
     }
 
+    /**
+     * Retrieves module grade. 
+     * 
+     * @return module grade. 
+     */
     public String getModuleGrade() {
         return moduleGrade;
     }

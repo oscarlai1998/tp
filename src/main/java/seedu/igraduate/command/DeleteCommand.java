@@ -20,19 +20,25 @@ public class DeleteCommand extends Command {
     protected String moduleCode;
 
 
+    /**
+     * Child class of the command class that contains the module code. 
+     * 
+     * @param moduleCode module code. 
+     */
     public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
     /**
      * Deletes a module from moduleList.
-     *
+     * 
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) 
+            throws ModuleNotFoundException {
         try {
             ArrayList<Module> modules = moduleList.getModules();
             int moduleIndex = moduleList.getModuleIndex(moduleCode);
@@ -44,11 +50,11 @@ public class DeleteCommand extends Command {
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
         }
-
     }
 
     /**
      * Deletes modules from Module list.
+     * 
      * @param moduleList module list consisting of all modules.
      * @param moduleCode module code.
      * @param ui User interface for printing result.
