@@ -3,10 +3,7 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
-import seedu.igraduate.exception.IncorrectModuleTypeException;
-import seedu.igraduate.exception.ModularCreditExceedsLimit;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.*;
 
 import java.io.IOException;
 
@@ -24,7 +21,7 @@ public abstract class Command {
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
         throws SaveModuleFailException, ModuleNotFoundException, IOException,
-        IncorrectModuleTypeException, ModularCreditExceedsLimit;
+        IncorrectModuleTypeException, ModularCreditExceedsLimit, ExistingModuleException;
 
     /**
      * Returns a flag indicating whether the program should terminate after execution of current command.
