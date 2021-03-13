@@ -2,6 +2,10 @@ package seedu.igraduate.module;
 
 import java.util.ArrayList;
 
+/**
+ * Parent class for more specific command child class.
+ * Contains basic information applicable to all module related classes.
+ */
 public abstract class Module {
     private String code;
     private String name;
@@ -10,6 +14,16 @@ public abstract class Module {
     private String grade;
     private ArrayList<String> preRequisites;
 
+    /**
+     * Creates an instance of a module based on the corresponding module type. 
+     * 
+     * @param code module code. 
+     * @param name module name as specified in the user input. 
+     * @param credit number of modular credits. 
+     * @param status status of completion (tick for completed, cross for uncompleted). 
+     * @param grade grade attained for the module, only applicable is status is done. 
+     * @param preRequisites prerequisites required for the module. 
+     */
     public Module(String code, String name, double credit, String status, String grade,
                   ArrayList<String> preRequisites) {
         setCode(code);
@@ -60,6 +74,11 @@ public abstract class Module {
         return status;
     }
 
+    /**
+     * Gets the completion status of the module.
+     *  
+     * @return tick if taken, cross if not taken and dash if unapplicable. 
+     */
     public String getStatusIcon() {
         String status = getStatus();
         if (status.equals("taken")) {
@@ -71,18 +90,9 @@ public abstract class Module {
         }
     }
 
-    public boolean isDone() {
-        if (getStatusIcon().equals("✓")) {
-            return true;
-        } else if (getStatusIcon().equals("✘")) {
-            return false;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-35s %8s", getStatusIcon(), getCode(), getName(), getCredit());
+        return String.format("[%s] %-8s %-50s %5s MC", getStatusIcon(), getCode(), getName(),
+                Math.round(getCredit()));
     }
 }

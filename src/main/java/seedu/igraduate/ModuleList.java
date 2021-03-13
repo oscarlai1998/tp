@@ -1,7 +1,12 @@
 package seedu.igraduate;
 
+import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.module.Module;
+import seedu.igraduate.module.MathModule;
+import seedu.igraduate.module.CoreModule;
+import seedu.igraduate.module.ElectiveModule;
+import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
 
@@ -13,6 +18,8 @@ public class ModuleList {
      * ArrayList that stores all the modules data.
      */
     private ArrayList<Module> modules;
+
+    private static final int DEFAULT_INDEX = -1;
 
     /**
      * Constructs new ArrayList if no data is provided.
@@ -31,11 +38,16 @@ public class ModuleList {
     }
 
     /**
-     * Adds new module to the module storage.
+     * Adds new module to the module storage if not already exists.
      *
      * @param module Module to be added into the module list.
+     * @throws ExistingModuleException If the new module already exists.
      */
-    public void add(Module module) {
+    public void add(Module module) throws ExistingModuleException {
+        String moduleCode = module.getCode();
+        if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            throw new ExistingModuleException();
+        }
         modules.add(module);
     }
 
@@ -61,7 +73,7 @@ public class ModuleList {
      * Sets the specified module grade.
      *
      * @param module Module to be marked as taken.
-     * @param grade Grade obtained for the specified module.
+     * @param grade  Grade obtained for the specified module.
      */
     public void setGrade(Module module, String grade) {
         module.setGrade(grade);
@@ -86,14 +98,12 @@ public class ModuleList {
     }
 
     /**
-     * Retrieves specified module from module list based on index number.
+     * Check if the current module list is empty.
      *
-     * @param index Index number of module in module list.
-     * @return The retrieved module based on specified module code.
-     * @throws ModuleNotFoundException If the module specified is not in the list.
+     * @return Boolean value indicating whether the module list is empty.
      */
-    public Module getByIndex(int index) {
-        return modules.get(index);
+    public boolean isEmpty() {
+        return modules.isEmpty();
     }
 
     /**
@@ -103,10 +113,11 @@ public class ModuleList {
      * @return The retrieved module based on specified module code.
      * @throws ModuleNotFoundException If the module specified is not in the list.
      */
-    public Module getByCode(String moduleCode) throws ModuleNotFoundException {
+    public Module getByCode(String moduleCode) 
+            throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
 
-        if (moduleIndex == -1) {
+        if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
 
@@ -120,7 +131,7 @@ public class ModuleList {
      * @return The retrieved module index on specified module code.
      */
     public int getModuleIndex(String moduleCode) {
-        int index = -1;
+        int index = DEFAULT_INDEX;
 
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
@@ -132,4 +143,38 @@ public class ModuleList {
         return index;
     }
 
+    /**
+     * Retrieves the module type of specified module.
+     *
+     * @param module Module object for finding type.
+     * @return The type of module specified.
+     */
+    public String getModuleType(Module module) {
+        String moduleType = "Undefined";
+        if (module instanceof CoreModule) {
+            moduleType = "Core";
+        } else if (module instanceof MathModule) {
+            moduleType = "Math";
+        } else if (module instanceof GeModule) {
+            moduleType = "GE";
+        } else if (module instanceof ElectiveModule) {
+            moduleType = "Elective";
+        }
+        return moduleType;
+    }
+
+    /**
+     * Calculates the total completed MC of all modules.
+     *
+     * @return The total completed MCs.
+     */
+    public double getTotalCompletedMCs() {
+        double totalCompletedMCs = 0;
+        for (Module module : modules) {
+            if (module.getStatus().equalsIgnoreCase("taken")) {
+                totalCompletedMCs += module.getCredit();
+            }
+        }
+        return totalCompletedMCs;
+    }
 }

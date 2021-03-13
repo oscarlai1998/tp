@@ -14,7 +14,6 @@ import seedu.igraduate.module.GeModule;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.Module;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +34,14 @@ public class AddCommand extends Command {
 
     private ArrayList<String> preRequisites;
 
+    /**
+     * Child class of the command class that contains the module name, code, type and credits to be added. 
+     * 
+     * @param moduleCode module code. 
+     * @param moduleName module name, customised according to user input. 
+     * @param moduleType module type (core, ue, ge or math). 
+     * @param moduleCredits number of credits for the module. 
+     */
     public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
@@ -43,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Todo: Add comments here.
+     * Executes the addCommand function. 
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -53,13 +60,10 @@ public class AddCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, IncorrectModuleTypeException, ExistingModuleException {
         try {
-            checkExistingModule(moduleList);
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
-        } catch (IOException e) {
-            throw new SaveModuleFailException();
         } catch (IncorrectModuleTypeException e) {
             throw new IncorrectModuleTypeException();
         } catch (ExistingModuleException e) {
@@ -67,6 +71,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Create a module based on its category. 
+     * Types: Core, UE, Math, GE. 
+     * 
+     * @return the created module. 
+     * @throws IncorrectModuleTypeException if module type does not fit any categories. 
+     */
     public Module createModuleByType() throws IncorrectModuleTypeException {
         Module module;
         switch (moduleType) {
@@ -90,15 +101,6 @@ public class AddCommand extends Command {
             throw new IncorrectModuleTypeException();
         }
         return module;
-    }
-
-    public void checkExistingModule(ModuleList moduleList) throws ExistingModuleException {
-        ArrayList<Module> modules = moduleList.getModules();
-        for (Module module : modules) {
-            if (moduleCode.equals(module.getCode())) {
-                throw new ExistingModuleException();
-            }
-        }
     }
 
     /**
