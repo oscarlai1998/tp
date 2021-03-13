@@ -9,6 +9,7 @@ import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 
 public class Parser {
@@ -32,7 +33,8 @@ public class Parser {
      * @param line user input.
      */
     public static Command parseCommand(String line) 
-            throws InvalidCommandException, IncorrectParameterCountException {
+            throws InvalidCommandException, IncorrectParameterCountException,
+            InputNotNumberException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -82,15 +84,17 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
-            throws InvalidCommandException, IncorrectParameterCountException {
+            throws InvalidCommandException, IncorrectParameterCountException,
+            InputNotNumberException {
         if (commandFlags.length != COMMAND_ADD_LENGTH) {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = extractModuleCode(commandFlags);
+        String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
 
-        return new AddCommand(moduleCode, commandParameters[1], moduleType, moduleCredits);
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
     /**
@@ -99,7 +103,6 @@ public class Parser {
      * Format: "Delete [module code]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
-     * 
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
@@ -108,8 +111,9 @@ public class Parser {
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        String moduleCode = commandParameters[1];
 
-        return new DeleteCommand(commandParameters[1]);
+        return new DeleteCommand(moduleCode);
     }
 
     /**
@@ -231,10 +235,14 @@ public class Parser {
      * @throws InvalidCommandException if command format is not recognised.
      */
     public static double extractModuleCredits(String[] commandFlags)
-            throws NumberFormatException, InvalidCommandException {
+            throws InputNotNumberException, InvalidCommandException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
-                return Double.parseDouble(commandFlags[i + 1]);
+                try {
+                    return Double.parseDouble(commandFlags[i + 1]);
+                } catch (NumberFormatException e) {
+                    throw new InputNotNumberException("Modular credits : -mc");
+                }
             }
         }
         throw new InvalidCommandException();
