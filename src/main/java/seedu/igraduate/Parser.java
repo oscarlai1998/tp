@@ -11,6 +11,7 @@ import seedu.igraduate.command.ProgressCommand;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -34,7 +35,7 @@ public class Parser {
      */
     public static Command parseCommand(String line) 
             throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException {
+            InputNotNumberException, InvalidModuleTypeException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -85,7 +86,7 @@ public class Parser {
      */
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException {
+            InputNotNumberException, InvalidModuleTypeException {
         if (commandFlags.length != COMMAND_ADD_LENGTH) {
             throw new IncorrectParameterCountException();
         }
@@ -208,7 +209,7 @@ public class Parser {
      * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractModuleType(String[] commandFlags) 
-            throws InvalidCommandException {
+            throws InvalidModuleTypeException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
@@ -219,11 +220,11 @@ public class Parser {
                 case "ge":
                     return type;
                 default:
-                    throw new InvalidCommandException();
+                    throw new InvalidModuleTypeException();
                 }
             }
         }
-        throw new InvalidCommandException();
+        throw new InvalidModuleTypeException();
     }
 
     /**
