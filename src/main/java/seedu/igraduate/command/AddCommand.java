@@ -53,7 +53,6 @@ public class AddCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, IncorrectModuleTypeException, ExistingModuleException {
         try {
-            checkExistingModule(moduleList);
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
@@ -90,15 +89,6 @@ public class AddCommand extends Command {
             throw new IncorrectModuleTypeException();
         }
         return module;
-    }
-
-    public void checkExistingModule(ModuleList moduleList) throws ExistingModuleException {
-        ArrayList<Module> modules = moduleList.getModules();
-        for (Module module : modules) {
-            if (moduleCode.equals(module.getCode())) {
-                throw new ExistingModuleException();
-            }
-        }
     }
 
     /**
