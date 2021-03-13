@@ -34,6 +34,14 @@ public class AddCommand extends Command {
 
     private ArrayList<String> preRequisites;
 
+    /**
+     * Child class of the command class that contains the module name, code, type and credits to be added. 
+     * 
+     * @param moduleCode module code. 
+     * @param moduleName module name, customised according to user input. 
+     * @param moduleType module type (core, ue, ge or math). 
+     * @param moduleCredits number of credits for the module. 
+     */
     public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
@@ -42,7 +50,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Todo: Add comments here.
+     * Executes the addCommand function. 
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -63,6 +71,13 @@ public class AddCommand extends Command {
         }
     }
 
+    /**
+     * Create a module based on its category. 
+     * Types: Core, UE, Math, GE. 
+     * 
+     * @return the created module. 
+     * @throws IncorrectModuleTypeException if module type does not fit any categories. 
+     */
     public Module createModuleByType() throws IncorrectModuleTypeException {
         Module module;
         switch (moduleType) {

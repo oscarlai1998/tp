@@ -13,17 +13,24 @@ import seedu.igraduate.module.Module;
 public class DeleteCommand extends Command {
     protected String moduleCode;
 
+
+    /**
+     * Child class of the command class that contains the module code. 
+     * 
+     * @param moduleCode module code. 
+     */
     public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
     /**
      * Deletes a module from moduleList.
-     *
+     * 
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
      * @throws ModuleNotFoundException If the module specified does not exists.
+     * @throws SaveModuleFailException If module data fails to save to file.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)

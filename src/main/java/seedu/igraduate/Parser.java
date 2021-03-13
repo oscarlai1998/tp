@@ -12,7 +12,12 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 
+/**
+ * Representats an instance of a parser. 
+ * A parse object correspomnds to the processing of one input by the user. 
+ */
 public class Parser {
+    // Constants for command words
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_LIST = "list";
@@ -20,6 +25,7 @@ public class Parser {
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
 
+    // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_LENGTH = 6;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 1;
@@ -29,8 +35,11 @@ public class Parser {
 
     /**
      * Parses user input and identifies the command to be executed.
-     *
-     * @param line user input.
+     * 
+     * @param line User input directly from the input stream. 
+     * @return An object of the respective command class (e.g. deleteCommand, addCommand, etc.)
+     * @throws InvalidCommandException If input does not contain a valid command. 
+     * @throws IncorrectParameterCountException If the command input does not contain the right parameters. 
      */
     public static Command parseCommand(String line) 
             throws InvalidCommandException, IncorrectParameterCountException,
@@ -66,6 +75,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Obtains the flags and their respective values. 
+     * 
+     * @param commands Array seperating command name and parameters with command flags and values. 
+     * @return Array containing the flags and values split with the delimeter (" ")
+     */
     private static String[] getCommandFlag(String[] commands) {
         if (commands.length < 2) {
             return new String[] { null };
@@ -81,7 +96,8 @@ public class Parser {
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags flags of commands from user input. 
      * @return new instance of AddCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @throws InvalidCommandException If input does not contain a valid command. 
+     * @throws IncorrectParameterCountException If the command input does not contain the right parameters. 
      */
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
@@ -98,8 +114,7 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of DeleteCommand class
-     * to execute.
+     * Extracts relevant parameters and creates new instance of DeleteCommand class to execute.
      * Format: "Delete [module code]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
@@ -117,8 +132,7 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of ListCommand class to
-     * execute.
+     * Extracts relevant parameters and creates new instance of ListCommand class to execute.
      * Format: "List"
      *
      * @param commandParameters parameters of user input, excluding command flags.
@@ -150,14 +164,14 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates an instance of DoneCommand to
-     * execute.
+     * Extracts relevant parameters and creates an instance of DoneCommand to execute.
      * Format: "done [module code] -g [grade]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags flags of commands from user input. 
      * @return new instance of DoneCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @throws InvalidCommandException If the command input does not contain the right parameters. 
      */
     public static Command createDoneCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
@@ -189,6 +203,7 @@ public class Parser {
      *
      * @param commands parameters of user input, excluding command flags.
      * @return module code.
+     * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static String extractModuleCode(String[] commands)
             throws IncorrectParameterCountException {
