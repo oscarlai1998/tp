@@ -16,9 +16,9 @@ public class Ui {
             + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "------------------------------------------------------------"
-            + "---------------";
+            + "------------------";
 
-    private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%dMCs)";
+    private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%sMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
@@ -93,13 +93,12 @@ public class Ui {
 
     public void printProgressBar(double completedMCs, String percentage) {
         System.out.println("Progress:");
-        double completedMCsRatio = completedMCs % 10;
-        double uncompletedMCsRatio = 10 - completedMCsRatio;
+        int completedMCsRatio = (int)completedMCs / 10;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 11; i++) {
             if (i < completedMCsRatio) {
                 System.out.print("█");
-            } else if (i >= completedMCsRatio && i < uncompletedMCsRatio) {
+            } else if (i >= completedMCsRatio) {
                 System.out.print("░");
             }
         }

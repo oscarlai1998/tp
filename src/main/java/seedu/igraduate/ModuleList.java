@@ -1,5 +1,6 @@
 package seedu.igraduate;
 
+import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.module.*;
 import seedu.igraduate.module.Module;
@@ -14,6 +15,8 @@ public class ModuleList {
      * ArrayList that stores all the modules data.
      */
     private ArrayList<Module> modules;
+
+    private final int DEFAULT_INDEX = -1;
 
     /**
      * Constructs new ArrayList if no data is provided.
@@ -32,11 +35,16 @@ public class ModuleList {
     }
 
     /**
-     * Adds new module to the module storage.
+     * Adds new module to the module storage if not already exists.
      *
      * @param module Module to be added into the module list.
+     * @throws ExistingModuleException If the new module already exists.
      */
-    public void add(Module module) {
+    public void add(Module module) throws ExistingModuleException {
+        String moduleCode = module.getCode();
+        if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            throw new ExistingModuleException();
+        }
         modules.add(module);
     }
 
@@ -105,7 +113,7 @@ public class ModuleList {
     public Module getByCode(String moduleCode) throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
 
-        if (moduleIndex == -1) {
+        if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
 
@@ -119,7 +127,7 @@ public class ModuleList {
      * @return The retrieved module index on specified module code.
      */
     public int getModuleIndex(String moduleCode) {
-        int index = -1;
+        int index = DEFAULT_INDEX;
 
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
@@ -151,4 +159,18 @@ public class ModuleList {
         return moduleType;
     }
 
+    /**
+     * Calculates the total completed MC of all modules.
+     *
+     * @return The total completed MCs.
+     */
+    public double getTotalCompletedMCs() {
+        double totalCompletedMCs = 0;
+        for (Module module : modules) {
+            if (module.getStatus().equalsIgnoreCase("taken")) {
+                totalCompletedMCs += module.getCredit();
+            }
+        }
+        return totalCompletedMCs;
+    }
 }
