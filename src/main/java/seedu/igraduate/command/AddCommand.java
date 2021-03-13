@@ -3,8 +3,11 @@ package seedu.igraduate.command;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
+
+import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.IncorrectModuleTypeException;
 import seedu.igraduate.exception.SaveModuleFailException;
+
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
@@ -48,8 +51,9 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, IncorrectModuleTypeException {
+            throws SaveModuleFailException, IncorrectModuleTypeException, ExistingModuleException {
         try {
+            checkExistingModule(moduleList);
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
@@ -58,6 +62,8 @@ public class AddCommand extends Command {
             throw new SaveModuleFailException();
         } catch (IncorrectModuleTypeException e) {
             throw new IncorrectModuleTypeException();
+        } catch (ExistingModuleException e) {
+            throw new ExistingModuleException();
         }
     }
 
@@ -84,6 +90,15 @@ public class AddCommand extends Command {
             throw new IncorrectModuleTypeException();
         }
         return module;
+    }
+
+    public void checkExistingModule(ModuleList moduleList) throws ExistingModuleException {
+        ArrayList<Module> modules = moduleList.getModules();
+        for (Module module : modules) {
+            if (moduleCode.equals(module.getCode())) {
+                throw new ExistingModuleException();
+            }
+        }
     }
 
     /**
