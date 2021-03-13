@@ -1,5 +1,7 @@
 package seedu.igraduate;
 
+import seedu.igraduate.exception.LoadModuleFailException;
+import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
@@ -7,7 +9,6 @@ import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.Module;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,8 +16,6 @@ import java.util.ArrayList;
 import java.lang.reflect.Type;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
@@ -46,13 +45,18 @@ public class Storage {
      * @throws JsonSyntaxException if there is error parsing the json format. 
      */
     public ArrayList<Module> loadModulesFromFile()
-            throws IOException, FileNotFoundException, JsonSyntaxException {
+            throws LoadModuleFailException {
         if (!filePath.exists()) {
-            throw new FileNotFoundException();
+            throw new LoadModuleFailException();
         }
 
         Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
-        return loadFromJson(objectType, filePath);
+
+        try {
+            return loadFromJson(objectType, filePath);
+        } catch (Exception e) {
+            throw new LoadModuleFailException();
+        }
     }
 
     /**
@@ -65,7 +69,7 @@ public class Storage {
      * @throws FileNotFoundException
      */
     public ArrayList<Module> loadFromJson(Type type, File jsonFile) 
-            throws IOException, FileNotFoundException {
+            throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         FileReader fileReader = new FileReader(jsonFile);
@@ -76,15 +80,18 @@ public class Storage {
      * Prepares to save the array list into a json format. 
      * 
      * @param modules array list of all modules. 
-     * @throws JsonIOException if the is an error converting the array list to json format. 
-     * @throws IOException if the file failed to be written. 
+     * @throws SaveModuleFailException if the module fails to save to file. 
      */
-    public void saveModulesToFile(ModuleList modules) throws JsonIOException, IOException {
+    public void saveModulesToFile(ModuleList modules) throws SaveModuleFailException {
         // Creates parent directories if file does not exist
         if (!filePath.exists()) {
             filePath.getParentFile().mkdirs();
         }
-        saveToJson(filePath, modules.getModules());
+        try {
+            saveToJson(filePath, modules.getModules());
+        } catch (Exception exception) {
+            throw new SaveModuleFailException();
+        }
     }
 
     /**

@@ -14,7 +14,6 @@ import seedu.igraduate.module.GeModule;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.Module;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -61,13 +60,10 @@ public class AddCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, IncorrectModuleTypeException, ExistingModuleException {
         try {
-            checkExistingModule(moduleList);
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
-        } catch (IOException e) {
-            throw new SaveModuleFailException();
         } catch (IncorrectModuleTypeException e) {
             throw new IncorrectModuleTypeException();
         } catch (ExistingModuleException e) {
@@ -105,21 +101,6 @@ public class AddCommand extends Command {
             throw new IncorrectModuleTypeException();
         }
         return module;
-    }
-
-    /**
-     * Checks if the module already exists. 
-     * 
-     * @param moduleList list of call modules. 
-     * @throws ExistingModuleException if the module already exists. 
-     */
-    public void checkExistingModule(ModuleList moduleList) throws ExistingModuleException {
-        ArrayList<Module> modules = moduleList.getModules();
-        for (Module module : modules) {
-            if (moduleCode.equals(module.getCode())) {
-                throw new ExistingModuleException();
-            }
-        }
     }
 
     /**

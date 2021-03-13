@@ -1,6 +1,5 @@
 package seedu.igraduate;
 
-import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
@@ -16,10 +15,11 @@ public class Ui {
     private static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
             + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
-    private static final String BORDER_LINE = "------------------------------------------------------------";
+    private static final String BORDER_LINE = "------------------------------------------------------------"
+            + "------------------";
 
     // Meesages for successful execution
-    private static final String MODULE_ADDED_MESSAGE = "Added %s as a %s module. (%dMCs)";
+    private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%sMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
@@ -89,7 +89,7 @@ public class Ui {
      * @param module array list containing the modules. 
      */
     public void printAddedModuleSuccess(Module module) {
-        System.out.println("Module added to the list.");
+        System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getName(), module.getCredit()));
         System.out.println(module);
     }
 
@@ -148,34 +148,21 @@ public class Ui {
      * Displays the progress bar for university graduation completion. 
      * 
      * @param completedMCs total number of credits completed. 
-     * @param percentageDone percentage of academic career completed. 
      * @param percentage percentage of academic career completed in string. 
      */
-    public void printProgressBar(float completedMCs, float percentageDone, String percentage) {
+    public void printProgressBar(double completedMCs, String percentage) {
         System.out.println("Progress:");
-        if (percentageDone == 100.0) {
-            System.out.println("██████████ 100%");
-        } else if (percentageDone >= 90.0 && percentageDone < 100.0) {
-            System.out.println("█████████░ " + percentage + "%");
-        } else if (percentageDone >= 80.0 && percentageDone < 90.0) {
-            System.out.println("████████░░ " + percentage + "%");
-        } else if (percentageDone >= 70.0 && percentageDone < 80.0) {
-            System.out.println("███████░░░ " + percentage + "%");
-        } else if (percentageDone >= 60.0 && percentageDone < 70.0) {
-            System.out.println("██████░░░░ " + percentage + "%");
-        } else if (percentageDone >= 50.0 && percentageDone < 80.0) {
-            System.out.println("█████░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 40.0 && percentageDone < 50.0) {
-            System.out.println("████░░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 30.0 && percentageDone < 40.0) {
-            System.out.println("███░░░░░░░ " + percentage + "%");
-        } else if (percentageDone >= 20.0 && percentageDone < 30.0) {
-            System.out.println("██░░░░░░░░ " + percentage + "%");
-        } else if (percentageDone > 0.0 && percentageDone < 20.0) {
-            System.out.println("█░░░░░░░░░ " + percentage + "%");
-        } else if (percentageDone == 0.0) {
-            System.out.println("░░░░░░░░░░ 0%");
+        int completedMCsRatio = (int)completedMCs / 10;
+
+        for (int i = 0; i < 11; i++) {
+            if (i < completedMCsRatio) {
+                System.out.print("█");
+            } else if (i >= completedMCsRatio) {
+                System.out.print("░");
+            }
         }
+
+        System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
     }
 

@@ -2,6 +2,7 @@ package seedu.igraduate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.module.GeModule;
 
@@ -14,7 +15,7 @@ class ModuleListTest {
     private ModuleList modules = new ModuleList();
 
     @Test
-    void add_module_success() throws ModuleNotFoundException {
+    void add_module_success() throws ModuleNotFoundException, ExistingModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -23,7 +24,7 @@ class ModuleListTest {
     }
 
     @Test
-    void delete_module_success() {
+    void delete_module_success() throws ExistingModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -43,7 +44,7 @@ class ModuleListTest {
     }
 
     @Test
-    void get_existingModule_success() throws ModuleNotFoundException {
+    void get_existingModule_success() throws ModuleNotFoundException, ExistingModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);

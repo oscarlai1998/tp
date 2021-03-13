@@ -90,23 +90,9 @@ public abstract class Module {
         }
     }
 
-    /**
-     * Check the module completion status. 
-     * 
-     * @return true if completed, false otherwise. 
-     */
-    public boolean isDone() {
-        if (getStatusIcon().equals("✓")) {
-            return true;
-        } else if (getStatusIcon().equals("✘")) {
-            return false;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-35s %8s", getStatusIcon(), getCode(), getName(), getCredit());
+        return String.format("[%s] %-8s %-50s %5s MC", getStatusIcon(), getCode(), getName(),
+                Math.round(getCredit()));
     }
 }
