@@ -1,4 +1,5 @@
-null
+Oops! An error occur when trying to import module data from file :(.
+Initializing new module list...
  _  ____               _             _
 (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
 | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
