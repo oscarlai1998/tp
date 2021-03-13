@@ -2,8 +2,11 @@ package seedu.igraduate;
 
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.module.*;
 import seedu.igraduate.module.Module;
+import seedu.igraduate.module.MathModule;
+import seedu.igraduate.module.CoreModule;
+import seedu.igraduate.module.ElectiveModule;
+import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
 
@@ -16,7 +19,7 @@ public class ModuleList {
      */
     private ArrayList<Module> modules;
 
-    private final int DEFAULT_INDEX = -1;
+    private static final int DEFAULT_INDEX = -1;
 
     /**
      * Constructs new ArrayList if no data is provided.
