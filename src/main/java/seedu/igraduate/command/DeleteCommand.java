@@ -54,7 +54,8 @@ public class DeleteCommand extends Command {
      * @param ui User interface for printing result.
      * @throws ModuleNotFoundException if moduleCode is is not in list.
      */
-    public void deleteModule(Module module, ModuleList moduleList, String moduleCode, Ui ui) throws ModuleNotFoundException {
+    public void deleteModule(Module module, ModuleList moduleList, String moduleCode, Ui ui)
+            throws ModuleNotFoundException {
         String moduleType = null;
         moduleList.delete(module);
         if (module instanceof CoreModule) {

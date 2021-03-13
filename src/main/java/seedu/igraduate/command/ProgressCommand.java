@@ -30,7 +30,7 @@ public class ProgressCommand extends Command {
                 completedMCs += module.getCredit();
             }
         }
-        float percentageDone = (completedMCs / 160 ) * 100;
+        float percentageDone = (completedMCs / 160) * 100;
         String stringPercentageDone = df.format(percentageDone);
         if (percentageDone > 100) {
             throw new ModularCreditExceedsLimit();
