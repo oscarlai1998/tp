@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Retrieves the module code. 
+     * Retrieves the module code given in the user input. 
      * 
      * @return module code. 
      */
@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Retrieves module grade. 
+     * Retrieves module grade given in the user input. 
      * 
      * @return module grade. 
      */
