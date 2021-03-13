@@ -18,7 +18,7 @@ public class Ui {
     private static final String BORDER_LINE = "------------------------------------------------------------"
             + "------------------";
 
-    // Meesages for successful execution
+    // Messages for successful execution
     private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%sMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
