@@ -7,8 +7,6 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.Module;
 
-import java.io.IOException;
-
 /**
  * Handles delete command.
  */
@@ -38,8 +36,6 @@ public class DeleteCommand extends Command {
             ui.printDeletedModuleSuccess(moduleCode, moduleType);
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
-        } catch (IOException e) {
-            throw new SaveModuleFailException();
         }
     }
 

@@ -27,13 +27,9 @@ public class IGraduate {
         storage = new Storage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
-        } catch (FileNotFoundException exception) {
-            ui.printErrorMessage(exception);
+        } catch (Exception e) {
+            ui.printErrorMessage(e);
             modules = new ModuleList();
-        } catch (JsonSyntaxException exception) {
-            ui.printErrorMessage(exception);
-        } catch (IOException exception) {
-            ui.printErrorMessage(exception);
         }
     }
 
