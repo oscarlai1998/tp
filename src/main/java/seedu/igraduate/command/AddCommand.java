@@ -14,7 +14,6 @@ import seedu.igraduate.module.GeModule;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.Module;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -57,8 +56,6 @@ public class AddCommand extends Command {
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
-        } catch (IOException e) {
-            throw new SaveModuleFailException();
         } catch (IncorrectModuleTypeException e) {
             throw new IncorrectModuleTypeException();
         } catch (ExistingModuleException e) {

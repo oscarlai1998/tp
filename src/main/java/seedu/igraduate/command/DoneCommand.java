@@ -7,8 +7,6 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.Module;
 
-import java.io.IOException;
-
 /**
  * Handles done command.
  */
@@ -47,8 +45,6 @@ public class DoneCommand extends Command {
             moduleList.setGrade(module, getModuleGrade());
             storage.saveModulesToFile(moduleList);
             ui.printMarkAsTakenMessage(module);
-        } catch (IOException e) {
-            throw new SaveModuleFailException();
         } catch (ModuleNotFoundException e) {
             throw new ModuleNotFoundException();
         }
