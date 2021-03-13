@@ -4,7 +4,7 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
-import seedu.igraduate.module.Module;
+
 import java.text.DecimalFormat;
 
 /**
@@ -22,7 +22,7 @@ public class ProgressCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws ModularCreditExceedsLimitException {
         DecimalFormat df = new DecimalFormat("0.00");
-        double completedMCs = Module.getTotalCompletedMCs();
+        double completedMCs = moduleList.getTotalCompletedMCs();
         double percentageDone = (completedMCs / 160 ) * 100;
         String stringPercentageDone = df.format(percentageDone);
         if (percentageDone > 100) {
