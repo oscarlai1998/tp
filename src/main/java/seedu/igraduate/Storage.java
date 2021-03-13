@@ -22,6 +22,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+/**
+ * Represents an instance of storage. 
+ * A storage object corresponds to the saving and loading of file.  
+ */
 public class Storage {
     private File filePath;
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
@@ -35,6 +39,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Prepares to load modules from file. 
+     * 
+     * @return the parsed array list containing all saved modules. 
+     * @throws IOException if file cannot be read or processed. 
+     * @throws LoadModuleFailException if the module fails to save to file. 
+     */
     public ArrayList<Module> loadModulesFromFile()
             throws LoadModuleFailException {
         if (!filePath.exists()) {
@@ -50,6 +61,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the stored modules from json file.  
+     * 
+     * @param type module type. 
+     * @param jsonFile file opened for reading. 
+     * @return parsed array list containing saved modules. 
+     * @throws IOException if the file failed to be read. 
+     */
     public ArrayList<Module> loadFromJson(Type type, File jsonFile) 
             throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
@@ -58,6 +77,12 @@ public class Storage {
         return gson.fromJson(fileReader, type);
     }
 
+    /**
+     * Prepares to save the array list into a json format. 
+     * 
+     * @param modules array list of all modules. 
+     * @throws SaveModuleFailException if the module fails to save to file. 
+     */
     public void saveModulesToFile(ModuleList modules) throws SaveModuleFailException {
         // Creates parent directories if file does not exist
         if (!filePath.exists()) {
@@ -65,11 +90,18 @@ public class Storage {
         }
         try {
             saveToJson(filePath, modules.getModules());
-        } catch (Exception e) {
+        } catch (Exception exception) {
             throw new SaveModuleFailException();
         }
     }
 
+    /**
+     * Saves the array list to json file. 
+     * 
+     * @param jsonFile file opened for writing. 
+     * @param modules array list of all the modules. 
+     * @throws IOException if the file failed to be written. 
+     */
     public void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapterFactory(moduleAdaptorFactory).create();

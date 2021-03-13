@@ -74,7 +74,7 @@ public class ModuleList {
      * Sets the specified module grade.
      *
      * @param module Module to be marked as taken.
-     * @param grade Grade obtained for the specified module.
+     * @param grade  Grade obtained for the specified module.
      */
     public void setGrade(Module module, String grade) {
         module.setGrade(grade);
@@ -101,7 +101,7 @@ public class ModuleList {
     /**
      * Check if the current module list is empty.
      *
-     * @return Boolean value indicating whether the module list is empty..
+     * @return Boolean value indicating whether the module list is empty.
      */
     public boolean isEmpty() {
         return modules.isEmpty();
@@ -114,7 +114,8 @@ public class ModuleList {
      * @return The retrieved module based on specified module code.
      * @throws ModuleNotFoundException If the module specified is not in the list.
      */
-    public Module getByCode(String moduleCode) throws ModuleNotFoundException {
+    public Module getByCode(String moduleCode) 
+            throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
 
         if (moduleIndex == DEFAULT_INDEX) {
