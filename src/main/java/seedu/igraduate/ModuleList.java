@@ -100,7 +100,6 @@ public class ModuleList {
     /**
      * Check if the current module list is empty.
      *
-     * @param index Index number of module in module list.
      * @return Boolean value indicating whether the module list is empty.
      */
     public boolean isEmpty() {

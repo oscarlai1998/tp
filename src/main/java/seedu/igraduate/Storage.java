@@ -41,8 +41,7 @@ public class Storage {
      * 
      * @return the parsed array list containing all saved modules. 
      * @throws IOException if file cannot be read or processed. 
-     * @throws FileNotFoundException if file cannot be found. 
-     * @throws JsonSyntaxException if there is error parsing the json format. 
+     * @throws LoadModuleFailException if the module fails to save to file. 
      */
     public ArrayList<Module> loadModulesFromFile()
             throws LoadModuleFailException {
@@ -62,11 +61,10 @@ public class Storage {
     /**
      * Loads the stored modules from json file.  
      * 
-     * @param type
-     * @param jsonFile
-     * @return
-     * @throws IOException
-     * @throws FileNotFoundException
+     * @param type module type. 
+     * @param jsonFile file opened for reading. 
+     * @return parsed array list containing saved modules. 
+     * @throws IOException if the file failed to be read. 
      */
     public ArrayList<Module> loadFromJson(Type type, File jsonFile) 
             throws IOException {
