@@ -98,7 +98,7 @@ public class ModuleList {
     }
 
     /**
-     * Check if the current module list is empty.
+     * Checks if the current module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */

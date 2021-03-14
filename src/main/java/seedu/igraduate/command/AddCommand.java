@@ -72,7 +72,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Create a module based on its category. 
+     * Creates a module based on its category. 
      * Types: Core, UE, Math, GE. 
      * 
      * @return the created module. 

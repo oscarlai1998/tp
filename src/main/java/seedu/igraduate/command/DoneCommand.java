@@ -45,7 +45,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark the provided module as done and set the corresponding grade.
+     * Marks the provided module as done and set the corresponding grade.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.

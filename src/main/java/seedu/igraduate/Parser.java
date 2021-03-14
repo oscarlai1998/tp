@@ -13,8 +13,8 @@ import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 
 /**
- * Representats an instance of a parser. 
- * A parse object correspomnds to the processing of one input by the user. 
+ * Represents an instance of a parser. 
+ * A parser object corresponds to the processing of one input by the user. 
  */
 public class Parser {
     // Constants for command words
