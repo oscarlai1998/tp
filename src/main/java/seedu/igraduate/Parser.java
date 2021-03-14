@@ -114,8 +114,6 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
 
-        assert commandParameters.length == 2 : "Input for add should have 2 parameters (excluding flags)";
-        assert commandFlags.length == 6 : "COMMAND_ADD_LENGTH should be 6.";
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
@@ -137,7 +135,6 @@ public class Parser {
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-        assert commandParameters.length == 2 : "Input for delete should have 2 parameters.";
         String moduleCode = commandParameters[1];
 
         return new DeleteCommand(moduleCode);
@@ -156,7 +153,6 @@ public class Parser {
         if (commandParameters.length != COMMAND_LIST_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-        assert commandParameters.length == 1 : "Input for list should only have 1 parameter.";
         return new ListCommand();
     }
 
@@ -173,7 +169,7 @@ public class Parser {
         if (commandParameters.length != COMMAND_PROGRESS_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-        assert commandParameters.length == 1 : "Input for progress should only have 1 parameter.";
+
         return new ProgressCommand();
     }
 
@@ -196,8 +192,6 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
 
-        assert commandParameters.length == 2 : "Input for done should have 2 parameters (excluding flags)";
-        assert commandFlags.length == 2 : "COMMAND_DONE_LENGTH should be 2.";
         String moduleGrade = extractModuleGrade(commandFlags);
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
@@ -214,7 +208,6 @@ public class Parser {
         if (commandParameters.length != COMMAND_EXIT_LENGTH) {
             throw new IncorrectParameterCountException();
         }
-        assert commandParameters.length == 1 : "Input for exit should only have 1 parameter.";
         return new ExitCommand();
     }
 
