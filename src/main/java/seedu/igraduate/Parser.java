@@ -27,11 +27,13 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
 
     // Constants for the expected number of parameters for a given command
-    private static final int COMMAND_ADD_LENGTH = 6;
+    private static final int COMMAND_ADD_FLAG_LENGTH = 6;
+    private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 1;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
-    private static final int COMMAND_DONE_LENGTH = 2;
+    private static final int COMMAND_DONE_FLAG_LENGTH = 2;
+    private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     /**
@@ -105,9 +107,13 @@ public class Parser {
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException {
-        if (commandFlags.length != COMMAND_ADD_LENGTH) {
+        if (commandFlags.length != COMMAND_ADD_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        if (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH) {
+            throw new IncorrectParameterCountException();
+        }
+
         assert commandParameters.length == 2 : "Input for add should have 2 parameters (excluding flags)";
         assert commandFlags.length == 6 : "COMMAND_ADD_LENGTH should be 6.";
         String moduleCode = extractModuleCode(commandFlags);
@@ -183,9 +189,13 @@ public class Parser {
      */
     public static Command createDoneCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
-        if (commandFlags.length != COMMAND_DONE_LENGTH) {
+        if (commandFlags.length != COMMAND_DONE_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        if (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH) {
+            throw new IncorrectParameterCountException();
+        }
+
         assert commandParameters.length == 2 : "Input for done should have 2 parameters (excluding flags)";
         assert commandFlags.length == 2 : "COMMAND_DONE_LENGTH should be 2.";
         String moduleGrade = extractModuleGrade(commandFlags);
