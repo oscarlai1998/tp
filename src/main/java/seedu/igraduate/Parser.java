@@ -210,7 +210,7 @@ public class Parser {
             throws IncorrectParameterCountException {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
-                return commands[i + 1].toLowerCase().trim();
+                return commands[i + 1].toUpperCase().trim();
             }
         }
         throw new IncorrectParameterCountException();
