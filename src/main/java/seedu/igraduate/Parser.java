@@ -111,9 +111,8 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of AddCommand class to
-     * execute. Format: "Add [module name] -c [module code] -t [module type] -mc
-     * [modular credits]"
+     * Extracts relevant parameters and creates new instance of AddCommand class to execute.
+     * Format: "Add [module name] -c [module code] -t [module type] -mc [modular credits]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags      flags of commands from user input.
@@ -134,6 +133,9 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
 
+        assert commandParameters.length == 2 : "Input for add should have 2 parameters (excluding flags)";
+        assert commandFlags.length == 6 : "COMMAND_ADD_LENGTH should be 6.";
+
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
         assert moduleName.trim().length() > 0 : "Name of module should not be empty.";
@@ -145,8 +147,8 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of DeleteCommand class
-     * to execute. Format: "Delete [module code]"
+     * Extracts relevant parameters and creates new instance of DeleteCommand class to execute.
+     * Format: "Delete [module code]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of DeleteCommand class.
@@ -169,8 +171,8 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of ListCommand class to
-     * execute. Format: "List"
+     * Extracts relevant parameters and creates new instance of ListCommand class to execute.
+     * Format: "List"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of ListCommand class.
@@ -191,7 +193,8 @@ public class Parser {
     }
 
     /**
-     * Creates new instance of ProgressCommand class to execute. Format: "Progress"
+     * Creates new instance of ProgressCommand class to execute.
+     * Format: "Progress"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @return new instance of ProgressCommand class.
@@ -231,6 +234,7 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+        assert commandFlags.length == 2 : "COMMAND_DONE_LENGTH should be 2.";
 
         String moduleGrade = extractModuleGrade(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for done command.");
@@ -268,6 +272,7 @@ public class Parser {
      */
     public static String extractModuleCode(String[] commands) 
             throws IncorrectParameterCountException {
+        assert commands.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleCode should only be" + " called for add";
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
                 assert commands[i + 1].length() > 0 : "Module code should not be empty";
@@ -289,6 +294,7 @@ public class Parser {
      */
     public static String extractModuleType(String[] commandFlags) 
             throws InvalidModuleTypeException, InvalidCommandException {
+        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleType should only be" + " called for add";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
@@ -319,6 +325,8 @@ public class Parser {
      */
     public static double extractModuleCredits(String[] commandFlags)
             throws InputNotNumberException, InvalidCommandException {
+        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleCredits should only be "
+                + "called for add command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
                 assert commandFlags[i + 1].trim().length() > 0 : "Modular credits field should not be empty.";
@@ -343,6 +351,8 @@ public class Parser {
      */
     public static String extractModuleGrade(String[] commandFlags) 
             throws InvalidCommandException {
+        assert commandFlags.length == COMMAND_DONE_FLAG_LENGTH : "extractModuleGrade should only be "
+                + "called for done command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-g")) {
                 assert commandFlags[i + 1].length() > 0 : "Grade should not be empty.";
