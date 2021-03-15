@@ -16,7 +16,7 @@ public class Ui {
             + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "------------------------------------------------------------"
-            + "---------------------";
+            + "--------------------------";
 
     // Messages for successful execution
     private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%sMCs)";
