@@ -92,7 +92,7 @@ public abstract class Module {
 
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-50s %5s MC", getStatusIcon(), getCode(), getName(),
+        return String.format("[%s] %-8s %-55s %5s MC", getStatusIcon(), getCode(), getName(),
                 Math.round(getCredit()));
     }
 }

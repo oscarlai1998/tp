@@ -224,7 +224,7 @@ public class Parser {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
                 assert commands[i + 1].length() > 0 : "Module code should not be empty";
-                return commands[i + 1].toLowerCase().trim();
+                return commands[i + 1].toUpperCase().trim();
             }
         }
         throw new IncorrectParameterCountException();
