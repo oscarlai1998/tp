@@ -14,7 +14,7 @@ public class ListCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
 
     /**
-     * Print list of all modules.
+     * Prints list of all modules.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
