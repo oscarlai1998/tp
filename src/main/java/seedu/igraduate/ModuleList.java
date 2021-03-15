@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+    
     private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
 
     /**
