@@ -13,6 +13,8 @@ import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 
+import java.util.logging.*;
+
 /**
  * Represents an instance of a parser. A parse object corresponds to the
  * processing of one input by the user.
@@ -35,6 +37,8 @@ public class Parser {
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
+
+    private static final Logger logger = Logger.getLogger(Parser.class.getName());
 
     /**
      * Parses user input and identifies the command to be executed.
@@ -66,16 +70,22 @@ public class Parser {
 
         switch (command) {
         case COMMAND_ADD:
+            logger.log(Level.INFO, "Message parsed to add command.");
             return createAddCommand(commandParameters, commandFlags);
         case COMMAND_DELETE:
+            logger.log(Level.INFO, "Message parsed to delete command.");
             return createDeleteCommand(commandParameters, commandFlags);
         case COMMAND_LIST:
+            logger.log(Level.INFO, "Message parsed to list command.");
             return createListCommand(commandParameters, commandFlags);
         case COMMAND_PROGRESS:
+            logger.log(Level.INFO, "Message parsed to progress command.");
             return createProgressCommand(commandParameters, commandFlags);
         case COMMAND_DONE:
+            logger.log(Level.INFO, "Message parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
+            logger.log(Level.INFO, "Message parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
         default:
             throw new InvalidCommandException();
@@ -122,6 +132,7 @@ public class Parser {
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
+        logger.log(Level.INFO, "Valid parameters for add command.");
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
@@ -142,6 +153,7 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = commandParameters[1];
+        logger.log(Level.INFO, "Valid parameters for delete command.");
         return new DeleteCommand(moduleCode);
     }
 
@@ -160,6 +172,7 @@ public class Parser {
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
         }
+        logger.log(Level.INFO, "Valid parameters for list command.");
         return new ListCommand();
     }
 
@@ -177,7 +190,7 @@ public class Parser {
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
         }
-
+        logger.log(Level.INFO, "Valid parameters for progress command.");
         return new ProgressCommand();
     }
 
@@ -201,6 +214,7 @@ public class Parser {
         }
 
         String moduleGrade = extractModuleGrade(commandFlags);
+        logger.log(Level.INFO, "Valid parameters for done command.");
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
@@ -218,6 +232,7 @@ public class Parser {
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
         }
+        logger.log(Level.INFO, "Valid parameters for exit command.");
         return new ExitCommand();
     }
 

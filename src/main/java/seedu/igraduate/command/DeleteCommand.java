@@ -9,12 +9,15 @@ import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.module.Module;
 
+import java.util.logging.*;
+
 /**
  * Handles delete command.
  */
 public class DeleteCommand extends Command {
     protected String moduleCode;
 
+    private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
 
     /**
      * Child class of the command class that contains the module code. 
@@ -39,11 +42,17 @@ public class DeleteCommand extends Command {
             throws ModuleNotFoundException, SaveModuleFailException {
         try {
             Module module = moduleList.getByCode(moduleCode);
+            logger.log(Level.INFO, "moduleList.getByCode success.");
             String moduleType = moduleList.getModuleType(module);
+            logger.log(Level.INFO, "moduleList.getModuleType success.");
             moduleList.delete(module);
             storage.saveModulesToFile(moduleList);
+            logger.log(Level.INFO, "storage.saveModulesToFile success.");
             ui.printDeletedModuleSuccess(moduleCode, moduleType);
+            logger.log(Level.INFO, "DeleteCommand execution success.");
         } catch (ModuleNotFoundException e) {
+            logger.log(Level.WARNING, "DeleteCommand execution failed. Check which of the following"
+                    + " success messages are missing: getByCode, getModuleType, saveModulesToFile.");
             throw new ModuleNotFoundException();
         }
     }
