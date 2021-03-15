@@ -74,7 +74,7 @@ public abstract class Module {
         return status;
     }
 
-    public boolean isDone(){
+    public boolean isDone() {
         String status = getStatus();
         if (status.equals("taken")) {
             return true;
