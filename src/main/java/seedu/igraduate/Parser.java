@@ -141,8 +141,8 @@ public class Parser {
         assert moduleName.trim().length() > 0 : "Name of module should not be empty.";
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
-
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
+
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
@@ -167,6 +167,7 @@ public class Parser {
 
         String moduleCode = commandParameters[1];
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
+
         return new DeleteCommand(moduleCode);
     }
 
@@ -187,8 +188,8 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-
         LOGGER.log(Level.INFO, "Valid parameters for list command.");
+
         return new ListCommand();
     }
 
@@ -211,6 +212,7 @@ public class Parser {
         }
 
         LOGGER.log(Level.INFO, "Valid parameters for progress command.");
+
         return new ProgressCommand();
     }
 
@@ -238,6 +240,7 @@ public class Parser {
 
         String moduleGrade = extractModuleGrade(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for done command.");
+
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
@@ -259,6 +262,7 @@ public class Parser {
         }
 
         LOGGER.log(Level.INFO, "Valid parameters for exit command.");
+        
         return new ExitCommand();
     }
 

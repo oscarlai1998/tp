@@ -161,7 +161,6 @@ public class Ui {
                 System.out.print("░");
             }
         }
-
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
     }
