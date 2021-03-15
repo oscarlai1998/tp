@@ -51,6 +51,7 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
+<<<<<<< Updated upstream
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
@@ -61,6 +62,10 @@ public class Parser {
         String command = commandParameters[0].toLowerCase();
 
         switch (command) {
+=======
+<<<<<<< Updated upstream
+        switch (command) { 
+>>>>>>> Stashed changes
         case COMMAND_ADD:
             String[] addCommandFlags = getCommandFlag(commands);
             return createAddCommand(commandParameters, addCommandFlags);
@@ -74,7 +79,37 @@ public class Parser {
             String[] doneCommandFlags = getCommandFlag(commands);
             return createDoneCommand(commandParameters, doneCommandFlags);
         case COMMAND_EXIT:
+<<<<<<< Updated upstream
             return createExitCommand(commandParameters);
+=======
+            // Fallthrough
+            return createExitCommand(commands);
+=======
+        // Splits into 2 String elements:
+        // 1. command + first parameter
+        // 2. command flags (if any)
+        String[] commands = line.split("\\s+(?=-)", 2);
+        assert commands.length <= 2 : "Limit of split is 2";
+        String[] commandParameters = commands[0].split("\\s+", 2);
+        assert commandParameters.length <= 2 : "Limit of split is 2";
+        String command = commandParameters[0].toLowerCase();
+        String[] commandFlags = getCommandFlag(commands);
+
+        switch (command) {
+        case COMMAND_ADD:
+            return createAddCommand(commandParameters, commandFlags);
+        case COMMAND_DELETE:
+            return createDeleteCommand(commandParameters, commandFlags);
+        case COMMAND_LIST:
+            return createListCommand(commandParameters, commandFlags);
+        case COMMAND_PROGRESS:
+            return createProgressCommand(commandParameters, commandFlags);
+        case COMMAND_DONE:
+            return createDoneCommand(commandParameters, commandFlags);
+        case COMMAND_EXIT:
+            return createExitCommand(commandParameters, commandFlags);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
         default:
             throw new InvalidCommandException();
         }
@@ -104,6 +139,7 @@ public class Parser {
      * @throws InvalidCommandException If input does not contain a valid command. 
      * @throws IncorrectParameterCountException If the command input does not contain the right parameters. 
      */
+<<<<<<< Updated upstream
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException {
@@ -111,6 +147,25 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
         if (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH) {
+=======
+<<<<<<< Updated upstream
+    public static Command createAddCommand(String[] commands)
+            throws InvalidCommandException, IncorrectParameterCountException {
+        if (commands.length != COMMAND_ADD_LENGTH) { 
+            throw new IncorrectParameterCountException();
+        }
+        String moduleCode = extractModuleCode(commands);
+        String moduleName = extractModuleName(commands);
+        String moduleType = extractModuleType(commands);
+        double moduleCredits = extractModuleCredits(commands);
+=======
+    public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
+            throws InvalidCommandException, IncorrectParameterCountException,
+            InputNotNumberException, InvalidModuleTypeException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
+        if (isInvalidPara || isInvalidFlag) {
+>>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
 
@@ -118,6 +173,10 @@ public class Parser {
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
@@ -130,14 +189,34 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
+<<<<<<< Updated upstream
     public static Command createDeleteCommand(String[] commandParameters) 
+=======
+<<<<<<< Updated upstream
+    public static Command createDeleteCommand(String[] commands)
+>>>>>>> Stashed changes
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = commandParameters[1];
 
+<<<<<<< Updated upstream
         return new DeleteCommand(moduleCode);
+=======
+        return new DeleteCommand(code);
+=======
+    public static Command createDeleteCommand(String[] commandParameters, String[] commandFlags) 
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
+        boolean isInvalidFlag = (commandFlags != null);
+        if (isInvalidPara || isInvalidFlag) {
+            throw new IncorrectParameterCountException();
+        }
+        String moduleCode = commandParameters[1];
+        return new DeleteCommand(moduleCode);
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
     }
 
     /**
@@ -148,9 +227,23 @@ public class Parser {
      * @return new instance of ListCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
+<<<<<<< Updated upstream
     public static Command createListCommand(String[] commandParameters)
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_LIST_LENGTH) {
+=======
+<<<<<<< Updated upstream
+    public static Command createListCommand(String[] commands)
+            throws InvalidCommandException, IncorrectParameterCountException {
+        if (commands.length != COMMAND_LIST_LENGTH) { 
+=======
+    public static Command createListCommand(String[] commandParameters, String[] commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
+        boolean isInvalidFlag = (commandFlags[0] != null);
+        if (isInvalidPara || isInvalidFlag) {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
         return new ListCommand();
@@ -164,9 +257,23 @@ public class Parser {
      * @return new instance of ProgressCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
+<<<<<<< Updated upstream
     public static Command createProgressCommand(String[] commandParameters) 
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_PROGRESS_LENGTH) {
+=======
+<<<<<<< Updated upstream
+    public static Command createProgressCommand(String[] commands)
+            throws IncorrectParameterCountException {
+        if (commands.length != COMMAND_PROGRESS_LENGTH) { 
+=======
+    public static Command createProgressCommand(String[] commandParameters, String[] commandFlags) 
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_PROGRESS_LENGTH);
+        boolean isInvalidFlag = (commandFlags[0] != null);
+        if (isInvalidPara || isInvalidFlag) {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
 
@@ -185,10 +292,20 @@ public class Parser {
      */
     public static Command createDoneCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
+<<<<<<< Updated upstream
         if (commandFlags.length != COMMAND_DONE_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
         if (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH) {
+=======
+<<<<<<< Updated upstream
+        if (commands.length != COMMAND_DONE_LENGTH) {
+=======
+        boolean isInvalidPara = (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.length != COMMAND_DONE_FLAG_LENGTH);
+        if (isInvalidPara || isInvalidFlag) {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
 
@@ -203,9 +320,23 @@ public class Parser {
      * @return new instance of ExitCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
+<<<<<<< Updated upstream
     public static Command createExitCommand(String[] commandParameters) 
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_EXIT_LENGTH) {
+=======
+<<<<<<< Updated upstream
+    public static Command createExitCommand(String[] commands)
+            throws IncorrectParameterCountException {
+        if (commands.length != COMMAND_EXIT_LENGTH) { 
+=======
+    public static Command createExitCommand(String[] commandParameters, String[] commandFlags) 
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_EXIT_LENGTH);
+        boolean isInvalidFlag = (commandFlags[0] != null);
+        if (isInvalidPara || isInvalidFlag) {
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
         return new ExitCommand();
