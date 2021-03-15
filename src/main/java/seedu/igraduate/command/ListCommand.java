@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Handles list command.
  */
 public class ListCommand extends Command {
-    private static Logger logger = Logger.getLogger(ListCommand.class.getName());
+    private static final Logger logger = Logger.getLogger(ListCommand.class.getName());
 
     /**
      * Print list of all modules.

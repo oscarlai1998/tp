@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  * Handles progress command.
  */
 public class ProgressCommand extends Command {
-    private static Logger logger = Logger.getLogger(ProgressCommand.class.getName());
+    private static final Logger logger = Logger.getLogger(ProgressCommand.class.getName());
 
     /**
      * Prints progress in percentage of MCs completed out of 160MCs.
