@@ -136,6 +136,7 @@ public class Parser {
 
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
+        assert moduleName.trim().length() > 0 : "Name of module should not be empty.";
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
 
@@ -320,6 +321,7 @@ public class Parser {
             throws InputNotNumberException, InvalidCommandException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
+                assert commandFlags[i + 1].trim().length() > 0 : "Modular credits field should not be empty.";
                 try {
                     return Double.parseDouble(commandFlags[i + 1]);
                 } catch (NumberFormatException e) {
