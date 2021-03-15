@@ -130,7 +130,7 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-    public static Command createDeleteCommand(String[] commandParameters) 
+    public static Command createDeleteCommand(String[] commandParameters)
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_DELETE_LENGTH) {
             throw new IncorrectParameterCountException();
