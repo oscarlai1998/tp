@@ -52,6 +52,7 @@ public class Parser {
         }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
@@ -64,6 +65,8 @@ public class Parser {
         switch (command) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
         switch (command) { 
 >>>>>>> Stashed changes
         case COMMAND_ADD:
@@ -109,6 +112,9 @@ public class Parser {
         case COMMAND_EXIT:
             return createExitCommand(commandParameters, commandFlags);
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         default:
             throw new InvalidCommandException();
@@ -140,6 +146,7 @@ public class Parser {
      * @throws IncorrectParameterCountException If the command input does not contain the right parameters. 
      */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException {
@@ -149,6 +156,8 @@ public class Parser {
         if (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     public static Command createAddCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_ADD_LENGTH) { 
@@ -165,6 +174,9 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
         if (isInvalidPara || isInvalidFlag) {
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
@@ -174,6 +186,9 @@ public class Parser {
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 >>>>>>> Stashed changes
@@ -190,9 +205,12 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static Command createDeleteCommand(String[] commandParameters) 
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     public static Command createDeleteCommand(String[] commands)
 >>>>>>> Stashed changes
             throws IncorrectParameterCountException {
@@ -216,6 +234,9 @@ public class Parser {
         String moduleCode = commandParameters[1];
         return new DeleteCommand(moduleCode);
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     }
 
@@ -228,11 +249,14 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static Command createListCommand(String[] commandParameters)
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_LIST_LENGTH) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     public static Command createListCommand(String[] commands)
             throws InvalidCommandException, IncorrectParameterCountException {
         if (commands.length != COMMAND_LIST_LENGTH) { 
@@ -243,6 +267,9 @@ public class Parser {
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
@@ -258,11 +285,14 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static Command createProgressCommand(String[] commandParameters) 
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_PROGRESS_LENGTH) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     public static Command createProgressCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_PROGRESS_LENGTH) { 
@@ -273,6 +303,9 @@ public class Parser {
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
@@ -293,18 +326,24 @@ public class Parser {
     public static Command createDoneCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         if (commandFlags.length != COMMAND_DONE_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
         if (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
         if (commands.length != COMMAND_DONE_LENGTH) {
 =======
         boolean isInvalidPara = (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_DONE_FLAG_LENGTH);
         if (isInvalidPara || isInvalidFlag) {
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
@@ -321,11 +360,14 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     public static Command createExitCommand(String[] commandParameters) 
             throws IncorrectParameterCountException {
         if (commandParameters.length != COMMAND_EXIT_LENGTH) {
 =======
 <<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
     public static Command createExitCommand(String[] commands)
             throws IncorrectParameterCountException {
         if (commands.length != COMMAND_EXIT_LENGTH) { 
@@ -336,6 +378,9 @@ public class Parser {
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             throw new IncorrectParameterCountException();
         }
