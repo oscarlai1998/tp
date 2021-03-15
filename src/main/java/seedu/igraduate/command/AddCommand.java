@@ -78,6 +78,7 @@ public class AddCommand extends Command {
         LOGGER.log(Level.INFO, "Executing add command...");
         try {
             Module module = createModuleByType();
+            assert module != null : "Module should not be empty.";
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
@@ -102,8 +103,9 @@ public class AddCommand extends Command {
      * @throws InvalidModuleTypeException if module type does not fit any categories.
      */
     public Module createModuleByType() throws InvalidModuleTypeException {
-        LOGGER.log(Level.INFO, "going to start creating");
+        LOGGER.log(Level.INFO, "Creating module...");
         Module module;
+        assert moduleType != null : "Module type should not be empty.";
         switch (moduleType) {
         case CORE:
             module = new CoreModule(moduleCode, moduleName, moduleCredits,
@@ -122,11 +124,12 @@ public class AddCommand extends Command {
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         default:
-            LOGGER.log(Level.INFO, "invalid module type");
-            LOGGER.log(Level.INFO, "end of creating");
+            LOGGER.log(Level.INFO, "Failed to create invalid module type.");
+            LOGGER.log(Level.INFO, "End of module creation.");
             throw new InvalidModuleTypeException();
         }
-        LOGGER.log(Level.INFO, "end of creating");
+        LOGGER.log(Level.INFO, "End of module creation.");
+        assert module != null : "Module should not be empty.";
         return module;
     }
 
