@@ -10,11 +10,15 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+
+    private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -50,6 +54,7 @@ public class ModuleList {
             assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
+        assert getModuleIndex(moduleCode) == DEFAULT_INDEX : "Duplicated module cannot be added.";
         modules.add(module);
     }
 
@@ -118,12 +123,10 @@ public class ModuleList {
     public Module getByCode(String moduleCode) 
             throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
-
         if (moduleIndex == DEFAULT_INDEX) {
-            assert moduleIndex == DEFAULT_INDEX : "Module code should have a valid index";
             throw new ModuleNotFoundException();
         }
-
+        assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
         return modules.get(moduleIndex);
     }
 
@@ -163,6 +166,7 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
+        assert !moduleType.equals("Undefined") : "Module type is not valid.";
         return moduleType;
     }
 

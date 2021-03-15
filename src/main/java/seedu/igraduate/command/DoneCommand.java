@@ -9,12 +9,17 @@ import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.module.Module;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Handles done command.
  */
 public class DoneCommand extends Command {
     protected String moduleCode;
     protected String moduleGrade;
+
+    private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
 
     /**
      * Child class of the command class that contains the module code and grade. 
@@ -58,14 +63,19 @@ public class DoneCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException {
+        LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getByCode(getModuleCode());
             moduleList.markAsTaken(module);
             moduleList.setGrade(module, getModuleGrade());
             storage.saveModulesToFile(moduleList);
             ui.printMarkAsTakenMessage(module);
+            LOGGER.log(Level.INFO, String.format("Successfully marked %s module as taken.", getModuleCode()));
         } catch (ModuleNotFoundException e) {
+            LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", e);
             throw new ModuleNotFoundException();
+        } finally {
+            LOGGER.log(Level.INFO, "End of done command execution.");
         }
     }
 
