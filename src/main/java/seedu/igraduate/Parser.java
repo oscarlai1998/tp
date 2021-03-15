@@ -59,7 +59,7 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
-        LOGGER.log(Level.INFO, "User command entered: %s", line);
+        LOGGER.log(Level.INFO, String.format("User input: %s", line));
 
         // Splits into 2 String elements:
         // 1. command + first parameter
