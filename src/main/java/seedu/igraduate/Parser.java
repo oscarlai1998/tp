@@ -14,8 +14,8 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 
 /**
- * Representats an instance of a parser. 
- * A parse object correspomnds to the processing of one input by the user. 
+ * Represents an instance of a parser.
+ * A parse object corresponds to the processing of one input by the user.
  */
 public class Parser {
     // Constants for command words
@@ -27,11 +27,13 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
 
     // Constants for the expected number of parameters for a given command
-    private static final int COMMAND_ADD_LENGTH = 6;
+    private static final int COMMAND_ADD_FLAG_LENGTH = 6;
+    private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 1;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
-    private static final int COMMAND_DONE_LENGTH = 2;
+    private static final int COMMAND_DONE_FLAG_LENGTH = 2;
+    private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     /**
@@ -53,7 +55,9 @@ public class Parser {
         // 1. command + first parameter
         // 2. command flags (if any)
         String[] commands = line.split("\\s+(?=-)", 2);
+        assert commands.length <= 2 : "Limit of split is 2";
         String[] commandParameters = commands[0].split("\\s+", 2);
+        assert commandParameters.length <= 2 : "Limit of split is 2";
         String command = commandParameters[0].toLowerCase();
 
         switch (command) {
@@ -79,8 +83,8 @@ public class Parser {
     /**
      * Obtains the flags and their respective values. 
      * 
-     * @param commands Array seperating command name and parameters with command flags and values. 
-     * @return Array containing the flags and values split with the delimeter (" ")
+     * @param commands Array separating command name and parameters with command flags and values.
+     * @return Array containing the flags and values split with the delimiter (" ").
      */
     private static String[] getCommandFlag(String[] commands) {
         if (commands.length < 2) {
@@ -103,9 +107,13 @@ public class Parser {
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException {
-        if (commandFlags.length != COMMAND_ADD_LENGTH) {
+        if (commandFlags.length != COMMAND_ADD_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        if (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH) {
+            throw new IncorrectParameterCountException();
+        }
+
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
@@ -161,6 +169,7 @@ public class Parser {
         if (commandParameters.length != COMMAND_PROGRESS_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+
         return new ProgressCommand();
     }
 
@@ -176,9 +185,13 @@ public class Parser {
      */
     public static Command createDoneCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
-        if (commandFlags.length != COMMAND_DONE_LENGTH) {
+        if (commandFlags.length != COMMAND_DONE_FLAG_LENGTH) {
             throw new IncorrectParameterCountException();
         }
+        if (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH) {
+            throw new IncorrectParameterCountException();
+        }
+
         String moduleGrade = extractModuleGrade(commandFlags);
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
@@ -210,6 +223,7 @@ public class Parser {
             throws IncorrectParameterCountException {
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
+                assert commands[i + 1].length() > 0 : "Module code should not be empty";
                 return commands[i + 1].toUpperCase().trim();
             }
         }
@@ -221,13 +235,14 @@ public class Parser {
      *
      * @param commandFlags flags of commands from user input. 
      * @return module type.
-     * @throws InvalidCommandException if command format is not recognised.
+     * @throws InvalidModuleTypeException if command format is not recognised.
      */
     public static String extractModuleType(String[] commandFlags) 
             throws InvalidModuleTypeException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
+                assert type.length() > 0 : "Module type should not be empty.";
                 switch (type) {
                 case "core":
                 case "ue":
@@ -274,6 +289,7 @@ public class Parser {
     public static String extractModuleGrade(String[] commandFlags) throws InvalidCommandException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-g")) {
+                assert commandFlags[i + 1].length() > 0 : "Grade should not be empty.";
                 return commandFlags[i + 1];
             }
         }
