@@ -14,6 +14,7 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 
 import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Represents an instance of a parser. A parse object corresponds to the
@@ -70,16 +71,22 @@ public class Parser {
 
         switch (command) {
         case COMMAND_ADD:
+            LOGGER.log(Level.INFO, "Message parsed to add command.");
             return createAddCommand(commandParameters, commandFlags);
         case COMMAND_DELETE:
+            LOGGER.log(Level.INFO, "Message parsed to delete command.");
             return createDeleteCommand(commandParameters, commandFlags);
         case COMMAND_LIST:
+            LOGGER.log(Level.INFO, "Message parsed to list command.");
             return createListCommand(commandParameters, commandFlags);
         case COMMAND_PROGRESS:
+            LOGGER.log(Level.INFO, "Message parsed to progress command.");
             return createProgressCommand(commandParameters, commandFlags);
         case COMMAND_DONE:
+            LOGGER.log(Level.INFO, "Message parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
+            LOGGER.log(Level.INFO, "Message parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
         default:
             LOGGER.warning("Invalid command detected. ");
@@ -128,6 +135,7 @@ public class Parser {
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
+        LOGGER.log(Level.INFO, "Valid parameters for add command.");
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
 
@@ -139,6 +147,7 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
+
     public static Command createDeleteCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
@@ -148,6 +157,7 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
         String moduleCode = commandParameters[1];
+        LOGGER.log(Level.INFO, "Valid parameters for delete command.");
         return new DeleteCommand(moduleCode);
     }
 
@@ -167,6 +177,7 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
+        LOGGER.log(Level.INFO, "Valid parameters for list command.");
         return new ListCommand();
     }
 
@@ -185,6 +196,8 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
+        LOGGER.log(Level.INFO, "Valid parameters for progress command.");
+
         return new ProgressCommand();
     }
 
@@ -209,6 +222,7 @@ public class Parser {
         }
 
         String moduleGrade = extractModuleGrade(commandFlags);
+        LOGGER.log(Level.INFO, "Valid parameters for done command.");
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
@@ -227,6 +241,7 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
+        LOGGER.log(Level.INFO, "Valid parameters for exit command.");
         return new ExitCommand();
     }
 
