@@ -57,12 +57,13 @@ public class Parser {
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
-        String[] commands = line.split("\\s+(?=-)", 2);
-        assert commands.length <= 2 : "Limit of split is 2";
-        String[] commandParameters = commands[0].split("\\s+", 2);
-        assert commandParameters.length <= 2 : "Limit of split is 2";
+        String[] commands = getCommand(line);
+        String[] commandParameters = getCommandParameters(commands);
         String command = commandParameters[0].toLowerCase();
         String[] commandFlags = getCommandFlag(commands);
+
+        assert commands.length <= 2 : "Limit of split is 2";
+        assert commandParameters.length <= 2 : "Limit of split is 2";
 
         switch (command) {
         case COMMAND_ADD:
@@ -80,6 +81,14 @@ public class Parser {
         default:
             throw new InvalidCommandException();
         }
+    }
+
+    private static String[] getCommand(String line) {
+        return line.split("\\s+(?=-)", 2);
+    }
+
+    private static String[] getCommandParameters(String[] commands) {
+        return commands[0].split("\\s+", 2);
     }
 
     /**
@@ -159,6 +168,7 @@ public class Parser {
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
         }
+
         return new ListCommand();
     }
 
