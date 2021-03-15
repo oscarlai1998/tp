@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.command.*;
+import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.ListCommand;
+import seedu.igraduate.command.ProgressCommand;
+import seedu.igraduate.command.DoneCommand;
+import seedu.igraduate.command.DeleteCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
@@ -14,12 +18,10 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 
 public class ParserTest {
 
-    private static final String INVALID_COMMAND_MESSAGE= "The command you have entered is incorrect. \n"
+    private static final String INVALID_COMMAND_MESSAGE = "The command you have entered is incorrect. \n"
             + "Please double check and try again.";
     private static final String INCORRECT_PARAMETER_NUMBER_MESSAGE = "The number of parameters"
             + " provided is incorrect. \nPlease double check and try again.";
-    private static final String MODULE_NOT_FOUND_MESSAGE = "The module code you have entered"
-            + " does not exists. \nPlease double check and try again.";
 
     @Test
     void parseCommand_emptyCommand_exceptionThrown() {
@@ -54,7 +56,7 @@ public class ParserTest {
     void createAddCommand_tooFewParameters_exceptionThrown() {
         String line = "Add Introduction to Information Security -t core -mc  -c CS2107";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
     }
 
@@ -77,7 +79,7 @@ public class ParserTest {
     void createDeleteCommand_extraFlag_exceptionThrown() {
         String line = "Delete CS2106 -mc 4";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
     }
 
@@ -137,7 +139,7 @@ public class ParserTest {
     void createListCommand_tooManyParameters_exception() {
         String line = "list all";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
     }
 }
