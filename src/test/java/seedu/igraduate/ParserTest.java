@@ -29,9 +29,8 @@ public class ParserTest {
     @Test
     void executeDeleteCommand_tooFewParameters_exceptionThrown() {
         String line = "Delete";
-        String[] components = line.split(" ");
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-            () -> Parser.createDeleteCommand(components));
+            () -> Parser.parseCommand(line));
         assertEquals("The number of parameters"
                 + " provided is incorrect. \nPlease double check and try again.", exception.getMessage());
     }
