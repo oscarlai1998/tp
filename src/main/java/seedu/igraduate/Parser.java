@@ -13,6 +13,8 @@ import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 
+import java.util.logging.Logger;
+
 /**
  * Represents an instance of a parser. A parse object corresponds to the
  * processing of one input by the user.
@@ -35,6 +37,8 @@ public class Parser {
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
+
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
     /**
      * Parses user input and identifies the command to be executed.
@@ -78,6 +82,7 @@ public class Parser {
         case COMMAND_EXIT:
             return createExitCommand(commandParameters, commandFlags);
         default:
+            LOGGER.warning("Invalid command detected. ");
             throw new InvalidCommandException();
         }
     }
@@ -115,6 +120,7 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
 
@@ -139,6 +145,7 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
         String moduleCode = commandParameters[1];
@@ -158,6 +165,7 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
         return new ListCommand();
@@ -175,9 +183,9 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_PROGRESS_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
-
         return new ProgressCommand();
     }
 
@@ -197,6 +205,7 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_DONE_FLAG_LENGTH);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
 
@@ -216,6 +225,7 @@ public class Parser {
         boolean isInvalidPara = (commandParameters.length != COMMAND_EXIT_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
         if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
         return new ExitCommand();
@@ -237,6 +247,7 @@ public class Parser {
                 return commands[i + 1].toUpperCase().trim();
             }
         }
+        LOGGER.warning("Invalid number of parameters");
         throw new IncorrectParameterCountException();
     }
 
@@ -247,9 +258,10 @@ public class Parser {
      * @param commandFlags flags of commands from user input.
      * @return module type.
      * @throws InvalidModuleTypeException if command format is not recognised.
+     * @throws InvalidCommandException if -t flag is not found. 
      */
     public static String extractModuleType(String[] commandFlags) 
-            throws InvalidModuleTypeException {
+            throws InvalidModuleTypeException, InvalidCommandException {
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
@@ -261,11 +273,13 @@ public class Parser {
                 case "ge":
                     return type;
                 default:
+                    LOGGER.warning("Invalid module type detected. ");
                     throw new InvalidModuleTypeException();
                 }
             }
         }
-        throw new InvalidModuleTypeException();
+        LOGGER.warning("Failed in finding module type. ");
+        throw new InvalidCommandException();
     }
 
     /**
@@ -274,7 +288,7 @@ public class Parser {
      * @param commandFlags flags of commands from user input.
      * @return number of modular credits.
      * @throws NumberFormatException   if number is not given as modular credits.
-     * @throws InvalidCommandException if command format is not recognised.
+     * @throws InvalidCommandException if -mc flag is not found.
      */
     public static double extractModuleCredits(String[] commandFlags)
             throws InputNotNumberException, InvalidCommandException {
@@ -283,10 +297,12 @@ public class Parser {
                 try {
                     return Double.parseDouble(commandFlags[i + 1]);
                 } catch (NumberFormatException e) {
+                    LOGGER.warning("Invalid number detected. ");
                     throw new InputNotNumberException("Modular credits : -mc");
                 }
             }
         }
+        LOGGER.warning("Failed to find module credits. ");
         throw new InvalidCommandException();
     }
 
@@ -295,7 +311,7 @@ public class Parser {
      *
      * @param commandFlags flags of commands from user input.
      * @return module grade.
-     * @throws InvalidCommandException if command format is not recognised.
+     * @throws InvalidCommandException if -g flag is not found.
      */
     public static String extractModuleGrade(String[] commandFlags) 
             throws InvalidCommandException {
@@ -305,6 +321,7 @@ public class Parser {
                 return commandFlags[i + 1];
             }
         }
+        LOGGER.warning("Failed to find module grade. ");
         throw new InvalidCommandException();
     }
 }

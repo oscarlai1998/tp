@@ -47,6 +47,7 @@ public class ModuleList {
     public void add(Module module) throws ExistingModuleException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
         modules.add(module);
@@ -119,6 +120,7 @@ public class ModuleList {
         int moduleIndex = getModuleIndex(moduleCode);
 
         if (moduleIndex == DEFAULT_INDEX) {
+            assert moduleIndex == DEFAULT_INDEX : "Module code should have a valid index";
             throw new ModuleNotFoundException();
         }
 
@@ -173,6 +175,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
+                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
+                       + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }

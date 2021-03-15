@@ -3,7 +3,10 @@ package seedu.igraduate;
 import java.io.File;
 import java.nio.file.Paths;
 
+import java.util.logging.Logger;
+
 import seedu.igraduate.command.Command;
+import seedu.igraduate.exception.LoadModuleFailException;
 
 /**
  * IGraduate program.
@@ -12,6 +15,7 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
+    private static final Logger LOGGER = Logger.getLogger(IGraduate.class.getName());
 
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
@@ -23,8 +27,9 @@ public class IGraduate {
         storage = new Storage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
-        } catch (Exception e) {
-            ui.printErrorMessage(e);
+            LOGGER.info("File loaded successfullly. ");
+        } catch (LoadModuleFailException exception) {
+            ui.printErrorMessage(exception);
             modules = new ModuleList();
         }
     }
