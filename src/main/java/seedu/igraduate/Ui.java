@@ -16,10 +16,10 @@ public class Ui {
             + "your one stop study planning service!\nWhat would you like to do today?";
     private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     private static final String BORDER_LINE = "------------------------------------------------------------"
-            + "------------------";
+            + "--------------------------";
 
-    // Meesages for successful execution
-    private static final String MODULE_ADDED_MESSAGE = "Added %s module. (%sMCs)";
+    // Messages for successful execution
+    private static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
     private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
     private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
@@ -68,7 +68,7 @@ public class Ui {
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
-            System.out.print(i + 1 + ": ");
+            System.out.print(String.format("%-4d: ", i + 1));
             printModuleDetails(modules.get(i));
         }
     }
@@ -89,7 +89,7 @@ public class Ui {
      * @param module array list containing the modules. 
      */
     public void printAddedModuleSuccess(Module module) {
-        System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getName(), module.getCredit()));
+        System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getCode(), module.getName(), module.getCredit()));
         System.out.println(module);
     }
 
@@ -104,14 +104,6 @@ public class Ui {
     }
 
     /**
-     * Lists all modules (both taken and not taken). 
-     */
-    public void printAllModules() {
-        printModulesTakenMessage();
-        printModulesRemainingMessage();
-    }
-
-    /**
      * Displays success message after marking a module as completed. 
      * 
      * @param module module marked as completed. 
@@ -119,6 +111,14 @@ public class Ui {
     public void printMarkAsTakenMessage(Module module) {
         System.out.println("Nice! I've marked this module as done:");
         System.out.println("  " + module);
+    }
+
+    /**
+     * Lists all modules (both taken and not taken).
+     */
+    public void printAllModules() {
+        printModulesTakenMessage();
+        printModulesRemainingMessage();
     }
 
     /**
@@ -161,7 +161,6 @@ public class Ui {
                 System.out.print("░");
             }
         }
-
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
     }

@@ -2,6 +2,7 @@ package seedu.igraduate;
 
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+
 import seedu.igraduate.module.Module;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.CoreModule;
@@ -9,11 +10,15 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+
+    private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -46,8 +51,10 @@ public class ModuleList {
     public void add(Module module) throws ExistingModuleException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
+        assert getModuleIndex(moduleCode) == DEFAULT_INDEX : "Duplicated module cannot be added.";
         modules.add(module);
     }
 
@@ -116,10 +123,10 @@ public class ModuleList {
     public Module getByCode(String moduleCode) 
             throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
-
         if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
+        assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
 
         return modules.get(moduleIndex);
     }
@@ -139,7 +146,6 @@ public class ModuleList {
                 break;
             }
         }
-
         return index;
     }
 
@@ -160,6 +166,8 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
+        assert !moduleType.equals("Undefined") : "Module type is not valid.";
+
         return moduleType;
     }
 
@@ -172,6 +180,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
+                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
+                       + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }

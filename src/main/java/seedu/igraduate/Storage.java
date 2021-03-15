@@ -2,6 +2,7 @@ package seedu.igraduate;
 
 import seedu.igraduate.exception.LoadModuleFailException;
 import seedu.igraduate.exception.SaveModuleFailException;
+
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
@@ -12,19 +13,27 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.ArrayList;
 import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Represents an instance of storage. 
  * A storage object corresponds to the saving and loading of file.  
  */
 public class Storage {
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
     private File filePath;
+
+    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
             .of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core")
@@ -52,8 +61,11 @@ public class Storage {
         Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
 
         try {
-            return loadFromJson(objectType, filePath);
-        } catch (Exception e) {
+            ArrayList<Module> modules = loadFromJson(objectType, filePath);
+            LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
+            return modules;
+        } catch (IOException exception) {
+            LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
     }
@@ -71,6 +83,7 @@ public class Storage {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         FileReader fileReader = new FileReader(jsonFile);
+
         return gson.fromJson(fileReader, type);
     }
 
@@ -87,7 +100,9 @@ public class Storage {
         }
         try {
             saveToJson(filePath, modules.getModules());
+            LOGGER.log(Level.INFO, "Module data saved to disk successfully.");
         } catch (Exception exception) {
+            LOGGER.warning("Failed to save module.");
             throw new SaveModuleFailException();
         }
     }

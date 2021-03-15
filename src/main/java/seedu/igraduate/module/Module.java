@@ -74,6 +74,17 @@ public abstract class Module {
         return status;
     }
 
+    public boolean isDone() {
+        String status = getStatus();
+        if (status.equals("taken")) {
+            return true;
+        } else if (status.equals("not taken")) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Gets the completion status of the module.
      *  
@@ -92,7 +103,7 @@ public abstract class Module {
 
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-50s %5s MC", getStatusIcon(), getCode(), getName(),
+        return String.format("[%s] %-8s %-55s %5s MC", getStatusIcon(), getCode(), getName(),
                 Math.round(getCredit()));
     }
 }
