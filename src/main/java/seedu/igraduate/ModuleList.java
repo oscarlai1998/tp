@@ -10,11 +10,15 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 /**
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+
+    private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -47,6 +51,7 @@ public class ModuleList {
     public void add(Module module) throws ExistingModuleException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
         assert getModuleIndex(moduleCode) == DEFAULT_INDEX : "Duplicated module cannot be added.";
@@ -174,6 +179,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
+                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
+                       + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }

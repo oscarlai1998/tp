@@ -22,12 +22,18 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Represents an instance of storage. 
  * A storage object corresponds to the saving and loading of file.  
  */
 public class Storage {
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
     private File filePath;
+
+    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
             .of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core")
@@ -55,8 +61,11 @@ public class Storage {
         Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
 
         try {
-            return loadFromJson(objectType, filePath);
-        } catch (Exception e) {
+            ArrayList<Module> modules = loadFromJson(objectType, filePath);
+            LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
+            return modules;
+        } catch (IOException exception) {
+            LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
     }
@@ -90,7 +99,9 @@ public class Storage {
         }
         try {
             saveToJson(filePath, modules.getModules());
+            LOGGER.log(Level.INFO, "Module data saved to disk successfully.");
         } catch (Exception exception) {
+            LOGGER.warning("Failed to save module.");
             throw new SaveModuleFailException();
         }
     }
