@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * A storage object corresponds to the saving and loading of file.  
  */
 public class Storage {
-    private final static Logger LOGGER = Logger.getLogger(Storage.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
     private File filePath;
 
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory

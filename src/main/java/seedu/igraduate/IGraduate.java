@@ -15,7 +15,7 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
-    private final static Logger LOGGER = Logger.getLogger(Storage.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(IGraduate.class.getName());
 
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.

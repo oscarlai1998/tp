@@ -38,7 +38,7 @@ public class Parser {
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
-    private final static Logger LOGGER = Logger.getLogger(Storage.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
 
     /**
      * Parses user input and identifies the command to be executed.
