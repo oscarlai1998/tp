@@ -127,6 +127,7 @@ public class ModuleList {
             throw new ModuleNotFoundException();
         }
         assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
+
         return modules.get(moduleIndex);
     }
 
@@ -145,7 +146,6 @@ public class ModuleList {
                 break;
             }
         }
-
         return index;
     }
 
@@ -167,6 +167,7 @@ public class ModuleList {
             moduleType = "Elective";
         }
         assert !moduleType.equals("Undefined") : "Module type is not valid.";
+
         return moduleType;
     }
 

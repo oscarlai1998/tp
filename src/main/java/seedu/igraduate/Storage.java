@@ -83,6 +83,7 @@ public class Storage {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         FileReader fileReader = new FileReader(jsonFile);
+
         return gson.fromJson(fileReader, type);
     }
 

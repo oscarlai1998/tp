@@ -130,6 +130,7 @@ public class AddCommand extends Command {
         }
         LOGGER.log(Level.INFO, "End of module creation.");
         assert module != null : "Module should not be empty.";
+
         return module;
     }
 
