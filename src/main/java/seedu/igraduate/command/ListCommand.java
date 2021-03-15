@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Handles list command.
  */
 public class ListCommand extends Command {
-    private static final Logger logger = Logger.getLogger(ListCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
 
     /**
      * Print list of all modules.
@@ -25,10 +25,10 @@ public class ListCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
         if (moduleList.isEmpty()) {
             assert moduleList.isEmpty() : "List should be empty";
-            logger.log(Level.INFO, "List is empty.");
+            LOGGER.log(Level.INFO, "List is empty.");
             ui.printListEmptyMessage();
         } else {
-            logger.log(Level.INFO, "List is not empty.");
+            LOGGER.log(Level.INFO, "List is not empty.");
             ui.printEntireList(moduleList.getModules());
         }
     }

@@ -9,12 +9,17 @@ import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.module.Module;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 /**
  * Handles done command.
  */
 public class DoneCommand extends Command {
     protected String moduleCode;
     protected String moduleGrade;
+
+    private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
 
     /**
      * Child class of the command class that contains the module code and grade. 
@@ -60,11 +65,17 @@ public class DoneCommand extends Command {
             throws SaveModuleFailException, ModuleNotFoundException {
         try {
             Module module = moduleList.getByCode(getModuleCode());
+            LOGGER.log(Level.INFO, "moduleList.getByCode success");
             moduleList.markAsTaken(module);
+            LOGGER.log(Level.INFO, "moduleList.markAsDone success");
             moduleList.setGrade(module, getModuleGrade());
+            LOGGER.log(Level.INFO, "moduleList.setGrade success");
             storage.saveModulesToFile(moduleList);
+            LOGGER.log(Level.INFO, "storage.saveModulesToFile success");
             ui.printMarkAsTakenMessage(module);
         } catch (ModuleNotFoundException e) {
+            LOGGER.log(Level.WARNING, "DoneCommand execution failed. Check which of the following"
+                    + " success log messages are missing: getByCode, markAsDone, setGrade, saveModulesToFile");
             throw new ModuleNotFoundException();
         }
     }

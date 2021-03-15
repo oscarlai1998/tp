@@ -36,7 +36,7 @@ public class AddCommand extends Command {
 
     private ArrayList<String> preRequisites;
 
-    private static final Logger logger = Logger.getLogger(AddCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
 
     /**
      * Child class of the command class that contains the module name, code, type and credits to be added. 
@@ -63,22 +63,22 @@ public class AddCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException {
-        logger.log(Level.INFO, "going to start adding");
+        LOGGER.log(Level.INFO, "going to start adding");
         try {
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
         } catch (InvalidModuleTypeException e) {
-            logger.log(Level.WARNING, "invalid module type", e);
-            logger.log(Level.INFO, "end of adding");
+            LOGGER.log(Level.WARNING, "invalid module type", e);
+            LOGGER.log(Level.INFO, "end of adding");
             throw new InvalidModuleTypeException();
         } catch (ExistingModuleException e) {
-            logger.log(Level.WARNING, "existing module", e);
-            logger.log(Level.INFO, "end of adding");
+            LOGGER.log(Level.WARNING, "existing module", e);
+            LOGGER.log(Level.INFO, "end of adding");
             throw new ExistingModuleException();
         }
-        logger.log(Level.INFO, "end of adding");
+        LOGGER.log(Level.INFO, "end of adding");
     }
 
     /**
@@ -89,7 +89,7 @@ public class AddCommand extends Command {
      * @throws InvalidModuleTypeException if module type does not fit any categories.
      */
     public Module createModuleByType() throws InvalidModuleTypeException {
-        logger.log(Level.INFO, "going to start creating");
+        LOGGER.log(Level.INFO, "going to start creating");
         Module module;
         switch (moduleType) {
         case CORE:
@@ -109,11 +109,11 @@ public class AddCommand extends Command {
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         default:
-            logger.log(Level.INFO, "invalid module type");
-            logger.log(Level.INFO, "end of creating");
+            LOGGER.log(Level.INFO, "invalid module type");
+            LOGGER.log(Level.INFO, "end of creating");
             throw new InvalidModuleTypeException();
         }
-        logger.log(Level.INFO, "end of creating");
+        LOGGER.log(Level.INFO, "end of creating");
         return module;
     }
 
