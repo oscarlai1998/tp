@@ -10,11 +10,14 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+    private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -123,7 +126,7 @@ public class ModuleList {
             assert moduleIndex == DEFAULT_INDEX : "Module code should have a valid index";
             throw new ModuleNotFoundException();
         }
-
+        LOGGER.log(Level.INFO, "moduleList.getByCode success.");
         return modules.get(moduleIndex);
     }
 
@@ -163,6 +166,7 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
+        LOGGER.log(Level.INFO, "moduleList.getModuleType success.");
         return moduleType;
     }
 

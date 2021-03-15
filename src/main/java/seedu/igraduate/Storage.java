@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -96,6 +97,7 @@ public class Storage {
         }
         try {
             saveToJson(filePath, modules.getModules());
+            LOGGER.log(Level.INFO, "storage.saveModulesToFile success.");
         } catch (Exception exception) {
             LOGGER.warning("Failed to save module. ");
             throw new SaveModuleFailException();

@@ -44,12 +44,9 @@ public class DeleteCommand extends Command {
             throws ModuleNotFoundException, SaveModuleFailException {
         try {
             Module module = moduleList.getByCode(moduleCode);
-            LOGGER.log(Level.INFO, "moduleList.getByCode success.");
             String moduleType = moduleList.getModuleType(module);
-            LOGGER.log(Level.INFO, "moduleList.getModuleType success.");
             moduleList.delete(module);
             storage.saveModulesToFile(moduleList);
-            LOGGER.log(Level.INFO, "storage.saveModulesToFile success.");
             ui.printDeletedModuleSuccess(moduleCode, moduleType);
             LOGGER.log(Level.INFO, "DeleteCommand execution success.");
         } catch (ModuleNotFoundException e) {
