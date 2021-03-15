@@ -96,19 +96,11 @@ public class AddCommand extends Command {
     }
 
     /**
-<<<<<<< HEAD
-     * Creates a module based on its category. 
-     * Types: Core, UE, Math, GE. 
-     * 
-     * @return the created module. 
-     * @throws IncorrectModuleTypeException if module type does not fit any categories. 
-=======
      * Create a module based on its category.
      * Types: Core, UE, Math, GE.
      *
      * @return the created module.
      * @throws InvalidModuleTypeException if module type does not fit any categories.
->>>>>>> c049c3469b118e2f35c282e7500c65179e7fb8f8
      */
     public Module createModuleByType() throws InvalidModuleTypeException {
         LOGGER.log(Level.INFO, "Creating module...");
