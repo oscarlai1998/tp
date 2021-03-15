@@ -25,7 +25,7 @@ public class IGraduate {
         try {
             InputStream inputStream = IGraduate.class.getClassLoader().getResourceAsStream("logger.properties");
             LogManager.getLogManager().readConfiguration(inputStream);
-        } catch(Exception e) {
+        } catch (Exception e) {
             logger.log(Level.WARNING, "An error occur when trying to read logger configuration file.", e);
         }
     }
