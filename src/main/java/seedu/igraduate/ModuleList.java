@@ -49,7 +49,7 @@ public class ModuleList {
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
             throw new ExistingModuleException();
         }
-        assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "Duplicated module cannot be added.";
+        assert getModuleIndex(moduleCode) == DEFAULT_INDEX : "Duplicated module cannot be added.";
         modules.add(module);
     }
 
@@ -121,7 +121,7 @@ public class ModuleList {
         if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
-        assert moduleIndex == DEFAULT_INDEX : "Module code does not exists.";
+        assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
         return modules.get(moduleIndex);
     }
 
@@ -161,7 +161,7 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
-        assert moduleType.equals("Undefined") : "Module type is not valid.";
+        assert !moduleType.equals("Undefined") : "Module type is not valid.";
         return moduleType;
     }
 
