@@ -74,6 +74,17 @@ public abstract class Module {
         return status;
     }
 
+    public boolean isDone() {
+        String status = getStatus();
+        if (status.equals("taken")) {
+            return true;
+        } else if (status.equals("not taken")) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Gets the completion status of the module.
      *  
