@@ -59,6 +59,8 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
+        LOGGER.log(Level.INFO, String.format("User input: %s", line));
+
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
@@ -71,25 +73,25 @@ public class Parser {
 
         switch (command) {
         case COMMAND_ADD:
-            LOGGER.log(Level.INFO, "Message parsed to add command.");
+            LOGGER.log(Level.INFO, "Input parsed to add command.");
             return createAddCommand(commandParameters, commandFlags);
         case COMMAND_DELETE:
-            LOGGER.log(Level.INFO, "Message parsed to delete command.");
+            LOGGER.log(Level.INFO, "Input parsed to delete command.");
             return createDeleteCommand(commandParameters, commandFlags);
         case COMMAND_LIST:
-            LOGGER.log(Level.INFO, "Message parsed to list command.");
+            LOGGER.log(Level.INFO, "Input parsed to list command.");
             return createListCommand(commandParameters, commandFlags);
         case COMMAND_PROGRESS:
-            LOGGER.log(Level.INFO, "Message parsed to progress command.");
+            LOGGER.log(Level.INFO, "Input parsed to progress command.");
             return createProgressCommand(commandParameters, commandFlags);
         case COMMAND_DONE:
-            LOGGER.log(Level.INFO, "Message parsed to done command.");
+            LOGGER.log(Level.INFO, "Input parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
-            LOGGER.log(Level.INFO, "Message parsed to exit command.");
+            LOGGER.log(Level.INFO, "Input parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
         default:
-            LOGGER.warning("Invalid command detected. ");
+            LOGGER.warning("Invalid command detected.");
             throw new InvalidCommandException();
         }
     }
@@ -126,6 +128,7 @@ public class Parser {
             InvalidModuleTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
+
         if (isInvalidPara || isInvalidFlag) {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
@@ -135,6 +138,7 @@ public class Parser {
         String moduleName = commandParameters[1];
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
+
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
     }
@@ -152,10 +156,12 @@ public class Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
+
         if (isInvalidPara || isInvalidFlag) {
-            LOGGER.warning("Invalid number of parameters");
+            LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+
         String moduleCode = commandParameters[1];
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
         return new DeleteCommand(moduleCode);
@@ -173,10 +179,12 @@ public class Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
+
         if (isInvalidPara || isInvalidFlag) {
-            LOGGER.warning("Invalid number of parameters");
+            LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+
         LOGGER.log(Level.INFO, "Valid parameters for list command.");
         return new ListCommand();
     }
@@ -192,12 +200,13 @@ public class Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_PROGRESS_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
+
         if (isInvalidPara || isInvalidFlag) {
-            LOGGER.warning("Invalid number of parameters");
+            LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-        LOGGER.log(Level.INFO, "Valid parameters for progress command.");
 
+        LOGGER.log(Level.INFO, "Valid parameters for progress command.");
         return new ProgressCommand();
     }
 
@@ -216,8 +225,9 @@ public class Parser {
             throws IncorrectParameterCountException, InvalidCommandException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_DONE_FLAG_LENGTH);
+
         if (isInvalidPara || isInvalidFlag) {
-            LOGGER.warning("Invalid number of parameters");
+            LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
 
@@ -237,10 +247,12 @@ public class Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_EXIT_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
+
         if (isInvalidPara || isInvalidFlag) {
-            LOGGER.warning("Invalid number of parameters");
+            LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+
         LOGGER.log(Level.INFO, "Valid parameters for exit command.");
         return new ExitCommand();
     }
@@ -261,7 +273,7 @@ public class Parser {
                 return commands[i + 1].toUpperCase().trim();
             }
         }
-        LOGGER.warning("Invalid number of parameters");
+        LOGGER.warning("Missing module code parameter.");
         throw new IncorrectParameterCountException();
     }
 
@@ -287,12 +299,12 @@ public class Parser {
                 case "ge":
                     return type;
                 default:
-                    LOGGER.warning("Invalid module type detected. ");
+                    LOGGER.warning("Invalid module type detected.");
                     throw new InvalidModuleTypeException();
                 }
             }
         }
-        LOGGER.warning("Failed in finding module type. ");
+        LOGGER.warning("Missing module type parameter.");
         throw new InvalidCommandException();
     }
 
@@ -311,12 +323,12 @@ public class Parser {
                 try {
                     return Double.parseDouble(commandFlags[i + 1]);
                 } catch (NumberFormatException e) {
-                    LOGGER.warning("Invalid number detected. ");
+                    LOGGER.warning("Invalid module credits detected.");
                     throw new InputNotNumberException("Modular credits : -mc");
                 }
             }
         }
-        LOGGER.warning("Failed to find module credits. ");
+        LOGGER.warning("Missing module credits parameter.");
         throw new InvalidCommandException();
     }
 
@@ -335,7 +347,7 @@ public class Parser {
                 return commandFlags[i + 1];
             }
         }
-        LOGGER.warning("Failed to find module grade. ");
+        LOGGER.warning("Missing module grade parameter.");
         throw new InvalidCommandException();
     }
 }

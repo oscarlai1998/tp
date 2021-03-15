@@ -54,31 +54,44 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Retrieves and return module code for the current module.
+     *
+     * @return module code.
+     */
+    private String getModuleCode() {
+        return moduleCode;
+    }
+
+    /**
      * Executes the addCommand function. 
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
+     * @throws SaveModuleFailException If storage fail to save module data to disk.
+     * @throws InvalidModuleTypeException If the module type is invalid.
+     * @throws ExistingModuleException If the module to be added already exists in module list.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException {
-        LOGGER.log(Level.INFO, "going to start adding");
+        LOGGER.log(Level.INFO, "Executing add command...");
         try {
             Module module = createModuleByType();
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
+            LOGGER.log(Level.INFO, String.format("Successfully added %s module to module list.",
+                    getModuleCode()));
         } catch (InvalidModuleTypeException e) {
-            LOGGER.log(Level.WARNING, "invalid module type", e);
-            LOGGER.log(Level.INFO, "end of adding");
+            LOGGER.log(Level.WARNING, "Failed to add invalid module type.", e);
             throw new InvalidModuleTypeException();
         } catch (ExistingModuleException e) {
-            LOGGER.log(Level.WARNING, "existing module", e);
-            LOGGER.log(Level.INFO, "end of adding");
+            LOGGER.log(Level.WARNING, "Failed to add duplicated module to module list.", e);
             throw new ExistingModuleException();
+        } finally {
+            LOGGER.log(Level.INFO, "End of add command execution.");
         }
-        LOGGER.log(Level.INFO, "end of adding");
     }
 
     /**

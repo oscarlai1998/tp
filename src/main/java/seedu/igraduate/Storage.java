@@ -33,6 +33,7 @@ public class Storage {
     private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
     private File filePath;
 
+    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
             .of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core")
@@ -42,7 +43,6 @@ public class Storage {
 
     public Storage(File filePath) {
         this.filePath = filePath;
-        LOGGER.info("Storage initialised successfully. ");
     }
 
     /**
@@ -61,9 +61,11 @@ public class Storage {
         Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
 
         try {
-            return loadFromJson(objectType, filePath);
+            ArrayList<Module> modules = loadFromJson(objectType, filePath);
+            LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
+            return modules;
         } catch (IOException exception) {
-            LOGGER.warning("Failed to load module. ");
+            LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
     }
@@ -97,9 +99,9 @@ public class Storage {
         }
         try {
             saveToJson(filePath, modules.getModules());
-            LOGGER.log(Level.INFO, "storage.saveModulesToFile success.");
+            LOGGER.log(Level.INFO, "Module data saved to disk successfully.");
         } catch (Exception exception) {
-            LOGGER.warning("Failed to save module. ");
+            LOGGER.warning("Failed to save module.");
             throw new SaveModuleFailException();
         }
     }

@@ -63,20 +63,19 @@ public class DoneCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException {
+        LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getByCode(getModuleCode());
-            LOGGER.log(Level.INFO, "moduleList.getByCode success");
             moduleList.markAsTaken(module);
-            LOGGER.log(Level.INFO, "moduleList.markAsDone success");
             moduleList.setGrade(module, getModuleGrade());
-            LOGGER.log(Level.INFO, "moduleList.setGrade success");
             storage.saveModulesToFile(moduleList);
-            LOGGER.log(Level.INFO, "storage.saveModulesToFile success");
             ui.printMarkAsTakenMessage(module);
+            LOGGER.log(Level.INFO, String.format("Successfully marked %s module as taken.", getModuleCode()));
         } catch (ModuleNotFoundException e) {
-            LOGGER.log(Level.WARNING, "DoneCommand execution failed. Check which of the following"
-                    + " success log messages are missing: getByCode, markAsDone, setGrade, saveModulesToFile");
+            LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", e);
             throw new ModuleNotFoundException();
+        } finally {
+            LOGGER.log(Level.INFO, "End of done command execution.");
         }
     }
 

@@ -27,6 +27,7 @@ public class ProgressCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws ModularCreditExceedsLimitException {
+        LOGGER.log(Level.INFO, "Executing progress command...");
         DecimalFormat df = new DecimalFormat("0.00");
         double completedMCs = moduleList.getTotalCompletedMCs();
         LOGGER.log(Level.INFO, "Completed MCs success.");
@@ -38,6 +39,7 @@ public class ProgressCommand extends Command {
         }
         ui.printProgressBar(completedMCs, stringPercentageDone);
         LOGGER.log(Level.INFO, "Print Progress Bar success.");
+        LOGGER.log(Level.INFO, "End of progress command execution.");
     }
 
     /**
