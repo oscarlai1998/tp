@@ -26,7 +26,7 @@ class ModuleListTest {
     }
 
     @Test
-    void add_module_throwsExistingModuleException() throws ModuleNotFoundException, ExistingModuleException{
+    void add_module_throwsExistingModuleException() throws ModuleNotFoundException, ExistingModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
