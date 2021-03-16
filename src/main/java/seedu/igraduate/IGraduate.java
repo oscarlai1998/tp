@@ -51,6 +51,8 @@ public class IGraduate {
         } finally {
             LOGGER.info("All components initialised successfully.");
         }
+
+        assert modules.size() >= 0 : "Array not initialised properly. ";
     }
 
     /**
