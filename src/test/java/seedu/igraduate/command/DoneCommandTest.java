@@ -18,16 +18,19 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.module.Module;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
 
-public class DeleteCommandTest {
+public class DoneCommandTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
+    private static final String MODULE_MARKEDASDONE_MESSAGE = "Nice! I've marked this module as done:\r\n"
+        + "  %s\r\n";
     private Storage storage = new Storage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
@@ -36,13 +39,13 @@ public class DeleteCommandTest {
     private final PrintStream ORIGINALOUT = System.out;
 
     @Test
-    void executeDeleteCommand_nonexistentModule_exceptionThrown()
+    void executeDoneCommand_nonexistentModule_exceptionThrown()
             throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException {
-        String line = "Delete Pigs (Three Different Ones)";
-        Command deleteCommand = Parser.parseCommand(line);
+        String line = "Done GES1036 -g A+";
+        Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
+                () -> doneCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -54,11 +57,12 @@ public class DeleteCommandTest {
             ModularCreditExceedsLimitException, ModuleNotFoundException {
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0);
         addCommand.execute(moduleList, ui, storage);
-        String line = "Delete cs1010";
-        Command deleteCommand = Parser.parseCommand(line);
+        String line = "Done CS1010 -g A";
+        Command doneCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(OUTCONTENT));
-        deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010") + "\r\n", OUTCONTENT.toString());
+        Module module = moduleList.getByCode("cs1010");
+        doneCommand.execute(moduleList, ui, storage);
+        assertEquals(String.format(MODULE_MARKEDASDONE_MESSAGE, module), OUTCONTENT.toString());
         System.setOut(ORIGINALOUT);
     }
 }
