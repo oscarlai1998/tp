@@ -29,8 +29,10 @@ public class DoneCommandTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
-    private static final String MODULE_MARKEDASDONE_MESSAGE = "Nice! I've marked this module as done:\r\n"
-        + "  %s\r\n";
+    private static final String MODULE_MARKEDASDONE_MESSAGE = "Nice! I've marked this module as done:"
+            + System.lineSeparator()
+            + "  %s"
+            + System.lineSeparator();
     private Storage storage = new Storage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
@@ -50,7 +52,7 @@ public class DoneCommandTest {
     }
 
     @Test
-    void executeDeleteCommand_moduleInList_success()
+    void executeDoneCommand_moduleInList_success()
             throws ExistingModuleException, InvalidModuleTypeException,
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,

@@ -62,8 +62,8 @@ public class AddCommandTest {
         addCommand.execute(moduleList, ui, storage);
         Module module = moduleList.getByCode("cs2100");
         assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0")
-                + "\r\n"
-                + module + "\r\n", outContent.toString());
+                + System.lineSeparator()
+                + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 }

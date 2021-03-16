@@ -58,7 +58,8 @@ public class DeleteCommandTest {
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010") + "\r\n", outContent.toString());
+        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010")
+                + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 }
