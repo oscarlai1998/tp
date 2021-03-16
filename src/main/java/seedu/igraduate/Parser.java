@@ -17,13 +17,8 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
-<<<<<<< HEAD
- * Represents an instance of a parser. 
- * A parser object corresponds to the processing of one input by the user. 
-=======
  * Represents an instance of a parser. A parse object corresponds to the
  * processing of one input by the user.
->>>>>>> c049c3469b118e2f35c282e7500c65179e7fb8f8
  */
 public class Parser {
     // Constants for command words
@@ -170,6 +165,7 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
 
+        assert commandParameters.length == 2 : "COMMAND_DELETE_LENGTH should be 2";
         String moduleCode = commandParameters[1];
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
 
