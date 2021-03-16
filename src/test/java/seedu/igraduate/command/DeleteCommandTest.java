@@ -32,8 +32,8 @@ public class DeleteCommandTest {
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
 
-    private final ByteArrayOutputStream OUTCONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINALOUT = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown()
@@ -56,9 +56,9 @@ public class DeleteCommandTest {
         addCommand.execute(moduleList, ui, storage);
         String line = "Delete cs1010";
         Command deleteCommand = Parser.parseCommand(line);
-        System.setOut(new PrintStream(OUTCONTENT));
+        System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010") + "\r\n", OUTCONTENT.toString());
-        System.setOut(ORIGINALOUT);
+        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010") + "\r\n", outContent.toString());
+        System.setOut(originalOut);
     }
 }

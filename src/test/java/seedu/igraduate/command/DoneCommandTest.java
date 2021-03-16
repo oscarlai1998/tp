@@ -35,8 +35,8 @@ public class DoneCommandTest {
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
 
-    private final ByteArrayOutputStream OUTCONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINALOUT = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Test
     void executeDoneCommand_nonexistentModule_exceptionThrown()
@@ -45,7 +45,7 @@ public class DoneCommandTest {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> doneCommand.execute(moduleList, ui, storage));
+            () -> doneCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -59,10 +59,10 @@ public class DoneCommandTest {
         addCommand.execute(moduleList, ui, storage);
         String line = "Done CS1010 -g A";
         Command doneCommand = Parser.parseCommand(line);
-        System.setOut(new PrintStream(OUTCONTENT));
+        System.setOut(new PrintStream(outContent));
         Module module = moduleList.getByCode("cs1010");
         doneCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(MODULE_MARKEDASDONE_MESSAGE, module), OUTCONTENT.toString());
-        System.setOut(ORIGINALOUT);
+        assertEquals(String.format(MODULE_MARKEDASDONE_MESSAGE, module), outContent.toString());
+        System.setOut(originalOut);
     }
 }

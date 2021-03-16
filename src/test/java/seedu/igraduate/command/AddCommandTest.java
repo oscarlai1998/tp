@@ -33,8 +33,8 @@ public class AddCommandTest {
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
 
-    private final ByteArrayOutputStream OUTCONTENT = new ByteArrayOutputStream();
-    private final PrintStream ORIGINALOUT = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
     @Test
     void executeAddCommand_ExistingModule_exceptionThrown()
@@ -46,7 +46,7 @@ public class AddCommandTest {
         String line = "add Programming -mc 4 -t core -c cs1010";
         Command testAddCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ExistingModuleException.class,
-                () -> testAddCommand.execute(moduleList, ui, storage));
+            () -> testAddCommand.execute(moduleList, ui, storage));
         assertEquals(ExistingModuleException.EXISTING_MODULE_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -58,11 +58,12 @@ public class AddCommandTest {
             ModularCreditExceedsLimitException {
         String line = "add Computer Org -mc 4 -t core -c cs2100";
         Command addCommand = Parser.parseCommand(line);
-        System.setOut(new PrintStream(OUTCONTENT));
+        System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
         Module module = moduleList.getByCode("cs2100");
-        assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0") + "\r\n" +
-                        module + "\r\n", OUTCONTENT.toString());
-        System.setOut(ORIGINALOUT);
+        assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0")
+                + "\r\n"
+                + module + "\r\n", outContent.toString());
+        System.setOut(originalOut);
     }
 }
