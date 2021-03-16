@@ -26,7 +26,7 @@ class ModuleListTest {
     }
 
     @Test
-    void add_module_throwsExistingModuleException() throws ModuleNotFoundException, ExistingModuleException {
+    void add_module_throwsExistingModuleException() throws ExistingModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -63,6 +63,17 @@ class ModuleListTest {
                 4.0, "taken", "A-", preRequisites);
         modules.add(geModule);
         assertEquals(geModule, modules.getByCode("GER1000"));
+    }
+
+    @Test
+    void getByCode_throwsModuleNotFoundException() throws ExistingModuleException, ModuleNotFoundException {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
+                4.0, "taken", "A-", preRequisites);
+        modules.add(geModule);
+        modules.getByCode("GER1000");
+        assertThrows(ModuleNotFoundException.class, "The module code you have entered"
+                + " does not exists. \nPlease double check and try again.", () -> modules.getByCode("CS1010"));
     }
 
     /**
