@@ -9,6 +9,8 @@ import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.module.Module;
 
+import java.io.ByteArrayOutputStream;
+
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -19,6 +21,8 @@ public class DeleteCommand extends Command {
     protected String moduleCode;
 
     private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
+
+    private final ByteArrayOutputStream OUTCONTENT = new ByteArrayOutputStream();
 
     /**
      * Child class of the command class that contains the module code. 
