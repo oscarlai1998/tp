@@ -1,7 +1,9 @@
 package seedu.igraduate;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.function.Executable;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.module.GeModule;
@@ -21,6 +23,17 @@ class ModuleListTest {
                 4.0, "taken", "A-", preRequisites);
         modules.add(geModule);
         assertEquals("GER1000", modules.getByCode("GER1000").getCode());
+    }
+
+    @Test
+    void add_module_throwsExistingModuleException() throws ModuleNotFoundException, ExistingModuleException{
+        ArrayList<String> preRequisites = new ArrayList<>();
+        GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
+                4.0, "taken", "A-", preRequisites);
+        modules.add(geModule);
+
+        assertThrows(ExistingModuleException.class, "The module code"
+                + " already exists.", () -> modules.add(geModule));
     }
 
     @Test
@@ -51,4 +64,18 @@ class ModuleListTest {
         modules.add(geModule);
         assertEquals(geModule, modules.getByCode("GER1000"));
     }
+
+    /**
+     * Asserts that the {@code executable} throws the {@code expectedType} Exception with the {@code expectedMessage}.
+     *
+     * @param expectedType expected exception
+     * @param expectedMessage expected message from exception
+     * @param executable method that throws exception
+     */
+    public static void assertThrows(Class<? extends Throwable> expectedType, String expectedMessage,
+                                    Executable executable) {
+        Throwable thrownException = Assertions.assertThrows(expectedType, executable);
+        Assertions.assertEquals(expectedMessage, thrownException.getMessage());
+    }
+
 }
