@@ -10,14 +10,11 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
-
-    private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
 
     /**
      * ArrayList that stores all the modules data.
@@ -105,7 +102,7 @@ public class ModuleList {
     }
 
     /**
-     * Check if the current module list is empty.
+     * Checks if the current module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */

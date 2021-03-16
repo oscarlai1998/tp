@@ -18,27 +18,24 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 
 public class ParserTest {
 
-    private static final String INVALID_COMMAND_MESSAGE = "The command you have entered is incorrect. \n"
-            + "Please double check and try again.";
-    private static final String INCORRECT_PARAMETER_NUMBER_MESSAGE = "The number of parameters"
-            + " provided is incorrect. \nPlease double check and try again.";
-
     @Test
     void parseCommand_emptyCommand_exceptionThrown() {
         String line = "";
         Exception exception = assertThrows(InvalidCommandException.class, () -> Parser.parseCommand(line));
-        assertEquals(INVALID_COMMAND_MESSAGE, exception.getMessage());
+        assertEquals(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, exception.getMessage());
     }
 
     @Test
-    void createAddCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
+    void createAddCommand_appropriateParameters_success() 
+            throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException {
         String line = "add Programming Methodology -t core -mc 4 -c CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
     }
 
     @Test
-    void createAddCommand_parametersWithSpacing_success() throws InvalidCommandException, InvalidModuleTypeException,
+    void createAddCommand_parametersWithSpacing_success() 
+            throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException {
         String line = "add Programming Methodology    -t      core       -mc      4      -c            CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
@@ -49,7 +46,8 @@ public class ParserTest {
         String line = "Add Introduction to Information Security -t core -mc 4 -c CS2107 -n prefab sprout";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
@@ -57,12 +55,23 @@ public class ParserTest {
         String line = "Add Introduction to Information Security -t core -mc  -c CS2107";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
-    void createDeleteCommand_appropriateParameters_success() throws InvalidCommandException,
-            InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
+    void createAddCommand_invalidCredits_exceptionThrown() {
+        String line = "Add Introduction to Information Security -t core -mc n -c CS2107";
+        Exception exception = assertThrows(InputNotNumberException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals(InputNotNumberException.INPUT_NOT_NUMBER_ERROR_MESSAGE + "Modular credits : -mc", 
+                exception.getMessage());
+    }
+
+    @Test
+    void createDeleteCommand_appropriateParameters_success()
+            throws InvalidCommandException, InvalidModuleTypeException, 
+            InputNotNumberException, IncorrectParameterCountException {
         String line = "Delete CS2107";
         assertEquals(DeleteCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -72,7 +81,8 @@ public class ParserTest {
         String line = "Delete";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
@@ -80,7 +90,8 @@ public class ParserTest {
         String line = "Delete CS2106 -mc 4";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
@@ -98,11 +109,12 @@ public class ParserTest {
     }
 
     @Test
-    void createListCommand_invalidParameter_exceptionThrown() {
+    void createDoneCommand_invalidParameter_exceptionThrown() {
         String line = "done";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
+                exception.getMessage());
     }
 
     @Test
@@ -110,7 +122,8 @@ public class ParserTest {
         String line = "done CS2107";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
@@ -125,12 +138,23 @@ public class ParserTest {
         String line = "progress -mc";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 
     @Test
-    void createListCommand_appropriateParameters_success() throws InvalidCommandException,
-            InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
+    void createProgressCommand_tooManyParameters_exceptionThrown() {
+        String line = "progress testing";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
+    }
+
+    @Test
+    void createListCommand_appropriateParameters_success() 
+            throws InvalidCommandException, InvalidModuleTypeException, 
+            InputNotNumberException, IncorrectParameterCountException {
         String line = "list";
         assertEquals(ListCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -140,6 +164,16 @@ public class ParserTest {
         String line = "list all";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(INCORRECT_PARAMETER_NUMBER_MESSAGE, exception.getMessage());
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
+    }
+
+    @Test
+    void createListCommand_extraFlag_exceptionThrown() {
+        String line = "list -mc";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
     }
 }
