@@ -5,10 +5,11 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
 import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 
 /**
  * Parent class for more specific command child class.
@@ -29,7 +30,7 @@ public abstract class Command {
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
         throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
-            ModularCreditExceedsLimitException, ExistingModuleException;
+            ModularCreditExceedsLimitException, ExistingModuleException, PrerequisiteNotFoundException;
 
     /**
      * Returns a flag indicating whether the program should terminate after execution of current command.

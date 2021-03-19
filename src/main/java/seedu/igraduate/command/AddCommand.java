@@ -4,9 +4,11 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
 
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
@@ -46,11 +48,13 @@ public class AddCommand extends Command {
      * @param moduleType module type (core, ue, ge or math). 
      * @param moduleCredits number of credits for the module. 
      */
-    public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits) {
+    public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits,
+                      ArrayList<String> preRequisites) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.moduleType = moduleType;
         this.moduleCredits = moduleCredits;
+        this.preRequisites = preRequisites;
     }
 
     /**
@@ -74,7 +78,8 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException {
+            throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
+            ModuleNotFoundException, PrerequisiteNotFoundException {
         LOGGER.log(Level.INFO, "Executing add command...");
         try {
             Module module = createModuleByType();
@@ -90,6 +95,9 @@ public class AddCommand extends Command {
         } catch (ExistingModuleException e) {
             LOGGER.log(Level.WARNING, "Failed to add duplicated module to module list.", e);
             throw new ExistingModuleException();
+        } catch (PrerequisiteNotFoundException e) {
+            LOGGER.log(Level.WARNING, "Failed to add non-existing pre-requisite modules", e);
+            throw new PrerequisiteNotFoundException();
         } finally {
             LOGGER.log(Level.INFO, "End of add command execution.");
         }
