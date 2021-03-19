@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class AddCommandTest {
 
@@ -40,8 +41,10 @@ public class AddCommandTest {
     void executeAddCommand_ExistingModule_exceptionThrown()
             throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException,
-            SaveModuleFailException, ExistingModuleException {
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0);
+            SaveModuleFailException, ExistingModuleException,
+            ModuleNotFoundException {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "add Programming -mc 4 -t core -c cs1010";
         Command testAddCommand = Parser.parseCommand(line);

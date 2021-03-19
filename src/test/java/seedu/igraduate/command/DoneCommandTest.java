@@ -10,20 +10,14 @@ import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.*;
 import seedu.igraduate.module.Module;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class DoneCommandTest {
 
@@ -56,8 +50,10 @@ public class DoneCommandTest {
             throws ExistingModuleException, InvalidModuleTypeException,
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,
-            ModularCreditExceedsLimitException, ModuleNotFoundException {
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0);
+            ModularCreditExceedsLimitException, ModuleNotFoundException,
+            PrerequisiteNotFoundException  {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "Done CS1010 -g A";
         Command doneCommand = Parser.parseCommand(line);

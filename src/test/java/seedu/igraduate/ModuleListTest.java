@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ class ModuleListTest {
     private ModuleList modules = new ModuleList();
 
     @Test
-    void add_module_success() throws ModuleNotFoundException, ExistingModuleException {
+    void add_module_success() throws ModuleNotFoundException, ExistingModuleException,
+            PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -26,7 +28,8 @@ class ModuleListTest {
     }
 
     @Test
-    void add_module_throwsExistingModuleException() throws ExistingModuleException {
+    void add_module_throwsExistingModuleException() throws ExistingModuleException, ModuleNotFoundException,
+            PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -37,7 +40,8 @@ class ModuleListTest {
     }
 
     @Test
-    void delete_module_success() throws ExistingModuleException {
+    void delete_module_success() throws ExistingModuleException, ModuleNotFoundException,
+            PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -57,7 +61,8 @@ class ModuleListTest {
     }
 
     @Test
-    void get_existingModule_success() throws ModuleNotFoundException, ExistingModuleException {
+    void get_existingModule_success() throws ModuleNotFoundException, ExistingModuleException,
+            PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
@@ -66,7 +71,8 @@ class ModuleListTest {
     }
 
     @Test
-    void getByCode_throwsModuleNotFoundException() throws ExistingModuleException, ModuleNotFoundException {
+    void getByCode_throwsModuleNotFoundException() throws ExistingModuleException, ModuleNotFoundException,
+            PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites);
