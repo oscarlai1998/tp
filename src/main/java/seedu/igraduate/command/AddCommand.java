@@ -15,6 +15,8 @@ import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.Module;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Handles add command.
@@ -34,6 +36,8 @@ public class AddCommand extends Command {
 
     private ArrayList<String> preRequisites;
 
+    private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
+
     /**
      * Child class of the command class that contains the module name, code, type and credits to be added. 
      * 
@@ -50,24 +54,44 @@ public class AddCommand extends Command {
     }
 
     /**
+     * Retrieves and return module code for the current module.
+     *
+     * @return module code.
+     */
+    private String getModuleCode() {
+        return moduleCode;
+    }
+
+    /**
      * Executes the addCommand function. 
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
+     * @throws SaveModuleFailException If storage fail to save module data to disk.
+     * @throws InvalidModuleTypeException If the module type is invalid.
+     * @throws ExistingModuleException If the module to be added already exists in module list.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException {
+        LOGGER.log(Level.INFO, "Executing add command...");
         try {
             Module module = createModuleByType();
+            assert module != null : "Module should not be empty.";
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
+            LOGGER.log(Level.INFO, String.format("Successfully added %s module to module list.",
+                    getModuleCode()));
         } catch (InvalidModuleTypeException e) {
+            LOGGER.log(Level.WARNING, "Failed to add invalid module type.", e);
             throw new InvalidModuleTypeException();
         } catch (ExistingModuleException e) {
+            LOGGER.log(Level.WARNING, "Failed to add duplicated module to module list.", e);
             throw new ExistingModuleException();
+        } finally {
+            LOGGER.log(Level.INFO, "End of add command execution.");
         }
     }
 
@@ -79,7 +103,9 @@ public class AddCommand extends Command {
      * @throws InvalidModuleTypeException if module type does not fit any categories.
      */
     public Module createModuleByType() throws InvalidModuleTypeException {
+        LOGGER.log(Level.INFO, "Creating module...");
         Module module;
+        assert moduleType != null : "Module type should not be empty.";
         switch (moduleType) {
         case CORE:
             module = new CoreModule(moduleCode, moduleName, moduleCredits,
@@ -98,8 +124,13 @@ public class AddCommand extends Command {
                     DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
             break;
         default:
+            LOGGER.log(Level.INFO, "Failed to create invalid module type.");
+            LOGGER.log(Level.INFO, "End of module creation.");
             throw new InvalidModuleTypeException();
         }
+        LOGGER.log(Level.INFO, "End of module creation.");
+        assert module != null : "Module should not be empty.";
+
         return module;
     }
 

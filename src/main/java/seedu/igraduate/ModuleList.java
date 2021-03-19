@@ -15,6 +15,7 @@ import java.util.ArrayList;
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -47,8 +48,10 @@ public class ModuleList {
     public void add(Module module) throws ExistingModuleException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
+        assert getModuleIndex(moduleCode) == DEFAULT_INDEX : "Duplicated module cannot be added.";
         modules.add(module);
     }
 
@@ -99,7 +102,7 @@ public class ModuleList {
     }
 
     /**
-     * Check if the current module list is empty.
+     * Checks if the current module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */
@@ -117,10 +120,10 @@ public class ModuleList {
     public Module getByCode(String moduleCode) 
             throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
-
         if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
+        assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
 
         return modules.get(moduleIndex);
     }
@@ -140,7 +143,6 @@ public class ModuleList {
                 break;
             }
         }
-
         return index;
     }
 
@@ -161,6 +163,8 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
+        assert !moduleType.equals("Undefined") : "Module type is not valid.";
+
         return moduleType;
     }
 
@@ -173,6 +177,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
+                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
+                       + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }
