@@ -34,6 +34,7 @@ public class Parser {
 
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
+    private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
     private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 1;
@@ -129,15 +130,16 @@ public class Parser {
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
             InvalidModuleTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.length < COMMAND_ADD_FLAG_LENGTH);
+        boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
+        boolean isInvalidPrereqFlag = (commandFlags.length != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
 
-        if (isInvalidPara || isInvalidFlag) {
+        if (isInvalidPara || (isInvalidFlag && isInvalidPrereqFlag)) {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
         }
 
         assert commandParameters.length == 2 : "Input for add should have 2 parameters (excluding flags)";
-        assert commandFlags.length >= 6 : "COMMAND_ADD_LENGTH should be at least 6.";
+        assert commandFlags.length == 6 || commandFlags.length == 8 : "COMMAND_ADD_LENGTH should be 6 or 8.";
 
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
@@ -280,7 +282,9 @@ public class Parser {
      */
     public static String extractModuleCode(String[] commands) 
             throws IncorrectParameterCountException {
-        assert commands.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleCode should only be" + " called for add";
+        assert commands.length == COMMAND_ADD_FLAG_LENGTH
+                || commands.length == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
+                : "extractModuleCode should only be called for add";
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
                 assert commands[i + 1].length() > 0 : "Module code should not be empty";
@@ -302,7 +306,9 @@ public class Parser {
      */
     public static String extractModuleType(String[] commandFlags) 
             throws InvalidModuleTypeException, InvalidCommandException {
-        assert commandFlags.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleType should only be" + " called for add";
+        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH
+                || commandFlags.length == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
+                : "extractModuleType should only be called for add";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
@@ -333,8 +339,9 @@ public class Parser {
      */
     public static double extractModuleCredits(String[] commandFlags)
             throws InputNotNumberException, InvalidCommandException {
-        assert commandFlags.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleCredits should only be "
-                + "called for add command.";
+        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH
+                || commandFlags.length == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
+                : "extractModuleCredits should only be called for add command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
                 assert commandFlags[i + 1].trim().length() > 0 : "Modular credits field should not be empty.";
