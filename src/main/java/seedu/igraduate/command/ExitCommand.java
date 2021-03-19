@@ -4,10 +4,15 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  * Handles exit command.
  */
 public class ExitCommand extends Command {
+    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
 
     /**
      * Prints exit message.
@@ -18,6 +23,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
+        LOGGER.log(Level.INFO, "Exit Command executed!");
         ui.printExitMessage();
     }
 
