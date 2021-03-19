@@ -13,6 +13,9 @@ import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -126,7 +129,7 @@ public class Parser {
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
             InvalidModuleTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
+        boolean isInvalidFlag = (commandFlags.length < COMMAND_ADD_FLAG_LENGTH);
 
         if (isInvalidPara || isInvalidFlag) {
             LOGGER.warning("Invalid number of parameters");
@@ -134,16 +137,17 @@ public class Parser {
         }
 
         assert commandParameters.length == 2 : "Input for add should have 2 parameters (excluding flags)";
-        assert commandFlags.length == 6 : "COMMAND_ADD_LENGTH should be 6.";
+        assert commandFlags.length >= 6 : "COMMAND_ADD_LENGTH should be at least 6.";
 
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters[1];
         assert moduleName.trim().length() > 0 : "Name of module should not be empty.";
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
+        ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
 
-        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits);
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites);
     }
 
     /**
@@ -154,7 +158,6 @@ public class Parser {
      * @return new instance of DeleteCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
-
     public static Command createDeleteCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
@@ -277,7 +280,7 @@ public class Parser {
      */
     public static String extractModuleCode(String[] commands) 
             throws IncorrectParameterCountException {
-        assert commands.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleCode should only be" + " called for add";
+        assert commands.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleCode should only be" + " called for add";
         for (int i = 0; i < commands.length; i++) {
             if (commands[i].equals("-c")) {
                 assert commands[i + 1].length() > 0 : "Module code should not be empty";
@@ -299,7 +302,7 @@ public class Parser {
      */
     public static String extractModuleType(String[] commandFlags) 
             throws InvalidModuleTypeException, InvalidCommandException {
-        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleType should only be" + " called for add";
+        assert commandFlags.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleType should only be" + " called for add";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-t")) {
                 String type = commandFlags[i + 1].toLowerCase().trim();
@@ -330,7 +333,7 @@ public class Parser {
      */
     public static double extractModuleCredits(String[] commandFlags)
             throws InputNotNumberException, InvalidCommandException {
-        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH : "extractModuleCredits should only be "
+        assert commandFlags.length >= COMMAND_ADD_FLAG_LENGTH : "extractModuleCredits should only be "
                 + "called for add command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
@@ -366,5 +369,21 @@ public class Parser {
         }
         LOGGER.warning("Missing module grade parameter.");
         throw new InvalidCommandException();
+    }
+
+    public static ArrayList<String> extractPreRequisites(String[] commandFlags) {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        List<String> moduleCodes;
+        for (int i = 0; i < commandFlags.length; i++) {
+            if (commandFlags[i].equals("-p")) {
+                String trimmedCommandFlag = commandFlags[i + 1].trim();
+                moduleCodes = Arrays.asList(trimmedCommandFlag.split(","));
+                for (String moduleCode : moduleCodes) {
+                    preRequisites.add(moduleCode.toUpperCase());
+                }
+                break;
+            }
+        }
+        return preRequisites;
     }
 }
