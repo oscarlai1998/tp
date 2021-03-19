@@ -1,0 +1,34 @@
+Mar 19, 2021 1:57:36 AM seedu.igraduate.IGraduate main
+INFO: iGraduate starts.
+Mar 19, 2021 1:57:36 AM seedu.igraduate.IGraduate <init>
+INFO: Initialising iGraduate Ui, Storage and ModuleList components...
+Mar 19, 2021 1:57:36 AM seedu.igraduate.Storage loadModulesFromFile
+INFO: Module data loaded from disk successfully.
+Mar 19, 2021 1:57:36 AM seedu.igraduate.IGraduate <init>
+INFO: All components initialised successfully.
+Mar 19, 2021 1:57:42 AM seedu.igraduate.Parser parseCommand
+INFO: User input: list
+Mar 19, 2021 1:57:42 AM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to list command.
+Mar 19, 2021 1:57:42 AM seedu.igraduate.Parser createListCommand
+INFO: Valid parameters for list command.
+Mar 19, 2021 1:57:42 AM seedu.igraduate.command.ListCommand execute
+INFO: Executing list command...
+Mar 19, 2021 1:57:42 AM seedu.igraduate.command.ListCommand execute
+INFO: Successfully printed module list.
+Mar 19, 2021 1:57:42 AM seedu.igraduate.command.ListCommand execute
+INFO: End of list command execution.
+Mar 19, 2021 1:58:31 AM seedu.igraduate.Parser parseCommand
+INFO: User input: done cs1010 -g a+
+Mar 19, 2021 1:58:31 AM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to done command.
+Mar 19, 2021 1:58:31 AM seedu.igraduate.Parser createDoneCommand
+INFO: Valid parameters for done command.
+Mar 19, 2021 1:58:31 AM seedu.igraduate.command.DoneCommand execute
+INFO: Executing done command...
+Mar 19, 2021 1:58:31 AM seedu.igraduate.Storage saveModulesToFile
+INFO: Module data saved to disk successfully.
+Mar 19, 2021 1:58:31 AM seedu.igraduate.command.DoneCommand execute
+INFO: Successfully marked cs1010 module as taken.
+Mar 19, 2021 1:58:31 AM seedu.igraduate.command.DoneCommand execute
+INFO: End of done command execution.
