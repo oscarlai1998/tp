@@ -165,6 +165,7 @@ public class Parser {
             throw new IncorrectParameterCountException();
         }
 
+        assert commandParameters.length == 2 : "COMMAND_DELETE_LENGTH should be 2";
         String moduleCode = commandParameters[1];
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
 
