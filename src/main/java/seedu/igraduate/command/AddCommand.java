@@ -4,7 +4,11 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
 
 import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
