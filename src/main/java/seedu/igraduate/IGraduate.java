@@ -70,6 +70,7 @@ public class IGraduate {
                 isExit = c.isExit();
             } catch (Exception e) {
                 ui.printErrorMessage(e);
+                LOGGER.log(Level.WARNING, "An error occur when trying to execute command.", e);
             } finally {
                 ui.printBorderLine();
             }

@@ -29,6 +29,7 @@ public class AddCommand extends Command {
     protected String moduleType;
     protected Double moduleCredits;
     protected ArrayList<String> preRequisites;
+    protected ArrayList<String> untakenPreRequisites;
 
     private static final String CORE = "core";
     private static final String UE = "ue";
@@ -50,12 +51,13 @@ public class AddCommand extends Command {
      * @param preRequisites ArrayList containing all pre-requisite modules.
      */
     public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits,
-                      ArrayList<String> preRequisites) {
+                      ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.moduleType = moduleType;
         this.moduleCredits = moduleCredits;
         this.preRequisites = preRequisites;
+        this.untakenPreRequisites = untakenPreRequisites;
     }
 
     /**
@@ -120,19 +122,19 @@ public class AddCommand extends Command {
         switch (moduleType) {
         case CORE:
             module = new CoreModule(moduleCode, moduleName, moduleCredits,
-                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites, untakenPreRequisites);
             break;
         case UE:
             module = new ElectiveModule(moduleCode, moduleName, moduleCredits,
-                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites, untakenPreRequisites);
             break;
         case MATH:
             module = new MathModule(moduleCode, moduleName, moduleCredits,
-                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites, untakenPreRequisites);
             break;
         case GE:
             module = new GeModule(moduleCode, moduleName, moduleCredits,
-                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites);
+                    DEFAULT_STATUS, DEFAULT_GRADE, preRequisites, untakenPreRequisites);
             break;
         default:
             LOGGER.log(Level.INFO, "Failed to create invalid module type.");

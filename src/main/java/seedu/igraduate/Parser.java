@@ -148,9 +148,10 @@ public class Parser {
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
         ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
+        ArrayList<String> untakenPreRequisites = extractPreRequisites(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
 
-        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites);
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites, untakenPreRequisites);
     }
 
     /**

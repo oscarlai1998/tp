@@ -4,6 +4,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.module.Module;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.CoreModule;
@@ -11,6 +12,7 @@ import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Handles underlying operations on modules ArrayList.
@@ -46,18 +48,40 @@ public class ModuleList {
      *
      * @param module Module to be added into the module list.
      * @throws ExistingModuleException If the new module already exists.
-     * @throws ModuleNotFoundException If module code is not found in module list.
      * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
      */
-    public void add(Module module) throws ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException {
+    public void add(Module module) throws ExistingModuleException, PrerequisiteNotFoundException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
             assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
         addModuleRequiredBy(module);
+        removeTakenPreRequisiteModule(module);
         modules.add(module);
+    }
+
+    /**
+     * Removes taken pre-requisite module from current untaken pre-requisite ArrayList.
+     *
+     * @param module Module object to be added to moduleList.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
+     */
+    public void removeTakenPreRequisiteModule(Module module) throws PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = module.getPreRequisites();
+        ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+
+        for (String preRequisite : preRequisites) {
+            try {
+                Module preRequisiteModule = getByCode(preRequisite);
+                String status = preRequisiteModule.getStatus();
+                if (status.equals("taken")) {
+                    module.removeUntakenPreRequisite(preRequisite);
+                }
+            } catch (ModuleNotFoundException e) {
+                throw new PrerequisiteNotFoundException();
+            }
+        }
     }
 
     /**
@@ -79,32 +103,67 @@ public class ModuleList {
      * Add the current module code to pre-requisite modules as requiredBy module.
      *
      * @param module Module to be added to module list.
-     * @throws ModuleNotFoundException If module does not exists.
      * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
      */
-    public void addModuleRequiredBy(Module module) throws ModuleNotFoundException,
-            PrerequisiteNotFoundException {
+    public void addModuleRequiredBy(Module module) throws PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = module.getPreRequisites();
 
-        if (checkPreRequisitesAvailability(preRequisites)) {
-            for (String preRequisite : preRequisites) {
-                Module requiredModule = getByCode(preRequisite);
-                ArrayList<String> requiredBy = requiredModule.getRequiredByModules();
-                requiredBy.add(module.getCode());
-                requiredModule.setRequiredByModules(requiredBy);
-            }
-        } else {
+        if (!checkPreRequisitesAvailability(preRequisites)) {
             throw new PrerequisiteNotFoundException();
+        }
+
+        for (String preRequisite : preRequisites) {
+            try {
+                Module requiredModule = getByCode(preRequisite);
+                ArrayList<String> requiredByModules = requiredModule.getRequiredByModules();
+                String moduleCode = module.getCode();
+                if (!requiredByModules.contains(moduleCode)) {
+                    requiredByModules.add(moduleCode);
+                    requiredModule.setRequiredByModules(requiredByModules);
+                }
+            } catch (ModuleNotFoundException e) {
+                throw new PrerequisiteNotFoundException();
+            }
         }
     }
 
     /**
-     * Removes specified module from the module storage.
+     * Removes specified module from the module storage if it is not required by any module.
      *
      * @param module Module to be removed from the module list.
+     * @throws PrerequisiteNotFoundException If the pre-requisite module is deleted beforehand.
+     * @throws UnableToDeletePrereqModuleException If the module is a pre-requisite of other modules.
      */
-    public void delete(Module module) {
-        modules.remove(module);
+    public void delete(Module module) throws PrerequisiteNotFoundException,
+            UnableToDeletePrereqModuleException {
+        ArrayList<String> requiredByModules = module.getRequiredByModules();
+
+        if (requiredByModules.isEmpty()) {
+            modules.remove(module);
+            removeFromPreRequisiteModuleRequiredBy(module);
+        } else {
+            throw new UnableToDeletePrereqModuleException(requiredByModules);
+        }
+    }
+
+    /**
+     * Remove deleted module from its pre-requisite modules' required by list.
+     *
+     * @param module Module object deleted from module list.
+     * @throws PrerequisiteNotFoundException If the pre-requisite module is deleted beforehand.
+     */
+    public void removeFromPreRequisiteModuleRequiredBy(Module module) throws PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = module.getPreRequisites();
+        String moduleCode = module.getCode();
+
+        for (String preRequisite : preRequisites) {
+            try {
+                Module preRequisiteModule = getByCode(preRequisite);
+                preRequisiteModule.removeRequredByModule(moduleCode);
+            } catch (ModuleNotFoundException e) {
+                throw new PrerequisiteNotFoundException();
+            }
+        }
     }
 
     /**
@@ -116,8 +175,8 @@ public class ModuleList {
     public void markAsTaken(Module module) throws ModuleNotFoundException {
         module.setStatus("taken");
         String moduleCode = module.getCode();
-        ArrayList<String> requiredBy = module.getRequiredByModules();
-        removeRequiredByModulePrerequisites(moduleCode, requiredBy);
+        ArrayList<String> requiredByModules = module.getRequiredByModules();
+        removeFromModuleUntakenPrerequisites(moduleCode, requiredByModules);
     }
 
     /**
@@ -127,11 +186,11 @@ public class ModuleList {
      * @param requiredByModules ArrayList of modules required taken module as pre-requisite.
      * @throws ModuleNotFoundException If requiredBy module does not exists in module list.
      */
-    public void removeRequiredByModulePrerequisites(String moduleCode, ArrayList<String> requiredByModules)
+    public void removeFromModuleUntakenPrerequisites(String moduleCode, ArrayList<String> requiredByModules)
             throws ModuleNotFoundException {
         for (String requiredByModule : requiredByModules) {
             Module module = getByCode(requiredByModule);
-            module.removePreRequisites(moduleCode);
+            module.removeUntakenPreRequisite(moduleCode);
         }
     }
 
