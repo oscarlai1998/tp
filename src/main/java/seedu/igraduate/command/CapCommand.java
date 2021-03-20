@@ -74,9 +74,7 @@ public class CapCommand extends Command {
     private float convertGradeToCap(String grade) throws InvalidModuleGradeException {
         float cap;
         switch (grade) {
-        case "A+":
-            cap = 5.0F;
-            break;
+        case "A+":     // Fallthrough
         case "A":
             cap = 5.0F;
             break;

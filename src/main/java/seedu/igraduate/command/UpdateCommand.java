@@ -39,7 +39,7 @@ public class UpdateCommand extends Command {
         ui.printUpdateSuccess(targetModule);
     }
 
-    private void extractModuleName(String[] coomandFlags) {
+    private void extractModuleName(String[] commandFlags) {
         try {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
