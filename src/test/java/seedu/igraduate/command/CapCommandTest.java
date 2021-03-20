@@ -94,10 +94,10 @@ public class CapCommandTest {
         String calcCap = "cap";
         Command capCommand = Parser.parseCommand(calcCap);
         Exception exception = assertThrows(InvalidModuleGradeException.class,
-                () -> capCommand.execute(moduleList, ui, storage));
+            () -> capCommand.execute(moduleList, ui, storage));
         assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
-    
+
     @AfterEach
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,

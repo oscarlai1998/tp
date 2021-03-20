@@ -26,7 +26,7 @@ public class ParserTest {
         assertEquals(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, exception.getMessage());
     }
 
-    /****************************************** AddCommand tests *************************************************/
+    /****************************************** AddCommand tests. *************************************************/
     @Test
     void createAddCommand_appropriateParameters_success() 
             throws InvalidCommandException, InvalidModuleTypeException,
@@ -70,7 +70,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
-    /****************************************** DeleteCommand tests *************************************************/
+    /****************************************** DeleteCommand tests. *************************************************/
     @Test
     void createDeleteCommand_appropriateParameters_success()
             throws InvalidCommandException, InvalidModuleTypeException, 
@@ -97,7 +97,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
-    /****************************************** DoneCommand tests *************************************************/
+    /****************************************** DoneCommand tests. *************************************************/
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
@@ -130,7 +130,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
-    /****************************************** ProgressCommand tests *************************************************/
+    /****************************************** ProgressCommand tests. ************************************************/
     @Test
     void createProgressCommand_appropriateParameters_success() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
@@ -156,7 +156,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
-    /****************************************** ListCommand tests *************************************************/
+    /****************************************** ListCommand tests. *************************************************/
     @Test
     void createListCommand_appropriateParameters_success() 
             throws InvalidCommandException, InvalidModuleTypeException, 
@@ -183,7 +183,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
-    /****************************************** CapCommand tests *************************************************/
+    /****************************************** CapCommand tests. *************************************************/
     @Test
     void createCapCommand_appropriateParameters_success()
             throws InvalidCommandException, InvalidModuleTypeException,
@@ -196,7 +196,7 @@ public class ParserTest {
     void createCapCommand_tooManyParameters_exceptionThrow() {
         String line = "cap now";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
                 exception.getMessage());
     }
@@ -205,7 +205,7 @@ public class ParserTest {
     void createCapCommand_extraFlag_exceptionThrown() {
         String line = "cap -t";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
-                () -> Parser.parseCommand(line));
+            () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
                 exception.getMessage());
     }
