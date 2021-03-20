@@ -159,6 +159,11 @@ public class Ui {
         System.out.println("  " + module);
     }
 
+    public void printUpdateSuccess(Module module) {
+        System.out.println("Nice! I've updated this module:");
+        System.out.println("  " + module);
+    }
+
     /**
      * Displays message if module list is empty. 
      */
