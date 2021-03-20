@@ -19,6 +19,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 
 import seedu.igraduate.module.Module;
 
@@ -60,9 +61,11 @@ public class DoneCommandTest {
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,
             ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException  {
+            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
+                preRequisites, untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "Done CS1010 -g A";
         Command doneCommand = Parser.parseCommand(line);

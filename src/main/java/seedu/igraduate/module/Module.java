@@ -13,6 +13,7 @@ public abstract class Module {
     private String status;
     private String grade;
     private ArrayList<String> preRequisites;
+    private ArrayList<String> untakenPreRequisites;
     private ArrayList<String> requiredByModules;
 
     /**
@@ -23,16 +24,18 @@ public abstract class Module {
      * @param credit number of modular credits. 
      * @param status status of completion (tick for completed, cross for uncompleted). 
      * @param grade grade attained for the module, only applicable is status is done. 
-     * @param preRequisites prerequisites required for the module. 
+     * @param preRequisites prerequisites required for the module.
+     * @param untakenPreRequisites pre-requisite modules not taken yet.
      */
     public Module(String code, String name, double credit, String status, String grade,
-                  ArrayList<String> preRequisites) {
+                  ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
         setCode(code);
         setName(name);
         setCredit(credit);
         setStatus(status);
         setGrade(grade);
         setPreRequisites(preRequisites);
+        setUntakenPreRequisites(untakenPreRequisites);
         setRequiredByModules(new ArrayList<>());
     }
 
@@ -58,6 +61,10 @@ public abstract class Module {
 
     public void setPreRequisites(ArrayList<String> preRequisites) {
         this.preRequisites = preRequisites;
+    }
+
+    public void setUntakenPreRequisites(ArrayList<String> untakenPreRequisites) {
+        this.untakenPreRequisites = untakenPreRequisites;
     }
 
     public void setRequiredByModules(ArrayList<String> requiredByModules) {
@@ -95,12 +102,20 @@ public abstract class Module {
         return preRequisites;
     }
 
+    public ArrayList<String> getUntakenPreRequisites() {
+        return untakenPreRequisites;
+    }
+
     public ArrayList<String> getRequiredByModules() {
         return requiredByModules;
     }
 
-    public void removePreRequisites(String moduleCode) {
-        preRequisites.remove(moduleCode);
+    public void removeUntakenPreRequisite(String moduleCode) {
+        untakenPreRequisites.remove(moduleCode);
+    }
+
+    public void removeRequredByModule(String moduleCode) {
+        requiredByModules.remove(moduleCode);
     }
 
     /**

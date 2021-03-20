@@ -14,11 +14,12 @@ public class CoreModule extends Module {
      * @param credit number of modular credits. 
      * @param status status of completion (tick for completed, cross for uncompleted). 
      * @param grade grade attained for the module, only applicable is status is done. 
-     * @param preRequisites prerequisites required for the module. 
+     * @param preRequisites prerequisites required for the module.
+     * @param untakenPreRequisites pre-requisite modules not taken yet.
      */
     public CoreModule(String code, String name, double credit, String status, String grade,
-                      ArrayList<String> preRequisites) {
-        super(code, name, credit, status, grade, preRequisites);
+                      ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
+        super(code, name, credit, status, grade, preRequisites, untakenPreRequisites);
     }
 
     @Override

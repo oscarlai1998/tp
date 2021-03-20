@@ -10,6 +10,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 
 /**
  * Parent class for more specific command child class.
@@ -27,10 +28,13 @@ public abstract class Command {
      * @throws InvalidModuleTypeException If the module type is invalid.
      * @throws ModularCreditExceedsLimitException If the total completed modular credits exceed 160.
      * @throws ExistingModuleException If the module to be added already exists in module list.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
+     * @throws UnableToDeletePrereqModuleException If module is a pre-requisite module for other modules.
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
         throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
-            ModularCreditExceedsLimitException, ExistingModuleException, PrerequisiteNotFoundException;
+            ModularCreditExceedsLimitException, ExistingModuleException, PrerequisiteNotFoundException,
+            UnableToDeletePrereqModuleException;
 
     /**
      * Returns a flag indicating whether the program should terminate after execution of current command.
