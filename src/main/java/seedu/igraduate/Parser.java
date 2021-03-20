@@ -362,9 +362,9 @@ public class Parser {
                 String type = commandFlags[i + 1].toLowerCase().trim();
                 assert type.length() > 0 : "Module type should not be empty.";
                 switch (type) {
-                case "ue":
-                case "ge":
-                case "math":
+                case "ue":         // fallthrough
+                case "ge":         // fallthrough
+                case "math":       // fallthrough
                 case "core":
                     return type;
                 default:
@@ -438,9 +438,9 @@ public class Parser {
             throws IncorrectParameterCountException {
         String scope = commandFlags[1].trim().toLowerCase();
         switch (scope) {
-        case "all":
-        case "complete":
-        case "incomplete":
+        case "all":        // fallthrough
+        case "complete":   // fallthrough
+        case "incomplete": // fallthrough
             return scope;
         default:
             throw new IncorrectParameterCountException();
