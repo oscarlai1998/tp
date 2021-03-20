@@ -41,10 +41,13 @@ public class ModuleList {
     }
 
     /**
-     * Adds new module to the module storage if not already exists.
+     * Adds new module to the module storage if not already exists and pre-requisite
+     * modules exists.
      *
      * @param module Module to be added into the module list.
      * @throws ExistingModuleException If the new module already exists.
+     * @throws ModuleNotFoundException If module code is not found in module list.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
      */
     public void add(Module module) throws ExistingModuleException, ModuleNotFoundException,
             PrerequisiteNotFoundException {
@@ -57,6 +60,12 @@ public class ModuleList {
         modules.add(module);
     }
 
+    /**
+     * Check if the pre-requisite modules exists in the current module list.
+     *
+     * @param preRequisites ArrayList containing the pre-requisite module codes for module to be added.
+     * @return Boolean value indicating whether all the pre-requisite modules exist.
+     */
     public boolean checkPreRequisitesAvailability(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
             if (getModuleIndex(preRequisite) == DEFAULT_INDEX) {
@@ -66,6 +75,13 @@ public class ModuleList {
         return true;
     }
 
+    /**
+     * Add the current module code to pre-requisite modules as requiredBy module.
+     *
+     * @param module Module to be added to module list.
+     * @throws ModuleNotFoundException If module does not exists.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
+     */
     public void addModuleRequiredBy(Module module) throws ModuleNotFoundException,
             PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = module.getPreRequisites();
@@ -95,6 +111,7 @@ public class ModuleList {
      * Marks the specified module as taken.
      *
      * @param module Module to be marked as taken.
+     * @throws ModuleNotFoundException If module is not found in module list.
      */
     public void markAsTaken(Module module) throws ModuleNotFoundException {
         module.setStatus("taken");
@@ -103,6 +120,13 @@ public class ModuleList {
         removeRequiredByModulePrerequisites(moduleCode, requiredBy);
     }
 
+    /**
+     * Remove taken module from modules required it as pre-requisite.
+     *
+     * @param moduleCode Module code of taken module.
+     * @param requiredByModules ArrayList of modules required taken module as pre-requisite.
+     * @throws ModuleNotFoundException If requiredBy module does not exists in module list.
+     */
     public void removeRequiredByModulePrerequisites(String moduleCode, ArrayList<String> requiredByModules)
             throws ModuleNotFoundException {
         for (String requiredByModule : requiredByModules) {

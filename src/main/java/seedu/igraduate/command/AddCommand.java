@@ -28,6 +28,7 @@ public class AddCommand extends Command {
     protected String moduleName;
     protected String moduleType;
     protected Double moduleCredits;
+    protected ArrayList<String> preRequisites;
 
     private static final String CORE = "core";
     private static final String UE = "ue";
@@ -36,17 +37,17 @@ public class AddCommand extends Command {
     private static final String DEFAULT_STATUS = "not taken";
     private static final String DEFAULT_GRADE = "nil";
 
-    private ArrayList<String> preRequisites;
-
     private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
 
     /**
-     * Child class of the command class that contains the module name, code, type and credits to be added. 
+     * Child class of the command class that contains the module name, code, type, credits
+     * and pre-requisite modules to be added.
      * 
      * @param moduleCode module code. 
      * @param moduleName module name, customised according to user input. 
      * @param moduleType module type (core, ue, ge or math). 
-     * @param moduleCredits number of credits for the module. 
+     * @param moduleCredits number of credits for the module.
+     * @param preRequisites ArrayList containing all pre-requisite modules.
      */
     public AddCommand(String moduleCode, String moduleName, String moduleType, double moduleCredits,
                       ArrayList<String> preRequisites) {
@@ -75,6 +76,8 @@ public class AddCommand extends Command {
      * @throws SaveModuleFailException If storage fail to save module data to disk.
      * @throws InvalidModuleTypeException If the module type is invalid.
      * @throws ExistingModuleException If the module to be added already exists in module list.
+     * @throws ModuleNotFoundException If the module code is not found.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
