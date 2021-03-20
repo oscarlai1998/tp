@@ -46,8 +46,8 @@ public class ModuleList {
      * @param module Module to be added into the module list.
      * @throws ExistingModuleException If the new module already exists.
      */
-    public void add(Module module) throws ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException {
+    public void add(Module module)
+            throws ExistingModuleException, ModuleNotFoundException, PrerequisiteNotFoundException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
             assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
@@ -66,8 +66,8 @@ public class ModuleList {
         return true;
     }
 
-    public void addModuleRequiredBy(Module module) throws ModuleNotFoundException,
-            PrerequisiteNotFoundException {
+    public void addModuleRequiredBy(Module module) 
+            throws ModuleNotFoundException, PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = module.getPreRequisites();
 
         if (checkPreRequisitesAvailability(preRequisites)) {
@@ -155,8 +155,7 @@ public class ModuleList {
      * @return The retrieved module based on specified module code.
      * @throws ModuleNotFoundException If the module specified is not in the list.
      */
-    public Module getByCode(String moduleCode) 
-            throws ModuleNotFoundException {
+    public Module getByCode(String moduleCode) throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
         if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
@@ -182,6 +181,21 @@ public class ModuleList {
             }
         }
         return index;
+    }
+
+    /**
+     * Retrieves the module in module list.
+     *
+     * @param moduleCode Module code of module.
+     * @return The retrieved module index on specified module code.
+     */
+    public Module getModule(String moduleCode) throws ModuleNotFoundException {
+        for (int i = 0; i < modules.size(); i++) {
+            if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
+                return modules.get(i);
+            }
+        }
+        throw new ModuleNotFoundException();
     }
 
     /**
@@ -215,8 +229,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
-                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
-                       + "of done modules";
+                assert totalCompletedMCs >= module.getCredit()
+                        : "Completed MCs should be more or equal to credits" + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }

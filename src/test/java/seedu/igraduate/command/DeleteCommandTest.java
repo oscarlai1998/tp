@@ -19,6 +19,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,7 +55,7 @@ public class DeleteCommandTest {
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,
             ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException  {
+            PrerequisiteNotFoundException, ModuleNotCompleteException {
         ArrayList<String> preRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
         addCommand.execute(moduleList, ui, storage);

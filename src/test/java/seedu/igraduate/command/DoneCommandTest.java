@@ -19,7 +19,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
-
+import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.module.Module;
 
 import java.io.ByteArrayOutputStream;
@@ -60,7 +60,7 @@ public class DoneCommandTest {
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,
             ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException  {
+            PrerequisiteNotFoundException, ModuleNotCompleteException {
         ArrayList<String> preRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
         addCommand.execute(moduleList, ui, storage);
