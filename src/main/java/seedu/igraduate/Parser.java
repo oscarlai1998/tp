@@ -132,15 +132,16 @@ public class Parser {
 
     /**
      * Extracts relevant parameters and creates new instance of AddCommand class to execute.
-     * Format: "Add [module name] -c [module code] -t [module type] -mc [modular credits]"
+     * Format: "Add [module name] -c [module code] -t [module type] -mc [modular credits] -p [pre-requisites]"
      *
      * @param commandParameters parameters of user input, excluding command flags.
      * @param commandFlags      flags of commands from user input.
      * @return new instance of AddCommand class.
-     * @throws InvalidCommandException          If input does not contain a valid
-     *                                          command.
+     * @throws InvalidCommandException          If input does not contain a valid command.
      * @throws IncorrectParameterCountException If the command input does not
      *                                          contain the right parameters.
+     * @throws InputNotNumberException          If the expected input is not number.
+     * @throws InvalidModuleTypeException       If the specified module type is not valid.
      */
     public static Command createAddCommand(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
@@ -163,12 +164,14 @@ public class Parser {
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
         ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
+        ArrayList<String> untakenPreRequisites = extractPreRequisites(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
 
         if (!isModuleCodeValid(moduleCode) || !isModuleCodeValid(preRequisites)) {
             throw new InvalidCommandException();
         }
-        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites);
+
+        return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites, untakenPreRequisites);
     }
 
     /**
@@ -431,13 +434,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts pre-requisite module codes from user input.
+     *
+     * @param commandFlags flags of commands from user input.
+     * @return ArrayList containing extracted pre-requisite module codes.
+     */
     public static ArrayList<String> extractPreRequisites(String[] commandFlags) {
         ArrayList<String> preRequisites = new ArrayList<>();
         List<String> moduleCodes;
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-p")) {
                 String trimmedCommandFlag = commandFlags[i + 1].trim();
-                moduleCodes = Arrays.asList(trimmedCommandFlag.split(","));
+                String[] splitPreRequisites = trimmedCommandFlag.split(",");
+                moduleCodes = Arrays.asList(splitPreRequisites);
                 for (String moduleCode : moduleCodes) {
                     preRequisites.add(moduleCode.toUpperCase());
                 }

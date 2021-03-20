@@ -5,7 +5,9 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 
 import seedu.igraduate.module.Module;
 
@@ -37,10 +39,13 @@ public class DeleteCommand extends Command {
      * @param storage Storage for storing module list data.
      * @throws ModuleNotFoundException If the module specified does not exists.
      * @throws SaveModuleFailException If module data fails to save to file.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
+     * @throws UnableToDeletePrereqModuleException If module is a pre-requisite module for other modules.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws ModuleNotFoundException, SaveModuleFailException {
+            throws ModuleNotFoundException, SaveModuleFailException, PrerequisiteNotFoundException,
+            UnableToDeletePrereqModuleException {
         LOGGER.log(Level.INFO, "Executing delete command...");
         try {
             Module module = moduleList.getByCode(moduleCode);

@@ -19,6 +19,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 
 import seedu.igraduate.module.Module;
 
@@ -46,7 +47,9 @@ public class AddCommandTest {
             SaveModuleFailException, ExistingModuleException,
             ModuleNotFoundException, PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites);
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
+                preRequisites, untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "add Programming -mc 4 -t core -c cs1010";
         Command testAddCommand = Parser.parseCommand(line);
@@ -60,7 +63,8 @@ public class AddCommandTest {
             throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException,
             ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
-            ModularCreditExceedsLimitException, PrerequisiteNotFoundException {
+            ModularCreditExceedsLimitException, PrerequisiteNotFoundException,
+            UnableToDeletePrereqModuleException {
         String line = "add Computer Org -mc 4 -t core -c cs2100";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
