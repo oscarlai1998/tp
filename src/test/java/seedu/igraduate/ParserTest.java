@@ -6,10 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.igraduate.command.AddCommand;
+import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
-import seedu.igraduate.command.DoneCommand;
-import seedu.igraduate.command.DeleteCommand;
+import seedu.igraduate.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
@@ -25,6 +26,7 @@ public class ParserTest {
         assertEquals(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, exception.getMessage());
     }
 
+    /****************************************** AddCommand tests *************************************************/
     @Test
     void createAddCommand_appropriateParameters_success() 
             throws InvalidCommandException, InvalidModuleTypeException,
@@ -68,6 +70,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
+    /****************************************** DeleteCommand tests *************************************************/
     @Test
     void createDeleteCommand_appropriateParameters_success()
             throws InvalidCommandException, InvalidModuleTypeException, 
@@ -94,6 +97,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
+    /****************************************** DoneCommand tests *************************************************/
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
@@ -126,6 +130,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
+    /****************************************** ProgressCommand tests *************************************************/
     @Test
     void createProgressCommand_appropriateParameters_success() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException {
@@ -151,6 +156,7 @@ public class ParserTest {
                 exception.getMessage());
     }
 
+    /****************************************** ListCommand tests *************************************************/
     @Test
     void createListCommand_appropriateParameters_success() 
             throws InvalidCommandException, InvalidModuleTypeException, 
@@ -174,6 +180,33 @@ public class ParserTest {
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+                exception.getMessage());
+    }
+
+    /****************************************** CapCommand tests *************************************************/
+    @Test
+    void createCapCommand_appropriateParameters_success()
+            throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException {
+        String line = "cap";
+        assertEquals(CapCommand.class, Parser.parseCommand(line).getClass());
+    }
+
+    @Test
+    void createCapCommand_tooManyParameters_exceptionThrow() {
+        String line = "cap now";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+                () -> Parser.parseCommand(line));
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
+                exception.getMessage());
+    }
+
+    @Test
+    void createCapCommand_extraFlag_exceptionThrown() {
+        String line = "cap -t";
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
+                () -> Parser.parseCommand(line));
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
                 exception.getMessage());
     }
 }

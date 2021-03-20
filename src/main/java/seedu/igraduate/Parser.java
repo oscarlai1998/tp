@@ -35,6 +35,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_CAP = "cap";
 
+
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
     private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
@@ -66,7 +67,6 @@ public class Parser {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
-
         LOGGER.log(Level.INFO, String.format("User input: %s", line));
 
         // Splits into 2 String elements:
@@ -108,10 +108,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Split the user input into maximum of 2 parts, with '-' as delimiter.
+     *
+     * @param line user input.
+     * @return String array of user input split up.
+     */
     private static String[] getCommand(String line) {
         return line.split("\\s+(?=-)", 2);
     }
 
+    /**
+     * Obtain a string array of length 2, with the first index containing name of command
+     * and second index containing the first parameter.
+     *
+     * @param commands User input split up using getCommand().
+     * @return String array of command and first parameter separated.
+     */
     private static String[] getCommandParameters(String[] commands) {
         return commands[0].split("\\s+", 2);
     }
@@ -458,12 +471,12 @@ public class Parser {
     }
 
     private static boolean isModuleCodeValid(String moduleCode) {
-        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", moduleCode);
+        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", moduleCode);
     }
 
     private static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
-            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", preRequisite)) {
+            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", preRequisite)) {
                 return false;
             }
         }
