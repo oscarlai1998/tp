@@ -282,6 +282,7 @@ public class Parser {
 
         return new CapCommand();
     }
+
     /**
      * Creates new instance of ExitCommand class to execute.
      *
@@ -457,6 +458,5 @@ public class Parser {
             }
         }
         return true;
-
     }
 }

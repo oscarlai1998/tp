@@ -102,6 +102,7 @@ public class Ui {
             }
         }
     }
+
     /**
      * Prints the module information. 
      * 
@@ -191,7 +192,7 @@ public class Ui {
      *
      * @param cap CAP of user.
      */
-    public void printCAP(double cap) {
+    public void printCap(double cap) {
         System.out.println(String.format(CAP_MESSAGE, cap));
     }
 
