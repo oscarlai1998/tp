@@ -4,7 +4,15 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.SaveModuleFailException;
+
 
 /**
  * Parent class for more specific command child class.
