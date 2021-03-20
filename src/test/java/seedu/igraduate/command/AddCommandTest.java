@@ -10,16 +10,17 @@ import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.InvalidModuleTypeException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.PrerequisiteNotFoundException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
 
 import seedu.igraduate.module.Module;
 
@@ -64,7 +65,7 @@ public class AddCommandTest {
             InputNotNumberException, IncorrectParameterCountException,
             ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
             ModularCreditExceedsLimitException, PrerequisiteNotFoundException,
-            UnableToDeletePrereqModuleException {
+            UnableToDeletePrereqModuleException, InvalidModuleGradeException {
         String line = "add Computer Org -mc 4 -t core -c cs2100";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
