@@ -5,13 +5,16 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
 import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
+
 
 /**
  * Parent class for more specific command child class. Contains basic
@@ -38,11 +41,14 @@ public abstract class Command {
      * @throws NumberFormatException              If the module credit failed to
      *                                            convert into integer.
      * @throws ModuleNotCompleteException         If the module is incomplete.
+     * @throws InvalidModuleGradeException        If the module grade is invalid.
+     * @throws UnableToDeletePrereqModuleException
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
             ModularCreditExceedsLimitException, ExistingModuleException, PrerequisiteNotFoundException,
-            NumberFormatException, InputNotNumberException, ModuleNotCompleteException;
+            NumberFormatException, InputNotNumberException, ModuleNotCompleteException, 
+            InvalidModuleGradeException, UnableToDeletePrereqModuleException;
 
     /**
      * Returns a flag indicating whether the program should terminate after

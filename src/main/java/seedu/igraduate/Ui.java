@@ -22,9 +22,11 @@ public class Ui {
     public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
     public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
-    public static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
+    public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to take:\n";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
+    public static final String PREREQUISITES_MESSAGE = "List of pre-requisites to take %s: ";
+    public static final String CAP_MESSAGE = "Current CAP: %.2f";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -74,6 +76,34 @@ public class Ui {
     }
 
     /**
+     * Prints the modules in the array list that user has taken.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printCompletedList(ArrayList<Module> modules) {
+        System.out.println(MODULES_TAKEN_MESSAGE);
+        for (Module module : modules) {
+            if (module.isDone()) {
+                printModuleDetails(module);
+            }
+        }
+    }
+
+    /**
+     * Prints the modules in the array list that user has not taken.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printIncompletedList(ArrayList<Module> modules) {
+        System.out.println(MODULES_LEFT_MESSAGE);
+        for (Module module : modules) {
+            if (!module.isDone()) {
+                printModuleDetails(module);
+            }
+        }
+    }
+
+    /**
      * Prints the module information. 
      * 
      * @param module array list containing the modules. 
@@ -90,7 +120,23 @@ public class Ui {
      */
     public void printAddedModuleSuccess(Module module) {
         System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getCode(), module.getName(), module.getCredit()));
+        if (module.getPreRequisites().size() > 0) {
+            printPrerequisites(module.getCode(), module.getPreRequisites());
+        }
         System.out.println(module);
+    }
+
+    /**
+     * Prints all prerequisites of a module.
+     *
+     * @param prerequisites array list containing all prerequisites.
+     */
+    public void printPrerequisites(String moduleCode, ArrayList<String> prerequisites) {
+        System.out.print(String.format(PREREQUISITES_MESSAGE, moduleCode));
+        for (int i = 0; i < prerequisites.size() - 1; i++) {
+            System.out.print(prerequisites.get(i) + ", ");
+        }
+        System.out.println(prerequisites.get(prerequisites.size() - 1));
     }
 
     /**
@@ -119,30 +165,6 @@ public class Ui {
     }
 
     /**
-     * Lists all modules (both taken and not taken).
-     */
-    public void printAllModules() {
-        printModulesTakenMessage();
-        printModulesRemainingMessage();
-    }
-
-    /**
-     * Lists all modules that have been taken. 
-     */
-    public void printModulesTakenMessage() {
-        System.out.println(MODULES_TAKEN_MESSAGE);
-        System.out.println(); // Print module names
-    }
-
-    /**
-     * Lists all modules that have not been taken. 
-     */
-    public void printModulesRemainingMessage() {
-        System.out.println(MODULES_LEFT_MESSAGE);
-        System.out.println(); // Print module names
-    }
-
-    /**
      * Displays message if module list is empty. 
      */
     public void printListEmptyMessage() {
@@ -168,6 +190,15 @@ public class Ui {
         }
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
+    }
+
+    /**
+     * Prints CAP of user based on their grades.
+     *
+     * @param cap CAP of user.
+     */
+    public void printCap(double cap) {
+        System.out.println(String.format(CAP_MESSAGE, cap));
     }
 
     /**

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.function.Executable;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.module.GeModule;
 
 import java.util.ArrayList;
@@ -21,8 +22,9 @@ class ModuleListTest {
     void add_module_success() throws ModuleNotFoundException, ExistingModuleException,
             PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
-                4.0, "taken", "A-", preRequisites);
+                4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
         assertEquals("GER1000", modules.getByCode("GER1000").getCode());
     }
@@ -31,8 +33,9 @@ class ModuleListTest {
     void add_module_throwsExistingModuleException() throws ExistingModuleException, ModuleNotFoundException,
             PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
-                4.0, "taken", "A-", preRequisites);
+                4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
 
         assertThrows(ExistingModuleException.class, "The module code"
@@ -40,11 +43,13 @@ class ModuleListTest {
     }
 
     @Test
-    void delete_module_success() throws ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException {
+    void delete_module_success() 
+            throws ExistingModuleException, UnableToDeletePrereqModuleException,
+            PrerequisiteNotFoundException, ModuleNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
-                4.0, "taken", "A-", preRequisites);
+                4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
         modules.delete(geModule);
         assertEquals(0, modules.size());
@@ -64,8 +69,9 @@ class ModuleListTest {
     void get_existingModule_success() throws ModuleNotFoundException, ExistingModuleException,
             PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
-                4.0, "taken", "A-", preRequisites);
+                4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
         assertEquals(geModule, modules.getByCode("GER1000"));
     }
@@ -74,8 +80,9 @@ class ModuleListTest {
     void getByCode_throwsModuleNotFoundException() throws ExistingModuleException, ModuleNotFoundException,
             PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
-                4.0, "taken", "A-", preRequisites);
+                4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
         modules.getByCode("GER1000");
         assertThrows(ModuleNotFoundException.class, "The module code you have entered"
