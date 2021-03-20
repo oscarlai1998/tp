@@ -19,12 +19,12 @@ public class Ui {
             + "--------------------------";
 
     // Messages for successful execution
-    private static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
-    private static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
-    private static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
-    private static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
-    private static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
-    private static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
+    public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
+    public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
+    public static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
+    public static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
+    public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
+    public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -161,7 +161,6 @@ public class Ui {
                 System.out.print("░");
             }
         }
-
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
     }

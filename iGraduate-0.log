@@ -1,0 +1,82 @@
+Mar 20, 2021 5:23:27 PM seedu.igraduate.IGraduate main
+INFO: iGraduate starts.
+Mar 20, 2021 5:23:27 PM seedu.igraduate.IGraduate <init>
+INFO: Initialising iGraduate Ui, Storage and ModuleList components...
+Mar 20, 2021 5:23:27 PM seedu.igraduate.Storage loadModulesFromFile
+INFO: Module data loaded from disk successfully.
+Mar 20, 2021 5:23:27 PM seedu.igraduate.IGraduate <init>
+INFO: All components initialised successfully.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.Parser parseCommand
+INFO: User input: add haha -c cs1234t -mc 4 -t ge -p is2100
+Mar 20, 2021 5:23:28 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to add command.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.Parser createAddCommand
+INFO: Valid parameters for add command.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.command.AddCommand execute
+INFO: Executing add command...
+Mar 20, 2021 5:23:28 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: Creating module...
+Mar 20, 2021 5:23:28 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: End of module creation.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.Storage saveModulesToFile
+INFO: Module data saved to disk successfully.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.command.AddCommand execute
+INFO: Successfully added CS1234T module to module list.
+Mar 20, 2021 5:23:28 PM seedu.igraduate.command.AddCommand execute
+INFO: End of add command execution.
+Mar 20, 2021 5:23:31 PM seedu.igraduate.Parser parseCommand
+INFO: User input: add haha -c cs1234t -mc 4 -t ge -p is2100,cs2345
+Mar 20, 2021 5:23:31 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to add command.
+Mar 20, 2021 5:23:31 PM seedu.igraduate.Parser createAddCommand
+INFO: Valid parameters for add command.
+Mar 20, 2021 5:23:31 PM seedu.igraduate.command.AddCommand execute
+INFO: Executing add command...
+Mar 20, 2021 5:23:31 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: Creating module...
+Mar 20, 2021 5:23:31 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: End of module creation.
+Mar 20, 2021 5:23:31 PM seedu.igraduate.command.AddCommand execute
+WARNING: Failed to add duplicated module to module list.
+seedu.igraduate.exception.ExistingModuleException: The module code already exists.
+	at seedu.igraduate.ModuleList.add(ModuleList.java:54)
+	at seedu.igraduate.command.AddCommand.execute(AddCommand.java:87)
+	at seedu.igraduate.IGraduate.run(IGraduate.java:69)
+	at seedu.igraduate.IGraduate.main(IGraduate.java:83)
+
+Mar 20, 2021 5:23:31 PM seedu.igraduate.command.AddCommand execute
+INFO: End of add command execution.
+Mar 20, 2021 5:23:35 PM seedu.igraduate.Parser parseCommand
+INFO: User input: add haha -c cs43534t -mc 4 -t ge -p is2100,cs2345
+Mar 20, 2021 5:23:35 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to add command.
+Mar 20, 2021 5:23:35 PM seedu.igraduate.Parser createAddCommand
+INFO: Valid parameters for add command.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.Parser parseCommand
+INFO: User input: add haha -c cs4354t -mc 4 -t ge -p is2100,cs2345
+Mar 20, 2021 5:23:39 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to add command.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.Parser createAddCommand
+INFO: Valid parameters for add command.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.command.AddCommand execute
+INFO: Executing add command...
+Mar 20, 2021 5:23:39 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: Creating module...
+Mar 20, 2021 5:23:39 PM seedu.igraduate.command.AddCommand createModuleByType
+INFO: End of module creation.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.Storage saveModulesToFile
+INFO: Module data saved to disk successfully.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.command.AddCommand execute
+INFO: Successfully added CS4354T module to module list.
+Mar 20, 2021 5:23:39 PM seedu.igraduate.command.AddCommand execute
+INFO: End of add command execution.
+Mar 20, 2021 5:23:49 PM seedu.igraduate.Parser parseCommand
+INFO: User input: exit
+Mar 20, 2021 5:23:49 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to exit command.
+Mar 20, 2021 5:23:49 PM seedu.igraduate.Parser createExitCommand
+INFO: Valid parameters for exit command.
+Mar 20, 2021 5:23:49 PM seedu.igraduate.command.ExitCommand execute
+INFO: Exit Command executed!
+Mar 20, 2021 5:23:49 PM seedu.igraduate.IGraduate main
+INFO: iGraduate exits.

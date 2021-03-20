@@ -4,13 +4,17 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Handles list command.
  */
 public class ListCommand extends Command {
+    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
 
     /**
-     * Print list of all modules.
+     * Prints list of all modules.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -18,11 +22,16 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
+        LOGGER.log(Level.INFO, "Executing list command...");
         if (moduleList.isEmpty()) {
+            assert moduleList.isEmpty() : "List should be empty";
+            LOGGER.log(Level.INFO, "List is empty.");
             ui.printListEmptyMessage();
         } else {
             ui.printEntireList(moduleList.getModules());
+            LOGGER.log(Level.INFO, "Successfully printed module list.");
         }
+        LOGGER.log(Level.INFO, "End of list command execution.");
     }
 
     /**

@@ -13,6 +13,7 @@ public abstract class Module {
     private String status;
     private String grade;
     private ArrayList<String> preRequisites;
+    private ArrayList<String> requiredByModules;
 
     /**
      * Creates an instance of a module based on the corresponding module type. 
@@ -32,6 +33,7 @@ public abstract class Module {
         setStatus(status);
         setGrade(grade);
         setPreRequisites(preRequisites);
+        setRequiredByModules(new ArrayList<>());
     }
 
     public void setCode(String code) {
@@ -58,6 +60,10 @@ public abstract class Module {
         this.preRequisites = preRequisites;
     }
 
+    public void setRequiredByModules(ArrayList<String> requiredByModules) {
+        this.requiredByModules = requiredByModules;
+    }
+
     public String getCode() {
         return code;
     }
@@ -72,6 +78,29 @@ public abstract class Module {
 
     public String getStatus() {
         return status;
+    }
+
+    public boolean isDone() {
+        String status = getStatus();
+        if (status.equals("taken")) {
+            return true;
+        } else if (status.equals("not taken")) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    public ArrayList<String> getPreRequisites() {
+        return preRequisites;
+    }
+
+    public ArrayList<String> getRequiredByModules() {
+        return requiredByModules;
+    }
+
+    public void removePreRequisites(String moduleCode) {
+        preRequisites.remove(moduleCode);
     }
 
     /**

@@ -3,6 +3,7 @@ package seedu.igraduate;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.module.Module;
 import seedu.igraduate.module.MathModule;
 import seedu.igraduate.module.CoreModule;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  * Handles underlying operations on modules ArrayList.
  */
 public class ModuleList {
+
     /**
      * ArrayList that stores all the modules data.
      */
@@ -44,12 +46,40 @@ public class ModuleList {
      * @param module Module to be added into the module list.
      * @throws ExistingModuleException If the new module already exists.
      */
-    public void add(Module module) throws ExistingModuleException {
+    public void add(Module module) throws ExistingModuleException, ModuleNotFoundException,
+            PrerequisiteNotFoundException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
+            assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
             throw new ExistingModuleException();
         }
+        addModuleRequiredBy(module);
         modules.add(module);
+    }
+
+    public boolean checkPreRequisitesAvailability(ArrayList<String> preRequisites) {
+        for (String preRequisite : preRequisites) {
+            if (getModuleIndex(preRequisite) == DEFAULT_INDEX) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void addModuleRequiredBy(Module module) throws ModuleNotFoundException,
+            PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = module.getPreRequisites();
+
+        if (checkPreRequisitesAvailability(preRequisites)) {
+            for (String preRequisite : preRequisites) {
+                Module requiredModule = getByCode(preRequisite);
+                ArrayList<String> requiredBy = requiredModule.getRequiredByModules();
+                requiredBy.add(module.getCode());
+                requiredModule.setRequiredByModules(requiredBy);
+            }
+        } else {
+            throw new PrerequisiteNotFoundException();
+        }
     }
 
     /**
@@ -66,8 +96,19 @@ public class ModuleList {
      *
      * @param module Module to be marked as taken.
      */
-    public void markAsTaken(Module module) {
+    public void markAsTaken(Module module) throws ModuleNotFoundException {
         module.setStatus("taken");
+        String moduleCode = module.getCode();
+        ArrayList<String> requiredBy = module.getRequiredByModules();
+        removeRequiredByModulePrerequisites(moduleCode, requiredBy);
+    }
+
+    public void removeRequiredByModulePrerequisites(String moduleCode, ArrayList<String> requiredByModules)
+            throws ModuleNotFoundException {
+        for (String requiredByModule : requiredByModules) {
+            Module module = getByCode(requiredByModule);
+            module.removePreRequisites(moduleCode);
+        }
     }
 
     /**
@@ -99,7 +140,7 @@ public class ModuleList {
     }
 
     /**
-     * Check if the current module list is empty.
+     * Checks if the current module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */
@@ -117,10 +158,10 @@ public class ModuleList {
     public Module getByCode(String moduleCode) 
             throws ModuleNotFoundException {
         int moduleIndex = getModuleIndex(moduleCode);
-
         if (moduleIndex == DEFAULT_INDEX) {
             throw new ModuleNotFoundException();
         }
+        assert moduleIndex != DEFAULT_INDEX : "Module code does not exists.";
 
         return modules.get(moduleIndex);
     }
@@ -140,7 +181,6 @@ public class ModuleList {
                 break;
             }
         }
-
         return index;
     }
 
@@ -161,6 +201,8 @@ public class ModuleList {
         } else if (module instanceof ElectiveModule) {
             moduleType = "Elective";
         }
+        assert !moduleType.equals("Undefined") : "Module type is not valid.";
+
         return moduleType;
     }
 
@@ -173,6 +215,8 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
+                assert totalCompletedMCs >= module.getCredit() : "Completed MCs should be more or equal to credits"
+                       + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
         }
