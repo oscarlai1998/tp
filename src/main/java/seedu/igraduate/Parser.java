@@ -292,6 +292,15 @@ public class Parser {
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
+    /**
+     * Extracts relevant parameters and creates an instance of UpdateCommand to execute. 
+     * Format: "update [module code] [-g|-mc|-n] [value]"
+     * 
+     * @param commandParameters parameters of user input, excluding command flags. 
+     * @param commandFlags flags of commands from user input. 
+     * @return new instance of UpdateCommand class. 
+     * @throws IncorrectParameterCountException if parameter count is not correct. 
+     */
     public static Command createUpdateCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_UPDATE_PARAMETER_LENGTH);
@@ -516,10 +525,22 @@ public class Parser {
         return preRequisites;
     }
 
+    /**
+     * Checks if the module code is valid according to school codes. 
+     * 
+     * @param moduleCode module code to be checked. 
+     * @return True if the code is valid, false otherwise. 
+     */
     private static boolean isModuleCodeValid(String moduleCode) {
         return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", moduleCode);
     }
 
+    /**
+     * Checks if the module code is valid according to school codes. 
+     * 
+     * @param preRequisites list of all the module codes to be checked. 
+     * @return True if all the codes are valid, false otherwise. 
+     */
     private static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
             if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", preRequisite)) {
