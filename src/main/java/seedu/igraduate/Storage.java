@@ -59,7 +59,7 @@ public class Storage {
     /**
      * Instantiates the storage object. 
      */
-    private Storage (File filePath) {
+    private Storage(File filePath) {
         this.filePath = filePath;
     }
 
