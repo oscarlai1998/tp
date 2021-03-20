@@ -22,7 +22,7 @@ public class DeleteCommandTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
-    private Storage storage = new Storage(FILEPATH);
+    private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
 

@@ -12,6 +12,11 @@ import java.util.logging.Logger;
  */
 public class ListCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
+    private String scope;
+
+    public ListCommand(String scope) {
+        this.scope = scope;
+    }
 
     /**
      * Prints list of all modules.

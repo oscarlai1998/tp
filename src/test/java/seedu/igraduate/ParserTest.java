@@ -155,13 +155,13 @@ public class ParserTest {
     void createListCommand_appropriateParameters_success() 
             throws InvalidCommandException, InvalidModuleTypeException, 
             InputNotNumberException, IncorrectParameterCountException {
-        String line = "list";
+        String line = "list complete";
         assertEquals(ListCommand.class, Parser.parseCommand(line).getClass());
     }
 
     @Test
     void createListCommand_tooManyParameters_exception() {
-        String line = "list all";
+        String line = "list all hoi";
         Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
