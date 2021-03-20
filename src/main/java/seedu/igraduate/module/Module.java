@@ -71,6 +71,10 @@ public abstract class Module {
         this.requiredByModules = requiredByModules;
     }
 
+    public String getGrade() {
+        return grade;
+    }
+
     public String getCode() {
         return code;
     }
