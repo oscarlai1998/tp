@@ -36,7 +36,7 @@ public class DoneCommandTest {
             + System.lineSeparator()
             + "  %s"
             + System.lineSeparator();
-    private Storage storage = new Storage(FILEPATH);
+    private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
 

@@ -30,8 +30,9 @@ import java.util.logging.Logger;
  * A storage object corresponds to the saving and loading of file.  
  */
 public class Storage {
-    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
+    private static Storage storage = null;
     private File filePath;
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
     // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
@@ -41,7 +42,24 @@ public class Storage {
             .registerSubtype(GeModule.class, "ge")
             .registerSubtype(MathModule.class, "math");
 
-    public Storage(File filePath) {
+    /**
+     * Creates a Singleton of Storage, which should only have one instance.
+     * If storage has not been instantiated, create. 
+     * 
+     * @param filePath File opened for read. 
+     * @return Storage object. 
+     */
+    public static Storage getStorage(File filePath) {
+        if (storage == null) {
+            storage = new Storage(filePath);
+        }
+        return storage;
+    }
+
+    /**
+     * Instantiates the storage object. 
+     */
+    private Storage (File filePath) {
         this.filePath = filePath;
     }
 
