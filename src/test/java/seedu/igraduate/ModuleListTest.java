@@ -43,8 +43,9 @@ class ModuleListTest {
     }
 
     @Test
-    void delete_module_success() throws ExistingModuleException, UnableToDeletePrereqModuleException,
-            PrerequisiteNotFoundException {
+    void delete_module_success() 
+            throws ExistingModuleException, UnableToDeletePrereqModuleException,
+            PrerequisiteNotFoundException, ModuleNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = preRequisites;
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",

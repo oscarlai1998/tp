@@ -7,6 +7,7 @@ import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
+import seedu.igraduate.command.UpdateCommand;
 import seedu.igraduate.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -32,6 +33,7 @@ public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_PROGRESS = "progress";
     private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_CAP = "cap";
 
@@ -44,6 +46,8 @@ public class Parser {
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
+    private static final int COMMAND_UPDATE_PARAMETER_LENGTH = 2;
+    private static final int COMMAND_UPDATE_FLAG_LENGTH = 2;
     private static final int COMMAND_CAP_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
@@ -96,6 +100,9 @@ public class Parser {
         case COMMAND_DONE:
             LOGGER.log(Level.INFO, "Input parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
+        case COMMAND_UPDATE:
+            LOGGER.log(Level.INFO, "Input parsed to udpate command.");
+            return createUpdateCommand(commandParameters, commandFlags);
         case COMMAND_CAP:
             LOGGER.log(Level.INFO, "Input parsed to cap command.");
             return createCapCommand(commandParameters, commandFlags);
@@ -272,6 +279,19 @@ public class Parser {
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
+    public static Command createUpdateCommand(String[] commandParameters, String[] commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_UPDATE_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.length < COMMAND_UPDATE_FLAG_LENGTH);
+
+        if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters.");
+            throw new IncorrectParameterCountException();
+        }
+
+        return new UpdateCommand(commandParameters[1], commandFlags);
+    }
+
     public static Command createCapCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_CAP_LENGTH);
@@ -374,9 +394,6 @@ public class Parser {
      */
     public static double extractModuleCredits(String[] commandFlags)
             throws InputNotNumberException, InvalidCommandException {
-        assert commandFlags.length == COMMAND_ADD_FLAG_LENGTH
-                || commandFlags.length == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
-                : "extractModuleCredits should only be called for add command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-mc")) {
                 assert commandFlags[i + 1].trim().length() > 0 : "Modular credits field should not be empty.";
@@ -401,8 +418,6 @@ public class Parser {
      */
     public static String extractModuleGrade(String[] commandFlags) 
             throws InvalidCommandException {
-        assert commandFlags.length == COMMAND_DONE_FLAG_LENGTH : "extractModuleGrade should only be "
-                + "called for done command.";
         for (int i = 0; i < commandFlags.length; i++) {
             if (commandFlags[i].equals("-g")) {
                 assert commandFlags[i + 1].length() > 0 : "Grade should not be empty.";
@@ -411,6 +426,37 @@ public class Parser {
         }
         LOGGER.warning("Missing module grade parameter.");
         throw new InvalidCommandException();
+    }
+
+    public static String extractModuleName(String[] commandFlags) 
+            throws InvalidCommandException {
+        int start = -1;
+        int end = commandFlags.length;
+        
+        for (int i = 0; i < commandFlags.length; i++) {
+            if (commandFlags[i].equals("-n")) {
+                start = i + 1;
+                break;
+            }
+        }
+
+        if (start == -1) {
+            LOGGER.warning("Missing module name parameter.");
+            throw new InvalidCommandException();
+        }
+
+        for (int i = start; i < commandFlags.length; i++) {
+            if (commandFlags[i].matches("-[a-z]{1,2}")) {
+                end = i;
+                break;
+            }
+        }
+
+        String moduleName = "";
+        for (int i = start; i < end; i++) {
+            moduleName = moduleName + " " + commandFlags[i];
+        }
+        return moduleName.trim();
     }
 
     /**

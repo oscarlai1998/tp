@@ -40,7 +40,7 @@ public abstract class Module {
     }
 
     public void setCode(String code) {
-        this.code = code;
+        this.code = code.toUpperCase();
     }
 
     public void setName(String name) {
@@ -56,7 +56,7 @@ public abstract class Module {
     }
 
     public void setGrade(String grade) {
-        this.grade = grade;
+        this.grade = grade.toUpperCase();
     }
 
     public void setPreRequisites(ArrayList<String> preRequisites) {

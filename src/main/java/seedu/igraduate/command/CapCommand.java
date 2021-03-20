@@ -8,7 +8,6 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.Module;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CapCommand extends Command {

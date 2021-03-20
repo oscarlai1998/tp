@@ -1,0 +1,24 @@
+Mar 20, 2021 10:15:17 PM seedu.igraduate.IGraduate main
+INFO: iGraduate starts.
+Mar 20, 2021 10:15:17 PM seedu.igraduate.IGraduate <init>
+INFO: Initialising iGraduate Ui, Storage and ModuleList components...
+Mar 20, 2021 10:15:17 PM seedu.igraduate.Storage loadModulesFromFile
+INFO: Module data loaded from disk successfully.
+Mar 20, 2021 10:15:17 PM seedu.igraduate.IGraduate <init>
+INFO: All components initialised successfully.
+Mar 20, 2021 10:15:18 PM seedu.igraduate.Parser parseCommand
+INFO: User input: cap
+Mar 20, 2021 10:15:18 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to cap command.
+Mar 20, 2021 10:15:18 PM seedu.igraduate.Parser createCapCommand
+INFO: Valid parameters for cap command.
+Mar 20, 2021 10:17:39 PM seedu.igraduate.Parser parseCommand
+INFO: User input: exit
+Mar 20, 2021 10:17:39 PM seedu.igraduate.Parser parseCommand
+INFO: Input parsed to exit command.
+Mar 20, 2021 10:17:39 PM seedu.igraduate.Parser createExitCommand
+INFO: Valid parameters for exit command.
+Mar 20, 2021 10:17:39 PM seedu.igraduate.command.ExitCommand execute
+INFO: Exit Command executed!
+Mar 20, 2021 10:17:39 PM seedu.igraduate.IGraduate main
+INFO: iGraduate exits.
