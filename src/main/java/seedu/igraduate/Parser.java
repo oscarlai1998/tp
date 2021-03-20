@@ -7,6 +7,7 @@ import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
+import seedu.igraduate.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
@@ -32,16 +33,18 @@ public class Parser {
     private static final String COMMAND_PROGRESS = "progress";
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_CAP = "cap";
 
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
     private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
     private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
-    private static final int COMMAND_LIST_LENGTH = 1;
+    private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
+    private static final int COMMAND_CAP_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -93,6 +96,9 @@ public class Parser {
         case COMMAND_DONE:
             LOGGER.log(Level.INFO, "Input parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
+        case COMMAND_CAP:
+            LOGGER.log(Level.INFO, "Input parsed to cap command.");
+            return createCapCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
             LOGGER.log(Level.INFO, "Input parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
@@ -199,7 +205,7 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static Command createListCommand(String[] commandParameters, String[] commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidCommandException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
 
@@ -207,9 +213,10 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+        String scope = extractListScope(commandParameters);
         LOGGER.log(Level.INFO, "Valid parameters for list command.");
 
-        return new ListCommand();
+        return new ListCommand(scope);
     }
 
     /**
@@ -229,7 +236,6 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-
         LOGGER.log(Level.INFO, "Valid parameters for progress command.");
 
         return new ProgressCommand();
@@ -263,6 +269,20 @@ public class Parser {
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
+    public static Command createCapCommand(String[] commandParameters, String[] commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_CAP_LENGTH);
+        boolean isInvalidFlag = (commandFlags[0] != null);
+
+        if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters.");
+            throw new IncorrectParameterCountException();
+        }
+        LOGGER.log(Level.INFO, "Valid parameters for cap command.");
+
+        return new CapCommand();
+    }
+
     /**
      * Creates new instance of ExitCommand class to execute.
      *
@@ -279,7 +299,6 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-
         LOGGER.log(Level.INFO, "Valid parameters for exit command.");
         
         return new ExitCommand();
@@ -327,10 +346,10 @@ public class Parser {
                 String type = commandFlags[i + 1].toLowerCase().trim();
                 assert type.length() > 0 : "Module type should not be empty.";
                 switch (type) {
-                case "core":
                 case "ue":
-                case "math":
                 case "ge":
+                case "math":
+                case "core":
                     return type;
                 default:
                     LOGGER.warning("Invalid module type detected.");
@@ -391,6 +410,27 @@ public class Parser {
         throw new InvalidCommandException();
     }
 
+    /**
+     * Determines the option user selects if "List" command is run. Options are: 1.
+     * List all modules 2. List modules taken 3. List modules not taken
+     *
+     * @param commandFlags flags of commands from user input.
+     * @return the option user selects.
+     * @throws InvalidCommandException if command format is not recognised.
+     */
+    public static String extractListScope(String[] commandFlags)
+            throws IncorrectParameterCountException {
+        String scope = commandFlags[1].trim().toLowerCase();
+        switch (scope) {
+        case "all":
+        case "complete":
+        case "incomplete":
+            return scope;
+        default:
+            throw new IncorrectParameterCountException();
+        }
+    }
+
     public static ArrayList<String> extractPreRequisites(String[] commandFlags) {
         ArrayList<String> preRequisites = new ArrayList<>();
         List<String> moduleCodes;
@@ -418,6 +458,5 @@ public class Parser {
             }
         }
         return true;
-
     }
 }
