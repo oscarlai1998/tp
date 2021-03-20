@@ -1,6 +1,6 @@
 package seedu.igraduate.command;
-import java.util.logging.Logger;
 
+import java.util.logging.Logger;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
@@ -29,10 +29,8 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, Ui ui, Storage storage) 
-            throws ModuleNotFoundException, NumberFormatException, 
-            InputNotNumberException, ModuleNotCompleteException, 
-            SaveModuleFailException {
+    public void execute(ModuleList modules, Ui ui, Storage storage) throws ModuleNotFoundException,
+            NumberFormatException, InputNotNumberException, ModuleNotCompleteException, SaveModuleFailException {
         this.targetModule = modules.getModule(moduleCode);
         extractModuleName(this.commandFlags);
         extractModuleCredits(this.commandFlags);
@@ -50,8 +48,7 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private void extractModuleCredits(String[] commandFlags) 
-            throws NumberFormatException, InputNotNumberException{
+    private void extractModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -60,15 +57,14 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private void extractModuleGrade (String[] commandFlags) 
-            throws ModuleNotCompleteException {
+    private void extractModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
             if (!targetModule.isDone()) {
                 LOGGER.warning("Module has not been completed, no grade update is permitted. ");
                 throw new ModuleNotCompleteException();
             }
-            
+
             targetModule.setGrade(moduleGrade);
         } catch (InvalidCommandException invalidCommandException) {
             LOGGER.info("No grade field found, no updates to grade done. ");
