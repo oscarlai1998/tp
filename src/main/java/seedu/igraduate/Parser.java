@@ -7,6 +7,7 @@ import seedu.igraduate.command.DoneCommand;
 import seedu.igraduate.command.ExitCommand;
 import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
+import seedu.igraduate.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
@@ -31,6 +32,7 @@ public class Parser {
     private static final String COMMAND_PROGRESS = "progress";
     private static final String COMMAND_DONE = "done";
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_CAP = "cap";
 
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
@@ -41,6 +43,7 @@ public class Parser {
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
+    private static final int COMMAND_CAP_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -91,6 +94,9 @@ public class Parser {
         case COMMAND_DONE:
             LOGGER.log(Level.INFO, "Input parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
+        case COMMAND_CAP:
+            LOGGER.log(Level.INFO, "Input parsed to cap command.");
+            return createCapCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
             LOGGER.log(Level.INFO, "Input parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
@@ -217,7 +223,6 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-
         LOGGER.log(Level.INFO, "Valid parameters for progress command.");
 
         return new ProgressCommand();
@@ -251,6 +256,19 @@ public class Parser {
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
+    public static Command createCapCommand(String[] commandParameters, String[] commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.length != COMMAND_CAP_LENGTH);
+        boolean isInvalidFlag = (commandFlags[0] != null);
+
+        if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters.");
+            throw new IncorrectParameterCountException();
+        }
+        LOGGER.log(Level.INFO, "Valid parameters for cap command.");
+
+        return new CapCommand();
+    }
     /**
      * Creates new instance of ExitCommand class to execute.
      *
@@ -267,7 +285,6 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
-
         LOGGER.log(Level.INFO, "Valid parameters for exit command.");
         
         return new ExitCommand();
@@ -317,6 +334,8 @@ public class Parser {
                 switch (type) {
                 case "ue":
                 case "ge":
+                case "math":
+                case "core":
                     return type;
                 default:
                     LOGGER.warning("Invalid module type detected.");
