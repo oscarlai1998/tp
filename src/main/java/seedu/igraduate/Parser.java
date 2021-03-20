@@ -419,7 +419,7 @@ public class Parser {
      * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractListScope(String[] commandFlags)
-            throws InvalidCommandException {
+            throws IncorrectParameterCountException {
         String scope = commandFlags[1].trim().toLowerCase();
         switch (scope) {
         case "all":
@@ -427,7 +427,7 @@ public class Parser {
         case "incomplete":
             return scope;
         default:
-            throw new InvalidCommandException();
+            throw new IncorrectParameterCountException();
         }
     }
 
