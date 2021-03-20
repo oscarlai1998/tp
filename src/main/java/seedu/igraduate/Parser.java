@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import java.util.logging.Level;
 
 /**
@@ -71,12 +72,13 @@ public class Parser {
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
-        String[] commands = line.split("\\s+(?=-)", 2);
-        assert commands.length <= 2 : "Limit of split is 2";
-        String[] commandParameters = commands[0].split("\\s+", 2);
-        assert commandParameters.length <= 2 : "Limit of split is 2";
+        String[] commands = getCommand(line);
+        String[] commandParameters = getCommandParameters(commands);
         String command = commandParameters[0].toLowerCase();
         String[] commandFlags = getCommandFlag(commands);
+
+        assert commands.length <= 2 : "Limit of split is 2";
+        assert commandParameters.length <= 2 : "Limit of split is 2";
 
         switch (command) {
         case COMMAND_ADD:
@@ -104,6 +106,14 @@ public class Parser {
             LOGGER.warning("Invalid command detected.");
             throw new InvalidCommandException();
         }
+    }
+
+    private static String[] getCommand(String line) {
+        return line.split("\\s+(?=-)", 2);
+    }
+
+    private static String[] getCommandParameters(String[] commands) {
+        return commands[0].split("\\s+", 2);
     }
 
     /**
@@ -155,6 +165,9 @@ public class Parser {
         ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
 
+        if (!isModuleCodeValid(moduleCode) || !isModuleCodeValid(preRequisites)) {
+            throw new InvalidCommandException();
+        }
         return new AddCommand(moduleCode, moduleName, moduleType, moduleCredits, preRequisites);
     }
 
@@ -431,5 +444,19 @@ public class Parser {
             }
         }
         return preRequisites;
+    }
+
+    private static boolean isModuleCodeValid(String moduleCode) {
+        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", moduleCode);
+    }
+
+    private static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
+        for (String preRequisite : preRequisites) {
+            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", preRequisite)) {
+                return false;
+            }
+        }
+        return true;
+
     }
 }
