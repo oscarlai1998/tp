@@ -37,7 +37,7 @@ public class Parser {
     private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
     private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
-    private static final int COMMAND_LIST_LENGTH = 1;
+    private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
     private static final int COMMAND_DONE_PARAMETER_LENGTH = 2;
@@ -186,7 +186,7 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static Command createListCommand(String[] commandParameters, String[] commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidCommandException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
 
@@ -194,9 +194,10 @@ public class Parser {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
+        String scope = extractListScope(commandParameters);
         LOGGER.log(Level.INFO, "Valid parameters for list command.");
 
-        return new ListCommand();
+        return new ListCommand(scope);
     }
 
     /**
@@ -314,9 +315,7 @@ public class Parser {
                 String type = commandFlags[i + 1].toLowerCase().trim();
                 assert type.length() > 0 : "Module type should not be empty.";
                 switch (type) {
-                case "core":
                 case "ue":
-                case "math":
                 case "ge":
                     return type;
                 default:
@@ -376,6 +375,27 @@ public class Parser {
         }
         LOGGER.warning("Missing module grade parameter.");
         throw new InvalidCommandException();
+    }
+
+    /**
+     * Determines the option user selects if "List" command is run. Options are: 1.
+     * List all modules 2. List modules taken 3. List modules not taken
+     *
+     * @param commandFlags flags of commands from user input.
+     * @return the option user selects.
+     * @throws InvalidCommandException if command format is not recognised.
+     */
+    public static String extractListScope(String[] commandFlags)
+            throws InvalidCommandException {
+        String scope = commandFlags[1].trim().toLowerCase();
+        switch (scope) {
+        case "all":
+        case "complete":
+        case "incomplete":
+            return scope;
+        default:
+            throw new InvalidCommandException();
+        }
     }
 
     public static ArrayList<String> extractPreRequisites(String[] commandFlags) {

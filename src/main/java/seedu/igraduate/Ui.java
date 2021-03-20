@@ -22,7 +22,7 @@ public class Ui {
     public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
     public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
-    public static final String MODULES_LEFT_MESSAGE = "Modules you can take:\n";
+    public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to take:\n";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
 
@@ -74,6 +74,33 @@ public class Ui {
     }
 
     /**
+     * Prints the modules in the array list that user has taken.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printCompletedList(ArrayList<Module> modules) {
+        System.out.println(MODULES_TAKEN_MESSAGE);
+        for (int i = 0; i < modules.size(); i++) {
+            if (modules.get(i).isDone()) {
+                printModuleDetails(modules.get(i));
+            }
+        }
+    }
+
+    /**
+     * Prints the modules in the array list that user has not taken.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printIncompletedList(ArrayList<Module> modules) {
+        System.out.println(MODULES_LEFT_MESSAGE);
+        for (int i = 0; i < modules.size(); i++) {
+            if (!modules.get(i).isDone()) {
+                printModuleDetails(modules.get(i));
+            }
+        }
+    }
+    /**
      * Prints the module information. 
      * 
      * @param module array list containing the modules. 
@@ -111,30 +138,6 @@ public class Ui {
     public void printMarkAsTakenMessage(Module module) {
         System.out.println("Nice! I've marked this module as done:");
         System.out.println("  " + module);
-    }
-
-    /**
-     * Lists all modules (both taken and not taken).
-     */
-    public void printAllModules() {
-        printModulesTakenMessage();
-        printModulesRemainingMessage();
-    }
-
-    /**
-     * Lists all modules that have been taken. 
-     */
-    public void printModulesTakenMessage() {
-        System.out.println(MODULES_TAKEN_MESSAGE);
-        System.out.println(); // Print module names
-    }
-
-    /**
-     * Lists all modules that have not been taken. 
-     */
-    public void printModulesRemainingMessage() {
-        System.out.println(MODULES_LEFT_MESSAGE);
-        System.out.println(); // Print module names
     }
 
     /**
