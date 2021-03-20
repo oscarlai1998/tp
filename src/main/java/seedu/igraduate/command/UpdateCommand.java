@@ -40,7 +40,7 @@ public class UpdateCommand extends Command {
     /**
      * Executes the updateCommand function. 
      * 
-     * @param moduleList Module list consisting of all modules.
+     * @param modules Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
      * @throws ModuleNotFoundException If the module code is not found in module list. 
