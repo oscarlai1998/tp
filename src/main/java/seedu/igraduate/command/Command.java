@@ -4,7 +4,18 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.*;
+
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 /**
  * Parent class for more specific command child class. Contains basic
@@ -37,8 +48,9 @@ public abstract class Command {
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
             ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
-            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException, InputNotNumberException,
-            ModuleNotCompleteException, InvalidModuleGradeException, UnableToDeletePrereqModuleException, InvalidListTypeException;
+            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
+            InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, InvalidListTypeException;
 
     /**
      * Returns a flag indicating whether the program should terminate after
