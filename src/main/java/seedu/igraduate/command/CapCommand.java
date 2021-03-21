@@ -30,6 +30,8 @@ public class CapCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException {
 
+        LOGGER.log(Level.INFO, "Executing CAP command...");
+
         double totalCredit = 0;
         double moduleCredit = 0;
         float moduleCap = 0.0F;
@@ -48,6 +50,7 @@ public class CapCommand extends Command {
         }
         cap = calculateCap(totalCredit, totalModuleCap);
         ui.printCap(cap);
+        LOGGER.log(Level.INFO, "Successfully calculated CAP.");
     }
 
     /**
@@ -73,6 +76,7 @@ public class CapCommand extends Command {
      * @throws InvalidModuleGradeException if module grade does not fit any categories.
      */
     private float convertGradeToCap(String grade) throws InvalidModuleGradeException {
+        LOGGER.log(Level.INFO, "Converting grade to cap score...");
         float cap;
         switch (grade) {
         case "A+":
@@ -109,9 +113,11 @@ public class CapCommand extends Command {
             cap = 0.0F;
             break;
         default:
+            LOGGER.log(Level.WARNING, "Failure to convert invalid module grade.");
             throw new InvalidModuleGradeException();
         }
 
+        LOGGER.log(Level.INFO, "End of conversion.");
         return cap;
     }
 
