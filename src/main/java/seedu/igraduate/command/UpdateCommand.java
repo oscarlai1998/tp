@@ -54,19 +54,26 @@ public class UpdateCommand extends Command {
             throws ModuleNotFoundException,
             NumberFormatException, InputNotNumberException, ModuleNotCompleteException, SaveModuleFailException {
         this.targetModule = modules.getModule(moduleCode);
-        extractModuleName(this.commandFlags);
-        extractModuleCredits(this.commandFlags);
-        extractModuleGrade(this.commandFlags);
-        storage.saveModulesToFile(modules);
+        
+        try {
+            updateModuleGrade(this.commandFlags);
+        } catch (ModuleNotCompleteException exception) {
+            throw exception;
+        } finally {
+            updateModuleName(this.commandFlags);
+            updateModuleCredits(this.commandFlags);
+            storage.saveModulesToFile(modules);
+        }
+        
         ui.printUpdateSuccess(targetModule);
     }
 
     /**
-     * Extracts the module name from commandFlags. 
+     * Updates the module name from commandFlags. 
      * 
      * @param commandFlags List containing all flags and values. 
      */
-    private void extractModuleName(String[] commandFlags) {
+    private void updateModuleName(String[] commandFlags) {
         try {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
@@ -76,13 +83,13 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Extracts the module credit from commandFlags. 
+     * Updates the module credit from commandFlags. 
      * 
      * @param commandFlags List containing all flags and values. 
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
-    private void extractModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -92,12 +99,13 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Extract module grade from commandFlags. 
+     * Updates module grade from commandFlags. 
+     * If the module is incomplete, no updates is done on the module grade.  
      * 
      * @param commandFlags List containing all flags and values. 
      * @throws ModuleNotCompleteException If the module has not been marked as completed. 
      */
-    private void extractModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
+    private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
             if (!targetModule.isDone()) {
