@@ -73,7 +73,8 @@ public class CapCommandTest {
         Command capCommand = Parser.parseCommand(calcCap);
         System.setOut(new PrintStream(outContent));
         capCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.CAP_MESSAGE, 4.75) + System.lineSeparator(), outContent.toString());
+        assertEquals(String.format(Ui.CAP_MESSAGE, 4.75, "Honours (Highest Distinction)")
+                + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 
