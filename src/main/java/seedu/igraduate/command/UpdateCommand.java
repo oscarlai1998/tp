@@ -12,6 +12,9 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.Module;
 
+/**
+ * Handles update command. 
+ */
 public class UpdateCommand extends Command {
     private String moduleCode;
     private String[] commandFlags;
@@ -23,13 +26,32 @@ public class UpdateCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
 
+    /**
+     * Child class of the command class that contains the module code and command flags. 
+     * 
+     * @param moduleCode module code. 
+     * @param commandFlags flags containing all the information to update. 
+     */
     public UpdateCommand(String moduleCode, String[] commandFlags) {
         this.moduleCode = moduleCode;
         this.commandFlags = commandFlags;
     }
 
+    /**
+     * Executes the updateCommand function. 
+     * 
+     * @param modules Module list consisting of all modules.
+     * @param ui User interface for printing result.
+     * @param storage Storage for storing module list data.
+     * @throws ModuleNotFoundException If the module code is not found in module list. 
+     * @throws NumberFormatException If module credit is not an integer (or double). 
+     * @throws InputNotNumberException If module credit is not an integer (or double). 
+     * @throws ModuleNotCompleteException If the module has not been marked as completed. 
+     * @throws SaveModuleFailException If the program fails to save changes. 
+     */
     @Override
-    public void execute(ModuleList modules, Ui ui, Storage storage) throws ModuleNotFoundException,
+    public void execute(ModuleList modules, Ui ui, Storage storage) 
+            throws ModuleNotFoundException,
             NumberFormatException, InputNotNumberException, ModuleNotCompleteException, SaveModuleFailException {
         this.targetModule = modules.getModule(moduleCode);
         
@@ -46,7 +68,12 @@ public class UpdateCommand extends Command {
         ui.printUpdateSuccess(targetModule);
     }
 
-    private void updateModuleName(String[] coomandFlags) {
+    /**
+     * Updates the module name from commandFlags. 
+     * 
+     * @param commandFlags List containing all flags and values. 
+     */
+    private void updateModuleName(String[] commandFlags) {
         try {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
@@ -55,6 +82,13 @@ public class UpdateCommand extends Command {
         }
     }
 
+    /**
+     * Updates the module credit from commandFlags. 
+     * 
+     * @param commandFlags List containing all flags and values. 
+     * @throws NumberFormatException If module credit is not an integer (or double). 
+     * @throws InputNotNumberException If module credit is not an integer (or double). 
+     */
     private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
@@ -64,6 +98,13 @@ public class UpdateCommand extends Command {
         }
     }
 
+    /**
+     * Updates module grade from commandFlags. 
+     * If the module is incomplete, no updates is done on the module grade.  
+     * 
+     * @param commandFlags List containing all flags and values. 
+     * @throws ModuleNotCompleteException If the module has not been marked as completed. 
+     */
     private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);

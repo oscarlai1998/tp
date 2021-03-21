@@ -37,6 +37,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_CAP = "cap";
 
+
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
     private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
@@ -70,7 +71,6 @@ public class Parser {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
-
         LOGGER.log(Level.INFO, String.format("User input: %s", line));
 
         // Splits into 2 String elements:
@@ -115,10 +115,23 @@ public class Parser {
         }
     }
 
+    /**
+     * Split the user input into maximum of 2 parts, with '-' as delimiter.
+     *
+     * @param line user input.
+     * @return String array of user input split up.
+     */
     private static String[] getCommand(String line) {
         return line.split("\\s+(?=-)", 2);
     }
 
+    /**
+     * Obtain a string array of length 2, with the first index containing name of command
+     * and second index containing the first parameter.
+     *
+     * @param commands User input split up using getCommand().
+     * @return String array of command and first parameter separated.
+     */
     private static String[] getCommandParameters(String[] commands) {
         return commands[0].split("\\s+", 2);
     }
@@ -279,6 +292,15 @@ public class Parser {
         return new DoneCommand(commandParameters[1], moduleGrade);
     }
 
+    /**
+     * Extracts relevant parameters and creates an instance of UpdateCommand to execute. 
+     * Format: "update [module code] [-g|-mc|-n] [value]"
+     * 
+     * @param commandParameters parameters of user input, excluding command flags. 
+     * @param commandFlags flags of commands from user input. 
+     * @return new instance of UpdateCommand class. 
+     * @throws IncorrectParameterCountException if parameter count is not correct. 
+     */
     public static Command createUpdateCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_UPDATE_PARAMETER_LENGTH);
@@ -369,9 +391,9 @@ public class Parser {
                 String type = commandFlags[i + 1].toLowerCase().trim();
                 assert type.length() > 0 : "Module type should not be empty.";
                 switch (type) {
-                case "ue":
-                case "ge":
-                case "math":
+                case "ue":         // fallthrough
+                case "ge":         // fallthrough
+                case "math":       // fallthrough
                 case "core":
                     return type;
                 default:
@@ -471,9 +493,9 @@ public class Parser {
             throws IncorrectParameterCountException {
         String scope = commandFlags[1].trim().toLowerCase();
         switch (scope) {
-        case "all":
-        case "complete":
-        case "incomplete":
+        case "all":        // fallthrough
+        case "complete":   // fallthrough
+        case "incomplete": // fallthrough
             return scope;
         default:
             throw new IncorrectParameterCountException();
@@ -503,13 +525,25 @@ public class Parser {
         return preRequisites;
     }
 
+    /**
+     * Checks if the module code is valid according to school codes. 
+     * 
+     * @param moduleCode module code to be checked. 
+     * @return True if the code is valid, false otherwise. 
+     */
     private static boolean isModuleCodeValid(String moduleCode) {
-        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", moduleCode);
+        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", moduleCode);
     }
 
+    /**
+     * Checks if the module code is valid according to school codes. 
+     * 
+     * @param preRequisites list of all the module codes to be checked. 
+     * @return True if all the codes are valid, false otherwise. 
+     */
     private static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
-            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4,4}[a-zA-Z]{0,1}", preRequisite)) {
+            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", preRequisite)) {
                 return false;
             }
         }
