@@ -181,9 +181,9 @@ public class ParserTest {
     @Test
     void createListCommand_extraFlag_exceptionThrown() {
         String line = "list -mc";
-        Exception exception = assertThrows(InvalidListTypeException.class,
+        Exception exception = assertThrows(IncorrectParameterCountException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(InvalidListTypeException.INVALID_LIST_TYPE_ERROR_MESSAGE,
+        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE,
                 exception.getMessage());
     }
 
