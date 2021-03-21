@@ -12,7 +12,11 @@ import seedu.igraduate.command.ListCommand;
 import seedu.igraduate.command.ProgressCommand;
 import seedu.igraduate.command.CapCommand;
 
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 public class ParserTest {
 
