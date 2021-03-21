@@ -21,8 +21,8 @@ public class Ui {
     // Messages for successful execution
     public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
     public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
-    public static final String MODULES_TAKEN_MESSAGE = "Modules you have taken:\n";
-    public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to take:\n";
+    public static final String MODULES_TAKEN_MESSAGE = "Modules you have have completed:";
+    public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to complete:";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites to take %s: ";
@@ -63,14 +63,14 @@ public class Ui {
     }
 
     /**
-     * Prints all the modules in array list. 
-     * 
-     * @param modules array list containing the modules. 
+     * Prints all the modules in array list.
+     *
+     * @param modules array list containing the modules.
      */
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
-            System.out.print(String.format("%-4d: ", i + 1));
+            System.out.print(i + 1 + ": ");
             printModuleDetails(modules.get(i));
         }
     }
@@ -82,9 +82,12 @@ public class Ui {
      */
     public void printCompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_TAKEN_MESSAGE);
+        int i = 1;
         for (Module module : modules) {
             if (module.isDone()) {
+                System.out.print(i + ": ");
                 printModuleDetails(module);
+                i += 1;
             }
         }
     }
@@ -96,17 +99,20 @@ public class Ui {
      */
     public void printIncompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_LEFT_MESSAGE);
+        int i = 1;
         for (Module module : modules) {
             if (!module.isDone()) {
+                System.out.print(i + ": ");
                 printModuleDetails(module);
+                i += 1;
             }
         }
     }
 
     /**
-     * Prints the module information. 
-     * 
-     * @param module array list containing the modules. 
+     * Prints the module information.
+     *
+     * @param module array list containing the modules.
      */
     public void printModuleDetails(Module module) {
         String moduleDetails = module.toString();

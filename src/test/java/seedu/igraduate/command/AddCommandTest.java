@@ -22,6 +22,7 @@ import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 import seedu.igraduate.module.Module;
 
@@ -44,10 +45,10 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_ExistingModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException,
-            SaveModuleFailException, ExistingModuleException,
-            ModuleNotFoundException, PrerequisiteNotFoundException {
+        throws InvalidCommandException, InvalidModuleTypeException,
+        InputNotNumberException, IncorrectParameterCountException,
+        SaveModuleFailException, ExistingModuleException,
+        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidListTypeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
@@ -62,11 +63,11 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_validParameters_success()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException,
-            ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
-            PrerequisiteNotFoundException, ModuleNotCompleteException, ModularCreditExceedsLimitException, 
-            UnableToDeletePrereqModuleException, InvalidModuleGradeException {
+        throws InvalidCommandException, InvalidModuleTypeException,
+        InputNotNumberException, IncorrectParameterCountException,
+        ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
+        PrerequisiteNotFoundException, ModuleNotCompleteException, ModularCreditExceedsLimitException,
+        UnableToDeletePrereqModuleException, InvalidModuleGradeException, InvalidListTypeException {
         String line = "add Computer Org -mc 4 -t core -c cs2100";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
