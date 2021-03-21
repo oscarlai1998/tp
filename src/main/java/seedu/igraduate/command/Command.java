@@ -16,6 +16,7 @@ import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.InvalidListTypeException;
+import seedu.igraduate.exception.PrerequisiteNotMetException;
 
 /**
  * Parent class for more specific command child class. Contains basic
@@ -47,10 +48,10 @@ public abstract class Command {
      *                                             of other modules.
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
-            ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
-            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
-            InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, InvalidListTypeException;
+        ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
+        ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
+        InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
+        UnableToDeletePrereqModuleException, InvalidListTypeException, PrerequisiteNotMetException;
 
     /**
      * Returns a flag indicating whether the program should terminate after

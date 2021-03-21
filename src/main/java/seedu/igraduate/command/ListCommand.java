@@ -38,6 +38,7 @@ public class ListCommand extends Command {
                 return;
             }
             ui.printEntireList(moduleList.getModules());
+            LOGGER.log(Level.INFO, "Printed Entire List.");
             break;
         case "complete" :
             if (moduleList.isCompleteEmpty()) {

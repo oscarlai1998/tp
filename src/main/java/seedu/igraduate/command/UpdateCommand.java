@@ -1,15 +1,12 @@
 package seedu.igraduate.command;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.ModuleNotCompleteException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.*;
 import seedu.igraduate.module.Module;
 
 /**
@@ -52,7 +49,8 @@ public class UpdateCommand extends Command {
     @Override
     public void execute(ModuleList modules, Ui ui, Storage storage) 
             throws ModuleNotFoundException,
-            NumberFormatException, InputNotNumberException, ModuleNotCompleteException, SaveModuleFailException {
+            NumberFormatException, InputNotNumberException, ModuleNotCompleteException,
+            InvalidModuleGradeException, SaveModuleFailException {
         this.targetModule = modules.getModule(moduleCode);
         
         try {
@@ -64,7 +62,7 @@ public class UpdateCommand extends Command {
             updateModuleCredits(this.commandFlags);
             storage.saveModulesToFile(modules);
         }
-        
+
         ui.printUpdateSuccess(targetModule);
     }
 
@@ -105,14 +103,17 @@ public class UpdateCommand extends Command {
      * @param commandFlags List containing all flags and values. 
      * @throws ModuleNotCompleteException If the module has not been marked as completed. 
      */
-    private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
+    private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException,
+        InvalidModuleGradeException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
             if (!targetModule.isDone()) {
                 LOGGER.warning("Module has not been completed, no grade update is permitted. ");
                 throw new ModuleNotCompleteException();
             }
-
+            if (!targetModule.isGradeValid(moduleGrade)) {
+                throw new InvalidModuleGradeException();
+            }
             targetModule.setGrade(moduleGrade);
         } catch (InvalidCommandException invalidCommandException) {
             LOGGER.info("No grade field found, no updates to grade done. ");

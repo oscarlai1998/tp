@@ -4,11 +4,11 @@ import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.*;
 
 import seedu.igraduate.module.Module;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -62,21 +62,36 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, ModuleNotFoundException {
+        throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException,
+        PrerequisiteNotMetException, PrerequisiteNotFoundException {
         LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getByCode(getModuleCode());
-            moduleList.markAsTaken(module);
-            moduleList.setGrade(module, getModuleGrade());
-            storage.saveModulesToFile(moduleList);
-            ui.printMarkAsTakenMessage(module);
+            if (!module.isGradeValid(moduleGrade)) {
+                LOGGER.log(Level.INFO, "Invalid grade input.");
+                throw new InvalidModuleGradeException();
+            }
+            if (!moduleList.isModuleValid(module)) {
+                LOGGER.log(Level.INFO, "Prerequisites check failed.");
+                throw new PrerequisiteNotMetException();
+            }
+            markDone(moduleList, module);
+            storage.saveModulesToFile(moduleList); //update json list
+            ui.printMarkAsTakenMessage(module); //done message
             LOGGER.log(Level.INFO, String.format("Successfully marked %s module as taken.", getModuleCode()));
-        } catch (ModuleNotFoundException e) {
+        } catch (ModuleNotFoundException | PrerequisiteNotFoundException | PrerequisiteNotMetException e) {
             LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", e);
-            throw new ModuleNotFoundException();
+            throw e;
         } finally {
             LOGGER.log(Level.INFO, "End of done command execution.");
         }
+    }
+
+
+
+    private void markDone(ModuleList moduleList, Module module) throws ModuleNotFoundException {
+        moduleList.markAsTaken(module);
+        moduleList.setGrade(module, getModuleGrade());
     }
 
     /**

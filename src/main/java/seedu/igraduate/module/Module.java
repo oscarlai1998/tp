@@ -102,6 +102,38 @@ public abstract class Module {
         }
     }
 
+    /**
+     * Check if grade is valid.
+     * [A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU].
+     *
+     * @return boolean value true if grade is value and false if invalid.
+     */
+    public static boolean isGradeValid(String moduleGrade) {
+        ArrayList<String> validGrades = new ArrayList<>() {
+            {
+                add("A+");
+                add("A");
+                add("A-");
+                add("B+");
+                add("B");
+                add("B-");
+                add("C+");
+                add("C");
+                add("D+");
+                add("F");
+                add("S");
+                add("U");
+                add("CS");
+                add("CU");
+
+            }
+        } ;
+        if (validGrades.contains(moduleGrade.toUpperCase())) {
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<String> getPreRequisites() {
         return preRequisites;
     }
