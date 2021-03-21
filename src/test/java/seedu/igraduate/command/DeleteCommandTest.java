@@ -10,7 +10,19 @@ import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
+import seedu.igraduate.exception.ModularCreditExceedsLimitException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
+import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

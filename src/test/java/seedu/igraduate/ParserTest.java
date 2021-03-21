@@ -101,14 +101,16 @@ public class ParserTest {
     /****************************************** DoneCommand tests. *************************************************/
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException,
-        InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        InvalidModuleTypeException, InputNotNumberException,
+        IncorrectParameterCountException, InvalidListTypeException {
         String line = "done CS2107 -g A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
 
     @Test
     void createDoneCommand_parametersWithSpacing_success() throws InvalidCommandException,
-        InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        InvalidModuleTypeException, InputNotNumberException,
+        IncorrectParameterCountException, InvalidListTypeException {
         String line = "done      CS2107           -g                             A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -134,7 +136,8 @@ public class ParserTest {
     /****************************************** ProgressCommand tests. ************************************************/
     @Test
     void createProgressCommand_appropriateParameters_success() throws InvalidCommandException,
-        InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        InvalidModuleTypeException, InputNotNumberException,
+        IncorrectParameterCountException, InvalidListTypeException {
         String line = "progress";
         assertEquals(ProgressCommand.class, Parser.parseCommand(line).getClass());
     }
