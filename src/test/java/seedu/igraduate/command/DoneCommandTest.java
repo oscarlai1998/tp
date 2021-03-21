@@ -22,7 +22,7 @@ import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
-
+import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.module.Module;
 
 import java.io.ByteArrayOutputStream;
@@ -48,8 +48,8 @@ public class DoneCommandTest {
 
     @Test
     void executeDoneCommand_nonexistentModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException {
+        throws InvalidCommandException, InvalidModuleTypeException,
+        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -59,12 +59,12 @@ public class DoneCommandTest {
 
     @Test
     void executeDoneCommand_moduleInList_success()
-            throws ExistingModuleException, InvalidModuleTypeException,
-            SaveModuleFailException, IncorrectParameterCountException,
-            InvalidCommandException, InputNotNumberException,
-            ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException, ModuleNotCompleteException, 
-            UnableToDeletePrereqModuleException, InvalidModuleGradeException {
+        throws ExistingModuleException, InvalidModuleTypeException,
+        SaveModuleFailException, IncorrectParameterCountException,
+        InvalidCommandException, InputNotNumberException,
+        ModularCreditExceedsLimitException, ModuleNotFoundException,
+        PrerequisiteNotFoundException, ModuleNotCompleteException,
+        UnableToDeletePrereqModuleException, InvalidModuleGradeException, InvalidListTypeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
