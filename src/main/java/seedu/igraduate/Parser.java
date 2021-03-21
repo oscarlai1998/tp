@@ -10,10 +10,7 @@ import seedu.igraduate.command.ProgressCommand;
 import seedu.igraduate.command.UpdateCommand;
 import seedu.igraduate.command.CapCommand;
 
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -65,9 +62,9 @@ public class Parser {
      * @throws IncorrectParameterCountException If the command input does not
      *                                          contain the right parameters.
      */
-    public static Command parseCommand(String line) 
-            throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException, InvalidModuleTypeException {
+    public static Command parseCommand(String line)
+        throws InvalidCommandException, IncorrectParameterCountException,
+        InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -228,7 +225,7 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static Command createListCommand(String[] commandParameters, String[] commandFlags)
-            throws IncorrectParameterCountException, InvalidCommandException {
+        throws IncorrectParameterCountException, InvalidCommandException, InvalidListTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
 
@@ -490,7 +487,7 @@ public class Parser {
      * @throws InvalidCommandException if command format is not recognised.
      */
     public static String extractListScope(String[] commandFlags)
-            throws IncorrectParameterCountException {
+            throws InvalidListTypeException {
         String scope = commandFlags[1].trim().toLowerCase();
         switch (scope) {
         case "all":        // fallthrough
@@ -498,7 +495,7 @@ public class Parser {
         case "incomplete": // fallthrough
             return scope;
         default:
-            throw new IncorrectParameterCountException();
+            throw new InvalidListTypeException();
         }
     }
 

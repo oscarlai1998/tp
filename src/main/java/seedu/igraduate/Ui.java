@@ -70,7 +70,7 @@ public class Ui {
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
-            System.out.print(i+1 + ": ");
+            System.out.print(i + 1 + ": ");
             printModuleDetails(modules.get(i));
         }
     }

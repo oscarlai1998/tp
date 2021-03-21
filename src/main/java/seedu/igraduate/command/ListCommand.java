@@ -3,6 +3,7 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
+import seedu.igraduate.exception.InvalidModuleTypeException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,14 +27,14 @@ public class ListCommand extends Command {
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidModuleTypeException {
         LOGGER.log(Level.INFO, "Executing list command...");
-        switch(scope) {
+        switch (scope) {
         case "all" :
             if (moduleList.isEmpty()) {
                 assert moduleList.isEmpty() : "List should be empty";
                 ui.printListEmptyMessage();
-                ui.printEntireList(moduleList.getModules());
+                return;
             }
             ui.printEntireList(moduleList.getModules());
             break;
@@ -45,6 +46,9 @@ public class ListCommand extends Command {
             ui.printIncompletedList(moduleList.getModules());
             LOGGER.log(Level.INFO, "Printed Incomplete Modules.");
             break;
+        default:
+            LOGGER.log(Level.INFO, "Failed to print a valid list");
+            throw new InvalidModuleTypeException();
         }
         LOGGER.log(Level.INFO, "End of list command execution.");
     }
