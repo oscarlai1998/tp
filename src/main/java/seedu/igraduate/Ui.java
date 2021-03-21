@@ -28,7 +28,7 @@ public class Ui {
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites to take %s: ";
-    public static final String CAP_MESSAGE = "Current CAP: %.2f";
+    public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -215,12 +215,13 @@ public class Ui {
     }
 
     /**
-     * Prints CAP of user based on their grades.
+     * Prints CAP and degree classification of user based on their grades.
      *
-     * @param cap CAP of user.
+     * @param cap user's cap
+     * @param degreeClassification user's degree classification
      */
-    public void printCap(double cap) {
-        System.out.println(String.format(CAP_MESSAGE, cap));
+    public void printCap(double cap, String degreeClassification) {
+        System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));
     }
 
     /**

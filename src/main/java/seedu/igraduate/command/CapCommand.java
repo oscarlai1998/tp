@@ -16,6 +16,7 @@ public class CapCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
 
     private static float cap;
+    private static String degreeClassification;
 
     /**
      * Execute the capCommand function.
@@ -50,9 +51,12 @@ public class CapCommand extends Command {
             }
         }
         cap = calculateCap(totalCredit, totalModuleCap);
-        ui.printCap(cap);
+        degreeClassification = getDegreeClassification(cap);
+        ui.printCap(cap, degreeClassification);
         LOGGER.log(Level.INFO, "Successfully calculated CAP.");
     }
+
+
 
     /**
      * Check whether S/U option is exercised on the module.
@@ -136,6 +140,32 @@ public class CapCommand extends Command {
         }
 
         return cap;
+    }
+
+    /**
+     * Get the degree classification based on the cap.
+     *
+     * @param cap current cap.
+     * @return current degree classification.
+     */
+    private String getDegreeClassification(float cap) {
+        String capClass;
+
+        if (cap >= 2.00 && cap <= 2.99) {
+            capClass = "Pass";
+        } else if (cap >= 3.00 && cap <= 3.49) {
+            capClass = "Honours";
+        } else if (cap >= 3.50 && cap <= 3.99) {
+            capClass = "Honours (Merit)";
+        } else if (cap >= 4.00 && cap <= 4.49) {
+            capClass = "Honours (Distinction)";
+        } else if (cap >= 4.50) {
+            capClass = "Honours (Highest Distinction)";
+        } else {
+            capClass = "Fail";
+        }
+
+        return capClass;
     }
 
     /**
