@@ -180,14 +180,14 @@ public class Ui {
     }
 
     /**
-     * Displays message if there are no completed modules
+     * Displays message if there are no completed modules.
      */
     public void printCompleteListEmptyMessage() {
         System.out.println(EMPTY_COMPLETE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no incomplete modules
+     * Displays message if there are no incomplete modules.
      */
     public void printIncompleteListEmptyMessage() {
         System.out.println(EMPTY_INCOMPLETE_LIST_MESSAGE);

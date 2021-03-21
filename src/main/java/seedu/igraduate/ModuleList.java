@@ -227,9 +227,9 @@ public class ModuleList {
     }
 
     /**
-     * Checks if the list for completed module is empty
+     * Checks if the list for completed module is empty.
      *
-     * @return Boolean value indicating whether there are any completed modules
+     * @return Boolean value indicating whether there are any completed modules.
      */
     public boolean isCompleteEmpty() {
         for (Module module : modules) {
@@ -241,9 +241,9 @@ public class ModuleList {
     }
 
     /**
-     * Checks if the list for incomplete module is empty
+     * Checks if the list for incomplete module is empty.
      *
-     * @return Boolean value indicating whether there are any incomplete modules
+     * @return Boolean value indicating whether there are any incomplete modules.
      */
     public boolean isIncompleteEmpty() {
         for (Module module: modules) {
