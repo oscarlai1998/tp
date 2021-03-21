@@ -36,6 +36,7 @@ public class CapCommand extends Command {
         double moduleCredit = 0;
         float moduleCap = 0.0F;
         float totalModuleCap = 0.0F;
+        cap = 0.0F;
 
         for (int i = 0; i < moduleList.getModules().size(); i++) {
             Module module = moduleList.getModules().get(i);
@@ -127,7 +128,13 @@ public class CapCommand extends Command {
      * @return final cap.
      */
     private float calculateCap(double totalCredit, float totalModuleCap) {
-        float cap = (float) (totalModuleCap / totalCredit);
+        float cap;
+        if (totalCredit == 0) {
+            cap = 0.0F;
+        } else {
+            cap = (float) (totalModuleCap / totalCredit);
+        }
+
         return cap;
     }
 
