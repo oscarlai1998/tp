@@ -218,12 +218,40 @@ public class ModuleList {
     }
 
     /**
-     * Checks if the current module list is empty.
+     * Checks if the entire module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */
     public boolean isEmpty() {
         return modules.isEmpty();
+    }
+
+    /**
+     * Checks if the list for completed module is empty.
+     *
+     * @return Boolean value indicating whether there are any completed modules.
+     */
+    public boolean isCompleteEmpty() {
+        for (Module module : modules) {
+            if (module.isDone()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the list for incomplete module is empty.
+     *
+     * @return Boolean value indicating whether there are any incomplete modules.
+     */
+    public boolean isIncompleteEmpty() {
+        for (Module module: modules) {
+            if (!module.isDone()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -307,9 +335,9 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
-                assert totalCompletedMCs >= module.getCredit()
-                        : "Completed MCs should be more or equal to credits" + "of done modules";
                 totalCompletedMCs += module.getCredit();
+                assert totalCompletedMCs >= module.getCredit()
+                    : "Completed MCs should be more or equal to credits" + "of done modules";
             }
         }
         return totalCompletedMCs;
