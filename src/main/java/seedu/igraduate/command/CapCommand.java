@@ -8,7 +8,6 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.module.Module;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CapCommand extends Command {
@@ -79,9 +78,7 @@ public class CapCommand extends Command {
         LOGGER.log(Level.INFO, "Converting grade to cap score...");
         float cap;
         switch (grade) {
-        case "A+":
-            cap = 5.0F;
-            break;
+        case "A+":     // Fallthrough
         case "A":
             cap = 5.0F;
             break;

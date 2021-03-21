@@ -18,6 +18,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
@@ -62,7 +63,8 @@ public class DoneCommandTest {
             SaveModuleFailException, IncorrectParameterCountException,
             InvalidCommandException, InputNotNumberException,
             ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException, InvalidModuleGradeException {
+            PrerequisiteNotFoundException, ModuleNotCompleteException, 
+            UnableToDeletePrereqModuleException, InvalidModuleGradeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
