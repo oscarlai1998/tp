@@ -25,7 +25,9 @@ public class Ui {
     public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to take:\n";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
-    public static final String PREREQUISITES_MESSAGE = "List of pre-requisites to take %s: ";
+    public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
+    public static final String PREREQUISITES_UNFULFILLED_MESSAGE = "You have not completed the prerequisites for"
+            + "%s!\n";
     public static final String CAP_MESSAGE = "Current CAP: %.2f";
 
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -101,6 +103,17 @@ public class Ui {
                 printModuleDetails(module);
             }
         }
+    }
+
+    /**
+     * Prints prerequisites required when user tries to complete a module they with prerequisites remaining.
+     *
+     * @param moduleCode module code from user input.
+     * @param prerequisites list of prerequisites remaining for module corresponding to moduleCode.
+     */
+    public void printPrerequisitesUnfulfilled(String moduleCode, ArrayList<String> prerequisites) {
+        System.out.println(String.format(PREREQUISITES_UNFULFILLED_MESSAGE, moduleCode));
+        printPrerequisites(moduleCode, prerequisites);
     }
 
     /**
