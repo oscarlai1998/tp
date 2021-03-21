@@ -10,18 +10,7 @@ import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
 
-import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
-import seedu.igraduate.exception.PrerequisiteNotFoundException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.ModuleNotCompleteException;
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,8 +31,8 @@ public class DeleteCommandTest {
 
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException {
+        throws InvalidCommandException, InvalidModuleTypeException,
+        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
         String line = "Delete Pigs (Three Different Ones)";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -53,12 +42,12 @@ public class DeleteCommandTest {
 
     @Test
     void executeDeleteCommand_moduleInList_success()
-            throws ExistingModuleException, InvalidModuleTypeException,
-            SaveModuleFailException, IncorrectParameterCountException,
-            InvalidCommandException, InputNotNumberException,
-            ModularCreditExceedsLimitException, ModuleNotFoundException,
-            PrerequisiteNotFoundException, ModuleNotCompleteException, 
-            UnableToDeletePrereqModuleException, InvalidModuleGradeException {
+        throws ExistingModuleException, InvalidModuleTypeException,
+        SaveModuleFailException, IncorrectParameterCountException,
+        InvalidCommandException, InputNotNumberException,
+        ModularCreditExceedsLimitException, ModuleNotFoundException,
+        PrerequisiteNotFoundException, ModuleNotCompleteException,
+        UnableToDeletePrereqModuleException, InvalidModuleGradeException, InvalidListTypeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
