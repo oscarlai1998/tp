@@ -128,10 +128,11 @@ public class CapCommand extends Command {
      * @return final cap.
      */
     private float calculateCap(double totalCredit, float totalModuleCap) {
+        float cap;
         if (totalCredit == 0) {
             cap = 0.0F;
         } else {
-            float cap = (float) (totalModuleCap / totalCredit);
+            cap = (float) (totalModuleCap / totalCredit);
         }
 
         return cap;
