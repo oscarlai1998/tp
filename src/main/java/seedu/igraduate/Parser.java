@@ -229,7 +229,7 @@ public class Parser {
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
     public static Command createListCommand(String[] commandParameters, String[] commandFlags)
-        throws IncorrectParameterCountException, InvalidCommandException, InvalidListTypeException {
+        throws IncorrectParameterCountException, InvalidListTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
         boolean isInvalidFlag = (commandFlags[0] != null);
 
