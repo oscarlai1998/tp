@@ -28,13 +28,23 @@ public class ListCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) {
         LOGGER.log(Level.INFO, "Executing list command...");
-        if (moduleList.isEmpty()) {
-            assert moduleList.isEmpty() : "List should be empty";
-            LOGGER.log(Level.INFO, "List is empty.");
-            ui.printListEmptyMessage();
-        } else {
+        switch(scope) {
+        case "all" :
+            if (moduleList.isEmpty()) {
+                assert moduleList.isEmpty() : "List should be empty";
+                ui.printListEmptyMessage();
+                ui.printEntireList(moduleList.getModules());
+            }
             ui.printEntireList(moduleList.getModules());
-            LOGGER.log(Level.INFO, "Successfully printed module list.");
+            break;
+        case "complete" :
+            ui.printCompletedList(moduleList.getModules());
+            LOGGER.log(Level.INFO, "Printed Completed Modules.");
+            break;
+        case "incomplete":
+            ui.printIncompletedList(moduleList.getModules());
+            LOGGER.log(Level.INFO, "Printed Incomplete Modules.");
+            break;
         }
         LOGGER.log(Level.INFO, "End of list command execution.");
     }
