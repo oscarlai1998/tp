@@ -32,14 +32,21 @@ public class UpdateCommand extends Command {
     public void execute(ModuleList modules, Ui ui, Storage storage) throws ModuleNotFoundException,
             NumberFormatException, InputNotNumberException, ModuleNotCompleteException, SaveModuleFailException {
         this.targetModule = modules.getModule(moduleCode);
-        extractModuleName(this.commandFlags);
-        extractModuleCredits(this.commandFlags);
-        extractModuleGrade(this.commandFlags);
-        storage.saveModulesToFile(modules);
+        
+        try {
+            updateModuleGrade(this.commandFlags);
+        } catch (ModuleNotCompleteException exception) {
+            throw exception;
+        } finally {
+            updateModuleName(this.commandFlags);
+            updateModuleCredits(this.commandFlags);
+            storage.saveModulesToFile(modules);
+        }
+        
         ui.printUpdateSuccess(targetModule);
     }
 
-    private void extractModuleName(String[] coomandFlags) {
+    private void updateModuleName(String[] coomandFlags) {
         try {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
@@ -48,7 +55,7 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private void extractModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -57,7 +64,7 @@ public class UpdateCommand extends Command {
         }
     }
 
-    private void extractModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
+    private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
             if (!targetModule.isDone()) {
