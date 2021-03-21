@@ -28,7 +28,7 @@ public class CapCommand extends Command {
      * @throws ModuleNotFoundException If the module type is invalid.
      * @throws InvalidModuleGradeException If the module grade is invalid.
      */
-    public void execute(ModuleList moduleList, Ui ui, Storage storage)
+    public  void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException {
 
         LOGGER.log(Level.INFO, "Executing CAP command...");

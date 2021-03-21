@@ -11,6 +11,7 @@ import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -82,6 +83,19 @@ public class ModuleList {
                 throw new PrerequisiteNotFoundException();
             }
         }
+    }
+
+    /**
+     * Checks if module list contains module.
+     *
+     * @param module Module object to be added to moduleList.
+     * @return boolean value indicating if module list contains module.
+     */
+    public boolean isContains(Module module) {
+        if (modules.contains(module)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -159,6 +173,29 @@ public class ModuleList {
                 throw new PrerequisiteNotFoundException();
             }
         }
+    }
+
+    /**
+     * Checks if Prerequisite of module is done.
+     *
+     * @param module Module object marked done.
+     * @return boolean value indicating whether module is valid.
+     * @throws PrerequisiteNotFoundException If the pre-requisite module is not found.
+     */
+    public boolean isModuleValid(Module module) throws PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = module.getPreRequisites();
+
+        for (String preRequisite : preRequisites) {
+            try {
+                Module preRequisiteModule = getByCode(preRequisite);
+                if (!preRequisiteModule.isDone()) {
+                    return false;
+                }
+            } catch (ModuleNotFoundException e) {
+                throw new PrerequisiteNotFoundException();
+            }
+        }
+        return true;
     }
 
     /**
