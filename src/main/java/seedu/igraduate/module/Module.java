@@ -127,7 +127,7 @@ public abstract class Module {
                 add("CU");
 
             }
-        } ;
+        };
         if (validGrades.contains(moduleGrade.toUpperCase())) {
             return true;
         }

@@ -6,7 +6,12 @@ import seedu.igraduate.ModuleList;
 import seedu.igraduate.Parser;
 import seedu.igraduate.Storage;
 import seedu.igraduate.Ui;
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.module.Module;
 
 /**
