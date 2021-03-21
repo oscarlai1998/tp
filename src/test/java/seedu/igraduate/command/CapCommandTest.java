@@ -91,7 +91,7 @@ public class CapCommandTest {
         ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
 
         String setFirstToDone = "done cs1010 -g A+";
-        String setSecondToDone = "done cs2100 -g K";
+        String setSecondToDone = "done cs2100 -g B-";
         Command doneFirst = Parser.parseCommand(setFirstToDone);
         Command doneSecond = Parser.parseCommand(setSecondToDone);
         doneFirst.execute(moduleList, ui, storage);
@@ -99,9 +99,7 @@ public class CapCommandTest {
 
         String calcCap = "cap";
         Command capCommand = Parser.parseCommand(calcCap);
-        Exception exception = assertThrows(InvalidModuleGradeException.class,
-            () -> capCommand.execute(moduleList, ui, storage));
-        assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
+        capCommand.execute(moduleList, ui, storage);
     }
 
     @AfterEach
