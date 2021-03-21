@@ -172,18 +172,18 @@ public class ParserTest {
     @Test
     void createListCommand_tooManyParameters_exception() {
         String line = "list all hoi";
-        Exception exception = assertThrows(IncorrectParameterCountException.class,
+        Exception exception = assertThrows(InvalidListTypeException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+        assertEquals(InvalidListTypeException.INVALID_LIST_TYPE_ERROR_MESSAGE,
                 exception.getMessage());
     }
 
     @Test
     void createListCommand_extraFlag_exceptionThrown() {
         String line = "list -mc";
-        Exception exception = assertThrows(IncorrectParameterCountException.class,
+        Exception exception = assertThrows(InvalidListTypeException.class,
             () -> Parser.parseCommand(line));
-        assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, 
+        assertEquals(InvalidListTypeException.INVALID_LIST_TYPE_ERROR_MESSAGE,
                 exception.getMessage());
     }
 
