@@ -3,7 +3,7 @@ package seedu.igraduate.command;
 import seedu.igraduate.Storage;
 import seedu.igraduate.ModuleList;
 import seedu.igraduate.Ui;
-import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidModuleTypeException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidListTypeException {
         LOGGER.log(Level.INFO, "Executing list command...");
         switch (scope) {
         case "all" :
@@ -48,7 +48,6 @@ public class ListCommand extends Command {
             break;
         default:
             LOGGER.log(Level.INFO, "Failed to print a valid list");
-            throw new InvalidModuleTypeException();
         }
         LOGGER.log(Level.INFO, "End of list command execution.");
     }
