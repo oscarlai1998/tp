@@ -1,8 +1,8 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Storage;
-import seedu.igraduate.Ui;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
@@ -10,11 +10,11 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 
-import seedu.igraduate.module.CoreModule;
-import seedu.igraduate.module.ElectiveModule;
-import seedu.igraduate.module.GeModule;
-import seedu.igraduate.module.MathModule;
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.CoreModule;
+import seedu.igraduate.model.module.ElectiveModule;
+import seedu.igraduate.model.module.GeModule;
+import seedu.igraduate.model.module.MathModule;
+import seedu.igraduate.model.module.Module;
 
 import java.util.ArrayList;
 import java.util.logging.Level;

@@ -6,7 +6,11 @@ import java.nio.file.Paths;
 
 import java.util.logging.Logger;
 
-import seedu.igraduate.command.Command;
+import seedu.igraduate.logic.command.Command;
+import seedu.igraduate.logic.Parser;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import java.util.logging.LogManager;
 import java.util.logging.Level;

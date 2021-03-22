@@ -1,8 +1,8 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
-import seedu.igraduate.Storage;
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Ui;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.ui.Ui;
 
 
 import seedu.igraduate.exception.SaveModuleFailException;
