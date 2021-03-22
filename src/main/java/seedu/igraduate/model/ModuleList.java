@@ -1,17 +1,16 @@
-package seedu.igraduate;
+package seedu.igraduate.model;
 
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.module.Module;
-import seedu.igraduate.module.MathModule;
-import seedu.igraduate.module.CoreModule;
-import seedu.igraduate.module.ElectiveModule;
-import seedu.igraduate.module.GeModule;
+import seedu.igraduate.model.module.Module;
+import seedu.igraduate.model.module.MathModule;
+import seedu.igraduate.model.module.CoreModule;
+import seedu.igraduate.model.module.ElectiveModule;
+import seedu.igraduate.model.module.GeModule;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

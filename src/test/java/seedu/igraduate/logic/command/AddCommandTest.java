@@ -1,14 +1,14 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Parser;
-import seedu.igraduate.Storage;
-import seedu.igraduate.Ui;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.logic.Parser;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
@@ -24,6 +24,7 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
+import seedu.igraduate.model.module.Module;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -31,7 +32,7 @@ import java.io.PrintStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class DeleteCommandTest {
+public class AddCommandTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
@@ -43,34 +44,38 @@ public class DeleteCommandTest {
     private final PrintStream originalOut = System.out;
 
     @Test
-    void executeDeleteCommand_nonexistentModule_exceptionThrown()
+    void executeAddCommand_ExistingModule_exceptionThrown()
         throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
-        String line = "Delete Pigs (Three Different Ones)";
-        Command deleteCommand = Parser.parseCommand(line);
-        Exception exception = assertThrows(ModuleNotFoundException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
-        assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void executeDeleteCommand_moduleInList_success()
-        throws ExistingModuleException, InvalidModuleTypeException,
-        SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-        ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
-        ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-        InvalidListTypeException, PrerequisiteNotMetException {
+        InputNotNumberException, IncorrectParameterCountException,
+        SaveModuleFailException, ExistingModuleException,
+        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidListTypeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
                 preRequisites, untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
-        String line = "Delete cs1010";
-        Command deleteCommand = Parser.parseCommand(line);
+        String line = "add Programming -mc 4 -t core -c cs1010";
+        Command testAddCommand = Parser.parseCommand(line);
+        Exception exception = assertThrows(ExistingModuleException.class,
+            () -> testAddCommand.execute(moduleList, ui, storage));
+        assertEquals(ExistingModuleException.EXISTING_MODULE_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void executeAddCommand_validParameters_success()
+        throws InvalidCommandException, InvalidModuleTypeException,
+        InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
+        SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
+        ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
+        InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException {
+        String line = "add Computer Org -mc 4 -t core -c cs2100";
+        Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
-        deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010")
-                + System.lineSeparator(), outContent.toString());
+        addCommand.execute(moduleList, ui, storage);
+        Module module = moduleList.getByCode("cs2100");
+        assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0")
+                + System.lineSeparator()
+                + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 }

@@ -5,18 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.command.AddCommand;
-import seedu.igraduate.command.DeleteCommand;
-import seedu.igraduate.command.DoneCommand;
-import seedu.igraduate.command.ListCommand;
-import seedu.igraduate.command.ProgressCommand;
-import seedu.igraduate.command.CapCommand;
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.DeleteCommand;
+import seedu.igraduate.logic.command.DoneCommand;
+import seedu.igraduate.logic.command.ListCommand;
+import seedu.igraduate.logic.command.ProgressCommand;
+import seedu.igraduate.logic.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
+import seedu.igraduate.logic.Parser;
 
 public class ParserTest {
 
