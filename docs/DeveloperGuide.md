@@ -26,15 +26,11 @@ point of time and list modules added to the application.
 ## 2. Setting up, getting started
 
 ## 3. Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
 
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
-
-## Design & implementation
 
 iGraduate has one class called `iGraduate` which contains a main and run method and iGraduate constructor. 
 It is responsible for:
@@ -55,8 +51,8 @@ The rest of the App consists of four components:
 - Storage: Reads data from, and writes data to, the hard disk.
 
 Each of the four components,
-defines its API in an interface with the same name as the Component.
-exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding API interface mentioned in the previous point.
+- defines its API in an interface with the same name as the Component.
+- exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding API interface mentioned in the previous point.
 
 How the architecture interacts with each other [DIAGRAM]
 
@@ -67,8 +63,36 @@ How the architecture interacts with each other [DIAGRAM]
 ### 3.4 Model Component
 
 ### 3.5 Storage Component
+<b>API</b>: `Storage.java`
+
+The `Storage` Component, 
+- Can save `module` objects in the `moduleList` in a JSON format and read them back
 
 ### 3.6 Common classes
+
+## Implementation
+
+### 3.1 UI
+
+### 3.2 Parser
+
+### 3.3 Command
+
+#### 3.3.1 Add Command
+
+#### 3.3.2 Delete Command
+
+#### 3.3.3 Update Command
+
+#### 3.3.4 List Command
+
+#### 3.3.5 CAP Command
+
+#### 3.3.6 Done Command
+
+#### 3.3.7 Progress Command
+
+### 3.4 Storage 
 
 ## Appendix: Requirements
 
