@@ -114,6 +114,40 @@ This section elaborates on some details about how certain features are implement
 ### 4.5 ModuleList
 
 ### 4.6 Storage
+The storage feature saves the state of the module list after every execution of commands that manipulates 
+(i.e. update, add or delete) the modules in the list.
+
+<b>Details</b>
+
+The storage function is executed after every command that manipulates (i.e. adds, deletes or updates) the 
+modules in the module list, saving the updated state into the storage file. 
+The module list is stored in a storage file named `modules.json` in the `data` folder 
+(`<program location>/data/modules.json`). 
+
+<b>Considerations</b>
+
+The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
+handling and management with regards to modified storage files. The parsing of JSON format is also more 
+sophisticated and reliable. 
+
+In addition, the JSON format can be read across multiple different types of applications, allowing flexibility
+ in any future implementations regarding exporting of data. 
+
+<b>Alternatives</b>
+
+The alternative storage format considered is the use of delimiters. However, there are concerns regarding such
+ usage; the most important being potential parsing failure from a valid module. With the use of common 
+ delimiters such as commas (,) and dashes (-), the program is unable to differentiate between the various 
+ module information and legitimate module names containing delimiters and may parse the portion of the module 
+ to a wrong variable, resulting in corrupted results and a potential program crash. One example of such 
+ occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains 
+ dashes when the delimiters are used for separating various module information is also a dash. 
+
+Considerations were also given to use more unique delimiters (such as \\, |, etc.) to avoid accidental parsing
+ fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and
+  render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
+  third-party library, since the exception handling and parsing management lies in the library functions. 
+
 
 ### 4.7 Exception
 
