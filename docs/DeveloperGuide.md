@@ -6,13 +6,22 @@
 
 
 ## Product scope
-### Target user profile
 
-{Describe the target user profile}
+###Target user profile:
+* is a NUS Information Security student
+* has a need to manage and plan modules
+* has a need to track graduation progress
+* has a need to track his/her CAP
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
-### Value proposition
+### Value proposition:
+Allows users to manage modules faster than a typical mouse/GUI driven app.
+Includes higher level features such as ability to add modules while ensuring user has cleared all prerequisites
+and to list all modules taken, graduation progress and current CAP with degree classification.
 
-{Describe the value proposition: what problem does it solve?}
 
 ## User Stories
 
