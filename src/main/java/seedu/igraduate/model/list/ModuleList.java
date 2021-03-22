@@ -1,4 +1,4 @@
-package seedu.igraduate.model;
+package seedu.igraduate.model.list;
 
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
