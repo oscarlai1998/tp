@@ -66,13 +66,28 @@ How the architecture interacts with each other [DIAGRAM]
 
 
 ## Product scope
-### Target user profile
 
-{Describe the target user profile}
+###Target user profile:
+* is a NUS Information Security student
+* has a need to manage and plan modules
+* has a need to track graduation progress
+* has a need to track his/her CAP
+* prefer desktop apps over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
+### Value proposition:
+Allows users to manage modules faster than a typical mouse/GUI driven app.
+Includes higher level features such as ability to add modules while ensuring user has cleared all prerequisites
+and to list all modules taken, graduation progress and current CAP with degree classification.
+
+<<<<<<< HEAD
+=======
 ### Value proposition
 
 This app will help NUS students majoring in information security check his/her graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools to help make informed decisions about future modules.
+>>>>>>> 6cfe11a1d6cfc22260108a01def349be3d6b6652
 
 ## User Stories
 
