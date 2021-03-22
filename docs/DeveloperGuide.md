@@ -71,6 +71,22 @@ The `UI` component:
 - Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
+The logic component consists of **two components**, `Parser` and `Command`, which works together
+to execute user commands.
+
+### Parser
+#### Description
+The parser interprets user input and makes sense of the command from the user.
+#### Design
+The parser feature contains one class, `Parser.java` and does its job through the `parseCommand()` method.
+
+`parseCommand()`extracts the command phrase entered by the user. Based on the type of command from the user, `parseCommand()` then calls different 
+methods to extract parameters and flags from the user command that are relevant to the command. The parser then creates 
+the relevant `Command` object and dispatches the control of the program to the created object.
+
+Given below is a diagram on how the Parser parses the command “***done CS2113T -g A+***”
+
+### Command
 
 ### 3.4 Model Component
 
