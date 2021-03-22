@@ -1,14 +1,14 @@
-package seedu.igraduate;
+package seedu.igraduate.logic;
 
-import seedu.igraduate.command.Command;
-import seedu.igraduate.command.AddCommand;
-import seedu.igraduate.command.DeleteCommand;
-import seedu.igraduate.command.DoneCommand;
-import seedu.igraduate.command.ExitCommand;
-import seedu.igraduate.command.ListCommand;
-import seedu.igraduate.command.ProgressCommand;
-import seedu.igraduate.command.UpdateCommand;
-import seedu.igraduate.command.CapCommand;
+import seedu.igraduate.logic.command.Command;
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.DeleteCommand;
+import seedu.igraduate.logic.command.DoneCommand;
+import seedu.igraduate.logic.command.ExitCommand;
+import seedu.igraduate.logic.command.ListCommand;
+import seedu.igraduate.logic.command.ProgressCommand;
+import seedu.igraduate.logic.command.UpdateCommand;
+import seedu.igraduate.logic.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;

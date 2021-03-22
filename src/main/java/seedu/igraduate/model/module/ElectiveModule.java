@@ -1,13 +1,13 @@
-package seedu.igraduate.module;
+package seedu.igraduate.model.module;
 
 import java.util.ArrayList;
 
 /**
- * Handles math modules. 
+ * Handles elective modules. 
  */
-public class MathModule extends Module {
+public class ElectiveModule extends Module {
     /**
-     * Child class of the modules class that contains the math modules. 
+     * Child class of the modules class that contains the elective modules. 
      * 
      * @param code module code. 
      * @param name module name as specified in the user input. 
@@ -17,13 +17,13 @@ public class MathModule extends Module {
      * @param preRequisites prerequisites required for the module.
      * @param untakenPreRequisites pre-requisite modules not taken yet.
      */
-    public MathModule(String code, String name, double credit, String status, String grade,
-                      ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
+    public ElectiveModule(String code, String name, double credit, String status, String grade,
+                          ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
         super(code, name, credit, status, grade, preRequisites, untakenPreRequisites);
     }
 
     @Override
     public String toString() {
-        return "[M]" + super.toString();
+        return "[E]" + super.toString();
     }
 }

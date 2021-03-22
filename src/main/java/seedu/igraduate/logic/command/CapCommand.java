@@ -1,12 +1,12 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Storage;
-import seedu.igraduate.Ui;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.Module;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

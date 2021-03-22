@@ -1,4 +1,4 @@
-package seedu.igraduate.module;
+package seedu.igraduate.model.module;
 
 import java.util.ArrayList;
 

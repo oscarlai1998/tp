@@ -1,13 +1,14 @@
-package seedu.igraduate;
+package seedu.igraduate.storage;
 
 import seedu.igraduate.exception.LoadModuleFailException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
-import seedu.igraduate.module.CoreModule;
-import seedu.igraduate.module.ElectiveModule;
-import seedu.igraduate.module.GeModule;
-import seedu.igraduate.module.MathModule;
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.model.module.CoreModule;
+import seedu.igraduate.model.module.ElectiveModule;
+import seedu.igraduate.model.module.GeModule;
+import seedu.igraduate.model.module.MathModule;
+import seedu.igraduate.model.module.Module;
 
 import java.io.File;
 import java.io.FileReader;

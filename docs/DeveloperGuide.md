@@ -23,9 +23,12 @@ point of time and list modules added to the application.
 ## 3. Design
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
+
+## Design & implementation
 
 iGraduate has one class called `iGraduate` which contains a main and run method and iGraduate constructor. 
 It is responsible for:
@@ -69,7 +72,7 @@ How the architecture interacts with each other [DIAGRAM]
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This app will help NUS students majoring in information security check his/her graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools to help make informed decisions about future modules.
 
 ## User Stories
 
@@ -84,7 +87,6 @@ How the architecture interacts with each other [DIAGRAM]
 |v1.0|impatient user|access information quickly||
 |v1.0|lazy user|access information with as little effort as possible||
 |v1.0|user|know my academic progress|estimate my pace and plan for the future|
-
 |v2.0|careless user|know if the module I entered is valid||
 |v2.0|user|calculate my current CAP||
 |v2.0|user|know if the module I entered is valid|monitor my performance throughout the course of study|

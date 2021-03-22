@@ -1,18 +1,17 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Parser;
-import seedu.igraduate.Storage;
-import seedu.igraduate.Ui;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.logic.Parser;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.Module;
 
 /**
  * Handles update command. 

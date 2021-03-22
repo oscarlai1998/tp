@@ -1,8 +1,8 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
-import seedu.igraduate.Storage;
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Ui;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.ui.Ui;
 
 
 import seedu.igraduate.exception.ModuleNotFoundException;
@@ -11,7 +11,7 @@ import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.Module;
 
 import java.util.logging.Logger;
 import java.util.logging.Level;
