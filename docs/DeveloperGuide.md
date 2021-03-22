@@ -31,6 +31,7 @@ point of time and list modules added to the application.
 
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
+
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 ## Design & implementation
