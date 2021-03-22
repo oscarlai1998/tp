@@ -11,7 +11,12 @@ By: `W09-2` Latest update: `22 March 2021`
         + [3.4 Model component](#34-model-component)
         + [3.5 Storage component](#35-storage-component)
         + [3.6 Common classes](#36-common-classes)
-    
+    * [Appendix: Requirements](#appendix-requirements)
+        + [Product Scope](#product-scope)
+            + [Target User Profile](#target-user-profile)
+            + [Value Proposition](#value-proposition)
+        + [User Stories](#user-stories)
+
 ## 1. Introduction
 iGraduate is a command line interface application written in Java. 
 The iGraduate API allows students to add modules to take, edit, delete or 
@@ -64,10 +69,11 @@ How the architecture interacts with each other [DIAGRAM]
 
 ### 3.6 Common classes
 
+## Appendix: Requirements
 
-## Product scope
+### Product scope
 
-###Target user profile:
+#### Target user profile:
 * is a NUS Information Security student
 * has a need to manage and plan modules
 * has a need to track graduation progress
@@ -77,7 +83,7 @@ How the architecture interacts with each other [DIAGRAM]
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-### Value proposition:
+#### Value proposition:
 Allows users to manage modules faster than a typical mouse/GUI driven app.
 Includes higher level features such as ability to add modules while ensuring user has cleared all prerequisites
 and to list all modules taken, graduation progress and current CAP with degree classification.
@@ -85,7 +91,7 @@ This app will help NUS students majoring in information security check his/her g
 a coherent manner based on the programme requirements.
 It also contains tools to help make informed decisions about future modules.
 
-## User Stories
+### User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
