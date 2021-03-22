@@ -112,7 +112,11 @@ It also contains tools to help make informed decisions about future modules.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user without online connection should still be able to use the application.
+5. A beginner user without prior knowledge should be able to pick up the application comfortably.
 
 ## Glossary
 
