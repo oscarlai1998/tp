@@ -41,7 +41,7 @@ public class ListCommand extends Command {
             LOGGER.log(Level.INFO, "Printed Entire List.");
             break;
         case "complete" :
-            if (moduleList.isCompleteEmpty()) {
+            if (moduleList.isCompletedModulesEmpty()) {
                 ui.printCompleteListEmptyMessage();
                 return;
             }
@@ -49,7 +49,7 @@ public class ListCommand extends Command {
             LOGGER.log(Level.INFO, "Printed Completed Modules.");
             break;
         case "incomplete":
-            if (moduleList.isIncompleteEmpty()) {
+            if (moduleList.isIncompletedModulesEmpty()) {
                 ui.printIncompleteListEmptyMessage();
                 return;
             }

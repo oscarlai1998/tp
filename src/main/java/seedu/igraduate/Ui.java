@@ -29,7 +29,6 @@ public class Ui {
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
 
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
-    public static final String PREREQUISITES_UNFULFILLED_MESSAGE = "You have not completed the prerequisites for %s!\n";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
 
@@ -112,17 +111,6 @@ public class Ui {
                 i += 1;
             }
         }
-    }
-
-    /**
-     * Prints prerequisites required when user tries to complete a module they with prerequisites remaining.
-     *
-     * @param moduleCode module code from user input.
-     * @param prerequisites list of prerequisites remaining for module corresponding to moduleCode.
-     */
-    public void printPrerequisitesUnfulfilled(String moduleCode, ArrayList<String> prerequisites) {
-        System.out.println(String.format(PREREQUISITES_UNFULFILLED_MESSAGE, moduleCode));
-        printPrerequisites(moduleCode, prerequisites);
     }
 
     /**

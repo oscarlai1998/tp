@@ -77,7 +77,7 @@ public class DoneCommand extends Command {
             }
             if (!moduleList.isModuleValid(module)) {
                 LOGGER.log(Level.INFO, "Prerequisites check failed.");
-                throw new PrerequisiteNotMetException();
+                throw new PrerequisiteNotMetException(module.getCode(), module.getUntakenPreRequisites());
             }
             markDone(moduleList, module);
             storage.saveModulesToFile(moduleList); //update json list
