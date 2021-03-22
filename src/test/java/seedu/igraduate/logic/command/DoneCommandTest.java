@@ -1,14 +1,14 @@
-package seedu.igraduate.command;
+package seedu.igraduate.logic.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.ModuleList;
-import seedu.igraduate.Parser;
-import seedu.igraduate.Storage;
-import seedu.igraduate.Ui;
+import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.logic.Parser;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
@@ -24,7 +24,7 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.Module;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

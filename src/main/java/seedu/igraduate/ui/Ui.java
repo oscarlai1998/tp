@@ -1,6 +1,6 @@
-package seedu.igraduate;
+package seedu.igraduate.ui;
 
-import seedu.igraduate.module.Module;
+import seedu.igraduate.model.module.Module;
 
 import java.util.ArrayList;
 import java.util.Scanner;
