@@ -11,6 +11,7 @@ By: `W09-2` Latest update: `22 March 2021`
         + [3.4 Model component](#34-model-component)
         + [3.5 Storage component](#35-storage-component)
         + [3.6 Common classes](#36-common-classes)
+    * [4. Implementation](#4-implementation)
     * [Appendix: Requirements](#appendix-requirements)
         + [Product Scope](#product-scope)
             + [Target User Profile](#target-user-profile)
@@ -84,6 +85,9 @@ when an error occurs. The method catches the exceptions and prints out the respe
 
 Each `exception` is specified by the name and description.
 
+## 4. Implementation
+
+This section elaborates on some details about how certain features are implemented.
 ## Appendix: Requirements
 
 ### Product scope
