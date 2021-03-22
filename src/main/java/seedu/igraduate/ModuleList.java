@@ -307,10 +307,10 @@ public class ModuleList {
         double totalCompletedMCs = 0;
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
-                assert totalCompletedMCs >= module.getCredit()
-                        : "Completed MCs should be more or equal to credits" + "of done modules";
                 totalCompletedMCs += module.getCredit();
             }
+            assert totalCompletedMCs >= module.getCredit()
+                    : "Completed MCs should be more or equal to credits" + "of done modules";
         }
         return totalCompletedMCs;
     }
