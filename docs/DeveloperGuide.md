@@ -27,7 +27,6 @@
 |v1.0|impatient user|access information quickly||
 |v1.0|lazy user|access information with as little effort as possible||
 |v1.0|user|know my academic progress|estimate my pace and plan for the future|
-
 |v2.0|careless user|know if the module I entered is valid||
 |v2.0|user|calculate my current CAP||
 |v2.0|user|know if the module I entered is valid|monitor my performance throughout the course of study|
