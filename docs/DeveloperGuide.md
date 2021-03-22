@@ -1,5 +1,8 @@
 # Developer Guide
 
+## About
+iGraduate is a <b>command line application</b> that will help NUS students majoring in information security <b>check his/her graduation progress and modules taken</b> in a coherent manner based on the programme requirements. It also contains tools to help make informed decisions about future modules. iGraduate data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -12,7 +15,7 @@
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This app will help NUS students majoring in information security check his/her graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools to help make informed decisions about future modules.
 
 ## User Stories
 
