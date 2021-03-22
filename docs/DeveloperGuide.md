@@ -11,6 +11,8 @@ By: `W09-2` Latest update: `22 March 2021`
         + [3.4 Model component](#34-model-component)
         + [3.5 Storage component](#35-storage-component)
         + [3.6 Common classes](#36-common-classes)
+    * [4. Implementation](#4-implementation)
+        + [4.1]
     * [Appendix: Requirements](#appendix-requirements)
         + [Product Scope](#product-scope)
             + [Target User Profile](#target-user-profile)
@@ -26,15 +28,12 @@ point of time and list modules added to the application.
 ## 2. Setting up, getting started
 
 ## 3. Design
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
 
-The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
-
-## Design & implementation
+The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each 
+component.
 
 iGraduate has one class called `iGraduate` which contains a main and run method and iGraduate constructor. 
 It is responsible for:
@@ -55,20 +54,118 @@ The rest of the App consists of four components:
 - Storage: Reads data from, and writes data to, the hard disk.
 
 Each of the four components,
-defines its API in an interface with the same name as the Component.
-exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding API interface mentioned in the previous point.
+- defines its API in an interface with the same name as the Component.
+- exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding 
+API interface mentioned in the previous point.
 
 How the architecture interacts with each other [DIAGRAM]
 
 ### 3.2 UI Component
+The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` 
+and `Print Methods`. 
+
+The `UI` component:
+- Executes user command using the Logic Package which consist of `Command` and `Parser` classes.
+- Listens for calls from `Model` package which consist of `ModuleList` and `Module` classes. Model packages will call
+  the specific print method to print an output.
+- Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
+The logic component consists of **two components**, `Parser` and `Command`, which works together
+to execute user commands.
+
+### Parser
+#### Description
+The parser interprets user input and makes sense of the command from the user.
+#### Design
+The parser feature contains one class, `Parser.java` and does its job through the `parseCommand()` method.
+
+`parseCommand()`extracts the command phrase entered by the user. Based on the type of command from the user, `parseCommand()` then calls different 
+methods to extract parameters and flags from the user command that are relevant to the command. The parser then creates 
+the relevant `Command` object and dispatches the control of the program to the created object.
+
+Given below is a diagram on how the Parser parses the command “***done CS2113T -g A+***”
+
+### Command
 
 ### 3.4 Model Component
 
 ### 3.5 Storage Component
+<b>API</b>: `Storage.java`
+
+The `Storage` Component, 
+- Can save `module` objects in the `moduleList` in a JSON format and read them back
 
 ### 3.6 Common classes
+The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
+when an error occurs. The method catches the exceptions and prints out the respective error message. 
+
+Each `exception` is specified by the name and description.
+
+## 4. Implementation
+This section elaborates on some details about how certain features are implemented.
+
+### 4.1 UI
+
+### 4.2 Parser
+
+### 4.3 Command
+
+#### 4.3.1 Add Command
+
+#### 4.3.2 Delete Command
+
+#### 4.3.3 Update Command
+
+#### 4.3.4 List Command
+
+#### 4.3.5 CAP Command
+
+#### 4.3.6 Done Command
+
+#### 4.3.7 Progress Command
+
+### 4.4 Module
+
+### 4.5 ModuleList
+
+### 4.6 Storage
+The storage feature saves the state of the module list after every execution of commands that manipulates 
+(i.e. update, add or delete) the modules in the list.
+
+<b>Details</b>
+
+The storage function is executed after every command that manipulates (i.e. adds, deletes or updates) the 
+modules in the module list, saving the updated state into the storage file. 
+The module list is stored in a storage file named `modules.json` in the `data` folder 
+(`<program location>/data/modules.json`). 
+
+<b>Considerations</b>
+
+The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
+handling and management with regards to modified storage files. The parsing of JSON format is also more 
+sophisticated and reliable. 
+
+In addition, the JSON format can be read across multiple different types of applications, allowing flexibility
+ in any future implementations regarding exporting of data. 
+
+<b>Alternatives</b>
+
+The alternative storage format considered is the use of delimiters. However, there are concerns regarding such
+ usage; the most important being potential parsing failure from a valid module. With the use of common 
+ delimiters such as commas (,) and dashes (-), the program is unable to differentiate between the various 
+ module information and legitimate module names containing delimiters and may parse the portion of the module 
+ to a wrong variable, resulting in corrupted results and a potential program crash. One example of such 
+ occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains 
+ dashes when the delimiters are used for separating various module information is also a dash. 
+
+Considerations were also given to use more unique delimiters (such as \\, |, etc.) to avoid accidental parsing
+ fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and
+  render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
+  third-party library, since the exception handling and parsing management lies in the library functions. 
+
+
+### 4.7 Exception
 
 ## Appendix: Requirements
 
