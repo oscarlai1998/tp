@@ -268,7 +268,7 @@ public class ModuleList {
      *
      * @return Boolean value indicating whether there are any completed modules.
      */
-    public boolean isCompleteEmpty() {
+    public boolean isCompletedModulesEmpty() {
         for (Module module : modules) {
             if (module.isDone()) {
                 return false;
@@ -282,7 +282,7 @@ public class ModuleList {
      *
      * @return Boolean value indicating whether there are any incomplete modules.
      */
-    public boolean isIncompleteEmpty() {
+    public boolean isIncompletedModulesEmpty() {
         for (Module module: modules) {
             if (!module.isDone()) {
                 return false;
@@ -376,6 +376,8 @@ public class ModuleList {
                 assert totalCompletedMCs >= module.getCredit()
                     : "Completed MCs should be more or equal to credits" + "of done modules";
             }
+            assert totalCompletedMCs >= module.getCredit()
+                    : "Completed MCs should be more or equal to credits" + "of done modules";
         }
         return totalCompletedMCs;
     }

@@ -27,8 +27,10 @@ public class Ui {
     public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
-    public static final String PREREQUISITES_MESSAGE = "List of pre-requisites to take %s: ";
+
+    public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
+
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
