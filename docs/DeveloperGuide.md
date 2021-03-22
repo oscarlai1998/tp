@@ -11,6 +11,8 @@ By: `W09-2` Latest update: `22 March 2021`
         + [3.4 Model component](#34-model-component)
         + [3.5 Storage component](#35-storage-component)
         + [3.6 Common classes](#36-common-classes)
+    * [4. Implementation](#4-implementation)
+        + [4.1]
     * [Appendix: Requirements](#appendix-requirements)
         + [Product Scope](#product-scope)
             + [Target User Profile](#target-user-profile)
@@ -30,7 +32,8 @@ point of time and list modules added to the application.
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
 
-The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
+The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each 
+component.
 
 iGraduate has one class called `iGraduate` which contains a main and run method and iGraduate constructor. 
 It is responsible for:
@@ -52,11 +55,20 @@ The rest of the App consists of four components:
 
 Each of the four components,
 - defines its API in an interface with the same name as the Component.
-- exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding API interface mentioned in the previous point.
+- exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding 
+API interface mentioned in the previous point.
 
 How the architecture interacts with each other [DIAGRAM]
 
 ### 3.2 UI Component
+The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` 
+and `Print Methods`. 
+
+The `UI` component:
+- Executes user command using the Logic Package which consist of `Command` and `Parser` classes.
+- Listens for calls from `Model` package which consist of `ModuleList` and `Module` classes. Model packages will call
+  the specific print method to print an output.
+- Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
 
@@ -69,30 +81,41 @@ The `Storage` Component,
 - Can save `module` objects in the `moduleList` in a JSON format and read them back
 
 ### 3.6 Common classes
+The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
+when an error occurs. The method catches the exceptions and prints out the respective error message. 
 
-## Implementation
+Each `exception` is specified by the name and description.
 
-### 3.1 UI
+## 4. Implementation
+This section elaborates on some details about how certain features are implemented.
 
-### 3.2 Parser
+### 4.1 UI
 
-### 3.3 Command
+### 4.2 Parser
 
-#### 3.3.1 Add Command
+### 4.3 Command
 
-#### 3.3.2 Delete Command
+#### 4.3.1 Add Command
 
-#### 3.3.3 Update Command
+#### 4.3.2 Delete Command
 
-#### 3.3.4 List Command
+#### 4.3.3 Update Command
 
-#### 3.3.5 CAP Command
+#### 4.3.4 List Command
 
-#### 3.3.6 Done Command
+#### 4.3.5 CAP Command
 
-#### 3.3.7 Progress Command
+#### 4.3.6 Done Command
 
-### 3.4 Storage
+#### 4.3.7 Progress Command
+
+### 4.4 Module
+
+### 4.5 ModuleList
+
+### 4.6 Storage
+
+### 4.7 Exception
 
 ## Appendix: Requirements
 
@@ -143,7 +166,11 @@ It also contains tools to help make informed decisions about future modules.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. A user without online connection should still be able to use the application.
+5. A beginner user without prior knowledge should be able to pick up the application comfortably.
 
 ## Glossary
 
