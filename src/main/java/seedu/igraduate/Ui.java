@@ -24,10 +24,14 @@ public class Ui {
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have have completed:";
     public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to complete:";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
+    public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
+    public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
+
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String PREREQUISITES_UNFULFILLED_MESSAGE = "You have not completed the prerequisites for %s!\n";
-    public static final String CAP_MESSAGE = "Current CAP: %.2f";
+    public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
+
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -190,6 +194,20 @@ public class Ui {
     }
 
     /**
+     * Displays message if there are no completed modules.
+     */
+    public void printCompleteListEmptyMessage() {
+        System.out.println(EMPTY_COMPLETE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no incomplete modules.
+     */
+    public void printIncompleteListEmptyMessage() {
+        System.out.println(EMPTY_INCOMPLETE_LIST_MESSAGE);
+    }
+
+    /**
      * Displays the progress bar for university graduation completion. 
      * 
      * @param completedMCs total number of credits completed. 
@@ -211,12 +229,13 @@ public class Ui {
     }
 
     /**
-     * Prints CAP of user based on their grades.
+     * Prints CAP and degree classification of user based on their grades.
      *
-     * @param cap CAP of user.
+     * @param cap user's cap
+     * @param degreeClassification user's degree classification
      */
-    public void printCap(double cap) {
-        System.out.println(String.format(CAP_MESSAGE, cap));
+    public void printCap(double cap, String degreeClassification) {
+        System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));
     }
 
     /**
@@ -227,4 +246,6 @@ public class Ui {
     public void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }
+
+
 }

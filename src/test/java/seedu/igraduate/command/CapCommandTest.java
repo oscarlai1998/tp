@@ -25,6 +25,7 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
+import seedu.igraduate.exception.PrerequisiteNotMetException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -48,7 +49,7 @@ public class CapCommandTest {
         IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
         ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
         UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException {
+        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Computer Org -mc 4 -t core -c cs2100";
         Command addFirst = Parser.parseCommand(firstModule);
@@ -63,7 +64,7 @@ public class CapCommandTest {
         IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
         ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
         UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException {
+        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
 
         String setFirstToDone = "done cs1010 -g A+";
         String setSecondToDone = "done cs2100 -g A-";
@@ -76,7 +77,8 @@ public class CapCommandTest {
         Command capCommand = Parser.parseCommand(calcCap);
         System.setOut(new PrintStream(outContent));
         capCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.CAP_MESSAGE, 4.75) + System.lineSeparator(), outContent.toString());
+        assertEquals(String.format(Ui.CAP_MESSAGE, 4.75, "Honours (Highest Distinction)")
+                + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -86,10 +88,10 @@ public class CapCommandTest {
         IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
         ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
         UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException {
+        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
 
         String setFirstToDone = "done cs1010 -g A+";
-        String setSecondToDone = "done cs2100 -g K";
+        String setSecondToDone = "done cs2100 -g B-";
         Command doneFirst = Parser.parseCommand(setFirstToDone);
         Command doneSecond = Parser.parseCommand(setSecondToDone);
         doneFirst.execute(moduleList, ui, storage);
@@ -97,9 +99,7 @@ public class CapCommandTest {
 
         String calcCap = "cap";
         Command capCommand = Parser.parseCommand(calcCap);
-        Exception exception = assertThrows(InvalidModuleGradeException.class,
-            () -> capCommand.execute(moduleList, ui, storage));
-        assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
+        capCommand.execute(moduleList, ui, storage);
     }
 
     @AfterEach
@@ -107,7 +107,7 @@ public class CapCommandTest {
         IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
         ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
         UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException {
+        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2100";
         Command deleteFirst = Parser.parseCommand(firstModule);

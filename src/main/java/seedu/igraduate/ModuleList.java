@@ -11,6 +11,7 @@ import seedu.igraduate.module.CoreModule;
 import seedu.igraduate.module.ElectiveModule;
 import seedu.igraduate.module.GeModule;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -82,6 +83,19 @@ public class ModuleList {
                 throw new PrerequisiteNotFoundException();
             }
         }
+    }
+
+    /**
+     * Checks if module list contains module.
+     *
+     * @param module Module object to be added to moduleList.
+     * @return boolean value indicating if module list contains module.
+     */
+    public boolean isContains(Module module) {
+        if (modules.contains(module)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -162,6 +176,29 @@ public class ModuleList {
     }
 
     /**
+     * Checks if Prerequisite of module is done.
+     *
+     * @param module Module object marked done.
+     * @return boolean value indicating whether module is valid.
+     * @throws PrerequisiteNotFoundException If the pre-requisite module is not found.
+     */
+    public boolean isModuleValid(Module module) throws PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = module.getPreRequisites();
+
+        for (String preRequisite : preRequisites) {
+            try {
+                Module preRequisiteModule = getByCode(preRequisite);
+                if (!preRequisiteModule.isDone()) {
+                    return false;
+                }
+            } catch (ModuleNotFoundException e) {
+                throw new PrerequisiteNotFoundException();
+            }
+        }
+        return true;
+    }
+
+    /**
      * Marks the specified module as taken.
      *
      * @param module Module to be marked as taken.
@@ -218,12 +255,40 @@ public class ModuleList {
     }
 
     /**
-     * Checks if the current module list is empty.
+     * Checks if the entire module list is empty.
      *
      * @return Boolean value indicating whether the module list is empty.
      */
     public boolean isEmpty() {
         return modules.isEmpty();
+    }
+
+    /**
+     * Checks if the list for completed module is empty.
+     *
+     * @return Boolean value indicating whether there are any completed modules.
+     */
+    public boolean isCompleteEmpty() {
+        for (Module module : modules) {
+            if (module.isDone()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the list for incomplete module is empty.
+     *
+     * @return Boolean value indicating whether there are any incomplete modules.
+     */
+    public boolean isIncompleteEmpty() {
+        for (Module module: modules) {
+            if (!module.isDone()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -308,6 +373,8 @@ public class ModuleList {
         for (Module module : modules) {
             if (module.getStatus().equalsIgnoreCase("taken")) {
                 totalCompletedMCs += module.getCredit();
+                assert totalCompletedMCs >= module.getCredit()
+                    : "Completed MCs should be more or equal to credits" + "of done modules";
             }
             assert totalCompletedMCs >= module.getCredit()
                     : "Completed MCs should be more or equal to credits" + "of done modules";
