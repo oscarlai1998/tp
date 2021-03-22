@@ -32,7 +32,8 @@ point of time and list modules added to the application.
 ### 3.1 Architecture
 ![archi](./images/ArchitectureDiagram.png)
 
-The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each component.
+The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each 
+component.
 
 ## Design & implementation
 
@@ -56,11 +57,20 @@ The rest of the App consists of four components:
 
 Each of the four components,
 defines its API in an interface with the same name as the Component.
-exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding API interface mentioned in the previous point.
+exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding 
+API interface mentioned in the previous point.
 
 How the architecture interacts with each other [DIAGRAM]
 
 ### 3.2 UI Component
+The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` 
+and `Print Methods`. 
+
+The `UI` component:
+- Executes user command using the Logic Package which consist of `Command` and `Parser` classes.
+- Listens for calls from `Model` package which consist of `ModuleList` and `Module` classes. Model packages will call
+  the specific print method to print an output.
+- Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
 
@@ -69,6 +79,10 @@ How the architecture interacts with each other [DIAGRAM]
 ### 3.5 Storage Component
 
 ### 3.6 Common classes
+The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
+when an error occurs. The method catches the exceptions and prints out the respective error message. 
+
+Each `exception` is specified by the name and description.
 
 ## Appendix: Requirements
 
