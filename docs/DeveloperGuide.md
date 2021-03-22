@@ -92,7 +92,7 @@ The `Storage` Component,
 
 #### 3.3.7 Progress Command
 
-### 3.4 Storage 
+### 3.4 Storage
 
 ## Appendix: Requirements
 
