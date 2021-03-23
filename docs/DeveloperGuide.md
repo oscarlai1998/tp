@@ -88,7 +88,7 @@ Based on the type of command from the user, `parseCommand()` then calls differen
 flags from the user command that are relevant to the command. The parser then creates 
 the relevant `Command` object and dispatches the control of the program to the created object.
 
-Given below is the Parser class diagram showing the important methods that returns a `Command` object.”
+Given below is the Parser class diagram showing the important methods that returns a `Command` object.
 ![archi](./images/ParserClassDiagram.png)
 
 ### 3.3.2 Command
@@ -189,7 +189,7 @@ and contains a `toString` method that overrides the format of elective module pr
 The `MathModule` class inherits from the `Module` class. It initializes the math module object with the information needed and 
 contains a `toString` method that overrides the format of math module printing.
 
-#### 3.4.2 `list` Package
+### 3.4.2 `list` Package
 
 ### 3.5 Storage Component
 Class Diagram:
