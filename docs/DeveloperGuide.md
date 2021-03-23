@@ -88,6 +88,24 @@ the relevant `Command` object and dispatches the control of the program to the c
 Given below is a diagram on how the Parser parses the command “***done CS2113T -g A+***”
 
 ### Command
+#### Description
+The `command` component executes the correct command based on what the parser interprets.
+#### Design
+The `command` component consists of an abstract class `Command` and 8 subclasses that inherit from it.
+
+The 8 subclasses are:
+* AddCommand
+* CapCommand
+* DeleteCommand
+* DoneCommand
+* ExitCommand
+* ListCommand
+* ProgressCommand
+* UpdateCommand
+
+The correct command is executed once the `Command` object is created by the parser by executing the `execute()` method in the correct subclass.
+The command execution can affect the `Model` (eg. adding a module).
+At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
 ### 3.4 Model Component
 
