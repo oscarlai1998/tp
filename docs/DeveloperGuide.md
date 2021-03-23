@@ -192,10 +192,18 @@ contains a `toString` method that overrides the format of math module printing.
 #### 3.4.2 `list` Package
 
 ### 3.5 Storage Component
-<b>API</b>: `Storage.java`
+Class Diagram:
+
+![archi](./images/storageClassDiagram.jpg)
+
+<sup>***Figure 3.5.1** UML class diagram for Storage package*</sup>
 
 The `Storage` Component, 
 - Can save `module` objects in the `moduleList` in a JSON format and read them back
+
+![archi](./images/storageObjectDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML object diagram for an instance of storage object*</sup>
 
 ### 3.6 Common classes
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
