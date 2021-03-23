@@ -249,6 +249,10 @@ modules in the module list, saving the updated state into the storage file.
 The module list is stored in a storage file named `modules.json` in the `data` folder 
 (`<program location>/data/modules.json`). 
 
+![archi](./images/storageSequenceDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
+
 <b>Considerations</b>
 
 The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
