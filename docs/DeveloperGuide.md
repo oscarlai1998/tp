@@ -72,22 +72,26 @@ The `UI` component:
 - Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
-The logic component consists of **two components**, `Parser` and `Command`, which works together
-to execute user commands.
+The logic component consists of  the class `Parser` and the package `command`. They work together to deal
+with interpreting user input, identifying the right command to execute as well as the
+actual execution of the command. `Parser` identifies the command to run and extracts the parameters and flags
+required for the command from user input and passes these values to `command`, which then runs the command.
 
-### Parser
+### 3.3.1 Parser
 #### Description
-The parser interprets user input and makes sense of the command from the user.
+The parser interprets user input and subsequently passes the properly parsed user input to `command` to execute the command.
 #### Design
 The parser feature contains one class, `Parser.java` and does its job through the `parseCommand()` method.
 
-`parseCommand()`extracts the command phrase entered by the user. Based on the type of command from the user, `parseCommand()` then calls different 
-methods to extract parameters and flags from the user command that are relevant to the command. The parser then creates 
+`parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input.
+Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and 
+flags from the user command that are relevant to the command. The parser then creates 
 the relevant `Command` object and dispatches the control of the program to the created object.
 
-Given below is a diagram on how the Parser parses the command “***done CS2113T -g A+***”
+Given below is the Parser class diagram showing the important methods that returns a `Command` object.”
+![archi](./images/ParserClassDiagram.png)
 
-### Command
+### 3.3.2 Command
 
 ### 3.4 Model Component
 
@@ -110,7 +114,7 @@ The `module` package consists of classes related to module objects. An abstract 
 and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
 the relationship between the interaction of classes under the module package is shown below.
 
-![archi](./diagrams/ModulePackageClassDiagram.png)
+![archi](./images/ModulePackageClassDiagram.png)
 <sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
 
 The following child classes are created to handle different types of modules based on the generic module type available in 
