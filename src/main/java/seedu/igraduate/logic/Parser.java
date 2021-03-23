@@ -315,6 +315,15 @@ public class Parser {
         return new UpdateCommand(commandParameters[1], commandFlags);
     }
 
+    /**
+     * Extracts relevant parameters and creates an instance of CapCommand to execute.
+     * Format: "Cap"
+     *
+     * @param commandParameters parameters of user input, excluding command flags.
+     * @param commandFlags flags of commands from user input.
+     * @return new instance of CapCommand class.
+     * @throws IncorrectParameterCountException if parameter count is not correct.
+     */
     public static Command createCapCommand(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_CAP_LENGTH);
