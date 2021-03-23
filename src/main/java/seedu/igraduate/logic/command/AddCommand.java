@@ -1,6 +1,6 @@
 package seedu.igraduate.logic.command;
 
-import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 

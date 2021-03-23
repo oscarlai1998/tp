@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.Parser;
-import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
