@@ -295,7 +295,7 @@ public class Parser {
 
     /**
      * Extracts relevant parameters and creates an instance of UpdateCommand to execute. 
-     * Format: "update [module code] [-g|-mc|-n] [value]"
+     * Format: "update [module code] [-g|-mc|-n|-p] [value]"
      * 
      * @param commandParameters parameters of user input, excluding command flags. 
      * @param commandFlags flags of commands from user input. 
