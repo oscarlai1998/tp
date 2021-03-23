@@ -8,7 +8,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.model.module.GeModule;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
-# iGraduate study helper
+# iGraduate
 By: `W09-2` Latest update: `22 March 2021`
 
-- [iGraduate study helper](#igraduate-study-helper)
+- [iGraduate Developer Guide](#igraduate-developer-guide)
     * [1. Introduction](#1-introduction)
     * [2. Setting up, getting started](#2-setting-up-getting-started)
     * [3. Design](#3-design)
@@ -30,6 +30,7 @@ point of time and list modules added to the application.
 ## 3. Design
 
 ### 3.1 Architecture
+
 ![archi](./images/ArchitectureDiagram.png)
 
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each 
@@ -89,6 +90,84 @@ Given below is a diagram on how the Parser parses the command “***done CS2113T
 ### Command
 
 ### 3.4 Model Component
+
+The `model` component consists of two main packages that define and deal with data storing issues based on the information 
+provided by the user input. The data storing issues are split into two main categories, what data should be included in for a 
+module and a container managing the module objects. The `module` package holds the information which acts as a blueprint for 
+creating and manipulating module objects while the `list` package consists of a class that defines the way the module objects 
+should be managed and stored.
+
+#### 3.4.1 `module` Package
+
+##### Description
+
+The `module` package consists of classes that are used to define the type of data to be stored in a module object and establish 
+a framework to show how other components can make use of the features in module classes.
+
+##### Design
+
+The `module` package consists of classes related to module objects. An abstract class `Module` is created to hold attributes 
+and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
+the relationship between the interaction of classes under the module package is shown below.
+
+![archi](./diagrams/ModulePackageClassDiagram.png)
+<sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
+
+The following child classes are created to handle different types of modules based on the generic module type available in 
+the university:
+- `CoreModule`
+- `GeModule`
+- `ElectiveModule`
+- `MathModule`
+
+Each of the module classes consists of:
+- Attributes related to the module type it is representing
+- Getter and setter methods for setting and retrieval of its attributes
+- Methods that alter an instance of its own class
+
+##### 3.4.1.1 `Module` Class
+
+`Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes 
+applicable to all modules. The attributes found in the `Module` class are:
+
+Scope   | Type              | Variable             | Description | 
+--------|-------------------|----------------------|-------------|
+private | String            | code                 | Module code of the module object.
+private | String            | name                 | Module name of the module object.
+private | double            | credit               | Modular credit of the module object.
+private | String            | status               | Status of the module, whether it is “taken”, “not taken” or “taking”.
+private | String            | grade                | The grade of taken modules.
+private | ArrayList<String> | preRequisites        | A list of prerequisite modules.
+private | ArrayList<String> | untakenPreRequisites | A list of unsatisfied prerequisite modules.
+private | ArrayList<String> | requiredByModules    | A list of modules requiring the current module as a prerequisite.
+
+The `Module` class also consists of methods that set and get the value of attributes shown in the table above. There are 
+four additional methods in the class, namely `removeUntakenPreRequisite`, `removeRequiredByModule`, `getStatusIcon`and `toString`
+. The `removeUntakenPreRequisite` and `removeRequiredByModule` methods are used to remove a single`untakenPreRequisites` module 
+and `requiredByModules` module respectively, whereas `getStatusIcon` returns the status icon based on the module 
+status. For customized formatting of module printing messages, `toString` method is overridden.
+
+##### 3.4.1.2 `CoreModule` Class
+
+The `CoreModule` class inherits from the `Module` class. It initializes the core module object with the information needed and 
+contains a `toString` method that overrides the format of core module printing.
+
+##### 3.4.1.3 `GeModule` Class
+
+The `GeModule` class inherits from the `Module` class. It initializes the general education module object with the information needed 
+and contains a `toString` method that overrides the format of general education module printing.
+
+##### 3.4.1.4 `ElectiveModule` Class
+
+The `ElectiveModule` class inherits from the `Module` class. It initializes the elective module object with the information needed 
+and contains a `toString` method that overrides the format of elective module printing.
+
+##### 3.4.1.5 `MathModule` Class
+
+The `MathModule` class inherits from the `Module` class. It initializes the math module object with the information needed and 
+contains a `toString` method that overrides the format of math module printing.
+
+#### 3.4.2 `list` Package
 
 ### 3.5 Storage Component
 <b>API</b>: `Storage.java`

@@ -3,7 +3,7 @@ package seedu.igraduate.storage;
 import seedu.igraduate.exception.LoadModuleFailException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
-import seedu.igraduate.model.ModuleList;
+import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.model.module.CoreModule;
 import seedu.igraduate.model.module.ElectiveModule;
 import seedu.igraduate.model.module.GeModule;
