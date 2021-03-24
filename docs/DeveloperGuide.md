@@ -1,4 +1,4 @@
-# iGraduate
+# iGraduate Developer Guide
 By: `W09-2` Latest update: `22 March 2021`
 
 - [iGraduate Developer Guide](#igraduate-developer-guide)
@@ -6,11 +6,18 @@ By: `W09-2` Latest update: `22 March 2021`
     * [2. Setting up, getting started](#2-setting-up-getting-started)
     * [3. Design](#3-design)
         + [3.1 Architecture](#31-architecture)
-        + [3.2 UI component](#32-ui-component)
-        + [3.3 Logic component](#33-logic-component)
-        + [3.4 Model component](#34-model-component)
-        + [3.5 Storage component](#35-storage-component)
-        + [3.6 Common classes](#36-common-classes)
+        + [3.2 UI Component](#32-ui-component)
+        + [3.3 Logic Component](#33-logic-component)
+        + [3.4 Model Component](#34-model-component)
+            + [3.4.1 `module` Package](#341-module-package)
+                + [3.4.1.1 `Module` Class](#3411-module-class)
+                + [3.4.1.2 `CoreModule` Class](#3412-coremodule-class)
+                + [3.4.1.3 `GeModule` Class](#3413-gemodule-class)
+                + [3.4.1.4 `ElectiveModule` Class](#3414-electivemodule-class)
+                + [3.4.1.5 `MathModule` Class](#3415-mathmodule-class)
+            + [3.4.2 `list` Package](#342-list-package)
+        + [3.5 Storage Component](#35-storage-component)
+        + [3.6 Common Classes](#36-common-classes)
     * [4. Implementation](#4-implementation)
         + [4.1]
     * [Appendix: Requirements](#appendix-requirements)
@@ -99,12 +106,12 @@ should be managed and stored.
 
 #### 3.4.1 `module` Package
 
-##### Description
+#### Description
 
 The `module` package consists of classes that are used to define the type of data to be stored in a module object and establish 
 a framework to show how other components can make use of the features in module classes.
 
-##### Design
+#### Design
 
 The `module` package consists of classes related to module objects. An abstract class `Module` is created to hold attributes 
 and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
@@ -125,7 +132,7 @@ Each of the module classes consists of:
 - Getter and setter methods for setting and retrieval of its attributes
 - Methods that alter an instance of its own class
 
-##### 3.4.1.1 `Module` Class
+#### 3.4.1.1 `Module` Class
 
 `Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes 
 applicable to all modules. The attributes found in the `Module` class are:
@@ -147,22 +154,22 @@ four additional methods in the class, namely `removeUntakenPreRequisite`, `remov
 and `requiredByModules` module respectively, whereas `getStatusIcon` returns the status icon based on the module 
 status. For customized formatting of module printing messages, `toString` method is overridden.
 
-##### 3.4.1.2 `CoreModule` Class
+#### 3.4.1.2 `CoreModule` Class
 
 The `CoreModule` class inherits from the `Module` class. It initializes the core module object with the information needed and 
 contains a `toString` method that overrides the format of core module printing.
 
-##### 3.4.1.3 `GeModule` Class
+#### 3.4.1.3 `GeModule` Class
 
 The `GeModule` class inherits from the `Module` class. It initializes the general education module object with the information needed 
 and contains a `toString` method that overrides the format of general education module printing.
 
-##### 3.4.1.4 `ElectiveModule` Class
+#### 3.4.1.4 `ElectiveModule` Class
 
 The `ElectiveModule` class inherits from the `Module` class. It initializes the elective module object with the information needed 
 and contains a `toString` method that overrides the format of elective module printing.
 
-##### 3.4.1.5 `MathModule` Class
+#### 3.4.1.5 `MathModule` Class
 
 The `MathModule` class inherits from the `Module` class. It initializes the math module object with the information needed and 
 contains a `toString` method that overrides the format of math module printing.
