@@ -1,4 +1,4 @@
-# iGraduate
+# iGraduate Developer Guide
 By: `W09-2` Latest update: `22 March 2021`
 
 - [iGraduate Developer Guide](#igraduate-developer-guide)
@@ -119,7 +119,7 @@ module and a container managing the module objects. The `module` package holds t
 creating and manipulating module objects while the `list` package consists of a class that defines the way the module objects 
 should be managed and stored.
 
-#### 3.4.1 `module` Package
+### 3.4.1 `module` Package
 
 ##### Description
 
@@ -190,6 +190,47 @@ The `MathModule` class inherits from the `Module` class. It initializes the math
 contains a `toString` method that overrides the format of math module printing.
 
 ### 3.4.2 `list` Package
+
+#### Description
+The `list` package contains an `ArrayList` of type `Module`, representing
+the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
+such as adding, deleting or marking a `Module` as done.
+
+#### Design
+The package consists of 1 class, `ModuleList.java`. `ModuleList` contains 2 constructor signatures; 1 for constructing a
+new, empty list for when the user uses iGraduate for the first time, and the other to contain the modules already stored
+in `Storage`.
+
+Within the class `ModuleList`, different methods are defined to perform different operations on the list of `Modules`. These
+operations are:
+1. Add a module to the list
+2. Delete a module from the list
+3. Mark a module as done
+##### Adding a module
+For adding modules to the list, the methods defined are `add`, `addModuleRequiredBy` and `removeTakenByPrerequisites`.
+To add a new module, say `newModule`, `add` is called to perform 3 steps:
+1. First, `addModuleRequiredBy`is called to populate the list of modules that require
+`newModule` as a prerequisite. 
+2. Then, `removeTakenByPrerequisites` checks the list of prerequisites of `newModule` and 
+removes the ones that have been marked as taken.
+3. Finally, `add` calls `ArrayList.add()` to add `newModule` to the list.
+
+##### Deleting a module
+For deleting a module to the list, the methods defined are `delete` and `removeFromPreRequisiteModuleRequiredBy`. To
+delete an existing module from the list, say `existingModule`, `delete` is called to perform 2 steps:
+1. Firstly, `delete` calls `ArrayList.remove()` to delete `existingModule` from the list.
+2. Then, `removeFromPreRequisiteModuleRequiredBy` is called to remove `existingModule` from its pre-requisite modules' 
+   requiredBy list.
+   
+##### Mark module as taken
+For marking a module as taken, the methods defined are `markAsTaken` and `removeFromModuleUntakenPrerequisites`. To mark
+an existing module as taken, say `existingModule`, `markAsTaken` is called to perform 2 steps:
+1. First, `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
+2. Then, `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table
+from the list of modules that require `existingModule` as a prerequisite.
+
+Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such
+as the entire list or an individual module from the list according to different parameters such as module code or index. 
 
 ### 3.5 Storage Component
 Class Diagram:
@@ -342,7 +383,8 @@ It also contains tools to help make informed decisions about future modules.
 ## Instructions for manual testing
 
 Given below are instructions to test the app manually.
-<div markdown="span" class="alert alert-info">**Note:** These instructions only provide a starting point for testers to work on;
+
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
