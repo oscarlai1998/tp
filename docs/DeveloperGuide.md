@@ -191,7 +191,6 @@ contains a `toString` method that overrides the format of math module printing.
 
 ### 3.4.2 `list` Package
 
-<<<<<<< HEAD
 #### Description
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
