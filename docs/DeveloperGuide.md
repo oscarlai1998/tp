@@ -79,22 +79,44 @@ The `UI` component:
 - Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
-The logic component consists of **two components**, `Parser` and `Command`, which works together
-to execute user commands.
+The logic component consists of  the class `Parser` and the package `command`. They work together to deal
+with interpreting user input, identifying the right command to execute as well as the
+actual execution of the command. `Parser` identifies the command to run and extracts the parameters and flags
+required for the command from user input and passes these values to `command`, which then runs the command.
 
-### Parser
+### 3.3.1 Parser
 #### Description
-The parser interprets user input and makes sense of the command from the user.
+The parser interprets user input and subsequently passes the properly parsed user input to `command` to execute the command.
 #### Design
 The parser feature contains one class, `Parser.java` and does its job through the `parseCommand()` method.
 
-`parseCommand()`extracts the command phrase entered by the user. Based on the type of command from the user, `parseCommand()` then calls different 
-methods to extract parameters and flags from the user command that are relevant to the command. The parser then creates 
+`parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input.
+Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and 
+flags from the user command that are relevant to the command. The parser then creates 
 the relevant `Command` object and dispatches the control of the program to the created object.
 
-Given below is a diagram on how the Parser parses the command “***done CS2113T -g A+***”
+Given below is the Parser class diagram showing the important methods that returns a `Command` object.
+![archi](./images/ParserClassDiagram.png)
 
-### Command
+### 3.3.2 Command
+#### Description
+The `command` component executes the correct command based on what the parser interprets.
+#### Design
+The `command` component consists of an abstract class `Command` and 8 subclasses that inherit from it.
+
+The 8 subclasses are:
+* AddCommand
+* CapCommand
+* DeleteCommand
+* DoneCommand
+* ExitCommand
+* ListCommand
+* ProgressCommand
+* UpdateCommand
+
+The correct command is executed once the `Command` object is created by the parser by executing the `execute()` method in the correct subclass.
+The command execution can affect the `Model` (eg. adding a module).
+At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
 ### 3.4 Model Component
 
@@ -117,7 +139,7 @@ The `module` package consists of classes related to module objects. An abstract 
 and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
 the relationship between the interaction of classes under the module package is shown below.
 
-![archi](./diagrams/ModulePackageClassDiagram.png)
+![archi](./images/ModulePackageClassDiagram.png)
 <sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
 
 The following child classes are created to handle different types of modules based on the generic module type available in 
@@ -174,13 +196,21 @@ and contains a `toString` method that overrides the format of elective module pr
 The `MathModule` class inherits from the `Module` class. It initializes the math module object with the information needed and 
 contains a `toString` method that overrides the format of math module printing.
 
-#### 3.4.2 `list` Package
+### 3.4.2 `list` Package
 
 ### 3.5 Storage Component
-<b>API</b>: `Storage.java`
+Class Diagram:
+
+![archi](./images/storageClassDiagram.jpg)
+
+<sup>***Figure 3.5.1** UML class diagram for Storage package*</sup>
 
 The `Storage` Component, 
 - Can save `module` objects in the `moduleList` in a JSON format and read them back
+
+![archi](./images/storageObjectDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML object diagram for an instance of storage object*</sup>
 
 ### 3.6 Common classes
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
@@ -225,6 +255,10 @@ The storage function is executed after every command that manipulates (i.e. adds
 modules in the module list, saving the updated state into the storage file. 
 The module list is stored in a storage file named `modules.json` in the `data` folder 
 (`<program location>/data/modules.json`). 
+
+![archi](./images/storageSequenceDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
 <b>Considerations</b>
 

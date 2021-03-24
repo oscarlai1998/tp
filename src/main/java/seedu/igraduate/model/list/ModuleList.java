@@ -375,8 +375,6 @@ public class ModuleList {
                 assert totalCompletedMCs >= module.getCredit()
                     : "Completed MCs should be more or equal to credits" + "of done modules";
             }
-            assert totalCompletedMCs >= module.getCredit()
-                    : "Completed MCs should be more or equal to credits" + "of done modules";
         }
         return totalCompletedMCs;
     }
