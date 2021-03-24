@@ -1,4 +1,4 @@
-# iGraduate
+# iGraduate Developer Guide
 By: `W09-2` Latest update: `22 March 2021`
 
 - [iGraduate Developer Guide](#igraduate-developer-guide)
@@ -191,6 +191,7 @@ contains a `toString` method that overrides the format of math module printing.
 
 ### 3.4.2 `list` Package
 
+<<<<<<< HEAD
 #### Description
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
@@ -232,11 +233,19 @@ from the list of modules that require `existingModule` as a prerequisite.
 Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such
 as the entire list or an individual module from the list according to different parameters such as module code or index. 
 
-s### 3.5 Storage Component
-<b>API</b>: `Storage.java`
+### 3.5 Storage Component
+Class Diagram:
+
+![archi](./images/storageClassDiagram.jpg)
+
+<sup>***Figure 3.5.1** UML class diagram for Storage package*</sup>
 
 The `Storage` Component, 
 - Can save `module` objects in the `moduleList` in a JSON format and read them back
+
+![archi](./images/storageObjectDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML object diagram for an instance of storage object*</sup>
 
 ### 3.6 Common classes
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
@@ -281,6 +290,10 @@ The storage function is executed after every command that manipulates (i.e. adds
 modules in the module list, saving the updated state into the storage file. 
 The module list is stored in a storage file named `modules.json` in the `data` folder 
 (`<program location>/data/modules.json`). 
+
+![archi](./images/storageSequenceDiagram.jpg)
+
+<sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
 <b>Considerations</b>
 
@@ -370,4 +383,236 @@ It also contains tools to help make informed decisions about future modules.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually.
+
+**Note:** These instructions only provide a starting point for testers to work on;
+testers are expected to do more *exploratory* testing.
+
+### Launch and shutdown
+
+1. Initial launch
+
+    1. Download the jar file and copy into an empty folder
+
+    1. Run the jar file on your command prompt with the by typing "java -jar iGradute.java" then enter. 
+    
+
+2. Shutdown
+    
+    1. Enter the command `exit` in iGraduate. The program will shutdown by itself.
+    
+### Adding a module
+
+1. Adding a module into the module list.
+
+    1. Prerequisites: Module does not exist in the module list.
+    
+    1. Test case: `add Programming Methodology -t core -mc 4 -c CS1010`<br>
+       Expected: Module added successfully.
+       ````
+       Added CS1010 Programming Methodology to the list. (4.0MCs)
+       
+       [C][✘] CS1010   Programming Methodology                                 NIL   4 MC
+       ````
+    1. Test case: `add Programming Methodology -t cor -mc 4 -c CS1010`
+       Expected: Error in adding module as module type is invalid.
+       ````
+       The module type you have entered is invalid.
+       The supported module types for add are: ue, ge, core and math.
+       ````
+   1. Test case: `add Programming Methodology -t core -mc -c CS1010`<br>
+      Expected:
+      Error in adding module as there is incorrect number of parameters given,
+      which in this case number of mc is not given.
+      ````
+      The number of parameters provided is incorrect. 
+      Please double check and try again.   
+      ````   
+    1. Other incorrect add commands to try: `add`, `add nothing` <br>
+       Expected: Similar to previous.
+       
+### Deleting a module
+1. Deleting modules from a given module list.
+   
+    1. Prerequisites: Module list is not empty.
+    
+    1. Assumption: Module list consists of module CS1010.
+    
+    1. Test case: `delete CS1010`<br>
+       Expected: Module deleted successfully.
+       ````
+       "Core" module CS1010 has been deleted.
+       ````
+    1. Test case: `delete CS1020` <br>
+       Expected: Error in deleting module as module is not in the list.
+       ````
+       The module code you have entered does not exists. 
+       Please double check and try again.
+       ````
+    1. Test case: `delet CS1010` <br>
+       Expected: Error in deleting module as `delet` is an unknown command word.
+       ````
+       The command you have entered is incorrect. 
+       Please double check and try again.
+       ````
+    1. Test case: `delete -g A CS1010` <br>
+       Expected: Error in deleting module as extra parameter, eg. -g A, is found.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+       
+### Marking modules as done
+1. Masking modules as done with grade obtained after the semester.
+    1. Prerequisites: Module list is not empty.
+
+    1. Assumption: Module list consists of module CS1010.
+    
+    1. Test case: `done CS1010 -g A+` <br>
+       Expected: Module marked as done with grade A+ successfully.
+       ````
+       Nice! I've marked this module as done:
+       [C][✓] CS1010   Programming Methodology                                  A+   2 MC
+       ````
+    1. Test case: `done CS1020` <br>
+       Expected: Error in marking module as done as module is not in the list.
+       ````
+       The module code you have entered does not exists.
+       Please double check and try again.
+       ````
+    1. Test case: `done CS1010 A+` <br>
+       Expected: Error in marking module as done as flag `-g` is not found before the grade `A+`.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+    1. Test case: `done CS1010`<br>
+       Expected: Error in marking module as done as incorrect number of parametes is given, eg. missing grade.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+    1. Other incorrect done commands to try: `done`, `done -g A+` <br>
+      Expected: Similar to previous.
+       
+### Updating the module list
+1. Update the modules in module list with changes in module credits or module grade.
+    1. Prerequisites: Module list is not empty.
+
+    1. Assumption: Module list consists of module CS1010 with 4mcs marked as done with grade A+.
+    
+    1. Test case: `update CS1010 -g A- -mc 2` <br>
+       Expected: Module grade and module credits updated succesfully.
+       ````
+       Nice! I've updated this module:
+       [C][✓] CS1010   Programming Methodology                                  A-   2 MC
+       ````
+    1. Test case: `update CS1010 -g A-` <br>
+       Expected: Module grade updated successfully.
+       ````
+       Nice! I've updated this module:
+       [C][✓] CS1010   Programming Methodology                                   A   4 MC
+       ````
+    1. Test case: `update CS1010 -mc 2` <br>
+       Expected: Module module credits updated successfully.
+       ````
+       Nice! I've updated this module:
+       [C][✓] CS1010   Programming Methodology                                   A+  2 MC
+       ````
+    1. Test case: `update` <br>
+       Expected: Error in updating module as not parameters were given.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+    1. Test case: `update CS1234 -g A- -mc 2` <br>
+       Expected: Error in updating module as module is not found in the module list.
+       ````
+       The module code you have entered does not exists.
+       Please double check and try again.
+       ````
+   1. Test case: `update -g A- -mc 2` <br>
+      Expected: Error in updating module as no module name is given.
+      ````
+      The number of parameters provided is incorrect.
+      Please double check and try again.
+      ````
+    1. Other incorrect update commands to try: `update`, `update CS1010`.
+       Expected: Similar to previous.
+       
+### CAP
+1. Display current CAP and degree classification of user.
+    1. Assumptions: Module list consists of CS1010 marked as done with 4mcs and grade A+.
+    1. Test case: `cap`<br>
+       Expected: CAP and degree classification displayed successfully.
+       ````
+       Current CAP: 4.50
+       Current Degree Classification: Honours (Highest Distinction)
+       ````
+    1. Test case: `cap gg` <br>
+       Expected: Error as there is extra parameters found.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+       
+### Progress
+1. Display user's progress towards graduation.
+    1. Assumptions: Module list consists of CS1010 marked as done with 4mcs and grade A+.
+    1. Test case: `progress` <br>
+       Expected: Progress displayed successfully.
+       ````
+       Progress:
+       
+       ░░░░░░░░░░░ 2.50%
+       4MCs/160MCs Completed
+       ```
+    1. Test case: `progress gg` <br>
+       Expected: Error as there is extra parameters found.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+       
+### List modules
+1. List modules in the modules list.
+    1. Assumption: Module list consists of CS1010 marked as done and CS2040C not done.
+    1. Test case: `list all` <br>
+       Expected: All modules listed successfully.
+       ````
+       Module List:
+       1: [C][✓] CS1010   Programming Methodology                                   A   4 MC
+       2: [C][✘] CS2040C  Data Structures and Algorithms                          NIL   4 MC
+       ````
+    1. Test case: `list complete` <br>
+       Expected: All completed modules listed successfully.
+       ````
+       Modules you have have completed:
+       1: [C][✓] CS1010   Programming Methodology                                   A   4 MC
+       ````
+    1. Test case: `list incomplete` <br>
+       Expected: All incompleted modules listed sucessfully.
+       ````
+       Modules you have yet to complete:
+       1: [C][✘] CS2040C  Data Structures and Algorithms                          NIL   4 MC
+       ````
+    1. Test case: `list` <br>
+       Expected: Error in listing modules as list type not given.
+       ````
+       The number of parameters provided is incorrect.
+       Please double check and try again.
+       ````
+    1. Test case: `list all completed` <br>
+       Expected: Error in listing modules as list type invalid.
+       ````
+       The list type you have entered is invalid.
+       The supported list types for list are: all, incomplete and complete.
+       ````
+       
+### Saving data
+1. Dealing with missing/corrupted data files.
+    1. While not in iGraduate, delete json file under `/data` directory. Then start iGraduate. <br>
+       Expected: iGraduate accepts current content of files as empty and functions as per normal.
+       
+    1. While not in iGraduate, corrupt the json file under `/data` directory. Then start iGraduate. <br>
+       Expected: iGraduate senses the corrupted files, replace it with empty content and functions as per normal.
