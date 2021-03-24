@@ -211,10 +211,10 @@ public class ModuleList {
     }
 
     /**
-     * Remove taken module from modules required it as pre-requisite.
+     * Remove taken module from modules requiring it as pre-requisite.
      *
      * @param moduleCode Module code of taken module.
-     * @param requiredByModules ArrayList of modules required taken module as pre-requisite.
+     * @param requiredByModules ArrayList of modules requiring taken module as pre-requisite.
      * @throws ModuleNotFoundException If requiredBy module does not exists in module list.
      */
     public void removeFromModuleUntakenPrerequisites(String moduleCode, ArrayList<String> requiredByModules)
@@ -332,9 +332,9 @@ public class ModuleList {
      * @return The retrieved module index on specified module code.
      */
     public Module getModule(String moduleCode) throws ModuleNotFoundException {
-        for (int i = 0; i < modules.size(); i++) {
-            if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
-                return modules.get(i);
+        for (Module module : modules) {
+            if (module.getCode().equalsIgnoreCase(moduleCode)) {
+                return module;
             }
         }
         throw new ModuleNotFoundException();
