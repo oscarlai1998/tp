@@ -66,7 +66,6 @@ directly from our latest release [here](https://github.com/AY2021S2-CS2113T-W09-
 1. Open a terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
    Windows platform or run `./gradlew run` on MacOS/Linux platform.
    <br>
-   <br>
 2. You will see the following output in the console when the setup is successful:
 
 ```
@@ -87,7 +86,6 @@ What would you like to do today?
 1. Configure Intellij IDEA to use `JDK 11` by referring to the guide 
    [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
    <br>
-   <br>
 2. Import the project as a `Gradle` project by following the steps below:
    > ℹ️ **Note:** Importing a `Gradle` project is slightly different from importing a 
    > normal Java project.
@@ -105,7 +103,6 @@ What would you like to do today?
     * Click `OK` to accept the default settings but do ensure that the selected version 
       of Gradle JVM matches the JDK being used for the project.
     * Wait for the importing process to finish (could take a few minutes).
-   <br>
    <br>
 3. Verify the setup by running the `seedu.igraduate.IGraduate` and enter a few commands. If
    no error is shown, the project is setup successfully.
