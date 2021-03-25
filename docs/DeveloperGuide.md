@@ -229,6 +229,9 @@ an existing module as taken, say `existingModule`, `markAsTaken` is called to pe
 2. Then, `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table
 from the list of modules that require `existingModule` as a prerequisite.
 
+Given below is the class diagram of `ModuleList` showing its 3 main functions.
+![archi](./images/ModuleListClassDiagram.png)
+
 Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such
 as the entire list or an individual module from the list according to different parameters such as module code or index. 
 

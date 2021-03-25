@@ -1,0 +1,13 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+ModuleList"1" <-- iGraduate
+
+ModuleList : -modules:ArrayList<Module>
+ModuleList : +add(Module module)
+ModuleList : +delete(Module module)
+ModuleList : +markAsTaken(Module module)
+
+iGraduate : +run()
+iGraduate : +main()
+@enduml
