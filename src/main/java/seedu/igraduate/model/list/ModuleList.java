@@ -69,7 +69,6 @@ public class ModuleList {
      */
     public void removeTakenPreRequisiteModule(Module module) throws PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = module.getPreRequisites();
-        ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
 
         for (String preRequisite : preRequisites) {
             try {
@@ -103,7 +102,7 @@ public class ModuleList {
      * @param preRequisites ArrayList containing the pre-requisite module codes for module to be added.
      * @return Boolean value indicating whether all the pre-requisite modules exist.
      */
-    public boolean checkPreRequisitesAvailability(ArrayList<String> preRequisites) {
+    public boolean isPreRequisiteExist(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
             if (getModuleIndex(preRequisite) == DEFAULT_INDEX) {
                 return false;
@@ -112,11 +111,16 @@ public class ModuleList {
         return true;
     }
 
-    public void addModuleRequiredBy(Module module) 
-            throws ModuleNotFoundException, PrerequisiteNotFoundException {
+    /**
+     * Add the module code of the new module to the requiredBy list of its pre-requisite modules.
+     *
+     * @param module Module object to be added to moduleList.
+     * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
+     */
+    public void addModuleRequiredBy(Module module) throws PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = module.getPreRequisites();
 
-        if (!checkPreRequisitesAvailability(preRequisites)) {
+        if (!isPreRequisiteExist(preRequisites)) {
             throw new PrerequisiteNotFoundException();
         }
 
@@ -211,10 +215,10 @@ public class ModuleList {
     }
 
     /**
-     * Remove taken module from modules required it as pre-requisite.
+     * Remove taken module from modules requiring it as pre-requisite.
      *
      * @param moduleCode Module code of taken module.
-     * @param requiredByModules ArrayList of modules required taken module as pre-requisite.
+     * @param requiredByModules ArrayList of modules requiring taken module as pre-requisite.
      * @throws ModuleNotFoundException If requiredBy module does not exists in module list.
      */
     public void removeFromModuleUntakenPrerequisites(String moduleCode, ArrayList<String> requiredByModules)
@@ -332,9 +336,9 @@ public class ModuleList {
      * @return The retrieved module index on specified module code.
      */
     public Module getModule(String moduleCode) throws ModuleNotFoundException {
-        for (int i = 0; i < modules.size(); i++) {
-            if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {
-                return modules.get(i);
+        for (Module module : modules) {
+            if (module.getCode().equalsIgnoreCase(moduleCode)) {
+                return module;
             }
         }
         throw new ModuleNotFoundException();
@@ -375,8 +379,6 @@ public class ModuleList {
                 assert totalCompletedMCs >= module.getCredit()
                     : "Completed MCs should be more or equal to credits" + "of done modules";
             }
-            assert totalCompletedMCs >= module.getCredit()
-                    : "Completed MCs should be more or equal to credits" + "of done modules";
         }
         return totalCompletedMCs;
     }

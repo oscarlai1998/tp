@@ -97,7 +97,7 @@ public class Storage {
      * @return parsed array list containing saved modules. 
      * @throws IOException if the file failed to be read. 
      */
-    public ArrayList<Module> loadFromJson(Type type, File jsonFile) 
+    private ArrayList<Module> loadFromJson(Type type, File jsonFile) 
             throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
@@ -133,7 +133,7 @@ public class Storage {
      * @param modules array list of all the modules. 
      * @throws IOException if the file failed to be written. 
      */
-    public void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
+    private void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
