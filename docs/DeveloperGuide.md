@@ -329,6 +329,7 @@ an existing module as taken, say `existingModule`, `markAsTaken` is called to pe
 from the list of modules that require `existingModule` as a prerequisite.
 
 Given below is the class diagram of `ModuleList` showing its 3 main functions.
+
 ![archi](./images/ModuleListClassDiagram.png)
 
 <sup>***Figure 3.4.2.1** UML class diagram for ModuleList class*</sup>
@@ -362,6 +363,31 @@ This section elaborates on some details about how certain features are implement
 ### 4.1 UI
 
 ### 4.2 Parser
+The parser feature has 3 primary responsibilities: 
+1. Identify the command the user wants to run.
+2. Extract the relevant parameters and flags required to run the command
+3. Create a new `Command` object and hand it over to `iGraduate` to execute
+
+![archi](./images/ParserSequenceDiagram.png)
+
+<sup>***Figure 4.2.1** Sequence diagram of `Parser` class with user input *"done CS1010 -g A"**</sup>
+
+#### Details
+There are 3 classifications of user input: **command, parameter and flags**. **Command** is the type of 
+command the user intends to run and is first word from the user input. The command dictates how `Parser` extracts the 
+parameter and flags. The **parameter** is the argument that comes after the command word and can vary depending on the 
+command. For example, if the command is `add`, the parameter would be the module name, but for `delete`, the parameter 
+would be the module code. Flags come after parameters and are available only for a few commands. They specify the 
+additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and 
+prerequisites.
+
+#### Considerations
+From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large
+number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single 
+Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or 
+format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user
+input for the given command before passing the parameters and flags to the relevant `Command` class to do further 
+validation of the type and formatting of flags and parameters.
 
 ### 4.3 Command
 
