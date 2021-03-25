@@ -1,9 +1,11 @@
 # iGraduate Developer Guide
-By: `W09-2` Latest update: `22 March 2021`
+By: `W09-2` Latest update: `25 March 2021`
 
 - [iGraduate Developer Guide](#igraduate-developer-guide)
     * [1. Introduction](#1-introduction)
     * [2. Setting up, getting started](#2-setting-up-getting-started)
+        + [2.1 Terminal](#21-terminal)
+        + [2.2 Intellij IDEA (Recommended)](#22-intellij-idea-recommended)
     * [3. Design](#3-design)
         + [3.1 Architecture](#31-architecture)
         + [3.2 UI Component](#32-ui-component)
@@ -16,6 +18,7 @@ By: `W09-2` Latest update: `22 March 2021`
                 + [3.4.1.4 `ElectiveModule` Class](#3414-electivemodule-class)
                 + [3.4.1.5 `MathModule` Class](#3415-mathmodule-class)
             + [3.4.2 `list` Package](#342-list-package)
+                + [3.4.2.1 `ModuleList` Class](#3421-modulelist-class)
         + [3.5 Storage Component](#35-storage-component)
         + [3.6 Common Classes](#36-common-classes)
     * [4. Implementation](#4-implementation)
@@ -27,12 +30,85 @@ By: `W09-2` Latest update: `22 March 2021`
         + [User Stories](#user-stories)
 
 ## 1. Introduction
-iGraduate is a command line interface application written in Java. 
-The iGraduate API allows students to add modules to take, edit, delete or 
-mark these modules as done. Students can also calculate their CAP at any 
-point of time and list modules added to the application.
+
+iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
+students to track and plan their graduation by allowing them to add new modules for tracking,
+show the modules they have taken and can be taken, calculating their CAP and check their graduation
+progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
+for tracking. When listing the modules, the module type will be shown accordingly.
+
+This developer guide is made for developers who wish to understand and/or develop <b>iGraduate</b> 
+further. This guide includes the setup steps, design, implementation, logging, testing, product scope,
+and other sections to give developers a better understanding of the application.
+
+Note that the following symbols and formatting are used in this guide:
+
+Symbols/Formatting | Description
+-------------------|------------------------------------------
+ℹ️ **Note:**        | Information to take note of.
+`Grey highlight`   | Code or terms related to the application.
 
 ## 2. Setting up, getting started
+
+This section guides you through the process of setting up the project on your computer.
+
+> ℹ️ **Note:** This application is developed for users with `Java 11` installed on their computer. 
+> If you do not have it installed on your computer or you have other versions of it, follow this 
+> [link](https://openjdk.java.net/projects/jdk/11/) to download and install it before continuing 
+> with this section.
+
+Fork this [repo](https://github.com/AY2021S2-CS2113T-W09-2/tp) to your github account and clone 
+it to your local computer. Alternatively, you could also download the source code of the application 
+directly from our latest release [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
+
+### 2.1 Terminal
+
+1. Open a terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
+   Windows platform or run `./gradlew run` on MacOS/Linux platform.
+   <br>
+   <br>
+2. You will see the following output in the console when the setup is successful:
+
+```
+> Task :run
+ _  ____               _             _
+(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
+| | |  _| '__/ _  |/ _  | | | |/ _  | __/ _ 
+| | |_| | | | (_| | (_| | |_| | (_| | ||  __/
+|_| ____|_|   __,_| __,_| __,_| __,_| __ ___|
+iGraduate starting up...
+Welcome to iGraduate, your one stop study planning service!
+What would you like to do today?
+--------------------------------------------------------------------------------------
+```
+
+### 2.2 Intellij IDEA (Recommended)
+
+1. Configure Intellij IDEA to use `JDK 11` by referring to the guide 
+   [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
+   <br>
+   <br>
+2. Import the project as a `Gradle` project by following the steps below:
+   > ℹ️ **Note:** Importing a `Gradle` project is slightly different from importing a 
+   > normal Java project.
+   
+   > ℹ️ **Note:** If there is a `build.gradle` file in the project root, 
+   > Intellij treats it as a `Gradle` project by default.
+    * IntelliJ IDEA has the `Gradle` plugin installed by default. If you have 
+      disabled it, go to `File` → `Settings` → `Plugins` to re-enable them.
+    * Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` 
+      to close the existing project first)
+    * Open the project into Intellij as follows:
+      + Click `Open`.
+      + Select the project directory, and click `OK`.
+      + If there are any further prompts, accept the defaults.
+    * Click `OK` to accept the default settings but do ensure that the selected version 
+      of Gradle JVM matches the JDK being used for the project.
+    * Wait for the importing process to finish (could take a few minutes).
+   <br>
+   <br>
+3. Verify the setup by running the `seedu.igraduate.IGraduate` and enter a few commands. If
+   no error is shown, the project is setup successfully.
 
 ## 3. Design
 
@@ -97,6 +173,7 @@ the relevant `Command` object and dispatches the control of the program to the c
 
 Given below is the Parser class diagram showing the important methods that returns a `Command` object.
 ![archi](./images/ParserClassDiagram.png)
+<sup>***Figure 3.3.1.1** UML class diagram for Parser class*</sup>
 
 ### 3.3.2 Command
 #### Description
@@ -139,7 +216,7 @@ The `module` package consists of classes related to module objects. An abstract 
 and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
 the relationship between the interaction of classes under the module package is shown below.
 
-![archi](./images/ModulePackageClassDiagram.png)
+![archi](images/ModuleClassDiagram.png)
 <sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
 
 The following child classes are created to handle different types of modules based on the generic module type available in 
@@ -199,21 +276,33 @@ contains a `toString` method that overrides the format of math module printing.
 ### 3.4.2 `list` Package
 
 #### Description
+
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
 such as adding, deleting or marking a `Module` as done.
 
 #### Design
+
 The package consists of 1 class, `ModuleList.java`. `ModuleList` contains 2 constructor signatures; 1 for constructing a
 new, empty list for when the user uses iGraduate for the first time, and the other to contain the modules already stored
 in `Storage`.
+
+#### 3.4.2.1 `ModuleList` Class
+
+The `ModuleList` class acts as an abstraction for the ArrayList that is used to store module objects created from any of the 
+classes under the `module` package. It provides a `ModuleList` structure with features built on top of ArrayList to enhance and 
+customize its usage for the application. Some data-related methods such as `addModuleRequiredBy` and `removeTakenPreRequisiteModule` 
+are added to aid data processing when adding a module to the `ModuleList`. The `ModuleList` class is also used by the `Storage` 
+component to generate JSON data of all modules and store it to disk.
 
 Within the class `ModuleList`, different methods are defined to perform different operations on the list of `Modules`. These
 operations are:
 1. Add a module to the list
 2. Delete a module from the list
 3. Mark a module as done
+
 ##### Adding a module
+
 For adding modules to the list, the methods defined are `add`, `addModuleRequiredBy` and `removeTakenByPrerequisites`.
 To add a new module, say `newModule`, `add` is called to perform 3 steps:
 1. First, `addModuleRequiredBy`is called to populate the list of modules that require
@@ -223,6 +312,7 @@ removes the ones that have been marked as taken.
 3. Finally, `add` calls `ArrayList.add()` to add `newModule` to the list.
 
 ##### Deleting a module
+
 For deleting a module to the list, the methods defined are `delete` and `removeFromPreRequisiteModuleRequiredBy`. To
 delete an existing module from the list, say `existingModule`, `delete` is called to perform 2 steps:
 1. Firstly, `delete` calls `ArrayList.remove()` to delete `existingModule` from the list.
@@ -230,6 +320,7 @@ delete an existing module from the list, say `existingModule`, `delete` is calle
    requiredBy list.
    
 ##### Mark module as taken
+
 For marking a module as taken, the methods defined are `markAsTaken` and `removeFromModuleUntakenPrerequisites`. To mark
 an existing module as taken, say `existingModule`, `markAsTaken` is called to perform 2 steps:
 1. First, `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
