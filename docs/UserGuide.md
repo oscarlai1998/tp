@@ -4,14 +4,14 @@ By: `W09-2` Latest update: `25 March 2021`
 * [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * [Add todo : `todo`](#add-todo--todo)
-    * [Add event : `event`](#add-event--event)
-    * [Add deadline : `deadline`](#add-deadline--deadline)
-    * [List all tasks : `list`](#list-all-tasks--list)
-    * [Mark task as done : `done`](#mark-task-as-done--done)
-    * [Delete task : `delete`](#delete-task--delete)
-    * [Find task : `find`](#find-task--find)
-    * [Exit Program : `bye`](#exit-program--bye)
+    * [Add new module: `add`](#add-new-module-add)
+    * [Delete existing module: `delete`](#delete-existing-module-delete)
+    * [Update module information: `update`](#update-module-information-update)
+    * [Mark a module as complete: `done`](#mark-a-module-as-complete-done)
+    * [List modules: `list`](#list-modules-list)
+    * [Show academic progression: `progress`](#show-academic-progression-progress)
+    * [Calculate CAP: `cap`](#calculate-cap-cap)
+    * [Exit the program: `exit`](#exit-the-program-exit)
 * [Storage](#storage)
 * [Command Summary](#command-summary)
 
@@ -24,174 +24,230 @@ command that changes the data. There is no need to save manually.
 ## Quick Start
 
 1. Make sure you have Java version 11 installed on your computer.
-2. Download 'Duke.jar' from latest github release by clicking [here](https://github.com/kewenlok/ip/releases).
-3. Copy the file to the folder you want to use as the home folder for your Duke program.
-4. Run the program in command prompt using `java -jar Duke.jar` command.
-5. Type your command in the command prompt to interact with Duke.
+2. Download 'iGraduate.jar' from latest github release by clicking [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
+3. Copy the file to the folder you want to use as the home folder for your iGraduate program.
+4. Run the program in command prompt using `java -jar iGraduate.jar` command.
+5. Type your command in the command prompt to interact with iGraduate.
 
 ## Features
 
-### Add todo : `todo`
+### Add new module: `add`
 
-Adds a new todo task to task list.
+Adds a new module to the list. 
 
-Format:
-
-`todo <task name>`
-
-Example of Usage:
-
-`todo exercise`
-
-Expected Outcome:
-
-    Got it. I've added this task:
-      [T][✘] exercise
-    Now you have 1 tasks in the list.
-
-### Add event : `event`
-
-Adds a new event task with date/time to task list.
+<b>Note:</b>
+- The prerequisite field is optional. 
 
 Format:
 
-`event <task name> /at <event date/time>`
+`add <name> -c <code> -t core|math|ue|ge -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
 
-Example of Usage:
+Example of Usage(s) and Expected Outcome(s):
 
-`event AWS Summit 2020 /at 25 April 2020, 9AM`
+`add Journey of the Innovator -c CP2201 -t ue -mc 2`
 
-Expected Outcome:
+```
+--------------------------------------------------------------------------------------
+Added CP2201 Journey of the Innovator to the list. (2.0MCs)
+[E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
+--------------------------------------------------------------------------------------
+```
 
-    Got it. I've added this task:
-      [E][✘] AWS Summit 2020 (at: 25 April 2020, 9AM)
-    Now you have 2 tasks in the list.
+### Delete existing module: `delete`
+Deletes an existing module from the list. 
 
-### Add deadline : `deadline`
-
-Adds a new deadline task with deadline to task list.
-
-Format:
-
-`deadline <task name> /by <deadline>`
-
-Example of Usage:
-
-`deadline CS2113T Assignment /by 2021-03-05 23:59`
-
-**Note**: The format of deadline should be `YYYY-MM-DD HH:MM`.
-
-Expected Outcome:
-
-    Got it. I've added this task:
-      [D][✘] CS2113T Assignment (by: 5 Mar 2021 11:59pm)
-    Now you have 3 tasks in the list.
-
-### List all tasks : `list`
-
-List all the tasks in the task list.
+<b>Note:</b>
+- The module must not be a prerequisite of another module. 
 
 Format:
 
-`list`
+`delete <code>`
 
-Example of Usage:
+Example of Usage(s) and Expected Outcome(s):
 
-`list`
+`delete CS2100`
 
-Expected Outcome:
+```
+--------------------------------------------------------------------------------------
+"Core" module CS2100 has been deleted.
+--------------------------------------------------------------------------------------
+```
 
-    Here are the tasks in your list:
-    1. [T][✘] practice coding
-    2. [D][✓] CS2105 Assignment (by: 31 Jan 2021 11:59pm)
-    3. [T][✘] Assignment
-    4. [T][✘] exercise
-    5. [E][✘] AWS Summit 2020 (at: 25 April 2020, 9AM)
-    6. [D][✘] CS2113T Assignment (by: 5 Mar 2021 11:59pm)
+`delete CP2201`
 
-### Mark task as done : `done`
+```
+--------------------------------------------------------------------------------------
+"Elective" module CP2201 has been deleted.
+--------------------------------------------------------------------------------------
+```
 
-Mark the specified task as done.
+### Update module information: `update`
 
-Format:
+Updates relevant information (name, credit and grade) for the selected module. The information can be arranged 
+in any order and multiple information can be entered in one command. 
 
-`done <index number>`
-
-Example of Usage:
-
-`done 5`
-
-Expected Outcome:
-
-    Nice! I've marked this task as done:
-      [E][✓] AWS Summit 2020 (at: 25 April 2020, 9AM)
-
-### Delete task : `delete`
-
-Delete the specified task.
+<b>Note:</b>
+- Updating of grades is only permitted if the module has been completed (see done command).
+- If a grade is entered for an incomplete module, no grades will be added but the rest of the 
+information (if any) will be updated. 
 
 Format:
 
-`delete <index number>`
+`update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 
-Example of Usage:
+Example of Usage(s) and Expected Outcome(s):
 
-`delete 4`
+`update CS1010 -n Introduction to Programming -mc 4 -g A -p CS1010,CS2100`
 
-Expected Outcome:
+```
+--------------------------------------------------------------------------------------
+Nice! I've updated this module:
+  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+--------------------------------------------------------------------------------------
+```
 
-    Noted. I've removed this task:
-      [T][✘] exercise
-    Now you have 5 tasks in the list.
+### Mark a module as complete: `done`
 
-### Find task : `find`
-
-Find tasks that contains a specified keyword.
-
-Format:
-
-`find <keyword>`
-
-Example of Usage:
-
-`find assignment`
-
-Expected Outcome:
-
-    Here are the matching tasks in your list:
-    1. [D][✓] CS2105 Assignment (by: 31 Jan 2021 11:59pm)
-    2. [T][✘] Assignment
-    3. [D][✘] CS2113T Assignment (by: 5 Mar 2021 11:59pm)
-
-### Exit Program : `bye`
-
-Saves data and exits the Duke program.
+Mark a module as done with grade. 
 
 Format:
 
-`bye`
+`done <code> -g <grade>`
 
-Example of Usage:
+Example of Usage(s) and Expected Outcome(s):
 
-`bye`
+`done CS2106 -g A`
 
-Expected Outcome:
+```
+--------------------------------------------------------------------------------------
+Nice! I've updated this module:
+  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+--------------------------------------------------------------------------------------
+```
 
-    Bye. Hope to see you again soon!
+`done GES1041 -g S`
+
+```
+--------------------------------------------------------------------------------------
+Nice! I've marked this module as done:
+  [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+--------------------------------------------------------------------------------------
+```
+
+### List modules: `list`
+
+Lists all modules added on your list and all modules you can take. 
+
+Format:
+
+`list all|incomplete|complete`
+
+Example of Usage(s) and Expected Outcome(s):
+
+`list all`
+
+```
+--------------------------------------------------------------------------------------
+Module List:
+1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+3: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
+4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+
+`list incomplete`
+
+```
+--------------------------------------------------------------------------------------
+Modules you have yet to complete:
+1: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
+2: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+
+`list complete`
+
+```
+--------------------------------------------------------------------------------------
+Modules you have have completed:
+1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+--------------------------------------------------------------------------------------
+```
+
+### Show academic progression: `progress`
+
+Shows a progress bar for the percentage of modules completed with respect to total modules needed for 
+graduation requirement (default value is 160). 
+
+Format:
+
+`progress`
+
+Example of Usage(s) and Expected Outcome(s):
+
+`progress`
+
+```
+--------------------------------------------------------------------------------------
+Progress:
+░░░░░░░░░░░ 5.00%
+8MCs/160MCs Completed
+--------------------------------------------------------------------------------------
+```
+
+### Calculate CAP: `cap`
+
+Calculates the current CAP and shows the degree classification based on the grades from the modules that have 
+been marked as completed. 
+
+Format:
+
+`cap`
+
+Example of Usage(s) and Expected Outcome(s):
+
+`cap`
+
+```
+--------------------------------------------------------------------------------------
+Current CAP: 4.00
+Current Degree Classification: Honours (Distinction)
+--------------------------------------------------------------------------------------
+```
+
+### Exit the program: `exit`
+Exits the program. 
+
+Format:
+
+`exit`
+
+Example of Usage(s) and Expected Outcome(s):
+
+`exit`
+
+```
+--------------------------------------------------------------------------------------
+See you soon! Happy studying!
+--------------------------------------------------------------------------------------
+```
 
 ## Storage
 
-All data are stored automatically by Duke everytime a change is being made and when exiting the program. The data will be loaded in the next time of usage.
+All data are stored automatically by IGraduate everytime a module is modified (i.e. added, deleted or updated) 
+and when exiting the program. The data will be loaded in the next time of usage.
 
 ## Command Summary
 
 Command | Format
 --------|--------
-todo    |`todo <task name>`
-event   |`event <task name> /at <event date/time>`
-deadline|`deadline <task name> /by <deadline>`<br>The format of deadline should be `YYYY-MM-DD HH:MM`.
-list    |`list`
-done    |`done <index number>`
-delete  |`delete <index number>`
-find    |`find <keyword>`
-bye     |`bye`
+add | `add <name> -c <code> -t core\|math\|ue\|ge -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
+delete | `delete <code>`
+update | `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
+done | `done <code> -g <grade>`
+list | `list all\|incomplete\|complete`
+progress | `progress`
+cap    | `cap`
+exit     | `exit`
