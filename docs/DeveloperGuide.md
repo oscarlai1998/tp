@@ -402,6 +402,34 @@ validation of the type and formatting of flags and parameters.
 #### 4.3.2 Delete Command
 
 #### 4.3.3 Update Command
+The update commands allows modifications to the existing modules, identified by the module code. 
+The information that can be updated include module name, credits, prerequisites and grades (if the module is 
+marked as done). 
+
+The update function is executed if the user decides to edit some information regarding a module in the module
+list. The various information requested to update would be identified with their flags: 
+1. name 
+   - `-n <String>`
+1. module credits
+   - `-mc <int>`
+1. prerequisites
+   - `-p [<String>, ...]`
+1. grade
+   - `-g <String>`
+
+
+#### <b>ℹ️  Note:</b> 
+
+- The code and type of modules <b>cannot be modified</b> as they are identifiers of the modules
+- <b>Multiple module information</b> can be updated in a single command
+- The command <b>will not update grades</b> if the module requested has not been completed. The rest of 
+the information parsed in the command (if any) will be updated. 
+
+
+<b>Details</b>
+
+The following is the class diagram for update command consisting of updating each flags
+
 
 #### 4.3.4 List Command
 
