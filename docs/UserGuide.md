@@ -109,7 +109,7 @@ Format:
 
 Example of Usage(s) and Expected Outcome(s):
 
-`update CS1010 -n Introduction to Programming -mc 4 -g A -p CS1010,CS2100`
+`update CS2106 -n Introduction to Operating Systems -mc 4 -g A -p CS1010,CS2100`
 
 ```
 --------------------------------------------------------------------------------------
