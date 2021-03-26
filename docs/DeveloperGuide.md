@@ -22,7 +22,13 @@ By: `W09-2` Latest update: `25 March 2021`
         + [3.5 Storage Component](#35-storage-component)
         + [3.6 Common Classes](#36-common-classes)
     * [4. Implementation](#4-implementation)
-        + [4.1]
+        + [4.1 UI](#41-ui)
+        + [4.2 Parser](#42-parser)
+        + [4.3 Command](#43-command)
+        + [4.4 Module](#44-module)
+        + [4.5 ModuleList](#45-modulelist)
+        + [4.6 Storage](#46-storage)
+        + [4.7 Exception](#47-exception)
     * [Appendix: Requirements](#appendix-requirements)
         + [Product Scope](#product-scope)
             + [Target User Profile](#target-user-profile)
@@ -360,6 +366,31 @@ This section elaborates on some details about how certain features are implement
 ### 4.1 UI
 
 ### 4.2 Parser
+The parser feature has 3 primary responsibilities: 
+1. Identify the command the user wants to run.
+2. Extract the relevant parameters and flags required to run the command
+3. Create a new `Command` object and hand it over to `iGraduate` to execute
+
+![archi](./images/ParserSequenceDiagram.png)
+
+<sup>***Figure 4.2.1** Sequence diagram of `Parser` class with user input *"done CS1010 -g A"**</sup>
+
+#### Details
+There are 3 classifications of user input: **command, parameter and flags**. **Command** is the type of 
+command the user intends to run and is first word from the user input. The command dictates how `Parser` extracts the 
+parameter and flags. The **parameter** is the argument that comes after the command word and can vary depending on the 
+command. For example, if the command is `add`, the parameter would be the module name, but for `delete`, the parameter 
+would be the module code. Flags come after parameters and are available only for a few commands. They specify the 
+additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and 
+prerequisites.
+
+#### Considerations
+From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large
+number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single 
+Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or 
+format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user
+input for the given command before passing the parameters and flags to the relevant `Command` class to do further 
+validation of the type and formatting of flags and parameters.
 
 ### 4.3 Command
 
@@ -368,6 +399,34 @@ This section elaborates on some details about how certain features are implement
 #### 4.3.2 Delete Command
 
 #### 4.3.3 Update Command
+The update commands allows modifications to the existing modules, identified by the module code. 
+The information that can be updated include module name, credits, prerequisites and grades (if the module is 
+marked as done). 
+
+The update function is executed if the user decides to edit some information regarding a module in the module
+list. The various information requested to update would be identified with their flags: 
+1. name 
+   - `-n <String>`
+1. module credits
+   - `-mc <int>`
+1. prerequisites
+   - `-p [<String>, ...]`
+1. grade
+   - `-g <String>`
+
+
+#### <b>ℹ️  Note:</b> 
+
+- The code and type of modules <b>cannot be modified</b> as they are identifiers of the modules
+- <b>Multiple module information</b> can be updated in a single command
+- The command <b>will not update grades</b> if the module requested has not been completed. The rest of 
+the information parsed in the command (if any) will be updated. 
+
+
+<b>Details</b>
+
+The following is the class diagram for update command consisting of updating each flags
+
 
 #### 4.3.4 List Command
 

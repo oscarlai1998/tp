@@ -1,6 +1,5 @@
 package seedu.igraduate.logic.command;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 import seedu.igraduate.model.list.ModuleList;
@@ -26,7 +25,7 @@ public class UpdateCommand extends Command {
     private double moduleCredit;
     private String moduleGrade;
     private String moduleName;
-    private ArrayList<String> prerequisites;
+    private ArrayList<String> preRequisites;
 
     private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
 
@@ -119,7 +118,7 @@ public class UpdateCommand extends Command {
                 LOGGER.warning("Module has not been completed, no grade update is permitted. ");
                 throw new ModuleNotCompleteException();
             }
-            if (!targetModule.isGradeValid(moduleGrade)) {
+            if (!Module.isGradeValid(moduleGrade)) {
                 throw new InvalidModuleGradeException();
             }
             targetModule.setGrade(moduleGrade);
@@ -139,16 +138,16 @@ public class UpdateCommand extends Command {
     private void updatePrerequisites(String[] commandFlags, ModuleList modules)
             throws ModuleNotFoundException {
         // Extract all new prerequisites
-        ArrayList<String> newPrerequisites = Parser.extractPreRequisites(commandFlags);
+        preRequisites = Parser.extractPreRequisites(commandFlags);
         // Extract new prerequisites that are not taken
-        ArrayList<String> notTakenPrerequisites = extractPrerequisitesNotTaken(modules, newPrerequisites);
+        ArrayList<String> notTakenPrerequisites = extractPrerequisitesNotTaken(modules, preRequisites);
         // Remove targetModule from requiredBy of old prerequisites list and
         // add targetModule to requiredBy of new prerequisites
         removeModuleFromRequiredBy(targetModule, modules);
-        addModuleToRequiredBy(targetModule, modules, newPrerequisites);
+        addModuleToRequiredBy(targetModule, modules, preRequisites);
 
         targetModule.setUntakenPreRequisites(notTakenPrerequisites);
-        targetModule.setPreRequisites(newPrerequisites);
+        targetModule.setPreRequisites(preRequisites);
     }
 
     /**
@@ -164,10 +163,8 @@ public class UpdateCommand extends Command {
         ArrayList<String> notTakenPrerequisites = new ArrayList<>();
         for (String moduleCode : prerequisites) {
             if (!modules.getModule(moduleCode).isDone()) {
-                System.out.println("not taken" + moduleCode);
                 notTakenPrerequisites.add(moduleCode);
             }
-            System.out.println(moduleCode);
         }
 
         return notTakenPrerequisites;
