@@ -13,9 +13,11 @@ By: `W09-2` Latest update: `25 March 2021`
     * [Calculate CAP: `cap`](#calculate-cap-cap)
     * [Exit the program: `exit`](#exit-the-program-exit)
 * [Storage](#storage)
+* [Manual Modification of Data](#manual-modification-of-data)
 * [Command Summary](#command-summary)
 
 ## Introduction
+
 iGraduate is a command line application that will help NUS students majoring in information security check his/her 
 graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools 
 to help make informed decisions about future modules. iGraduate data is saved in the hard disk automatically after any 
@@ -24,10 +26,19 @@ command that changes the data. There is no need to save manually.
 ## Quick Start
 
 1. Make sure you have Java version 11 installed on your computer.
-2. Download 'iGraduate.jar' from latest github release by clicking [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
+2. Download `iGraduate.jar` from latest github release by clicking [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your iGraduate program.
 4. Run the program in command prompt using `java -jar iGraduate.jar` command.
 5. Type your command in the command prompt to interact with iGraduate.
+
+Note that the following symbols and formatting are used in this guide:
+
+Symbols/Formatting | Description
+-------------------|------------------------------------------
+ℹ️ **Note:**        | Information to take note of.
+`Grey highlight`   | Code or terms related to the application.
+`[]`               | Optional parameter.
+`<>`               | Include only one compulsory value from choices.
 
 ## Features
 
@@ -35,12 +46,14 @@ command that changes the data. There is no need to save manually.
 
 Adds a new module to the list. 
 
-<b>Note:</b>
-- The prerequisite field is optional. 
+> ℹ️ **Note:** The prerequisite field is optional. 
+
+> ℹ️ **Note:** If you decided to add prerequisite modules, please ensure that all the prerequisite modules are added
+> to the application before proceed.
 
 Format:
 
-`add <name> -c <code> -t core|math|ue|ge -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
+`add <name> -c <module code> -t <core|math|ue|ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -54,14 +67,14 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 ```
 
 ### Delete existing module: `delete`
+
 Deletes an existing module from the list. 
 
-<b>Note:</b>
-- The module must not be a prerequisite of another module. 
+> ℹ️ **Note:** The module must not be a prerequisite of another module. 
 
 Format:
 
-`delete <code>`
+`delete <module code>`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -86,9 +99,8 @@ Example of Usage(s) and Expected Outcome(s):
 Updates relevant information (name, credit and grade) for the selected module. The information can be arranged 
 in any order and multiple information can be entered in one command. 
 
-<b>Note:</b>
-- Updating of grades is only permitted if the module has been completed (see done command).
-- If a grade is entered for an incomplete module, no grades will be added but the rest of the 
+> ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see [done command](#mark-a-module-as-complete-done)).
+> If a grade is entered for an incomplete module, no grades will be added but the rest of the 
 information (if any) will be updated. 
 
 Format:
@@ -108,11 +120,12 @@ Nice! I've updated this module:
 
 ### Mark a module as complete: `done`
 
-Mark a module as done with grade. 
+Mark a module as done with grade. To modify the grade of taken module,
+simply use the `done` command again.
 
 Format:
 
-`done <code> -g <grade>`
+`done <module code> -g <grade>`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -239,15 +252,29 @@ See you soon! Happy studying!
 All data are stored automatically by IGraduate everytime a module is modified (i.e. added, deleted or updated) 
 and when exiting the program. The data will be loaded in the next time of usage.
 
+## Manual Modification of Data
+
+> ℹ️ **Note:** Please ensure that you modify only the value of module attributes if you are unsure of how the `json`
+> structure works.
+
+> ℹ️ **Note:** The application might not behave as the way it is expected to if you modify the application data in an 
+> incorrect manner. For example, data corruption might occur.
+
+The IGraduate application data file is stored under the same folder where the IGraduate application resides. You may 
+notice a folder named `data` is created and there is a `modules.json` file inside the folder. In `modules.json`, you 
+will find your data created in the application here. To modify the data of existing module, simply change the value
+of each attribute in the `json` file and save it. You are advised to add or remove new module data manually only if you
+understand the application's logic and `json` format.
+
 ## Command Summary
 
 Command | Format
 --------|--------
-add | `add <name> -c <code> -t core\|math\|ue\|ge -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
-delete | `delete <code>`
+add | <code>add <name> -c <module code> -t <core&#124;math&#124;ue&#124;ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]</code>
+delete | `delete <module code>`
 update | `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
-done | `done <code> -g <grade>`
-list | `list all\|incomplete\|complete`
+done | `done <module code> -g <grade>`
+list | <code>list all&#124;incomplete&#124;complete</code>
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
