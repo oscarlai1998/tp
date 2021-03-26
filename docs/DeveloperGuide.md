@@ -326,6 +326,7 @@ an existing module as taken, say `existingModule`, `markAsTaken` is called to pe
 from the list of modules that require `existingModule` as a prerequisite.
 
 Given below is the class diagram of `ModuleList` showing its 3 main functions.
+
 ![archi](./images/ModuleListClassDiagram.png)
 
 <sup>***Figure 3.4.2.1** UML class diagram for ModuleList class*</sup>
