@@ -175,6 +175,7 @@ flags from the user command that are relevant to the command. The parser then cr
 the relevant `Command` object and dispatches the control of the program to the created object.
 
 Given below is the Parser class diagram showing the important methods that returns a `Command` object.
+
 ![archi](./images/ParserClassDiagram.png)
 
 <sup>***Figure 3.3.1.1** UML class diagram for Parser class*</sup>
@@ -221,6 +222,7 @@ and methods applicable to all class objects. It is then inherited by all other c
 the relationship between the interaction of classes under the module package is shown below.
 
 ![archi](images/ModuleClassDiagram.png)
+
 <sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
 
 The following child classes are created to handle different types of modules based on the generic module type available in 
@@ -425,7 +427,20 @@ the information parsed in the command (if any) will be updated.
 
 <b>Details</b>
 
-The following is the class diagram for update command consisting of updating each flags
+The following is the UML diagrams for update command consisting of updating each flag
+
+![archi](./images/updateClassDiagram.jpg)
+
+<sup>***Figure 4.3.3.1** Class diagram of `Update` class with user input*</sup>
+
+
+![archi](./images/updateSequenceDiagram.jpg)
+
+<sup>***Figure 4.3.3.2** Sequence diagram of `Update` class with user input*</sup>
+
+<b>Considerations</b>
+
+<b>Alternative</b>
 
 
 #### 4.3.4 List Command
