@@ -26,6 +26,7 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
+import seedu.igraduate.exception.AddSelfToPrereqException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -45,11 +46,11 @@ public class CapCommandTest {
 
     @BeforeEach
     void populateList()
-        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Computer Org -mc 4 -t core -c cs2100";
         Command addFirst = Parser.parseCommand(firstModule);
@@ -60,11 +61,11 @@ public class CapCommandTest {
 
     @Test
     void executeCapCommand_validParameters_success()
-        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
 
         String setFirstToDone = "done cs1010 -g A+";
         String setSecondToDone = "done cs2100 -g A-";
@@ -84,11 +85,11 @@ public class CapCommandTest {
 
     @Test
     void executeCapCommand_invalidGrade_exceptionThrown()
-        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
 
         String setFirstToDone = "done cs1010 -g A+";
         String setSecondToDone = "done cs2100 -g B-";
@@ -104,10 +105,10 @@ public class CapCommandTest {
 
     @AfterEach
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException {
+            IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2100";
         Command deleteFirst = Parser.parseCommand(firstModule);
