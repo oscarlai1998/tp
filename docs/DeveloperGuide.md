@@ -151,6 +151,11 @@ How the architecture interacts with each other [DIAGRAM]
 The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` 
 and `Print Methods`. 
 
+![archi](./images/UiClassDiagram.png)
+
+<sup>***Figure 3.2.1** UML class diagram for Ui class*</sup>
+
+
 The `UI` component:
 - Executes user command using the Logic Package which consist of `Command` and `Parser` classes.
 - Listens for calls from `Model` package which consist of `ModuleList` and `Module` classes. Model packages will call
@@ -360,10 +365,16 @@ when an error occurs. The method catches the exceptions and prints out the respe
 
 Each `exception` is specified by the name and description.
 
+
+
 ## 4. Implementation
 This section elaborates on some details about how certain features are implemented.
 
 ### 4.1 UI
+UI component
+* Executes user command using Logic Component
+* Listens to calls from Model data so that UI can print the results.
+
 
 ### 4.2 Parser
 The parser feature has 3 primary responsibilities: 
@@ -481,6 +492,26 @@ Considerations were also given to use more unique delimiters (such as \\, |, etc
 
 
 ### 4.7 Exception
+Exception is an event that disrupts the normal flow of the diagram. It is an object that is thrown at runtime.
+In iGraduate, there are several exceptions that are thrown due to different conditions.
+
+Exception   | Description              
+--------|-------------------|
+ExistingModuleException | The exception is thrown if the module code input already exists.             | 
+IncorrectParameterCountException | The exception is thrown if the parameters given is incorrect.
+InputNotNumberException | The exception is thrown if input is not an integer.
+InvalidCommandException | The exception is thrown if the command input was invalid.
+InvalidListTypeException | Exception is thrown if list command is not followed by: all, incomplete and complete.
+InvalidModuleGradeException | The exception is thrown if module grade input is invalid.
+InvalidModuleTypeException | The exception is thrown if the module type input is invalid.
+LoadModuleFailException | The exception is thrown if module cannot be loaded properly.
+ModulularCreditExceedsLimitException | The exception is thrown if the module limit is reached.
+ModuleNotCompleteException | The exception is thrown if the module being updated (on grade) has not been completed.
+ModuleNotFoundException | The exception is thrown if the module cannot be matched.
+PrerequisiteNotFoundException | The exception is thrown if the pre-requisite module cannot be matched.
+PrerequisiteNotMetException | Exception is thrown if prerequisite of the module has not been completed.
+SaveModuleFailException | This exception is thrown if the program fails to save data to file.
+UnableToDeletePrereqModuleException | This exception is thrown when user tries to delete a pre-requisite module.
 
 ## Appendix: Requirements
 
