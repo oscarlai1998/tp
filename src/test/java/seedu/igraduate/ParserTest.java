@@ -10,6 +10,7 @@ import seedu.igraduate.logic.command.DeleteCommand;
 import seedu.igraduate.logic.command.DoneCommand;
 import seedu.igraduate.logic.command.ListCommand;
 import seedu.igraduate.logic.command.ProgressCommand;
+import seedu.igraduate.logic.command.UpdateCommand;
 import seedu.igraduate.logic.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -168,9 +169,6 @@ public class ParserTest {
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
     }
 
-    /******************************************
-     * DoneCommand tests.
-     *************************************************/
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
@@ -199,9 +197,7 @@ public class ParserTest {
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
     }
 
-    /******************************************
-     * ProgressCommand tests.
-     ************************************************/
+    /* Progress Command */
     @Test
     void createProgressCommand_appropriateParameters_success()
             throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
@@ -270,5 +266,13 @@ public class ParserTest {
         String line = "cap -t";
         Exception exception = assertThrows(IncorrectParameterCountException.class, () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    /* UpdateCommand tests */
+    @Test
+    void createUpdateCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
+        assertEquals(UpdateCommand.class, Parser.parseCommand(line).getClass());
     }
 }

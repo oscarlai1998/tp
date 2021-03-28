@@ -19,7 +19,7 @@ import seedu.igraduate.model.module.Module;
  */
 public class UpdateCommand extends Command {
     private String moduleCode;
-    private String[] commandFlags;
+    private ArrayList<String> commandFlags;
 
     private Module targetModule;
     private double moduleCredit;
@@ -35,7 +35,7 @@ public class UpdateCommand extends Command {
      * @param moduleCode module code. 
      * @param commandFlags flags containing all the information to update. 
      */
-    public UpdateCommand(String moduleCode, String[] commandFlags) {
+    public UpdateCommand(String moduleCode, ArrayList<String> commandFlags) {
         this.moduleCode = moduleCode;
         this.commandFlags = commandFlags;
     }
@@ -78,7 +78,7 @@ public class UpdateCommand extends Command {
      * 
      * @param commandFlags List containing all flags and values. 
      */
-    private void updateModuleName(String[] commandFlags) {
+    private void updateModuleName(ArrayList<String> commandFlags) {
         try {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
@@ -94,7 +94,7 @@ public class UpdateCommand extends Command {
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
-    private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(ArrayList<String> commandFlags) throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -110,7 +110,7 @@ public class UpdateCommand extends Command {
      * @param commandFlags List containing all flags and values. 
      * @throws ModuleNotCompleteException If the module has not been marked as completed. 
      */
-    private void updateModuleGrade(String[] commandFlags) throws ModuleNotCompleteException,
+    private void updateModuleGrade(ArrayList<String> commandFlags) throws ModuleNotCompleteException,
         InvalidModuleGradeException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
@@ -135,7 +135,7 @@ public class UpdateCommand extends Command {
      * @param modules List of all modules.
      * @throws ModuleNotFoundException If the module is not found.
      */
-    private void updatePrerequisites(String[] commandFlags, ModuleList modules)
+    private void updatePrerequisites(ArrayList<String> commandFlags, ModuleList modules)
             throws ModuleNotFoundException {
         // Extract all new prerequisites
         preRequisites = Parser.extractPreRequisites(commandFlags);
