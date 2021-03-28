@@ -39,44 +39,59 @@ public class ParserTest {
 
     @Test
     void parseAddCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
 
         String line = "add Introduction to Operating Systems -t core -mc 4 -c CS2106 -p CS1010,CS2100";
-        assertEquals("new AddCommand(CS2106, Introduction to Operating Systems, core, 4.00, [CS1010, CS2100])",
+        assertEquals("new AddCommand(CS2106, Introduction to Operating Systems, core, 4.00, [CS1010, CS2100], [CS1010, CS2100])",
                 ParserStub.parseCommandStub(line));
     }
 
     @Test
     void parseDeleteCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
         String line = "delete CS1010";
         assertEquals("new DeleteCommand(CS1010)", ParserStub.parseCommandStub(line));
     }
 
     @Test
     void parseListCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
-        String line = "list";
-        assertEquals("new ListCommand()", ParserStub.parseCommandStub(line));
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
+        String line = "list all";
+        assertEquals("new ListCommand(all)", ParserStub.parseCommandStub(line));
     }
 
     @Test
     void parseProgressCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
         String line = "progress";
         assertEquals("new ProgressCommand()", ParserStub.parseCommandStub(line));
     }
 
     @Test
     void parseDoneCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
         String line = "done CS1010 -g A+";
         assertEquals("new DoneCommand(CS1010, A+)", ParserStub.parseCommandStub(line));
     }
 
     @Test
+    void parseUpdateCommand_appropriateParameters_success() throws InvalidCommandException,
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
+        String line = "update CS2106 -n Intro to OS -mc 2 -g A- -p CS1010,CS2100";
+        assertEquals("new UpdateCommand(CS2106, [-n, Intro, to, OS, -mc, 2, -g, A-, -p, CS1010,CS2100])", ParserStub.parseCommandStub(line));
+    }
+
+    @Test
+    void parseCapCommand_appropriateParameters_success() throws InvalidCommandException,
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
+        String line = "cap";
+        assertEquals("new CapCommand()", ParserStub.parseCommandStub(line));
+    }
+
+
+    @Test
     void parseExitCommand_appropriateParameters_success() throws InvalidCommandException,
-            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException {
+            IncorrectParameterCountException, InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
         String line = "exit";
         assertEquals("new ExitCommand()", ParserStub.parseCommandStub(line));
     }
