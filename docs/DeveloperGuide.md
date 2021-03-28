@@ -212,14 +212,14 @@ module and a container managing the module objects. The `module` package holds t
 creating and manipulating module objects while the `list` package consists of a class that defines the way the module objects 
 should be managed and stored.
 
-### 3.4.1 `module` Package
+#### 3.4.1 `module` Package
 
-#### Description
+##### Description
 
 The `module` package consists of classes that are used to define the type of data to be stored in a module object and establish 
 a framework to show how other components can make use of the features in module classes.
 
-#### Design
+##### Design
 
 The `module` package consists of classes related to module objects. An abstract class `Module` is created to hold attributes 
 and methods applicable to all class objects. It is then inherited by all other child module classes. A class diagram illustrating 
@@ -282,21 +282,21 @@ and contains a `toString` method that overrides the format of elective module pr
 The `MathModule` class inherits from the `Module` class. It initializes the math module object with the information needed and 
 contains a `toString` method that overrides the format of math module printing.
 
-### 3.4.2 `list` Package
+#### 3.4.2 `list` Package
 
-#### Description
+##### Description
 
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
 such as adding, deleting or marking a `Module` as done.
 
-#### Design
+##### Design
 
 The package consists of 1 class, `ModuleList.java`. `ModuleList` contains 2 constructor signatures; 1 for constructing a
 new, empty list for when the user uses iGraduate for the first time, and the other to contain the modules already stored
 in `Storage`.
 
-#### 3.4.2.1 `ModuleList` Class
+##### 3.4.2.1 `ModuleList` Class
 
 The `ModuleList` class acts as an abstraction for the ArrayList that is used to store module objects created from any of the 
 classes under the `module` package. It provides a `ModuleList` structure with features built on top of ArrayList to enhance and 
@@ -479,13 +479,13 @@ In addition, the JSON format can be read across multiple different types of appl
 
 The alternative storage format considered is the use of delimiters. However, there are concerns regarding such
  usage; the most important being potential parsing failure from a valid module. With the use of common 
- delimiters such as commas (,) and dashes (-), the program is unable to differentiate between the various 
+ delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various 
  module information and legitimate module names containing delimiters and may parse the portion of the module 
  to a wrong variable, resulting in corrupted results and a potential program crash. One example of such 
  occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains 
  dashes when the delimiters are used for separating various module information is also a dash. 
 
-Considerations were also given to use more unique delimiters (such as \\, |, etc.) to avoid accidental parsing
+Considerations were also given to use more unique delimiters (such as \, `|`, etc.) to avoid accidental parsing
  fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and
   render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
   third-party library, since the exception handling and parsing management lies in the library functions. 
