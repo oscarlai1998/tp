@@ -64,7 +64,7 @@ public class CapCommandTest {
         doneSecond.execute(moduleList, ui, storage);
     }
 
-    /** Unit test **/
+    /*----------------- Unit test -----------------------*/
     @Test
     void executeCapCommand_validParameters_success()
             throws InvalidModuleTypeException, InputNotNumberException,
