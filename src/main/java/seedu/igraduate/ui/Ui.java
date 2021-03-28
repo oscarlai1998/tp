@@ -7,15 +7,15 @@ import java.util.Scanner;
 
 public class Ui {
     // Welcome message
-    private static final String LOGO = " _  ____               _             _\n"
+    public static final String LOGO = " _  ____               _             _\n"
             + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
             + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
             + "| | |_| | | | (_| | (_| | |_| | (_| | ||  __/\n"
             + "|_|\\____|_|  \\__,_|\\__,_|\\__,_|\\__,_|\\__\\___|";
-    private static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
+    public static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
             + "your one stop study planning service!\nWhat would you like to do today?";
-    private static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
-    private static final String BORDER_LINE = "------------------------------------------------------------"
+    public static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
+    public static final String BORDER_LINE = "------------------------------------------------------------"
             + "--------------------------";
 
     // Messages for successful execution
