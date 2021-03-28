@@ -3,12 +3,19 @@ package seedu.igraduate.logic.command;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import seedu.igraduate.exception.*;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 import seedu.igraduate.model.module.Module;
+
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.AddSelfToPrereqException;
 
 /**
  * Handles update command. 
