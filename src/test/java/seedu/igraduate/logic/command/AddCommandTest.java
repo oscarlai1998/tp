@@ -47,24 +47,43 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_ExistingModule_exceptionThrown()
-        throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException,
-        SaveModuleFailException, ExistingModuleException,
-        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidListTypeException {
+        throws InvalidModuleTypeException, SaveModuleFailException, ExistingModuleException,
+        ModuleNotFoundException, PrerequisiteNotFoundException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
                 preRequisites, untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
-        String line = "add Programming -mc 4 -t core -c cs1010";
-        Command testAddCommand = Parser.parseCommand(line);
+        AddCommand duplicateAddCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
+                preRequisites, untakenPreRequisites);
         Exception exception = assertThrows(ExistingModuleException.class,
-            () -> testAddCommand.execute(moduleList, ui, storage));
+            () -> duplicateAddCommand.execute(moduleList, ui, storage));
         assertEquals(ExistingModuleException.EXISTING_MODULE_ERROR_MESSAGE, exception.getMessage());
     }
 
     @Test
     void executeAddCommand_validParameters_success()
+            throws  InvalidModuleTypeException, ModuleNotFoundException,
+            SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException {
+
+        ArrayList<String> cs1010PreRequisites = new ArrayList<>();
+        ArrayList<String> cs1010UntakenPreRequisites = new ArrayList<>();
+        AddCommand cs1010AddCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
+                cs1010PreRequisites, cs1010UntakenPreRequisites);
+        cs1010AddCommand.execute(moduleList, ui, storage);
+
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        preRequisites.add("CS1010");
+        untakenPreRequisites.add("CS1010");
+        AddCommand addCommand = new AddCommand("cs2100", "Computer Org", "core", 4.0,
+                preRequisites, untakenPreRequisites);
+        addCommand.execute(moduleList, ui, storage);
+    }
+
+    /*------------- Integration test with Ui -----------------*/
+    @Test
+    void executeAddCommand_validParametersWithUi_success()
             throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
             SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
