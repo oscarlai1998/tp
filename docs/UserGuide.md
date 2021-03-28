@@ -123,6 +123,8 @@ Nice! I've updated this module:
 Mark a module as done with grade. To modify the grade of taken module,
 simply use the `done` command again.
 
+> ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
+
 Format:
 
 `done <module code> -g <grade>`
