@@ -6,7 +6,11 @@ import java.nio.file.Paths;
 
 import java.util.logging.Logger;
 
-import seedu.igraduate.command.Command;
+import seedu.igraduate.logic.command.Command;
+import seedu.igraduate.logic.Parser;
+import seedu.igraduate.model.list.ModuleList;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import java.util.logging.LogManager;
 import java.util.logging.Level;
@@ -18,6 +22,7 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
+    private Parser parser;
 
     private static final Logger LOGGER = Logger.getLogger(IGraduate.class.getName());
 
@@ -42,6 +47,7 @@ public class IGraduate {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
         ui = new Ui();
         storage = Storage.getStorage(filePath);
+        parser = new Parser();
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
         } catch (Exception e) {
@@ -65,11 +71,12 @@ public class IGraduate {
             try {
                 String fullCommand = ui.getCommand();
                 ui.printBorderLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {
                 ui.printErrorMessage(e);
+                LOGGER.log(Level.WARNING, "An error occur when trying to execute command.", e);
             } finally {
                 ui.printBorderLine();
             }

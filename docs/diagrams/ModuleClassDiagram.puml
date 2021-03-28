@@ -1,0 +1,46 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class "{abstract}\nModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+class "CoreModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+class "GeModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+class "ElectiveModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+class "MathModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+"{abstract}\nModule" <|-- "CoreModule"
+"{abstract}\nModule" <|-- "GeModule"
+"{abstract}\nModule" <|-- "ElectiveModule"
+"{abstract}\nModule" <|-- "MathModule"
+
+@enduml

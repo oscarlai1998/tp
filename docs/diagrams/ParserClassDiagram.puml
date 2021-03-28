@@ -1,0 +1,18 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Parser"1" <-- iGraduate
+Parser : +parseCommand(String line):Command
+
+Parser : +createAddCommand(String[] commandParameters, String[] commandFlags):AddCommand
+Parser : +createDeleteCommand(String[] commandParameters, String[] commandFlags):DeleteCommand
+Parser : +createDoneCommand(String[] commandParameters, String[] commandFlags):DoneCommand
+Parser : +createProgressCommand(String[] commandParameters, String[] commandFlags):ProgressCommand
+Parser : +createUpdateCommand(String[] commandParameters, String[] commandFlags):UpdateCommand
+Parser : +createCapCommand(String[] commandParameters, String[] commandFlags):CapCommand
+Parser : +createListCommand(String[] commandParameters, String[] commandFlags):ListCommand
+Parser : +createExitCommand(String[] commandParameters, String[] commandFlags):ExitCommand
+
+iGraduate : +run()
+iGraduate : +main()
+@enduml
