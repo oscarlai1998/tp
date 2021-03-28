@@ -18,7 +18,7 @@ By: `W09-2` Latest update: `25 March 2021`
 
 ## Introduction
 
-iGraduate is a command line application that will help NUS students majoring in information security check his/her 
+iGraduate is a command line application that will help NUS students majoring in Information Security check his/her 
 graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools 
 to help make informed decisions about future modules. iGraduate data is saved in the hard disk automatically after any 
 command that changes the data. There is no need to save manually.

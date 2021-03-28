@@ -4,7 +4,6 @@ import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.model.module.Module;
 
@@ -25,11 +24,10 @@ public class CapCommand extends Command {
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
      * @throws SaveModuleFailException If storage fail to save module data to disk.
-     * @throws ModuleNotFoundException If the module type is invalid.
      * @throws InvalidModuleGradeException If the module grade is invalid.
      */
     public  void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException {
+            throws SaveModuleFailException, InvalidModuleGradeException {
 
         LOGGER.log(Level.INFO, "Executing CAP command...");
 
