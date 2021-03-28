@@ -122,7 +122,7 @@ public class Parser {
      * @param line user input.
      * @return String array of user input split up.
      */
-    private static String[] getCommand(String line) {
+    protected static String[] getCommand(String line) {
         return line.split("\\s+(?=-)", 2);
     }
 
@@ -133,7 +133,7 @@ public class Parser {
      * @param commands User input split up using getCommand().
      * @return String array of command and first parameter separated.
      */
-    private static String[] getCommandParameters(String[] commands) {
+    protected static String[] getCommandParameters(String[] commands) {
         return commands[0].split("\\s+", 2);
     }
 
@@ -144,7 +144,7 @@ public class Parser {
      *                 flags and values.
      * @return Array containing the flags and values split with the delimiter (" ").
      */
-    private static String[] getCommandFlag(String[] commands) {
+    protected static String[] getCommandFlag(String[] commands) {
         if (commands.length < 2) {
             return new String[] { null };
         }
@@ -541,7 +541,7 @@ public class Parser {
      * @param moduleCode module code to be checked. 
      * @return True if the code is valid, false otherwise. 
      */
-    private static boolean isModuleCodeValid(String moduleCode) {
+    protected static boolean isModuleCodeValid(String moduleCode) {
         return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", moduleCode);
     }
 
@@ -551,7 +551,7 @@ public class Parser {
      * @param preRequisites list of all the module codes to be checked. 
      * @return True if all the codes are valid, false otherwise. 
      */
-    private static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
+    protected static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
             if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", preRequisite)) {
                 return false;
