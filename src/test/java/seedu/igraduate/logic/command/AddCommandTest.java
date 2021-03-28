@@ -24,6 +24,8 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
+import seedu.igraduate.exception.AddSelfToPrereqException;
+
 import seedu.igraduate.model.module.Module;
 
 import java.io.ByteArrayOutputStream;
@@ -63,11 +65,12 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_validParameters_success()
-        throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
-        SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
-        ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
-        InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException {
+            throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
+            SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
+            InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
+            AddSelfToPrereqException {
         String line = "add Computer Org -mc 4 -t core -c cs2100";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
