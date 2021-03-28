@@ -46,8 +46,8 @@ public class ParserTest {
 
         String line = "add Introduction to Operating Systems -t core -mc 4 -c CS2106 -p CS1010,CS2100";
         assertEquals(
-                "new AddCommand(CS2106, Introduction to Operating Systems, core, 4.00, [CS1010, CS2100], [CS1010, CS2100])",
-                ParserStub.parseCommandStub(line));
+                "new AddCommand(CS2106, Introduction to Operating Systems, core, 4.00, [CS1010, CS2100], " + 
+                "[CS1010, CS2100])", ParserStub.parseCommandStub(line));
     }
 
     @Test

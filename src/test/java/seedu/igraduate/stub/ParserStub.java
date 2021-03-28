@@ -36,7 +36,7 @@ public class ParserStub extends Parser {
 
     public static String createAddCommandStub(String[] commandParameters, String[] commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
-    InvalidModuleTypeException {
+            InvalidModuleTypeException {
         boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
         boolean isInvalidPrereqFlag = (commandFlags.length != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
@@ -56,9 +56,9 @@ public class ParserStub extends Parser {
             throw new InvalidCommandException();
         }
 
-        return String.format("new AddCommand(%s, %s, %s, %.2f, %s, %s)", moduleCode, moduleName, moduleType, moduleCredits, preRequisites, untakenPreRequisites);
-        }
-
+        return String.format("new AddCommand(%s, %s, %s, %.2f, %s, %s)", moduleCode, moduleName, moduleType,
+                moduleCredits, preRequisites, untakenPreRequisites);
+    }
 
     public static String createDeleteCommandStub(String[] commandParameters, String[] commandFlags)
             throws IncorrectParameterCountException {
