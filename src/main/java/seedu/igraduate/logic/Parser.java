@@ -305,9 +305,9 @@ public class Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
-        boolean isIllegalFlag = (commandFlags.contains("-t"));
+        boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
 
-        if (isInvalidPara || isInvalidFlag) {
+        if (isInvalidPara || isInvalidFlag || isIllegalFlag) {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
         }
@@ -370,12 +370,12 @@ public class Parser {
     public static String extractModuleCode(ArrayList<String> commands) throws IncorrectParameterCountException {
         assert commands.size() == COMMAND_ADD_FLAG_LENGTH || commands.size() == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
                 : "extractModuleCode should only be called for add";
-        for (int i = 0; i < commands.size(); i++) {
-            if (commands.get(i).equals("-c")) {
-                assert commands.get(i + 1).length() > 0 : "Module code should not be empty";
-                return commands.get(i + 1).toUpperCase().trim();
-            }
+        int index = commands.indexOf("-c");
+        if (index > 0) {
+            assert commands.get(index + 1).length() > 0 : "Module code should not be empty";
+            return commands.get(index + 1).toUpperCase().trim();
         }
+
         LOGGER.warning("Missing module code parameter.");
         throw new IncorrectParameterCountException();
     }
@@ -394,24 +394,24 @@ public class Parser {
         assert commandFlags.size() == COMMAND_ADD_FLAG_LENGTH
                 || commandFlags.size() == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
                 : "extractModuleType should only be called for add";
-        for (int i = 0; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).equals("-t")) {
-                String type = commandFlags.get(i + 1).toLowerCase().trim();
-                assert type.length() > 0 : "Module type should not be empty.";
-                switch (type) {
-                case "ue": // fallthrough
-                case "ge": // fallthrough
-                case "math": // fallthrough
-                case "core":
-                    return type;
-                default:
-                    LOGGER.warning("Invalid module type detected.");
-                    throw new InvalidModuleTypeException();
-                }
-            }
+        int index = commandFlags.indexOf("-t");
+        if (index < 0) {
+            LOGGER.warning("Missing module type parameter.");
+            throw new InvalidCommandException();
         }
-        LOGGER.warning("Missing module type parameter.");
-        throw new InvalidCommandException();
+
+        String type = commandFlags.get(index + 1).toLowerCase().trim();
+        assert type.length() > 0 : "Module type should not be empty.";
+        switch (type) {
+        case "ue": // fallthrough
+        case "ge": // fallthrough
+        case "math": // fallthrough
+        case "core":
+            return type;
+        default:
+            LOGGER.warning("Invalid module type detected.");
+            throw new InvalidModuleTypeException();
+        }
     }
 
     /**
@@ -424,19 +424,20 @@ public class Parser {
      */
     public static double extractModuleCredits(ArrayList<String> commandFlags)
             throws InputNotNumberException, InvalidCommandException {
-        for (int i = 0; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).equals("-mc")) {
-                assert commandFlags.get(i + 1).trim().length() > 0 : "Modular credits field should not be empty.";
-                try {
-                    return Double.parseDouble(commandFlags.get(i + 1));
-                } catch (NumberFormatException e) {
-                    LOGGER.warning("Invalid module credits detected.");
-                    throw new InputNotNumberException("Modular credits : -mc");
-                }
-            }
+        int index = commandFlags.indexOf("-mc");
+
+        if (index < 0) {
+            LOGGER.warning("Missing module credits parameter.");
+            throw new InvalidCommandException();
         }
-        LOGGER.warning("Missing module credits parameter.");
-        throw new InvalidCommandException();
+
+        assert commandFlags.get(index + 1).trim().length() > 0 : "Modular credits field should not be empty.";
+        try {
+            return Double.parseDouble(commandFlags.get(index + 1));
+        } catch (NumberFormatException e) {
+            LOGGER.warning("Invalid module credits detected.");
+            throw new InputNotNumberException("Modular credits : -mc");
+        }
     }
 
     /**
@@ -447,41 +448,32 @@ public class Parser {
      * @throws InvalidCommandException if -g flag is not found.
      */
     public static String extractModuleGrade(ArrayList<String> commandFlags) throws InvalidCommandException {
-        for (int i = 0; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).equals("-g")) {
-                assert commandFlags.get(i + 1).length() > 0 : "Grade should not be empty.";
-                return commandFlags.get(i + 1);
-            }
+        int index = commandFlags.indexOf("-g");
+        if (index < 0) {
+            LOGGER.warning("Missing module grade parameter.");
+            throw new InvalidCommandException();
         }
-        LOGGER.warning("Missing module grade parameter.");
-        throw new InvalidCommandException();
+
+        assert commandFlags.get(index + 1).length() > 0 : "Grade should not be empty.";
+        return commandFlags.get(index + 1);
     }
 
     public static String extractModuleName(ArrayList<String> commandFlags) throws InvalidCommandException {
-        int start = -1;
-        int end = commandFlags.size();
+        
 
-        for (int i = 0; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).equals("-n")) {
-                start = i + 1;
-                break;
-            }
-        }
-
-        if (start == -1) {
+        int startIndex = commandFlags.indexOf("-n");
+        if (startIndex < 0) {
             LOGGER.warning("Missing module name parameter.");
             throw new InvalidCommandException();
         }
 
-        for (int i = start; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).matches("-[a-z]{1,2}")) {
-                end = i;
-                break;
-            }
+        int endIndex = commandFlags.indexOf(Pattern.compile("-[a-z]{1,2}")); 
+        if (endIndex < 0) {
+            endIndex = commandFlags.size();;
         }
 
         String moduleName = "";
-        for (int i = start; i < end; i++) {
+        for (int i = startIndex + 1; i < endIndex; i++) {
             moduleName = moduleName + " " + commandFlags.get(i);
         }
         return moduleName.trim();
@@ -515,16 +507,15 @@ public class Parser {
      */
     public static ArrayList<String> extractPreRequisites(ArrayList<String> commandFlags) {
         ArrayList<String> preRequisites = new ArrayList<>();
-        for (int i = 0; i < commandFlags.size(); i++) {
-            if (commandFlags.get(i).equals("-p")) {
-                String trimmedCommandFlag = commandFlags.get(i + 1).trim();
-                ArrayList<String> moduleCodes = new ArrayList<String>(Arrays.asList(trimmedCommandFlag.split(",")));
-                for (String moduleCode : moduleCodes) {
-                    preRequisites.add(moduleCode.toUpperCase());
-                }
-                break;
+        int index = commandFlags.indexOf("-p");
+        if (index >= 0) {
+            String trimmedCommandFlag = commandFlags.get(index + 1).trim();
+            ArrayList<String> moduleCodes = new ArrayList<String>(Arrays.asList(trimmedCommandFlag.split(",")));
+            for (String moduleCode : moduleCodes) {
+                preRequisites.add(moduleCode.toUpperCase());
             }
         }
+
         return preRequisites;
     }
 

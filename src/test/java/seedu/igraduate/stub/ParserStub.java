@@ -1,7 +1,6 @@
 package seedu.igraduate.stub;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -117,8 +116,9 @@ public class ParserStub extends Parser {
             throws IncorrectParameterCountException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
+        boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
 
-        if (isInvalidPara || isInvalidFlag) {
+        if (isInvalidPara || isInvalidFlag || isIllegalFlag) {
             throw new IncorrectParameterCountException();
         }
 
