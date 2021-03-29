@@ -73,8 +73,8 @@ public class DeleteCommandUnitTest {
         DeleteCommand deleteCommand = new DeleteCommand("CS1010");
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
-        assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE +
-                        "[CS2100]", exception.getMessage());
+        assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
+                        + "[CS2100]", exception.getMessage());
     }
 
     @Test
