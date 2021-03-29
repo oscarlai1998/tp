@@ -272,11 +272,11 @@ understand the application's logic and `json` format.
 
 Command | Format
 --------|--------
-add | <code>add <name> -c <module code> -t <core&#124;math&#124;ue&#124;ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]</code>
+add | <code>add <name> -c <module code> -t <core&#124;math&#124;ue&#124;ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]
 delete | `delete <module code>`
 update | `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 done | `done <module code> -g <grade>`
-list | <code>list all&#124;incomplete&#124;complete</code>
+list | <code>list <all&#124;incomplete&#124;complete></code>
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
