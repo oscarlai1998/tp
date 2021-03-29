@@ -85,10 +85,10 @@ public class DeleteCommandTest {
         String line = "Delete CS1010";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-                () -> deleteCommand.execute(moduleList, ui, storage));
+            () -> deleteCommand.execute(moduleList, ui, storage));
         String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
                 + "[CS2100]";
-        assertEquals(exceptionMessage , exception.getMessage());
+        assertEquals(exceptionMessage, exception.getMessage());
     }
 
     @Test
