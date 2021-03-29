@@ -36,7 +36,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DeleteCommandTest {
+public class DeleteCommandIntegrationTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
@@ -68,8 +68,8 @@ public class DeleteCommandTest {
 
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown()
-        throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+            throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
         String line = "Delete Pigs (Three Different Ones)";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
