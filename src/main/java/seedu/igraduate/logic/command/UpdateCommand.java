@@ -92,7 +92,8 @@ public class UpdateCommand extends Command {
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
-    private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(String[] commandFlags) 
+            throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
