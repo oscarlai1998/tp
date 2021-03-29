@@ -71,7 +71,7 @@ public class DoneCommand extends Command {
         LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getByCode(getModuleCode());
-            if (!module.isGradeValid(moduleGrade)) {
+            if (!Module.isGradeValid(moduleGrade)) {
                 LOGGER.log(Level.INFO, "Invalid grade input.");
                 throw new InvalidModuleGradeException();
             }
