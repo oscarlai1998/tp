@@ -9,6 +9,7 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 
 import seedu.igraduate.model.module.CoreModule;
 import seedu.igraduate.model.module.ElectiveModule;
@@ -83,10 +84,13 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
-            ModuleNotFoundException, PrerequisiteNotFoundException {
+        throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
+        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         LOGGER.log(Level.INFO, "Executing add command...");
         try {
+            if (moduleCredits < 0) {
+                throw new InvalidModularCreditException();
+            }
             Module module = createModuleByType();
             assert module != null : "Module should not be empty.";
             moduleList.add(module);
@@ -103,6 +107,9 @@ public class AddCommand extends Command {
         } catch (PrerequisiteNotFoundException e) {
             LOGGER.log(Level.WARNING, "Failed to add non-existing pre-requisite modules", e);
             throw new PrerequisiteNotFoundException();
+        } catch (InvalidModularCreditException e) {
+            LOGGER.log(Level.WARNING, "Failed to add module due to invalid modular credit input", e);
+            throw new InvalidModularCreditException();
         } finally {
             LOGGER.log(Level.INFO, "End of add command execution.");
         }
