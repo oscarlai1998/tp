@@ -335,7 +335,7 @@ public class ModuleList {
      * @return The retrieved module index on specified module code.
      */
     public int getModuleIndex(String moduleCode) {
-        int index = DEFAULT_INDEX;
+        int index = DEFAULT_INDEX; 
 
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getCode().equalsIgnoreCase(moduleCode)) {

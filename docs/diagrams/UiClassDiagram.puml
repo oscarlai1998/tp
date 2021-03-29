@@ -1,0 +1,45 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+Ui"1" <-- iGraduate
+Ui : -LOGO:String
+Ui : -GREETING_MESSAGE:String
+Ui : -GOODBYE_MESSAGE:String
+Ui : -BORDER_LINE:String
+Ui : +MODULE_ADDED_MESSAGE:String
+Ui : +MODULE_DELETED_MESSAGE:String
+Ui : +MODULE_TAKEN_MESSAGE:String
+Ui : +MODULE_LEFT_MESSAGE:String
+Ui : +EMPTY_LIST_MESSAGE:String
+Ui : +EMPTY_COMPLETE_LIST_MESSAGE:String
+Ui : +EMPTY_INCOMPLETE_LIST_MESSAGE:String
+Ui : +PROGRESS_MESSAGE:String
+Ui : +CAP_MESSAGE:String
+Ui : -SCANNER:Scanner
+Ui : +getCommand(): String
+Ui : +printWelcomeMessage(): void
+Ui : +printExitMessage(): void
+Ui : +printBorderLine(): void
+Ui : +printEntireList(ArrayList<Module> modules): void
+Ui : +printCompleteList(ArrayList<Module> modules): void
+Ui : +printIncompletedList(ArrayList<Module> modules): void
+Ui : +printModuleDetails(Module module): void
+Ui : +printAddedModuleSuccess(Module module): void
+Ui : +printPrerequisites(String moduleCode, ArrayList<String> prerequisites): void
+Ui : +printDeletedModuleSuccess(String name, String type): void
+Ui : +printMarkAsTakenMessage(Module module): void
+Ui : +printUpdateSuccess(Module module): void
+Ui : +printListEmptyMessage(): void
+Ui : +printCompleteListEmptyMessage(): void
+Ui : +printIncompleteListEmptyMessage(): void
+Ui : +printProgressBar(double completedMCs, String percentage): void
+Ui : +printCap(double cap, String degreeClassification): void
+Ui : +printErrorMessage(Exception exception): void
+
+
+
+
+
+iGraduate : +run()
+iGraduate : +main()
+@enduml

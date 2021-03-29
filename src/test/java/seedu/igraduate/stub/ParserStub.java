@@ -1,7 +1,6 @@
 package seedu.igraduate.stub;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -34,19 +33,19 @@ public class ParserStub extends Parser {
     private static final int COMMAND_CAP_LENGTH = 1;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
-    public static String createAddCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createAddCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
             InvalidModuleTypeException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_ADD_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.length != COMMAND_ADD_FLAG_LENGTH);
-        boolean isInvalidPrereqFlag = (commandFlags.length != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_ADD_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.size() != COMMAND_ADD_FLAG_LENGTH);
+        boolean isInvalidPrereqFlag = (commandFlags.size() != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
 
         if (isInvalidPara || (isInvalidFlag && isInvalidPrereqFlag)) {
             throw new IncorrectParameterCountException();
         }
 
         String moduleCode = extractModuleCode(commandFlags);
-        String moduleName = commandParameters[1];
+        String moduleName = commandParameters.get(1);
         String moduleType = extractModuleType(commandFlags);
         double moduleCredits = extractModuleCredits(commandFlags);
         ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
@@ -60,24 +59,24 @@ public class ParserStub extends Parser {
                 moduleCredits, preRequisites, untakenPreRequisites);
     }
 
-    public static String createDeleteCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createDeleteCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_DELETE_LENGTH);
-        boolean isInvalidFlag = (commandFlags[0] != null);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_DELETE_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
         }
 
-        String moduleCode = commandParameters[1];
+        String moduleCode = commandParameters.get(1);
 
         return "new DeleteCommand(" + moduleCode + ")";
     }
 
-    public static String createListCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createListCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidListTypeException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_LIST_LENGTH);
-        boolean isInvalidFlag = (commandFlags[0] != null);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_LIST_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
@@ -87,10 +86,10 @@ public class ParserStub extends Parser {
         return String.format("new ListCommand(%s)", scope);
     }
 
-    public static String createProgressCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createProgressCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_PROGRESS_LENGTH);
-        boolean isInvalidFlag = (commandFlags[0] != null);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_PROGRESS_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
@@ -99,10 +98,10 @@ public class ParserStub extends Parser {
         return "new ProgressCommand()";
     }
 
-    public static String createDoneCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createDoneCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_DONE_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.length != COMMAND_DONE_FLAG_LENGTH);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_DONE_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.size() != COMMAND_DONE_FLAG_LENGTH);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
@@ -110,25 +109,26 @@ public class ParserStub extends Parser {
 
         String moduleGrade = extractModuleGrade(commandFlags);
 
-        return String.format("new DoneCommand(%s, %s)", commandParameters[1], moduleGrade);
+        return String.format("new DoneCommand(%s, %s)", commandParameters.get(1), moduleGrade);
     }
 
-    public static String createUpdateCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createUpdateCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_UPDATE_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.length < COMMAND_UPDATE_FLAG_LENGTH);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
+        boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
+        boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
 
-        if (isInvalidPara || isInvalidFlag) {
+        if (isInvalidPara || isInvalidFlag || isIllegalFlag) {
             throw new IncorrectParameterCountException();
         }
 
-        return String.format("new UpdateCommand(%s, %s)", commandParameters[1], Arrays.asList(commandFlags));
+        return String.format("new UpdateCommand(%s, %s)", commandParameters.get(1), commandFlags);
     }
 
-    public static String createCapCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createCapCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_CAP_LENGTH);
-        boolean isInvalidFlag = (commandFlags[0] != null);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_CAP_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
@@ -137,10 +137,10 @@ public class ParserStub extends Parser {
         return "new CapCommand()";
     }
 
-    public static String createExitCommandStub(String[] commandParameters, String[] commandFlags)
+    public static String createExitCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
-        boolean isInvalidPara = (commandParameters.length != COMMAND_EXIT_LENGTH);
-        boolean isInvalidFlag = (commandFlags[0] != null);
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_EXIT_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
 
         if (isInvalidPara || isInvalidFlag) {
             throw new IncorrectParameterCountException();
@@ -154,10 +154,10 @@ public class ParserStub extends Parser {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
-        String[] commands = getCommand(line);
-        String[] commandParameters = getCommandParameters(commands);
-        String command = commandParameters[0].toLowerCase();
-        String[] commandFlags = getCommandFlag(commands);
+        ArrayList<String> commands = getCommand(line);
+        ArrayList<String> commandParameters = getCommandParameters(commands);
+        String command = commandParameters.get(0).toLowerCase();
+        ArrayList<String> commandFlags = getCommandFlag(commands);
 
         switch (command) {
         case COMMAND_ADD:
