@@ -2,17 +2,20 @@ package seedu.igraduate.logic.command;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
+
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
+import seedu.igraduate.model.module.Module;
+
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.model.module.Module;
+import seedu.igraduate.exception.AddSelfToPrereqException;
 
 /**
  * Handles update command. 
@@ -53,22 +56,17 @@ public class UpdateCommand extends Command {
      * @throws SaveModuleFailException If the program fails to save changes. 
      */
     @Override
-    public void execute(ModuleList modules, Ui ui, Storage storage) 
+    public void execute(ModuleList modules, Ui ui, Storage storage)
             throws ModuleNotFoundException,
             NumberFormatException, InputNotNumberException, ModuleNotCompleteException,
-            InvalidModuleGradeException, SaveModuleFailException {
+            InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException {
         this.targetModule = modules.getModule(moduleCode);
-        
-        try {
-            updateModuleGrade(this.commandFlags);
-        } catch (ModuleNotCompleteException exception) {
-            throw exception;
-        } finally {
-            updateModuleName(this.commandFlags);
-            updateModuleCredits(this.commandFlags);
-            updatePrerequisites(this.commandFlags, modules);
-            storage.saveModulesToFile(modules);
-        }
+
+        updateModuleGrade(this.commandFlags);
+        updateModuleName(this.commandFlags);
+        updateModuleCredits(this.commandFlags);
+        updatePrerequisites(this.commandFlags, modules);
+        storage.saveModulesToFile(modules);
 
         ui.printUpdateSuccess(targetModule);
     }
@@ -94,7 +92,8 @@ public class UpdateCommand extends Command {
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
-    private void updateModuleCredits(String[] commandFlags) throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(String[] commandFlags) 
+            throws NumberFormatException, InputNotNumberException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -136,9 +135,10 @@ public class UpdateCommand extends Command {
      * @throws ModuleNotFoundException If the module is not found.
      */
     private void updatePrerequisites(String[] commandFlags, ModuleList modules)
-            throws ModuleNotFoundException {
+            throws ModuleNotFoundException, AddSelfToPrereqException {
         // Extract all new prerequisites
         preRequisites = Parser.extractPreRequisites(commandFlags);
+        checkSelfPrerequisite(targetModule, preRequisites);
         // Extract new prerequisites that are not taken
         ArrayList<String> notTakenPrerequisites = extractPrerequisitesNotTaken(modules, preRequisites);
         // Remove targetModule from requiredBy of old prerequisites list and
@@ -167,6 +167,20 @@ public class UpdateCommand extends Command {
         }
 
         return notTakenPrerequisites;
+    }
+
+    /**
+     * Checks if user is adding the target module code to its own list of prerequisites.
+     *
+     * @param module The target module the user wants to update.
+     * @param preRequisites List of new prerequisites user wants to add to module.
+     */
+    private void checkSelfPrerequisite(Module module, ArrayList<String> preRequisites)
+            throws AddSelfToPrereqException {
+        String moduleCode = module.getCode();
+        if (preRequisites.contains(moduleCode)) {
+            throw new AddSelfToPrereqException();
+        }
     }
 
     /**

@@ -24,6 +24,8 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
+import seedu.igraduate.exception.AddSelfToPrereqException;
+
 import seedu.igraduate.model.module.Module;
 
 import java.io.ByteArrayOutputStream;
@@ -60,11 +62,11 @@ public class DoneCommandTest {
 
     @Test
     void executeDoneCommand_moduleInList_success()
-        throws ExistingModuleException, InvalidModuleTypeException, SaveModuleFailException,
-        IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-        ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
-        ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-        InvalidListTypeException, PrerequisiteNotMetException {
+            throws ExistingModuleException, InvalidModuleTypeException, SaveModuleFailException,
+            IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
