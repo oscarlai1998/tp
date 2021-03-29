@@ -28,6 +28,7 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,7 +52,8 @@ public class DeleteCommandUnitTest {
             IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            InvalidModularCreditException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
         String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
         Command addFirst = Parser.parseCommand(firstModule);
@@ -79,13 +81,13 @@ public class DeleteCommandUnitTest {
 
     @Test
     void executeDeleteCommand_moduleInList_success()
-            throws SaveModuleFailException, ModuleNotFoundException,
-            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
+        throws SaveModuleFailException, ModuleNotFoundException,
+        PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
         DeleteCommand deleteCommand = new DeleteCommand("CS2100");
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
         assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS2100")
-                + System.lineSeparator(), outContent.toString());
+            + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 
