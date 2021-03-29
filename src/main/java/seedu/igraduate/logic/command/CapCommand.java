@@ -14,7 +14,7 @@ public class CapCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
 
-    protected static float cap;
+    protected float cap;
     protected String degreeClassification;
 
     /**
@@ -26,7 +26,7 @@ public class CapCommand extends Command {
      * @throws SaveModuleFailException If storage fail to save module data to disk.
      * @throws InvalidModuleGradeException If the module grade is invalid.
      */
-    public  void execute(ModuleList moduleList, Ui ui, Storage storage)
+    public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, InvalidModuleGradeException {
 
         LOGGER.log(Level.INFO, "Executing CAP command...");
@@ -164,15 +164,6 @@ public class CapCommand extends Command {
         }
 
         return capClass;
-    }
-
-    /**
-     * Retrieves and return cap.
-     *
-     * @return cap.
-     */
-    public static float getCap() {
-        return cap;
     }
 
     @Override
