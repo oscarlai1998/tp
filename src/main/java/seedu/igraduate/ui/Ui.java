@@ -23,9 +23,11 @@ public class Ui {
     public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have have completed:";
     public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to complete:";
+    public static final String MODULES_AVAILABLE_MESSAGE = "Modules can be taken:";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
+    public static final String EMPTY_AVAILABLE_LIST_MESSAGE = "There are no modules available for take.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
 
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
@@ -114,6 +116,26 @@ public class Ui {
     }
 
     /**
+     * Prints the modules in the array list that user can take.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printAvailableList(ArrayList<Module> modules) {
+        System.out.println(MODULES_AVAILABLE_MESSAGE);
+        int i = 1;
+        for (Module module : modules) {
+            ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+            boolean isPreRequisiteCleared = untakenPreRequisites.isEmpty();
+            boolean isIncomplete = module.getStatus().equalsIgnoreCase("not taken");
+            if (isPreRequisiteCleared && isIncomplete) {
+                System.out.print(i + ": ");
+                printModuleDetails(module);
+                i += 1;
+            }
+        }
+    }
+
+    /**
      * Prints the module information.
      *
      * @param module array list containing the modules.
@@ -193,6 +215,13 @@ public class Ui {
      */
     public void printIncompleteListEmptyMessage() {
         System.out.println(EMPTY_INCOMPLETE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no available modules.
+     */
+    public void printAvailableListEmptyMessage() {
+        System.out.println(EMPTY_AVAILABLE_LIST_MESSAGE);
     }
 
     /**

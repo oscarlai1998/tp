@@ -295,6 +295,23 @@ public class ModuleList {
     }
 
     /**
+     * Checks if there is any available module
+     *
+     * @return Boolean value indicating whether there is module available to take.
+     */
+    public boolean isModuleAvailable() {
+        for (Module module: modules) {
+            ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+            boolean isPreRequisiteCleared = untakenPreRequisites.isEmpty();
+            boolean isIncomplete = module.getStatus().equalsIgnoreCase("not taken");
+            if (isPreRequisiteCleared && isIncomplete) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Retrieves specified module from module list.
      *
      * @param moduleCode Module code of module.

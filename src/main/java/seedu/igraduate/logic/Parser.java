@@ -506,6 +506,7 @@ public class Parser {
         case "all":        // fallthrough
         case "complete":   // fallthrough
         case "incomplete": // fallthrough
+        case "available":  // fallthrough
             return scope;
         default:
             throw new InvalidListTypeException();
