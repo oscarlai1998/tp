@@ -1,0 +1,45 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class "{abstract}\n<i>Command" {
+    +<i>execute(ModuleList: moduleList, Ui: ui, Storage: storage)
+}
+
+class "AddCommand" {
+    #moduleCode:String
+    #moduleName:String
+    #moduleType:String
+    #moduleCredits:Double
+    #preRequisites:ArrayList<String>
+    #untakenPreRequisites:ArrayList<String>
+    +execute(ModuleList: moduleList, Ui: ui, Storage: storage)
+    -createModuleByType():Module
+}
+
+class "CapCommand" {
+    #
+
+}
+
+class "ElectiveModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+class "MathModule" {
+    +removeUntakenPreRequisite(String:ModuleCode)
+    +removeRequredByModule(String:ModuleCode)
+    +getStatusIcon():String
+    +toString():String
+}
+
+"{abstract}\n<i>Command" <|-- "AddCommand"
+"{abstract}\n<i>Command" <|-- "CapCommand"
+"{abstract}\n<i>Command" <|-- "ElectiveModule"
+"{abstract}\n<i>Command" <|-- "MathModule"
+
+@enduml

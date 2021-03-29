@@ -14,8 +14,8 @@ public class CapCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
 
-    private static float cap;
-    private static String degreeClassification;
+    protected static float cap;
+    protected String degreeClassification;
 
     /**
      * Execute the capCommand function.
