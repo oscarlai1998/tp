@@ -92,7 +92,12 @@ public class UpdateCommand extends Command {
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
+<<<<<<< HEAD
     private void updateModuleCredits(ArrayList<String> commandFlags) throws NumberFormatException, InputNotNumberException {
+=======
+    private void updateModuleCredits(String[] commandFlags) 
+            throws NumberFormatException, InputNotNumberException {
+>>>>>>> 8e76708ab10cb82d80e8e12392cfe6cb450c01f8
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -144,7 +149,6 @@ public class UpdateCommand extends Command {
         // add targetModule to requiredBy of new prerequisites
         removeModuleFromRequiredBy(targetModule, modules);
         addModuleToRequiredBy(targetModule, modules, preRequisites);
-
         targetModule.setUntakenPreRequisites(notTakenPrerequisites);
         targetModule.setPreRequisites(preRequisites);
     }

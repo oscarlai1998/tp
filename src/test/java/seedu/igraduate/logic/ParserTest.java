@@ -1,4 +1,4 @@
-package seedu.igraduate;
+package seedu.igraduate.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,7 +19,6 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.stub.ParserStub;
 import seedu.igraduate.exception.InvalidListTypeException;
-import seedu.igraduate.logic.Parser;
 
 public class ParserTest {
     /*-------------------- Unit tests --------------------*/
