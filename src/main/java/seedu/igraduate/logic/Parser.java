@@ -372,12 +372,11 @@ public class Parser {
                 : "extractModuleCode should only be called for add";
         int index = commands.indexOf("-c");
         if (index > 0) {
-            assert commands.get(index + 1).length() > 0 : "Module code should not be empty";
-            return commands.get(index + 1).toUpperCase().trim();
+            LOGGER.warning("Missing module code parameter.");
+            throw new IncorrectParameterCountException();
         }
-
-        LOGGER.warning("Missing module code parameter.");
-        throw new IncorrectParameterCountException();
+        assert commands.get(index + 1).length() > 0 : "Module code should not be empty";
+        return commands.get(index + 1).toUpperCase().trim();
     }
 
     /**

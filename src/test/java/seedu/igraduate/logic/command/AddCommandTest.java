@@ -90,7 +90,7 @@ public class AddCommandTest {
             ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
             InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
             AddSelfToPrereqException {
-        String line = "add Computer Org -mc 4 -t core -c cs2100";
+        String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
