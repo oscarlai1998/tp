@@ -10,6 +10,7 @@ import seedu.igraduate.logic.command.DeleteCommand;
 import seedu.igraduate.logic.command.DoneCommand;
 import seedu.igraduate.logic.command.ListCommand;
 import seedu.igraduate.logic.command.ProgressCommand;
+import seedu.igraduate.logic.command.UpdateCommand;
 import seedu.igraduate.logic.command.CapCommand;
 
 import seedu.igraduate.exception.IncorrectParameterCountException;
@@ -18,7 +19,6 @@ import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.stub.ParserStub;
 import seedu.igraduate.exception.InvalidListTypeException;
-import seedu.igraduate.logic.Parser;
 
 public class ParserTest {
     /*-------------------- Unit tests --------------------*/
@@ -164,7 +164,6 @@ public class ParserTest {
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
     }
 
-
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
@@ -192,7 +191,6 @@ public class ParserTest {
         Exception exception = assertThrows(IncorrectParameterCountException.class, () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
     }
-
 
     /* Progress Command */
     @Test
@@ -259,5 +257,13 @@ public class ParserTest {
         String line = "cap -t";
         Exception exception = assertThrows(IncorrectParameterCountException.class, () -> Parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    /* UpdateCommand tests */
+    @Test
+    void createUpdateCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
+        assertEquals(UpdateCommand.class, Parser.parseCommand(line).getClass());
     }
 }

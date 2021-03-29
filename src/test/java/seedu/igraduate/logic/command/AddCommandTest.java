@@ -82,7 +82,7 @@ public class AddCommandTest {
         addCommand.execute(moduleList, ui, storage);
     }
 
-    /*------------- Integration test with Ui -----------------*/
+    /*------------- Integration test with Ui and Parser -----------------*/
     @Test
     void executeAddCommand_validParametersWithUi_success()
             throws InvalidCommandException, InvalidModuleTypeException,
