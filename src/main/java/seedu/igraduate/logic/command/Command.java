@@ -1,9 +1,5 @@
 package seedu.igraduate.logic.command;
 
-import seedu.igraduate.storage.Storage;
-import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.ui.Ui;
-
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
@@ -17,6 +13,10 @@ import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.model.list.ModuleList;
+import seedu.igraduate.ui.Ui;
 
 /**
  * Parent class for more specific command child class. Contains basic
@@ -48,11 +48,11 @@ public abstract class Command {
      *                                             of other modules.
      */
     public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
-            ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
-            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
-            InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, InvalidListTypeException, PrerequisiteNotMetException,
-            AddSelfToPrereqException;
+        ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
+        ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
+        InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
+        UnableToDeletePrereqModuleException, InvalidListTypeException, PrerequisiteNotMetException,
+        AddSelfToPrereqException, InvalidModularCreditException;
 
     /**
      * Returns a flag indicating whether the program should terminate after
