@@ -410,6 +410,8 @@ validation of the type and formatting of flags and parameters.
 #### 4.3.1 Add Command
 
 #### 4.3.2 Delete Command
+The delete command allows for deletion of module from the module list, identified by the module code.
+
 
 #### 4.3.3 Update Command
 The update commands allows modifications to the existing modules, identified by the module code. 
