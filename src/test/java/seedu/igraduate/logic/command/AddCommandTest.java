@@ -85,13 +85,13 @@ public class AddCommandTest {
     /*------------- Integration test with Ui and Parser -----------------*/
     @Test
     void executeAddCommand_validParametersWithUi_success()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
-            SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
-            ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
+            ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
+            ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
             InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
             AddSelfToPrereqException, InvalidModularCreditException {
-        String line = "add Computer Org -mc 4 -t core -c cs2100";
+        String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
