@@ -25,6 +25,7 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 
 import seedu.igraduate.model.module.Module;
 
@@ -48,7 +49,7 @@ public class AddCommandTest {
     @Test
     void executeAddCommand_ExistingModule_exceptionThrown()
         throws InvalidModuleTypeException, SaveModuleFailException, ExistingModuleException,
-        ModuleNotFoundException, PrerequisiteNotFoundException {
+        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
@@ -63,8 +64,8 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_validParameters_success()
-            throws  InvalidModuleTypeException, ModuleNotFoundException,
-            SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException {
+        throws  InvalidModuleTypeException, ModuleNotFoundException, SaveModuleFailException,
+        ExistingModuleException, PrerequisiteNotFoundException, InvalidModularCreditException {
 
         ArrayList<String> cs1010PreRequisites = new ArrayList<>();
         ArrayList<String> cs1010UntakenPreRequisites = new ArrayList<>();
@@ -84,13 +85,13 @@ public class AddCommandTest {
     /*------------- Integration test with Ui and Parser -----------------*/
     @Test
     void executeAddCommand_validParametersWithUi_success()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException,
-            SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
-            ModuleNotCompleteException, ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
+            ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
+            ModularCreditExceedsLimitException, UnableToDeletePrereqModuleException,
             InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
-            AddSelfToPrereqException {
-        String line = "add Computer Org -mc 4 -t core -c cs2100";
+            AddSelfToPrereqException, InvalidModularCreditException {
+        String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
