@@ -56,6 +56,15 @@ public class ListCommand extends Command {
             ui.printIncompletedList(moduleList.getModules());
             LOGGER.log(Level.INFO, "Printed Incomplete Modules.");
             break;
+        case "available":
+            if (moduleList.isModuleAvailable()) {
+                ui.printAvailableList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed available modules.");
+            } else {
+                ui.printAvailableListEmptyMessage();
+                LOGGER.log(Level.INFO, "No available modules.");
+            }
+            break;
         default:
             LOGGER.log(Level.INFO, "Failed to print a valid list");
         }

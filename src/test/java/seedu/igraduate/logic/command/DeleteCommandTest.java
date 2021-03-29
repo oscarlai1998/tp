@@ -3,12 +3,15 @@ package seedu.igraduate.logic.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
+import seedu.igraduate.model.module.Module;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
@@ -32,6 +35,7 @@ import java.io.PrintStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteCommandTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
@@ -43,6 +47,25 @@ public class DeleteCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
+    @BeforeAll
+    void deleteCommand_setup() throws SaveModuleFailException, InvalidModuleTypeException,
+            ExistingModuleException, ModuleNotFoundException, PrerequisiteNotFoundException {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        ArrayList<String> requiredByModules = new ArrayList<>();
+        AddCommand firstModuleAddCommand = new AddCommand("cs1010", "Programming Methodology", "core", 4.0,
+                preRequisites, untakenPreRequisites);
+        firstModuleAddCommand.execute(moduleList, ui, storage);
+        requiredByModules.add("CS2100");
+        Module module = moduleList.getModule("cs1010");
+        module.setRequiredByModules(requiredByModules);
+        ArrayList<String> secondModulePreRequisites = new ArrayList<>();
+        ArrayList<String> secondModuleUntakenPreRequisites = new ArrayList<>();
+        AddCommand secondModuleAddCommand = new AddCommand("cs2100", "Introduction to Computer Organisation", "core",
+                4.0, secondModulePreRequisites, secondModuleUntakenPreRequisites);
+        secondModuleAddCommand.execute(moduleList, ui, storage);
+    }
+
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown()
         throws InvalidCommandException, InvalidModuleTypeException,
@@ -51,7 +74,21 @@ public class DeleteCommandTest {
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
-        assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
+        String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
+        assertEquals(exceptionMessage, exception.getMessage());
+    }
+
+    @Test
+    void executeDeleteCommand_preRequisiteModule_exceptionThrown()
+            throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        String line = "Delete CS1010";
+        Command deleteCommand = Parser.parseCommand(line);
+        Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
+            () -> deleteCommand.execute(moduleList, ui, storage));
+        String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
+                + "[CS2100]";
+        assertEquals(exceptionMessage, exception.getMessage());
     }
 
     @Test
@@ -61,17 +98,12 @@ public class DeleteCommandTest {
             ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
-        ArrayList<String> preRequisites = new ArrayList<>();
-        ArrayList<String> untakenPreRequisites = new ArrayList<>();
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
-                preRequisites, untakenPreRequisites);
-        addCommand.execute(moduleList, ui, storage);
-        String line = "Delete cs1010";
+        String line = "Delete cs2100";
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010")
-                + System.lineSeparator(), outContent.toString());
+        String successMessage = String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs2100") + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
     }
 }
