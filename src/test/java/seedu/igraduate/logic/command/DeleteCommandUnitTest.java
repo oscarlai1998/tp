@@ -3,6 +3,7 @@ package seedu.igraduate.logic.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.igraduate.model.list.ModuleList;
@@ -30,9 +31,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
-public class DeleteCommandTest {
+public class DeleteCommandUnitTest {
 
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
@@ -43,12 +43,24 @@ public class DeleteCommandTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
+    @BeforeEach
+    void populateList()
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+        String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
+        String secondModule = "add Computer Org -mc 4 -t core -c cs2100";
+        Command addFirst = Parser.parseCommand(firstModule);
+        addFirst.execute(moduleList, ui, storage);
+        Command addSecond = Parser.parseCommand(secondModule);
+        addSecond.execute(moduleList, ui, storage);
+    }
+
     @Test
-    void executeDeleteCommand_nonexistentModule_exceptionThrown()
-        throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
-        String line = "Delete Pigs (Three Different Ones)";
-        Command deleteCommand = Parser.parseCommand(line);
+    void executeDeleteCommand_nonexistentModule_exceptionThrown() {
+        DeleteCommand deleteCommand = new DeleteCommand("Pigs (Three Different Ones)");
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
@@ -56,22 +68,14 @@ public class DeleteCommandTest {
 
     @Test
     void executeDeleteCommand_moduleInList_success()
-            throws ExistingModuleException, InvalidModuleTypeException,
-            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-            ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
-            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
-        ArrayList<String> preRequisites = new ArrayList<>();
-        ArrayList<String> untakenPreRequisites = new ArrayList<>();
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
-                preRequisites, untakenPreRequisites);
-        addCommand.execute(moduleList, ui, storage);
-        String line = "Delete cs1010";
-        Command deleteCommand = Parser.parseCommand(line);
+            throws SaveModuleFailException, ModuleNotFoundException,
+            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
+        DeleteCommand deleteCommand = new DeleteCommand("CS1010");
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs1010")
+        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS1010")
                 + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
+
 }
