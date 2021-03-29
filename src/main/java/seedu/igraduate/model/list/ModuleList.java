@@ -295,7 +295,7 @@ public class ModuleList {
     }
 
     /**
-     * Checks if there is any available module
+     * Checks if there is any available module.
      *
      * @return Boolean value indicating whether there is module available to take.
      */
