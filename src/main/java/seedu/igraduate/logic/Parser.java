@@ -371,7 +371,7 @@ public class Parser {
         assert commands.size() == COMMAND_ADD_FLAG_LENGTH || commands.size() == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
                 : "extractModuleCode should only be called for add";
         int index = commands.indexOf("-c");
-        if (index > 0) {
+        if (index < 0) {
             LOGGER.warning("Missing module code parameter.");
             throw new IncorrectParameterCountException();
         }
