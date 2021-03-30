@@ -76,8 +76,7 @@ public class Ui {
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
         for (int i = 0; i < modules.size(); i++) {
-            System.out.print(i + 1 + ": ");
-            printModuleDetails(modules.get(i));
+            System.out.println((i + 1) + ": " + modules.get(i));
         }
     }
 
@@ -88,12 +87,11 @@ public class Ui {
      */
     public void printCompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_TAKEN_MESSAGE);
-        int i = 1;
+        int count = 0;
         for (Module module : modules) {
             if (module.isDone()) {
-                System.out.print(i + ": ");
-                printModuleDetails(module);
-                i += 1;
+                System.out.println((count + 1) + ": " + module);
+                count++;
             }
         }
     }
@@ -105,12 +103,11 @@ public class Ui {
      */
     public void printIncompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_LEFT_MESSAGE);
-        int i = 1;
+        int count = 0;
         for (Module module : modules) {
             if (!module.isDone()) {
-                System.out.print(i + ": ");
-                printModuleDetails(module);
-                i += 1;
+                System.out.println((count + 1) + ": " + module);
+                count++;
             }
         }
     }
@@ -122,27 +119,16 @@ public class Ui {
      */
     public void printAvailableList(ArrayList<Module> modules) {
         System.out.println(MODULES_AVAILABLE_MESSAGE);
-        int i = 1;
+        int count = 0;
         for (Module module : modules) {
             ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
             boolean isPreRequisiteCleared = untakenPreRequisites.isEmpty();
             boolean isIncomplete = module.getStatus().equalsIgnoreCase("not taken");
             if (isPreRequisiteCleared && isIncomplete) {
-                System.out.print(i + ": ");
-                printModuleDetails(module);
-                i += 1;
+                System.out.println((count + 1) + ": " + module);
+                count++;
             }
         }
-    }
-
-    /**
-     * Prints the module information.
-     *
-     * @param module array list containing the modules.
-     */
-    public void printModuleDetails(Module module) {
-        String moduleDetails = module.toString();
-        System.out.println(moduleDetails);
     }
 
     /**
