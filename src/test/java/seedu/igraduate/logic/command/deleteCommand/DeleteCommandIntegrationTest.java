@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command;
+package seedu.igraduate.logic.command.deleteCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;

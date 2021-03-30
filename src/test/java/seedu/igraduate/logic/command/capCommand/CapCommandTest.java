@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command;
+package seedu.igraduate.logic.command.capCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.logic.command.CapCommand;
+import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;
