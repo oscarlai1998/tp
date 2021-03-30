@@ -410,12 +410,43 @@ input for the given command before passing the parameters and flags to the relev
 validation of the type and formatting of flags and parameters.
 
 ### 4.3 Command
+The `command` package is responsible for executing the command from the user. The package contains the  abstract class 
+`Command` and 8 subclasses that inherit `Command`, one for each valid iGraduate command .
+#### Details
+The abstract class `Command` contains only 1 method: `execute()`, which takes in 3 parameters: `moduleList`, `ui` and
+`storage`. These 3 parameters aid with printing information to the user, making modifications to the data and saving the
+data. Each subclass of `Command` overrides `execute()` and implements their own methods to execute the command. Each 
+subclass also has a unique constructor signature as each subclass requires different parameters to execute.
+
+#### Implementation
+The implementation for executing every command differs, and the implementation details of each of them will be further 
+elaborated below.
 
 #### 4.3.1 Add Command
+The add command allows a user to add a new module to the list of existing modules. The module name is part of the 
+parameters and is extracted directly from user input while the various information required to add a new module are 
+included in the flags of the user input. There are 3 compulsory flags and 1 optional flag for adding a module:
+1. module code
+    - `-c <String>`
+1. module credits
+    - `-mc <double>`
+1. module type
+    - `-t <String>`
+1. (Optional) prerequisite modules
+    - `-p [>String>, ...]`
+
+#### <b>ℹ️  Note:</b>
+- The order of flags in user input does not matter.
+
+[DIAGRAM]
 
 #### 4.3.2 Delete Command
-The delete command allows for deletion of module from the module list, identified by the module code.
+The delete command allows for deletion of module from the module list, identified by the module code. There are no flags
+involved for deleting a module.
+#### <b>ℹ️  Note:</b>
+- Users cannot delete modules which are prerequisites for other modules.
 
+[DIAGRAM]
 
 #### 4.3.3 Update Command
 The update commands allows modifications to the existing modules, identified by the module code. 
@@ -461,13 +492,38 @@ The following is the UML diagrams for update command consisting of updating each
 
 
 #### 4.3.4 List Command
+The list command provides users with 4 options to list down the modules being tracked by iGraduate. The 4 options are:
+1. List all modules being tracked:
+    - `all`
+1. List modules that have been marked as done:
+   - `complete`
+1. List modules that have not been marked as done:
+    - `incomplete`
+1. List incomplete modules available to be marked as done based on prerequisites completed:
+    - `available`
 
+[DIAGRAM]
 #### 4.3.5 CAP Command
+The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
+command also displays the degree classification of the user. There are no flags or additional parameters required.
 
+[DIAGRAM]
 #### 4.3.6 Done Command
+The done command is used to mark a module as completed. To execute this command, the module code is extracted as a 
+parameter from user input, and there is 1 compulsory flag:
+1. Grade obtained for module
+    - `-g <String>`
+#### <b>ℹ️  Note:</b>
 
+- Only NUS recognised grades are permitted for the grade flag
+- iGraduate recognises and supports either 'S' grade or 'U' grade
+
+[DIAGRAM]
 #### 4.3.7 Progress Command
+The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
+additional flags are required for this command.
 
+[DIAGRAM]
 ### 4.4 Module
 
 ### 4.5 ModuleList
