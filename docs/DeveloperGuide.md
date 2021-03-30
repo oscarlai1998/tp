@@ -38,8 +38,8 @@ By: `W09-2` Latest update: `30 March 2021`
 ## 1. Introduction
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
-students to track and plan their graduation by allowing them to add new modules for tracking,
-show the modules they have taken and can be taken, calculate their CAP and check their graduation
+students track and plan their graduation by allowing them to add new modules for tracking,
+show the modules they have taken and can be taken, calculating their CAP and checking their graduation
 progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
@@ -51,7 +51,9 @@ Note that the following symbols and formatting are used in this guide:
 
 Symbols/Formatting | Description
 -------------------|------------------------------------------
-ℹ️ **Note:**        | Information to take note of.
+ ℹ️ **Note:**        | Information to take note of.
+📝 **Tip:**        | Optional information that may be useful. 
+⚠️ **Warning!**   | Contains important information that may resolve problems. 
 `Grey highlight`   | Code or terms related to the application.
 
 ## 2. Setting up, getting started
@@ -62,6 +64,8 @@ This section guides you through the process of setting up the project on your co
 > If you do not have it installed on your computer or you have other versions of it, follow this 
 > [link](https://openjdk.java.net/projects/jdk/11/) to download and install it before continuing 
 > with this section.
+
+> 📝 **Tip:** To check if you have `Java 11` installed, type `java --version` into a command prompt
 
 Fork this [repo](https://github.com/AY2021S2-CS2113T-W09-2/tp) to your github account and clone 
 it to your local computer. Alternatively, you could also download the source code of the application 
@@ -87,16 +91,19 @@ What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
 
-### 2.2 Intellij IDEA (Recommended)
+### 2.2 Intellij IDEA
+
+> ℹ️ **Note:** This developer guide uses IntelliJ IDEA as the default IDE. 
+> It is recommended to install IntelliJ to follow the guide. 
 
 1. Configure Intellij IDEA to use `JDK 11` by referring to the guide 
    [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).
    <br>
 2. Import the project as a `Gradle` project by following the steps below:
-   > ℹ️ **Note:** Importing a `Gradle` project is slightly different from importing a 
+   > ⚠️ **Warning!** Importing a `Gradle` project is slightly different from importing a 
    > normal Java project.
    
-   > ℹ️ **Note:** If there is a `build.gradle` file in the project root, 
+   > 📝 **Tip:** If there is a `build.gradle` file in the project root, 
    > Intellij treats it as a `Gradle` project by default.
     * IntelliJ IDEA has the `Gradle` plugin installed by default. If you have 
       disabled it, go to `File` → `Settings` → `Plugins` to re-enable them.
@@ -122,7 +129,7 @@ What would you like to do today?
 The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of each 
 component.
 
-iGraduate has one class called `iGraduate` which contains a main and run method and iGraduate constructor. 
+iGraduate has one class called `iGraduate` which contains a `main` and `run` method and `iGraduate` constructor. 
 It is responsible for:
 
 - At app launch: Initialising the components in the correct sequence, and connects them up with each other.
@@ -131,18 +138,18 @@ It is responsible for:
 `Commons` represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components:
-- UI: The UI of the App.
-- Logic: The command executor.
-    - Parser - Understands and interprets the commands input by user, passes command to run to Command.
-    - Command - Executes command based on what is parsed.
-- Model: The user data held by the program
-    - Module - Holds the information of individual modules.
-    - ModuleList - Holds data of all modules of the app in memory.
-- Storage: Reads data from, and writes data to, the hard disk.
+- `UI` -> The UI of the App.
+- `Logic` -> The command executor.
+    - `Parser` -> Understands and interprets the commands input by user, passes command to run to Command.
+    - `Command` -> Executes command based on what is parsed.
+- `Model` -> The user data held by the program
+    - `Module` -> Holds the information of individual modules.
+    - `ModuleList` -> Holds data of all modules of the app in memory.
+- `Storage` -> Reads data from, and writes data to, the hard disk.
 
 Each of the four components,
-- defines its API in an interface with the same name as the Component.
-- exposes its functionality using a concrete {Component Name}Manager class (which implements the corresponding 
+- defines its API in an interface with the <b>same name</b> as the Component.
+- exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding 
 API interface mentioned in the previous point.
 
 How the architecture interacts with each other [DIAGRAM]
@@ -169,15 +176,10 @@ actual execution of the command. `Parser` identifies the command to run and extr
 required for the command from user input and passes these values to `command`, which then runs the command.
 
 ### 3.3.1 Parser
+The `Parser` class is part of the [logic](#33-logic-component) component. 
+
 #### Description
 The parser interprets user input and subsequently passes the properly parsed user input to `command` to execute the command.
-#### Design
-The parser feature contains one class, `Parser.java` and does its job through the `parseCommand()` method.
-
-`parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input.
-Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and 
-flags from the user command that are relevant to the command. The parser then creates 
-the relevant `Command` object and dispatches the control of the program to the created object.
 
 Given below is the Parser class diagram showing the important methods that returns a `Command` object.
 
@@ -185,9 +187,38 @@ Given below is the Parser class diagram showing the important methods that retur
 
 <sup>***Figure 3.3.1.1** UML class diagram for Parser class*</sup>
 
+
+#### Design
+The parser feature contains one class, `Parser.java` and the main function is the `parseCommand()` method.
+
+`parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input. 
+Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and 
+flags from the user command that are relevant to the command. The parser then creates 
+the relevant `Command` object and dispatches the control of the program to the created object. 
+
+> ℹ️ **Note:** Intrepretation and checking of parameter validity occurs in the parser. 
+
+The methods that extract various components include
+- `extractModuleCode()` - Extracts the module code by checking for the parameter `-c` flag. Invoked with `createAddCommand()`. 
+- `extractModuleType()` - Extracts the module type by checking for the parameter `-t` flag. Invoked with `createAddCommand()`. 
+- `extractModuleCredits()` - Extracts the module type by checking for the parameter `-mc` flag. Invoked with `createAddCommand()`, `createUpdateCommand()`. 
+- `extractModuleGrade()` - Extracts the grade obtained by checking for the parameter `-g` flag. Invoked with `createDoneCommand()`, `createUpdateCommand()`. 
+- `extractModuleName()` - Extracts the module name by checking for the parameter `-n` flag. Invoked with `createUpdateCommand()`
+- `extractPreRequisites()` - Extracts the prerequisites of the module by checking for the `-p` flag. Invoked with `createAddCommand()`, `createUpdateCommand()`. 
+- `extractListScope()` - Extracts the list type. Accepts all, complete,  incomplete or available as acceptable scopes. Invoked with `createListCommand()`. 
+
+which would be invoked based on the command word detected in the user input. 
+
+> ℹ️ **Note:** The Parser also contains checks that ensures the parameters passed are appropriate
+
+The methods that check various parameters include
+- `isModuleCodeValid` - Checks that the module code is a valid module code according to the standard for NUS modules. The method uses regex to check for the valid code. There are 2 overloading methods, one for checking a single instance and another for an arraylist to check through a list of module codes. 
+
 ### 3.3.2 Command
+
 #### Description
 The `command` component executes the correct command based on what the parser interprets.
+
 #### Design
 The `command` component consists of an abstract class `Command` and 8 subclasses that inherit from it.
 
