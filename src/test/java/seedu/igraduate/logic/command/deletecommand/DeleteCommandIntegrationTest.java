@@ -17,6 +17,7 @@ import seedu.igraduate.ui.Ui;
 import seedu.igraduate.model.module.Module;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
@@ -75,8 +76,8 @@ public class DeleteCommandIntegrationTest {
 
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
         String line = "Delete Pigs (Three Different Ones)";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -87,8 +88,8 @@ public class DeleteCommandIntegrationTest {
 
     @Test
     void executeDeleteCommand_preRequisiteModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
         String line = "Delete CS1010";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,

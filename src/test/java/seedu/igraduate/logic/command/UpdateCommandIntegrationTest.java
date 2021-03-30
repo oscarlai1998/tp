@@ -13,6 +13,7 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
@@ -80,7 +81,7 @@ public class UpdateCommandIntegrationTest {
     @Test
     void executeUpdateCommand_nonexistentModule_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InvalidListTypeException, InputNotNumberException,
-            IncorrectParameterCountException {
+            IncorrectParameterCountException, InvalidModularCreditException {
         String line = "update CS2040 -g A- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -91,7 +92,7 @@ public class UpdateCommandIntegrationTest {
     @Test
     void executeUpdateCommand_invalidGrade_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InvalidListTypeException, InputNotNumberException,
-            IncorrectParameterCountException {
+            IncorrectParameterCountException, InvalidModularCreditException {
         String line = "update CS1010 -g O- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(InvalidModuleGradeException.class,

@@ -2,12 +2,14 @@ package seedu.igraduate.stub;
 
 import java.util.ArrayList;
 
-import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.InvalidListTypeException;
+
+import seedu.igraduate.logic.parser.Parser;
 
 public class ParserStub extends Parser {
     private static final String COMMAND_ADD = "add";
@@ -35,7 +37,7 @@ public class ParserStub extends Parser {
 
     public static String createAddCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
-            InvalidModuleTypeException {
+            InvalidModuleTypeException, InvalidModularCreditException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_ADD_FLAG_LENGTH);
         boolean isInvalidPrereqFlag = (commandFlags.size() != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
@@ -150,7 +152,8 @@ public class ParserStub extends Parser {
     }
 
     public static String parseCommandStub(String line) throws InvalidCommandException, IncorrectParameterCountException,
-            InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException {
+            InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException,
+            InvalidModularCreditException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }

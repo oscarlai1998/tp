@@ -3,19 +3,20 @@ package seedu.igraduate.logic.command;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import seedu.igraduate.exception.SaveModuleFailException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.ModuleNotCompleteException;
+import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.InvalidModularCreditException;
+
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 import seedu.igraduate.model.module.Module;
-
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.ModuleNotCompleteException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.exception.AddSelfToPrereqException;
 
 /**
  * Handles update command. 
@@ -59,7 +60,8 @@ public class UpdateCommand extends Command {
     public void execute(ModuleList modules, Ui ui, Storage storage)
             throws ModuleNotFoundException,
             NumberFormatException, InputNotNumberException, ModuleNotCompleteException,
-            InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException {
+            InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException,
+            InvalidModularCreditException {
         this.targetModule = modules.getModule(moduleCode);
 
         updateModuleGrade(this.commandFlags);
@@ -81,7 +83,7 @@ public class UpdateCommand extends Command {
             moduleName = Parser.extractModuleName(commandFlags);
             targetModule.setName(moduleName);
         } catch (InvalidCommandException exception) {
-            LOGGER.info("No name field found, not updates to name done. ");
+            LOGGER.info("No name field found, not updates to name done.");
         }
     }
 
@@ -92,8 +94,8 @@ public class UpdateCommand extends Command {
      * @throws NumberFormatException If module credit is not an integer (or double). 
      * @throws InputNotNumberException If module credit is not an integer (or double). 
      */
-    private void updateModuleCredits(ArrayList<String> commandFlags) 
-            throws NumberFormatException, InputNotNumberException {
+    private void updateModuleCredits(ArrayList<String> commandFlags) throws NumberFormatException,
+            InputNotNumberException, InvalidModularCreditException {
         try {
             moduleCredit = Parser.extractModuleCredits(commandFlags);
             targetModule.setCredit(moduleCredit);
