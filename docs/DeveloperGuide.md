@@ -471,6 +471,7 @@ elaborated below.
 The add command allows a user to add a new module to the list of existing modules. The module name is part of the 
 parameters and is extracted directly from user input while the various information required to add a new module are 
 included in the flags of the user input. There are 3 compulsory flags and 1 optional flag for adding a module:
+
 1. module code
     - `-c <String>`
 1. module credits
@@ -482,7 +483,11 @@ included in the flags of the user input. There are 3 compulsory flags and 1 opti
 
 > ℹ️ **Note:** The order of flags in user input does not matter.
 
-[DIAGRAM]
+The sequence diagram below shows the execution of add command in action:
+
+![archi](./images/AddCommandSequenceDiagram.png)
+
+<sup>***Figure 4.3.1.1** Sequence diagram of `AddCommand` in execution.*</sup>
 
 #### 4.3.2 Delete Command
 
@@ -521,7 +526,7 @@ the information parsed in the command (if any) will be updated.
 
 ####Details
 
-The following is the UML diagrams for update command consisting of updating each flag
+The following is the UML diagrams for update command consisting of updating each flag.
 
 ![archi](./images/updateClassDiagram.jpg)
 
