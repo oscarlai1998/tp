@@ -496,7 +496,8 @@ involved for deleting a module.
 
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
 
-[DIAGRAM]
+![archi](./images/DeleteCommandSequenceDiagram.png)
+<sup>***Figure 4.3.2.1** Sequence diagram of `Delete` class with "delete CS1010" as user input*</sup>
 
 #### 4.3.3 Update Command
 
