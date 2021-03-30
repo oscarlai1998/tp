@@ -162,9 +162,9 @@ public abstract class Module {
     public String getStatusIcon() {
         String status = getStatus();
         if (status.equals("taken")) {
-            return "✓";
+            return "O";
         } else if (status.equals("not taken")) {
-            return "✘";
+            return "X";
         } else {
             return "-";
         }
