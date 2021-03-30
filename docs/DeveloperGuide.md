@@ -420,7 +420,6 @@ The parser feature has 3 primary responsibilities:
 3. Create a new `Command` object and hand it over to `iGraduate` to execute
 
 ![archi](./images/ParserSequenceDiagram.png)
-
 <sup>***Figure 4.2.1** Sequence diagram of `Parser` class with user input *"done CS1010 -g A"**</sup>
 
 #### Details
@@ -549,7 +548,10 @@ parameter from user input, and there is 1 compulsory flag:
 - Only NUS recognised grades are permitted for the grade flag
 - iGraduate recognises and supports either 'S' grade or 'U' grade
 
-[DIAGRAM]
+![archi](./images/DoneCommandSequenceDiagram.png)
+
+<sup>***Figure 4.3.6.1** Sequence diagram of `DoneCommand` class with user input*</sup>
+
 #### 4.3.7 Progress Command
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.

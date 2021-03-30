@@ -1,0 +1,43 @@
+@startuml
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":DoneCommand" as DoneCommand
+participant ":ModuleList" as ModuleList
+participant ":Storage" as Storage
+
+iGraduate -> Parser: parseCommand("done CS1010 -g A")
+activate Parser #FFBBBB
+
+create DoneCommand
+Parser -> DoneCommand: new
+activate DoneCommand
+DoneCommand --> Parser: new DoneCommand("CS1010", "A")
+deactivate DoneCommand
+
+Parser --> iGraduate: new DoneCommand("CS1010", "A")
+deactivate Parser
+
+iGraduate -> DoneCommand: execute(moduleList, ui, storage)
+activate DoneCommand
+
+DoneCommand -> ModuleList: getByCode()
+activate ModuleList
+ModuleList --> DoneCommand: module
+deactivate ModuleList
+
+ModuleList -[hidden]-> ModuleList
+DoneCommand -> ModuleList: markAsDone(module)
+activate ModuleList
+deactivate ModuleList
+
+ModuleList -[hidden]-> ModuleList
+DoneCommand -> ModuleList: setGrade(module, "A")
+activate ModuleList
+deactivate ModuleList
+
+DoneCommand -> Storage: saveModulesToFile(moduleList)
+activate Storage
+deactivate Storage
+
+deactivate DoneCommand
+@enduml
