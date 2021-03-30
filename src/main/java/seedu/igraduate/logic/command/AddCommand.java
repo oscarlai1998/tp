@@ -88,11 +88,7 @@ public class AddCommand extends Command {
         ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         LOGGER.log(Level.INFO, "Executing add command...");
         try {
-            if (moduleCredits < 0) {
-                throw new InvalidModularCreditException();
-            }
             Module module = createModuleByType();
-            assert module != null : "Module should not be empty.";
             moduleList.add(module);
             storage.saveModulesToFile(moduleList);
             ui.printAddedModuleSuccess(module);
@@ -107,9 +103,6 @@ public class AddCommand extends Command {
         } catch (PrerequisiteNotFoundException e) {
             LOGGER.log(Level.WARNING, "Failed to add non-existing pre-requisite modules", e);
             throw new PrerequisiteNotFoundException();
-        } catch (InvalidModularCreditException e) {
-            LOGGER.log(Level.WARNING, "Failed to add module due to invalid modular credit input", e);
-            throw new InvalidModularCreditException();
         } finally {
             LOGGER.log(Level.INFO, "End of add command execution.");
         }
@@ -125,7 +118,6 @@ public class AddCommand extends Command {
     public Module createModuleByType() throws InvalidModuleTypeException {
         LOGGER.log(Level.INFO, "Creating module...");
         Module module;
-        assert moduleType != null : "Module type should not be empty.";
         switch (moduleType) {
         case CORE:
             module = new CoreModule(moduleCode, moduleName, moduleCredits,
@@ -149,7 +141,6 @@ public class AddCommand extends Command {
             throw new InvalidModuleTypeException();
         }
         LOGGER.log(Level.INFO, "End of module creation.");
-        assert module != null : "Module should not be empty.";
 
         return module;
     }

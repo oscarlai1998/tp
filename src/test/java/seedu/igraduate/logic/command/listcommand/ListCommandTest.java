@@ -17,6 +17,7 @@ import seedu.igraduate.exception.ExistingModuleException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
@@ -244,8 +245,8 @@ class ListCommandTest {
     }
 
     @Test
-    void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException,
-            InvalidCommandException, InputNotNumberException, InvalidListTypeException {
+    void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException, InvalidCommandException,
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
         String line = "list all";
         Command listCommand = Parser.parseCommand(line);
         assertEquals(false, listCommand.isExit());
