@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command.deleteCommand;
+package seedu.igraduate.logic.command.deletecommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

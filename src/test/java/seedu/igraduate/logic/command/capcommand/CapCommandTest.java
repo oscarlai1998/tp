@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command.capCommand;
+package seedu.igraduate.logic.command.capcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

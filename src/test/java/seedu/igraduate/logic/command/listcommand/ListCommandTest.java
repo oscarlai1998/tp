@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command.listCommand;
+package seedu.igraduate.logic.command.listcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
