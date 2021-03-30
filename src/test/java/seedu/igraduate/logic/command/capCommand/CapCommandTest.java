@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.igraduate.logic.command.CapCommand;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -37,7 +37,7 @@ import java.nio.file.Paths;
 
 public class CapCommandTest {
 
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/capCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();

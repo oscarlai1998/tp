@@ -3,14 +3,15 @@ package seedu.igraduate.logic.command.deleteCommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 import seedu.igraduate.model.module.Module;
@@ -50,10 +51,10 @@ public class DeleteCommandIntegrationTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    @BeforeAll
-    void deleteCommand_setup() throws SaveModuleFailException, InvalidModuleTypeException,
+    @BeforeEach
+    void setUp() throws SaveModuleFailException, InvalidModuleTypeException,
             ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException,InvalidModularCreditException  {
+            PrerequisiteNotFoundException,InvalidModularCreditException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         ArrayList<String> requiredByModules = new ArrayList<>();
@@ -65,6 +66,8 @@ public class DeleteCommandIntegrationTest {
         module.setRequiredByModules(requiredByModules);
         ArrayList<String> secondModulePreRequisites = new ArrayList<>();
         ArrayList<String> secondModuleUntakenPreRequisites = new ArrayList<>();
+        secondModulePreRequisites.add("CS1010");
+        secondModuleUntakenPreRequisites.add("CS1010");
         AddCommand secondModuleAddCommand = new AddCommand("cs2100", "Introduction to Computer Organisation", "core",
                 4.0, secondModulePreRequisites, secondModuleUntakenPreRequisites);
         secondModuleAddCommand.execute(moduleList, ui, storage);
@@ -110,5 +113,10 @@ public class DeleteCommandIntegrationTest {
         String successMessage = String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs2100") + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
+    }
+
+    @AfterEach
+    void tearDown() {
+        moduleList = new ModuleList();
     }
 }

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.command.DeleteCommand;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -47,7 +47,7 @@ public class DeleteCommandUnitTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void deleteCommand_setup()
+    void setUp()
             throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
