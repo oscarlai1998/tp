@@ -17,6 +17,7 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.stub.ParserStub;
 import seedu.igraduate.exception.InvalidListTypeException;
 

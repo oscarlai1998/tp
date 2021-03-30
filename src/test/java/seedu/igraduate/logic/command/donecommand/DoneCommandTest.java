@@ -1,12 +1,14 @@
-package seedu.igraduate.logic.command;
+package seedu.igraduate.logic.command.donecommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 
 public class DoneCommandTest {
 
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/doneCommandData.json").toFile();
 
     private static final String MODULE_MARKEDASDONE_MESSAGE = "Nice! I've marked this module as done:"
             + System.lineSeparator()

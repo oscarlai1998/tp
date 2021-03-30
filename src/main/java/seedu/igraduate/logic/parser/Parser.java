@@ -1,4 +1,4 @@
-package seedu.igraduate.logic;
+package seedu.igraduate.logic.parser;
 
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.command.AddCommand;

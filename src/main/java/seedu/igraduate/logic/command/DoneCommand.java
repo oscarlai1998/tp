@@ -79,23 +79,17 @@ public class DoneCommand extends Command {
                 LOGGER.log(Level.INFO, "Prerequisites check failed.");
                 throw new PrerequisiteNotMetException(module.getCode(), module.getUntakenPreRequisites());
             }
-            markDone(moduleList, module);
+            moduleList.markAsTaken(module);
+            moduleList.setGrade(module, getModuleGrade());
             storage.saveModulesToFile(moduleList); //update json list
             ui.printMarkAsTakenMessage(module); //done message
             LOGGER.log(Level.INFO, String.format("Successfully marked %s module as taken.", getModuleCode()));
-        } catch (ModuleNotFoundException | PrerequisiteNotFoundException | PrerequisiteNotMetException e) {
-            LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", e);
-            throw e;
+        } catch (ModuleNotFoundException | PrerequisiteNotFoundException | PrerequisiteNotMetException exception) {
+            LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", exception);
+            throw exception;
         } finally {
             LOGGER.log(Level.INFO, "End of done command execution.");
         }
-    }
-
-
-
-    private void markDone(ModuleList moduleList, Module module) throws ModuleNotFoundException {
-        moduleList.markAsTaken(module);
-        moduleList.setGrade(module, getModuleGrade());
     }
 
     /**
