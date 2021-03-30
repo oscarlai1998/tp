@@ -31,4 +31,5 @@ deactivate Ui
 AddCommand --> iGraduate
 
 deactivate AddCommand
+destroy AddCommand
 @enduml
