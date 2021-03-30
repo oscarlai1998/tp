@@ -244,7 +244,9 @@ At the end of each command execution, different methods in the `Ui` will be call
 Below is a Command class diagram.
 
 ![archi](images/CommandClassDiagram.png)
+
 <sup>***Figure 3.3.2.1** UML class diagram for Command class*</sup>
+
 ### 3.4 Model Component
 
 The `model` component consists of two main packages that define and deal with data storing issues based on the information 
@@ -562,7 +564,9 @@ The list command provides users with 4 options to list down the modules being tr
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
 command also displays the degree classification of the user. There are no flags or additional parameters required.
 
-[DIAGRAM]
+![archi](./images/CapCommandSequenceDiagram.png)
+
+<sup>***Figure 4.3.5.1** Sequence diagram of `CapCommand` class.*</sup>
 
 #### 4.3.6 Done Command
 
@@ -584,7 +588,9 @@ parameter from user input, and there is 1 compulsory flag:
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
-[DIAGRAM]
+![archi](./images/ProgressSequenceDiagram.png)
+
+<sup>***Figure 4.3.7.1** Sequence diagram of `ProgressCommand` class.*</sup>
 
 ### 4.4 Module
 
