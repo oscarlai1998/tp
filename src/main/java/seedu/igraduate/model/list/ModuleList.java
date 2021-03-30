@@ -49,7 +49,8 @@ public class ModuleList {
      * @throws ExistingModuleException If the new module already exists.
      * @throws PrerequisiteNotFoundException If any of the pre-requisite module does not exists.
      */
-    public void add(Module module) throws ExistingModuleException, ModuleNotFoundException, PrerequisiteNotFoundException {
+    public void add(Module module) throws ExistingModuleException, ModuleNotFoundException,
+            PrerequisiteNotFoundException {
         String moduleCode = module.getCode();
         if (getModuleIndex(moduleCode) != DEFAULT_INDEX) {
             assert getModuleIndex(moduleCode) != DEFAULT_INDEX : "No repeating modules allowed to be added";
