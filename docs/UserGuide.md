@@ -20,11 +20,14 @@ By: `W09-2` Latest update: `30 March 2021`
 
 ## Introduction
 
-iGraduate is a command line application that will help <b>NUS students majoring in Information Security</b> check his/her 
-graduation progress and modules taken in based on the academic program requirements. iGraduate also contains tools such as storing of modules, listing of modules that can be taken, an academic progression indicator and CAP calculator, which help students make informed decisions about future modules. 
+iGraduate is a command line application that acts as a centralised hub for <b>NUS students majoring in Information 
+Security</b> to plan their academic journey. With tools like the storing of modules, listing of modules that can be 
+taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation 
+progress, view modules taken based on programme requirements and make informed decisions about future modules.
 
 ## User Guide Usage
-This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise each feature, its proper formats and expected behaviours from different sample inputs.
+This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
+each feature, its proper formats and expected behaviours from different sample inputs.
 
 The following symbols are used in this user guide: 
 
@@ -38,11 +41,12 @@ Symbols/Formatting | Description
 ## Quick Start
 > ℹ️ **Note:** The recommended operating system for iGraduate is Windows 10
 
-1. Make sure you have Java version 11 installed on your computer. 
+1. Make sure you have Java version 11 installed on your computer. If you do not have Java 11 installed on your computer,
+   you can install it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download `iGraduate.jar` from latest github release by clicking [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your iGraduate program.
 4. Run the program in command prompt using `java -jar iGraduate.jar` command.
-5. If successful, the programe would look like this:
+5. If successful, the programme would look like this:
 ```
  _  ____               _             _       
 (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
@@ -56,11 +60,13 @@ What would you like to do today?
 ```
 
 ## Features
-The following section outlines the various commands suopported by the application, its proper usages and expected behaviours. 
+The following section outlines the various commands supported by the application, its proper usages and expected behaviours. 
 
-### Add new module: `add`
+### Add a new module: `add`
 
-Adds a new module to the list of modules undertaken. The add function serves to keep track of the modules that you have taken or are currently taking. Other functions would interact with these added modules to keep track, calculate CAP and check the progress of your academic career. 
+Adds a new module to the list of modules you wish to track. The list serves to keep track of the modules that 
+you have taken, are currently taking or intend to take in the future. Other functions would interact with these added 
+modules to keep track, calculate CAP and check the progress of your academic career. 
 
 > ℹ️ **Note:** The prerequisite field is optional. 
 
@@ -86,7 +92,7 @@ Innovator`, a `2` credit module with the code `CP2201`.*</sup>
 ### Delete existing module: `delete`
 
 Deletes an existing module from the list of modules added via the module code. The delete function serves to 
-amend any changes to the planning of the modules during the semester. 
+amend any changes to the planning of modules. 
 
 > ℹ️ **Note:** The module must not be a prerequisite of another module. 
 
@@ -118,9 +124,9 @@ Example of Usage(s) and Expected Outcome(s):
 
 Updates relevant information (name, credit and grade) for the selected module. The information can be arranged 
 in any order and multiple information can be entered in one command. The command is used to make any changes 
-to the module information in case of mistakes or changes to the module. 
+to the module information in case of mistakes or unexpected changes to the module. 
 
-> ℹ️ **Note:**  You cannot change the module type and code as they identify the modules. If you want to remove 
+> ℹ️ **Note:**  You cannot change the module type and code as iGraduate uses them to identify the modules. If you want to remove 
 the modules, use the [`delete command`](#delete-existing-module-delete) instead. 
 
 > ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see 
@@ -182,18 +188,18 @@ done.*</sup>
 
 ### List modules: `list`
 
-Lists all modules added to your list according to the filter. List all modules or select only completed, 
-incomplete or available modules to take. `complete` lists all modules that have been completed (i.e. marked 
-as done), `incomplete` lists all modules that have been added into the system but has not been completed 
-(i.e. modules that you are currently taking), `available` lists all modules that can be taken (with 
-prerequisites fulfilled), but have not been taken, based on the completed modules. The list shows module 
+The list command lists modules added to your list according to the filter. List all modules or select only completed, 
+incomplete or available modules to take. `all` lists all modules on your list, `complete` lists all modules that have 
+been completed (i.e. marked as done), `incomplete` lists all modules that have been added into the system but has not
+been completed(i.e. modules that you are currently taking or yet to take), `available` lists all modules that can be 
+taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. The list shows module 
 details including the module `type`, `code`, `completetion status`, `name`, `grade` and `credits`. 
 
 ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead. 
 
 Format: 
 
-`list all|incomplete|complete`
+`list all|incomplete|complete|available`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -308,7 +314,8 @@ See you soon! Happy studying!
 ## Storage of Data
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
-updated) and when exiting the program. The data will be loaded in the next time of usage.
+updated) and when exiting the program. The data will be automatically loaded in the next time of usage. No user
+intervention is required for storage of data.
 
 ## Manual Modification of Data
 
@@ -330,7 +337,8 @@ remove new module data manually only if you understand the application's logic a
 > Yes! iGraduate is a cross-platfotm application that can be run on Windows, Linux or Mac.  
 
 **Q2**: Can I share my module list with my friends?
-> Yes! Just go into `/data` of the application folder and pass the `modules.json` file over to your friends.  
+> Yes! Just go into `/data` of the application folder and pass the `modules.json` file over to your friends. Make sure
+> your friends save the `modules.json` file under their `/data` folder as well!
 
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
