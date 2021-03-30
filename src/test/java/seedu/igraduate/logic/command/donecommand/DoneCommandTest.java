@@ -13,6 +13,7 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
@@ -54,8 +55,8 @@ public class DoneCommandTest {
 
     @Test
     void executeDoneCommand_nonexistentModule_exceptionThrown()
-        throws InvalidCommandException, InvalidModuleTypeException,
-        InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException {
+        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,

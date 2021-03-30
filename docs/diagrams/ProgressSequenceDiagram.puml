@@ -1,0 +1,35 @@
+@startuml
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":ProgressCommand" as ProgressCommand
+participant ":ModuleList" as ModuleList
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("progress")
+activate Parser #FFBBBB
+
+create ProgressCommand
+Parser -> ProgressCommand: new
+activate ProgressCommand
+ProgressCommand --> Parser: new ProgressCommand()
+deactivate ProgressCommand
+
+Parser --> iGraduate: new ProgressCommand()
+deactivate Parser
+
+iGraduate -> ProgressCommand: execute(moduleList, ui, storage)
+activate ProgressCommand
+
+ProgressCommand -> ModuleList: getTotalCompletedMCs()
+activate ModuleList
+ModuleList --> ProgressCommand: competedMCs
+deactivate ModuleList
+
+ProgressCommand -> Ui
+ProgressCommand -> Ui: printProgressBar(competedMCs)
+activate Ui
+deactivate Ui
+
+
+
+@enduml

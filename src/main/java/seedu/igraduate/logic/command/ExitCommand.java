@@ -7,7 +7,6 @@ import seedu.igraduate.ui.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Handles exit command.
  */

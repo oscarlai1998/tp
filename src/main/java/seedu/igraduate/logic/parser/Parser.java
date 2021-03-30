@@ -1,5 +1,12 @@
 package seedu.igraduate.logic.parser;
 
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InputNotNumberException;
+import seedu.igraduate.exception.InvalidListTypeException;
+
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.DeleteCommand;
@@ -9,12 +16,6 @@ import seedu.igraduate.logic.command.ListCommand;
 import seedu.igraduate.logic.command.ProgressCommand;
 import seedu.igraduate.logic.command.UpdateCommand;
 import seedu.igraduate.logic.command.CapCommand;
-
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
-import seedu.igraduate.exception.InvalidListTypeException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +66,8 @@ public class Parser {
      *                                          contain the right parameters.
      */
     public static Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException {
+            InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
+            InvalidModularCreditException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -166,7 +168,7 @@ public class Parser {
      */
     public static Command createAddCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
-            InvalidModuleTypeException {
+            InvalidModuleTypeException, InvalidModularCreditException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_ADD_FLAG_LENGTH);
         boolean isInvalidPrereqFlag = (commandFlags.size() != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
@@ -420,9 +422,10 @@ public class Parser {
      * @return number of modular credits.
      * @throws NumberFormatException   if number is not given as modular credits.
      * @throws InvalidCommandException if -mc flag is not found.
+     * @throws InvalidModularCreditException if modular credit is not positive number.
      */
     public static double extractModuleCredits(ArrayList<String> commandFlags)
-            throws InputNotNumberException, InvalidCommandException {
+            throws InputNotNumberException, InvalidCommandException, InvalidModularCreditException {
         int index = commandFlags.indexOf("-mc");
 
         if (index < 0) {
@@ -432,7 +435,11 @@ public class Parser {
 
         assert commandFlags.get(index + 1).trim().length() > 0 : "Modular credits field should not be empty.";
         try {
-            return Double.parseDouble(commandFlags.get(index + 1));
+            double moduleCredits = Double.parseDouble(commandFlags.get(index + 1));
+            if (moduleCredits < 0) {
+                throw new InvalidModularCreditException();
+            }
+            return moduleCredits;
         } catch (NumberFormatException e) {
             LOGGER.warning("Invalid module credits detected.");
             throw new InputNotNumberException("Modular credits : -mc");

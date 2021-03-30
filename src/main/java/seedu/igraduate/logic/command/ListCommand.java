@@ -3,6 +3,7 @@ package seedu.igraduate.logic.command;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.ui.Ui;
+
 import seedu.igraduate.exception.InvalidListTypeException;
 
 import java.util.logging.Level;
