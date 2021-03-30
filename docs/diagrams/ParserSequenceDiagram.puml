@@ -22,7 +22,7 @@ Parser -> DoneCommand: new
 activate DoneCommand
 DoneCommand --> Parser: new DoneCommand("CS1010", "A")
 deactivate DoneCommand
-
+deactivate Parser
 Parser --> iGraduate: new DoneCommand("CS1010", "A")
 
 deactivate Parser

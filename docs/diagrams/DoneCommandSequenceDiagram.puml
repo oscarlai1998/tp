@@ -4,15 +4,20 @@ participant ":Parser" as Parser
 participant ":DoneCommand" as DoneCommand
 participant ":ModuleList" as ModuleList
 participant ":Storage" as Storage
+participant ":Ui" as Ui
 
 iGraduate -> Parser: parseCommand("done CS1010 -g A")
 activate Parser #FFBBBB
 
+Parser -> Parser: createDoneCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
 create DoneCommand
-Parser -> DoneCommand: new
+Parser -> DoneCommand: DoneCommand("CS1010", "A")
 activate DoneCommand
 DoneCommand --> Parser: new DoneCommand("CS1010", "A")
 deactivate DoneCommand
+deactivate Parser
 
 Parser --> iGraduate: new DoneCommand("CS1010", "A")
 deactivate Parser
@@ -20,7 +25,7 @@ deactivate Parser
 iGraduate -> DoneCommand: execute(moduleList, ui, storage)
 activate DoneCommand
 
-DoneCommand -> ModuleList: getByCode()
+DoneCommand -> ModuleList: getByCode("CS1010")
 activate ModuleList
 ModuleList --> DoneCommand: module
 deactivate ModuleList
@@ -39,5 +44,10 @@ DoneCommand -> Storage: saveModulesToFile(moduleList)
 activate Storage
 deactivate Storage
 
+DoneCommand -> Ui: printMarkAsTakenMessage(module)
+activate Ui
+deactivate Ui
+
 deactivate DoneCommand
+destroy DoneCommand
 @enduml
