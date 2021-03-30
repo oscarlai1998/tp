@@ -7,8 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
