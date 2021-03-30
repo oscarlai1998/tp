@@ -9,11 +9,15 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("delete CS1010")
 activate Parser #FFBBBB
 
+Parser -> Parser: createDeleteCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
 create DeleteCommand
-Parser -> DeleteCommand: createDeleteCommand(commandParameters, commandFlags)
+Parser -> DeleteCommand: DeleteCommand("CS1010")
 activate DeleteCommand
 DeleteCommand --> Parser: new DeleteCommand("CS1010")
 deactivate DeleteCommand
+deactivate Parser
 
 Parser --> iGraduate: new DeleteCommand("CS1010")
 deactivate Parser
@@ -43,4 +47,5 @@ deactivate Storage
 
 DeleteCommand -> Ui: printDeletedModuleSuccess("CS1010", "core")
 deactivate DeleteCommand
+destroy DeleteCommand
 @enduml

@@ -513,7 +513,7 @@ The following is the UML diagrams for update command consisting of updating each
 <sup>***Figure 4.3.3.1** Class diagram of `Update` class with user input*</sup>
 
 
-![archi](./images/updateSequenceDiagram.jpg)
+![archi](./images/updateCommandSequenceDiagram.png)
 
 <sup>***Figure 4.3.3.2** Sequence diagram of `Update` class with user input*</sup>
 
