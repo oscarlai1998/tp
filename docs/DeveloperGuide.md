@@ -51,9 +51,9 @@ Note that the following symbols and formatting are used in this guide:
 
 Symbols/Formatting | Description
 -------------------|------------------------------------------
- ℹ️ **Note:**        | Information to take note of.
+ℹ️ **Note:**        | Information to take note of.
 📝 **Tip:**        | Optional information that may be useful. 
-⚠️ **Warning!**   | Contains important information that may resolve problems. 
+⚠️ **Warning!**    | Contains important information that may resolve problems. 
 `Grey highlight`   | Code or terms related to the application.
 
 ## 2. Setting up, getting started
@@ -107,7 +107,7 @@ What would you like to do today?
    > Intellij treats it as a `Gradle` project by default.
     * IntelliJ IDEA has the `Gradle` plugin installed by default. If you have 
       disabled it, go to `File` → `Settings` → `Plugins` to re-enable them.
-    * Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` 
+    * Open Intellij (if you are not in the welcome screen, click `File` → `Close Project` 
       to close the existing project first)
     * Open the project into Intellij as follows:
       + Click `Open`.
@@ -155,6 +155,7 @@ API interface mentioned in the previous point.
 How the architecture interacts with each other [DIAGRAM]
 
 ### 3.2 UI Component
+
 The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` 
 and `Print Methods`. 
 
@@ -170,15 +171,18 @@ The `UI` component:
 - Print method references `Constants` and prints them for user to see.
 
 ### 3.3 Logic Component
+
 The logic component consists of  the class `Parser` and the package `command`. They work together to deal
 with interpreting user input, identifying the right command to execute as well as the
 actual execution of the command. `Parser` identifies the command to run and extracts the parameters and flags
 required for the command from user input and passes these values to `command`, which then runs the command.
 
 ### 3.3.1 Parser
+
 The `Parser` class is part of the [logic](#33-logic-component) component. 
 
 #### Description
+
 The parser interprets user input and subsequently passes the properly parsed user input to `command` to execute the command.
 
 Given below is the Parser class diagram showing the important methods that returns a `Command` object.
@@ -189,6 +193,7 @@ Given below is the Parser class diagram showing the important methods that retur
 
 
 #### Design
+
 The parser feature contains one class, `Parser.java` and the main function is the `parseCommand()` method.
 
 `parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input. 
@@ -196,7 +201,7 @@ Based on the type of command from the user, `parseCommand()` then calls differen
 flags from the user command that are relevant to the command. The parser then creates 
 the relevant `Command` object and dispatches the control of the program to the created object. 
 
-> ℹ️ **Note:** Intrepretation and checking of parameter validity occurs in the parser. 
+> ℹ️ **Note:** Interpretation and checking of parameter validity occurs in the parser. 
 
 The methods that extract various components include
 - `extractModuleCode()` - Extracts the module code by checking for the parameter `-c` flag. Invoked with `createAddCommand()`. 
@@ -383,6 +388,7 @@ Apart from these 3 operations, the `ModuleList` class also defines getter and se
 as the entire list or an individual module from the list according to different parameters such as module code or index. 
 
 ### 3.5 Storage Component
+
 Class Diagram:
 
 ![archi](./images/storageClassDiagram.jpg)
@@ -402,27 +408,30 @@ when an error occurs. The method catches the exceptions and prints out the respe
 
 Each `exception` is specified by the name and description.
 
-
-
 ## 4. Implementation
+
 This section elaborates on some details about how certain features are implemented.
 
 ### 4.1 UI
+
 UI component
 * Executes user command using Logic Component
 * Listens to calls from Model data so that UI can print the results.
 
 
 ### 4.2 Parser
+
 The parser feature has 3 primary responsibilities: 
 1. Identify the command the user wants to run.
 2. Extract the relevant parameters and flags required to run the command
 3. Create a new `Command` object and hand it over to `iGraduate` to execute
 
 ![archi](./images/ParserSequenceDiagram.png)
+
 <sup>***Figure 4.2.1** Sequence diagram of `Parser` class with user input *"done CS1010 -g A"**</sup>
 
 #### Details
+
 There are 3 classifications of user input: **command, parameter and flags**. **Command** is the type of 
 command the user intends to run and is first word from the user input. The command dictates how `Parser` extracts the 
 parameter and flags. The **parameter** is the argument that comes after the command word and can vary depending on the 
@@ -432,6 +441,7 @@ additional information required for the command to run. For `add`, flags would b
 prerequisites.
 
 #### Considerations
+
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large
 number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single 
 Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or 
@@ -440,19 +450,24 @@ input for the given command before passing the parameters and flags to the relev
 validation of the type and formatting of flags and parameters.
 
 ### 4.3 Command
+
 The `command` package is responsible for executing the command from the user. The package contains the  abstract class 
 `Command` and 8 subclasses that inherit `Command`, one for each valid iGraduate command .
+
 #### Details
+
 The abstract class `Command` contains only 1 method: `execute()`, which takes in 3 parameters: `moduleList`, `ui` and
 `storage`. These 3 parameters aid with printing information to the user, making modifications to the data and saving the
 data. Each subclass of `Command` overrides `execute()` and implements their own methods to execute the command. Each 
 subclass also has a unique constructor signature as each subclass requires different parameters to execute.
 
 #### Implementation
+
 The implementation for executing every command differs, and the implementation details of each of them will be further 
 elaborated below.
 
 #### 4.3.1 Add Command
+
 The add command allows a user to add a new module to the list of existing modules. The module name is part of the 
 parameters and is extracted directly from user input while the various information required to add a new module are 
 included in the flags of the user input. There are 3 compulsory flags and 1 optional flag for adding a module:
@@ -465,20 +480,21 @@ included in the flags of the user input. There are 3 compulsory flags and 1 opti
 1. (Optional) prerequisite modules
     - `-p [>String>, ...]`
 
-#### <b>ℹ️  Note:</b>
-- The order of flags in user input does not matter.
+> ℹ️ **Note:** The order of flags in user input does not matter.
 
 [DIAGRAM]
 
 #### 4.3.2 Delete Command
+
 The delete command allows for deletion of module from the module list, identified by the module code. There are no flags
 involved for deleting a module.
-#### <b>ℹ️  Note:</b>
-- Users cannot delete modules which are prerequisites for other modules.
+
+> ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
 
 [DIAGRAM]
 
 #### 4.3.3 Update Command
+
 The update commands allows modifications to the existing modules, identified by the module code. 
 The information that can be updated include module name, credits, prerequisites and grades (if the module is 
 marked as done). 
@@ -495,15 +511,15 @@ list. The various information requested to update would be identified with their
    - `-g <String>`
 
 
-#### <b>ℹ️  Note:</b> 
+> ℹ️ **Note:** The code and type of modules <b>cannot be modified</b> as they are identifiers of the modules.
 
-- The code and type of modules <b>cannot be modified</b> as they are identifiers of the modules
-- <b>Multiple module information</b> can be updated in a single command
-- The command <b>will not update grades</b> if the module requested has not been completed. The rest of 
+> ℹ️ **Note:** <b>Multiple module information</b> can be updated in a single command
+
+> ℹ️ **Note:** The command <b>will not update grades</b> if the module requested has not been completed. The rest of 
 the information parsed in the command (if any) will be updated. 
 
 
-<b>Details</b>
+####Details
 
 The following is the UML diagrams for update command consisting of updating each flag
 
@@ -516,12 +532,13 @@ The following is the UML diagrams for update command consisting of updating each
 
 <sup>***Figure 4.3.3.2** Sequence diagram of `Update` class with user input*</sup>
 
-<b>Considerations</b>
+####Considerations
 
-<b>Alternative</b>
+####Alternative
 
 
 #### 4.3.4 List Command
+
 The list command provides users with 4 options to list down the modules being tracked by iGraduate. The 4 options are:
 1. List all modules being tracked:
     - `all`
@@ -533,39 +550,46 @@ The list command provides users with 4 options to list down the modules being tr
     - `available`
 
 [DIAGRAM]
+
 #### 4.3.5 CAP Command
+
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
 command also displays the degree classification of the user. There are no flags or additional parameters required.
 
 [DIAGRAM]
+
 #### 4.3.6 Done Command
+
 The done command is used to mark a module as completed. To execute this command, the module code is extracted as a 
 parameter from user input, and there is 1 compulsory flag:
 1. Grade obtained for module
     - `-g <String>`
-#### <b>ℹ️  Note:</b>
 
-- Only NUS recognised grades are permitted for the grade flag
-- iGraduate recognises and supports either 'S' grade or 'U' grade
+> ℹ️ **Note:** Only NUS recognised grades are permitted for the grade flag.
+
+> ℹ️ **Note:** iGraduate recognises and supports either 'S' grade or 'U' grade.
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
 <sup>***Figure 4.3.6.1** Sequence diagram of `DoneCommand` class with user input*</sup>
 
 #### 4.3.7 Progress Command
+
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
 [DIAGRAM]
+
 ### 4.4 Module
 
 ### 4.5 ModuleList
 
 ### 4.6 Storage
+
 The storage feature saves the state of the module list after every execution of commands that manipulates 
 (i.e. update, add or delete) the modules in the list.
 
-<b>Details</b>
+####Details
 
 The storage function is executed after every command that manipulates (i.e. adds, deletes or updates) the 
 modules in the module list, saving the updated state into the storage file. 
@@ -576,7 +600,7 @@ The module list is stored in a storage file named `modules.json` in the `data` f
 
 <sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
-<b>Considerations</b>
+####Considerations
 
 The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
 handling and management with regards to modified storage files. The parsing of JSON format is also more 
@@ -585,23 +609,24 @@ sophisticated and reliable.
 In addition, the JSON format can be read across multiple different types of applications, allowing flexibility
  in any future implementations regarding exporting of data. 
 
-<b>Alternatives</b>
+####Alternatives
 
 The alternative storage format considered is the use of delimiters. However, there are concerns regarding such
- usage; the most important being potential parsing failure from a valid module. With the use of common 
- delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various 
- module information and legitimate module names containing delimiters and may parse the portion of the module 
- to a wrong variable, resulting in corrupted results and a potential program crash. One example of such 
- occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains 
- dashes when the delimiters are used for separating various module information is also a dash. 
+usage; the most important being potential parsing failure from a valid module. With the use of common 
+delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various 
+module information and legitimate module names containing delimiters and may parse the portion of the module 
+to a wrong variable, resulting in corrupted results and a potential program crash. One example of such 
+occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains 
+dashes when the delimiters are used for separating various module information is also a dash. 
 
 Considerations were also given to use more unique delimiters (such as \, `|`, etc.) to avoid accidental parsing
- fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and
-  render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
-  third-party library, since the exception handling and parsing management lies in the library functions. 
+fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and 
+render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
+third-party library, since the exception handling and parsing management lies in the library functions. 
 
 
 ### 4.7 Exception
+
 Exception is an event that disrupts the normal flow of the diagram. It is an object that is thrown at runtime.
 In iGraduate, there are several exceptions that are thrown due to different conditions.
 
@@ -628,6 +653,7 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 ### Product scope
 
 #### Target user profile:
+
 * is a NUS Information Security student
 * has a need to manage and plan modules
 * has a need to track graduation progress
@@ -638,6 +664,7 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 * is reasonably comfortable using CLI apps
 
 #### Value proposition:
+
 Allows users to manage modules faster than a typical mouse/GUI driven app.
 Includes higher level features such as ability to add modules while ensuring user has cleared all prerequisites
 and to list all modules taken, graduation progress and current CAP with degree classification.
@@ -686,7 +713,7 @@ It also contains tools to help make informed decisions about future modules.
 
 Given below are instructions to test the app manually.
 
-**Note:** These instructions only provide a starting point for testers to work on;
+> ℹ️ **Note:**  These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 ### Launch and shutdown
@@ -733,6 +760,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
        
 ### Deleting a module
+
 1. Deleting modules from a given module list.
    
     1. Prerequisites: Module list is not empty.
@@ -764,6 +792,7 @@ testers are expected to do more *exploratory* testing.
        ````
        
 ### Marking modules as done
+
 1. Masking modules as done with grade obtained after the semester.
     1. Prerequisites: Module list is not empty.
 
@@ -797,6 +826,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
        
 ### Updating the module list
+
 1. Update the modules in module list with changes in module credits or module grade.
     1. Prerequisites: Module list is not empty.
 
@@ -842,6 +872,7 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
        
 ### CAP
+
 1. Display current CAP and degree classification of user.
     1. Assumptions: Module list consists of CS1010 marked as done with 4mcs and grade A+.
     1. Test case: `cap`<br>
@@ -858,6 +889,7 @@ testers are expected to do more *exploratory* testing.
        ````
        
 ### Progress
+
 1. Display user's progress towards graduation.
     1. Assumptions: Module list consists of CS1010 marked as done with 4mcs and grade A+.
     1. Test case: `progress` <br>
@@ -876,6 +908,7 @@ testers are expected to do more *exploratory* testing.
        ````
        
 ### List modules
+
 1. List modules in the modules list.
     1. Assumption: Module list consists of CS1010 marked as done and CS2040C not done.
     1. Test case: `list all` <br>
@@ -911,6 +944,7 @@ testers are expected to do more *exploratory* testing.
        ````
        
 ### Saving data
+
 1. Dealing with missing/corrupted data files.
     1. While not in iGraduate, delete json file under `/data` directory. Then start iGraduate. <br>
        Expected: iGraduate accepts current content of files as empty and functions as per normal.
