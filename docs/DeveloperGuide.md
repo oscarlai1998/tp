@@ -1,5 +1,5 @@
 # iGraduate Developer Guide
-By: `W09-2` Latest update: `25 March 2021`
+By: `W09-2` Latest update: `30 March 2021`
 
 - [iGraduate Developer Guide](#igraduate-developer-guide)
     * [1. Introduction](#1-introduction)
@@ -39,7 +39,7 @@ By: `W09-2` Latest update: `25 March 2021`
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
 students to track and plan their graduation by allowing them to add new modules for tracking,
-show the modules they have taken and can be taken, calculating their CAP and check their graduation
+show the modules they have taken and can be taken, calculate their CAP and check their graduation
 progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
