@@ -1,7 +1,8 @@
-package seedu.igraduate.logic.command;
+package seedu.igraduate.logic.command.exitcommand;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.logic.command.ExitCommand;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;

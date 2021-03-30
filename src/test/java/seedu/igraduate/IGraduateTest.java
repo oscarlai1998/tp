@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 
 class IGraduateTest {
     @Test

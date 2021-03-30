@@ -1,4 +1,4 @@
-package seedu.igraduate.logic.command;
+package seedu.igraduate.logic.command.capcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,8 +6,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.logic.command.CapCommand;
+import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -35,7 +37,7 @@ import java.nio.file.Paths;
 
 public class CapCommandTest {
 
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/capCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
