@@ -527,7 +527,7 @@ list. The various information requested to update would be identified with their
 the information parsed in the command (if any) will be updated. 
 
 
-####Details
+#### Details
 
 The following is the UML diagrams for update command consisting of updating each flag.
 
@@ -536,13 +536,13 @@ The following is the UML diagrams for update command consisting of updating each
 <sup>***Figure 4.3.3.1** Class diagram of `Update` class with user input*</sup>
 
 
-![archi](./images/updateCommandSequenceDiagram.png)
+![archi](./images/UpdateCommandSequenceDiagram.png)
 
 <sup>***Figure 4.3.3.2** Sequence diagram of `Update` class with user input*</sup>
 
-####Considerations
+#### Considerations
 
-####Alternative
+#### Alternative
 
 
 #### 4.3.4 List Command
@@ -601,7 +601,7 @@ additional flags are required for this command.
 The storage feature saves the state of the module list after every execution of commands that manipulates 
 (i.e. update, add or delete) the modules in the list.
 
-####Details
+#### Details
 
 The storage function is executed after every command that manipulates (i.e. adds, deletes or updates) the 
 modules in the module list, saving the updated state into the storage file. 
@@ -612,7 +612,7 @@ The module list is stored in a storage file named `modules.json` in the `data` f
 
 <sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
-####Considerations
+#### Considerations
 
 The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
 handling and management with regards to modified storage files. The parsing of JSON format is also more 
@@ -621,7 +621,7 @@ sophisticated and reliable.
 In addition, the JSON format can be read across multiple different types of applications, allowing flexibility
  in any future implementations regarding exporting of data. 
 
-####Alternatives
+#### Alternatives
 
 The alternative storage format considered is the use of delimiters. However, there are concerns regarding such
 usage; the most important being potential parsing failure from a valid module. With the use of common 
