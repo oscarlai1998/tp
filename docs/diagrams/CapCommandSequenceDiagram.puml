@@ -1,0 +1,48 @@
+@startuml
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":CapCommand" as CapCommand
+participant ":ModuleList" as ModuleList
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("cap")
+activate Parser #FFBBBB
+
+create CapCommand
+Parser -> CapCommand: new
+activate CapCommand
+CapCommand --> Parser: new CapCommand()
+deactivate CapCommand
+
+Parser --> iGraduate: new CapCommand()
+deactivate Parser
+
+iGraduate -> CapCommand: execute(moduleList, ui, storage)
+activate CapCommand
+
+CapCommand -> ModuleList: getModules().get()
+activate ModuleList
+ModuleList --> CapCommand: module: Module
+deactivate ModuleList
+
+CapCommand -> CapCommand:checkSu(module: Module)
+activate CapCommand #DarkSalmon
+return su: boolean
+
+CapCommand -> CapCommand:convertGradeToCap(grade String)
+activate CapCommand #DarkSalmon
+return moduleCap: float
+
+CapCommand -> CapCommand:caculateCap(totalCredit: double, totalModuleCap: float)
+activate CapCommand #DarkSalmon
+return cap: float
+
+CapCommand -> CapCommand:getDegreeClassification(cap: float)
+activate CapCommand #DarkSalmon
+return capClass: String
+
+CapCommand -> Ui: printCap(cap: Float, degreeClassification String)
+activate Ui
+deactivate Ui
+
+@enduml
