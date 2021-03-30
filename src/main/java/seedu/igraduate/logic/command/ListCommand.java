@@ -29,32 +29,34 @@ public class ListCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidListTypeException {
         LOGGER.log(Level.INFO, "Executing list command...");
-        String checkCode;
         switch (scope) {
         case "all" :
             if (moduleList.isEmpty()) {
                 assert moduleList.isEmpty() : "List should be empty";
                 ui.printListEmptyMessage();
-                return;
+                LOGGER.log(Level.INFO, "No module found.");
+            } else {
+                ui.printEntireList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed Entire List.");
             }
-            ui.printEntireList(moduleList.getModules());
-            LOGGER.log(Level.INFO, "Printed Entire List.");
             break;
         case "complete" :
             if (moduleList.isCompletedModulesEmpty()) {
                 ui.printCompleteListEmptyMessage();
-                return;
+                LOGGER.log(Level.INFO, "No completed modules.");
+            } else {
+                ui.printCompletedList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed completed modules.");
             }
-            ui.printCompletedList(moduleList.getModules());
-            LOGGER.log(Level.INFO, "Printed Completed Modules.");
             break;
         case "incomplete":
             if (moduleList.isIncompletedModulesEmpty()) {
                 ui.printIncompleteListEmptyMessage();
-                return;
+                LOGGER.log(Level.INFO, "No incomplete modules.");
+            } else {
+                ui.printIncompletedList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed incomplete modules.");
             }
-            ui.printIncompletedList(moduleList.getModules());
-            LOGGER.log(Level.INFO, "Printed Incomplete Modules.");
             break;
         case "available":
             if (moduleList.isModuleAvailable()) {
