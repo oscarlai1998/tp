@@ -538,7 +538,7 @@ The list command provides users with 4 options to list down the modules being tr
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
 command also displays the degree classification of the user. There are no flags or additional parameters required.
 
-[DIAGRAM]
+![archi](./images/CapCommandSequenceDiagram.png)
 #### 4.3.6 Done Command
 The done command is used to mark a module as completed. To execute this command, the module code is extracted as a 
 parameter from user input, and there is 1 compulsory flag:
@@ -557,7 +557,7 @@ parameter from user input, and there is 1 compulsory flag:
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
-[DIAGRAM]
+![archi](./images/ProgressSequenceDiagram.png)
 ### 4.4 Module
 
 ### 4.5 ModuleList
