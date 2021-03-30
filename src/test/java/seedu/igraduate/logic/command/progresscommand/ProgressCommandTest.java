@@ -87,8 +87,6 @@ public class ProgressCommandTest {
         Command progressCommand = new ProgressCommand();
         System.setOut(new PrintStream(outContent));
         progressCommand.execute(moduleList, ui, storage);
-//        assertEquals(String.format(Ui.CAP_MESSAGE, 4.75, "Honours (Highest Distinction)")
-//            + System.lineSeparator(), outContent.toString());
         assertEquals("Progress:" + System.lineSeparator() + "█░░░░░░░░░░ 7.50%"
             + System.lineSeparator() + "12MCs/160MCs Completed" + System.lineSeparator(), outContent.toString());
         System.out.println();
