@@ -75,7 +75,7 @@ public class ModuleList {
                 Module preRequisiteModule = getByCode(preRequisite);
                 String status = preRequisiteModule.getStatus();
                 if (status.equals("taken")) {
-                    module.removeUntakenPreRequisite(preRequisite);
+                    module.removeUntakenPreRequisite(preRequisite.toUpperCase());
                 }
             } catch (ModuleNotFoundException e) {
                 throw new PrerequisiteNotFoundException();
