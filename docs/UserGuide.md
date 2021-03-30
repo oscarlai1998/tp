@@ -12,7 +12,7 @@ By: `W09-2` Latest update: `25 March 2021`
     * [Show academic progression: `progress`](#show-academic-progression-progress)
     * [Calculate CAP: `cap`](#calculate-cap-cap)
     * [Exit the program: `exit`](#exit-the-program-exit)
-* [Storage](#storage)
+* [Storage of Data](#storage-of-data)
 * [Manual Modification of Data](#manual-modification-of-data)
 * [Command Summary](#command-summary)
 
@@ -20,8 +20,9 @@ By: `W09-2` Latest update: `25 March 2021`
 
 iGraduate is a command line application that will help NUS students majoring in Information Security check his/her 
 graduation progress and modules taken in a coherent manner based on the programme requirements. It also contains tools 
-to help make informed decisions about future modules. iGraduate data is saved in the hard disk automatically after any 
-command that changes the data. There is no need to save manually.
+to help make informed decisions about future modules.
+
+This user guide serves as a quick introduction to the application. This user guide also serves to provide instructions on how to use each feature, its proper usages and expected behaviours. 
 
 ## Quick Start
 
@@ -33,6 +34,10 @@ command that changes the data. There is no need to save manually.
 
 Note that the following symbols and formatting are used in this guide:
 
+## How to use the guide
+
+The following symbols are used in this user guide: 
+
 Symbols/Formatting | Description
 -------------------|------------------------------------------
 ℹ️ **Note:**        | Information to take note of.
@@ -41,10 +46,11 @@ Symbols/Formatting | Description
 `<>`               | Include only one compulsory value from choices.
 
 ## Features
+The following section outlines the various commands suopported by the application, its proper usages and expected behaviours. 
 
 ### Add new module: `add`
 
-Adds a new module to the list. 
+Adds a new module to the list of modules undertaken. The add function serves to keep track of the modules that you have taken or are currently taking. Other functions would interact with these modules to keep track, calculate CAP and check progress of your academic career. 
 
 > ℹ️ **Note:** The prerequisite field is optional. 
 
@@ -65,6 +71,7 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 [E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the Innovator`, a `2` credit module with the code `CP2201`.*</sup>
 
 ### Delete existing module: `delete`
 
@@ -85,6 +92,7 @@ Example of Usage(s) and Expected Outcome(s):
 "Core" module CS2100 has been deleted.
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.2** Expected results from deleting the `core` module with the code `CS2100`.*</sup>
 
 `delete CP2201`
 
@@ -93,6 +101,7 @@ Example of Usage(s) and Expected Outcome(s):
 "Elective" module CP2201 has been deleted.
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.3** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
 ### Update module information: `update`
 
@@ -117,11 +126,14 @@ Nice! I've updated this module:
   [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.4** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
+with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prerequisites to `CS1010` and 
+`CS2100`.*</sup>
 
 ### Mark a module as complete: `done`
 
-Mark a module as done with grade. To modify the grade of taken module,
-simply use the `done` command again.
+The done command marks a modules as completed. In addition, you must include the grade obtained to facilitate 
+the calculation of CAP. If you want to modify the grades, use the [update command](#update-module-information-update). 
 
 > ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
 
@@ -139,6 +151,8 @@ Nice! I've updated this module:
   [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.5** Expected results from marking the module with the code `CS2106` with the grade `A` as 
+done.*</sup>
 
 `done GES1041 -g S`
 
@@ -148,12 +162,18 @@ Nice! I've marked this module as done:
   [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
+done.*</sup>
 
 ### List modules: `list`
 
-Lists all modules added on your list and all modules you can take. 
+Lists all modules added to your list according to the filter. List all modules or select only completed, incomplete or available modules to take. `complete` lists all modules that have been completed (i.e. marked 
+as done), `incomplete` lists all modules that have been added into the system but has not been completed 
+(i.e. modules that you are currently taking), `available` lists all modules that can be taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and `credits`. 
 
-Format:
+ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead. 
+
+Format: 
 
 `list all|incomplete|complete`
 
@@ -170,6 +190,7 @@ Module List:
 4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross). *</sup>
 
 `list incomplete`
 
@@ -180,6 +201,7 @@ Modules you have yet to complete:
 2: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.8** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed, as indicated with a cross.*</sup>
 
 `list complete`
 
@@ -190,11 +212,23 @@ Modules you have have completed:
 2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.9** Expected results from listing `completed` modules. The list includes the module information that has been completed, as indicated with with a tick.*</sup>
+
+`list available`
+
+```
+--------------------------------------------------------------------------------------
+Modules can be taken:
+1: [C][✘] CS2106   Intro to OS                                             NIL   4 MC 
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.1.10** Expected results from listing `available` modules. The list includes the module information that has been added and can be taken (with all prerequisites fulfiled).*</sup>
 
 ### Show academic progression: `progress`
 
-Shows a progress bar for the percentage of modules completed with respect to total modules needed for 
-graduation requirement (default value is 160). 
+Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of your total completed module credits against the total number of credits needed for graduation requirements. The bar will fill up as more modules are completed. 
+
+> ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS single-degree Information Security undergraduate</b> student
 
 Format:
 
@@ -211,11 +245,13 @@ Progress:
 8MCs/160MCs Completed
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.11** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
 
 ### Calculate CAP: `cap`
 
-Calculates the current CAP and shows the degree classification based on the grades from the modules that have 
-been marked as completed. 
+Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
+
+> ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP
 
 Format:
 
@@ -231,6 +267,7 @@ Current CAP: 4.00
 Current Degree Classification: Honours (Distinction)
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.12** Expected results from running the cap command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
 
 ### Exit the program: `exit`
 Exits the program. 
@@ -248,25 +285,26 @@ Example of Usage(s) and Expected Outcome(s):
 See you soon! Happy studying!
 --------------------------------------------------------------------------------------
 ```
+<sup>***Figure 1.1.12** Expected results from exiting the program*</sup>
 
-## Storage
+## Storage of Data
 
-All data are stored automatically by IGraduate everytime a module is modified (i.e. added, deleted or updated) 
-and when exiting the program. The data will be loaded in the next time of usage.
+All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
+updated) and when exiting the program. The data will be loaded in the next time of usage.
 
 ## Manual Modification of Data
 
-> ℹ️ **Note:** Please ensure that you modify only the value of module attributes if you are unsure of how the `json`
-> structure works.
+> ℹ️ **Note:** Please ensure that you modify only the value of module attributes if you are unsure of how the 
+`json` structure works.
 
-> ℹ️ **Note:** The application might not behave as the way it is expected to if you modify the application data in an 
-> incorrect manner. For example, data corruption might occur.
+> ℹ️ **Note:** The application might not behave as the way it is expected to if you modify the application 
+data in an incorrect manner. For example, data corruption might occur.
 
-The IGraduate application data file is stored under the same folder where the IGraduate application resides. You may 
-notice a folder named `data` is created and there is a `modules.json` file inside the folder. In `modules.json`, you 
-will find your data created in the application here. To modify the data of existing module, simply change the value
-of each attribute in the `json` file and save it. You are advised to add or remove new module data manually only if you
-understand the application's logic and `json` format.
+The IGraduate application data file is stored under the same folder where the IGraduate application resides. 
+You may notice a folder named `data` is created and there is a `modules.json` file inside the folder. In 
+`modules.json`, you will find your data created in the application here. To modify the data of existing 
+module, simply change the value of each attribute in the `json` file and save it. You are advised to add or 
+remove new module data manually only if you understand the application's logic and `json` format.
 
 ## Command Summary
 
