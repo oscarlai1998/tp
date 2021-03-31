@@ -34,7 +34,16 @@ By: `W09-2` Latest update: `30 March 2021`
             + [Target User Profile](#target-user-profile)
             + [Value Proposition](#value-proposition)
         + [User Stories](#user-stories)
-
+    * [Instructions for Manual Testing](#instructions-for-manual-testing)
+        + [Launch and Shutdown](#launch-and-shutdown)
+        + [Adding a module](#adding-a-module)
+        + [Deleting a module](#deleting-a-module)
+        + [Marking modules as done](#marking-modules-as-done)
+        + [Updating the module list](#updating-the-module-list)
+        + [CAP](#cap)
+        + [Progress](#progress)
+        + [List Modules](#list-modules)
+        + [Saving data](#saving-data)
 ## 1. Introduction
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -151,8 +160,7 @@ Each of the four components,
 - defines its API in an interface with the <b>same name</b> as the Component.
 - exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding 
 API interface mentioned in the previous point.
-
-How the architecture interacts with each other [DIAGRAM]
+  
 
 ### 3.2 UI Component
 
@@ -556,8 +564,7 @@ The list command provides users with 4 options to list down the modules being tr
     - `incomplete`
 1. List incomplete modules available to be marked as done based on prerequisites completed:
     - `available`
-
-[DIAGRAM]
+    
 
 #### 4.3.5 CAP Command
 

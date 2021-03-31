@@ -27,7 +27,10 @@ progress, view modules taken based on programme requirements and make informed d
 
 ## User Guide Usage
 This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
-each feature, its proper formats and expected behaviours from different sample inputs.
+each feature, its proper formats and expected behaviours from different sample inputs. The User Guide also explains
+how modules are stored in the computer and how it can be access and modified. There is also a list of 
+frequently asked questions to answer any common queries. Finally, the user guide provides a command summary of all
+possible commands and the expected input for each command.
 
 The following symbols are used in this user guide: 
 
@@ -334,7 +337,7 @@ remove new module data manually only if you understand the application's logic a
 ## Frequently Asked Questions
 
 **Q1**: Can I use the application on my MacBook?
-> Yes! iGraduate is a cross-platfotm application that can be run on Windows, Linux or Mac.  
+> Yes! iGraduate is a cross-platform application that can be run on Windows, Linux or Mac.  
 
 **Q2**: Can I share my module list with my friends?
 > Yes! Just go into `/data` of the application folder and pass the `modules.json` file over to your friends. Make sure
@@ -342,6 +345,10 @@ remove new module data manually only if you understand the application's logic a
 
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
+
+**Q4**: Is the module list only in JSON format?
+> Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
+> the module list into a different format.
 
 ## Command Summary
 
