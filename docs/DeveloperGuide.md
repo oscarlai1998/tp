@@ -438,7 +438,7 @@ The parser feature has 3 primary responsibilities:
 
 ![archi](./images/ParserSequenceDiagram.png)
 
-<sup>***Figure 4.2.1** Sequence diagram of `Parser` class with user input *"done CS1010 -g A"**</sup>
+<sup>***Figure 4.2.1** Sequence diagram of `Parser` in execution with *"done CS1010 -g A"** as user input</sup>
 
 #### Details
 
@@ -497,7 +497,7 @@ The sequence diagram below shows the execution of add command in action:
 
 ![archi](./images/AddCommandSequenceDiagram.png)
 
-<sup>***Figure 4.3.1.1** Sequence diagram of `AddCommand` in execution.*</sup>
+<sup>***Figure 4.3.1.1** Sequence diagram of `AddCommand` in execution with *"add Programming Methodology -c CS1010 -mc 4 -t core"* as user input.*</sup>
 
 #### 4.3.2 Delete Command
 
@@ -507,7 +507,7 @@ involved for deleting a module.
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
 
 ![archi](./images/DeleteCommandSequenceDiagram.png)
-<sup>***Figure 4.3.2.1** Sequence diagram of `Delete` class with "delete CS1010" as user input*</sup>
+<sup>***Figure 4.3.2.1** Sequence diagram of `DeleteCommand` in execution with "delete CS1010" as user input*</sup>
 
 #### 4.3.3 Update Command
 
@@ -541,12 +541,12 @@ The following is the UML diagrams for update command consisting of updating each
 
 ![archi](./images/updateClassDiagram.jpg)
 
-<sup>***Figure 4.3.3.1** Class diagram of `Update` class with user input*</sup>
+<sup>***Figure 4.3.3.1** Class diagram of `UpdateCommand` class with user input*</sup>
 
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
 
-<sup>***Figure 4.3.3.2** Sequence diagram of `Update` class with user input*</sup>
+<sup>***Figure 4.3.3.2*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
 
 #### Considerations
 
@@ -588,7 +588,7 @@ parameter from user input, and there is 1 compulsory flag:
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
-<sup>***Figure 4.3.6.1** Sequence diagram of `DoneCommand` class with user input*</sup>
+<sup>***Figure 4.3.6.1*** Sequence diagram of `DoneCommand` in execution with *"done CS1010 -g A"* as user input</sup>
 
 #### 4.3.7 Progress Command
 
@@ -597,7 +597,7 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 4.3.7.1** Sequence diagram of `ProgressCommand` class.*</sup>
+<sup>***Figure 4.3.7.1*** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ### 4.4 Module
 
