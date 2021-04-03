@@ -20,6 +20,7 @@ import seedu.igraduate.logic.command.CapCommand;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.logging.Level;
 
@@ -65,9 +66,9 @@ public class Parser {
      * @throws IncorrectParameterCountException If the command input does not
      *                                          contain the right parameters.
      */
-    public static Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
-            InvalidModularCreditException {
+    public static Command parseCommand(String line)
+            throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
+            InvalidModuleTypeException, InvalidListTypeException, InvalidModularCreditException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -422,9 +423,11 @@ public class Parser {
      *
      * @param commandFlags flags of commands from user input.
      * @return number of modular credits.
-     * @throws NumberFormatException   if number is not given as modular credits.
-     * @throws InvalidCommandException if -mc flag is not found.
-     * @throws InvalidModularCreditException if modular credit is not positive number.
+     * @throws NumberFormatException         if number is not given as modular
+     *                                       credits.
+     * @throws InvalidCommandException       if -mc flag is not found.
+     * @throws InvalidModularCreditException if modular credit is not positive
+     *                                       number.
      */
     public static double extractModuleCredits(ArrayList<String> commandFlags)
             throws InputNotNumberException, InvalidCommandException, InvalidModularCreditException {
@@ -467,7 +470,6 @@ public class Parser {
     }
 
     public static String extractModuleName(ArrayList<String> commandFlags) throws InvalidCommandException {
-        
 
         int startIndex = commandFlags.indexOf("-n");
         if (startIndex < 0) {
@@ -475,15 +477,23 @@ public class Parser {
             throw new InvalidCommandException();
         }
 
-        int endIndex = commandFlags.indexOf(Pattern.compile("-[a-z]{1,2}")); 
+        int endIndex = -1;
+
+        for (int i = 0; i < commandFlags.size(); i++) {
+            if (commandFlags.get(i).matches("-[^n]{1,2}")) {
+                endIndex = i;
+            }
+        }
+
         if (endIndex < 0) {
-            endIndex = commandFlags.size();;
+            endIndex = commandFlags.size();
         }
 
         String moduleName = "";
         for (int i = startIndex + 1; i < endIndex; i++) {
             moduleName = moduleName + " " + commandFlags.get(i);
         }
+
         return moduleName.trim();
     }
 
@@ -501,7 +511,7 @@ public class Parser {
         case "all": // fallthrough
         case "complete": // fallthrough
         case "incomplete": // fallthrough
-        case "available":  // fallthrough
+        case "available": // fallthrough
             return scope;
         default:
             throw new InvalidListTypeException();
