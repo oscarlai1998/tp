@@ -136,9 +136,12 @@ the modules, use the [`delete command`](#delete-existing-module-delete) instead.
 [done command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades 
 will be added but the rest of the information (if any) will be updated. 
 
+
 Format:
 
 `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
+
+> ℹ️ **Note:** Although all parameters are optional, the update command requires at least 1 parameter to be used. 
 
 Example of Usage(s) and Expected Outcome(s):
 
