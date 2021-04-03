@@ -1,5 +1,6 @@
 package seedu.igraduate.storage;
 
+import seedu.igraduate.exception.DataFileNotFoundException;
 import seedu.igraduate.exception.LoadModuleFailException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
@@ -69,12 +70,13 @@ public class Storage {
      * 
      * @return the parsed array list containing all saved modules. 
      * @throws IOException if file cannot be read or processed. 
-     * @throws LoadModuleFailException if the module fails to save to file. 
+     * @throws LoadModuleFailException if the module fails to load from file.
+     * @throws DataFileNotFoundException if the module data file does not exists.
      */
     public ArrayList<Module> loadModulesFromFile()
-            throws LoadModuleFailException {
+            throws LoadModuleFailException, DataFileNotFoundException {
         if (!filePath.exists()) {
-            throw new LoadModuleFailException();
+            throw new DataFileNotFoundException();
         }
 
         Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();

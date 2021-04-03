@@ -29,6 +29,8 @@ public class Ui {
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
     public static final String EMPTY_AVAILABLE_LIST_MESSAGE = "There are no modules available for take.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
+    public static final String PROGRESS_COMPLETED_MESSAGE = "Congratulations! You are ready to graduate.";
+    public static final String PROGRESS_EXCEEDED_MESSAGE = "Great job studying beyond your graduation requirements!";
 
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
@@ -227,8 +229,21 @@ public class Ui {
                 System.out.print("░");
             }
         }
+
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
+        printProgressCompletionMessage(Double.parseDouble(percentage));
+    }
+
+    /**
+     * Displays progress completion message.
+     */
+    public void printProgressCompletionMessage(double percentage) {
+        if (percentage == 100) {
+            System.out.println(PROGRESS_COMPLETED_MESSAGE);
+        } else if (percentage > 100) {
+            System.out.println(PROGRESS_EXCEEDED_MESSAGE);
+        }
     }
 
     /**

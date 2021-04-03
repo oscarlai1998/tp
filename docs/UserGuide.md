@@ -5,7 +5,7 @@ By: `W09-2` Latest update: `30 March 2021`
 * [User Guide Usage](#user-guide-usage)
 * [Quick Start](#quick-start)
 * [Features](#features)
-    * [Add new module: `add`](#add-new-module-add)
+    * [Add new module: `add`](#add-a-new-module-add)
     * [Delete existing module: `delete`](#delete-existing-module-delete)
     * [Update module information: `update`](#update-module-information-update)
     * [Mark a module as complete: `done`](#mark-a-module-as-complete-done)
@@ -217,7 +217,8 @@ Module List:
 4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross). *</sup>
+<sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has 
+been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross).*</sup>
 
 `list incomplete`
 
