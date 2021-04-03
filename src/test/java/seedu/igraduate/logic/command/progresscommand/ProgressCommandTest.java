@@ -15,7 +15,6 @@ import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
@@ -48,12 +47,11 @@ public class ProgressCommandTest {
 
     @BeforeEach
     void populateList()
-        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-        InvalidModularCreditException {
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Algo and Strutures -mc 4 -t core -c cs2040c";
         String thirdModule = "add Discrete Structures -mc 4 -t core -c cs1231s";
@@ -77,12 +75,11 @@ public class ProgressCommandTest {
     /*----------------- Unit test -----------------------*/
     @Test
     void executeProgressCommand_validParameters_success()
-        throws InvalidModuleTypeException, InputNotNumberException,
-        ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-        InvalidModularCreditException {
+            throws InvalidModuleTypeException, InputNotNumberException,
+            ExistingModuleException, InvalidModularCreditException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
 
         Command progressCommand = new ProgressCommand();
         System.setOut(new PrintStream(outContent));
@@ -95,11 +92,10 @@ public class ProgressCommandTest {
 
     @AfterEach
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-        IncorrectParameterCountException, ExistingModuleException, ModularCreditExceedsLimitException,
-        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-        ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-        InvalidModularCreditException {
+            IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2040c";
         String thirdModule = "Delete cs1231s";

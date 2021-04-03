@@ -19,7 +19,6 @@ import seedu.igraduate.model.module.Module;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
@@ -32,7 +31,6 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
-import seedu.igraduate.exception.InvalidModularCreditException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -103,10 +101,9 @@ public class DeleteCommandIntegrationTest {
     void executeDeleteCommand_moduleInList_success()
             throws ExistingModuleException, InvalidModuleTypeException,
             SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-            ModularCreditExceedsLimitException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-         InvalidModularCreditException {
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
         String line = "Delete cs2100";
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));

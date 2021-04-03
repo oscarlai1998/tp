@@ -4,8 +4,6 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.ui.Ui;
 
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
-
 import java.text.DecimalFormat;
 
 import java.util.logging.Level;
@@ -25,18 +23,13 @@ public class ProgressCommand extends Command {
      * @param storage Storage for storing module list data.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws ModularCreditExceedsLimitException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) {
         LOGGER.log(Level.INFO, "Executing progress command...");
         DecimalFormat df = new DecimalFormat("0.00");
         double completedMCs = moduleList.getTotalCompletedMCs();
         LOGGER.log(Level.INFO, "Completed MCs success.");
         double percentageDone = (completedMCs / 160) * 100;
         String stringPercentageDone = df.format(percentageDone);
-        if (percentageDone > 100) {
-            LOGGER.log(Level.WARNING, "Execution failed! Percentage done exceeds 100%.");
-            throw new ModularCreditExceedsLimitException();
-        }
         ui.printProgressBar(completedMCs, stringPercentageDone);
         LOGGER.log(Level.INFO, "Print Progress Bar success.");
         LOGGER.log(Level.INFO, "End of progress command execution.");
