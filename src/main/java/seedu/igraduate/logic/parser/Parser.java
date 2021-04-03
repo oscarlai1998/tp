@@ -122,7 +122,9 @@ public class Parser {
      * @return String array of user input split up.
      */
     protected static ArrayList<String> getCommand(String line) {
-        return new ArrayList<String>(Arrays.asList(line.split("\\s+(?=-)", 2)));
+        String regex = "^\\s+";
+        String trimmedLine = line.replaceAll(regex, "");
+        return new ArrayList<String>(Arrays.asList(trimmedLine.split("\\s+(?=-)", 2)));
     }
 
     /**
