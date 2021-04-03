@@ -1,4 +1,6 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":CapCommand" as CapCommand
@@ -44,5 +46,6 @@ return capClass: String
 CapCommand -> Ui: printCap(cap: Float, degreeClassification String)
 activate Ui
 deactivate Ui
+destroy CapCommand
 
 @enduml

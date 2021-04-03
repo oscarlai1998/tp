@@ -1,4 +1,6 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":ProgressCommand" as ProgressCommand
@@ -29,7 +31,7 @@ ProgressCommand -> Ui
 ProgressCommand -> Ui: printProgressBar(competedMCs)
 activate Ui
 deactivate Ui
-
+destroy ProgressCommand
 
 
 @enduml

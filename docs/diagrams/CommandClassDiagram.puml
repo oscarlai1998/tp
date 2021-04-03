@@ -15,17 +15,12 @@ class "AddCommand" {
     #preRequisites:ArrayList<String>
     #untakenPreRequisites:ArrayList<String>
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-    -createModuleByType():Module
 }
 
 class "CapCommand" {
     #cap:Float
     #degreeClassification:String
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-    -checkSu(Module:module):Boolean
-    -convertGradeToCap(String:grade):Float
-    -calculateCap(Double:totalCredit, Float:totalModuleCap):Float
-    -getDegreeClassification(Float:cap):String
 }
 
 class "DeleteCommand" {
@@ -37,11 +32,9 @@ class "DoneCommand" {
     #moduleCode:String
     #moduleGrade:String
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-    -markDone(ModuleList:moduleList, Module:module)
 }
 
 class "ExitCommand" {
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
 }
 
 class "ListCommand" {
@@ -55,20 +48,11 @@ class "ProgressCommand" {
 
 class "UpdateCommand" {
     -moduleCode:String
-    -commandFlags:ArrayList<String>
     -targetModule:Module
     -moduleCredit:Double
     -moduleGrade:String
     -preRequisites:ArrayList<String>
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-    -updateModuleName(ArrayList<String>:commandFlags)
-    -updateModuleCredits(ArrayList<String>:commandFlags)
-    -updateModuleGrade(ArrayList<String>:commandFlags)
-    -updatePrerequisites(ArrayList<String>:commandFlags, ModuleList:modules)
-    -extractPrerequisitesNotTaken(ModuleList:modules, ArrayList<String>:prerequisites):ArrayList<String>
-    -checkSelfPrerequisite(Module:module, ArrayList<String>:preRequisites)
-    -removeModuleFromRequiredBy(Module:targetModule, ModuleList:moduleList)
-    -addModuleToRequiredBy(Module targetModule, ModuleList moduleList, ArrayList<String> newPrerequisites)
 }
 
 "{abstract}\n<i>Command" <|-- "AddCommand"

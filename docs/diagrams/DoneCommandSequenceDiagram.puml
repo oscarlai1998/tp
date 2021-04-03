@@ -1,4 +1,6 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":DoneCommand" as DoneCommand

@@ -1,4 +1,6 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":DeleteCommand" as DeleteCommand
@@ -46,6 +48,9 @@ activate Storage
 deactivate Storage
 
 DeleteCommand -> Ui: printDeletedModuleSuccess("CS1010", "core")
+activate Ui
+deactivate Ui
+
 deactivate DeleteCommand
 destroy DeleteCommand
 @enduml

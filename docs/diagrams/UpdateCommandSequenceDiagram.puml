@@ -1,4 +1,6 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":UpdateCommand" as UpdateCommand
@@ -54,4 +56,6 @@ deactivate Ui
 
 deactivate UpdateCommand
 destroy UpdateCommand
+
+
 @enduml
