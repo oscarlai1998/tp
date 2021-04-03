@@ -82,15 +82,29 @@ Format:
 Example of Usage(s) and Expected Outcome(s):
 
 `add Journey of the Innovator -c CP2201 -t ue -mc 2`
-
 ```
 --------------------------------------------------------------------------------------
 Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 [E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
+
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
-Innovator`, a `2` credit module with the code `CP2201`.*</sup>
+Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
+
+
+`add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS1010,CS2100`
+
+```
+--------------------------------------------------------------------------------------
+Added CS2106 Introduction to Operating Systems to the list. (4.0MCs)
+List of pre-requisites needed to take CS2106: CS1010, CS2100
+[C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+
+<sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
+`4` credit module with the code `CS2106`, with the prerequisites `CS1010` and `CS2100`.*</sup>
 
 ### Delete existing module: `delete`
 
