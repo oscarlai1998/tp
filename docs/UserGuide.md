@@ -71,7 +71,7 @@ Adds a new module to the list of modules you wish to track. The list serves to k
 you have taken, are currently taking or intend to take in the future. Other functions would interact with these added 
 modules to keep track, calculate CAP and check the progress of your academic career. 
 
-> ℹ️ **Note:** The prerequisite field is optional. 
+> ℹ️ **Note:** The module codes are based on the standard NUS module code style. 
 
 > ℹ️ **Note:** If you have to add prerequisite modules, please ensure that all the prerequisite modules are already added before proceeding.
 
