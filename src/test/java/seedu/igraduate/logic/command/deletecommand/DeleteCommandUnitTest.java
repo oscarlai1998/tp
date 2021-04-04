@@ -37,56 +37,56 @@ import java.nio.file.Paths;
 
 public class DeleteCommandUnitTest {
 
-        private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
-        private Storage storage = Storage.getStorage(FILEPATH);
-        private Ui ui = new Ui();
-        private ModuleList moduleList = new ModuleList();
+    private Storage storage = Storage.getStorage(FILEPATH);
+    private Ui ui = new Ui();
+    private ModuleList moduleList = new ModuleList();
 
-        private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        private final PrintStream originalOut = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
-        @BeforeEach
-        void setUp() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-                        IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
-                        ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-                        UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
-                        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-                        MarkCompletedModuleException {
-                String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
-                String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
-                Command addFirst = Parser.parseCommand(firstModule);
-                addFirst.execute(moduleList, ui, storage);
-                Command addSecond = Parser.parseCommand(secondModule);
-                addSecond.execute(moduleList, ui, storage);
-        }
+    @BeforeEach
+    void setUp() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
+            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
+        String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
+        String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
+        Command addFirst = Parser.parseCommand(firstModule);
+        addFirst.execute(moduleList, ui, storage);
+        Command addSecond = Parser.parseCommand(secondModule);
+        addSecond.execute(moduleList, ui, storage);
+    }
 
-        @Test
-        void executeDeleteCommand_nonexistentModule_exceptionThrown() {
-                DeleteCommand deleteCommand = new DeleteCommand("Pigs (Three Different Ones)");
-                Exception exception = assertThrows(ModuleNotFoundException.class,
-                                () -> deleteCommand.execute(moduleList, ui, storage));
-                assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
-        }
+    @Test
+    void executeDeleteCommand_nonexistentModule_exceptionThrown() {
+        DeleteCommand deleteCommand = new DeleteCommand("Pigs (Three Different Ones)");
+        Exception exception = assertThrows(ModuleNotFoundException.class,
+                () -> deleteCommand.execute(moduleList, ui, storage));
+        assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
+    }
 
-        @Test
-        void executeDeleteCommand_deleteIncompletePrerequisite_exceptionThrown() {
-                DeleteCommand deleteCommand = new DeleteCommand("CS1010");
-                Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-                                () -> deleteCommand.execute(moduleList, ui, storage));
-                assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
-                                + "[CS2100]", exception.getMessage());
-        }
+    @Test
+    void executeDeleteCommand_deleteIncompletePrerequisite_exceptionThrown() {
+        DeleteCommand deleteCommand = new DeleteCommand("CS1010");
+        Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
+                () -> deleteCommand.execute(moduleList, ui, storage));
+        assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE + "[CS2100]",
+                exception.getMessage());
+    }
 
-        @Test
-        void executeDeleteCommand_moduleInList_success() throws SaveModuleFailException, ModuleNotFoundException,
-                        PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
-                DeleteCommand deleteCommand = new DeleteCommand("CS2100");
-                System.setOut(new PrintStream(outContent));
-                deleteCommand.execute(moduleList, ui, storage);
-                assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS2100") + System.lineSeparator(),
-                                outContent.toString());
-                System.setOut(originalOut);
-        }
+    @Test
+    void executeDeleteCommand_moduleInList_success() throws SaveModuleFailException, ModuleNotFoundException,
+            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
+        DeleteCommand deleteCommand = new DeleteCommand("CS2100");
+        System.setOut(new PrintStream(outContent));
+        deleteCommand.execute(moduleList, ui, storage);
+        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS2100") + System.lineSeparator(),
+                outContent.toString());
+        System.setOut(originalOut);
+    }
 
 }

@@ -42,80 +42,79 @@ import java.util.ArrayList;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteCommandIntegrationTest {
 
-        private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
-        private Storage storage = Storage.getStorage(FILEPATH);
-        private Ui ui = new Ui();
-        private ModuleList moduleList = new ModuleList();
+    private Storage storage = Storage.getStorage(FILEPATH);
+    private Ui ui = new Ui();
+    private ModuleList moduleList = new ModuleList();
 
-        private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        private final PrintStream originalOut = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
-        @BeforeEach
-        void setUp() throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
-                        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
-                ArrayList<String> preRequisites = new ArrayList<>();
-                ArrayList<String> untakenPreRequisites = new ArrayList<>();
-                ArrayList<String> requiredByModules = new ArrayList<>();
-                AddCommand firstModuleAddCommand = new AddCommand("cs1010", "Programming Methodology", "core", 4.0,
-                                preRequisites, untakenPreRequisites);
-                firstModuleAddCommand.execute(moduleList, ui, storage);
-                requiredByModules.add("CS2100");
-                Module module = moduleList.getModule("cs1010");
-                module.setRequiredByModules(requiredByModules);
-                ArrayList<String> secondModulePreRequisites = new ArrayList<>();
-                ArrayList<String> secondModuleUntakenPreRequisites = new ArrayList<>();
-                secondModulePreRequisites.add("CS1010");
-                secondModuleUntakenPreRequisites.add("CS1010");
-                AddCommand secondModuleAddCommand = new AddCommand("cs2100", "Introduction to Computer Organisation",
-                                "core", 4.0, secondModulePreRequisites, secondModuleUntakenPreRequisites);
-                secondModuleAddCommand.execute(moduleList, ui, storage);
-        }
+    @BeforeEach
+    void setUp() throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
+            ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        ArrayList<String> requiredByModules = new ArrayList<>();
+        AddCommand firstModuleAddCommand = new AddCommand("cs1010", "Programming Methodology", "core", 4.0,
+                preRequisites, untakenPreRequisites);
+        firstModuleAddCommand.execute(moduleList, ui, storage);
+        requiredByModules.add("CS2100");
+        Module module = moduleList.getModule("cs1010");
+        module.setRequiredByModules(requiredByModules);
+        ArrayList<String> secondModulePreRequisites = new ArrayList<>();
+        ArrayList<String> secondModuleUntakenPreRequisites = new ArrayList<>();
+        secondModulePreRequisites.add("CS1010");
+        secondModuleUntakenPreRequisites.add("CS1010");
+        AddCommand secondModuleAddCommand = new AddCommand("cs2100", "Introduction to Computer Organisation", "core",
+                4.0, secondModulePreRequisites, secondModuleUntakenPreRequisites);
+        secondModuleAddCommand.execute(moduleList, ui, storage);
+    }
 
-        @Test
-        void executeDeleteCommand_nonexistentModule_exceptionThrown()
-                        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-                        IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
-                String line = "Delete Pigs (Three Different Ones)";
-                Command deleteCommand = Parser.parseCommand(line);
-                Exception exception = assertThrows(ModuleNotFoundException.class,
-                                () -> deleteCommand.execute(moduleList, ui, storage));
-                String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
-                assertEquals(exceptionMessage, exception.getMessage());
-        }
+    @Test
+    void executeDeleteCommand_nonexistentModule_exceptionThrown()
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
+        String line = "Delete Pigs (Three Different Ones)";
+        Command deleteCommand = Parser.parseCommand(line);
+        Exception exception = assertThrows(ModuleNotFoundException.class,
+                () -> deleteCommand.execute(moduleList, ui, storage));
+        String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
+        assertEquals(exceptionMessage, exception.getMessage());
+    }
 
-        @Test
-        void executeDeleteCommand_preRequisiteModule_exceptionThrown()
-                        throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-                        IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
-                String line = "Delete CS1010";
-                Command deleteCommand = Parser.parseCommand(line);
-                Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-                                () -> deleteCommand.execute(moduleList, ui, storage));
-                String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
-                                + "[CS2100]";
-                assertEquals(exceptionMessage, exception.getMessage());
-        }
+    @Test
+    void executeDeleteCommand_preRequisiteModule_exceptionThrown()
+            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
+        String line = "Delete CS1010";
+        Command deleteCommand = Parser.parseCommand(line);
+        Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
+                () -> deleteCommand.execute(moduleList, ui, storage));
+        String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
+                + "[CS2100]";
+        assertEquals(exceptionMessage, exception.getMessage());
+    }
 
-        @Test
-        void executeDeleteCommand_moduleInList_success() throws ExistingModuleException, InvalidModuleTypeException,
-                        SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException,
-                        InputNotNumberException, InvalidModularCreditException, ModuleNotFoundException,
-                        PrerequisiteNotFoundException, ModuleNotCompleteException, UnableToDeletePrereqModuleException,
-                        InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
-                        AddSelfToPrereqException, MarkCompletedModuleException {
-                String line = "Delete cs2100";
-                Command deleteCommand = Parser.parseCommand(line);
-                System.setOut(new PrintStream(outContent));
-                deleteCommand.execute(moduleList, ui, storage);
-                String successMessage = String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs2100")
-                                + System.lineSeparator();
-                assertEquals(successMessage, outContent.toString());
-                System.setOut(originalOut);
-        }
+    @Test
+    void executeDeleteCommand_moduleInList_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
+        String line = "Delete cs2100";
+        Command deleteCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        deleteCommand.execute(moduleList, ui, storage);
+        String successMessage = String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs2100") + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
 
-        @AfterEach
-        void tearDown() {
-                moduleList = new ModuleList();
-        }
+    @AfterEach
+    void tearDown() {
+        moduleList = new ModuleList();
+    }
 }

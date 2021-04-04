@@ -52,16 +52,17 @@ public class UpdateCommand extends Command {
      * @param modules Module list consisting of all modules.
      * @param ui      User interface for printing result.
      * @param storage Storage for storing module list data.
-     * @throws ModuleNotFoundException    If the module code is not found in module
-     *                                    list.
-     * @throws NumberFormatException      If module credit is not an integer (or
-     *                                    double).
-     * @throws InputNotNumberException    If module credit is not an integer (or
-     *                                    double).
-     * @throws ModuleNotCompleteException If the module has not been marked as
-     *                                    completed.
-     * @throws SaveModuleFailException    If the program fails to save changes.
-     * @throws PrerequisiteNotMetException If prerequisite of the module has not been completed.
+     * @throws ModuleNotFoundException     If the module code is not found in module
+     *                                     list.
+     * @throws NumberFormatException       If module credit is not an integer (or
+     *                                     double).
+     * @throws InputNotNumberException     If module credit is not an integer (or
+     *                                     double).
+     * @throws ModuleNotCompleteException  If the module has not been marked as
+     *                                     completed.
+     * @throws SaveModuleFailException     If the program fails to save changes.
+     * @throws PrerequisiteNotMetException If prerequisite of the module has not
+     *                                     been completed.
      */
     @Override
     public void execute(ModuleList modules, Ui ui, Storage storage)
@@ -144,8 +145,9 @@ public class UpdateCommand extends Command {
      *
      * @param commandFlags List containing all the flags and values.
      * @param modules      List of all modules.
-     * @throws ModuleNotFoundException   If the module is not found.
-     * @throws PrerequisiteNotMetException If the prerequisite of the module has not been completed.
+     * @throws ModuleNotFoundException     If the module is not found.
+     * @throws PrerequisiteNotMetException If the prerequisite of the module has not
+     *                                     been completed.
      */
     private void updatePrerequisites(ArrayList<String> commandFlags, ModuleList modules)
             throws ModuleNotFoundException, AddSelfToPrereqException, PrerequisiteNotMetException {

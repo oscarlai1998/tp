@@ -41,7 +41,8 @@ public class IGraduate {
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
      *
-     * @param filePath The file path at which module data file is located, if exists.
+     * @param filePath The file path at which module data file is located, if
+     *                 exists.
      */
     public IGraduate(File filePath) {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
