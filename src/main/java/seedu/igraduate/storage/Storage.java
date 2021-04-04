@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
@@ -28,28 +29,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Represents an instance of storage. 
- * A storage object corresponds to the saving and loading of file.  
+ * Represents an instance of storage. A storage object corresponds to the saving
+ * and loading of file.
  */
 public class Storage {
     private static Storage storage = null;
     private File filePath;
     private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
-    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
-    private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory
-            .of(Module.class, "type")
-            .registerSubtype(CoreModule.class, "core")
-            .registerSubtype(ElectiveModule.class, "elective")
-            .registerSubtype(GeModule.class, "ge")
-            .registerSubtype(MathModule.class, "math");
+    // Define the runtimeAdapterFactory for Gson to treat each module type as
+    // different object
+    private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory.of(Module.class, "type")
+            .registerSubtype(CoreModule.class, "core").registerSubtype(ElectiveModule.class, "elective")
+            .registerSubtype(GeModule.class, "ge").registerSubtype(MathModule.class, "math");
 
     /**
-     * Creates a Singleton of Storage, which should only have one instance.
-     * If storage has not been instantiated, create. 
+     * Creates a Singleton of Storage, which should only have one instance. If
+     * storage has not been instantiated, create.
      * 
-     * @param filePath File opened for read. 
-     * @return Storage object. 
+     * @param filePath File opened for read.
+     * @return Storage object.
      */
     public static Storage getStorage(File filePath) {
         if (storage == null) {
@@ -59,32 +58,32 @@ public class Storage {
     }
 
     /**
-     * Instantiates the storage object. 
+     * Instantiates the storage object.
      */
     private Storage(File filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * Prepares to load modules from file. 
+     * Prepares to load modules from file.
      * 
-     * @return the parsed array list containing all saved modules. 
-     * @throws IOException if file cannot be read or processed. 
-     * @throws LoadModuleFailException if the module fails to load from file.
+     * @return the parsed array list containing all saved modules.
+     * @throws IOException               if file cannot be read or processed.
+     * @throws LoadModuleFailException   if the module fails to load from file.
      * @throws DataFileNotFoundException if the module data file does not exists.
      */
-    public ArrayList<Module> loadModulesFromFile()
-            throws LoadModuleFailException, DataFileNotFoundException {
+    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
 
-        Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
+        Type objectType = new TypeToken<ArrayList<Module>>() {
+        }.getType();
 
         try {
             ArrayList<Module> modules = loadFromJson(objectType, filePath);
             LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
-            return modules;
+            return removeDuplicateModules(modules);
         } catch (IOException exception) {
             LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
@@ -92,15 +91,25 @@ public class Storage {
     }
 
     /**
-     * Loads the stored modules from json file.  
+     * Removes all duplicate modules (identified by module code) from list.
      * 
-     * @param type module type. 
-     * @param jsonFile file opened for reading. 
-     * @return parsed array list containing saved modules. 
-     * @throws IOException if the file failed to be read. 
+     * @param modules List of modules loaded into the application.
+     * @return List of modules containing all distinct modules (if all distinct,
+     *         return original module list)
      */
-    private ArrayList<Module> loadFromJson(Type type, File jsonFile) 
-            throws IOException {
+    private ArrayList<Module> removeDuplicateModules(ArrayList<Module> modules) {
+        return modules.stream().distinct().collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Loads the stored modules from json file.
+     * 
+     * @param type     module type.
+     * @param jsonFile file opened for reading.
+     * @return parsed array list containing saved modules.
+     * @throws IOException if the file failed to be read.
+     */
+    private ArrayList<Module> loadFromJson(Type type, File jsonFile) throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         FileReader fileReader = new FileReader(jsonFile);
@@ -109,10 +118,10 @@ public class Storage {
     }
 
     /**
-     * Prepares to save the array list into a json format. 
+     * Prepares to save the array list into a json format.
      * 
-     * @param modules array list of all modules. 
-     * @throws SaveModuleFailException if the module fails to save to file. 
+     * @param modules array list of all modules.
+     * @throws SaveModuleFailException if the module fails to save to file.
      */
     public void saveModulesToFile(ModuleList modules) throws SaveModuleFailException {
         // Creates parent directories if file does not exist
@@ -129,15 +138,14 @@ public class Storage {
     }
 
     /**
-     * Saves the array list to json file. 
+     * Saves the array list to json file.
      * 
-     * @param jsonFile file opened for writing. 
-     * @param modules array list of all the modules. 
-     * @throws IOException if the file failed to be written. 
+     * @param jsonFile file opened for writing.
+     * @param modules  array list of all the modules.
+     * @throws IOException if the file failed to be written.
      */
     private void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting()
-                .registerTypeAdapterFactory(moduleAdaptorFactory).create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         int arraySize = modules.size();
         int lastIndex = arraySize - 1;
