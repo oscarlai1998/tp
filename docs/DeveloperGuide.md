@@ -599,6 +599,26 @@ additional flags are required for this command.
 
 <sup>***Figure 4.3.7.1*** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
+#### 4.3.8 Help Command
+
+The help command provides users with a quick reference guide to the list of available commands, their functions and the
+proper format for inputs. Users also have an optional parameter to find the reference guide for a specific command.
+
+The optional parameters are the list of commands from above:
+- `add`
+- `delete`
+- `update`
+- `list`
+- `done`
+- `progress`
+- `cap`
+- `exit`
+
+If no parameters are provided, a brief description of the program and the available commands will be printed instead.
+
+![archi](./images/HelpCommandSequenceDiagram.png)
+<sup>***Figure 4.3.8.1*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
+
 ### 4.4 Module
 
 ### 4.5 ModuleList

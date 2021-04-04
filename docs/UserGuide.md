@@ -13,6 +13,7 @@ By: `W09-2` Latest update: `30 March 2021`
     * [Show academic progression: `progress`](#show-academic-progression-progress)
     * [Calculate CAP: `cap`](#calculate-cap-cap)
     * [Exit the program: `exit`](#exit-the-program-exit)
+    * [Program manual: `help`](#program-manual-help)
 * [Storage of Data](#storage-of-data)
 * [Manual Modification of Data](#manual-modification-of-data)
 * [Frequently Asked Questions](#frequently-asked-questions)
@@ -351,6 +352,47 @@ See you soon! Happy studying!
 ```
 <sup>***Figure 1.8.1** Expected results from exiting the program*</sup>
 
+### Program Manual: `help`
+The `help` command provides a quick reference guide on the description and format of the different commands in case you
+do not remember the different commands available or their purpose and format.
+
+Format:
+`help [add|delete|update|done|list|progress|cap|exit]`
+> ℹ️ **Note:** If an optional parameter is provided, `help` will provide a short description of the command's functionality
+> and format. Else, `help` will provide the list of commands available.
+
+Example of Usage(s) and Expected Outcome(s):
+
+`help`
+
+```
+--------------------------------------------------------------------------------------
+iGraduate is a command line application that acts as a centralised hub for NUS students majoring in Information Security to plan their academic journey.
+The application comes with 8 features:
+-add
+-delete
+-update
+-done
+-list
+-progress
+-cap
+-exit
+
+Type help <command> to view further details on each command.
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.9.1** Expected results of `help` without any optional parameters.*</sup>
+
+`help delete`
+
+```
+--------------------------------------------------------------------------------------
+The Delete command deletes an existing module from the list of modules added via the module code.
+
+Syntax: delete <module code>
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.9.2** Expected results of `help` with `delete` as the optional parameter*</sup>
 ## Storage of Data
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
