@@ -17,7 +17,6 @@ import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.PrereqIncompleteException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
@@ -53,7 +52,7 @@ public class DeleteCommandUnitTest {
                         ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
                         UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
                         InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-                        MarkCompletedModuleException, PrereqIncompleteException {
+                        MarkCompletedModuleException {
                 String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
                 String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
                 Command addFirst = Parser.parseCommand(firstModule);

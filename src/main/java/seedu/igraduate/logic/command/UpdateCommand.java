@@ -7,7 +7,7 @@ import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.PrereqIncompleteException;
+import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
@@ -61,13 +61,13 @@ public class UpdateCommand extends Command {
      * @throws ModuleNotCompleteException If the module has not been marked as
      *                                    completed.
      * @throws SaveModuleFailException    If the program fails to save changes.
-     * @throws PrereqIncompleteException
+     * @throws PrerequisiteNotMetException If prerequisite of the module has not been completed.
      */
     @Override
     public void execute(ModuleList modules, Ui ui, Storage storage)
             throws ModuleNotFoundException, NumberFormatException, InputNotNumberException, ModuleNotCompleteException,
             InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException,
-            InvalidModularCreditException, PrereqIncompleteException {
+            InvalidModularCreditException, PrerequisiteNotMetException {
         this.targetModule = modules.getModule(moduleCode);
 
         updateModuleGrade(this.commandFlags);
@@ -145,10 +145,10 @@ public class UpdateCommand extends Command {
      * @param commandFlags List containing all the flags and values.
      * @param modules      List of all modules.
      * @throws ModuleNotFoundException   If the module is not found.
-     * @throws PrereqIncompleteException
+     * @throws PrerequisiteNotMetException
      */
     private void updatePrerequisites(ArrayList<String> commandFlags, ModuleList modules)
-            throws ModuleNotFoundException, AddSelfToPrereqException, PrereqIncompleteException {
+            throws ModuleNotFoundException, AddSelfToPrereqException, PrerequisiteNotMetException {
         // Extract all new prerequisites
         preRequisites = Parser.extractPreRequisites(commandFlags);
         checkSelfPrerequisite(targetModule, preRequisites);
@@ -157,7 +157,7 @@ public class UpdateCommand extends Command {
         ArrayList<String> notTakenPrerequisites = extractPrerequisitesNotTaken(modules, preRequisites);
 
         if (targetModule.isDone() && notTakenPrerequisites.size() > 0) {
-            throw new PrereqIncompleteException();
+            throw new PrerequisiteNotMetException(moduleCode, notTakenPrerequisites);
         }
 
         // Remove targetModule from requiredBy of old prerequisites list and
