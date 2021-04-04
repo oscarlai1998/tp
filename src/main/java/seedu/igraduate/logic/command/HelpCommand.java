@@ -23,7 +23,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidCommandException {
         switch (helpType.toLowerCase()) {
-        case "help":
+        case "no params":
             ui.printIntroHelp();
             break;
         case "add":

@@ -358,7 +358,7 @@ public class Parser {
         }
         LOGGER.log(Level.INFO, "Valid parameters for help command");
         if (commandParameters.size() < 2) {
-            return new HelpCommand(commandParameters.get(0));
+            return new HelpCommand("no params");
         }
         return new HelpCommand(commandParameters.get(1));
     }
