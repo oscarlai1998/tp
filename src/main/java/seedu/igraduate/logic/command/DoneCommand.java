@@ -69,8 +69,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException,
-            PrerequisiteNotMetException, PrerequisiteNotFoundException, MarkCompletedModuleException {
+        throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException,
+        PrerequisiteNotMetException, PrerequisiteNotFoundException, MarkCompletedModuleException {
         LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getByCode(getModuleCode());
@@ -94,8 +94,7 @@ public class DoneCommand extends Command {
         } catch (ModuleNotFoundException | PrerequisiteNotMetException exception) {
             LOGGER.log(Level.WARNING, "Failed to mark non-existence module as taken.", exception);
             throw exception;
-        }
-        finally {
+        } finally {
             LOGGER.log(Level.INFO, "End of done command execution.");
         }
     }
