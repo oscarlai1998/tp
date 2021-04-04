@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import java.util.logging.Logger;
 
+import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
@@ -51,6 +52,7 @@ public class IGraduate {
         parser = new Parser();
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
+            storage.saveModulesToFile(modules);
         } catch (Exception e) {
             ui.printErrorMessage(e);
             modules = new ModuleList();
