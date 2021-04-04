@@ -36,6 +36,32 @@ public class Ui {
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
+    public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub for"
+            + " NUS students majoring in Information Security to plan their academic journey.\nThe application comes "
+            + "with 8 features:\n-add\n-delete\n-update\n-done\n-list\n-progress\n-cap\n-exit\n\nType help <command> to"
+            + " view further details on each command.";
+    public static final String HELP_ADD = "The Add command adds a new module to the list of modules you wish to track."
+            + " The list serves to keep track of the modules that you have taken, are currently taking or intend "
+            + "to take in the future.\n\nSyntax: add <name> -c <module code> -t <core|math|ue|ge> -mc "
+            + "<number of credits> [-p <prerequisite1,prerequisite2,...>]";
+    public static final String HELP_DELETE = "The Delete command deletes an existing module from the list of modules "
+            + "added via the module code.\n\nSyntax: delete <module code>";
+    public static final String HELP_UPDATE = "The Update command updates relevant information (name, credit and grade)"
+            + " for the selected module.\n\nSyntax: update <module code> [-n <name>] [-mc <credit>] [-g <grade>] "
+            + "[-p <prerequisite1,prerequisite2,...>]";
+    public static final String HELP_DONE = "The Done command marks a module as completed via its module code. "
+            + "You must include the grade obtained to facilitate the calculation of CAP.\n\n"
+            + "Syntax: done <module code> -g <grade>";
+    public static final String HELP_LIST = "The list command lists modules added to your list according "
+            + "to the filter. The filters are:\n-all: Lists all modules on the list\n-complete: Lists modules marked"
+            + "as done\n-incomplete: Lists modules yet to be marked as done\n-available: Lists modules with "
+            + "prerequisites fulfilled and can be completed\n\nSyntax: list all|incomplete|complete|available";
+    public static final String HELP_PROGRESS = "The Progress command displays a bar that represents the current "
+            + "progress of your academic career. The progress bar shows the percentage of your total completed module "
+            + "credits against the total number of credits needed for graduation requirements.\n\nSyntax: progress";
+    public static final String HELP_CAP = "The Cap command calculates your current Cumulative Average Point (CAP) and "
+            + "displays current degree classification based on CAP.\n\nSyntax: cap";
+    public static final String HELP_EXIT = "The Exit command exits the program.\n\nSyntax: exit";
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -234,6 +260,42 @@ public class Ui {
         System.out.println(" " + percentage + "%");
         System.out.println(String.format(PROGRESS_MESSAGE, Math.round(completedMCs)));
         printProgressCompletionMessage(Double.parseDouble(percentage));
+    }
+
+    public void printIntroHelp() {
+        System.out.println(HELP_INTRO);
+    }
+
+    public void printAddHelp() {
+        System.out.println(HELP_ADD);
+    }
+
+    public void printDeleteHelp() {
+        System.out.println(HELP_DELETE);
+    }
+
+    public void printUpdateHelp() {
+        System.out.println(HELP_UPDATE);
+    }
+
+    public void printDoneHelp() {
+        System.out.println(HELP_DONE);
+    }
+
+    public void printListHelp() {
+        System.out.println(HELP_LIST);
+    }
+
+    public void printProgressHelp() {
+        System.out.println(HELP_PROGRESS);
+    }
+
+    public void printCapHelp() {
+        System.out.println(HELP_CAP);
+    }
+
+    public void printExitHelp() {
+        System.out.println(HELP_EXIT);
     }
 
     /**

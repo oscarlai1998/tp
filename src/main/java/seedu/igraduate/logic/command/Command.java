@@ -14,6 +14,7 @@ import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.MarkCompletedModuleException;
+import seedu.igraduate.exception.InvalidCommandException;
 
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.model.list.ModuleList;
@@ -51,7 +52,7 @@ public abstract class Command {
             ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException, InputNotNumberException,
             ModuleNotCompleteException, InvalidModuleGradeException, UnableToDeletePrereqModuleException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            InvalidModularCreditException, MarkCompletedModuleException;
+            InvalidModularCreditException, MarkCompletedModuleException, InvalidCommandException;
 
     /**
      * Returns a flag indicating whether the program should terminate after

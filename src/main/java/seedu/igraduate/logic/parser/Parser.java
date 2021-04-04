@@ -7,20 +7,11 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidListTypeException;
 
-import seedu.igraduate.logic.command.Command;
-import seedu.igraduate.logic.command.AddCommand;
-import seedu.igraduate.logic.command.DeleteCommand;
-import seedu.igraduate.logic.command.DoneCommand;
-import seedu.igraduate.logic.command.ExitCommand;
-import seedu.igraduate.logic.command.ListCommand;
-import seedu.igraduate.logic.command.ProgressCommand;
-import seedu.igraduate.logic.command.UpdateCommand;
-import seedu.igraduate.logic.command.CapCommand;
+import seedu.igraduate.logic.command.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.logging.Level;
 
@@ -38,6 +29,7 @@ public class Parser {
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_CAP = "cap";
+    private static final String COMMAND_HELP = "help";
 
     // Constants for the expected number of parameters for a given command
     private static final int COMMAND_ADD_FLAG_LENGTH = 6;
@@ -51,6 +43,7 @@ public class Parser {
     private static final int COMMAND_UPDATE_PARAMETER_LENGTH = 2;
     private static final int COMMAND_UPDATE_FLAG_LENGTH = 2;
     private static final int COMMAND_CAP_LENGTH = 1;
+    private static final int COMMAND_HELP_LENGTH = 2;
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
@@ -107,6 +100,9 @@ public class Parser {
         case COMMAND_CAP:
             LOGGER.log(Level.INFO, "Input parsed to cap command.");
             return createCapCommand(commandParameters, commandFlags);
+        case COMMAND_HELP:
+            LOGGER.log(Level.INFO, "Input parsed to help command");
+            return createHelpCommand(commandParameters, commandFlags);
         case COMMAND_EXIT:
             LOGGER.log(Level.INFO, "Input parsed to exit command.");
             return createExitCommand(commandParameters, commandFlags);
@@ -125,7 +121,7 @@ public class Parser {
     protected static ArrayList<String> getCommand(String line) {
         String regex = "^\\s+";
         String trimmedLine = line.replaceAll(regex, "");
-        return new ArrayList<String>(Arrays.asList(trimmedLine.split("\\s+(?=-)", 2)));
+        return new ArrayList<>(Arrays.asList(trimmedLine.split("\\s+(?=-)", 2)));
     }
 
     /**
@@ -136,7 +132,7 @@ public class Parser {
      * @return String array of command and first parameter separated.
      */
     protected static ArrayList<String> getCommandParameters(ArrayList<String> commands) {
-        return new ArrayList<String>(Arrays.asList(commands.get(0).split("\\s+", 2)));
+        return new ArrayList<>(Arrays.asList(commands.get(0).split("\\s+", 2)));
     }
 
     /**
@@ -148,9 +144,9 @@ public class Parser {
      */
     protected static ArrayList<String> getCommandFlag(ArrayList<String> commands) {
         if (commands.size() < 2) {
-            return new ArrayList<String>(Arrays.asList(new String[] { null }));
+            return new ArrayList<>(Arrays.asList(new String[] { null }));
         }
-        return new ArrayList<String>(Arrays.asList(commands.get(1).split("\\s+")));
+        return new ArrayList<>(Arrays.asList(commands.get(1).split("\\s+")));
     }
 
     /**
@@ -344,6 +340,30 @@ public class Parser {
     }
 
     /**
+     *  Creates new instance of HelpCommand class to execute.
+     *
+     * @param commandParameters parameters of user input, excluding command flags.
+     * @param commandFlags flags of commands from user input.
+     * @return new instance of HelpCommand class.
+     * @throws IncorrectParameterCountException if parameter count is not correct.
+     */
+    public static Command createHelpCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.size() > COMMAND_HELP_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
+
+        if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters.");
+            throw new IncorrectParameterCountException();
+        }
+        LOGGER.log(Level.INFO, "Valid parameters for help command");
+        if (commandParameters.size() < 2) {
+            return new HelpCommand(commandParameters.get(0));
+        }
+        return new HelpCommand(commandParameters.get(1));
+    }
+
+    /**
      * Creates new instance of ExitCommand class to execute.
      *
      * @param commandParameters parameters of user input, excluding command flags.
@@ -504,7 +524,7 @@ public class Parser {
      *
      * @param commandFlags flags of commands from user input.
      * @return the option user selects.
-     * @throws InvalidCommandException if command format is not recognised.
+     * @throws InvalidListTypeException if list type given is invalid.
      */
     public static String extractListScope(ArrayList<String> commandFlags) throws InvalidListTypeException {
         String scope = commandFlags.get(1).trim().toLowerCase();
@@ -530,7 +550,7 @@ public class Parser {
         int index = commandFlags.indexOf("-p");
         if (index >= 0) {
             String trimmedCommandFlag = commandFlags.get(index + 1).trim();
-            ArrayList<String> moduleCodes = new ArrayList<String>(Arrays.asList(trimmedCommandFlag.split(",")));
+            ArrayList<String> moduleCodes = new ArrayList<>(Arrays.asList(trimmedCommandFlag.split(",")));
             for (String moduleCode : moduleCodes) {
                 preRequisites.add(moduleCode.toUpperCase());
             }
