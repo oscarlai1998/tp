@@ -20,6 +20,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
@@ -52,7 +53,7 @@ public class ProgressCommandTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Algo and Strutures -mc 4 -t core -c cs2040c";
         String thirdModule = "add Discrete Structures -mc 4 -t core -c cs1231s";
@@ -96,7 +97,7 @@ public class ProgressCommandTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2040c";
         String thirdModule = "Delete cs1231s";

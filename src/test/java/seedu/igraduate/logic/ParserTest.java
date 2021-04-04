@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
@@ -112,7 +113,7 @@ public class ParserTest {
     @Test
     void createAddCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "add Programming Methodology -t core -mc 4 -c CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -120,7 +121,7 @@ public class ParserTest {
     @Test
     void createAddCommand_parametersWithSpacing_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "add Programming Methodology    -t      core       -mc      4      -c            CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -151,7 +152,7 @@ public class ParserTest {
     @Test
     void createDeleteCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "Delete CS2107";
         assertEquals(DeleteCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -173,7 +174,7 @@ public class ParserTest {
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "done CS2107 -g A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -181,7 +182,7 @@ public class ParserTest {
     @Test
     void createDoneCommand_parametersWithSpacing_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "done      CS2107           -g                             A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -202,9 +203,9 @@ public class ParserTest {
 
     /* Progress Command */
     @Test
-    void createProgressCommand_appropriateParameters_success()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
+    void createProgressCommand_appropriateParameters_success() throws InvalidCommandException,
+            InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
         String line = "progress";
         assertEquals(ProgressCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -227,7 +228,7 @@ public class ParserTest {
     @Test
     void createListCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "list complete";
         assertEquals(ListCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -250,7 +251,7 @@ public class ParserTest {
     @Test
     void createCapCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "cap";
         assertEquals(CapCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -273,7 +274,7 @@ public class ParserTest {
     @Test
     void createUpdateCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, IllegalParametersException {
         String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
         assertEquals(UpdateCommand.class, Parser.parseCommand(line).getClass());
     }

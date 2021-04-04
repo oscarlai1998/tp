@@ -13,6 +13,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
@@ -75,7 +76,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String line = "list all";
         Command listCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
@@ -94,7 +95,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Assign empty module list
         moduleList = new ModuleList();
 
@@ -114,7 +115,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Mark CS1010 as taken
         Module module = moduleList.getByCode("cs1010");
         moduleList.markAsTaken(module);
@@ -136,7 +137,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String line = "list complete";
         Command listCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
@@ -152,7 +153,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Mark CS1010 as taken
         Module module = moduleList.getByCode("cs1010");
         moduleList.markAsTaken(module);
@@ -175,7 +176,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Mark all modules as taken
         Module firstModule = moduleList.getByCode("cs1010");
         moduleList.markAsTaken(firstModule);
@@ -199,7 +200,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Mark CS1010 as taken
         Module module = moduleList.getByCode("cs1010");
         moduleList.markAsTaken(module);
@@ -223,7 +224,7 @@ class ListCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         // Mark all modules as taken
         Module firstModule = moduleList.getByCode("cs1010");
         moduleList.markAsTaken(firstModule);
@@ -243,7 +244,7 @@ class ListCommandTest {
 
     @Test
     void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException, InvalidCommandException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
         String line = "list all";
         Command listCommand = Parser.parseCommand(line);
         assertEquals(false, listCommand.isExit());

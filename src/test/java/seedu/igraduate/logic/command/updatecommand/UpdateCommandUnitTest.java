@@ -21,6 +21,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
@@ -54,7 +55,7 @@ public class UpdateCommandUnitTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String module = "add Programming Methodology -mc 4 -t core -c cs1010";
         Command addModule = Parser.parseCommand(module);
         addModule.execute(moduleList, ui, storage);
@@ -103,7 +104,7 @@ public class UpdateCommandUnitTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, InvalidModularCreditException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         String module = "Delete cs1010";
         Command deleteModule = Parser.parseCommand(module);
         deleteModule.execute(moduleList, ui, storage);
