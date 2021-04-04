@@ -27,6 +27,7 @@ import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import seedu.igraduate.model.module.Module;
 
@@ -91,7 +92,7 @@ public class AddCommandTest {
             ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
             InvalidModularCreditException, UnableToDeletePrereqModuleException,
             InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
-            AddSelfToPrereqException {
+            AddSelfToPrereqException, MarkCompletedModuleException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
