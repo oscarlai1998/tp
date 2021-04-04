@@ -145,7 +145,7 @@ public class UpdateCommand extends Command {
      * @param commandFlags List containing all the flags and values.
      * @param modules      List of all modules.
      * @throws ModuleNotFoundException   If the module is not found.
-     * @throws PrerequisiteNotMetException
+     * @throws PrerequisiteNotMetException If the prerequisite of the module has not been completed.
      */
     private void updatePrerequisites(ArrayList<String> commandFlags, ModuleList modules)
             throws ModuleNotFoundException, AddSelfToPrereqException, PrerequisiteNotMetException {
