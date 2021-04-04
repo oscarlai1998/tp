@@ -86,7 +86,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Added CP2201 Journey of the Innovator to the list. (2.0MCs)
-[E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
+[E][X] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
@@ -147,7 +147,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.4** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
@@ -172,7 +172,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.5** Expected results from marking the module with the code `CS2106` with the grade `A` as 
@@ -183,7 +183,7 @@ done.*</sup>
 ```
 --------------------------------------------------------------------------------------
 Nice! I've marked this module as done:
-  [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+  [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
@@ -211,10 +211,10 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Module List:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
-3: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
+3: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+4: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has 
@@ -225,8 +225,8 @@ been added, including those that are completed (indicated with a tick) and incom
 ```
 --------------------------------------------------------------------------------------
 Modules you have yet to complete:
-1: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-2: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+2: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.8** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed, as indicated with a cross.*</sup>
@@ -236,8 +236,8 @@ Modules you have yet to complete:
 ```
 --------------------------------------------------------------------------------------
 Modules you have have completed:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.9** Expected results from listing `completed` modules. The list includes the module information that has been completed, as indicated with with a tick.*</sup>
@@ -247,7 +247,7 @@ Modules you have have completed:
 ```
 --------------------------------------------------------------------------------------
 Modules can be taken:
-1: [C][✘] CS2106   Intro to OS                                             NIL   4 MC 
+1: [C][X] CS2106   Intro to OS                                             NIL   4 MC 
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.10** Expected results from listing `available` modules. The list includes the module information that has been added and can be taken (with all prerequisites fulfiled).*</sup>
