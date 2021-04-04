@@ -85,7 +85,7 @@ public class UpdateCommandIntegrationTest {
         String line = "update CS2040 -g A- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> updateCommand.execute(moduleList, ui, storage));
+            () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -96,7 +96,7 @@ public class UpdateCommandIntegrationTest {
         String line = "update CS1010 -g O- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(InvalidModuleGradeException.class,
-                () -> updateCommand.execute(moduleList, ui, storage));
+            () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
 

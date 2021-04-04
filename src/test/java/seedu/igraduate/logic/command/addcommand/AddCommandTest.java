@@ -61,7 +61,7 @@ public class AddCommandTest {
         AddCommand duplicateAddCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,
                 untakenPreRequisites);
         Exception exception = assertThrows(ExistingModuleException.class,
-                () -> duplicateAddCommand.execute(moduleList, ui, storage));
+            () -> duplicateAddCommand.execute(moduleList, ui, storage));
         assertEquals(ExistingModuleException.EXISTING_MODULE_ERROR_MESSAGE, exception.getMessage());
     }
 
