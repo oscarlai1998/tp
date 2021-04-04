@@ -157,14 +157,15 @@ public abstract class Module {
     /**
      * Gets the completion status of the module.
      *  
-     * @return tick if taken, cross if not taken and dash if unapplicable. 
+     * @return tick if taken, cross if not taken and dash if not applicable.
      */
     public String getStatusIcon() {
         String status = getStatus();
+
         if (status.equals("taken")) {
-            return "✓";
+            return "O";
         } else if (status.equals("not taken")) {
-            return "✘";
+            return "X";
         } else {
             return "-";
         }
