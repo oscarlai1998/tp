@@ -347,11 +347,16 @@ remove new module data manually only if you understand the application's logic a
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
 
-**Q4**: Is the module list only in JSON format?
+**Q4**: I am a NUS student who is not majoring in Information Security. Can I use the application for module planning?
+> Yes, of course! Most of the features provided by the application are implemented in a generic way. However, features
+> such as progress is more targeted towards Information Security students. Support for other majors in NUS will be
+> implemented in the future. Stay tuned!
+
+**Q5**: Is the module list only in JSON format?
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
 > the module list into a different format.
 
-**Q5**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
+**Q6**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
 > The `iGraduate-0.log` is a log file for recording the crashes, errors and anomalies occurred when running the 
 > application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
 > any error during your use of the application in order for the developers to look into the problem.
