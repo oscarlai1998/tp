@@ -5,28 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.igraduate.exception.*;
 import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
-
-import seedu.igraduate.exception.InvalidModuleGradeException;
-import seedu.igraduate.exception.InvalidModularCreditException;
-import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
-import seedu.igraduate.exception.PrerequisiteNotFoundException;
-import seedu.igraduate.exception.ModuleNotFoundException;
-import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.ExistingModuleException;
-import seedu.igraduate.exception.ModuleNotCompleteException;
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
-import seedu.igraduate.exception.InvalidListTypeException;
-import seedu.igraduate.exception.PrerequisiteNotMetException;
-import seedu.igraduate.exception.AddSelfToPrereqException;
 
 import seedu.igraduate.model.module.Module;
 
@@ -68,7 +53,7 @@ public class DoneCommandTest {
         IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
         ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, MarkCompletedModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
