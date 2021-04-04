@@ -553,7 +553,7 @@ public class Parser {
         case "core": // fallthrough
         case "elec": // fallthrough
         case "ge": // fallthrough
-        case "math": // fallthrough
+        case "math":
             return scope;
         default:
             throw new InvalidListTypeException();
