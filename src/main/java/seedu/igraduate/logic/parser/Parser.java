@@ -68,7 +68,8 @@ public class Parser {
      *                                          command.
      * @throws IncorrectParameterCountException If the command input does not
      *                                          contain the right parameters.
-     * @throws IllegalParametersException
+     * @throws IllegalParametersException       If the parameter includes -t or -c,
+     *                                          which are illegal parameters.
      */
     public static Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
