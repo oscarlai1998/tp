@@ -29,6 +29,7 @@ import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,8 +52,8 @@ public class CapCommandTest {
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, NumberFormatException,
-            PrereqIncompleteException {
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, PrereqIncompleteException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Computer Org -mc 4 -t core -c cs2100";
         Command addFirst = Parser.parseCommand(firstModule);
@@ -73,7 +74,7 @@ public class CapCommandTest {
             ExistingModuleException, AddSelfToPrereqException, ModuleNotCompleteException, SaveModuleFailException,
             InvalidModuleGradeException, UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
             ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
-            InvalidModularCreditException, NumberFormatException, PrereqIncompleteException {
+            InvalidModularCreditException, MarkCompletedModuleException, PrereqIncompleteException {
 
         Command capCommand = new CapCommand();
         System.setOut(new PrintStream(outContent));
@@ -88,8 +89,8 @@ public class CapCommandTest {
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, NumberFormatException,
-            PrereqIncompleteException {
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, PrereqIncompleteException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2100";
         Command deleteFirst = Parser.parseCommand(firstModule);

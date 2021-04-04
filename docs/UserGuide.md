@@ -82,15 +82,29 @@ Format:
 Example of Usage(s) and Expected Outcome(s):
 
 `add Journey of the Innovator -c CP2201 -t ue -mc 2`
-
 ```
 --------------------------------------------------------------------------------------
 Added CP2201 Journey of the Innovator to the list. (2.0MCs)
-[E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
+[E][X] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
+
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
-Innovator`, a `2` credit module with the code `CP2201`.*</sup>
+Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
+
+
+`add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS1010,CS2100`
+
+```
+--------------------------------------------------------------------------------------
+Added CS2106 Introduction to Operating Systems to the list. (4.0MCs)
+List of pre-requisites needed to take CS2106: CS1010, CS2100
+[C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+
+<sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
+`4` credit module with the code `CS2106`, with the prerequisites `CS1010` and `CS2100`.*</sup>
 
 ### Delete existing module: `delete`
 
@@ -136,9 +150,12 @@ the modules, use the [`delete command`](#delete-existing-module-delete) instead.
 [done command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades 
 will be added but the rest of the information (if any) will be updated. 
 
+
 Format:
 
 `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
+
+> ℹ️ **Note:** Although all parameters are optional, the update command requires at least 1 parameter to be used. 
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -147,7 +164,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.4** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
@@ -172,7 +189,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.5** Expected results from marking the module with the code `CS2106` with the grade `A` as 
@@ -183,7 +200,7 @@ done.*</sup>
 ```
 --------------------------------------------------------------------------------------
 Nice! I've marked this module as done:
-  [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+  [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
@@ -211,10 +228,10 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Module List:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
-3: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
+3: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+4: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has 
@@ -225,8 +242,8 @@ been added, including those that are completed (indicated with a tick) and incom
 ```
 --------------------------------------------------------------------------------------
 Modules you have yet to complete:
-1: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-2: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+2: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.8** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed, as indicated with a cross.*</sup>
@@ -236,8 +253,8 @@ Modules you have yet to complete:
 ```
 --------------------------------------------------------------------------------------
 Modules you have have completed:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.9** Expected results from listing `completed` modules. The list includes the module information that has been completed, as indicated with with a tick.*</sup>
@@ -247,7 +264,7 @@ Modules you have have completed:
 ```
 --------------------------------------------------------------------------------------
 Modules can be taken:
-1: [C][✘] CS2106   Intro to OS                                             NIL   4 MC 
+1: [C][X] CS2106   Intro to OS                                             NIL   4 MC 
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.10** Expected results from listing `available` modules. The list includes the module information that has been added and can be taken (with all prerequisites fulfiled).*</sup>
@@ -347,9 +364,19 @@ remove new module data manually only if you understand the application's logic a
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
 
-**Q4**: Is the module list only in JSON format?
+**Q4**: I am a NUS student who is not majoring in Information Security. Can I use the application for module planning?
+> Yes, of course! Most of the features provided by the application are implemented in a generic way. However, features
+> such as progress is more targeted towards Information Security students. Support for other majors in NUS will be
+> implemented in the future. Stay tuned!
+
+**Q5**: Is the module list only in JSON format?
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
 > the module list into a different format.
+
+**Q6**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
+> The `iGraduate-0.log` is a log file for recording the crashes, errors and anomalies occurred when running the 
+> application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
+> any error during your use of the application in order for the developers to look into the problem.
 
 ## Command Summary
 
