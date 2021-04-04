@@ -69,12 +69,13 @@ public class Storage {
      * Prepares to load modules from file.
      * 
      * @return the parsed array list containing all saved modules.
-     * @throws IOException               if file cannot be read or processed.
-     * @throws LoadModuleFailException   if the module fails to load from file.
-     * @throws DataFileNotFoundException if the module data file does not exists.
-     * @throws ModifiedStorageFileException
+     * @throws IOException                  if file cannot be read or processed.
+     * @throws LoadModuleFailException      if the module fails to load from file.
+     * @throws DataFileNotFoundException    if the module data file does not exists.
+     * @throws ModifiedStorageFileException if the json file has been modified (when credits > 32 or credits < 0).
      */
-    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {
+    public ArrayList<Module> loadModulesFromFile()
+            throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
@@ -99,7 +100,7 @@ public class Storage {
     private boolean isValidModule(ArrayList<Module> modules) {
         for (Module module : modules) {
             double credit = module.getCredit();
-            if (credit < 0 | credit > 33) {
+            if (credit < 0 | credit > 32) {
                 return false;
             }
         }

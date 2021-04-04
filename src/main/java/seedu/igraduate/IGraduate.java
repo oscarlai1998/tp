@@ -44,7 +44,6 @@ public class IGraduate {
      *
      * @param filePath The file path at which module data file is located, if
      *                 exists.
-     * @throws SaveModuleFailException
      */
     public IGraduate(File filePath) {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
