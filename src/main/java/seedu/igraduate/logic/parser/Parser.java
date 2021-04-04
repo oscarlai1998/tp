@@ -482,6 +482,7 @@ public class Parser {
         for (int i = 0; i < commandFlags.size(); i++) {
             if (commandFlags.get(i).matches("-[^n]{1,2}")) {
                 endIndex = i;
+                break;
             }
         }
 

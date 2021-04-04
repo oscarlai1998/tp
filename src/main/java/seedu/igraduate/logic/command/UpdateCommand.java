@@ -71,12 +71,17 @@ public class UpdateCommand extends Command {
             InvalidModularCreditException, PrerequisiteNotMetException {
         this.targetModule = modules.getModule(moduleCode);
 
-        updateModuleGrade(this.commandFlags);
-        updateModuleName(this.commandFlags);
-        updateModuleCredits(this.commandFlags);
-        updatePrerequisites(this.commandFlags, modules);
-        storage.saveModulesToFile(modules);
-
+        try {
+            updateModuleGrade(this.commandFlags);
+        } catch (ModuleNotCompleteException exception) {
+            throw new ModuleNotCompleteException();
+        } finally {
+            updateModuleName(this.commandFlags);
+            updateModuleCredits(this.commandFlags);
+            updatePrerequisites(this.commandFlags, modules);
+            storage.saveModulesToFile(modules);
+        }
+        
         ui.printUpdateSuccess(targetModule);
     }
 
