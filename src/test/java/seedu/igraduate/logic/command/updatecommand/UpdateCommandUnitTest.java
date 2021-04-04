@@ -18,6 +18,7 @@ import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrereqIncompleteException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
@@ -48,12 +49,12 @@ public class UpdateCommandUnitTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void populateList()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+    void populateList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, NumberFormatException,
+            PrereqIncompleteException {
         String module = "add Programming Methodology -mc 4 -t core -c cs1010";
         Command addModule = Parser.parseCommand(module);
         addModule.execute(moduleList, ui, storage);
@@ -63,18 +64,17 @@ public class UpdateCommandUnitTest {
     }
 
     @Test
-    void executeUpdateCommand_validParameters_success()
-            throws InvalidModularCreditException, InputNotNumberException,
+    void executeUpdateCommand_validParameters_success() throws InvalidModularCreditException, InputNotNumberException,
             InvalidModuleGradeException, PrerequisiteNotFoundException, ModuleNotCompleteException,
-            ExistingModuleException, InvalidModuleTypeException, PrerequisiteNotMetException,
-            ModuleNotFoundException, InvalidListTypeException, AddSelfToPrereqException,
-            SaveModuleFailException, UnableToDeletePrereqModuleException {
+            ExistingModuleException, InvalidModuleTypeException, PrerequisiteNotMetException, ModuleNotFoundException,
+            InvalidListTypeException, AddSelfToPrereqException, SaveModuleFailException,
+            UnableToDeletePrereqModuleException, NumberFormatException, PrereqIncompleteException {
         Command updateCommand = new UpdateCommand("CS1010",
                 new ArrayList<String>(Arrays.asList("-g", "A-", "-mc", "2")));
         System.setOut(new PrintStream(outContent));
         updateCommand.execute(moduleList, ui, storage);
-        assertEquals("Nice! I've updated this module:" + System.lineSeparator()
-                + "  " + "[C][✓] CS1010   Programming Methodology                                  A-   2 MC"
+        assertEquals("Nice! I've updated this module:" + System.lineSeparator() + "  "
+                + "[C][✓] CS1010   Programming Methodology                                  A-   2 MC"
                 + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
@@ -84,7 +84,7 @@ public class UpdateCommandUnitTest {
         UpdateCommand updateCommand = new UpdateCommand("CS2040",
                 new ArrayList<String>(Arrays.asList("-g", "A-", "-mc", "2")));
         Exception exception = assertThrows(ModuleNotFoundException.class,
-            () -> updateCommand.execute(moduleList, ui, storage));
+                () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -93,7 +93,7 @@ public class UpdateCommandUnitTest {
         UpdateCommand updateCommand = new UpdateCommand("CS1010",
                 new ArrayList<String>(Arrays.asList("-g", "V-", "-mc", "2")));
         Exception exception = assertThrows(InvalidModuleGradeException.class,
-            () -> updateCommand.execute(moduleList, ui, storage));
+                () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -101,9 +101,9 @@ public class UpdateCommandUnitTest {
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, AddSelfToPrereqException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
-            InvalidModularCreditException {
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, InvalidModularCreditException, NumberFormatException,
+            PrereqIncompleteException {
         String module = "Delete cs1010";
         Command deleteModule = Parser.parseCommand(module);
         deleteModule.execute(moduleList, ui, storage);

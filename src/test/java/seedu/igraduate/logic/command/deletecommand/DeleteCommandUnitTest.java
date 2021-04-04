@@ -17,6 +17,7 @@ import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrereqIncompleteException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
@@ -46,12 +47,12 @@ public class DeleteCommandUnitTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void setUp()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+    void setUp() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, NumberFormatException,
+            PrereqIncompleteException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
         String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
         Command addFirst = Parser.parseCommand(firstModule);
@@ -64,7 +65,7 @@ public class DeleteCommandUnitTest {
     void executeDeleteCommand_nonexistentModule_exceptionThrown() {
         DeleteCommand deleteCommand = new DeleteCommand("Pigs (Three Different Ones)");
         Exception exception = assertThrows(ModuleNotFoundException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
+                () -> deleteCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -72,20 +73,19 @@ public class DeleteCommandUnitTest {
     void executeDeleteCommand_deleteIncompletePrerequisite_exceptionThrown() {
         DeleteCommand deleteCommand = new DeleteCommand("CS1010");
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
-        assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
-                        + "[CS2100]", exception.getMessage());
+                () -> deleteCommand.execute(moduleList, ui, storage));
+        assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE + "[CS2100]",
+                exception.getMessage());
     }
 
     @Test
-    void executeDeleteCommand_moduleInList_success()
-        throws SaveModuleFailException, ModuleNotFoundException,
-        PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
+    void executeDeleteCommand_moduleInList_success() throws SaveModuleFailException, ModuleNotFoundException,
+            PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
         DeleteCommand deleteCommand = new DeleteCommand("CS2100");
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
-        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS2100")
-            + System.lineSeparator(), outContent.toString());
+        assertEquals(String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "CS2100") + System.lineSeparator(),
+                outContent.toString());
         System.setOut(originalOut);
     }
 

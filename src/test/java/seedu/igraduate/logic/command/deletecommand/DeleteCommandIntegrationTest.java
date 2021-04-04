@@ -21,6 +21,7 @@ import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrereqIncompleteException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
@@ -51,9 +52,8 @@ public class DeleteCommandIntegrationTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void setUp() throws SaveModuleFailException, InvalidModuleTypeException,
-            ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException,InvalidModularCreditException {
+    void setUp() throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
+            ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         ArrayList<String> requiredByModules = new ArrayList<>();
@@ -79,7 +79,7 @@ public class DeleteCommandIntegrationTest {
         String line = "Delete Pigs (Three Different Ones)";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
+                () -> deleteCommand.execute(moduleList, ui, storage));
         String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
         assertEquals(exceptionMessage, exception.getMessage());
     }
@@ -91,19 +91,19 @@ public class DeleteCommandIntegrationTest {
         String line = "Delete CS1010";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-            () -> deleteCommand.execute(moduleList, ui, storage));
+                () -> deleteCommand.execute(moduleList, ui, storage));
         String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
                 + "[CS2100]";
         assertEquals(exceptionMessage, exception.getMessage());
     }
 
     @Test
-    void executeDeleteCommand_moduleInList_success()
-            throws ExistingModuleException, InvalidModuleTypeException,
+    void executeDeleteCommand_moduleInList_success() throws ExistingModuleException, InvalidModuleTypeException,
             SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, NumberFormatException,
+            PrereqIncompleteException {
         String line = "Delete cs2100";
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
