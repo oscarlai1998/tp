@@ -7,7 +7,16 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidListTypeException;
 
-import seedu.igraduate.logic.command.*;
+import seedu.igraduate.logic.command.Command;
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.DeleteCommand;
+import seedu.igraduate.logic.command.DoneCommand;
+import seedu.igraduate.logic.command.ExitCommand;
+import seedu.igraduate.logic.command.ListCommand;
+import seedu.igraduate.logic.command.ProgressCommand;
+import seedu.igraduate.logic.command.UpdateCommand;
+import seedu.igraduate.logic.command.CapCommand;
+import seedu.igraduate.logic.command.HelpCommand;
 
 import java.util.ArrayList;
 import java.util.Arrays;
