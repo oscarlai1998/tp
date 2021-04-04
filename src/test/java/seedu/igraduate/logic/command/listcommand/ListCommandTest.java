@@ -244,7 +244,8 @@ class ListCommandTest {
 
     @Test
     void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException, InvalidCommandException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException, 
+            IllegalParametersException {
         String line = "list all";
         Command listCommand = Parser.parseCommand(line);
         assertEquals(false, listCommand.isExit());
