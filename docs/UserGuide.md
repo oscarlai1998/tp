@@ -75,6 +75,15 @@ modules to keep track, calculate CAP and check the progress of your academic car
 
 > ℹ️ **Note:** If you have to add prerequisite modules, please ensure that all the prerequisite modules are already added before proceeding.
 
+> ℹ️**Note:** The maximum MCs allowed for a single module in iGraduate is <b>32</b>.
+
+> ℹ️**Note:** iGraduate only supports module codes that conform to NUS style module codes.
+> Examples include *CS1010*, *MA1101R*, *UTC1102B*.
+
+> ℹ️**Note:** iGraduate does not restrict the number of modules you can add. You can add modules even after fulfilling
+> minimum graduation requirements.
+
+
 Format:
 
 `add <name> -c <module code> -t <core|math|ue|ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
@@ -274,6 +283,10 @@ Modules can be taken:
 Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of your total completed module credits against the total number of credits needed for graduation requirements. The bar will fill up as more modules are completed. 
 
 > ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS single-degree Information Security undergraduate</b> student
+
+> ℹ️ **Note:**  If total MCs exceeds 160, the progress bar will still display `100%`. 
+> (See notes under [Add Command](#add-a-new-module-add))
+
 
 Format:
 
