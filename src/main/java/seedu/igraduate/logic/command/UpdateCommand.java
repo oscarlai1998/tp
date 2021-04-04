@@ -1,6 +1,7 @@
 package seedu.igraduate.logic.command;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.igraduate.exception.SaveModuleFailException;
@@ -69,11 +70,15 @@ public class UpdateCommand extends Command {
             throws ModuleNotFoundException, NumberFormatException, InputNotNumberException, ModuleNotCompleteException,
             InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException,
             InvalidModularCreditException, PrerequisiteNotMetException {
+
+        LOGGER.log(Level.INFO, "Executing update command...");
+
         this.targetModule = modules.getModule(moduleCode);
 
         try {
             updateModuleGrade(this.commandFlags);
         } catch (ModuleNotCompleteException exception) {
+            LOGGER.log(Level.WARNING, "Could not update grade for incomplete module...");
             throw new ModuleNotCompleteException();
         } finally {
             updateModuleName(this.commandFlags);
@@ -83,6 +88,8 @@ public class UpdateCommand extends Command {
         }
         
         ui.printUpdateSuccess(targetModule);
+
+        LOGGER.log(Level.INFO, "End of update command execution.");
     }
 
     /**

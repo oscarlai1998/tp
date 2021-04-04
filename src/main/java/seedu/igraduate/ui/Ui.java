@@ -1,5 +1,9 @@
 package seedu.igraduate.ui;
 
+import seedu.igraduate.model.module.CoreModule;
+import seedu.igraduate.model.module.ElectiveModule;
+import seedu.igraduate.model.module.GeModule;
+import seedu.igraduate.model.module.MathModule;
 import seedu.igraduate.model.module.Module;
 
 import java.util.ArrayList;
@@ -25,10 +29,18 @@ public class Ui {
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have have completed:";
     public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to complete:";
     public static final String MODULES_AVAILABLE_MESSAGE = "Modules can be taken:";
+    public static final String MODULES_CORE_MESSAGE = "Core modules in the list:";
+    public static final String MODULES_ELECTIVE_MESSAGE = "Elective modules in the list:";
+    public static final String MODULES_GE_MESSAGE = "GE modules in the list:";
+    public static final String MODULES_MATH_MESSAGE = "Math modules in the list:";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
     public static final String EMPTY_AVAILABLE_LIST_MESSAGE = "There are no modules available for take.";
+    public static final String EMPTY_CORE_MODULE_LIST_MESSAGE = "There are no core modules.";
+    public static final String EMPTY_ELECTIVE_MODULE_LIST_MESSAGE = "There are no elective modules.";
+    public static final String EMPTY_GE_MODULE_LIST_MESSAGE = "There are no ge modules.";
+    public static final String EMPTY_MATH_MODULE_LIST_MESSAGE = "There are no math modules.";
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
     public static final String PROGRESS_COMPLETED_MESSAGE = "Congratulations! You are ready to graduate.";
     public static final String PROGRESS_EXCEEDED_MESSAGE = "Great job studying beyond your graduation requirements!";
@@ -161,6 +173,70 @@ public class Ui {
     }
 
     /**
+     * Prints the core modules in the array list.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printCoreModuleList(ArrayList<Module> modules) {
+        System.out.println(MODULES_CORE_MESSAGE);
+        int count = 0;
+        for (Module module : modules) {
+            if (module instanceof CoreModule) {
+                System.out.println((count + 1) + ": " + module);
+                count++;
+            }
+        }
+    }
+
+    /**
+     * Prints the elective modules in the array list.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printElectiveModuleList(ArrayList<Module> modules) {
+        System.out.println(MODULES_ELECTIVE_MESSAGE);
+        int count = 0;
+        for (Module module : modules) {
+            if (module instanceof ElectiveModule) {
+                System.out.println((count + 1) + ": " + module);
+                count++;
+            }
+        }
+    }
+
+    /**
+     * Prints the ge modules in the array list.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printGeModuleList(ArrayList<Module> modules) {
+        System.out.println(MODULES_GE_MESSAGE);
+        int count = 0;
+        for (Module module : modules) {
+            if (module instanceof GeModule) {
+                System.out.println((count + 1) + ": " + module);
+                count++;
+            }
+        }
+    }
+
+    /**
+     * Prints the math modules in the array list.
+     *
+     * @param modules array list containing the modules.
+     */
+    public void printMathModuleList(ArrayList<Module> modules) {
+        System.out.println(MODULES_MATH_MESSAGE);
+        int count = 0;
+        for (Module module : modules) {
+            if (module instanceof MathModule) {
+                System.out.println((count + 1) + ": " + module);
+                count++;
+            }
+        }
+    }
+
+    /**
      * Displays success message after adding new module. 
      * 
      * @param module array list containing the modules. 
@@ -237,6 +313,34 @@ public class Ui {
      */
     public void printAvailableListEmptyMessage() {
         System.out.println(EMPTY_AVAILABLE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no core modules.
+     */
+    public void printCoreModuleListEmptyMessage() {
+        System.out.println(EMPTY_CORE_MODULE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no elective modules.
+     */
+    public void printElectiveModuleListEmptyMessage() {
+        System.out.println(EMPTY_ELECTIVE_MODULE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no ge modules.
+     */
+    public void printGeModuleListEmptyMessage() {
+        System.out.println(EMPTY_GE_MODULE_LIST_MESSAGE);
+    }
+
+    /**
+     * Displays message if there are no math modules.
+     */
+    public void printMathModuleListEmptyMessage() {
+        System.out.println(EMPTY_MATH_MODULE_LIST_MESSAGE);
     }
 
     /**

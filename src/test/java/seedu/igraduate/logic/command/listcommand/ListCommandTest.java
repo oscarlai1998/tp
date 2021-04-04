@@ -243,6 +243,171 @@ class ListCommandTest {
     }
 
     @Test
+    void executeListCommand_coreModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+
+        String line = "list core";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        Module firstCoreModule = moduleList.getByCode("cs1010");
+        Module secondCoreModule = moduleList.getByCode("cs2100");
+        String successMessage = ui.MODULES_CORE_MESSAGE + System.lineSeparator() + "1: " + firstCoreModule
+                + System.lineSeparator() + "2: " + secondCoreModule + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_noCoreModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+        // Assign empty module list
+        moduleList = new ModuleList();
+
+        String line = "list core";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        String successMessage = Ui.EMPTY_CORE_MODULE_LIST_MESSAGE + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_electiveModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+        // Add an elective module
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("laj1201", "Japanese 1", "ue", 4.0,
+                preRequisites, untakenPreRequisites);
+        addCommand.execute(moduleList, ui, storage);
+
+        String line = "list elec";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        Module electiveModule = moduleList.getByCode("LAJ1201");
+        String successMessage = ui.MODULES_ELECTIVE_MESSAGE + System.lineSeparator() + "1: " + electiveModule
+                + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_noElectiveModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+
+        String line = "list elec";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        String successMessage = Ui.EMPTY_ELECTIVE_MODULE_LIST_MESSAGE + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_geModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+        // Add a ge module
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("GER1000", "Quantitative Reasoning", "ge", 4.0,
+                preRequisites, untakenPreRequisites);
+        addCommand.execute(moduleList, ui, storage);
+
+        String line = "list ge";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        Module geModule = moduleList.getByCode("gEr1000");
+        String successMessage = ui.MODULES_GE_MESSAGE + System.lineSeparator() + "1: " + geModule
+                + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_noGeModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+
+        String line = "list ge";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        String successMessage = Ui.EMPTY_GE_MODULE_LIST_MESSAGE + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_mathModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+        // Add a math module
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("ma1521", "Calculus for Computing", "math", 4.0,
+                preRequisites, untakenPreRequisites);
+        addCommand.execute(moduleList, ui, storage);
+
+        String line = "list math";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        Module mathModule = moduleList.getByCode("mA1521");
+        String successMessage = ui.MODULES_MATH_MESSAGE + System.lineSeparator() + "1: " + mathModule
+                + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void executeListCommand_noMathModules_success() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
+
+        String line = "list math";
+        Command listCommand = Parser.parseCommand(line);
+        System.setOut(new PrintStream(outContent));
+        listCommand.execute(moduleList, ui, storage);
+        String successMessage = Ui.EMPTY_MATH_MODULE_LIST_MESSAGE + System.lineSeparator();
+        assertEquals(successMessage, outContent.toString());
+        System.setOut(originalOut);
+    }
+
+    @Test
     void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException, InvalidCommandException,
             InputNotNumberException, InvalidListTypeException, InvalidModularCreditException, 
             IllegalParametersException {
