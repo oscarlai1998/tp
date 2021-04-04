@@ -351,6 +351,11 @@ remove new module data manually only if you understand the application's logic a
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
 > the module list into a different format.
 
+**Q5**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
+> The `iGraduate-0.log` is a log file for recording the crashes, errors and anomalies occurred when running the 
+> application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
+> any error during your use of the application in order for the developers to look into the problem.
+
 ## Command Summary
 
 Command | Format
