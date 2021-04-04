@@ -228,14 +228,16 @@ The list command lists modules added to your list according to the filter. List 
 incomplete or available modules to take. `all` lists all modules on your list, `complete` lists all modules that have 
 been completed (i.e. marked as done), `incomplete` lists all modules that have been added into the system but has not
 been completed(i.e. modules that you are currently taking or yet to take), `available` lists all modules that can be 
-taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. The list shows module 
-details including the module `type`, `code`, `completetion status`, `name`, `grade` and `credits`. 
+taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. You could also list 
+specific type of modules by putting in the module type as option. The valid module types are `core`, `elec`, `ge` and
+`math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
+`credits`. 
 
 > ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead. 
 
 Format: 
 
-`list all|incomplete|complete|available`
+`list all|incomplete|complete|available|core|elec|ge|math`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -248,6 +250,9 @@ Module List:
 2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 3: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
 4: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
+5: [G][X] GER1000  Quantitative Reasoning                                  NIL   4 MC
+6: [M][O] MA1521   Calculus for Computing                                   A-   4 MC
+7. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.5.1** Expected results from listing `all` modules. The list includes the module information that has 
@@ -260,9 +265,12 @@ been added, including those that are completed (indicated with a tick) and incom
 Modules you have yet to complete:
 1: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
 2: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
+3: [G][X] GER1000  Quantitative Reasoning                                  NIL   4 MC
+4. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.2** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed, as indicated with a cross.*</sup>
+<sup>***Figure 1.5.2** Expected results from listing `incomplete` modules. The list includes the module information that 
+has been added but has not been completed, as indicated with a cross.*</sup>
 
 `list complete`
 
@@ -271,23 +279,77 @@ Modules you have yet to complete:
 Modules you have have completed:
 1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
 2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
+3: [M][O] MA1521   Calculus for Computing                                   A-   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.3** Expected results from listing `completed` modules. The list includes the module information that has been completed, as indicated with with a tick.*</sup>
+<sup>***Figure 1.5.3** Expected results from listing `completed` modules. The list includes the module information that 
+has been completed, as indicated with an "O".*</sup>
 
 `list available`
 
 ```
 --------------------------------------------------------------------------------------
 Modules can be taken:
-1: [C][X] CS2106   Intro to OS                                             NIL   4 MC 
+1: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+2: [G][X] GER1000  Quantitative Reasoning                                  NIL   4 MC
+3. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.4** Expected results from listing `available` modules. The list includes the module information that has been added and can be taken (with all prerequisites fulfiled).*</sup>
+<sup>***Figure 1.5.4** Expected results from listing `available` modules. The list includes the module information that 
+has been added and can be taken (with all prerequisites fulfiled).*</sup>
+
+`list core`
+
+```
+--------------------------------------------------------------------------------------
+Core modules in the list:
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+3: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.5** Expected results from listing `core` modules. This option will list out all `core` modules
+on the list.*</sup>
+
+`list elec`
+
+```
+--------------------------------------------------------------------------------------
+Elective modules in the list:
+1. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.6** Expected results from listing `elec` modules. This option will list out all `elective` modules
+on the list.*</sup>
+
+`list ge`
+
+```
+--------------------------------------------------------------------------------------
+GE modules in the list:
+1: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
+2: [G][X] GER1000  Quantitative Reasoning                                  NIL   4 MC
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.7** Expected results from listing `ge` modules. This option will list out all `ge` modules
+on the list.*</sup>
+
+`list math`
+
+```
+--------------------------------------------------------------------------------------
+Math modules in the list:
+1: [M][O] MA1521   Calculus for Computing                                   A-   4 MC
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.8** Expected results from listing `math` modules. This option will list out all `math` modules
+on the list.*</sup>
 
 ### Show academic progression: `progress`
 
-Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of your total completed module credits against the total number of credits needed for graduation requirements. The bar will fill up as more modules are completed. 
+Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of 
+your total completed module credits against the total number of credits needed for graduation requirements. The bar will 
+fill up as more modules are completed. 
 
 > ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS single-degree Information Security undergraduate</b> student
 
@@ -314,9 +376,10 @@ Progress:
 
 ### Calculate CAP: `cap`
 
-Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
+Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded 
+score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
 
-> ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP
+> ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP.
 
 Format:
 
@@ -447,7 +510,7 @@ add | <code>add <name> -c <module code> -t <core&#124;math&#124;ue&#124;ge> -mc 
 delete | `delete <module code>`
 update | `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 done | `done <module code> -g <grade>`
-list | <code>list <all&#124;incomplete&#124;complete></code>
+list | <code>list <all&#124;incomplete&#124;complete&#124;core&#124;elec&#124;ge&#124;math></code>
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
