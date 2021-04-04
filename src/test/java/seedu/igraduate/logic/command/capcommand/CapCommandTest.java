@@ -73,7 +73,7 @@ public class CapCommandTest {
             ExistingModuleException, AddSelfToPrereqException, ModuleNotCompleteException, SaveModuleFailException,
             InvalidModuleGradeException, UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
             ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
-            InvalidModularCreditException, MarkCompletedModuleException {
+            InvalidModularCreditException, MarkCompletedModuleException, InvalidCommandException {
 
         Command capCommand = new CapCommand();
         System.setOut(new PrintStream(outContent));

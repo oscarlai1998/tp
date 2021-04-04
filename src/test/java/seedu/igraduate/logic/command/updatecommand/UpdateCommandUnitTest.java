@@ -68,7 +68,7 @@ public class UpdateCommandUnitTest {
             InvalidModuleGradeException, PrerequisiteNotFoundException, ModuleNotCompleteException,
             ExistingModuleException, InvalidModuleTypeException, PrerequisiteNotMetException, ModuleNotFoundException,
             InvalidListTypeException, AddSelfToPrereqException, SaveModuleFailException,
-            UnableToDeletePrereqModuleException, MarkCompletedModuleException {
+            UnableToDeletePrereqModuleException, MarkCompletedModuleException, InvalidCommandException {
         Command updateCommand = new UpdateCommand("CS1010",
                 new ArrayList<String>(Arrays.asList("-g", "A-", "-mc", "2")));
         System.setOut(new PrintStream(outContent));

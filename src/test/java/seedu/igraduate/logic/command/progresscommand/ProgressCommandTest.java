@@ -79,7 +79,7 @@ public class ProgressCommandTest {
             ExistingModuleException, InvalidModularCreditException, ModuleNotCompleteException, SaveModuleFailException,
             InvalidModuleGradeException, UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
             ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, InvalidCommandException {
 
         Command progressCommand = new ProgressCommand();
         System.setOut(new PrintStream(outContent));
