@@ -2,6 +2,7 @@ package seedu.igraduate.storage;
 
 import seedu.igraduate.exception.DataFileNotFoundException;
 import seedu.igraduate.exception.LoadModuleFailException;
+import seedu.igraduate.exception.ModifiedStorageFileException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.model.list.ModuleList;
@@ -71,8 +72,9 @@ public class Storage {
      * @throws IOException               if file cannot be read or processed.
      * @throws LoadModuleFailException   if the module fails to load from file.
      * @throws DataFileNotFoundException if the module data file does not exists.
+     * @throws ModifiedStorageFileException
      */
-    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException {
+    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
@@ -81,13 +83,27 @@ public class Storage {
         }.getType();
 
         try {
-            ArrayList<Module> modules = loadFromJson(objectType, filePath);
+            ArrayList<Module> rawModules = loadFromJson(objectType, filePath);
             LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
-            return removeDuplicateModules(modules);
+            ArrayList<Module> distinctModules = removeDuplicateModules(rawModules);
+            if (!isValidModule(distinctModules)) {
+                throw new ModifiedStorageFileException();
+            }
+            return distinctModules;
         } catch (IOException exception) {
             LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
+    }
+
+    private boolean isValidModule(ArrayList<Module> modules) {
+        for (Module module : modules) {
+            double credit = module.getCredit();
+            if (credit < 0 | credit > 33) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
