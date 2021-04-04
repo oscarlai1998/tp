@@ -84,7 +84,7 @@ public class UpdateCommandUnitTest {
         UpdateCommand updateCommand = new UpdateCommand("CS2040",
                 new ArrayList<String>(Arrays.asList("-g", "A-", "-mc", "2")));
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> updateCommand.execute(moduleList, ui, storage));
+            () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -93,7 +93,7 @@ public class UpdateCommandUnitTest {
         UpdateCommand updateCommand = new UpdateCommand("CS1010",
                 new ArrayList<String>(Arrays.asList("-g", "V-", "-mc", "2")));
         Exception exception = assertThrows(InvalidModuleGradeException.class,
-                () -> updateCommand.execute(moduleList, ui, storage));
+            () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
 

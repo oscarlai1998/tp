@@ -57,7 +57,7 @@ public class DoneCommandTest {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> doneCommand.execute(moduleList, ui, storage));
+            () -> doneCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 

@@ -65,7 +65,7 @@ public class DeleteCommandUnitTest {
     void executeDeleteCommand_nonexistentModule_exceptionThrown() {
         DeleteCommand deleteCommand = new DeleteCommand("Pigs (Three Different Ones)");
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> deleteCommand.execute(moduleList, ui, storage));
+            () -> deleteCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
     }
 
@@ -73,7 +73,7 @@ public class DeleteCommandUnitTest {
     void executeDeleteCommand_deleteIncompletePrerequisite_exceptionThrown() {
         DeleteCommand deleteCommand = new DeleteCommand("CS1010");
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
-                () -> deleteCommand.execute(moduleList, ui, storage));
+            () -> deleteCommand.execute(moduleList, ui, storage));
         assertEquals(UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE + "[CS2100]",
                 exception.getMessage());
     }
