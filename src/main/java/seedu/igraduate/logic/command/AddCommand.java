@@ -87,6 +87,11 @@ public class AddCommand extends Command {
         throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
         ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         LOGGER.log(Level.INFO, "Executing add command...");
+        if (moduleCredits > 32) {
+            LOGGER.log(Level.WARNING, "Number of MCs exceeds 32. Adding command terminated.");
+            ui.printExceededMaxMCs();
+            return;
+        }
         try {
             Module module = createModuleByType();
             moduleList.add(module);

@@ -75,6 +75,15 @@ modules to keep track, calculate CAP and check the progress of your academic car
 
 > ℹ️ **Note:** If you have to add prerequisite modules, please ensure that all the prerequisite modules are already added before proceeding.
 
+> ℹ️**Note:** The maximum MCs allowed for a single module in iGraduate is <b>32</b>.
+
+> ℹ️**Note:** iGraduate only supports module codes that conform to NUS style module codes.
+> Examples include *CS1010*, *MA1101R*, *UTC1102B*.
+
+> ℹ️**Note:** iGraduate does not restrict the number of modules you can add. You can add modules even after fulfilling
+> minimum graduation requirements.
+
+
 Format:
 
 `add <name> -c <module code> -t <core|math|ue|ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
@@ -85,7 +94,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Added CP2201 Journey of the Innovator to the list. (2.0MCs)
-[E][✘] CP2201   Journey of the Innovator                                NIL   2 MC
+[E][X] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
 
@@ -164,7 +173,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.4** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
@@ -189,7 +198,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Nice! I've updated this module:
-  [C][✓] CS2106   Introduction to Operating Systems                         A   4 MC
+  [C][O] CS2106   Introduction to Operating Systems                         A   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.5** Expected results from marking the module with the code `CS2106` with the grade `A` as 
@@ -200,7 +209,7 @@ done.*</sup>
 ```
 --------------------------------------------------------------------------------------
 Nice! I've marked this module as done:
-  [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+  [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
@@ -228,10 +237,10 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Module List:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
-3: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-4: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
+3: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+4: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.7** Expected results from listing `all` modules. The list includes the module information that has 
@@ -242,8 +251,8 @@ been added, including those that are completed (indicated with a tick) and incom
 ```
 --------------------------------------------------------------------------------------
 Modules you have yet to complete:
-1: [C][✘] CS2100   Computer Organisation                                   NIL   4 MC
-2: [C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+1: [C][X] CS2100   Computer Organisation                                   NIL   4 MC
+2: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.8** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed, as indicated with a cross.*</sup>
@@ -253,8 +262,8 @@ Modules you have yet to complete:
 ```
 --------------------------------------------------------------------------------------
 Modules you have have completed:
-1: [C][✓] CS1010   Introduction to Programming                              B+   4 MC
-2: [G][✓] GES1041  Everyday Ethics in Singapore                              S   4 MC
+1: [C][O] CS1010   Introduction to Programming                              B+   4 MC
+2: [G][O] GES1041  Everyday Ethics in Singapore                              S   4 MC
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.9** Expected results from listing `completed` modules. The list includes the module information that has been completed, as indicated with with a tick.*</sup>
@@ -264,7 +273,7 @@ Modules you have have completed:
 ```
 --------------------------------------------------------------------------------------
 Modules can be taken:
-1: [C][✘] CS2106   Intro to OS                                             NIL   4 MC 
+1: [C][X] CS2106   Intro to OS                                             NIL   4 MC 
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.1.10** Expected results from listing `available` modules. The list includes the module information that has been added and can be taken (with all prerequisites fulfiled).*</sup>
@@ -274,6 +283,10 @@ Modules can be taken:
 Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of your total completed module credits against the total number of credits needed for graduation requirements. The bar will fill up as more modules are completed. 
 
 > ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS single-degree Information Security undergraduate</b> student
+
+> ℹ️ **Note:**  If total MCs exceeds 160, the progress bar will still display `100%`. 
+> (See notes under [Add Command](#add-a-new-module-add))
+
 
 Format:
 
@@ -364,9 +377,19 @@ remove new module data manually only if you understand the application's logic a
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
 
-**Q4**: Is the module list only in JSON format?
+**Q4**: I am a NUS student who is not majoring in Information Security. Can I use the application for module planning?
+> Yes, of course! Most of the features provided by the application are implemented in a generic way. However, features
+> such as progress is more targeted towards Information Security students. Support for other majors in NUS will be
+> implemented in the future. Stay tuned!
+
+**Q5**: Is the module list only in JSON format?
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
 > the module list into a different format.
+
+**Q6**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
+> The `iGraduate-0.log` is a log file for recording the crashes, errors and anomalies occurred when running the 
+> application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
+> any error during your use of the application in order for the developers to look into the problem.
 
 ## Command Summary
 

@@ -31,6 +31,7 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,9 +52,8 @@ public class DeleteCommandIntegrationTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void setUp() throws SaveModuleFailException, InvalidModuleTypeException,
-            ExistingModuleException, ModuleNotFoundException,
-            PrerequisiteNotFoundException,InvalidModularCreditException {
+    void setUp() throws SaveModuleFailException, InvalidModuleTypeException, ExistingModuleException,
+            ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         ArrayList<String> requiredByModules = new ArrayList<>();
@@ -98,12 +98,12 @@ public class DeleteCommandIntegrationTest {
     }
 
     @Test
-    void executeDeleteCommand_moduleInList_success()
-            throws ExistingModuleException, InvalidModuleTypeException,
+    void executeDeleteCommand_moduleInList_success() throws ExistingModuleException, InvalidModuleTypeException,
             SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
         String line = "Delete cs2100";
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));

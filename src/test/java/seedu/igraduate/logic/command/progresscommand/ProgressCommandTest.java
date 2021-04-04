@@ -28,6 +28,7 @@ import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,12 +47,12 @@ public class ProgressCommandTest {
     private final PrintStream originalOut = System.out;
 
     @BeforeEach
-    void populateList()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
+    void populateList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Algo and Strutures -mc 4 -t core -c cs2040c";
         String thirdModule = "add Discrete Structures -mc 4 -t core -c cs1231s";
@@ -74,18 +75,17 @@ public class ProgressCommandTest {
 
     /*----------------- Unit test -----------------------*/
     @Test
-    void executeProgressCommand_validParameters_success()
-            throws InvalidModuleTypeException, InputNotNumberException,
-            ExistingModuleException, InvalidModularCreditException,
-            ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+    void executeProgressCommand_validParameters_success() throws InvalidModuleTypeException, InputNotNumberException,
+            ExistingModuleException, InvalidModularCreditException, ModuleNotCompleteException, SaveModuleFailException,
+            InvalidModuleGradeException, UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
 
         Command progressCommand = new ProgressCommand();
         System.setOut(new PrintStream(outContent));
         progressCommand.execute(moduleList, ui, storage);
-        assertEquals("Progress:" + System.lineSeparator() + "█░░░░░░░░░░ 7.50%"
-            + System.lineSeparator() + "12MCs/160MCs Completed" + System.lineSeparator(), outContent.toString());
+        assertEquals("Progress:" + System.lineSeparator() + "█░░░░░░░░░░ 7.50%" + System.lineSeparator()
+                + "12MCs/160MCs Completed" + System.lineSeparator(), outContent.toString());
         System.out.println();
         System.setOut(originalOut);
     }
@@ -94,8 +94,9 @@ public class ProgressCommandTest {
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
-            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2040c";
         String thirdModule = "Delete cs1231s";
@@ -106,7 +107,5 @@ public class ProgressCommandTest {
         deleteSecond.execute(moduleList, ui, storage);
         deleteThird.execute(moduleList, ui, storage);
     }
-
-
 
 }
