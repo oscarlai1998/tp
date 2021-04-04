@@ -46,12 +46,12 @@ public abstract class Command {
      * @throws UnableToDeletePrereqModuleException If the module is a pre-requisite
      *                                             of other modules.
      */
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
-        ModuleNotFoundException, InvalidModuleTypeException, ExistingModuleException,
-        PrerequisiteNotFoundException, NumberFormatException, InputNotNumberException,
-        ModuleNotCompleteException, InvalidModuleGradeException, UnableToDeletePrereqModuleException,
-        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-        InvalidModularCreditException, MarkCompletedModuleException;
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
+            throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
+            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException, InputNotNumberException,
+            ModuleNotCompleteException, InvalidModuleGradeException, UnableToDeletePrereqModuleException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            InvalidModularCreditException, MarkCompletedModuleException;
 
     /**
      * Returns a flag indicating whether the program should terminate after

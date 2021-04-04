@@ -50,15 +50,15 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_ExistingModule_exceptionThrown()
-        throws InvalidModuleTypeException, SaveModuleFailException, ExistingModuleException,
-        ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
+            throws InvalidModuleTypeException, SaveModuleFailException, ExistingModuleException,
+            ModuleNotFoundException, PrerequisiteNotFoundException, InvalidModularCreditException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
-        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
-                preRequisites, untakenPreRequisites);
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,
+                untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
-        AddCommand duplicateAddCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
-                preRequisites, untakenPreRequisites);
+        AddCommand duplicateAddCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,
+                untakenPreRequisites);
         Exception exception = assertThrows(ExistingModuleException.class,
             () -> duplicateAddCommand.execute(moduleList, ui, storage));
         assertEquals(ExistingModuleException.EXISTING_MODULE_ERROR_MESSAGE, exception.getMessage());
@@ -66,21 +66,21 @@ public class AddCommandTest {
 
     @Test
     void executeAddCommand_validParameters_success()
-        throws  InvalidModuleTypeException, ModuleNotFoundException, SaveModuleFailException,
-        ExistingModuleException, PrerequisiteNotFoundException, InvalidModularCreditException {
+            throws InvalidModuleTypeException, ModuleNotFoundException, SaveModuleFailException,
+            ExistingModuleException, PrerequisiteNotFoundException, InvalidModularCreditException {
 
         ArrayList<String> cs1010PreRequisites = new ArrayList<>();
         ArrayList<String> cs1010UntakenPreRequisites = new ArrayList<>();
-        AddCommand cs1010AddCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
-                cs1010PreRequisites, cs1010UntakenPreRequisites);
+        AddCommand cs1010AddCommand = new AddCommand("cs1010", "Programming", "core", 4.0, cs1010PreRequisites,
+                cs1010UntakenPreRequisites);
         cs1010AddCommand.execute(moduleList, ui, storage);
 
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         preRequisites.add("CS1010");
         untakenPreRequisites.add("CS1010");
-        AddCommand addCommand = new AddCommand("cs2100", "Computer Org", "core", 4.0,
-                preRequisites, untakenPreRequisites);
+        AddCommand addCommand = new AddCommand("cs2100", "Computer Org", "core", 4.0, preRequisites,
+                untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
     }
 
@@ -88,19 +88,17 @@ public class AddCommandTest {
     @Test
     void executeAddCommand_validParametersWithUi_success()
             throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-            IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
-            ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
-            InvalidModularCreditException, UnableToDeletePrereqModuleException,
-            InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
-            AddSelfToPrereqException, MarkCompletedModuleException {
+            IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
+            PrerequisiteNotFoundException, ModuleNotCompleteException, InvalidModularCreditException,
+            UnableToDeletePrereqModuleException, InvalidModuleGradeException, InvalidListTypeException,
+            PrerequisiteNotMetException, AddSelfToPrereqException, MarkCompletedModuleException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
         Module module = moduleList.getByCode("cs2100");
-        assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0")
-                + System.lineSeparator() + Ui.INDENTATION
-                + module + System.lineSeparator(), outContent.toString());
+        assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0") + System.lineSeparator()
+                + Ui.INDENTATION + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
 }
