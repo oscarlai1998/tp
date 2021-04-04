@@ -65,9 +65,16 @@ public class Ui {
             + "You must include the grade obtained to facilitate the calculation of CAP.\n\n"
             + "Syntax: done <module code> -g <grade>";
     public static final String HELP_LIST = "The list command lists modules added to your list according "
-            + "to the filter. The filters are:\n-all: Lists all modules on the list\n-complete: Lists modules marked"
-            + "as done\n-incomplete: Lists modules yet to be marked as done\n-available: Lists modules with "
-            + "prerequisites fulfilled and can be completed\n\nSyntax: list all|incomplete|complete|available";
+            + "to the filter. The filters are:\n"
+            + "-all: Lists all modules on the list\n"
+            + "-complete: Lists modules marked as done\n"
+            + "-incomplete: Lists modules yet to be marked as done\n"
+            + "-available: Lists modules with prerequisites fulfilled and can be completed\n"
+            + "-core: Lists core modules on the list\n"
+            + "-elec: Lists elective modules on the list\n"
+            + "-ge: Lists general education modules on the list\n"
+            + "-math: Lists math modules on the list\n\n"
+            + "Syntax: list all|incomplete|complete|available|core|elec|ge|math";
     public static final String HELP_PROGRESS = "The Progress command displays a bar that represents the current "
             + "progress of your academic career. The progress bar shows the percentage of your total completed module "
             + "credits against the total number of credits needed for graduation requirements.\n\nSyntax: progress";
