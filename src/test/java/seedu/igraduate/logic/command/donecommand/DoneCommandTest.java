@@ -13,6 +13,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
@@ -51,9 +52,9 @@ public class DoneCommandTest {
     private final PrintStream originalOut = System.out;
 
     @Test
-    void executeDoneCommand_nonexistentModule_exceptionThrown()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-            IncorrectParameterCountException, InvalidListTypeException, InvalidModularCreditException {
+    void executeDoneCommand_nonexistentModule_exceptionThrown() throws InvalidCommandException,
+            InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -67,7 +68,7 @@ public class DoneCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException {
+            MarkCompletedModuleException, IllegalParametersException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,

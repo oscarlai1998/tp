@@ -19,6 +19,7 @@ import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
@@ -86,12 +87,12 @@ public class AddCommandTest {
 
     /*------------- Integration test with Ui and Parser -----------------*/
     @Test
-    void executeAddCommand_validParametersWithUi_success()
-            throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
-            IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException, ExistingModuleException,
-            PrerequisiteNotFoundException, ModuleNotCompleteException, InvalidModularCreditException,
-            UnableToDeletePrereqModuleException, InvalidModuleGradeException, InvalidListTypeException,
-            PrerequisiteNotMetException, AddSelfToPrereqException, MarkCompletedModuleException {
+    void executeAddCommand_validParametersWithUi_success() throws InvalidCommandException, InvalidModuleTypeException,
+            InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
+            ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
+            InvalidModularCreditException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));

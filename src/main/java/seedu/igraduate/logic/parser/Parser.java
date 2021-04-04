@@ -3,6 +3,7 @@ package seedu.igraduate.logic.parser;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidListTypeException;
@@ -67,10 +68,12 @@ public class Parser {
      *                                          command.
      * @throws IncorrectParameterCountException If the command input does not
      *                                          contain the right parameters.
+     * @throws IllegalParametersException       If the parameter includes -t or -c,
+     *                                          which are illegal parameters.
      */
-    public static Command parseCommand(String line)
-            throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
-            InvalidModuleTypeException, InvalidListTypeException, InvalidModularCreditException {
+    public static Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
+            InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
+            InvalidModularCreditException, IllegalParametersException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException();
         }
@@ -310,16 +313,21 @@ public class Parser {
      * @param commandFlags      flags of commands from user input.
      * @return new instance of UpdateCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @throws IllegalParametersException       if the parameter includes -t or -c,
+     *                                          which are illegal parameters.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, IllegalParametersException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
         boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
 
-        if (isInvalidPara || isInvalidFlag || isIllegalFlag) {
+        if (isInvalidPara || isInvalidFlag) {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
+        } else if (isIllegalFlag) {
+            LOGGER.warning("Illegal parameters detected. ");
+            throw new IllegalParametersException();
         }
 
         return new UpdateCommand(commandParameters.get(1), commandFlags);
@@ -349,10 +357,10 @@ public class Parser {
     }
 
     /**
-     *  Creates new instance of HelpCommand class to execute.
+     * Creates new instance of HelpCommand class to execute.
      *
      * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags flags of commands from user input.
+     * @param commandFlags      flags of commands from user input.
      * @return new instance of HelpCommand class.
      * @throws IncorrectParameterCountException if parameter count is not correct.
      */
