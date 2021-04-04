@@ -299,6 +299,62 @@ public class ModuleList {
     }
 
     /**
+     * Checks if the list for core module is empty.
+     *
+     * @return Boolean value indicating whether there are any core modules.
+     */
+    public boolean isCoreModulesEmpty() {
+        for (Module module: modules) {
+            if (module instanceof CoreModule) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the list for elective module is empty.
+     *
+     * @return Boolean value indicating whether there are any elective modules.
+     */
+    public boolean isElectiveModulesEmpty() {
+        for (Module module: modules) {
+            if (module instanceof ElectiveModule) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the list for ge module is empty.
+     *
+     * @return Boolean value indicating whether there are any ge modules.
+     */
+    public boolean isGeModulesEmpty() {
+        for (Module module: modules) {
+            if (module instanceof GeModule) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if the list for math module is empty.
+     *
+     * @return Boolean value indicating whether there are any math modules.
+     */
+    public boolean isMathModulesEmpty() {
+        for (Module module: modules) {
+            if (module instanceof MathModule) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Retrieves specified module from module list.
      *
      * @param moduleCode Module code of module.

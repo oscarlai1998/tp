@@ -550,6 +550,10 @@ public class Parser {
         case "complete": // fallthrough
         case "incomplete": // fallthrough
         case "available": // fallthrough
+        case "core": // fallthrough
+        case "elec": // fallthrough
+        case "ge": // fallthrough
+        case "math": // fallthrough
             return scope;
         default:
             throw new InvalidListTypeException();

@@ -68,6 +68,42 @@ public class ListCommand extends Command {
                 LOGGER.log(Level.INFO, "No available modules.");
             }
             break;
+        case "core":
+            if (moduleList.isCoreModulesEmpty()) {
+                ui.printCoreModuleListEmptyMessage();
+                LOGGER.log(Level.INFO, "No core modules.");
+            } else {
+                ui.printCoreModuleList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed core modules.");
+            }
+            break;
+        case "elec":
+            if (moduleList.isElectiveModulesEmpty()) {
+                ui.printElectiveModuleListEmptyMessage();
+                LOGGER.log(Level.INFO, "No elective modules.");
+            } else {
+                ui.printElectiveModuleList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed elective modules.");
+            }
+            break;
+        case "ge":
+            if (moduleList.isGeModulesEmpty()) {
+                ui.printGeModuleListEmptyMessage();
+                LOGGER.log(Level.INFO, "No ge modules.");
+            } else {
+                ui.printGeModuleList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed ge modules.");
+            }
+            break;
+        case "math":
+            if (moduleList.isMathModulesEmpty()) {
+                ui.printMathModuleListEmptyMessage();
+                LOGGER.log(Level.INFO, "No math modules.");
+            } else {
+                ui.printMathModuleList(moduleList.getModules());
+                LOGGER.log(Level.INFO, "Printed math modules.");
+            }
+            break;
         default:
             LOGGER.log(Level.INFO, "Failed to print a valid list");
         }
