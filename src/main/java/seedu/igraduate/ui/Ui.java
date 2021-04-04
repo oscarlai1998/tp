@@ -32,7 +32,7 @@ public class Ui {
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
     public static final String PROGRESS_COMPLETED_MESSAGE = "Congratulations! You are ready to graduate.";
     public static final String PROGRESS_EXCEEDED_MESSAGE = "Great job studying beyond your graduation requirements!";
-
+    public static final String ADD_EXCEEDS_MAX_CREDITS_MESSAGE = "Cannot add modules worth more than 32 MCs!";
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
@@ -255,6 +255,13 @@ public class Ui {
      */
     public void printCap(double cap, String degreeClassification) {
         System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));
+    }
+
+    /**
+     *  Prints warning message when user adds a module that exceeds 32 MCs.
+     */
+    public void printExceededMaxMCs() {
+        System.out.println(ADD_EXCEEDS_MAX_CREDITS_MESSAGE);
     }
 
     /**
