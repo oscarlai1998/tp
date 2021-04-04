@@ -28,6 +28,7 @@ import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -51,7 +52,8 @@ public class ProgressCommandTest {
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
+            AddSelfToPrereqException, MarkCompletedModuleException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Algo and Strutures -mc 4 -t core -c cs2040c";
         String thirdModule = "add Discrete Structures -mc 4 -t core -c cs1231s";
@@ -79,7 +81,8 @@ public class ProgressCommandTest {
             ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
+            AddSelfToPrereqException, MarkCompletedModuleException {
 
         Command progressCommand = new ProgressCommand();
         System.setOut(new PrintStream(outContent));
@@ -95,7 +98,8 @@ public class ProgressCommandTest {
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException,
-            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+            ModuleNotFoundException, InvalidListTypeException, PrerequisiteNotMetException,
+            AddSelfToPrereqException, MarkCompletedModuleException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2040c";
         String thirdModule = "Delete cs1231s";

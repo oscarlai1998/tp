@@ -5,13 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.logic.command.AddCommand;
-import seedu.igraduate.logic.command.Command;
-import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.logic.parser.Parser;
-import seedu.igraduate.storage.Storage;
-import seedu.igraduate.ui.Ui;
-
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
@@ -27,6 +20,14 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
+
+import seedu.igraduate.logic.command.AddCommand;
+import seedu.igraduate.logic.command.Command;
+import seedu.igraduate.model.list.ModuleList;
+import seedu.igraduate.logic.parser.Parser;
+import seedu.igraduate.storage.Storage;
+import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.model.module.Module;
 
@@ -68,7 +69,7 @@ public class DoneCommandTest {
         IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
         ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException {
+        InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException, MarkCompletedModuleException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0,
