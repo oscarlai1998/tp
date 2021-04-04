@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":HelpCommand" as HelpCommand
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("help add")
+activate Parser #FFBBBB
+
+Parser -> Parser: createHelpCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
+create HelpCommand
+Parser -> HelpCommand: HelpCommand("CS1010", "A")
+activate HelpCommand
+HelpCommand --> Parser: new HelpCommand("add")
+deactivate HelpCommand
+deactivate Parser
+
+Parser --> iGraduate: new HelpCommand("add")
+deactivate Parser
+
+iGraduate -> HelpCommand: execute(moduleList, ui, storage)
+activate HelpCommand
+
+HelpCommand -> Ui: printAddHelp()
+activate Ui
+deactivate Ui
+
+destroy HelpCommand
+
+@enduml
