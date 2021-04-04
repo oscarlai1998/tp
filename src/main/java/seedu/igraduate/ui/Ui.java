@@ -17,6 +17,7 @@ public class Ui {
     public static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
     public static final String BORDER_LINE = "------------------------------------------------------------"
             + "--------------------------";
+    public static final String INDENTATION = "  ";
 
     // Messages for successful execution
     public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
@@ -143,7 +144,7 @@ public class Ui {
         if (module.getPreRequisites().size() > 0) {
             printPrerequisites(module.getCode(), module.getPreRequisites());
         }
-        System.out.println(module);
+        System.out.println(INDENTATION + module);
     }
 
     /**
@@ -176,12 +177,12 @@ public class Ui {
      */
     public void printMarkAsTakenMessage(Module module) {
         System.out.println("Nice! I've marked this module as done:");
-        System.out.println("  " + module);
+        System.out.println(INDENTATION + module);
     }
 
     public void printUpdateSuccess(Module module) {
         System.out.println("Nice! I've updated this module:");
-        System.out.println("  " + module);
+        System.out.println(INDENTATION + module);
     }
 
     /**
