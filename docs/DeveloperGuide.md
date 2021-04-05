@@ -44,7 +44,7 @@ By: `W09-2` Latest update: `30 March 2021`
         + [Progress](#progress)
         + [List Modules](#list-modules)
         + [Saving data](#saving-data)
-    
+
 ## 1. Introduction
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -73,7 +73,7 @@ This section guides you through the process of setting up the project on your co
 > ℹ️ **Note:** This application is developed for users with `Java 11` installed on their computer. 
 > If you do not have it installed on your computer or you have other versions of it, follow this 
 > [link](https://openjdk.java.net/projects/jdk/11/) to download and install it before continuing 
-> with this section.
+> with this section. 
 
 > 📝 **Tip:** To check if you have `Java 11` installed, type `java --version` into a command prompt
 
@@ -551,9 +551,10 @@ The following is the UML diagrams for update command consisting of updating each
 <sup>***Figure 4.3.3.2*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
 
 #### Considerations
+An array list is used to store the parsed data from the user input. This is to make use of the built-in class functions (especially indexOf() and size()). array also lacks certain features that are of good use to the parser class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, matches() of array list automatically takes in a regex instead of having to manually create a regex object, then parsing into the find() function, which loops thorugh the entire array to obtain the matches. This significantly simplifies the code in the parser function, and makes handling exceptions easier. 
 
 #### Alternative
-
+Initialy, it was decided that the parameters would be split into an array to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an array list, since the array list has more features that can be utilised to make the code more efficient.  
 
 #### 4.3.4 List Command
 
@@ -747,8 +748,6 @@ It also contains tools to help make informed decisions about future modules.
 5. A beginner user without prior knowledge should be able to pick up the application comfortably.
 
 ## Glossary
-
-* *glossary item* - Definition
 
 ## Instructions for manual testing
 

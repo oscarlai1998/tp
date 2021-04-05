@@ -53,6 +53,7 @@ Symbols/Formatting | Description
 4. Run the program in command prompt using `java -jar iGraduate.jar` command.
 5. If successful, the programme would look like this:
 ```
+--------------------------------------------------------------------------------------
  _  ____               _             _       
 (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
 | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \

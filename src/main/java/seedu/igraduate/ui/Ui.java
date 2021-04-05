@@ -111,6 +111,7 @@ public class Ui {
      * Prints the welcome message. 
      */
     public void printWelcomeMessage() {
+        printBorderLine();
         System.out.println(LOGO);
         System.out.println(GREETING_MESSAGE);
         printBorderLine();
