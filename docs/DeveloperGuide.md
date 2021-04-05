@@ -44,6 +44,7 @@ By: `W09-2` Latest update: `30 March 2021`
         + [Progress](#progress)
         + [List Modules](#list-modules)
         + [Saving data](#saving-data)
+    
 ## 1. Introduction
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
