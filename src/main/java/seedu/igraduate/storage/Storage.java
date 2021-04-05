@@ -72,7 +72,8 @@ public class Storage {
      * @throws IOException                  if file cannot be read or processed.
      * @throws LoadModuleFailException      if the module fails to load from file.
      * @throws DataFileNotFoundException    if the module data file does not exists.
-     * @throws ModifiedStorageFileException if the json file has been modified (when credits > 32 or credits < 0).
+     * @throws ModifiedStorageFileException if the json file has been modified (when
+     *                                      credits > 32 or credits < 0).
      */
     public ArrayList<Module> loadModulesFromFile()
             throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {

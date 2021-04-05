@@ -33,7 +33,7 @@ public class UpdateCommand extends Command {
     private String moduleName;
     private ArrayList<String> preRequisites;
 
-    private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(UpdateCommand.class.getName());
 
     /**
      * Child class of the command class that contains the module code and command

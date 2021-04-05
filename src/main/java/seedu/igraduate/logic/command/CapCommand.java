@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class CapCommand extends Command {
 
-    private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CapCommand.class.getName());
 
     protected float cap;
     protected String degreeClassification;
