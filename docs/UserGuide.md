@@ -9,6 +9,7 @@ By: `W09-2` Latest update: `30 March 2021`
     * [Delete existing module: `delete`](#delete-existing-module-delete)
     * [Update module information: `update`](#update-module-information-update)
     * [Mark a module as complete: `done`](#mark-a-module-as-complete-done)
+    * [Show module information: `info`](#show-module-information-info)
     * [List modules: `list`](#list-modules-list)
     * [Show academic progression: `progress`](#show-academic-progression-progress)
     * [Calculate CAP: `cap`](#calculate-cap-cap)
@@ -95,7 +96,7 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 Added CP2201 Journey of the Innovator to the list. (2.0MCs)
-[E][X] CP2201   Journey of the Innovator                                NIL   2 MC
+  [E][X] CP2201   Journey of the Innovator                                NIL   2 MC
 --------------------------------------------------------------------------------------
 ```
 
@@ -103,18 +104,18 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
 
 
-`add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS1010,CS2100`
+`add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS2100`
 
 ```
 --------------------------------------------------------------------------------------
 Added CS2106 Introduction to Operating Systems to the list. (4.0MCs)
-List of pre-requisites needed to take CS2106: CS1010, CS2100
-[C][✘] CS2106   Introduction to Operating Systems                       NIL   4 MC
+List of pre-requisites needed to take CS2106: CS2100
+  [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
 
 <sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
-`4` credit module with the code `CS2106`, with the prerequisites `CS1010` and `CS2100`.*</sup>
+`4` credit module with the code `CS2106`, with the prerequisite `CS2100`.*</sup>
 
 ### Delete existing module: `delete`
 
@@ -222,6 +223,55 @@ Nice! I've marked this module as done:
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
 done.*</sup>
 
+### Show module information: `info`
+
+The info command shows the information of the specified module in a detailed manner. All information related to the
+specified module inclusing its prerequisites will be shown to you.
+
+> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
+
+Format:
+
+`info <module code>`
+
+Example of Usage(s) and Expected Outcome(s):
+
+`info CS2106`
+
+```
+--------------------------------------------------------------------------------------
+Printing CS2106 module information...
+Module Type                           : Core
+Module Code                           : CS2106
+Module Name                           : Introduction to Operating Systems
+Modular Credits                       : 4.0 MC
+Status                                : not taken
+Grade                                 : NIL
+Prerequisites                         : [CS2100]
+Incomplete Prerequisites              : [CS2100]
+Prerequisite for                      : []
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.1** Expected results from showing the detailed information of `CS2106` core module.*</sup>
+
+`info ger1000`
+
+```
+--------------------------------------------------------------------------------------
+Printing GER1000 module information...
+Module Type                           : GE
+Module Code                           : GER1000
+Module Name                           : Quantitative Reasoning
+Modular Credits                       : 4.0 MC
+Status                                : taken
+Grade                                 : A
+Prerequisites                         : []
+Incomplete Prerequisites              : []
+Prerequisite for                      : []
+--------------------------------------------------------------------------------------
+```
+<sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000` ge module.*</sup>
+
 ### List modules: `list`
 
 The list command lists modules added to your list according to the filter. List all modules or select only completed, 
@@ -255,7 +305,7 @@ Module List:
 7. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.1** Expected results from listing `all` modules. The list includes the module information that has 
+<sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes the module information that has 
 been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross).*</sup>
 
 `list incomplete`
@@ -269,7 +319,7 @@ Modules you have yet to complete:
 4. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.2** Expected results from listing `incomplete` modules. The list includes the module information that 
+<sup>***Figure 1.6.2** Expected results from listing `incomplete` modules. The list includes the module information that 
 has been added but has not been completed, as indicated with a cross.*</sup>
 
 `list complete`
@@ -282,7 +332,7 @@ Modules you have have completed:
 3: [M][O] MA1521   Calculus for Computing                                   A-   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.3** Expected results from listing `completed` modules. The list includes the module information that 
+<sup>***Figure 1.6.3** Expected results from listing `completed` modules. The list includes the module information that 
 has been completed, as indicated with an "O".*</sup>
 
 `list available`
@@ -295,7 +345,7 @@ Modules can be taken:
 3. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.4** Expected results from listing `available` modules. The list includes the module information that 
+<sup>***Figure 1.6.4** Expected results from listing `available` modules. The list includes the module information that 
 has been added and can be taken (with all prerequisites fulfiled).*</sup>
 
 `list core`
@@ -308,7 +358,7 @@ Core modules in the list:
 3: [C][X] CS2106   Introduction to Operating Systems                       NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.5** Expected results from listing `core` modules. This option will list out all `core` modules
+<sup>***Figure 1.6.5** Expected results from listing `core` modules. This option will list out all `core` modules
 on the list.*</sup>
 
 `list elec`
@@ -319,7 +369,7 @@ Elective modules in the list:
 1. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.6** Expected results from listing `elec` modules. This option will list out all `elective` modules
+<sup>***Figure 1.6.6** Expected results from listing `elec` modules. This option will list out all `elective` modules
 on the list.*</sup>
 
 `list ge`
@@ -331,7 +381,7 @@ GE modules in the list:
 2: [G][X] GER1000  Quantitative Reasoning                                  NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.7** Expected results from listing `ge` modules. This option will list out all `ge` modules
+<sup>***Figure 1.6.7** Expected results from listing `ge` modules. This option will list out all `ge` modules
 on the list.*</sup>
 
 `list math`
@@ -342,7 +392,7 @@ Math modules in the list:
 1: [M][O] MA1521   Calculus for Computing                                   A-   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.5.8** Expected results from listing `math` modules. This option will list out all `math` modules
+<sup>***Figure 1.6.8** Expected results from listing `math` modules. This option will list out all `math` modules
 on the list.*</sup>
 
 ### Show academic progression: `progress`
@@ -351,7 +401,8 @@ Displays a bar that represents the current progress of your academic career. The
 your total completed module credits against the total number of credits needed for graduation requirements. The bar will 
 fill up as more modules are completed. 
 
-> ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS single-degree Information Security undergraduate</b> student
+> ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS 
+> single-degree Information Security undergraduate</b> student
 
 > ℹ️ **Note:**  If total MCs exceeds 160, the progress bar will still display `100%`. 
 > (See notes under [Add Command](#add-a-new-module-add))
@@ -372,7 +423,7 @@ Progress:
 8MCs/160MCs Completed
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.6.1** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
+<sup>***Figure 1.7.1** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
 
 ### Calculate CAP: `cap`
 
@@ -395,7 +446,7 @@ Current CAP: 4.00
 Current Degree Classification: Honours (Distinction)
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.7.1** Expected results from running the cap command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
+<sup>***Figure 1.8.1** Expected results from running the cap command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
 
 ### Exit the program: `exit`
 Exits the program. 
@@ -413,7 +464,7 @@ Example of Usage(s) and Expected Outcome(s):
 See you soon! Happy studying!
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.8.1** Expected results from exiting the program*</sup>
+<sup>***Figure 1.9.1** Expected results from exiting the program*</sup>
 
 ### Program Manual: `help`
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
@@ -431,11 +482,12 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 --------------------------------------------------------------------------------------
 iGraduate is a command line application that acts as a centralised hub for NUS students majoring in Information Security to plan their academic journey.
-The application comes with 8 features:
+The application comes with 9 features:
 -add
 -delete
 -update
 -done
+-info
 -list
 -progress
 -cap
@@ -444,7 +496,7 @@ The application comes with 8 features:
 Type help <command> to view further details on each command.
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.9.1** Expected results of `help` without any optional parameters.*</sup>
+<sup>***Figure 1.10.1** Expected results of `help` without any optional parameters.*</sup>
 
 `help delete`
 
@@ -455,7 +507,7 @@ The Delete command deletes an existing module from the list of modules added via
 Syntax: delete <module code>
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.9.2** Expected results of `help` with `delete` as the optional parameter*</sup>
+<sup>***Figure 1.10.2** Expected results of `help` with `delete` as the optional parameter*</sup>
 ## Storage of Data
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
@@ -510,7 +562,9 @@ add | <code>add <name> -c <module code> -t <core&#124;math&#124;ue&#124;ge> -mc 
 delete | `delete <module code>`
 update | `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 done | `done <module code> -g <grade>`
+info | `info <module code>`
 list | <code>list <all&#124;incomplete&#124;complete&#124;core&#124;elec&#124;ge&#124;math></code>
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
+help     | `help <command>`

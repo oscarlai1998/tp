@@ -236,12 +236,13 @@ The `command` component executes the correct command based on what the parser in
 #### Design
 The `command` component consists of an abstract class `Command` and 8 subclasses that inherit from it.
 
-The 8 subclasses are:
+The 9 subclasses are:
 * AddCommand
 * CapCommand
 * DeleteCommand
 * DoneCommand
 * ExitCommand
+* InfoCommand
 * ListCommand
 * ProgressCommand
 * UpdateCommand

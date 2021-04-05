@@ -1,5 +1,6 @@
 package seedu.igraduate.ui;
 
+import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.model.module.CoreModule;
 import seedu.igraduate.model.module.ElectiveModule;
 import seedu.igraduate.model.module.GeModule;
@@ -33,6 +34,16 @@ public class Ui {
     public static final String MODULES_ELECTIVE_MESSAGE = "Elective modules in the list:";
     public static final String MODULES_GE_MESSAGE = "GE modules in the list:";
     public static final String MODULES_MATH_MESSAGE = "Math modules in the list:";
+    public static final String MODULES_INFO_MESSAGE = "Printing %s module information...\n"
+            + "Module Type                           : %s\n"
+            + "Module Code                           : %s\n"
+            + "Module Name                           : %s\n"
+            + "Modular Credits                       : %s MC\n"
+            + "Status                                : %s\n"
+            + "Grade                                 : %s\n"
+            + "Prerequisites                         : %s\n"
+            + "Incomplete Prerequisites              : %s\n"
+            + "Prerequisite for                      : %s";
     public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
     public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
     public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
@@ -50,8 +61,8 @@ public class Ui {
 
     public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub for\n"
             + "NUS students majoring in Information Security to plan their academic journey.\nThe application comes "
-            + "with 8 features:\n-add\n-delete\n-update\n-done\n-list\n-progress\n-cap\n-exit\n\nType help <command> to"
-            + " view further details on each command.";
+            + "with 9 features:\n-add\n-delete\n-update\n-done\n-info\n-list\n-progress\n-cap\n-exit\n\nType help <command> "
+            + "to view further details on each command.";
     public static final String HELP_ADD = "The Add command adds a new module to the list of modules you wish to track."
             + " The list serves to keep track of the modules that you have taken, are currently taking or intend "
             + "to take in the future.\n\nSyntax: add <name> -c <module code> -t <core|math|ue|ge> -mc "
@@ -64,6 +75,9 @@ public class Ui {
     public static final String HELP_DONE = "The Done command marks a module as completed via its module code. "
             + "You must include the grade obtained to facilitate the calculation of CAP.\n\n"
             + "Syntax: done <module code> -g <grade>";
+    public static final String HELP_INFO = "The Info command prints out module information of the module specified using "
+            + "the module code.\n\n"
+            + "Syntax: info <module code>";
     public static final String HELP_LIST = "The list command lists modules added to your list according "
             + "to the filter. The filters are:\n"
             + "-all: Lists all modules on the list\n"
@@ -289,9 +303,36 @@ public class Ui {
         System.out.println(INDENTATION + module);
     }
 
+    /**
+     * Displays success message after the specified information is updated.
+     *
+     * @param module module with updated information.
+     */
     public void printUpdateSuccess(Module module) {
         System.out.println("Nice! I've updated this module:");
         System.out.println(INDENTATION + module);
+    }
+
+    /**
+     * Prints all information of the specified module.
+     *
+     * @param module module for printing details.
+     * @param modules moduleList consisting all modules.
+     */
+    public void printModuleInfo(Module module, ModuleList moduleList) {
+        String moduleType = moduleList.getModuleType(module);
+        String moduleCode = module.getCode();
+        String moduleName = module.getName();
+        double moduleCredits = module.getCredit();
+        String moduleStatus = module.getStatus();
+        String moduleGrade = module.getGrade();
+        ArrayList<String> preRequisites = module.getPreRequisites();
+        ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+        ArrayList<String> requiredByModules = module.getRequiredByModules();
+
+        String message = String.format(MODULES_INFO_MESSAGE, moduleCode, moduleType, moduleCode, moduleName,
+                moduleCredits, moduleStatus, moduleGrade, preRequisites, untakenPreRequisites, requiredByModules);
+        System.out.println(message);
     }
 
     /**
@@ -391,6 +432,10 @@ public class Ui {
 
     public void printDoneHelp() {
         System.out.println(HELP_DONE);
+    }
+
+    public void printInfoHelp() {
+        System.out.println(HELP_INFO);
     }
 
     public void printListHelp() {
