@@ -59,10 +59,10 @@ public class Ui {
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
-    public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub for\n"
-            + "NUS students majoring in Information Security to plan their academic journey.\nThe application comes "
-            + "with 9 features:\n-add\n-delete\n-update\n-done\n-info\n-list\n-progress\n-cap\n-exit\n\nType help <command> "
-            + "to view further details on each command.";
+    public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub "
+            + "for\nNUS students majoring in Information Security to plan their academic journey.\nThe application "
+            + "comes with 9 features:\n-add\n-delete\n-update\n-done\n-info\n-list\n-progress\n-cap\n-exit\n\nType "
+            + "help <command> to view further details on each command.";
     public static final String HELP_ADD = "The Add command adds a new module to the list of modules you wish to track."
             + " The list serves to keep track of the modules that you have taken, are currently taking or intend "
             + "to take in the future.\n\nSyntax: add <name> -c <module code> -t <core|math|ue|ge> -mc "
@@ -75,8 +75,8 @@ public class Ui {
     public static final String HELP_DONE = "The Done command marks a module as completed via its module code. "
             + "You must include the grade obtained to facilitate the calculation of CAP.\n\n"
             + "Syntax: done <module code> -g <grade>";
-    public static final String HELP_INFO = "The Info command prints out module information of the module specified using "
-            + "the module code.\n\n"
+    public static final String HELP_INFO = "The Info command prints out module information of the module specified "
+            + "using the module code.\n\n"
             + "Syntax: info <module code>";
     public static final String HELP_LIST = "The list command lists modules added to your list according "
             + "to the filter. The filters are:\n"
@@ -317,7 +317,7 @@ public class Ui {
      * Prints all information of the specified module.
      *
      * @param module module for printing details.
-     * @param modules moduleList consisting all modules.
+     * @param moduleList moduleList consisting all modules.
      */
     public void printModuleInfo(Module module, ModuleList moduleList) {
         String moduleType = moduleList.getModuleType(module);
