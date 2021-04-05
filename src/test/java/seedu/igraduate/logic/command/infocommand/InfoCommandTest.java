@@ -62,7 +62,6 @@ class InfoCommandTest {
         String moduleGrade = "NIL";
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
-        ArrayList<String> requiredByModules = new ArrayList<>();
         CoreModule coreModule = new CoreModule(moduleCode, moduleName, moduleCredits, moduleStatus, moduleGrade,
                 preRequisites, untakenPreRequisites);
         moduleList.add(coreModule);
@@ -71,6 +70,7 @@ class InfoCommandTest {
         Command infoCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         infoCommand.execute(moduleList, ui, storage);
+        ArrayList<String> requiredByModules = new ArrayList<>();
         String expectedOutput = String.format(Ui.MODULES_INFO_MESSAGE, moduleCode, "Core", moduleCode, moduleName,
                 moduleCredits, moduleStatus, moduleGrade, preRequisites, untakenPreRequisites, requiredByModules)
                 + System.lineSeparator();
@@ -86,7 +86,7 @@ class InfoCommandTest {
         String line = "info cs1111";
         Command infoCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
-                () -> infoCommand.execute(moduleList, ui, storage));
+            () -> infoCommand.execute(moduleList, ui, storage));
         String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
         assertEquals(exceptionMessage, exception.getMessage());
     }
