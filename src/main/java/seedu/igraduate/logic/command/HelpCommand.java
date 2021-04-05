@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HelpCommand extends Command {
-    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HelpCommand.class.getName());
     private String helpType;
 
     public HelpCommand(String helpType) {

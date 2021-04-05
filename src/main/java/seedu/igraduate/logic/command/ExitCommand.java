@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Handles exit command.
  */
 public class ExitCommand extends Command {
-    private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
 
     /**
      * Prints exit message.
