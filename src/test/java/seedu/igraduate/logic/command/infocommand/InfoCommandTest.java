@@ -79,12 +79,9 @@ class InfoCommandTest {
     }
 
     @Test
-    void executeInfoCommand_nonExistenceModules_exceptionThrown() throws ExistingModuleException, InvalidModuleTypeException,
-            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
-            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+    void executeInfoCommand_nonExistenceModules_exceptionThrown() throws InvalidModuleTypeException,
+            IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, InvalidListTypeException, IllegalParametersException {
 
         String line = "info cs1111";
         Command infoCommand = Parser.parseCommand(line);
