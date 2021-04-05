@@ -13,6 +13,7 @@ import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.DeleteCommand;
 import seedu.igraduate.logic.command.DoneCommand;
 import seedu.igraduate.logic.command.ExitCommand;
+import seedu.igraduate.logic.command.InfoCommand;
 import seedu.igraduate.logic.command.ListCommand;
 import seedu.igraduate.logic.command.ProgressCommand;
 import seedu.igraduate.logic.command.UpdateCommand;
@@ -33,6 +34,7 @@ public class Parser {
     // Constants for command words
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_INFO = "info";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_PROGRESS = "progress";
     private static final String COMMAND_DONE = "done";
@@ -46,6 +48,7 @@ public class Parser {
     private static final int COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH = 8;
     private static final int COMMAND_ADD_PARAMETER_LENGTH = 2;
     private static final int COMMAND_DELETE_LENGTH = 2;
+    private static final int COMMAND_INFO_LENGTH = 2;
     private static final int COMMAND_LIST_LENGTH = 2;
     private static final int COMMAND_PROGRESS_LENGTH = 1;
     private static final int COMMAND_DONE_FLAG_LENGTH = 2;
@@ -97,6 +100,9 @@ public class Parser {
         case COMMAND_DELETE:
             LOGGER.log(Level.INFO, "Input parsed to delete command.");
             return createDeleteCommand(commandParameters, commandFlags);
+        case COMMAND_INFO:
+            LOGGER.log(Level.INFO, "Input parsed to info command.");
+            return createInfoCommand(commandParameters, commandFlags);
         case COMMAND_LIST:
             LOGGER.log(Level.INFO, "Input parsed to list command.");
             return createListCommand(commandParameters, commandFlags);
@@ -231,6 +237,31 @@ public class Parser {
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
 
         return new DeleteCommand(moduleCode);
+    }
+
+    /**
+     * Extracts relevant parameters and creates new instance of InfoCommand class
+     * to execute. Format: "Info [module code]"
+     *
+     * @param commandParameters parameters of user input, excluding command flags.
+     * @return new instance of InfoCommand class.
+     * @throws IncorrectParameterCountException if parameter count is not correct.
+     */
+    public static Command createInfoCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
+            throws IncorrectParameterCountException {
+        boolean isInvalidPara = (commandParameters.size() != COMMAND_INFO_LENGTH);
+        boolean isInvalidFlag = (commandFlags.get(0) != null);
+
+        if (isInvalidPara || isInvalidFlag) {
+            LOGGER.warning("Invalid number of parameters.");
+            throw new IncorrectParameterCountException();
+        }
+
+        assert commandParameters.size() == 2 : "COMMAND_INFO_LENGTH should be 2";
+        String moduleCode = commandParameters.get(1);
+        LOGGER.log(Level.INFO, "Valid parameters for info command.");
+
+        return new InfoCommand(moduleCode);
     }
 
     /**
