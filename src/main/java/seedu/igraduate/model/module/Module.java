@@ -3,8 +3,8 @@ package seedu.igraduate.model.module;
 import java.util.ArrayList;
 
 /**
- * Parent class for more specific command child class.
- * Contains basic information applicable to all module related classes.
+ * Parent class for more specific command child class. Contains basic
+ * information applicable to all module related classes.
  */
 public abstract class Module {
     private String code;
@@ -17,18 +17,20 @@ public abstract class Module {
     private ArrayList<String> requiredByModules;
 
     /**
-     * Creates an instance of a module based on the corresponding module type. 
+     * Creates an instance of a module based on the corresponding module type.
      * 
-     * @param code module code. 
-     * @param name module name as specified in the user input. 
-     * @param credit number of modular credits. 
-     * @param status status of completion (tick for completed, cross for uncompleted). 
-     * @param grade grade attained for the module, only applicable is status is done. 
-     * @param preRequisites prerequisites required for the module.
+     * @param code                 module code.
+     * @param name                 module name as specified in the user input.
+     * @param credit               number of modular credits.
+     * @param status               status of completion (tick for completed, cross
+     *                             for uncompleted).
+     * @param grade                grade attained for the module, only applicable is
+     *                             status is done.
+     * @param preRequisites        prerequisites required for the module.
      * @param untakenPreRequisites pre-requisite modules not taken yet.
      */
-    public Module(String code, String name, double credit, String status, String grade,
-                  ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites) {
+    public Module(String code, String name, double credit, String status, String grade, ArrayList<String> preRequisites,
+            ArrayList<String> untakenPreRequisites) {
         setCode(code);
         setName(name);
         setCredit(credit);
@@ -93,9 +95,9 @@ public abstract class Module {
 
     public boolean isDone() {
         String status = getStatus();
-        if (status.equals("taken")) {
+        if (status.equalsIgnoreCase("taken")) {
             return true;
-        } else if (status.equals("not taken")) {
+        } else if (status.equalsIgnoreCase("not taken")) {
             return false;
         } else {
             return false;
@@ -103,8 +105,8 @@ public abstract class Module {
     }
 
     /**
-     * Check if grade is valid.
-     * [A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU].
+     * Check if grade is valid. [A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS,
+     * CU].
      *
      * @return boolean value true if grade is value and false if invalid.
      */
@@ -156,18 +158,35 @@ public abstract class Module {
 
     /**
      * Gets the completion status of the module.
-     *  
-     * @return tick if taken, cross if not taken and dash if unapplicable. 
+     * 
+     * @return tick if taken, cross if not taken and dash if not applicable.
      */
     public String getStatusIcon() {
         String status = getStatus();
+
         if (status.equals("taken")) {
-            return "✓";
+            return "O";
         } else if (status.equals("not taken")) {
-            return "✘";
+            return "X";
         } else {
             return "-";
         }
+    }
+
+    /**
+     * Creates a custom hashcode for comparison in streams. 
+     */
+    @Override
+    public int hashCode() {
+        return code.hashCode();
+    }
+
+    /**
+     * Creates a custom comparator for identifying the module.
+     */
+    @Override
+    public boolean equals(Object module) {
+        return this.getCode().equals(((Module) module).getCode());
     }
 
     @Override

@@ -1,10 +1,12 @@
 @startuml
+hide footbox
+
 participant ":iGraduate" as iGraduate
 participant ":Parser" as Parser
 participant ":DoneCommand" as DoneCommand
 
 iGraduate -> Parser: parseCommand("done CS1010 -g A")
-activate Parser #FFBBBB
+activate Parser
 
 Parser -> Parser: getCommand(line:String)
 activate Parser #DarkSalmon
@@ -18,11 +20,13 @@ Parser -> Parser: createDoneCommand(commandParameters:String[], commandFlags:Str
 activate Parser #DarkSalmon
 
 create DoneCommand
-Parser --> DoneCommand: new
+Parser -> DoneCommand: new
 activate DoneCommand
 DoneCommand --> Parser: new DoneCommand("CS1010", "A")
 deactivate DoneCommand
-
-Parser --> iGraduate: new DoneCommand("CS1010", "A")
 deactivate Parser
+Parser --> iGraduate: new DoneCommand("CS1010", "A")
+
+deactivate Parser
+
 @enduml

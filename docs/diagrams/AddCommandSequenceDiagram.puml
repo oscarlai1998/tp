@@ -1,0 +1,36 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":AddCommand" as AddCommand
+participant ":Module" as Module
+participant ":ModuleList" as ModuleList
+participant ":Storage" as Storage
+participant ":Ui" as Ui
+
+iGraduate -> AddCommand: execute(moduleList, ui, storage)
+activate AddCommand
+
+AddCommand -> AddCommand: createModuleByType()
+activate AddCommand #DarkSalmon
+AddCommand -> Module: new Module("CS1010", "Programming Methodology", 4.0, "not taken", "nil", ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites)
+activate Module
+return module:Module
+return module:Module
+
+AddCommand -> ModuleList: add(module:Module)
+activate ModuleList
+deactivate ModuleList
+
+AddCommand -> Storage: saveModulesToFile(moduleList:ModuleList)
+activate Storage
+deactivate Storage
+
+AddCommand -> Ui: printAddedModuleSuccess(module:Module)
+activate Ui
+deactivate Ui
+
+
+deactivate AddCommand
+destroy AddCommand
+@enduml

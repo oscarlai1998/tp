@@ -8,12 +8,14 @@ import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.ModuleNotFoundException;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
-import seedu.igraduate.exception.ModularCreditExceedsLimitException;
 import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
 import seedu.igraduate.exception.InvalidModularCreditException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
+import seedu.igraduate.exception.InvalidCommandException;
+
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.ui.Ui;
@@ -34,8 +36,6 @@ public abstract class Command {
      * @throws ModuleNotFoundException             If the module indicated does not
      *                                             exists in module list.
      * @throws InvalidModuleTypeException          If the module type is invalid.
-     * @throws ModularCreditExceedsLimitException  If the total completed modular
-     *                                             credits exceed 160.
      * @throws ExistingModuleException             If the module to be added already
      *                                             exists in module list.
      * @throws InputNotNumberException             If the module credit input is not
@@ -47,12 +47,12 @@ public abstract class Command {
      * @throws UnableToDeletePrereqModuleException If the module is a pre-requisite
      *                                             of other modules.
      */
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
-        ModuleNotFoundException, InvalidModuleTypeException, ModularCreditExceedsLimitException,
-        ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException,
-        InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
-        UnableToDeletePrereqModuleException, InvalidListTypeException, PrerequisiteNotMetException,
-        AddSelfToPrereqException, InvalidModularCreditException;
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage)
+            throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleTypeException,
+            ExistingModuleException, PrerequisiteNotFoundException, NumberFormatException, InputNotNumberException,
+            ModuleNotCompleteException, InvalidModuleGradeException, UnableToDeletePrereqModuleException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            InvalidModularCreditException, MarkCompletedModuleException, InvalidCommandException;
 
     /**
      * Returns a flag indicating whether the program should terminate after

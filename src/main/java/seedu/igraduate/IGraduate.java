@@ -6,8 +6,9 @@ import java.nio.file.Paths;
 
 import java.util.logging.Logger;
 
+import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.logic.command.Command;
-import seedu.igraduate.logic.Parser;
+import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
@@ -40,7 +41,8 @@ public class IGraduate {
     /**
      * Instantiates Storage, ModuleList and Ui components of the program.
      *
-     * @param filePath The file path at which module data file is located, if exists.
+     * @param filePath The file path at which module data file is located, if
+     *                 exists.
      */
     public IGraduate(File filePath) {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
@@ -48,6 +50,7 @@ public class IGraduate {
         storage = Storage.getStorage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
+            storage.saveModulesToFile(modules);
         } catch (Exception e) {
             ui.printErrorMessage(e);
             modules = new ModuleList();

@@ -1,0 +1,61 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":UpdateCommand" as UpdateCommand
+participant ":ModuleList" as ModuleList
+participant "targetModule:Module" as Module
+participant ":Storage" as Storage
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("update CS1010 -mc 2")
+activate Parser #FFBBBB
+
+Parser -> Parser: createUpdateCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
+create UpdateCommand
+Parser -> UpdateCommand: UpdateCommand("CS1010", ["-mc", "2"])
+activate UpdateCommand
+UpdateCommand --> Parser: new UpdateCommand("CS1010", ["-mc", "2"])
+deactivate UpdateCommand
+deactivate Parser
+
+Parser --> iGraduate: new UpdateCommand("CS1010", "A")
+deactivate Parser
+
+iGraduate -> UpdateCommand: execute(moduleList, ui, storage)
+activate UpdateCommand
+
+UpdateCommand -> ModuleList: getModule("CS1010")
+activate ModuleList
+ModuleList --> UpdateCommand: :Module
+deactivate ModuleList
+
+UpdateCommand -> UpdateCommand: updateModuleCredits(["-mc", "2"])
+activate UpdateCommand #DarkSalmon
+
+UpdateCommand -> Parser: extractModuleCredits(["-mc", "2"])
+activate Parser
+Parser --> UpdateCommand: 2.0
+deactivate Parser
+
+UpdateCommand -> Module: setCredit(2.0)
+activate Module
+deactivate Module
+return
+
+UpdateCommand -> Storage: saveModulesToFile(modules)
+activate Storage
+deactivate Storage
+
+UpdateCommand -> Ui: printUpdateSuccess(targetModule)
+activate Ui
+deactivate Ui
+
+deactivate UpdateCommand
+destroy UpdateCommand
+
+
+@enduml

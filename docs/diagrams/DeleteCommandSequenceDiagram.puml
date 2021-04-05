@@ -1,0 +1,56 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":DeleteCommand" as DeleteCommand
+participant ":ModuleList" as ModuleList
+participant ":Storage" as Storage
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("delete CS1010")
+activate Parser #FFBBBB
+
+Parser -> Parser: createDeleteCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
+create DeleteCommand
+Parser -> DeleteCommand: DeleteCommand("CS1010")
+activate DeleteCommand
+DeleteCommand --> Parser: new DeleteCommand("CS1010")
+deactivate DeleteCommand
+deactivate Parser
+
+Parser --> iGraduate: new DeleteCommand("CS1010")
+deactivate Parser
+
+iGraduate -> DeleteCommand: execute(moduleList, ui, storage)
+activate DeleteCommand
+
+DeleteCommand -> ModuleList: getByCode("CS1010")
+activate ModuleList
+ModuleList --> DeleteCommand: module
+deactivate ModuleList
+
+ModuleList -[hidden]-> ModuleList
+DeleteCommand -> ModuleList: getModuleType(module)
+activate ModuleList
+ModuleList --> DeleteCommand: "core"
+deactivate ModuleList
+
+ModuleList -[hidden]-> ModuleList
+DeleteCommand -> ModuleList: delete("CS1010")
+activate ModuleList
+deactivate ModuleList
+
+DeleteCommand -> Storage: saveModulesToFile(moduleList)
+activate Storage
+deactivate Storage
+
+DeleteCommand -> Ui: printDeletedModuleSuccess("CS1010", "core")
+activate Ui
+deactivate Ui
+
+deactivate DeleteCommand
+destroy DeleteCommand
+@enduml

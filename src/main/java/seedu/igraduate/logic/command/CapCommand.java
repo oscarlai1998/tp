@@ -1,21 +1,22 @@
 package seedu.igraduate.logic.command;
 
 import seedu.igraduate.model.list.ModuleList;
+import seedu.igraduate.model.module.Module;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
+
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.SaveModuleFailException;
-import seedu.igraduate.model.module.Module;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CapCommand extends Command {
 
-    private static final Logger LOGGER = Logger.getLogger(DoneCommand.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CapCommand.class.getName());
 
-    private static float cap;
-    private static String degreeClassification;
+    protected float cap;
+    protected String degreeClassification;
 
     /**
      * Execute the capCommand function.
@@ -26,7 +27,7 @@ public class CapCommand extends Command {
      * @throws SaveModuleFailException If storage fail to save module data to disk.
      * @throws InvalidModuleGradeException If the module grade is invalid.
      */
-    public  void execute(ModuleList moduleList, Ui ui, Storage storage)
+    public void execute(ModuleList moduleList, Ui ui, Storage storage)
             throws SaveModuleFailException, InvalidModuleGradeException {
 
         LOGGER.log(Level.INFO, "Executing CAP command...");
@@ -164,15 +165,6 @@ public class CapCommand extends Command {
         }
 
         return capClass;
-    }
-
-    /**
-     * Retrieves and return cap.
-     *
-     * @return cap.
-     */
-    public static float getCap() {
-        return cap;
     }
 
     @Override
