@@ -48,8 +48,8 @@ public class Ui {
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
-    public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub for"
-            + " NUS students majoring in Information Security to plan their academic journey.\nThe application comes "
+    public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub for\n"
+            + "NUS students majoring in Information Security to plan their academic journey.\nThe application comes "
             + "with 8 features:\n-add\n-delete\n-update\n-done\n-list\n-progress\n-cap\n-exit\n\nType help <command> to"
             + " view further details on each command.";
     public static final String HELP_ADD = "The Add command adds a new module to the list of modules you wish to track."
