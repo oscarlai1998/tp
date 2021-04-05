@@ -95,9 +95,9 @@ public abstract class Module {
 
     public boolean isDone() {
         String status = getStatus();
-        if (status.equals("taken")) {
+        if (status.equalsIgnoreCase("taken")) {
             return true;
-        } else if (status.equals("not taken")) {
+        } else if (status.equalsIgnoreCase("not taken")) {
             return false;
         } else {
             return false;
