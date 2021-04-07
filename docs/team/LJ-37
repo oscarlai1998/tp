@@ -8,8 +8,98 @@ storing of modules, listing of modules that can be taken, an academic progressio
 and a CAP calculator, iGraduate will help students check his/her graduation progress, view modules
 taken based on programme requirements and make informed decisions about future modules.
 
-## Summary of Contributions
+---
 
-Given below are my contributions to the project.
+### Summary of Contributions
 
-* Code Contribution
+* **Code contributed:** [RepoSense link](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=LJ-37&sort=totalCommits%20dsc&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&breakdown=false&tabOpen=true&tabType=zoom&zFR=false&zA=LJ-37&zR=AY2021S2-CS2113T-W09-2%2Ftp%5Bmaster%5D&zACS=91.36363636363636&zS=2021-03-05&zFS=LJ-37&zU=2021-04-05&zMG=false&zFTF=commit&zFGS=groupByAuthors)
+
+---
+### Enhancements implemented:
+
+Given below are details of my contributions to the project.
+
+#### Implemented `AddCommand` class of iGraduate
+
+The AddCommand class is responsible for executing the `add` command, and takes in additional parameters, module name,
+module code, module type, number of MCs and/or prerequisites. The AddCommand class helps the users to add their 
+modules into the module list.
+
+*Considerations*
+
+The `add` command is important to iGraduate because we want to give the users freedom to plan what modules to take, 
+instead of giving them a study plan in-built by our team. Therefore, we decided to allow users to add modules on their own 
+as long as the module details are entered correctly and that they have cleared all prerequisites.
+
+#### Implemented `CapCommand` class of iGraduate
+
+The CapCommand class is responsible for executing the `cap` command, which helps to display the user's current CAP 
+and degree classification.
+
+*Considerations*
+
+The `cap` Command is important to iGraduate because our app's focus is to help user's easily access their academic 
+records and all details regarding it. Hence, we decided to show both the CAP score and degree classification with the 
+`cap` command.
+
+___
+### Contributions to documentation
+
+#### User Guide
+
+For the user guide, I made some minor edits to improve grammar, correct spelling and improve the phrasing of the guide to be more
+audience-centric and beginner-friendly.
+
+___
+
+### Contributions to DG
+
+For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed to the command component as well as
+some diagrams in the DG, namely the AddCommand class diagram and the delete command sequence diagram. 
+I used PlantUML to create the diagrams.
+
+For the <b>Product Scope</b> section of the DG, I contributed by writing the target user profile and value proposition 
+component of the section.
+
+I also wrote the <b>Non-Functional Requirements</b> section of the DG.
+
+I also wrote the <b>Instructions for manual testing</b> section of the DG, by giving positive and negative test cases
+for the commands in iGraduate, as well as the expected output in the application.
+
+---
+
+### Contributions to team-based tasks
+
+I helped to write non-feature specific portions of the UG and DG such as the <b>Product Scope</b> and 
+<b>Instructions for manual testing</b> sections of the DG.
+
+I also helped to create some user stories and assign issues to my group mates as well as myself.
+
+I also helped to fix some bugs and gave inputs to the discussions in the team.
+
+---
+
+### Reviews and PRs
+
+I helped the team with repository maintenance, mostly about git (Pull Requests, Branches, Merge Conflicts etc).
+
+Here is a list of pull requests I helped to review and merge:
+
+-  [#51](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/51)
+-  [#54](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/54)
+-  [#72](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/72)
+-  [#75](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/75)
+-  [#79](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/79)
+-  [#80](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/80)
+-  [#96](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/96)
+-  [#102](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/102)
+-  [#108](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/108)
+-  [#109](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/109)
+-  [#116](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/116)
+-  [#117](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/117)
+-  [#119](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/119)
+-  [#127](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/127)
+-  [#133](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/133)
+-  [#157](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/157)
+-  [#160](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/160)
+-  [#164](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/164)
