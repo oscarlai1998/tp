@@ -191,7 +191,7 @@ public abstract class Module {
 
     @Override
     public String toString() {
-        return String.format("[%s] %-8s %-55s %3s %3s MC", getStatusIcon(), getCode(), getName(), getGrade(),
+        return String.format("[%s] %-9s %-55s %3s %3s MC", getStatusIcon(), getCode(), getName(), getGrade(),
                 Math.round(getCredit()));
     }
 }

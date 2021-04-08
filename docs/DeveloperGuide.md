@@ -29,6 +29,8 @@ By: `W09-2` Latest update: `30 March 2021`
         + [4.5 ModuleList](#45-modulelist)
         + [4.6 Storage](#46-storage)
         + [4.7 Exception](#47-exception)
+    * [5. Logging](#5-logging)
+    * [6. Documentation](#6-documentation)
     * [Appendix: Requirements](#appendix-requirements)
         + [Product Scope](#product-scope)
             + [Target User Profile](#target-user-profile)
@@ -612,8 +614,9 @@ The optional parameters are the list of commands from above:
 - `add`
 - `delete`
 - `update`
-- `list`
 - `done`
+- `info`
+- `list`
 - `progress`
 - `cap`
 - `exit`
@@ -663,7 +666,7 @@ occurrence would be a module named `Software Engineering and Object-Oriented Pro
 dashes when the delimiters are used for separating various module information is also a dash. 
 
 Considerations were also given to use more unique delimiters (such as \, `|`, etc.) to avoid accidental parsing
-fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and 
+fails, but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and 
 render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
 third-party library, since the exception handling and parsing management lies in the library functions. 
 
@@ -690,6 +693,40 @@ PrerequisiteNotFoundException | The exception is thrown if the pre-requisite mod
 PrerequisiteNotMetException | Exception is thrown if prerequisite of the module has not been completed.
 SaveModuleFailException | This exception is thrown if the program fails to save data to file.
 UnableToDeletePrereqModuleException | This exception is thrown when user tries to delete a pre-requisite module.
+
+## 5. Logging
+
+The logging feature is implemented using the `java.util.logging` package. It is a default logging package included
+in the Java package. To learn more about the package, you may refer to [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/package-summary.html).
+
+To make use of logging feature, you will need to include the following line at the start of all the classes where logging
+feature is to be used.
+
+```
+private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+```
+
+When including the line above, remember to replace `ClassName` with the name of current class such as `iGraduate`. Once
+you have done instantiating the logger object with the code above, you can use the logger object to start logging. For
+more information on how logging works, refer to the [official documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/logging/overview.html).
+
+The logging configurations are specified in the `logger.properties` file located in `src/main/resources/logger.properties`.
+To change the logging configurations, simply modify the `logger.properties` file with the respective value. The current
+configuration logs all messages with level of `FINE` and above into a log file, `iGraduate-0.log`, under the same folder 
+where the application resides.
+
+## 6. Documentation
+
+All the documentations related to the application are stored under the `/docs` folder. There are currently three 
+documentations, `AboutUs.md`, `UserGuide.md` and `DeveloperGuide.md`. The documentation tools used for developing these
+guides are:
+
+- [GitHub Markdown](https://guides.github.com/features/mastering-markdown/) syntax for formatting
+- [PlantUML](https://se-education.org/guides/tutorials/plantUml.html) for drawing diagrams
+- [Jekyll](https://jekyllrb.com/) for documentation static site generation
+
+For more information on how to set up a documentation site using Jekyll, you may refer to
+[Using Jekyll for project documentation](https://se-education.org/guides/tutorials/jekyll.html) guide.
 
 ## Appendix: Requirements
 

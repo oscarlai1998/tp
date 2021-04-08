@@ -618,7 +618,7 @@ public class Parser {
      * @return True if the code is valid, false otherwise.
      */
     protected static boolean isModuleCodeValid(String moduleCode) {
-        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", moduleCode);
+        return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,2}", moduleCode);
     }
 
     /**
@@ -629,7 +629,7 @@ public class Parser {
      */
     protected static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
         for (String preRequisite : preRequisites) {
-            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,1}", preRequisite)) {
+            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,2}", preRequisite)) {
                 return false;
             }
         }

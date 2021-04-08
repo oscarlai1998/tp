@@ -73,7 +73,7 @@ public class UpdateCommandIntegrationTest {
         System.setOut(new PrintStream(outContent));
         updateCommand.execute(moduleList, ui, storage);
         assertEquals("Nice! I've updated this module:" + System.lineSeparator() + "  "
-                + "[C][O] CS1010   Programming Methodology                                  A-   2 MC"
+                + "[C][O] CS1010    Programming Methodology                                  A-   2 MC"
                 + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
