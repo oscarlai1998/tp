@@ -44,6 +44,7 @@ Symbols/Formatting | Description
 `<>`               | Include only one compulsory value from choices.
 
 ## Quick Start
+
 > ℹ️ **Note:** The recommended operating system for iGraduate is Windows 10
 
 1. Make sure you have Java version 11 installed on your computer. If you do not have Java 11 installed on your computer,
@@ -227,7 +228,7 @@ done.*</sup>
 ### Show module information: `info`
 
 The info command shows the information of the specified module in a detailed manner. All information related to the
-specified module inclusing its prerequisites will be shown to you.
+specified module including its prerequisites will be shown to you.
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
@@ -288,7 +289,7 @@ specific type of modules by putting in the module type as option. The valid modu
 
 Format: 
 
-`list all|incomplete|complete|available|core|elec|ge|math`
+`list <all|incomplete|complete|available|core|elec|ge|math>`
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -473,6 +474,7 @@ do not remember the different commands available or their purpose and format.
 
 Format:
 `help [add|delete|update|done|list|progress|cap|exit]`
+
 > ℹ️ **Note:** If an optional parameter is provided, `help` will provide a short description of the command's functionality
 > and format. Else, `help` will provide the list of commands available.
 

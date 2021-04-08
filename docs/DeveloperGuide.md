@@ -614,8 +614,9 @@ The optional parameters are the list of commands from above:
 - `add`
 - `delete`
 - `update`
-- `list`
 - `done`
+- `info`
+- `list`
 - `progress`
 - `cap`
 - `exit`
@@ -665,7 +666,7 @@ occurrence would be a module named `Software Engineering and Object-Oriented Pro
 dashes when the delimiters are used for separating various module information is also a dash. 
 
 Considerations were also given to use more unique delimiters (such as \, `|`, etc.) to avoid accidental parsing
-fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and 
+fails, but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and 
 render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a 
 third-party library, since the exception handling and parsing management lies in the library functions. 
 
