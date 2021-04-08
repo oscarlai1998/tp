@@ -1,5 +1,5 @@
 # iGraduate User Guide
-By: `W09-2` Latest update: `30 March 2021`
+By: `W09-2` Latest update: `8 April 2021`
 
 * [Introduction](#introduction)
 * [User Guide Usage](#user-guide-usage)
@@ -473,7 +473,7 @@ The `help` command provides a quick reference guide on the description and forma
 do not remember the different commands available or their purpose and format.
 
 Format:
-`help [add|delete|update|done|list|progress|cap|exit]`
+`help [add|delete|update|done|info|list|progress|cap|exit]`
 
 > ℹ️ **Note:** If an optional parameter is provided, `help` will provide a short description of the command's functionality
 > and format. Else, `help` will provide the list of commands available.
@@ -570,4 +570,4 @@ list | <code>list <all&#124;incomplete&#124;complete&#124;core&#124;elec&#124;ge
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
-help     | `help <command>`
+help     | <code>help [add&#124;delete&#124;update&#124;done&#124;info&#124;list&#124;progress&#124;cap&#124;exit]</code>
