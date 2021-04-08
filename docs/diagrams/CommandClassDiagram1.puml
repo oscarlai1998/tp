@@ -34,33 +34,8 @@ class "DoneCommand" {
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
 }
 
-class "ExitCommand" {
-}
-
-class "ListCommand" {
-    -scope:String
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-}
-
-class "ProgressCommand" {
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-}
-
-class "UpdateCommand" {
-    -moduleCode:String
-    -targetModule:Module
-    -moduleCredit:Double
-    -moduleGrade:String
-    -preRequisites:ArrayList<String>
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-}
-
 "{abstract}\n<i>Command" <|-- "AddCommand"
 "{abstract}\n<i>Command" <|-- "CapCommand"
 "{abstract}\n<i>Command" <|-- "DeleteCommand"
 "{abstract}\n<i>Command" <|-- "DoneCommand"
-"{abstract}\n<i>Command" <|-- "ExitCommand"
-"{abstract}\n<i>Command" <|-- "ListCommand"
-"{abstract}\n<i>Command" <|-- "ProgressCommand"
-"{abstract}\n<i>Command" <|-- "UpdateCommand"
 @enduml
