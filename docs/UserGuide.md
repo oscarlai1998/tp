@@ -27,7 +27,10 @@ Security</b> to plan their academic journey. With tools like the storing of modu
 taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation 
 progress, view modules taken based on programme requirements and make informed decisions about future modules.
 
+<div style="page-break-after: always;"></div>
+
 ## User Guide Usage
+
 This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
 each feature, its proper formats and expected behaviours from different sample inputs. The User Guide also explains
 how modules are stored in the computer and how it can be access and modified. There is also a list of 
@@ -66,7 +69,10 @@ What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Features
+
 The following section outlines the various commands supported by the application, its proper usages and expected behaviours. 
 
 ### Add a new module: `add`
@@ -105,6 +111,7 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
 Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
 
+<div style="page-break-after: always;"></div>
 
 `add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS2100`
 
@@ -152,6 +159,8 @@ Example of Usage(s) and Expected Outcome(s):
 ```
 <sup>***Figure 1.2.2** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 ### Update module information: `update`
 
 Updates relevant information (name, credit and grade) for the selected module. The information can be arranged 
@@ -163,8 +172,7 @@ the modules, use the [`delete` command](#delete-existing-module-delete) instead.
 
 > ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see 
 [`done` command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades 
-will be added but the rest of the information (if any) will be updated. 
-
+will be added but the rest of the information (if any) will be updated.
 
 Format:
 
@@ -187,6 +195,8 @@ Nice! I've updated this module:
 <sup>***Figure 1.3.1** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
 with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prerequisites to `CS1010` and 
 `CS2100`.*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### Mark a module as complete: `done`
 
@@ -224,6 +234,8 @@ Nice! I've marked this module as done:
 ```
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
 done.*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### Show module information: `info`
 
@@ -274,16 +286,16 @@ Prerequisite for                      : []
 ```
 <sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000` ge module.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 ### List modules: `list`
 
-The list command lists modules added to your list according to the filter. List all modules or select only completed, 
-incomplete or available modules to take. `all` lists all modules on your list, `complete` lists all modules that have 
-been completed (i.e. marked as done), `incomplete` lists all modules that have been added into the system but has not
-been completed(i.e. modules that you are currently taking or yet to take), `available` lists all modules that can be 
-taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. You could also list 
-specific type of modules by putting in the module type as option. The valid module types are `core`, `elec`, `ge` and
-`math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
-`credits`. 
+The list command lists modules based on the option you provided. There are four main options, `all`, `incomplete`, `complete` 
+and `available`. `all` lists all modules on your list, `complete` lists all modules that have been taken, `incomplete` lists 
+all added modules that has not been completed (i.e. modules that you are currently taking or yet to take), `available` lists 
+all modules that can be taken (with prerequisites fulfilled, but have not been taken). You could also list specific type of 
+modules by specifying a valid module type, `core`, `elec`,`ge` or `math` as an option. The list shows all module details
+excluding module prerequisites.
 
 > ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead. 
 
@@ -307,8 +319,8 @@ Module List:
 7. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes the module information that has 
-been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross).*</sup>
+<sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes all module information that has 
+been added.*</sup>
 
 `list incomplete`
 
