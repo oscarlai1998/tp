@@ -1,6 +1,6 @@
 # iGraduate User Guide
-By: `W09-2` Latest update: `30 March 2021`
-
+By: `W09-2` Latest update: `10 April 2021`
+![logo](./images/logo.jpg)
 * [Introduction](#introduction)
 * [User Guide Usage](#user-guide-usage)
 * [Quick Start](#quick-start)
@@ -47,7 +47,8 @@ Symbols/Formatting | Description
 
 > ℹ️ **Note:** The recommended operating system for iGraduate is Windows 10
 
-1. Make sure you have Java version 11 installed on your computer. If you do not have Java 11 installed on your computer,
+1. Make sure you have Java version 11 installed on your computer. You can check your version of Java by entering the command `java -version`
+   on a command line interface like Command Prompt. If you do not have Java 11 installed on your computer,
    you can install it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download `iGraduate.jar` from latest github release by clicking [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your iGraduate program.
@@ -76,7 +77,7 @@ by the iGraduate, its proper usages and expected behaviours.
 Adds a new module to the list of modules. This module can be one that you have taken, is taking or intend to take. To add a module, information needed
 are the module's **name, module code, module type and number of MCs.** You can also add any prerequisites to the module.
 
-Format:
+**Format:**
 
 `add <name> -c <module code> -t <core|math|ue|ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
 
@@ -89,7 +90,7 @@ Format:
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same. 
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `add Journey of the Innovator -c CP2201 -t ue -mc 2`
 ```
@@ -121,7 +122,7 @@ List of pre-requisites needed to take CS2106: CS2100
 Deletes an existing module from the list of modules via the module code. The delete function serves to 
 amend any changes to the planning of modules. 
 
-Format:
+**Format:**
 
 `delete <module code>`
 
@@ -129,7 +130,7 @@ Format:
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `delete CS2100`
 
@@ -151,11 +152,11 @@ Example of Usage(s) and Expected Outcome(s):
 
 ### Update module information: `update`
 
-Updates relevant information (module name, MCs and/or grade) for the selected module on the list. The information can be arranged 
+Updates relevant information (module name, MCs, prerequisites and/or grade) for the selected module on the list. The information can be arranged 
 in any order and multiple information can be entered in one command. The command is used to make any changes 
 to the module information in case of mistakes or unexpected changes to the module. 
 
-Format:
+**Format:**
 
 `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 
@@ -170,7 +171,7 @@ will be added but the rest of the information (if any) will be updated.
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `update CS2106 -n Introduction to Operating Systems -mc 4 -g A -p CS1010,CS2100`
 
@@ -189,7 +190,7 @@ with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prereq
 The done command marks a module on the list as completed. In addition, you must include the grade obtained to facilitate 
 the calculation of CAP. If you want to modify the grades, use the [`update` command](#update-module-information-update). 
 
-Format:
+**Format:**
 
 `done <module code> -g <grade>`
 
@@ -197,7 +198,7 @@ Format:
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `done CS2106 -g A`
 
@@ -226,13 +227,13 @@ done.*</sup>
 The info command shows the information of the specified module in a detailed manner. All information related to the
 specified module including its prerequisites will be shown to you.
 
-Format:
+**Format:**
 
 `info <module code>`
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `info CS2106`
 
@@ -281,13 +282,13 @@ specific type of modules by putting in the module type as option. The valid modu
 `math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
 `credits`. 
 
-Format: 
+**Format:**
 
 `list <all|incomplete|complete|available|core|elec|ge|math>`
 
 > ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `list all`
 
@@ -399,7 +400,7 @@ Displays a bar that represents the current progress of your academic career. The
 your total completed module credits against the total number of credits needed for graduation requirements. The bar will 
 fill up as more modules are completed.
 
-Format:
+**Format:**
 
 `progress`
 
@@ -409,7 +410,7 @@ Format:
 > ℹ️ **Note:**  If total completed MCs exceeds 160, the progress bar will still display `100%`.
 > (See Q7 of [FAQ](#frequently-asked-questions))
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `progress`
 
@@ -427,13 +428,13 @@ Progress:
 Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded 
 score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
 
-Format:
+**Format:**
 
 `cap`
 
 > ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `cap`
 
@@ -448,11 +449,11 @@ Current Degree Classification: Honours (Distinction)
 ### Exit the program: `exit`
 Exits the program. 
 
-Format:
+**Format:**
 
 `exit`
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `exit`
 
@@ -467,13 +468,14 @@ See you soon! Happy studying!
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
 do not remember the different commands available or their purpose and format.
 
-Format:
+**Format:**
+
 `help [add|delete|update|done|list|progress|cap|exit]`
 
 > ℹ️ **Note:** If an optional parameter is provided, `help` will provide a short description of the command's functionality
 > and format. Else, `help` will provide the list of commands available.
 
-Example of Usage(s) and Expected Outcome(s):
+**Example of Usage(s) and Expected Outcome(s):**
 
 `help`
 
