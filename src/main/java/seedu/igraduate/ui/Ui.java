@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    // Welcome message
+    // Greeting messages
     public static final String LOGO = " _  ____               _             _\n"
             + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
             + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
@@ -20,13 +20,25 @@ public class Ui {
     public static final String GREETING_MESSAGE = "iGraduate starting up...\nWelcome to iGraduate, "
             + "your one stop study planning service!\nWhat would you like to do today?";
     public static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
+
+    // Formatting messages
     public static final String BORDER_LINE = "------------------------------------------------------------"
             + "--------------------------";
     public static final String INDENTATION = "  ";
 
-    // Messages for successful execution
+    // Add command message
     public static final String MODULE_ADDED_MESSAGE = "Added %s %s to the list. (%sMCs)";
+
+    // Delete command message
     public static final String MODULE_DELETED_MESSAGE = "\"%s\" module %s has been deleted.";
+
+    // Done command message
+    public static final String MODULE_DONE_MESSAGE = "Nice! I've marked this module as done:";
+
+    // Update command message
+    public static final String MODULE_UPDATE_MESSAGE = "Nice! I've updated this module:";
+
+    // List command messages
     public static final String MODULES_TAKEN_MESSAGE = "Modules you have have completed:";
     public static final String MODULES_LEFT_MESSAGE = "Modules you have yet to complete:";
     public static final String MODULES_AVAILABLE_MESSAGE = "Modules can be taken:";
@@ -34,6 +46,16 @@ public class Ui {
     public static final String MODULES_ELECTIVE_MESSAGE = "Elective modules in the list:";
     public static final String MODULES_GE_MESSAGE = "GE modules in the list:";
     public static final String MODULES_MATH_MESSAGE = "Math modules in the list:";
+    public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
+    public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
+    public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
+    public static final String EMPTY_AVAILABLE_LIST_MESSAGE = "There are no modules available for take.";
+    public static final String EMPTY_CORE_MODULE_LIST_MESSAGE = "There are no core modules.";
+    public static final String EMPTY_ELECTIVE_MODULE_LIST_MESSAGE = "There are no elective modules.";
+    public static final String EMPTY_GE_MODULE_LIST_MESSAGE = "There are no ge modules.";
+    public static final String EMPTY_MATH_MODULE_LIST_MESSAGE = "There are no math modules.";
+
+    // Info command messages
     public static final String MODULES_INFO_MESSAGE = "Printing %s module information...\n"
             + "Module Type                           : %s\n"
             + "Module Code                           : %s\n"
@@ -44,21 +66,22 @@ public class Ui {
             + "Prerequisites                         : %s\n"
             + "Incomplete Prerequisites              : %s\n"
             + "Prerequisite for                      : %s";
-    public static final String EMPTY_LIST_MESSAGE = "List is empty. Add a module.";
-    public static final String EMPTY_COMPLETE_LIST_MESSAGE = "There are no completed modules.";
-    public static final String EMPTY_INCOMPLETE_LIST_MESSAGE = "There are no incomplete modules.";
-    public static final String EMPTY_AVAILABLE_LIST_MESSAGE = "There are no modules available for take.";
-    public static final String EMPTY_CORE_MODULE_LIST_MESSAGE = "There are no core modules.";
-    public static final String EMPTY_ELECTIVE_MODULE_LIST_MESSAGE = "There are no elective modules.";
-    public static final String EMPTY_GE_MODULE_LIST_MESSAGE = "There are no ge modules.";
-    public static final String EMPTY_MATH_MODULE_LIST_MESSAGE = "There are no math modules.";
+
+    // Progress command messages
     public static final String PROGRESS_MESSAGE = "%dMCs/160MCs Completed";
     public static final String PROGRESS_COMPLETED_MESSAGE = "Congratulations! You are ready to graduate.";
     public static final String PROGRESS_EXCEEDED_MESSAGE = "Great job studying beyond your graduation requirements!";
+
+    // Error message
     public static final String ADD_EXCEEDS_MAX_CREDITS_MESSAGE = "Cannot add modules worth more than 32 MCs!";
+
+    // Prerequistes related message
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
+
+    // Cap command message
     public static final String CAP_MESSAGE = "Current CAP: %.2f\nCurrent Degree Classification: %s";
 
+    // Help command message
     public static final String HELP_INTRO = "iGraduate is a command line application that acts as a centralised hub "
             + "for\nNUS students majoring in Information Security to plan their academic journey.\nThe application "
             + "comes with 9 features:\n-add\n-delete\n-update\n-done\n-info\n-list\n-progress\n-cap\n-exit\n\nType "
@@ -184,7 +207,7 @@ public class Ui {
         System.out.println(MODULES_AVAILABLE_MESSAGE);
         int count = 0;
         for (Module module : modules) {
-            ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+            ArrayList<String> untakenPreRequisites = module.getUntakenPrerequisites();
             boolean isPreRequisiteCleared = untakenPreRequisites.isEmpty();
             boolean isIncomplete = module.getStatus().equalsIgnoreCase("not taken");
             if (isPreRequisiteCleared && isIncomplete) {
@@ -259,14 +282,14 @@ public class Ui {
     }
 
     /**
-     * Displays success message after adding new module. 
+     * Prints success message after adding new module.
      * 
      * @param module array list containing the modules. 
      */
-    public void printAddedModuleSuccess(Module module) {
+    public void printAddModuleMessage(Module module) {
         System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getCode(), module.getName(), module.getCredit()));
-        if (module.getPreRequisites().size() > 0) {
-            printPrerequisites(module.getCode(), module.getPreRequisites());
+        if (module.getPrerequisites().size() > 0) {
+            printPrerequisites(module.getCode(), module.getPrerequisites());
         }
         System.out.println(INDENTATION + module);
     }
@@ -285,32 +308,32 @@ public class Ui {
     }
 
     /**
-     * Displays success message after deleting the module. 
+     * Prints success message after deleting the module.
      * 
      * @param name module name. 
      * @param type module type.
      */
-    public void printDeletedModuleSuccess(String name, String type) {
+    public void printDeleteModuleMessage(String name, String type) {
         System.out.println(String.format(MODULE_DELETED_MESSAGE, type, name));
     }
 
     /**
-     * Displays success message after marking a module as completed. 
+     * Prints success message after marking a module as completed.
      * 
      * @param module module marked as completed. 
      */
     public void printMarkAsTakenMessage(Module module) {
-        System.out.println("Nice! I've marked this module as done:");
+        System.out.println(MODULE_DONE_MESSAGE);
         System.out.println(INDENTATION + module);
     }
 
     /**
-     * Displays success message after the specified information is updated.
+     * Prints success message after the specified information is updated.
      *
      * @param module module with updated information.
      */
-    public void printUpdateSuccess(Module module) {
-        System.out.println("Nice! I've updated this module:");
+    public void printUpdateModuleMessage(Module module) {
+        System.out.println(MODULE_UPDATE_MESSAGE);
         System.out.println(INDENTATION + module);
     }
 
@@ -327,8 +350,8 @@ public class Ui {
         double moduleCredits = module.getCredit();
         String moduleStatus = module.getStatus();
         String moduleGrade = module.getGrade();
-        ArrayList<String> preRequisites = module.getPreRequisites();
-        ArrayList<String> untakenPreRequisites = module.getUntakenPreRequisites();
+        ArrayList<String> preRequisites = module.getPrerequisites();
+        ArrayList<String> untakenPreRequisites = module.getUntakenPrerequisites();
         ArrayList<String> requiredByModules = module.getRequiredByModules();
 
         String message = String.format(MODULES_INFO_MESSAGE, moduleCode, moduleType, moduleCode, moduleName,
@@ -337,66 +360,66 @@ public class Ui {
     }
 
     /**
-     * Displays message if module list is empty. 
+     * Prints message if module list is empty.
      */
     public void printListEmptyMessage() {
         System.out.println(EMPTY_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no completed modules.
+     * Prints message if there are no completed modules.
      */
     public void printCompleteListEmptyMessage() {
         System.out.println(EMPTY_COMPLETE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no incomplete modules.
+     * Prints message if there are no incomplete modules.
      */
     public void printIncompleteListEmptyMessage() {
         System.out.println(EMPTY_INCOMPLETE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no available modules.
+     * Prints message if there are no available modules.
      */
     public void printAvailableListEmptyMessage() {
         System.out.println(EMPTY_AVAILABLE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no core modules.
+     * Prints message if there are no core modules.
      */
     public void printCoreModuleListEmptyMessage() {
         System.out.println(EMPTY_CORE_MODULE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no elective modules.
+     * Prints message if there are no elective modules.
      */
     public void printElectiveModuleListEmptyMessage() {
         System.out.println(EMPTY_ELECTIVE_MODULE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no ge modules.
+     * Prints message if there are no ge modules.
      */
     public void printGeModuleListEmptyMessage() {
         System.out.println(EMPTY_GE_MODULE_LIST_MESSAGE);
     }
 
     /**
-     * Displays message if there are no math modules.
+     * Prints message if there are no math modules.
      */
     public void printMathModuleListEmptyMessage() {
         System.out.println(EMPTY_MATH_MODULE_LIST_MESSAGE);
     }
 
     /**
-     * Displays the progress bar for university graduation completion. 
+     * Prints the progress bar for university graduation completion.
      * 
-     * @param completedMCs total number of credits completed. 
-     * @param percentage percentage of academic career completed in string. 
+     * @param completedMCs Total number of credits completed.
+     * @param percentage Percentage of academic career completed in string.
      */
     public void printProgressBar(double completedMCs, String percentage) {
         System.out.println("Progress:");
@@ -415,48 +438,78 @@ public class Ui {
         printProgressCompletionMessage(Double.parseDouble(percentage));
     }
 
+    /**
+     * Prints introduction and available help options for help command.
+     */
     public void printIntroHelp() {
         System.out.println(HELP_INTRO);
     }
 
+    /**
+     * Prints help manual for add command.
+     */
     public void printAddHelp() {
         System.out.println(HELP_ADD);
     }
 
+    /**
+     * Prints help manual for delete command.
+     */
     public void printDeleteHelp() {
         System.out.println(HELP_DELETE);
     }
 
+    /**
+     * Prints help manual for update command.
+     */
     public void printUpdateHelp() {
         System.out.println(HELP_UPDATE);
     }
 
+    /**
+     * Prints help manual for done command.
+     */
     public void printDoneHelp() {
         System.out.println(HELP_DONE);
     }
 
+    /**
+     * Prints help manual for info command.
+     */
     public void printInfoHelp() {
         System.out.println(HELP_INFO);
     }
 
+    /**
+     * Prints help manual for list command.
+     */
     public void printListHelp() {
         System.out.println(HELP_LIST);
     }
 
+    /**
+     * Prints help manual for progress command.
+     */
     public void printProgressHelp() {
         System.out.println(HELP_PROGRESS);
     }
 
+    /**
+     * Prints help manual for cap command.
+     */
     public void printCapHelp() {
         System.out.println(HELP_CAP);
     }
 
+    /**
+     * Prints help manual for exit command.
+     */
     public void printExitHelp() {
         System.out.println(HELP_EXIT);
     }
 
     /**
-     * Displays progress completion message.
+     * Prints progress completion message.
      */
     public void printProgressCompletionMessage(double percentage) {
         if (percentage == 100) {
@@ -472,25 +525,17 @@ public class Ui {
      * @param cap user's cap
      * @param degreeClassification user's degree classification
      */
-    public void printCap(double cap, String degreeClassification) {
+    public void printCapMessage(double cap, String degreeClassification) {
         System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));
     }
 
     /**
-     *  Prints warning message when user adds a module that exceeds 32 MCs.
-     */
-    public void printExceededMaxMCs() {
-        System.out.println(ADD_EXCEEDS_MAX_CREDITS_MESSAGE);
-    }
-
-    /**
-     * Prints out underlying error message for exception.
+     * Prints out the underlying error message for all exceptions.
      *
      * @param exception Exception object caught.
      */
     public void printErrorMessage(Exception exception) {
         System.out.println(exception.getMessage());
     }
-
 
 }

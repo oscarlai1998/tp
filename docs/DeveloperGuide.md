@@ -300,18 +300,7 @@ Each of the module classes consists of:
 #### 3.4.1.1 `Module` Class
 
 `Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes 
-applicable to all modules. The attributes found in the `Module` class are:
-
-Scope   | Type              | Variable             | Description | 
---------|-------------------|----------------------|-------------|
-private | String            | code                 | Module code of the module object.
-private | String            | name                 | Module name of the module object.
-private | double            | credit               | Modular credit of the module object.
-private | String            | status               | Status of the module, whether it is “taken”, “not taken” or “taking”.
-private | String            | grade                | The grade of taken modules.
-private | ArrayList<String> | preRequisites        | A list of prerequisite modules.
-private | ArrayList<String> | untakenPreRequisites | A list of unsatisfied prerequisite modules.
-private | ArrayList<String> | requiredByModules    | A list of modules requiring the current module as a prerequisite.
+applicable to all modules. The attributes found in the `Module` class are relevant to NUS module information.
 
 The `Module` class also consists of methods that set and get the value of attributes shown in the table above. There are 
 four additional methods in the class, namely `removeUntakenPreRequisite`, `removeRequiredByModule`, `getStatusIcon`and `toString`

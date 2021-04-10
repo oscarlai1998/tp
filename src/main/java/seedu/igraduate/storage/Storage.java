@@ -2,7 +2,7 @@ package seedu.igraduate.storage;
 
 import seedu.igraduate.exception.DataFileNotFoundException;
 import seedu.igraduate.exception.LoadModuleFailException;
-import seedu.igraduate.exception.ModifiedStorageFileException;
+import seedu.igraduate.exception.CorruptedStorageFileException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.model.list.ModuleList;
@@ -11,6 +11,8 @@ import seedu.igraduate.model.module.ElectiveModule;
 import seedu.igraduate.model.module.GeModule;
 import seedu.igraduate.model.module.MathModule;
 import seedu.igraduate.model.module.Module;
+
+import seedu.igraduate.logic.parser.Parser;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import com.google.gson.JsonParseException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +39,7 @@ import java.util.logging.Logger;
 public class Storage {
     private static Storage storage = null;
     private File filePath;
+    private Parser parser;
     private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
     // Define the runtimeAdapterFactory for Gson to treat each module type as
@@ -72,36 +76,55 @@ public class Storage {
      * @throws IOException                  if file cannot be read or processed.
      * @throws LoadModuleFailException      if the module fails to load from file.
      * @throws DataFileNotFoundException    if the module data file does not exists.
-     * @throws ModifiedStorageFileException if the json file has been modified (when
+     * @throws CorruptedStorageFileException if the json file has been modified (when
      *                                      credits > 32 or credits < 0).
      */
     public ArrayList<Module> loadModulesFromFile()
-            throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {
+            throws LoadModuleFailException, DataFileNotFoundException, CorruptedStorageFileException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
 
-        Type objectType = new TypeToken<ArrayList<Module>>() {
-        }.getType();
+        Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
 
         try {
             ArrayList<Module> rawModules = loadFromJson(objectType, filePath);
             LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
             ArrayList<Module> distinctModules = removeDuplicateModules(rawModules);
-            if (!isValidModule(distinctModules)) {
-                throw new ModifiedStorageFileException();
+            if (!isModuleDataValid(distinctModules)) {
+                throw new CorruptedStorageFileException();
             }
             return distinctModules;
-        } catch (IOException exception) {
+        } catch (JsonParseException e) {
+            throw new CorruptedStorageFileException();
+        } catch (IOException e) {
             LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
     }
 
-    private boolean isValidModule(ArrayList<Module> modules) {
+    /**
+     * Checks if the module information imported is valid.
+     *
+     * @param modules Distinct module list imported from data file.
+     * @return True if all modules are valid, false otherwise.
+     */
+    private boolean isModuleDataValid(ArrayList<Module> modules) {
         for (Module module : modules) {
+            String moduleCode = module.getCode();
+            String moduleGrade = module.getGrade();
             double credit = module.getCredit();
-            if (credit < 0 | credit > 32) {
+            String status = module.getStatus();
+
+            boolean isInvalidModuleCode = !parser.isModuleCodeValid(moduleCode);
+            boolean isInvalidModuleGrade = !parser.isModuleGradeValid(moduleGrade);
+            boolean isInvalidModularCredit = !parser.isModularCreditValid(credit);
+            boolean isInvalidStatus = !(status.equalsIgnoreCase("taken")
+                    || status.equalsIgnoreCase("not taken"));
+            boolean isInvalidModuleData = isInvalidModuleCode || isInvalidModuleGrade || isInvalidModularCredit
+                    || isInvalidStatus;
+
+            if (isInvalidModuleData) {
                 return false;
             }
         }
