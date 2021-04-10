@@ -647,6 +647,22 @@ If no parameters are provided, a brief description of the program and the availa
 <sup>***Figure 4.3.8.1*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
 
 ### 4.4 Module
+The `module` component contains the class `module`, together with 4 child classes that inherit from `module`.
+All modules stored in iGraduate are instances of one of the 4 subclasses. 
+
+#### Details
+For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the 
+parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
+grade and MCs. It also contains the lists that track the prerequisites of the module. 
+
+The implementation details of the subclasses are hence quite sparse, containing only a constructor and a public method `toString()` which identifies the type of module stored
+in the `module` object.
+
+#### Considerations
+To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
+be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
+module code and grade, the subclasses do not contain much information that is not already stored in thier parent class. To
+better accommodate our *list by module type* feature, the subclass each module belongs to is determined by the module type.
 
 ### 4.5 ModuleList
 
@@ -662,7 +678,7 @@ modules in the module list, saving the updated state into the storage file.
 The module list is stored in a storage file named `modules.json` in the `data` folder 
 (`<program location>/data/modules.json`). 
 
-![archi](./images/storageSequenceDiagram.jpg)
+![archi](./images/StorageSequenceDiagram.png)
 
 <sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
