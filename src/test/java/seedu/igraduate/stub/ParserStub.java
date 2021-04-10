@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidListTypeException;
@@ -37,7 +39,7 @@ public class ParserStub extends Parser {
 
     public static String createAddCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
-            InvalidModuleTypeException, InvalidModularCreditException {
+            InvalidModuleTypeException, InvalidModularCreditException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_ADD_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_ADD_FLAG_LENGTH);
         boolean isInvalidPrereqFlag = (commandFlags.size() != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
@@ -49,16 +51,12 @@ public class ParserStub extends Parser {
         String moduleCode = extractModuleCode(commandFlags);
         String moduleName = commandParameters.get(1);
         String moduleType = extractModuleType(commandFlags);
-        double moduleCredits = extractModuleCredits(commandFlags);
-        ArrayList<String> preRequisites = extractPreRequisites(commandFlags);
-        ArrayList<String> untakenPreRequisites = extractPreRequisites(commandFlags);
-
-        if (!isModuleCodeValid(moduleCode) || !isModuleCodeValid(preRequisites)) {
-            throw new InvalidCommandException();
-        }
+        double moduleCredit = extractModularCredit(commandFlags);
+        ArrayList<String> preRequisites = extractPrerequisites(commandFlags);
+        ArrayList<String> untakenPreRequisites = extractPrerequisites(commandFlags);
 
         return String.format("new AddCommand(%s, %s, %s, %.2f, %s, %s)", moduleCode, moduleName, moduleType,
-                moduleCredits, preRequisites, untakenPreRequisites);
+                moduleCredit, preRequisites, untakenPreRequisites);
     }
 
     public static String createDeleteCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
@@ -101,7 +99,7 @@ public class ParserStub extends Parser {
     }
 
     public static String createDoneCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, InvalidCommandException {
+            throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_DONE_FLAG_LENGTH);
 
@@ -153,9 +151,9 @@ public class ParserStub extends Parser {
 
     public static String parseCommandStub(String line) throws InvalidCommandException, IncorrectParameterCountException,
             InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException,
-            InvalidModularCreditException {
+            InvalidModularCreditException, InvalidModuleGradeException, InvalidModuleCodeException {
         if (line.trim().length() == 0) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("You may type \"help\" to view manual for our available commands.");
         }
         ArrayList<String> commands = getCommand(line);
         ArrayList<String> commandParameters = getCommandParameters(commands);
@@ -180,7 +178,7 @@ public class ParserStub extends Parser {
         case COMMAND_EXIT:
             return createExitCommandStub(commandParameters, commandFlags);
         default:
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("You may type \"help\" to view manual for our available commands.");
         }
     }
 }

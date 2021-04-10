@@ -1,6 +1,7 @@
 # iGraduate User Guide
 By: `W09-2` Latest update: `10 April 2021`
 ![logo](./images/logo.jpg)
+
 * [Introduction](#introduction)
 * [User Guide Usage](#user-guide-usage)
 * [Quick Start](#quick-start)
@@ -27,7 +28,10 @@ Security</b> to plan their academic journey. With tools like the storing of modu
 taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation 
 progress, view modules taken based on programme requirements and make informed decisions about future modules.
 
+<div style="page-break-after: always;"></div>
+
 ## User Guide Usage
+
 This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
 each feature, its proper formats and expected behaviours from different sample inputs. The User Guide also explains
 how modules are stored in the computer and how it can be access and modified. There is also a list of 
@@ -67,7 +71,10 @@ What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Features
+
 iGraduate works by tracking a list of modules you have taken, is taking or is intending to take. Different features can be performed on the list
 to help you track your academic journey. These features can be called by a list of commands. The following section outlines the various commands supported
 by the iGraduate, its proper usages and expected behaviours.
@@ -103,6 +110,7 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
 Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
 
+<div style="page-break-after: always;"></div>
 
 `add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS2100`
 
@@ -150,11 +158,13 @@ amend any changes to the planning of modules.
 ```
 <sup>***Figure 1.2.2** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 ### Update module information: `update`
 
 Updates relevant information (module name, MCs, prerequisites and/or grade) for the selected module on the list. The information can be arranged 
 in any order and multiple information can be entered in one command. The command is used to make any changes 
-to the module information in case of mistakes or unexpected changes to the module. 
+to the module information in case of mistakes or unexpected changes to the module.
 
 **Format:**
 
@@ -184,6 +194,8 @@ Nice! I've updated this module:
 <sup>***Figure 1.3.1** Expected results from updating the `credit`, `grade` and `prerequisites` of the module 
 with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prerequisites to `CS1010` and 
 `CS2100`.*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### Mark a module as complete: `done`
 
@@ -221,6 +233,8 @@ Nice! I've marked this module as done:
 ```
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
 done.*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### Show module information: `info`
 
@@ -271,16 +285,16 @@ Prerequisite for                      : []
 ```
 <sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000` ge module.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 ### List modules: `list`
 
-The list command lists modules added to your list according to the filter. List all modules or select only completed, 
-incomplete or available modules to take. `all` lists all modules on your list, `complete` lists all modules that have 
-been completed (i.e. marked as done), `incomplete` lists all modules that have been added into the system but has not
-been completed(i.e. modules that you are currently taking or yet to take), `available` lists all modules that can be 
-taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. You could also list 
-specific type of modules by putting in the module type as option. The valid module types are `core`, `elec`, `ge` and
-`math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
-`credits`. 
+The list command lists modules based on the option you provided. There are four main options, `all`, `incomplete`, `complete` 
+and `available`. `all` lists all modules on your list, `complete` lists all modules that have been taken, `incomplete` lists 
+all added modules that has not been completed (i.e. modules that you are currently taking or yet to take), `available` lists 
+all modules that can be taken (with prerequisites fulfilled, but have not been taken). You could also list specific type of 
+modules by specifying a valid module type, `core`, `elec`,`ge` or `math` as an option. The list shows all module details
+excluding module prerequisites.
 
 **Format:**
 
@@ -304,8 +318,8 @@ Module List:
 7. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes the module information that has 
-been added, including those that are completed (indicated with a tick) and incompleted (indicated with a cross).*</sup>
+<sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes all module information that has 
+been added.*</sup>
 
 `list incomplete`
 
@@ -468,9 +482,8 @@ See you soon! Happy studying!
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
 do not remember the different commands available or their purpose and format.
 
-**Format:**
-
-`help [add|delete|update|done|list|progress|cap|exit]`
+Format:
+`help [add|delete|update|done|info|list|progress|cap|exit]`
 
 > ℹ️ **Note:** If an optional parameter is provided, `help` will provide a short description of the command's functionality
 > and format. Else, `help` will provide the list of commands available.
@@ -572,4 +585,4 @@ list | <code>list <all&#124;incomplete&#124;complete&#124;core&#124;elec&#124;ge
 progress | `progress`
 cap    | `cap`
 exit     | `exit`
-help     | `help <command>`
+help     | <code>help [add&#124;delete&#124;update&#124;done&#124;info&#124;list&#124;progress&#124;cap&#124;exit]</code>

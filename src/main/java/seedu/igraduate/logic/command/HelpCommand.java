@@ -1,6 +1,7 @@
 package seedu.igraduate.logic.command;
 
 import seedu.igraduate.exception.InvalidCommandException;
+
 import seedu.igraduate.model.list.ModuleList;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
@@ -9,9 +10,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HelpCommand extends Command {
+
     private static final Logger LOGGER = Logger.getLogger(HelpCommand.class.getName());
+
+    /**
+     * Type of help option.
+     */
     private String helpType;
 
+    /**
+     * Constructs a new HelpCommand object.
+     *
+     * @param helpType Type of help option.
+     */
     public HelpCommand(String helpType) {
         this.helpType = helpType.trim();
     }
@@ -22,7 +33,7 @@ public class HelpCommand extends Command {
      * @param moduleList Module list consisting of all modules.
      * @param ui         User interface for printing result.
      * @param storage    Storage for storing module list data.
-     * @throws InvalidCommandException if help type is invalid.
+     * @throws InvalidCommandException If help type is invalid.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidCommandException {
@@ -60,7 +71,7 @@ public class HelpCommand extends Command {
             break;
         default:
             LOGGER.log(Level.WARNING, "Invalid help option...");
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("You may type \"help\" to view manual for our available commands.");
         }
         LOGGER.log(Level.INFO, "End of help command execution.");
     }

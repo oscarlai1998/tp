@@ -7,37 +7,59 @@ import java.util.ArrayList;
  * information applicable to all module related classes.
  */
 public abstract class Module {
+    /**
+     * Module code of the module object.
+     */
     private String code;
+    /**
+     * Module name of the module object.
+     */
     private String name;
+    /**
+     * Modular credit of the module object.
+     */
     private double credit;
+    /**
+     * Status of the module, whether it is “taken” or “not taken”.
+     */
     private String status;
+    /**
+     * The grade of taken modules.
+     */
     private String grade;
-    private ArrayList<String> preRequisites;
-    private ArrayList<String> untakenPreRequisites;
+    /**
+     * A list of prerequisite modules.
+     */
+    private ArrayList<String> prerequisites;
+    /**
+     * A list of unsatisfied prerequisite modules.
+     */
+    private ArrayList<String> untakenPrerequisites;
+    /**
+     * A list of modules requiring the current module as a prerequisite.
+     */
     private ArrayList<String> requiredByModules;
 
     /**
-     * Creates an instance of a module based on the corresponding module type.
+     * Constructs a new Module object.
      * 
-     * @param code                 module code.
-     * @param name                 module name as specified in the user input.
-     * @param credit               number of modular credits.
-     * @param status               status of completion (tick for completed, cross
-     *                             for uncompleted).
-     * @param grade                grade attained for the module, only applicable is
-     *                             status is done.
-     * @param preRequisites        prerequisites required for the module.
-     * @param untakenPreRequisites pre-requisite modules not taken yet.
+     * @param code                 Module code of the module object.
+     * @param name                 Module name of the module object.
+     * @param credit               Modular credit of the module object.
+     * @param status               Status of the module, whether it is “taken” or “not taken”.
+     * @param grade                Default module grade when module is created.
+     * @param prerequisites        Prerequisites for the module object.
+     * @param untakenPrerequisites Unsatisfied prerequisites for module object.
      */
-    public Module(String code, String name, double credit, String status, String grade, ArrayList<String> preRequisites,
-            ArrayList<String> untakenPreRequisites) {
+    public Module(String code, String name, double credit, String status, String grade, ArrayList<String> prerequisites,
+            ArrayList<String> untakenPrerequisites) {
         setCode(code);
         setName(name);
         setCredit(credit);
         setStatus(status);
         setGrade(grade);
-        setPreRequisites(preRequisites);
-        setUntakenPreRequisites(untakenPreRequisites);
+        setPrerequisites(prerequisites);
+        setUntakenPrerequisites(untakenPrerequisites);
         setRequiredByModules(new ArrayList<>());
     }
 
@@ -61,12 +83,12 @@ public abstract class Module {
         this.grade = grade.toUpperCase();
     }
 
-    public void setPreRequisites(ArrayList<String> preRequisites) {
-        this.preRequisites = preRequisites;
+    public void setPrerequisites(ArrayList<String> prerequisites) {
+        this.prerequisites = prerequisites;
     }
 
-    public void setUntakenPreRequisites(ArrayList<String> untakenPreRequisites) {
-        this.untakenPreRequisites = untakenPreRequisites;
+    public void setUntakenPrerequisites(ArrayList<String> untakenPrerequisites) {
+        this.untakenPrerequisites = untakenPrerequisites;
     }
 
     public void setRequiredByModules(ArrayList<String> requiredByModules) {
@@ -93,6 +115,11 @@ public abstract class Module {
         return status;
     }
 
+    /**
+     * Checks if the current module is done/taken.
+     *
+     * @return True if module is done/taken, false otherwise.
+     */
     public boolean isDone() {
         String status = getStatus();
         if (status.equalsIgnoreCase("taken")) {
@@ -105,61 +132,62 @@ public abstract class Module {
     }
 
     /**
-     * Check if grade is valid. [A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS,
-     * CU].
+     * Check whether S/U option is exercised on the module.
      *
-     * @return boolean value true if grade is value and false if invalid.
+     * @return true if S/U option is exercised, false if S/U option is not exercised.
      */
-    public static boolean isGradeValid(String moduleGrade) {
-        ArrayList<String> validGrades = new ArrayList<>() {
-            {
-                add("A+");
-                add("A");
-                add("A-");
-                add("B+");
-                add("B");
-                add("B-");
-                add("C+");
-                add("C");
-                add("D+");
-                add("F");
-                add("S");
-                add("U");
-                add("CS");
-                add("CU");
-
-            }
-        };
-        if (validGrades.contains(moduleGrade.toUpperCase())) {
+    public boolean isGradeSu() {
+        String grade = getGrade();
+        if (grade.equals("S") || grade.equals("U")) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    public ArrayList<String> getPreRequisites() {
-        return preRequisites;
+    /**
+     * Checks whether all the prerequisites are satisfied.
+     *
+     * @return True if all prerequisites are satisfied, false otherwise.
+     */
+    public boolean isPrerequisitesSatisfied() {
+        return untakenPrerequisites.isEmpty();
     }
 
-    public ArrayList<String> getUntakenPreRequisites() {
-        return untakenPreRequisites;
+    public ArrayList<String> getPrerequisites() {
+        return prerequisites;
+    }
+
+    public ArrayList<String> getUntakenPrerequisites() {
+        return untakenPrerequisites;
     }
 
     public ArrayList<String> getRequiredByModules() {
         return requiredByModules;
     }
 
-    public void removeUntakenPreRequisite(String moduleCode) {
-        untakenPreRequisites.remove(moduleCode);
+    /**
+     * Remove specified prerequisite module from untakenPrerequisites list.
+     *
+     * @param moduleCode Module code of module to be removed from untakenPrerequisites list.
+     */
+    public void removeUntakenPrerequisite(String moduleCode) {
+        untakenPrerequisites.remove(moduleCode);
     }
 
-    public void removeRequredByModule(String moduleCode) {
+    /**
+     * Remove the specified module requiring current module as prerequisite.
+     *
+     * @param moduleCode Module code of module to be removed from requiredByModule list.
+     */
+    public void removeRequiredByModule(String moduleCode) {
         requiredByModules.remove(moduleCode);
     }
 
     /**
-     * Gets the completion status of the module.
+     * Gets the completion status icon of the module.
      * 
-     * @return tick if taken, cross if not taken and dash if not applicable.
+     * @return "O" if taken, "X" if not taken and dash otherwise.
      */
     public String getStatusIcon() {
         String status = getStatus();
