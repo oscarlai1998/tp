@@ -15,6 +15,7 @@ import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
@@ -53,7 +54,7 @@ class InfoCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         // Add one core module to module list
         String moduleCode = "CS1010";
         String moduleName = "Programming Methodology";
@@ -81,8 +82,8 @@ class InfoCommandTest {
     @Test
     void executeInfoCommand_nonExistenceModules_exceptionThrown() throws InvalidModuleTypeException,
             IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
-            InvalidModularCreditException, InvalidListTypeException, IllegalParametersException {
-
+            InvalidModularCreditException, InvalidListTypeException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "info cs1111";
         Command infoCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -94,7 +95,7 @@ class InfoCommandTest {
     @Test
     void isExit() throws InvalidModuleTypeException, IncorrectParameterCountException, InvalidCommandException,
             InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
-            IllegalParametersException {
+            IllegalParametersException, InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "info cs1010";
         Command infoCommand = Parser.parseCommand(line);
         assertEquals(false, infoCommand.isExit());

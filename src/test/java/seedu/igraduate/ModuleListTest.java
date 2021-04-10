@@ -27,7 +27,7 @@ class ModuleListTest {
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
-        assertEquals("GER1000", modules.getByCode("GER1000").getCode());
+        assertEquals("GER1000", modules.getModuleByCode("GER1000").getCode());
     }
 
     @Test
@@ -74,7 +74,7 @@ class ModuleListTest {
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
-        assertEquals(geModule, modules.getByCode("GER1000"));
+        assertEquals(geModule, modules.getModuleByCode("GER1000"));
     }
 
     @Test
@@ -85,9 +85,9 @@ class ModuleListTest {
         GeModule geModule = new GeModule("GER1000", "Quantitative Reasoning",
                 4.0, "taken", "A-", preRequisites, untakenPreRequisites);
         modules.add(geModule);
-        modules.getByCode("GER1000");
+        modules.getModuleByCode("GER1000");
         assertThrows(ModuleNotFoundException.class, "The module code you have entered"
-                + " does not exists. \nPlease double check and try again.", () -> modules.getByCode("CS1010"));
+                + " does not exists. \nPlease double check and try again.", () -> modules.getModuleByCode("CS1010"));
     }
 
     /**

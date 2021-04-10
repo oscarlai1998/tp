@@ -5,9 +5,9 @@ package seedu.igraduate.exception;
  */
 public class InvalidCommandException extends Exception {
     public static final String INVALID_COMMAND_ERROR_MESSAGE = "The command you have entered"
-            + " is incorrect. \nPlease double check and try again.";
+            + " is incorrect.\n%s";
 
-    public InvalidCommandException() {
-        super(INVALID_COMMAND_ERROR_MESSAGE);
+    public InvalidCommandException(String errorMessage) {
+        super(String.format(INVALID_COMMAND_ERROR_MESSAGE, errorMessage));
     }
 }

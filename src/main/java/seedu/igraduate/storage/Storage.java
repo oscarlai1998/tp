@@ -2,7 +2,7 @@ package seedu.igraduate.storage;
 
 import seedu.igraduate.exception.DataFileNotFoundException;
 import seedu.igraduate.exception.LoadModuleFailException;
-import seedu.igraduate.exception.ModifiedStorageFileException;
+import seedu.igraduate.exception.CorruptedStorageFileException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
 import seedu.igraduate.model.list.ModuleList;
@@ -11,6 +11,8 @@ import seedu.igraduate.model.module.ElectiveModule;
 import seedu.igraduate.model.module.GeModule;
 import seedu.igraduate.model.module.MathModule;
 import seedu.igraduate.model.module.Module;
+
+import seedu.igraduate.logic.parser.Parser;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +27,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
+import com.google.gson.JsonParseException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,12 +37,13 @@ import java.util.logging.Logger;
  * and loading of file.
  */
 public class Storage {
+    // Storage information
     private static Storage storage = null;
     private File filePath;
+
     private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
-    // Define the runtimeAdapterFactory for Gson to treat each module type as
-    // different object
+    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory.of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core").registerSubtype(ElectiveModule.class, "elective")
             .registerSubtype(GeModule.class, "ge").registerSubtype(MathModule.class, "math");
@@ -68,44 +72,86 @@ public class Storage {
     /**
      * Prepares to load modules from file.
      * 
-     * @return the parsed array list containing all saved modules.
-     * @throws IOException                  if file cannot be read or processed.
-     * @throws LoadModuleFailException      if the module fails to load from file.
-     * @throws DataFileNotFoundException    if the module data file does not exists.
-     * @throws ModifiedStorageFileException if the json file has been modified (when
-     *                                      credits > 32 or credits < 0).
+     * @return The parsed array list containing all saved modules.
+     * @throws LoadModuleFailException      If the module fails to load from file.
+     * @throws DataFileNotFoundException    If the module data file does not exists.
+     * @throws CorruptedStorageFileException If the json file has been modified in unintended manner.
      */
-    public ArrayList<Module> loadModulesFromFile()
-            throws LoadModuleFailException, DataFileNotFoundException, ModifiedStorageFileException {
+    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException,
+        CorruptedStorageFileException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
 
-        Type objectType = new TypeToken<ArrayList<Module>>() {
-        }.getType();
+        Type objectType = new TypeToken<ArrayList<Module>>() {}.getType();
 
         try {
             ArrayList<Module> rawModules = loadFromJson(objectType, filePath);
             LOGGER.log(Level.INFO, "Module data loaded from disk successfully.");
             ArrayList<Module> distinctModules = removeDuplicateModules(rawModules);
-            if (!isValidModule(distinctModules)) {
-                throw new ModifiedStorageFileException();
+            if (!isModuleDataValid(distinctModules)) {
+                throw new CorruptedStorageFileException();
             }
             return distinctModules;
-        } catch (IOException exception) {
+        } catch (JsonParseException e) {
+            throw new CorruptedStorageFileException();
+        } catch (IOException e) {
             LOGGER.warning("Failed to load module.");
             throw new LoadModuleFailException();
         }
     }
 
-    private boolean isValidModule(ArrayList<Module> modules) {
+    /**
+     * Checks if the module information imported is valid.
+     *
+     * @param modules Distinct module list imported from data file.
+     * @return True if all modules are valid, false otherwise.
+     */
+    private boolean isModuleDataValid(ArrayList<Module> modules) {
         for (Module module : modules) {
+            String moduleCode = module.getCode();
+            String moduleGrade = module.getGrade();
             double credit = module.getCredit();
-            if (credit < 0 | credit > 32) {
+            String status = module.getStatus();
+
+            boolean isInvalidModuleCode = !Parser.isModuleCodeValid(moduleCode);
+            boolean isInvalidModuleGrade = !Parser.isModuleGradeValid(moduleGrade);
+            boolean isInvalidModularCredit = !Parser.isModularCreditValid(credit);
+            boolean isInvalidStatus = !(status.equalsIgnoreCase("taken")
+                    || status.equalsIgnoreCase("not taken"));
+            boolean isInvalidModuleData = isInvalidModuleCode || isInvalidModuleGrade || isInvalidModularCredit
+                    || isInvalidStatus;
+
+            if (isInvalidModuleData) {
                 return false;
             }
+
+            initialiseEmptyArrayLists(module);
         }
         return true;
+    }
+
+    /**
+     * Initialises empty prerequisites, untakenPrerequisites and requiredByModule list.
+     *
+     * @param module Module object for checking and initialising empty array list.
+     */
+    private void initialiseEmptyArrayLists(Module module) {
+        ArrayList<String> prerequisites = module.getPrerequisites();
+        ArrayList<String> untakenPrerequisites = module.getUntakenPrerequisites();
+        ArrayList<String> requiredByModules = module.getRequiredByModules();
+
+        if (prerequisites == null) {
+            module.setPrerequisites(new ArrayList<>());
+        }
+
+        if (untakenPrerequisites == null) {
+            module.setUntakenPrerequisites(new ArrayList<>());
+        }
+
+        if (requiredByModules == null) {
+            module.setRequiredByModules(new ArrayList<>());
+        }
     }
 
     /**
@@ -122,10 +168,10 @@ public class Storage {
     /**
      * Loads the stored modules from json file.
      * 
-     * @param type     module type.
-     * @param jsonFile file opened for reading.
-     * @return parsed array list containing saved modules.
-     * @throws IOException if the file failed to be read.
+     * @param type     Module type.
+     * @param jsonFile File opened for reading.
+     * @return Parsed array list containing saved modules.
+     * @throws IOException If the file failed to be read.
      */
     private ArrayList<Module> loadFromJson(Type type, File jsonFile) throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
@@ -138,8 +184,8 @@ public class Storage {
     /**
      * Prepares to save the array list into a json format.
      * 
-     * @param modules array list of all modules.
-     * @throws SaveModuleFailException if the module fails to save to file.
+     * @param modules Array list of all modules.
+     * @throws SaveModuleFailException If the module fails to save to file.
      */
     public void saveModulesToFile(ModuleList modules) throws SaveModuleFailException {
         // Creates parent directories if file does not exist
@@ -158,11 +204,12 @@ public class Storage {
     /**
      * Saves the array list to json file.
      * 
-     * @param jsonFile file opened for writing.
-     * @param modules  array list of all the modules.
-     * @throws IOException if the file failed to be written.
+     * @param jsonFile File opened for writing.
+     * @param modules  Array list of all the modules.
+     * @throws IOException If the file failed to be written.
      */
     private void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
+        // Register module adaptor factory to gson builder for module type labelling
         Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         int arraySize = modules.size();

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
@@ -54,7 +55,8 @@ public class DoneCommandTest {
     @Test
     void executeDoneCommand_nonexistentModule_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
-            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Done GES1036 -g A+";
         Command doneCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -68,7 +70,7 @@ public class DoneCommandTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         ArrayList<String> preRequisites = new ArrayList<>();
         ArrayList<String> untakenPreRequisites = new ArrayList<>();
         AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,
@@ -77,7 +79,7 @@ public class DoneCommandTest {
         String line = "Done CS1010 -g A";
         Command doneCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
-        Module module = moduleList.getByCode("cs1010");
+        Module module = moduleList.getModuleByCode("cs1010");
         doneCommand.execute(moduleList, ui, storage);
         assertEquals(String.format(MODULE_MARKEDASDONE_MESSAGE, module), outContent.toString());
         System.setOut(originalOut);

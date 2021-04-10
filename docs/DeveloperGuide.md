@@ -317,8 +317,7 @@ Each of the module classes consists of:
 
 #### **Module Class** ####
 
-`Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes 
-applicable to all modules.
+`Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes applicable to all modules. The attributes found in the `Module` class are relevant to NUS module information.
 
 Scope   | Type              | Variable             | Description | 
 --------|-------------------|----------------------|-------------|
@@ -443,18 +442,17 @@ This section elaborates on some details about how certain features are implement
 
 ### **UI** ###
 
-UI component
-- Executes user command using Logic Component
-- Listens to calls from Model data so that UI can print the results.
-
-----
+The Ui feature has 3 primary responsibilities: 
+1. Executes user command using [`Logic Component`](#logic-component)
+1. Prints resulting message
+1. Listens to calls from Model data
 
 ### **Parser** ###
 
 The parser feature has 3 primary responsibilities: 
-1. Identify the command the user wants to run.
-2. Extract the relevant parameters and flags required to run the command
-3. Create a new `Command` object and hand it over to `iGraduate` to execute
+1. Identify the command the user wants to run
+1. Extract the relevant parameters and flags required to run the command
+1. Create a new `Command` object and hand it over to `iGraduate` to execute
 
 <br>
 
@@ -687,15 +685,20 @@ In iGraduate, there are several exceptions that are thrown due to different cond
 
 Exception   | Description              
 --------|-------------------|
+AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to includethe module itself.
+DataFileNotFoundException | The exception is thrown if module data file is not found.
 ExistingModuleException | The exception is thrown if the module code input already exists.             | 
+IllegalParametersException | The exception is thrown if the parameter includes any parameters not allowed in the command.
 IncorrectParameterCountException | The exception is thrown if the parameters given is incorrect.
 InputNotNumberException | The exception is thrown if input is not an integer.
 InvalidCommandException | The exception is thrown if the command input was invalid.
 InvalidListTypeException | Exception is thrown if list command is not followed by: all, incomplete and complete.
+InvalidModularCreditException | Exception is thrown if modular credit input is negative.
 InvalidModuleGradeException | The exception is thrown if module grade input is invalid.
 InvalidModuleTypeException | The exception is thrown if the module type input is invalid.
 LoadModuleFailException | The exception is thrown if module cannot be loaded properly.
-ModularCreditExceedsLimitException | The exception is thrown if the module limit is reached.
+MarkCompletedModuleException | The exception is thrown if module is already marked completed.
+ModifiedStoragefileException |  The exception is thrown if the json file has been modified (when credits > 32 or credits < 0).
 ModuleNotCompleteException | The exception is thrown if the module being updated (on grade) has not been completed.
 ModuleNotFoundException | The exception is thrown if the module cannot be matched.
 PrerequisiteNotFoundException | The exception is thrown if the pre-requisite module cannot be matched.
