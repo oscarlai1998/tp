@@ -81,7 +81,7 @@ public class Parser {
      * @throws InputNotNumberException          If the expected integer input is not a number.
      * @throws InvalidModuleTypeException       If the module type entered is not valid.
      * @throws InvalidListTypeException         If the option for command is invalid.
-     * @throws InvalidModularCreditException    If the modular credit is not between 0 and 32 inclusive.
+     * @throws InvalidModularCreditException    If the modular credit is not between 1 and 32 inclusive.
      * @throws InvalidModuleGradeException      If the module grade provided is incorrect.
      * @throws InvalidModuleCodeException       If the module code does not follow NUS standard.
      */
@@ -145,7 +145,7 @@ public class Parser {
     /**
      * Split the user input into maximum of 2 parts, with '-' as delimiter.
      *
-     * @param line user input.
+     * @param line User input.
      * @return String array of user input split up.
      */
     protected static ArrayList<String> getCommand(String line) {
@@ -184,16 +184,15 @@ public class Parser {
      * execute. Format: "Add [module name] -c [module code] -t [module type] -mc
      * [modular credits] -p [pre-requisites]"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags      flags of commands from user input.
-     * @return new instance of AddCommand class.
-     * @throws InvalidCommandException          If input does not contain a valid
-     *                                          command.
-     * @throws IncorrectParameterCountException If the command input does not
-     *                                          contain the right parameters.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @param commandFlags      Flags of commands from user input.
+     * @return New instance of AddCommand class.
+     * @throws InvalidCommandException          If input does not contain a valid command.
+     * @throws IncorrectParameterCountException If the command input does not contain the right parameters.
      * @throws InputNotNumberException          If the expected input is not number.
-     * @throws InvalidModuleTypeException       If the specified module type is not
-     *                                          valid.
+     * @throws InvalidModuleTypeException       If the specified module type is not valid.
+     * @throws InvalidModularCreditException    If the provided modular credit is invalid.
+     * @throws InvalidModuleCodeException       If the module code does not follow NUS standard.
      */
     public static Command createAddCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
@@ -215,20 +214,20 @@ public class Parser {
         assert moduleName.trim().length() > 0 : "Name of module should not be empty.";
         String moduleType = extractModuleType(commandFlags);
         double modularCredit = extractModularCredit(commandFlags);
-        ArrayList<String> preRequisites = extractPrerequisites(commandFlags);
-        ArrayList<String> untakenPreRequisites = extractPrerequisites(commandFlags);
+        ArrayList<String> prerequisites = extractPrerequisites(commandFlags);
+        ArrayList<String> untakenPrerequisites = extractPrerequisites(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for add command.");
 
-        return new AddCommand(moduleCode, moduleName, moduleType, modularCredit, preRequisites, untakenPreRequisites);
+        return new AddCommand(moduleCode, moduleName, moduleType, modularCredit, prerequisites, untakenPrerequisites);
     }
 
     /**
      * Extracts relevant parameters and creates new instance of DeleteCommand class
      * to execute. Format: "Delete [module code]"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @return new instance of DeleteCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @return New instance of DeleteCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createDeleteCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -251,9 +250,9 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of InfoCommand class
      * to execute. Format: "Info [module code]"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @return new instance of InfoCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @return New instance of InfoCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createInfoCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -276,9 +275,10 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of ListCommand class to
      * execute. Format: "List"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @return new instance of ListCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @return New instance of ListCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
+     * @throws InvalidListTypeException If the provided list option is invalid.
      */
     public static Command createListCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidListTypeException {
@@ -298,9 +298,9 @@ public class Parser {
     /**
      * Creates new instance of ProgressCommand class to execute. Format: "Progress"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @return new instance of ProgressCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @return New instance of ProgressCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createProgressCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -320,12 +320,11 @@ public class Parser {
      * Extracts relevant parameters and creates an instance of DoneCommand to
      * execute. Format: "done [module code] -g [grade]"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags      flags of commands from user input.
-     * @return new instance of DoneCommand class.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @param commandFlags      Flags of commands from user input.
+     * @return New instance of DoneCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
-     * @throws InvalidCommandException          If the command input does not
-     *                                          contain the right parameters.
+     * @throws InvalidCommandException          If the command input does not contain the right parameters.
      * @throws InvalidModuleGradeException      If the module grade provided is not valid.
      */
     public static Command createDoneCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
@@ -349,12 +348,11 @@ public class Parser {
      * Extracts relevant parameters and creates an instance of UpdateCommand to
      * execute. Format: "update [module code] [-g|-mc|-n|-p] [value]"
      * 
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags      flags of commands from user input.
-     * @return new instance of UpdateCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
-     * @throws IllegalParametersException       if the parameter includes -t or -c,
-     *                                          which are illegal parameters.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @param commandFlags      Flags of commands from user input.
+     * @return New instance of UpdateCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
+     * @throws IllegalParametersException       If the parameter includes -t or -c, which are illegal parameters.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, IllegalParametersException {
@@ -377,10 +375,10 @@ public class Parser {
      * Extracts relevant parameters and creates an instance of CapCommand to
      * execute. Format: "Cap"
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags      flags of commands from user input.
-     * @return new instance of CapCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @param commandFlags      Flags of commands from user input.
+     * @return New instance of CapCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createCapCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -399,10 +397,10 @@ public class Parser {
     /**
      * Creates new instance of HelpCommand class to execute.
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @param commandFlags      flags of commands from user input.
-     * @return new instance of HelpCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @param commandFlags      Flags of commands from user input.
+     * @return New instance of HelpCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createHelpCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -423,9 +421,9 @@ public class Parser {
     /**
      * Creates new instance of ExitCommand class to execute.
      *
-     * @param commandParameters parameters of user input, excluding command flags.
-     * @return new instance of ExitCommand class.
-     * @throws IncorrectParameterCountException if parameter count is not correct.
+     * @param commandParameters Parameters of user input, excluding command flags.
+     * @return New instance of ExitCommand class.
+     * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createExitCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -442,17 +440,15 @@ public class Parser {
     }
 
     /**
-     * Extracts module code from user input. Method is called if user runs "Add" or
-     * "Delete" command.
+     * Extracts module code from user input.
      *
      * @param commands parameters of user input, excluding command flags.
      * @return module code.
-     * @throws IncorrectParameterCountException If parameter count is not correct.
      * @throws InvalidModuleCodeException       If module code does not follow NUS standard.
      * @throws InvalidCommandException          If module code parameter is not provided.
      */
-    public static String extractModuleCode(ArrayList<String> commands) throws IncorrectParameterCountException,
-            InvalidModuleCodeException, InvalidCommandException {
+    public static String extractModuleCode(ArrayList<String> commands) throws InvalidModuleCodeException,
+            InvalidCommandException {
         assert commands.size() == COMMAND_ADD_FLAG_LENGTH || commands.size() == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
                 : "extractModuleCode should only be called for add";
         int index = commands.indexOf("-c");
@@ -471,13 +467,12 @@ public class Parser {
     }
 
     /**
-     * Extracts module type from user input. Method is called if user runs "Add"
-     * command.
+     * Extracts module type from user input.
      *
-     * @param commandFlags flags of commands from user input.
-     * @return module type.
-     * @throws InvalidModuleTypeException if command format is not recognised.
-     * @throws InvalidCommandException    if -t flag is not found.
+     * @param commandFlags Flags of commands from user input.
+     * @return Module type.
+     * @throws InvalidModuleTypeException If command format is not recognised.
+     * @throws InvalidCommandException    If -t flag is not found.
      */
     public static String extractModuleType(ArrayList<String> commandFlags)
             throws InvalidModuleTypeException, InvalidCommandException {
@@ -492,27 +487,22 @@ public class Parser {
 
         String type = commandFlags.get(index + 1).toLowerCase().trim();
         assert type.length() > 0 : "Module type should not be empty.";
-        switch (type) {
-        case "ue": // fallthrough
-        case "ge": // fallthrough
-        case "math": // fallthrough
-        case "core":
-            return type;
-        default:
+        if (!isModuleTypeValid(type)) {
             LOGGER.warning("Invalid module type detected.");
             throw new InvalidModuleTypeException();
         }
+        return type;
     }
 
     /**
      * Extracts modular credits from user input.
      *
-     * @param commandFlags flags of commands from user input.
-     * @return number of modular credits.
-     * @throws NumberFormatException         if number is not given as modular
+     * @param commandFlags Flags of commands from user input.
+     * @return Number of modular credits.
+     * @throws NumberFormatException         If number is not given as modular
      *                                       credits.
-     * @throws InvalidCommandException       if -mc flag is not found.
-     * @throws InvalidModularCreditException if modular credit is not positive
+     * @throws InvalidCommandException       If -mc flag is not found.
+     * @throws InvalidModularCreditException If modular credit is not positive
      *                                       number.
      */
     public static double extractModularCredit(ArrayList<String> commandFlags)
@@ -540,8 +530,8 @@ public class Parser {
     /**
      * Extracts module grade from user input.
      *
-     * @param commandFlags flags of commands from user input.
-     * @return module grade.
+     * @param commandFlags Flags of commands from user input.
+     * @return Module grade.
      * @throws InvalidCommandException If -g flag is not found.
      * @throws InvalidModuleGradeException If module grade provided is not valid.
      */
@@ -563,8 +553,14 @@ public class Parser {
         return moduleGrade;
     }
 
+    /**
+     * Extracts module name from user input.
+     *
+     * @param commandFlags Flags of commands from user input.
+     * @return Module name.
+     * @throws InvalidCommandException If the module name parameter is missing.
+     */
     public static String extractModuleName(ArrayList<String> commandFlags) throws InvalidCommandException {
-
         int startIndex = commandFlags.indexOf("-n");
         if (startIndex == DEFAULT_INDEX) {
             LOGGER.warning("Missing module name parameter.");
@@ -572,7 +568,6 @@ public class Parser {
         }
 
         int endIndex = DEFAULT_INDEX;
-
         for (int i = 0; i < commandFlags.size(); i++) {
             if (commandFlags.get(i).matches("-[^n]{1,2}")) {
                 endIndex = i;
@@ -596,31 +591,22 @@ public class Parser {
      * Determines the option user selects if "List" command is run. Options are: 1.
      * List all modules 2. List modules taken 3. List modules not taken
      *
-     * @param commandFlags flags of commands from user input.
-     * @return the option user selects.
-     * @throws InvalidListTypeException if list type given is invalid.
+     * @param commandFlags Flags of commands from user input.
+     * @return The option user selects.
+     * @throws InvalidListTypeException If list type given is invalid.
      */
     public static String extractListScope(ArrayList<String> commandFlags) throws InvalidListTypeException {
         String scope = commandFlags.get(1).trim().toLowerCase();
-        switch (scope) {
-        case "all": // fallthrough
-        case "complete": // fallthrough
-        case "incomplete": // fallthrough
-        case "available": // fallthrough
-        case "core": // fallthrough
-        case "elec": // fallthrough
-        case "ge": // fallthrough
-        case "math":
-            return scope;
-        default:
+        if (!isListScopeValid(scope)) {
             throw new InvalidListTypeException();
         }
+        return scope;
     }
 
     /**
-     * Extracts pre-requisite module codes from user input.
+     * Extracts prerequisite module codes from user input.
      *
-     * @param commandFlags flags of commands from user input.
+     * @param commandFlags Flags of commands from user input.
      * @return ArrayList containing extracted prerequisite module codes.
      */
     public static ArrayList<String> extractPrerequisites(ArrayList<String> commandFlags) {
@@ -640,26 +626,11 @@ public class Parser {
     /**
      * Checks if the module code is valid according to school codes.
      * 
-     * @param moduleCode module code to be checked.
+     * @param moduleCode Module code to be checked.
      * @return True if the code is valid, false otherwise.
      */
     public static boolean isModuleCodeValid(String moduleCode) {
         return Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,2}", moduleCode);
-    }
-
-    /**
-     * Checks if the module code is valid according to school codes.
-     * 
-     * @param preRequisites list of all the module codes to be checked.
-     * @return True if all the codes are valid, false otherwise.
-     */
-    protected static boolean isModuleCodeValid(ArrayList<String> preRequisites) {
-        for (String preRequisite : preRequisites) {
-            if (!Pattern.matches("[a-zA-Z]{2,3}[0-9]{4}[a-zA-Z]{0,2}", preRequisite)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -698,12 +669,53 @@ public class Parser {
      * @return True if the modular credit falls in valid range, false otherwise.
      */
     public static boolean isModularCreditValid(double modularCredit) {
-        boolean isPositive = modularCredit >= 0;
+        boolean isLargerThanZero = modularCredit > 0;
         boolean isSmallerThanLimit = modularCredit < 33;
+        boolean isWholeNumber = modularCredit % 1 == 0;
 
-        if (isPositive && isSmallerThanLimit) {
+        if (isLargerThanZero && isSmallerThanLimit && isWholeNumber) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Checks if the module type is valid.
+     *
+     * @param moduleType Module type entered by user.
+     * @return True if the module type is valid, false otherwise.
+     */
+    public static boolean isModuleTypeValid(String moduleType) {
+        switch (moduleType) {
+        case "ue": // fallthrough
+        case "ge": // fallthrough
+        case "math": // fallthrough
+        case "core":
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    /**
+     * Checks if the list scope is valid.
+     *
+     * @param scope Scope entered by user.
+     * @return True if the list scope is valid, false otherwise.
+     */
+    public static boolean isListScopeValid(String scope) {
+        switch (scope) {
+        case "all": // fallthrough
+        case "complete": // fallthrough
+        case "incomplete": // fallthrough
+        case "available": // fallthrough
+        case "core": // fallthrough
+        case "elec": // fallthrough
+        case "ge": // fallthrough
+        case "math":
+            return true;
+        default:
+            return false;
+        }
     }
 }

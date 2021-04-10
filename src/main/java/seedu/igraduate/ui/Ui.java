@@ -72,10 +72,7 @@ public class Ui {
     public static final String PROGRESS_COMPLETED_MESSAGE = "Congratulations! You are ready to graduate.";
     public static final String PROGRESS_EXCEEDED_MESSAGE = "Great job studying beyond your graduation requirements!";
 
-    // Error message
-    public static final String ADD_EXCEEDS_MAX_CREDITS_MESSAGE = "Cannot add modules worth more than 32 MCs!";
-
-    // Prerequistes related message
+    // Prerequisites related message
     public static final String PREREQUISITES_MESSAGE = "List of pre-requisites needed to take %s: ";
 
     // Cap command message
@@ -157,7 +154,7 @@ public class Ui {
     /**
      * Prints all the modules in array list.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printEntireList(ArrayList<Module> modules) {
         System.out.println("Module List: ");
@@ -169,7 +166,7 @@ public class Ui {
     /**
      * Prints the modules in the array list that user has taken.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printCompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_TAKEN_MESSAGE);
@@ -185,7 +182,7 @@ public class Ui {
     /**
      * Prints the modules in the array list that user has not taken.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printIncompletedList(ArrayList<Module> modules) {
         System.out.println(MODULES_LEFT_MESSAGE);
@@ -201,7 +198,7 @@ public class Ui {
     /**
      * Prints the modules in the array list that user can take.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printAvailableList(ArrayList<Module> modules) {
         System.out.println(MODULES_AVAILABLE_MESSAGE);
@@ -220,7 +217,7 @@ public class Ui {
     /**
      * Prints the core modules in the array list.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printCoreModuleList(ArrayList<Module> modules) {
         System.out.println(MODULES_CORE_MESSAGE);
@@ -236,7 +233,7 @@ public class Ui {
     /**
      * Prints the elective modules in the array list.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printElectiveModuleList(ArrayList<Module> modules) {
         System.out.println(MODULES_ELECTIVE_MESSAGE);
@@ -252,7 +249,7 @@ public class Ui {
     /**
      * Prints the ge modules in the array list.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printGeModuleList(ArrayList<Module> modules) {
         System.out.println(MODULES_GE_MESSAGE);
@@ -268,7 +265,7 @@ public class Ui {
     /**
      * Prints the math modules in the array list.
      *
-     * @param modules array list containing the modules.
+     * @param modules Array list containing the modules.
      */
     public void printMathModuleList(ArrayList<Module> modules) {
         System.out.println(MODULES_MATH_MESSAGE);
@@ -284,7 +281,7 @@ public class Ui {
     /**
      * Prints success message after adding new module.
      * 
-     * @param module array list containing the modules. 
+     * @param module Array list containing the modules.
      */
     public void printAddModuleMessage(Module module) {
         System.out.println(String.format(MODULE_ADDED_MESSAGE, module.getCode(), module.getName(), module.getCredit()));
@@ -297,7 +294,7 @@ public class Ui {
     /**
      * Prints all prerequisites of a module.
      *
-     * @param prerequisites array list containing all prerequisites.
+     * @param prerequisites Array list containing all prerequisites.
      */
     public void printPrerequisites(String moduleCode, ArrayList<String> prerequisites) {
         System.out.print(String.format(PREREQUISITES_MESSAGE, moduleCode));
@@ -310,8 +307,8 @@ public class Ui {
     /**
      * Prints success message after deleting the module.
      * 
-     * @param name module name. 
-     * @param type module type.
+     * @param name Module name.
+     * @param type Module type.
      */
     public void printDeleteModuleMessage(String name, String type) {
         System.out.println(String.format(MODULE_DELETED_MESSAGE, type, name));
@@ -320,7 +317,7 @@ public class Ui {
     /**
      * Prints success message after marking a module as completed.
      * 
-     * @param module module marked as completed. 
+     * @param module Module marked as completed.
      */
     public void printMarkAsTakenMessage(Module module) {
         System.out.println(MODULE_DONE_MESSAGE);
@@ -330,7 +327,7 @@ public class Ui {
     /**
      * Prints success message after the specified information is updated.
      *
-     * @param module module with updated information.
+     * @param module Module with updated information.
      */
     public void printUpdateModuleMessage(Module module) {
         System.out.println(MODULE_UPDATE_MESSAGE);
@@ -340,8 +337,8 @@ public class Ui {
     /**
      * Prints all information of the specified module.
      *
-     * @param module module for printing details.
-     * @param moduleList moduleList consisting all modules.
+     * @param module Module for printing details.
+     * @param moduleList ModuleList consisting all modules.
      */
     public void printModuleInfo(Module module, ModuleList moduleList) {
         String moduleType = moduleList.getModuleType(module);
@@ -522,8 +519,8 @@ public class Ui {
     /**
      * Prints CAP and degree classification of user based on their grades.
      *
-     * @param cap user's cap
-     * @param degreeClassification user's degree classification
+     * @param cap The computed user's CAP.
+     * @param degreeClassification User's degree classification.
      */
     public void printCapMessage(double cap, String degreeClassification) {
         System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));

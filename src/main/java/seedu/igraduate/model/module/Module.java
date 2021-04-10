@@ -180,7 +180,7 @@ public abstract class Module {
      *
      * @param moduleCode Module code of module to be removed from requiredByModule list.
      */
-    public void removeRequredByModule(String moduleCode) {
+    public void removeRequiredByModule(String moduleCode) {
         requiredByModules.remove(moduleCode);
     }
 

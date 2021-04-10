@@ -75,9 +75,9 @@ public class DoneCommand extends Command {
      * @throws MarkCompletedModuleException If module is already marked as done.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage)
-        throws SaveModuleFailException, ModuleNotFoundException, InvalidModuleGradeException,
-        PrerequisiteNotMetException, PrerequisiteNotFoundException, MarkCompletedModuleException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
+        ModuleNotFoundException, InvalidModuleGradeException, PrerequisiteNotMetException,
+        PrerequisiteNotFoundException, MarkCompletedModuleException {
         LOGGER.log(Level.INFO, "Executing done command...");
         try {
             Module module = moduleList.getModuleByCode(getModuleCode());

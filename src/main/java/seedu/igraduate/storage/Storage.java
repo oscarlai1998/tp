@@ -37,13 +37,13 @@ import java.util.logging.Logger;
  * and loading of file.
  */
 public class Storage {
+    // Storage information
     private static Storage storage = null;
     private File filePath;
-    private Parser parser;
+
     private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
-    // Define the runtimeAdapterFactory for Gson to treat each module type as
-    // different object
+    // Define the runtimeAdapterFactory for Gson to treat each module type as different object
     private RuntimeTypeAdapterFactory<Module> moduleAdaptorFactory = RuntimeTypeAdapterFactory.of(Module.class, "type")
             .registerSubtype(CoreModule.class, "core").registerSubtype(ElectiveModule.class, "elective")
             .registerSubtype(GeModule.class, "ge").registerSubtype(MathModule.class, "math");
@@ -72,15 +72,13 @@ public class Storage {
     /**
      * Prepares to load modules from file.
      * 
-     * @return the parsed array list containing all saved modules.
-     * @throws IOException                  if file cannot be read or processed.
-     * @throws LoadModuleFailException      if the module fails to load from file.
-     * @throws DataFileNotFoundException    if the module data file does not exists.
-     * @throws CorruptedStorageFileException if the json file has been modified (when
-     *                                      credits > 32 or credits < 0).
+     * @return The parsed array list containing all saved modules.
+     * @throws LoadModuleFailException      If the module fails to load from file.
+     * @throws DataFileNotFoundException    If the module data file does not exists.
+     * @throws CorruptedStorageFileException If the json file has been modified in unintended manner.
      */
-    public ArrayList<Module> loadModulesFromFile()
-            throws LoadModuleFailException, DataFileNotFoundException, CorruptedStorageFileException {
+    public ArrayList<Module> loadModulesFromFile() throws LoadModuleFailException, DataFileNotFoundException,
+        CorruptedStorageFileException {
         if (!filePath.exists()) {
             throw new DataFileNotFoundException();
         }
@@ -116,9 +114,9 @@ public class Storage {
             double credit = module.getCredit();
             String status = module.getStatus();
 
-            boolean isInvalidModuleCode = !parser.isModuleCodeValid(moduleCode);
-            boolean isInvalidModuleGrade = !parser.isModuleGradeValid(moduleGrade);
-            boolean isInvalidModularCredit = !parser.isModularCreditValid(credit);
+            boolean isInvalidModuleCode = !Parser.isModuleCodeValid(moduleCode);
+            boolean isInvalidModuleGrade = !Parser.isModuleGradeValid(moduleGrade);
+            boolean isInvalidModularCredit = !Parser.isModularCreditValid(credit);
             boolean isInvalidStatus = !(status.equalsIgnoreCase("taken")
                     || status.equalsIgnoreCase("not taken"));
             boolean isInvalidModuleData = isInvalidModuleCode || isInvalidModuleGrade || isInvalidModularCredit
@@ -127,8 +125,33 @@ public class Storage {
             if (isInvalidModuleData) {
                 return false;
             }
+
+            initialiseEmptyArrayLists(module);
         }
         return true;
+    }
+
+    /**
+     * Initialises empty prerequisites, untakenPrerequisites and requiredByModule list.
+     *
+     * @param module Module object for checking and initialising empty array list.
+     */
+    private void initialiseEmptyArrayLists(Module module) {
+        ArrayList<String> prerequisites = module.getPrerequisites();
+        ArrayList<String> untakenPrerequisites = module.getUntakenPrerequisites();
+        ArrayList<String> requiredByModules = module.getRequiredByModules();
+
+        if (prerequisites == null) {
+            module.setPrerequisites(new ArrayList<>());
+        }
+
+        if (untakenPrerequisites == null) {
+            module.setUntakenPrerequisites(new ArrayList<>());
+        }
+
+        if (requiredByModules == null) {
+            module.setRequiredByModules(new ArrayList<>());
+        }
     }
 
     /**
@@ -145,10 +168,10 @@ public class Storage {
     /**
      * Loads the stored modules from json file.
      * 
-     * @param type     module type.
-     * @param jsonFile file opened for reading.
-     * @return parsed array list containing saved modules.
-     * @throws IOException if the file failed to be read.
+     * @param type     Module type.
+     * @param jsonFile File opened for reading.
+     * @return Parsed array list containing saved modules.
+     * @throws IOException If the file failed to be read.
      */
     private ArrayList<Module> loadFromJson(Type type, File jsonFile) throws IOException {
         Gson gson = new GsonBuilder().registerTypeAdapterFactory(moduleAdaptorFactory).create();
@@ -161,8 +184,8 @@ public class Storage {
     /**
      * Prepares to save the array list into a json format.
      * 
-     * @param modules array list of all modules.
-     * @throws SaveModuleFailException if the module fails to save to file.
+     * @param modules Array list of all modules.
+     * @throws SaveModuleFailException If the module fails to save to file.
      */
     public void saveModulesToFile(ModuleList modules) throws SaveModuleFailException {
         // Creates parent directories if file does not exist
@@ -181,11 +204,12 @@ public class Storage {
     /**
      * Saves the array list to json file.
      * 
-     * @param jsonFile file opened for writing.
-     * @param modules  array list of all the modules.
-     * @throws IOException if the file failed to be written.
+     * @param jsonFile File opened for writing.
+     * @param modules  Array list of all the modules.
+     * @throws IOException If the file failed to be written.
      */
     private void saveToJson(File jsonFile, ArrayList<Module> modules) throws IOException {
+        // Register module adaptor factory to gson builder for module type labelling
         Gson gson = new GsonBuilder().setPrettyPrinting().registerTypeAdapterFactory(moduleAdaptorFactory).create();
 
         int arraySize = modules.size();
