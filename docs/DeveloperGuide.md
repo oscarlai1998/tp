@@ -289,8 +289,8 @@ the relationship between the interaction of classes under the module package is 
 
 <sup>***Figure 3.4.1.1** UML class diagram for Module package*</sup>
 
-The following child classes are created to handle different types of modules based on the generic module type available in 
-the university:
+The following child classes are created to handle different types of modules based on the categories of modules available
+to Information Security students in NUS:
 - `CoreModule`
 - `GeModule`
 - `ElectiveModule`
@@ -317,9 +317,15 @@ private | ArrayList<String> | preRequisites        | A list of prerequisite modu
 private | ArrayList<String> | untakenPreRequisites | A list of unsatisfied prerequisite modules.
 private | ArrayList<String> | requiredByModules    | A list of modules requiring the current module as a prerequisite.
 
-The `Module` class also consists of methods that set and get the value of attributes shown in the table above. There are 
-four additional methods in the class, namely `removeUntakenPreRequisite`, `removeRequiredByModule`, `getStatusIcon`and `toString`
-. The `removeUntakenPreRequisite` and `removeRequiredByModule` methods are used to remove a single`untakenPreRequisites` module 
+The `Module` class also consists of methods that set and get the value of attributes shown in the table above. 
+
+There are four additional methods in the class:
+- `removeUntakenPreRequisite`
+- `removeRequiredByModule`
+- `getStatusIcon`
+- `toString`
+
+`removeUntakenPreRequisite` and `removeRequiredByModule` are methods used to remove a single`untakenPreRequisites` module 
 and `requiredByModules` module respectively, whereas `getStatusIcon` returns the status icon based on the module 
 status. For customized formatting of module printing messages, `toString` method is overridden.
 
@@ -409,17 +415,25 @@ as the entire list or an individual module from the list according to different 
 ### 3.5 Storage Component
 
 Class Diagram:
+The `Storage` Component is made up of 1 class, the singleton `Storage`. The class is responsible for all operations pertaining the 
+saving and loading of `module` objects. It is responsible for saving the `ModuleList` along with all the
+information about each individual `module` in JSON format as well as loading the JSON file and process it back to a `ModuleList` object.
 
-![archi](./images/storageClassDiagram.jpg)
+The 5 relevant methods in the `Storage` class are:
+- `getStorage()`
+- `loadModulesFromFile()`
+- `saveMouleFile()`
+- `loadFromJson()`
+- `saveToJson()`
+
+`getStorage` is used to check and create the Singleton `Storage`.
+`saveModuleFile()` and `saveToJson()` are methods used to save the data in `ModuleList` to JSON format, while `loadModulesFromFile()`
+and `loadFromJson()` are methods used to load data from the JSON file into a `ModuleList`.
+
+![archi](./images/StorageClassDiagram.png)
 
 <sup>***Figure 3.5.1** UML class diagram for Storage package*</sup>
 
-The `Storage` Component, 
-- Can save `module` objects in the `moduleList` in a JSON format and read them back
-
-![archi](./images/storageObjectDiagram.jpg)
-
-<sup>***Figure 3.5.2** UML object diagram for an instance of storage object*</sup>
 
 ### 3.6 Common classes
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown
@@ -543,19 +557,9 @@ list. The various information requested to update would be identified with their
 > ℹ️ **Note:** The command <b>will not update grades</b> if the module requested has not been completed. The rest of 
 the information parsed in the command (if any) will be updated. 
 
-
-#### Details
-
-The following is the UML diagrams for update command consisting of updating each flag.
-
-![archi](./images/updateClassDiagram.jpg)
-
-<sup>***Figure 4.3.3.1** Class diagram of `UpdateCommand` class with user input*</sup>
-
-
 ![archi](./images/UpdateCommandSequenceDiagram.png)
 
-<sup>***Figure 4.3.3.2*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
+<sup>***Figure 4.3.3.2*** Sequence diagram of `UpdateCommand` in execution with *"update CS1010 -mc 2"* as user input</sup>
 
 #### Considerations
 An array list is used to store the parsed data from the user input. This is to make use of the built-in class functions (especially indexOf() and size()). array also lacks certain features that are of good use to the parser class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, matches() of array list automatically takes in a regex instead of having to manually create a regex object, then parsing into the find() function, which loops thorugh the entire array to obtain the matches. This significantly simplifies the code in the parser function, and makes handling exceptions easier. 
@@ -565,7 +569,8 @@ Initialy, it was decided that the parameters would be split into an array to uti
 
 #### 4.3.4 List Command
 
-The list command provides users with 4 options to list down the modules being tracked by iGraduate. The 4 options are:
+The list command provides users with multiple options to list down the modules being tracked by iGraduate. These options come in the form
+of one compulsory input parameter. The options are:
 1. List all modules being tracked:
     - `all`
 1. List modules that have been marked as done:
@@ -574,7 +579,18 @@ The list command provides users with 4 options to list down the modules being tr
     - `incomplete`
 1. List incomplete modules available to be marked as done based on prerequisites completed:
     - `available`
-    
+1. List all core modules being tracked:
+    - `core`
+1. List all math modules being tracked:
+    - `math`
+1. List all GE modules being tracked:
+    - `ge`
+1. List all elective modules being tracked:
+    - `elec`
+
+![archi](./images/ListCommandSequenceDiagram.png)
+
+<sup>*Figure 4.3.4.1* Sequence diagram of `ListCommand` class in execution with *"list complete"* as user input.</sup>
 
 #### 4.3.5 CAP Command
 
