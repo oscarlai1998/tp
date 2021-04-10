@@ -1,8 +1,12 @@
 package seedu.igraduate.model.list;
 
-import seedu.igraduate.exception.*;
+import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
+import seedu.igraduate.exception.ExistingModuleException;
+import seedu.igraduate.exception.ModuleNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotFoundException;
+import seedu.igraduate.exception.PrerequisiteNotMetException;
+import seedu.igraduate.exception.MarkCompletedModuleException;
 
-import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.module.Module;
 import seedu.igraduate.model.module.MathModule;
 import seedu.igraduate.model.module.CoreModule;
