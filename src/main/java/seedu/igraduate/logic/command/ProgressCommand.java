@@ -29,6 +29,9 @@ public class ProgressCommand extends Command {
         double completedMCs = moduleList.getTotalCompletedMCs();
         LOGGER.log(Level.INFO, "Completed MCs success.");
         double percentageDone = (completedMCs / 160) * 100;
+        if (percentageDone > 100) {
+            percentageDone = 100;
+        }
         String stringPercentageDone = df.format(percentageDone);
         ui.printProgressBar(completedMCs, stringPercentageDone);
         LOGGER.log(Level.INFO, "Print Progress Bar success.");

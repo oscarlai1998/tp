@@ -67,17 +67,14 @@ What would you like to do today?
 ```
 
 ## Features
-The following section outlines the various commands supported by the application, its proper usages and expected behaviours. 
+iGraduate works by tracking a list of modules you have taken, is taking or is intending to take. Different features can be performed on the list
+to help you track your academic journey. These features can be called by a list of commands. The following section outlines the various commands supported
+by the iGraduate, its proper usages and expected behaviours.
 
 ### Add a new module: `add`
 
-Adds a new module to the list of modules you wish to track. The list serves to keep track of the modules that 
-you have taken, are currently taking or intend to take in the future. Other functions would interact with these added 
-modules to keep track, calculate CAP and check the progress of your academic career. 
-
-> ℹ️ **Note:** iGraduate does not restrict the number of modules you can add. You can add modules even after fulfilling
-> minimum graduation requirements.
-
+Adds a new module to the list of modules. This module can be one that you have taken, is taking or intend to take. To add a module, information needed
+are the module's **name, module code, module type and number of MCs.** You can also add any prerequisites to the module.
 
 Format:
 
@@ -121,14 +118,14 @@ List of pre-requisites needed to take CS2106: CS2100
 
 ### Delete existing module: `delete`
 
-Deletes an existing module from the list of modules added via the module code. The delete function serves to 
+Deletes an existing module from the list of modules via the module code. The delete function serves to 
 amend any changes to the planning of modules. 
-
-> ℹ️ **Note:** The module must not be a prerequisite of another module. 
 
 Format:
 
 `delete <module code>`
+
+> ℹ️ **Note:** The module must not be a prerequisite of another module.
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
@@ -154,23 +151,22 @@ Example of Usage(s) and Expected Outcome(s):
 
 ### Update module information: `update`
 
-Updates relevant information (name, credit and grade) for the selected module. The information can be arranged 
+Updates relevant information (module name, MCs and/or grade) for the selected module on the list. The information can be arranged 
 in any order and multiple information can be entered in one command. The command is used to make any changes 
 to the module information in case of mistakes or unexpected changes to the module. 
-
-> ℹ️ **Note:**  You cannot change the module type and code as iGraduate uses them to identify the modules. If you want to remove 
-the modules, use the [`delete` command](#delete-existing-module-delete) instead. 
-
-> ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see 
-[`done` command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades 
-will be added but the rest of the information (if any) will be updated. 
-
 
 Format:
 
 `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 
-> ℹ️ **Note:** Although all parameters are optional, the update command requires at least 1 parameter to be used. 
+> ℹ️ **Note:**  You cannot change the module type and code as iGraduate uses them to identify the modules. If you want to remove
+the modules, use the [`delete` command](#delete-existing-module-delete) instead.
+
+> ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see
+[`done` command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades
+will be added but the rest of the information (if any) will be updated.
+
+> ℹ️ **Note:** Although all parameters are optional, the update command requires at least 1 parameter to be used.
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
@@ -190,14 +186,14 @@ with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prereq
 
 ### Mark a module as complete: `done`
 
-The done command marks a modules as completed. In addition, you must include the grade obtained to facilitate 
+The done command marks a module on the list as completed. In addition, you must include the grade obtained to facilitate 
 the calculation of CAP. If you want to modify the grades, use the [`update` command](#update-module-information-update). 
-
-> ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
 
 Format:
 
 `done <module code> -g <grade>`
+
+> ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
 
 > ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
@@ -230,11 +226,11 @@ done.*</sup>
 The info command shows the information of the specified module in a detailed manner. All information related to the
 specified module including its prerequisites will be shown to you.
 
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
-
 Format:
 
 `info <module code>`
+
+> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -285,11 +281,11 @@ specific type of modules by putting in the module type as option. The valid modu
 `math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
 `credits`. 
 
-> ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead. 
-
 Format: 
 
 `list <all|incomplete|complete|available|core|elec|ge|math>`
+
+> ℹ️ **Note:** If a module is completed, the grade obtained is displayed. Otherwise, a `NIL` is displayed instead.
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -401,18 +397,17 @@ on the list.*</sup>
 
 Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of 
 your total completed module credits against the total number of credits needed for graduation requirements. The bar will 
-fill up as more modules are completed. 
-
-> ℹ️ **Note:** The default number of credits used to calculate the progress bar is `160`, the amount of an <b>NUS 
-> single-degree Information Security undergraduate</b> student
-
-> ℹ️ **Note:**  If total MCs exceeds 160, the progress bar will still display `100%`. 
-> (See notes under [Add Command](#add-a-new-module-add))
-
+fill up as more modules are completed.
 
 Format:
 
 `progress`
+
+> ℹ️ **Note:** The number of credits used to calculate the progress bar is `160`, the graduation requirement of an <b>NUS
+> single-degree Information Security undergraduate</b> student
+
+> ℹ️ **Note:**  If total completed MCs exceeds 160, the progress bar will still display `100%`.
+> (See Q7 of [FAQ](#frequently-asked-questions))
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -432,11 +427,11 @@ Progress:
 Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded 
 score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
 
-> ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP.
-
 Format:
 
 `cap`
+
+> ℹ️ **Note:** Modules with Satisfactory/Unsatisfactory (S/U) grades are not calculated in the CAP.
 
 Example of Usage(s) and Expected Outcome(s):
 
@@ -557,6 +552,11 @@ remove new module data manually only if you understand the application's logic a
 > application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
 > any error during your use of the application in order for the developers to look into the problem.
 
+**Q7**: I want to take more modules than my major's graduation requirements. Does iGraduate allow me to do so?
+> Yes! iGraduate does not limit the number of modules you can track. This means that you can add more modules even after 
+> reaching your graduation requirements. Do note that the progress bar under `progress` command will still display 100% even
+> if you exceed your graduation requirements.
+> 
 ## Command Summary
 
 Command | Format
