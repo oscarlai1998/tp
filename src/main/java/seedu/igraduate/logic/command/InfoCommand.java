@@ -18,12 +18,15 @@ public class InfoCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(InfoCommand.class.getName());
 
+    /**
+     * Module code of the module to show detailed information.
+     */
     protected String moduleCode;
 
     /**
-     * Child class of the command class that contains the module code.
+     * Constructs a new InfoCommand object.
      *
-     * @param moduleCode module code.
+     * @param moduleCode Module code specified by the user.
      */
     public InfoCommand(String moduleCode) {
         this.moduleCode = moduleCode;
@@ -41,7 +44,7 @@ public class InfoCommand extends Command {
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException {
         LOGGER.log(Level.INFO, "Executing info command...");
         try {
-            Module module = moduleList.getByCode(moduleCode);
+            Module module = moduleList.getModuleByCode(moduleCode);
             ui.printModuleInfo(module, moduleList);
             LOGGER.log(Level.INFO, String.format("Successfully printed %s module information.", moduleCode));
         } catch (ModuleNotFoundException e) {

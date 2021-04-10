@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+
+participant ":AddCommand" as AddCommand
+participant ":ModuleList" as ModuleList
+participant ":Storage" as Storage
+
+-> AddCommand: execute(moduleList, ui, storage)
+activate AddCommand
+
+AddCommand -> ModuleList: add(module:Module)
+activate ModuleList
+deactivate ModuleList
+
+AddCommand -> Storage: saveModulesToFile(moduleList:ModuleList)
+activate Storage
+
+Storage -> Storage : saveToJson()
+activate Storage #DarkSalmon
+deactivate Storage
+
+
+@enduml

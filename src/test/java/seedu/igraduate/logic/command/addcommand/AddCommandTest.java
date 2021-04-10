@@ -13,6 +13,7 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
@@ -92,12 +93,12 @@ public class AddCommandTest {
             ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
             InvalidModularCreditException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
-        Module module = moduleList.getByCode("cs2100");
+        Module module = moduleList.getModuleByCode("cs2100");
         assertEquals(String.format(Ui.MODULE_ADDED_MESSAGE, "CS2100", "Computer Org", "4.0") + System.lineSeparator()
                 + Ui.INDENTATION + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
