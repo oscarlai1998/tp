@@ -1,5 +1,6 @@
 # iGraduate User Guide
 By: `W09-2` Latest update: `10 April 2021`
+
 ![logo](./images/logo.jpg)
 
 * [Introduction](#introduction)
@@ -30,6 +31,8 @@ progress, view modules taken based on programme requirements and make informed d
 
 <div style="page-break-after: always;"></div>
 
+[🡅 Back to Top](#igraduate-user-guide)
+
 ## User Guide Usage
 
 This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
@@ -46,6 +49,8 @@ Symbols/Formatting | Description
 `Grey highlight`   | Code or terms related to the application.
 `[]`               | Optional parameter.
 `<>`               | Include only one compulsory value from choices.
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ## Quick Start
 
@@ -72,6 +77,8 @@ What would you like to do today?
 ```
 
 <div style="page-break-after: always;"></div>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ## Features
 
@@ -125,6 +132,8 @@ List of pre-requisites needed to take CS2106: CS2100
 <sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
 `4` credit module with the code `CS2106`, with the prerequisite `CS2100`.*</sup>
 
+[🡅 Back to Top](#igraduate-user-guide)
+
 ### Delete existing module: `delete`
 
 Deletes an existing module from the list of modules via the module code. The delete function serves to 
@@ -159,6 +168,8 @@ amend any changes to the planning of modules.
 <sup>***Figure 1.2.2** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
 <div style="page-break-after: always;"></div>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ### Update module information: `update`
 
@@ -196,6 +207,8 @@ with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prereq
 `CS2100`.*</sup>
 
 <div style="page-break-after: always;"></div>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ### Mark a module as complete: `done`
 
@@ -235,6 +248,8 @@ Nice! I've marked this module as done:
 done.*</sup>
 
 <div style="page-break-after: always;"></div>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ### Show module information: `info`
 
@@ -286,6 +301,8 @@ Prerequisite for                      : []
 <sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000` ge module.*</sup>
 
 <div style="page-break-after: always;"></div>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ### List modules: `list`
 
@@ -408,6 +425,8 @@ Math modules in the list:
 <sup>***Figure 1.6.8** Expected results from listing `math` modules. This option will list out all `math` modules
 on the list.*</sup>
 
+[🡅 Back to Top](#igraduate-user-guide)
+
 ### Show academic progression: `progress`
 
 Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of 
@@ -437,6 +456,8 @@ Progress:
 ```
 <sup>***Figure 1.7.1** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
 
+[🡅 Back to Top](#igraduate-user-guide)
+
 ### Calculate CAP: `cap`
 
 Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded 
@@ -460,6 +481,8 @@ Current Degree Classification: Honours (Distinction)
 ```
 <sup>***Figure 1.8.1** Expected results from running the cap command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
 
+[🡅 Back to Top](#igraduate-user-guide)
+
 ### Exit the program: `exit`
 Exits the program. 
 
@@ -477,6 +500,8 @@ See you soon! Happy studying!
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.9.1** Expected results from exiting the program*</sup>
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ### Program Manual: `help`
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
@@ -521,11 +546,16 @@ Syntax: delete <module code>
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.10.2** Expected results of `help` with `delete` as the optional parameter*</sup>
+
+[🡅 Back to Top](#igraduate-user-guide)
+
 ## Storage of Data
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
 updated) and when exiting the program. The data will be automatically loaded in the next time of usage. No user
 intervention is required for storage of data.
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ## Manual Modification of Data
 
@@ -540,6 +570,8 @@ You may notice a folder named `data` is created and there is a `modules.json` fi
 `modules.json`, you will find your data created in the application here. To modify the data of existing 
 module, simply change the value of each attribute in the `json` file and save it. You are advised to add or 
 remove new module data manually only if you understand the application's logic and `json` format.
+
+[🡅 Back to Top](#igraduate-user-guide)
 
 ## Frequently Asked Questions
 
@@ -571,7 +603,10 @@ remove new module data manually only if you understand the application's logic a
 > Yes! iGraduate does not limit the number of modules you can track. This means that you can add more modules even after 
 > reaching your graduation requirements. Do note that the progress bar under `progress` command will still display 100% even
 > if you exceed your graduation requirements.
-> 
+>
+
+[🡅 Back to Top](#igraduate-user-guide)
+
 ## Command Summary
 
 Command | Format
@@ -586,3 +621,5 @@ progress | `progress`
 cap    | `cap`
 exit     | `exit`
 help     | <code>help [add&#124;delete&#124;update&#124;done&#124;info&#124;list&#124;progress&#124;cap&#124;exit]</code>
+
+[🡅 Back to Top](#igraduate-user-guide)

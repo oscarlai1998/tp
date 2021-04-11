@@ -213,7 +213,7 @@ required for the command from user input
 - `Command` then runs the command with the processed parameters and flags.
 
 ### **Parser** ###
-The `Parser` class is part of the [logic](#33-logic-component) component. 
+The `Parser` class is part of the [logic](#logic-component) component. 
 
 The `Parser` interprets user input and subsequently passes the properly processed user input to `Command` to execute the command.
 
@@ -246,6 +246,7 @@ The different methods extract the various parameters and flags, which would be i
 <sup>***Table 1.4** Methods invoked to extract various flags in various commands*</sup>
 
 The methods that check various parameters
+
 |Method|Description|
 |------|-----------|
 |`isModuleCodeValid()`|Checks that the module code is a valid module code according to the standard for NUS modules. The method uses **regex** to check for the valid code. There are 2 overloading methods - one for checking a single instance and another for an array list to check through a list of module codes.|
@@ -257,7 +258,7 @@ The methods that check various parameters
 ### **Command** ###
 The `command` component executes the correct command based on what the parser interprets.
 
-The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. These include:
+The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. The subclasses are:
 1. AddCommand
 1. CapCommand
 1. DeleteCommand
@@ -273,11 +274,15 @@ The correct command is executed once the `Command` object is created by the pars
 The command execution can affect the `Model` (eg. adding a module).
 At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
-Below is the class diagram of the Command methods.
+Below are the Command class diagrams, split into 2 diagrams for better readability.
 
-![archi](images/CommandClassDiagram.png)
+![archi](images/CommandClassDiagram1.png)
 
-<sup>***Figure 1.6** UML class diagram for Command class*</sup>
+<sup>***Figure 1.6.1** UML class diagram for Command class part 1*</sup>
+
+![archi](./images/CommandClassDiagram2.png)
+
+<sup>***Figure 1.6.2** UML class diagram for Command class part 2*</sup>
 
 ### **Model Component** ###
 
@@ -350,6 +355,8 @@ status. For customized formatting of module printing messages, `toString` method
 
 ----
 
+<!--@@author fupernova-->
+
 ### **List Package** ###
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
@@ -408,12 +415,13 @@ The following shows the process of marking a module named `existingModule` as do
 1. `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
 1. `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table from the list of modules that require `existingModule` as a prerequisite.
 
+<!--@@author ???-->
 ### **Storage Component** ###
 The storage component consists of the class `Storage`. The storage component is closely associated wtih the [ModuleList](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of modulelist. This includes adding, deleting and updating of modules, as well as marking a module as done. 
 
 Class Diagram:
 
-![archi](./images/storageClassDiagram.jpg)
+![archi](./images/StorageClassDiagram.png)
 
 <sup>***Figure 1.10** UML class diagram for Storage package*</sup>
 
@@ -421,7 +429,7 @@ Class Diagram:
 The `Storage` Component, 
 - Can save `module` objects in the `moduleList` in a JSON format and read them back
 
-![archi](./images/storageObjectDiagram.jpg)
+![archi](./images/StorageObjectDiagram.png)
 
 <sup>***Figure 1.11** UML object diagram for an instance of storage object*</sup>
 
@@ -447,6 +455,10 @@ The Ui feature has 3 primary responsibilities:
 1. Prints resulting message
 1. Listens to calls from Model data
 
+____
+
+<!--@@author fupernova-->
+
 ### **Parser** ###
 
 The parser feature has 3 primary responsibilities: 
@@ -469,7 +481,7 @@ There are 3 classifications of user input: **command, parameter and flags**.
 |`parameter`|the argument that comes after the command word and can vary depending on the command|specifies the identifier (module name or code or list type) for the modules. For example, the parameter for `add`command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specify the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands|specify the additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and prerequisites.|
 
-<sup>***Table 1.13** Terms used in differentiating the different parts of a user command </sup>
+<sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
 ***Considerations***<br>
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user input for the given command before passing the parameters and flags to the relevant `Command` class to do further validation of the type and formatting of flags and parameters. 
@@ -490,10 +502,11 @@ The abstract class `Command` contains only 1 method: `execute()`, which takes in
 data. Each subclass of `Command` overrides `execute()` and implements their own methods to execute the command. Each 
 subclass also has a unique constructor signature as each subclass requires different parameters to execute.
 
+***Implementation***<br>
 The implementation for executing every command differs, and the implementation details of each of them will be further 
 elaborated below.
 
-### **Add Command** ###
+#### **Add Command** ####
 
 The add command allows a user to add a new module to the list of existing modules. The module name is part of the 
 parameters and is extracted directly from user input while the various information required to add a new module are 
@@ -506,7 +519,7 @@ included in the flags of the user input. There are 3 compulsory flags and 1 opti
 1. module type
     - `-t <String>`
 1. (Optional) prerequisite modules
-    - `-p [>String>, ...]`
+    - `-p [<String>, ...]`
 
 > ℹ️ **Note:** The order of flags in user input does not matter.
 
@@ -515,10 +528,10 @@ The sequence diagram below shows the execution of add command in action:
 ![archi](./images/AddCommandSequenceDiagram.png)
 
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with *"add Programming Methodology -c CS1010 -mc 4 -t core"* as user input.*</sup>
-
+<!--@@author fupernova-->
 #### **Delete Command** ####
 
-The delete command allows for deletion of module from the module list, identified by the module code. There are no flags
+The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
 involved for deleting a module.
 
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
@@ -526,9 +539,8 @@ involved for deleting a module.
 ![archi](./images/DeleteCommandSequenceDiagram.png)
 <sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with "delete CS1010" as user input*</sup>
 
-----
-
-### **Update Command** ###
+<!--@@author ???-->
+#### **Update Command** ####
 
 The update commands allows modifications to the existing modules, identified by the module code. 
 The information that can be updated include module name, credits, prerequisites and grades (if the module is 
@@ -544,14 +556,7 @@ list. The various information requested to update would be identified with their
 > ℹ️ **Note:** 
 > - The code and type of modules **cannot be modified** as they are identifiers of the modules.
 > - **Multiple module information** can be updated in a single command
-> - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated. 
-
-***Details***<br>
-The following is the UML diagrams for update command consisting of updating each flag.
-
-![archi](./images/updateClassDiagram.jpg)
-
-<sup>***Figure 1.16** Class diagram of `UpdateCommand` class with user input*</sup>
+> - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated.
 
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
@@ -559,14 +564,18 @@ The following is the UML diagrams for update command consisting of updating each
 <sup>***Figure 1.17*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
 
 ***Considerations***
+
 An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
 ***Alternative***
+
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 #### **List Command** ####
 
-The list command provides users with 4 options to list down the modules being tracked by iGraduate. The table below shows the scope of each options.  
+The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
+form of a parameter.
+The table below shows the scope of each options.  
 
 |List Parameter|Scope|
 |--------------|-----|
@@ -574,11 +583,18 @@ The list command provides users with 4 options to list down the modules being tr
 |`complete`|List modules that have been marked as done|
 |`incomplete`|List modules that have not been marked as done|
 |`available`|List incomplete modules available to be marked as done based on prerequisites completed|
+|`core`|List all core modules on the list|
+|`math`|List all math modules on the list|
+|`elec`|List all elective modules on the list|
+|`ge`|List all GE modules on the list|
 
-<sup>***Table 1.18*** Supported list functions and their scope</sup>
+<sup>***Table 1.18.1*** Supported list functions and their scope</sup>
 
-----
+![list](./images/ListCommandSequenceDiagram.png)
 
+<sup>***Figure 1.18.2*** Sequence diagram of `ListCommand` in execution with *"list complete"* as user input</sup>
+
+<!--@@author fupernova-->
 #### **CAP Command** ####
 
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
@@ -605,7 +621,6 @@ parameter from user input, and there is 1 compulsory flag:
 
 <sup>***Figure 1.20*** Sequence diagram of `DoneCommand` in execution with *"done CS1010 -g A"* as user input</sup>
 
-----
 
 #### **Progress Command** ####
 
@@ -615,8 +630,6 @@ additional flags are required for this command.
 ![archi](./images/ProgressSequenceDiagram.png)
 
 <sup>***Figure 4.3.7.1*** Sequence diagram of `ProgressCommand` in execution.*</sup>
-
-----
 
 #### **Help Command** ####
 
@@ -634,16 +647,41 @@ The optional parameters are the list of commands from above:
 
 > ℹ️ **Note:** If no parameters are provided, a brief description of the program and the available commands will be printed instead.
 
-***Behaviour***
 
 The figure below demonstrates the behaviour of the help command. 
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
+
 <sup>***Figure 4.3.8.1*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
+
+____
 
 ### **Module** ###
 
+The `module` component contains the class `module`, together with 4 child classes that inherit from `module`. All modules 
+stored in iGraduate are instances of one of the 4 subclasses.
+
+#### Details
+For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the
+parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
+grade and MCs. It also contains the lists that track the prerequisites of the module.
+
+The implementation details of the subclasses are hence quite sparse, containing only a constructor and a public method `toString()` which identifies the type of module stored
+in the `module` object.
+
+#### Considerations
+To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
+be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
+module code and grade, the subclasses do not contain much information that is not already stored in thier parent class. To
+better accommodate our *list by module type* feature, the subclass each module belongs to is determined by the module type.
+
+____
+<!--@@author ???-->
 ### **ModuleList** ###
+
+
+
+____
 
 ### **Storage** ###
 
@@ -659,7 +697,7 @@ The module list is stored in a storage file named `modules.json` in the `data` f
 
 The figure below demonstrates the behaviour of the storage feature. 
 
-![archi](./images/storageSequenceDiagram.jpg)
+![archi](./images/StorageSequenceDiagram.png)
 
 <sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
@@ -677,6 +715,8 @@ In addition, the JSON format can be read across multiple different types of appl
 The alternative storage format considered is the use of delimiters. However, there are concerns regarding such usage; the most important being potential parsing failure from a valid module. With the use of common delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various module information and legitimate module names containing delimiters and may parse the portion of the module to a wrong variable, resulting in corrupted results and a potential program crash. One example of such occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains dashes when the delimiters are used for separating various module information is also a dash. 
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
+
+____
 
 ### **Exception** ###
 
@@ -707,6 +747,8 @@ SaveModuleFailException | This exception is thrown if the program fails to save 
 UnableToDeletePrereqModuleException | This exception is thrown when user tries to delete a pre-requisite module.
 
 [🡅 Back to Top](#table-of-contents)
+
+____
 
 ## **Appendix A: Product Scope** ##
 
