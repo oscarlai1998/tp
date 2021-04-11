@@ -7,6 +7,7 @@ public class PrerequisiteNotFoundException extends Exception {
     public static final String PREREQUISITE_NOT_FOUND_ERROR_MESSAGE = "The pre-requisite module you have entered"
             + " does not exists. \nPlease double check and try again.";
 
+    //@@author kewenlok
     public PrerequisiteNotFoundException() {
         super(PREREQUISITE_NOT_FOUND_ERROR_MESSAGE);
     }

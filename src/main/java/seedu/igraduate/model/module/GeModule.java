@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Handles general education (GE) modules. 
  */
 public class GeModule extends Module {
+    //@@author kewenlok
     /**
      * Constructs a new GeModule object.
      *

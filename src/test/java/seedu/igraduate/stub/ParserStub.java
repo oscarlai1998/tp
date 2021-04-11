@@ -15,9 +15,7 @@ import seedu.igraduate.logic.parser.Parser;
 
 /**
  * Stub class for the unit testing of Parser. 
- * Returns a string instead of a new command instance. 
- * 
- * @author xseh
+ * Returns a string instead of a new command instance.
  */
 public class ParserStub extends Parser {
     private static final String COMMAND_ADD = "add";
@@ -44,9 +42,7 @@ public class ParserStub extends Parser {
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     /**
-     * Stub for the createAddCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createAddCommand in Parser.
      */
     public static String createAddCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
@@ -71,9 +67,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createDeleteCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createDeleteCommand in Parser.
      */
     public static String createDeleteCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -90,9 +84,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createListCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createListCommand in Parser.
      */
     public static String createListCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidListTypeException {
@@ -108,9 +100,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createProgressCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createProgressCommand in Parser.
      */
     public static String createProgressCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -125,9 +115,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createDoneCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createDoneCommand in Parser.
      */
     public static String createDoneCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException {
@@ -144,9 +132,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createUpdateCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createUpdateCommand in Parser.
      */
     public static String createUpdateCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -162,9 +148,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createCapCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createCapCommand in Parser.
      */
     public static String createCapCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -179,9 +163,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createExitCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the createExitCommand in Parser.
      */
     public static String createExitCommandStub(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException {
@@ -196,9 +178,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the parseCommand in Parser. 
-     * 
-     * @author xseh
+     * Stub for the parseCommand in Parser.
      */
     public static String parseCommandStub(String line) throws InvalidCommandException, IncorrectParameterCountException,
             InvalidModuleTypeException, InputNotNumberException, InvalidListTypeException,
