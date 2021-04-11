@@ -1,9 +1,9 @@
 <!--@@author xseh-->
 
-# iGraduate Developer Guide #
+# **iGraduate Developer Guide** #
 Project by: `W09-2` Latest update: `11 April 2021`
 
-## Table of Contents ##
+## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [Developer Guide Usage](#developer-guide-usage)
 1. [Setting up, Getting Started](#setting-up-getting-started)
@@ -78,7 +78,9 @@ Symbols/Formatting | Description
 ⚠️ **Warning!**    | Contains important information that may resolve problems. 
 `Grey highlight`   | Code or terms related to the application.
 
-<br> [🡅 Back to Top](#table-of-contents)
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
@@ -93,35 +95,31 @@ This section guides you through the process of setting up the project on your co
 
 > 📝 **Tip:** To check if you have `Java 11` installed, type `java --version` into a command prompt
 
-<br> 
-
 Fork the [iGraduate repository](https://github.com/AY2021S2-CS2113T-W09-2/tp) to your github account and clone it to your local computer. 
 Alternatively, you could also download the source code of the application 
 directly from our [latest release](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
-
-<br>
 
 ### **Terminal** ###
 
 1. Open a terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
    Windows platform or run `./gradlew run` on MacOS/Linux platform.
    <br>
-2. You will see the following output in the console when the setup is successful:
+1. You will see the following output in the console when the setup is successful:
 
 ```
+Starting without existing module data...
+Initializing new module list...
 --------------------------------------------------------------------------------------
  _  ____               _             _
-(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
-| | |  _| '__/ _  |/ _  | | | |/ _  | __/ _ 
+(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
+| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
 | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
-|_| ____|_|   __,_| __,_| __,_| __,_| __ ___|
+|_|\____|_|  \__,_|\__,_|\__,_|\__,_|\__\___|
 iGraduate starting up...
 Welcome to iGraduate, your one stop study planning service!
 What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
-
-<br> 
 
 ### **IntelliJ IDEA** ###
 
@@ -132,7 +130,6 @@ What would you like to do today?
 
     > 📝 **Tip:** IntelliJ IDEA has the `Gradle` plugin installed by default. If you have 
     disabled it, go to `File` → `Settings` → `Plugins` to re-enable them.
-
     > If there is a `build.gradle` file in the project root, IntelliJ treats it as a `Gradle` project by default.
     > 1. Open IntelliJ (if you are not in the welcome screen, click `File` → `Close Project` 
     to close the existing project first)
@@ -145,9 +142,11 @@ What would you like to do today?
     > 1. Wait for the importing process to finish (could take a few minutes).
 1. Verify the setup by running `seedu.igraduate.IGraduate`. If successful, the console would output the following: 
     ```
+    Starting without existing module data...
+    Initializing new module list...
     --------------------------------------------------------------------------------------
-    _  ____               _             _       
-    (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
+    _  ____               _             _
+    (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
     | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
     | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
     |_|\____|_|  \__,_|\__,_|\__,_|\__,_|\__\___|
@@ -513,7 +512,7 @@ The parser feature has 3 primary responsibilities:
 
 ![archi](./images/ParserSequenceDiagram.png)
 
-<sup>***Figure 1.12** Sequence diagram of `Parser` in execution with *"done CS1010 -g A"** as user input</sup>
+<sup>***Figure 1.12** Sequence diagram of `Parser` in execution with `done CS1010 -g A` as user input*</sup>
 
 ***Details***<br>
 There are 3 classifications of user input: **command, parameter and flags**. 
@@ -578,7 +577,7 @@ The sequence diagram below shows the execution of add command in action:
 
 ![archi](./images/AddCommandSequenceDiagram.png)
 
-<sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with *"add Programming Methodology -c CS1010 -mc 4 -t core"* as user input.*</sup>
+<sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with `add Programming Methodology -c CS1010 -mc 4 -t core` as user input.*</sup>
 
 ----
 
@@ -592,7 +591,8 @@ involved for deleting a module.
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
 
 ![archi](./images/DeleteCommandSequenceDiagram.png)
-<sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with "delete CS1010" as user input*</sup>
+
+<sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with `delete CS1010` as user input*</sup>
 
 ----
 
@@ -618,13 +618,13 @@ list. The various information requested to update would be identified with their
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
 
-<sup>***Figure 1.17*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
+<sup>***Figure 1.17** Sequence diagram of `UpdateCommand` in execution with `update CS1010 -mc 2` as user input*</sup>
 
 ***Considerations***
 
 An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
-***Alternative***
+***Alternatives***
 
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
@@ -651,7 +651,7 @@ The table below shows the scope of each options.
 
 ![list](./images/ListCommandSequenceDiagram.png)
 
-<sup>***Figure 1.18.2*** Sequence diagram of `ListCommand` in execution with *"list complete"* as user input</sup>
+<sup>***Figure 1.18.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
 
 ----
 
@@ -680,7 +680,7 @@ parameter from user input, and there is 1 compulsory flag:
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
-<sup>***Figure 1.20*** Sequence diagram of `DoneCommand` in execution with *"done CS1010 -g A"* as user input</sup>
+<sup>***Figure 1.20** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
 
 ----
 
@@ -691,7 +691,7 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 1.21*** Sequence diagram of `ProgressCommand` in execution.*</sup>
+<sup>***Figure 1.21** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ----
 
@@ -716,7 +716,7 @@ The figure below demonstrates the behaviour of the help command.
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
-<sup>***Figure 1.22*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
+<sup>***Figure 1.22** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
 
 <br> 
 
@@ -774,7 +774,7 @@ The figure below demonstrates the behaviour of the storage feature.
 
 ![archi](./images/StorageSequenceDiagram.png)
 
-<sup>***Figure 1.23** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
+<sup>***Figure 1.23** UML sequence diagram showing the life of Storage when the `Add` command is invoked*</sup>
 
 ***Considerations***
 
