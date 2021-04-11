@@ -180,9 +180,9 @@ public class UpdateCommand extends Command {
 
         // Remove targetModule from requiredBy of old prerequisites list and
         // add targetModule to requiredBy of new prerequisites
+        moduleList.removeFromPrerequisiteModuleRequiredBy(targetModule);
         targetModule.setUntakenPrerequisites(notTakenPrerequisites);
         targetModule.setPrerequisites(prerequisites);
-        moduleList.removeFromPrerequisiteModuleRequiredBy(targetModule);
         moduleList.addModuleToRequiredBy(targetModule);
     }
 
