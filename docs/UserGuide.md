@@ -3,6 +3,8 @@ By: `W09-2` Latest update: `10 April 2021`
 
 ![logo](./images/logo.jpg)
 
+<div style="page-break-after: always;"></div>
+
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [User Guide Usage](#user-guide-usage)
@@ -56,6 +58,8 @@ Symbols/Formatting | Description
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ## **Quick Start** ##
 
 > ℹ️ **Note:** The recommended operating system for iGraduate is Windows 10
@@ -87,6 +91,8 @@ What would you like to do today?
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ## **Features** ##
 
@@ -591,6 +597,9 @@ Syntax: delete <module code>
 
 ----
 
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 ## **Storage of Data** ##
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
@@ -610,8 +619,6 @@ intervention is required for storage of data.
 > ℹ️ **Note:** 
 > - Please ensure that you modify only the value of module attributes if you are unsure of how the 
 `json` structure works.
-
-> ℹ️ **Note:**
 > - The application might not behave as the way it is expected to if you modify the application 
 data in an incorrect manner. For example, data corruption might occur.
 
@@ -663,7 +670,9 @@ module requirements logic in reality and might affect the application from givin
 
 ----
 
-<!--@@author ???-->
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ## **Frequently Asked Questions** ##
 
@@ -684,7 +693,7 @@ module requirements logic in reality and might affect the application from givin
 > such as progress is more targeted towards Information Security students. Support for other majors in NUS will be
 > implemented in the future. Stay tuned!
 
-<!--@@author ???-->
+<!--@@author xseh-->
 
 **Q5**: Is the module list only in JSON format?
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
@@ -709,6 +718,8 @@ module requirements logic in reality and might affect the application from givin
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author kewenlok-->
 
