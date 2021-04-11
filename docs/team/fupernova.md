@@ -1,6 +1,6 @@
 # Xia Fuxi - Project Portfolio Page
 
-## Project Overview
+## Overview
 
 `iGraduate` is a command line application that acts as a centralised hub for NUS students majoring in Information 
 Security to plan their academic journey. It is equipped with a module storage system where students

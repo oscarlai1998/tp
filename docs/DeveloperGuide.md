@@ -13,6 +13,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
     - [Architecture](#architecture)
     - [UI Component](#ui-component)
     - [Logic Component](#logic-component)
+        - [Parser Class](#parser-class)
+        - [Command Package](#command-package)
     - [Model Component](#model-component)
         - [`module` Package](#module-package)
             - [`Module` Class](#module-class)
@@ -46,6 +48,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ## **Introduction** ##
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -57,6 +61,8 @@ for tracking. When listing the modules, the module type will be shown accordingl
 <br> [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author xseh-->
 
 ## **Developer Guide Usage** ##
 This developer guide is made for developers who wish to understand and/or develop **iGraduate** 
@@ -188,6 +194,11 @@ Each of the four components,
 - Defines its API in an interface with the **same name** as the Component.
 - Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
   
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
 
 ### **UI Component** ###
 
@@ -202,6 +213,12 @@ The UI is a public class that consists of **three components** that is made up `
 
 <sup>***Figure 1.2** UML class diagram for Ui class*</sup>
 
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
 ### **Logic Component** ###
 
 The logic component consists of  the class `Parser` and the package `Command`. The classes work together to interpret user input, identify the right command to execute and the execution of the input command. 
@@ -212,7 +229,9 @@ required for the command from user input
 - `Parser` passes these values to `command`, creating an instance of the object from the type of command detected. 
 - `Command` then runs the command with the processed parameters and flags.
 
-### **Parser** ###
+----
+
+### **Parser Class** ###
 The `Parser` class is part of the [logic](#logic-component) component. 
 
 The `Parser` interprets user input and subsequently passes the properly processed user input to `Command` to execute the command.
@@ -228,22 +247,25 @@ Given below is the `Parser` class diagram showing the important methods that ret
  - Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and flags from the user command that are relevant to the command. 
  - The parser then creates the relevant `Command` object and dispatches the control of the program to the created object. 
 
-> ℹ️ **Note:** Interpretation and checking of parameter validity occurs in the parser. 
+> ℹ️ **Note:** 
+> - Interpretation and checking of parameter validity occurs in the parser. 
+> - The Parser also contains checks that ensures the parameters passed are appropriate. 
 
 The different methods extract the various parameters and flags, which would be invoked based on the command word detected in the user input. 
-> ℹ️ **Note:** The Parser also contains checks that ensures the parameters passed are appropriate
 
 |Method|Description|Invoked with|
 |------|-----------|------------|
-|`extractModuleCode()`|Extracts the **module code** by checking for the parameter `-c` flag. |`createAddCommand()`|
-|`extractModuleType()`|Extracts the **module type** by checking for the parameter `-t` flag. |`createAddCommand()`|
-|`extractModuleCredits()`|Extracts the **module credits** by checking for the parameter `-mc` flag. |`createAddCommand()`, `createUpdateCommand()`|
-|`extractModuleGrade()`|Extracts the module grade obtained by checking for the parameter `-g` flag. |`createDoneCommand()`, `createUpdateCommand()`|
-|`extractModuleName()`|Extracts the **module name** by checking for the parameter `-n` flag. |`createUpdateCommand()`|
+|`extractModuleCode()`|Extracts the **module code** by checking for the `-c` flag. |`createAddCommand()`|
+|`extractModuleType()`|Extracts the **module type** by checking for the `-t` flag. |`createAddCommand()`|
+|`extractModuleCredits()`|Extracts the **module credits** by checking for the `-mc` flag. |`createAddCommand()`, `createUpdateCommand()`|
+|`extractModuleGrade()`|Extracts the module grade obtained by checking for the `-g` flag. |`createDoneCommand()`, `createUpdateCommand()`|
+|`extractModuleName()`|Extracts the **module name** by checking for the `-n` flag. |`createUpdateCommand()`|
 |`extractPreRequisites()`|Extracts the **module prerequisites** by checking for the `-p` flag. |`createAddCommand()`, `createUpdateCommand()`|
 |`extractListScope()`|Extracts the **list type**. Accepts all, complete,  incomplete or available as acceptable scopes. |`createListCommand()`|
 
 <sup>***Table 1.4** Methods invoked to extract various flags in various commands*</sup>
+
+<br>
 
 The methods that check various parameters
 
@@ -255,7 +277,7 @@ The methods that check various parameters
 
 ----
 
-### **Command** ###
+### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
 
 The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. The subclasses are:
@@ -284,6 +306,12 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 
 <sup>***Figure 1.6.2** UML class diagram for Command class part 2*</sup>
 
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
 ### **Model Component** ###
 
 The `model` component consists of two main packages, `module` and `list`, which define and deal with data storing issues based on the information provided by the user input. 
@@ -293,6 +321,8 @@ The data storing issues are split into two main categories - what data should be
 - `module` holds the information which acts as a blueprint for creating and manipulating module objects 
 - `list` consists of a class that defines the way the module objects 
 should be managed and stored.
+
+----
 
 #### **Module Package** ####
 
@@ -319,6 +349,8 @@ Each of the module classes consists of:
 - Attributes related to the module type it is representing
 - Getter and setter methods for setting and retrieval of its attributes
 - Methods that alter an instance of its own class
+
+----
 
 #### **Module Class** ####
 
@@ -356,6 +388,8 @@ The package consists of 1 class, `ModuleList.java`. `ModuleList` contains 2 cons
 new, empty list for when the user uses iGraduate for the first time, and the other to contain the modules already stored
 in `Storage`.
 
+----
+
 #### **`ModuleList` Class** ####
 
 The `ModuleList` class acts as an abstraction for the ArrayList that is used to store module objects created from any of the classes under the `module` package.
@@ -377,6 +411,8 @@ The `ModuleList` class:
     1. [Mark](#mark-module-as-taken) a module as done
 - Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such as the entire list or an individual module from the list according to different parameters such as module code or index. 
 
+----
+
 #### **Add a Module** ####
 
 The methods `add`, `addModuleRequiredBy` and `removeTakenByPrerequisites` are invoked to add a module. 
@@ -386,6 +422,7 @@ The following shows the process of adding a module named `newModule`:
 1. `removeTakenByPrerequisites` checks the list of prerequisites of `newModule` and removes the ones that have been marked as taken.
 1. `add` calls `ArrayList.add()` to add `newModule` to the list.
 
+----
 
 #### **Delete a Module** ####
 
@@ -395,6 +432,7 @@ The following shows the process of deleting a module named `existingModule`:
 1. `delete` calls `ArrayList.remove()` to delete `existingModule` from the list.
 1. `removeFromPreRequisiteModuleRequiredBy` is called to remove `existingModule` from its pre-requisite modules' requiredBy list.
 
+----
 
 #### **Mark Module as Taken** ####
 
@@ -404,9 +442,15 @@ The following shows the process of marking a module named `existingModule` as do
 1. `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
 1. `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table from the list of modules that require `existingModule` as a prerequisite.
 
-<!--@@author ???-->
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<!--@@author xseh-->
 ### **Storage Component** ###
-The storage component consists of the class `Storage`. The storage component is closely associated wtih the [ModuleList](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of modulelist. This includes adding, deleting and updating of modules, as well as marking a module as done. 
+The storage component consists of the class `Storage`. The storage component is closely associated with the [`ModuleList`](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of `ModuleList`. This includes adding, deleting and updating of modules, as well as marking a module as done. 
 
 Class Diagram:
 
@@ -422,20 +466,26 @@ The `Storage` Component,
 
 <sup>***Figure 1.11** UML object diagram for an instance of storage object*</sup>
 
-### **Common Classes** ###
-The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown when an error occurs. The method catches the exceptions and prints out the respective error message. 
-
-ℹ️ **Note:** Each `exception` is specified by the name and description.
-
 <br> 
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
 
-## **Implementation** ##
+### **Common Classes** ###
+The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown when an error occurs. The method catches the exceptions and prints out the respective error message. 
+
+ℹ️ **Note:** Each `exception` is specified by the name and description.
+
+***Behaviour***
 
 This section elaborates on some details about how certain features are implemented.
+
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
 
 ### **UI** ###
 
@@ -444,7 +494,11 @@ The Ui feature has 3 primary responsibilities:
 1. Prints resulting message
 1. Listens to calls from Model data
 
-____
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
 
 <!--@@author fupernova-->
 
@@ -475,8 +529,14 @@ There are 3 classifications of user input: **command, parameter and flags**.
 ***Considerations***<br>
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user input for the given command before passing the parameters and flags to the relevant `Command` class to do further validation of the type and formatting of flags and parameters. 
 
+<!--@@author xseh-->
+
 ***Alternatives***<br>
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
+
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
@@ -494,6 +554,8 @@ subclass also has a unique constructor signature as each subclass requires diffe
 ***Implementation***<br>
 The implementation for executing every command differs, and the implementation details of each of them will be further 
 elaborated below.
+
+----
 
 #### **Add Command** ####
 
@@ -517,7 +579,11 @@ The sequence diagram below shows the execution of add command in action:
 ![archi](./images/AddCommandSequenceDiagram.png)
 
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with *"add Programming Methodology -c CS1010 -mc 4 -t core"* as user input.*</sup>
+
+----
+
 <!--@@author fupernova-->
+
 #### **Delete Command** ####
 
 The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
@@ -528,7 +594,10 @@ involved for deleting a module.
 ![archi](./images/DeleteCommandSequenceDiagram.png)
 <sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with "delete CS1010" as user input*</sup>
 
-<!--@@author ???-->
+----
+
+<!--@@author xseh-->
+
 #### **Update Command** ####
 
 The update commands allows modifications to the existing modules, identified by the module code. 
@@ -536,7 +605,7 @@ The information that can be updated include module name, credits, prerequisites 
 marked as done). 
 
 The update function is executed if the user decides to edit some information regarding a module in the module
-list. The various information requested to update would be identified with their flags: 
+list. The various information requested to update would be identified with their flags:
 - name -> `-n <String>`
 - module credits -> `-mc <int>`
 - prerequisites -> `-p [<String>, ...]`
@@ -546,7 +615,6 @@ list. The various information requested to update would be identified with their
 > - The code and type of modules **cannot be modified** as they are identifiers of the modules.
 > - **Multiple module information** can be updated in a single command
 > - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated.
-
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
 
@@ -559,6 +627,8 @@ An `arrayList` is used to store the parsed data from the user input instead of a
 ***Alternative***
 
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+
+----
 
 #### **List Command** ####
 
@@ -582,6 +652,8 @@ The table below shows the scope of each options.
 ![list](./images/ListCommandSequenceDiagram.png)
 
 <sup>***Figure 1.18.2*** Sequence diagram of `ListCommand` in execution with *"list complete"* as user input</sup>
+
+----
 
 <!--@@author fupernova-->
 #### **CAP Command** ####
@@ -610,6 +682,7 @@ parameter from user input, and there is 1 compulsory flag:
 
 <sup>***Figure 1.20*** Sequence diagram of `DoneCommand` in execution with *"done CS1010 -g A"* as user input</sup>
 
+----
 
 #### **Progress Command** ####
 
@@ -618,7 +691,9 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 4.3.7.1*** Sequence diagram of `ProgressCommand` in execution.*</sup>
+<sup>***Figure 1.21*** Sequence diagram of `ProgressCommand` in execution.*</sup>
+
+----
 
 #### **Help Command** ####
 
@@ -641,16 +716,20 @@ The figure below demonstrates the behaviour of the help command.
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
-<sup>***Figure 4.3.8.1*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
+<sup>***Figure 1.22*** Sequence diagram of `HelpCommand` in execution with `help add` as user input.</sup>
 
-____
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
 
 ### **Module** ###
 
 The `module` component contains the class `module`, together with 4 child classes that inherit from `module`. All modules 
 stored in iGraduate are instances of one of the 4 subclasses.
 
-#### Details
+***Details***
 For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the
 parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
 grade and MCs. It also contains the lists that track the prerequisites of the module.
@@ -658,37 +737,44 @@ grade and MCs. It also contains the lists that track the prerequisites of the mo
 The implementation details of the subclasses are hence quite sparse, containing only a constructor and a public method `toString()` which identifies the type of module stored
 in the `module` object.
 
-#### Considerations
+***Considerations*** 
 To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
 be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
-module code and grade, the subclasses do not contain much information that is not already stored in thier parent class. To
+module code and grade, the subclasses do not contain much information that is not already stored in their parent class. To
 better accommodate our *list by module type* feature, the subclass each module belongs to is determined by the module type.
 
-____
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
 <!--@@author ???-->
 ### **ModuleList** ###
 
 
+<br> 
 
-____
+[🡅 Back to Top](#table-of-contents)
+
+----
 
 ### **Storage** ###
 
 The storage feature saves the state of the module list after every execution of commands that manipulates 
 (i.e. update, add or delete) the modules in the list.
 
-***Behaviour***
+***Details***
 
 The storage function is executed after every command that manipulates (i.e. adds, deletes or updates) the modules in the module list, saving the updated state into the storage file. 
 
-The module list is stored in a storage file named `modules.json` in the `data` folder 
-(`<program location>/data/modules.json`). 
+The module list is stored in a storage file named `modules.json` in the `data` folder (`<program location>/data/modules.json`). 
 
 The figure below demonstrates the behaviour of the storage feature. 
 
 ![archi](./images/StorageSequenceDiagram.png)
 
-<sup>***Figure 3.5.2** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
+<sup>***Figure 1.23** UML sequence diagram showing the life of Storage when the Add command is invoked*</sup>
 
 ***Considerations***
 
@@ -705,7 +791,7 @@ The alternative storage format considered is the use of delimiters. However, the
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
-____
+----
 
 ### **Exception** ###
 
@@ -735,9 +821,13 @@ PrerequisiteNotMetException | Exception is thrown if prerequisite of the module 
 SaveModuleFailException | This exception is thrown if the program fails to save data to file.
 UnableToDeletePrereqModuleException | This exception is thrown when user tries to delete a pre-requisite module.
 
+<sup>***Table 1.24** The exhaustive list of all exceptions used in iGraduate*</sup>
+
+<br>
+
 [🡅 Back to Top](#table-of-contents)
 
-____
+----
 
 ## **Appendix A: Product Scope** ##
 
@@ -781,6 +871,8 @@ This app will help NUS students **majoring in Information Security** check his/h
 |v2.0|user|know the pre-requisites of a module|plan my semesters better|
 |v2.0|user|see all core modules I have to take||
 |v2.0|user|be able to choose any electives of my course||
+
+<sup>***Table 1.25** All user stories considered in the designing of iGraduate*</sup>
 
 <br>
 
@@ -928,6 +1020,7 @@ Deleting modules from a given module list.
 ### **Marking Modules as Done** ###
 
 Masking modules as done with grade obtained after the semester.
+
 **Prerequisites**: 
 - Module list is not empty.
 
@@ -969,6 +1062,12 @@ Masking modules as done with grade obtained after the semester.
     ```
 1. **Other incorrect done commands to try**: `done`, `done -g A+` <br>
     **Expected**: Similar to previous.
+    ```
+    --------------------------------------------------------------------------------------
+    The number of parameters provided is incorrect.
+    Please double check and try again.
+    --------------------------------------------------------------------------------------
+    ```
 
 ----
 
@@ -980,9 +1079,9 @@ Update the modules in module list with changes in module credits or module grade
 - Module list is not empty.
 
 **Assumption**:
-- Module list consists of module CS1010 with 4mcs marked as done with grade A+.
+- Module list consists of module `CS1010` with 4mcs marked as done with grade A+.
     
-**Test Cases**
+**Test Cases**:
 1. `update CS1010 -g A- -mc 2` <br>
     **Expected**: Module grade and module credits updated successfully.
     ```
@@ -1033,6 +1132,12 @@ Update the modules in module list with changes in module credits or module grade
     ```
 1. **Other incorrect update commands to try**: `update`, `update CS1010`. <br>
     **Expected**: Similar to previous.
+    ```
+    --------------------------------------------------------------------------------------
+    The number of parameters provided is incorrect.
+    Please double check and try again.
+    --------------------------------------------------------------------------------------
+    ```
        
 ----
 
@@ -1041,7 +1146,7 @@ Update the modules in module list with changes in module credits or module grade
 Display current CAP and degree classification of user.
 
 **Assumptions**: 
-- Module list consists of CS1010 marked as done with 4mcs and grade A+.
+- Module list consists of `CS1010` marked as done with 4mcs and grade A+.
 
 **Test Cases**
 1. `cap` <br>
@@ -1068,7 +1173,7 @@ Display current CAP and degree classification of user.
 Display user's progress towards graduation.
 
 **Assumptions**: 
-- Module list consists of CS1010 marked as done with 4mcs and grade A+.
+- Module list consists of `CS1010` marked as done with 4mcs and grade A+.
 
 **Test Cases**
 1. `progress` <br>
@@ -1144,4 +1249,8 @@ Dealing with missing/corrupted data files.
 1. While not in iGraduate, corrupt the json file under `/data` directory. Then start iGraduate. <br>
     Expected: iGraduate senses the corrupted files, replace it with empty content and functions as per normal.
 
+<br>
+
 [🡅 Back to Top](#table-of-contents)
+
+----
