@@ -580,6 +580,7 @@ Considerations were made for the adoption of third-party parser libraries. Howev
 [🡅 Back to Top](#table-of-contents)
 
 ----
+<!--@@author fupernova-->
 
 ### **Command** ###
 
@@ -624,8 +625,6 @@ The sequence diagram below shows the execution of add command in action:
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with `add Programming Methodology -c CS1010 -mc 4 -t core` as user input.*</sup>
 
 ----
-
-<!--@@author fupernova-->
 
 #### **Delete Command** ####
 
@@ -713,6 +712,7 @@ The table below shows the scope of each options.
 
 <sup>***Figure 1.18.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
 
+
 ----
 
 <!--@@author fupernova-->
@@ -778,6 +778,18 @@ The figure below demonstrates the behaviour of the help command.
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
 <sup>***Figure 1.22** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
+
+***Considerations & Alternatives***
+
+A quick reference guide where users can check the list of commands and their formats can have many different implementations.
+One implementation considered was the format used for Linux `man` pages, where a single command line input displays all 
+information about the command such as the functionality of the command and the types of parameters accepted. This was
+the most straightforward implementation due to the ease of parsing possible user inputs and there being only one kind of
+message to be displayed. This proved to be unfeasible from an User Experience point of view as there was too much information
+displayed at one go due to the number of commands the application has and their unique formats. Instead, the team opted to
+go for a more segmented implementation of the `help` command, with one command showing users how to use the reference guide
+while the other commands provide a readable reference guide to the user that targets the command that users want to know 
+more about.
 
 <br> 
 

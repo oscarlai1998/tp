@@ -1,3 +1,5 @@
+// @@author fupernova
+
 package seedu.igraduate.logic.command.deletecommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,7 +82,7 @@ public class DeleteCommandIntegrationTest {
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
             InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
             InvalidModuleGradeException, InvalidModuleCodeException {
-        String line = "Delete Pigs (Three Different Ones)";
+        String line = "Delete CS3333";
         Command deleteCommand = parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
