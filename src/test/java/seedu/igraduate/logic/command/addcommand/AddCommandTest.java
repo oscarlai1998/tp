@@ -14,6 +14,7 @@ import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.InvalidModuleCodeException;
+import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
@@ -28,7 +29,6 @@ import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
-import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.MarkCompletedModuleException;
 
 import seedu.igraduate.model.module.Module;
@@ -86,7 +86,7 @@ public class AddCommandTest {
         addCommand.execute(moduleList, ui, storage);
     }
 
-    /*------------- Integration test with Ui and Parser -----------------*/
+    /*------------- Integration tests -----------------*/
     @Test
     void executeAddCommand_validParametersWithUi_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
@@ -103,4 +103,5 @@ public class AddCommandTest {
                 + Ui.INDENTATION + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
+
 }
