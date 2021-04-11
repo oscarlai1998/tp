@@ -503,9 +503,10 @@ The Ui feature has 3 primary responsibilities:
 
 ### **Parser** ###
 
-The parser feature has 3 primary responsibilities: 
+The parser feature has 4 primary responsibilities: 
 1. Identify the command the user wants to run
 1. Extract the relevant parameters and flags required to run the command
+1. Check the validity of the parameters and flags   
 1. Create a new `Command` object and hand it over to `iGraduate` to execute
 
 <br>
@@ -526,12 +527,26 @@ There are 3 classifications of user input: **command, parameter and flags**.
 <sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
 ***Considerations***<br>
-From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user input for the given command before passing the parameters and flags to the relevant `Command` class to do further validation of the type and formatting of flags and parameters. 
+From the start, it was known that `Parser` would be one of the more challenging components to implement due to the 
+large number of commands and the variance in parameter and flag types. Another difficult problem to navigate was the
+validation of the format and values of the parameters and flags. Initially, no validation checks were put in `Parser`,
+with the respective `Command` subclasses doing the input validation for their specific parameters and flags. However, 
+the `Storage` component also requires the same checks as the `Command` component. As such, there was a dependency 
+between `Storage` and `Command`, which does not make sense as the responsibilities of the two are completely unlinked.
+Hence, the validation of parameters and flags were moved to `Parser`. In this implementation of `Parser`, the `Storage` 
+and `Command` components are unaware of each other, instead relying on `Parser` for extracting and validating inputs. 
+This helps to eliminate the dependency between `Storage` and `Command`.
 
 <!--@@author xseh-->
 
 ***Alternatives***<br>
-Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
+Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained 
+did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, 
+the command, parameters and flags would have to be directly piped in the command terminal, together with the application.
+This would create an instance of the iGraduate application before terminating after one command. Though this may provide
+a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, 
+the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error
+handling of the libraries, but within the context of the running application. 
 
 <br> 
 

@@ -97,9 +97,10 @@ public class Parser {
         // Splits into 2 String elements:
         // 1. command + first parameter
         // 2. command flags (if any)
+        line = line.trim();
         ArrayList<String> commands = getCommand(line);
         ArrayList<String> commandParameters = getCommandParameters(commands);
-        String command = commandParameters.get(FIRST_INDEX).toLowerCase();
+        String command = commandParameters.get(FIRST_INDEX).toLowerCase().trim();
         ArrayList<String> commandFlags = getCommandFlag(commands);
 
         assert commands.size() <= 2 : "Limit of split is 2";

@@ -84,4 +84,25 @@ public class DoneCommandTest {
         assertEquals(String.format(MODULE_MARKEDASDONE_MESSAGE, module), outContent.toString());
         System.setOut(originalOut);
     }
+
+    @Test
+    void executeDoneCommand_alreadyMarked_exception() throws ExistingModuleException, InvalidModuleTypeException,
+            SaveModuleFailException, IncorrectParameterCountException, InvalidCommandException, InputNotNumberException,
+            InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
+            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
+        ArrayList<String> preRequisites = new ArrayList<>();
+        ArrayList<String> untakenPreRequisites = new ArrayList<>();
+        AddCommand addCommand = new AddCommand("cs1010", "Programming", "core", 4.0, preRequisites,
+                untakenPreRequisites);
+        addCommand.execute(moduleList, ui, storage);
+        String line = "Done CS1010 -g A";
+        Command doneCommand = Parser.parseCommand(line);
+        doneCommand.execute(moduleList, ui, storage);
+        Command duplicateCommand = Parser.parseCommand(line);
+        Exception exception = assertThrows(MarkCompletedModuleException.class,
+            () -> duplicateCommand.execute(moduleList, ui, storage));
+        assertEquals(MarkCompletedModuleException.MARK_COMPLETED_MODULE_ERROR_MESSAGE, exception.getMessage());
+    }
 }
