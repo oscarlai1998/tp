@@ -43,6 +43,9 @@ public class ProgressCommand extends Command {
         DecimalFormat df = new DecimalFormat("0.00");
         double completedMCs = moduleList.getTotalCompletedMCs();
         double percentageDone = (completedMCs / 160) * 100;
+        if (percentageDone > 100) {
+            percentageDone = 100;
+        }
         String completedPercentage = df.format(percentageDone);
         LOGGER.log(Level.INFO, "Done calculating completion percentage.");
         return completedPercentage;
