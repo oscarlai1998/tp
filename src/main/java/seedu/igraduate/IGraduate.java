@@ -26,6 +26,7 @@ public class IGraduate {
 
     private static final Logger LOGGER = Logger.getLogger(IGraduate.class.getName());
 
+    //@@author kewenlok
     /**
      * Initialise logger configurations at the moment the program is run.
      */

@@ -34,6 +34,7 @@ public class ModuleList {
 
     private static final Logger LOGGER = Logger.getLogger(ModuleList.class.getName());
 
+    //@@author kewenlok
     /**
      * Constructs new ArrayList if no data is provided.
      */
@@ -248,6 +249,7 @@ public class ModuleList {
         return modules.isEmpty();
     }
 
+    //@@author oscarlai1998
     /**
      * Checks if the list for completed module is empty.
      *
@@ -276,6 +278,7 @@ public class ModuleList {
         return true;
     }
 
+    //@@author kewenlok
     /**
      * Checks if there is any available module.
      *

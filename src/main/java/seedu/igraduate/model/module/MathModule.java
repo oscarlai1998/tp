@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Handles math modules. 
  */
 public class MathModule extends Module {
+    //@@author kewenlok
     /**
      * Constructs a new MathModule object.
      *

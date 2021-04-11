@@ -21,6 +21,7 @@ public class ListCommand extends Command {
      */
     private String scope;
 
+    //@@author oscarlai1998
     /**
      * Constructs a new ListCommand object.
      *
@@ -70,6 +71,7 @@ public class ListCommand extends Command {
                 LOGGER.log(Level.INFO, "Printed incomplete modules.");
             }
             break;
+        //@@author kewenlok
         case "available":
             if (moduleList.isModuleAvailable()) {
                 ui.printAvailableList(moduleList.getModules());
@@ -120,7 +122,6 @@ public class ListCommand extends Command {
         }
         LOGGER.log(Level.INFO, "End of list command execution.");
     }
-
 
     /**
      * {@inheritDoc}

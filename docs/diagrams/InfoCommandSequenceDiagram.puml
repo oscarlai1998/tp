@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":InfoCommand" as InfoCommand
+participant ":ModuleList" as ModuleList
+participant ":Ui" as Ui
+
+iGraduate -> InfoCommand: execute(moduleList, ui, storage)
+activate InfoCommand
+
+InfoCommand -> ModuleList: getModuleByCode("CS1010");
+activate ModuleList
+return module:Module
+deactivate ModuleList
+
+InfoCommand -> Ui: printModuleInfo(module:Module, moduleList:ModuleList)
+activate Ui
+deactivate Ui
+
+deactivate InfoCommand
+destroy InfoCommand
+@enduml

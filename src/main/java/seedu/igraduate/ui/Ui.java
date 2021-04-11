@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class Ui {
     // Greeting messages
-    // @@author fupernova
     public static final String LOGO = " _  ____               _             _\n"
             + "(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ \n"
             + "| | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \\\n"
@@ -23,7 +22,7 @@ public class Ui {
     public static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
 
     // Formatting messages
-    public static final String BORDER_LINE = "-------------------------------------------".repeat(2);
+    public static final String BORDER_LINE = "-".repeat(86);
     public static final String INDENTATION = "  ";
 
     // Add command message
@@ -118,10 +117,10 @@ public class Ui {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    //@@author fupernova
     /**
      * Gets command from user input. 
      *
-     * @author fupernova
      * @return user input. 
      */
     public String getCommand() {
@@ -131,7 +130,6 @@ public class Ui {
     /**
      * Prints the welcome message.
      *
-     * @author fupernova
      */
     public void printWelcomeMessage() {
         printBorderLine();
@@ -143,7 +141,6 @@ public class Ui {
     /**
      * Prints the exit message.
      *
-     * @author fupernova
      */
     public void printExitMessage() {
         System.out.println(GOODBYE_MESSAGE);
@@ -152,7 +149,6 @@ public class Ui {
     /**
      * Prints the message border.
      *
-     * @author fupernova
      */
     public void printBorderLine() {
         System.out.println(BORDER_LINE);
@@ -161,7 +157,6 @@ public class Ui {
     /**
      * Prints all the modules in array list.
      *
-     * @author fupernova
      * @param modules Array list containing the modules.
      */
     public void printEntireList(ArrayList<Module> modules) {
@@ -174,7 +169,6 @@ public class Ui {
     /**
      * Prints the modules in the array list that user has taken.
      *
-     * @author fupernova
      * @param modules Array list containing the modules.
      */
     public void printCompletedList(ArrayList<Module> modules) {
@@ -191,7 +185,6 @@ public class Ui {
     /**
      * Prints the modules in the array list that user has not taken.
      *
-     * @author fupernova
      * @param modules Array list containing the modules.
      */
     public void printIncompleteList(ArrayList<Module> modules) {
@@ -205,6 +198,7 @@ public class Ui {
         }
     }
 
+    //@@author kewenlok
     /**
      * Prints the modules in the array list that user can take.
      *
@@ -288,10 +282,10 @@ public class Ui {
         }
     }
 
+    //@@author fupernova
     /**
      * Prints success message after adding new module.
      *
-     * @author fupernova
      * @param module Array list containing the modules.
      */
     public void printAddModuleMessage(Module module) {
@@ -318,7 +312,6 @@ public class Ui {
     /**
      * Prints success message after deleting the module.
      *
-     * @author fupernova
      * @param name Module name.
      * @param type Module type.
      */
@@ -326,6 +319,7 @@ public class Ui {
         System.out.println(String.format(MODULE_DELETED_MESSAGE, type, name));
     }
 
+    //@@author kewenlok
     /**
      * Prints success message after marking a module as completed.
      *
@@ -336,6 +330,7 @@ public class Ui {
         System.out.println(INDENTATION + module);
     }
 
+    //@@author xseh
     /**
      * Prints success message after the specified information is updated.
      *
@@ -346,6 +341,7 @@ public class Ui {
         System.out.println(INDENTATION + module);
     }
 
+    //@@author kewenlok
     /**
      * Prints all information of the specified module.
      *
@@ -368,6 +364,7 @@ public class Ui {
         System.out.println(message);
     }
 
+    //@@author oscarlai1998
     /**
      * Prints message if module list is empty.
      *
@@ -390,6 +387,7 @@ public class Ui {
         System.out.println(EMPTY_INCOMPLETE_LIST_MESSAGE);
     }
 
+    //@@author kewenlok
     /**
      * Prints message if there are no available modules.
      */
@@ -425,6 +423,7 @@ public class Ui {
         System.out.println(EMPTY_MATH_MODULE_LIST_MESSAGE);
     }
 
+    //@@author oscarlai1998
     /**
      * Prints the progress bar for university graduation completion.
      * 
@@ -448,9 +447,9 @@ public class Ui {
         printProgressCompletionMessage(Double.parseDouble(percentage));
     }
 
+    //@@author fupernova
     /**
      * Prints introduction and available help options for help command.
-     * @author fupernova
      */
     public void printIntroHelp() {
         System.out.println(HELP_INTRO);
@@ -458,7 +457,6 @@ public class Ui {
 
     /**
      * Prints help manual for add command.
-     * @author fupernova
      */
     public void printAddHelp() {
         System.out.println(HELP_ADD);
@@ -466,7 +464,6 @@ public class Ui {
 
     /**
      * Prints help manual for delete command.
-     * @author fupernova
      */
     public void printDeleteHelp() {
         System.out.println(HELP_DELETE);
@@ -474,7 +471,6 @@ public class Ui {
 
     /**
      * Prints help manual for update command.
-     * @author fupernova
      */
     public void printUpdateHelp() {
         System.out.println(HELP_UPDATE);
@@ -482,23 +478,22 @@ public class Ui {
 
     /**
      * Prints help manual for done command.
-     * @author fupernova
      */
     public void printDoneHelp() {
         System.out.println(HELP_DONE);
     }
 
+    //@@author kewenlok
     /**
      * Prints help manual for info command.
-     * @author fupernova
      */
     public void printInfoHelp() {
         System.out.println(HELP_INFO);
     }
 
+    //@@author fupernova
     /**
      * Prints help manual for list command.
-     * @author fupernova
      */
     public void printListHelp() {
         System.out.println(HELP_LIST);
@@ -506,7 +501,6 @@ public class Ui {
 
     /**
      * Prints help manual for progress command.
-     * @author fupernova
      */
     public void printProgressHelp() {
         System.out.println(HELP_PROGRESS);
@@ -514,7 +508,6 @@ public class Ui {
 
     /**
      * Prints help manual for cap command.
-     * @author fupernova
      */
     public void printCapHelp() {
         System.out.println(HELP_CAP);
@@ -522,12 +515,12 @@ public class Ui {
 
     /**
      * Prints help manual for exit command.
-     * @author fupernova
      */
     public void printExitHelp() {
         System.out.println(HELP_EXIT);
     }
 
+    //@@author kewenlok
     /**
      * Prints progress completion message.
      */
@@ -539,6 +532,7 @@ public class Ui {
         }
     }
 
+    //@@author fupernova
     /**
      * Prints CAP and degree classification of user based on their grades.
      *
@@ -549,6 +543,7 @@ public class Ui {
         System.out.println(String.format(CAP_MESSAGE, cap, degreeClassification));
     }
 
+    //@@author kewenlok
     /**
      * Prints out the underlying error message for all exceptions.
      *

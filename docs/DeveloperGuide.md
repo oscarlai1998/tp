@@ -30,6 +30,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
     - [ModuleList](#modulelist)
     - [Storage](#storage)
     - [Exception](#exception)
+1. [Logging](#logging)
+1. [Documentation](#documentation)
 1. [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
@@ -51,6 +53,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author kewenlok-->
+
 ## **Introduction** ##
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -59,7 +63,9 @@ show the modules they have taken and can be taken, calculating their CAP and che
 progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
-<br> [🡅 Back to Top](#table-of-contents)
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
@@ -70,6 +76,7 @@ This developer guide is made for developers who wish to understand and/or develo
 further. This guide includes the setup steps, design, implementation, logging, testing, product scope,
 and other sections to give developers a better understanding of the application.
 
+<!--@@author kewenlok-->
 <br> The following symbols and formatting are used in this guide: 
 
 Symbols/Formatting | Description
@@ -146,7 +153,7 @@ What would you like to do today?
     Starting without existing module data...
     Initializing new module list...
     --------------------------------------------------------------------------------------
-    _  ____               _             _
+     _  ____               _             _
     (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
     | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
     | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
@@ -162,6 +169,8 @@ What would you like to do today?
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ## **Design** ##
 The following section describes an overview of the design architecture. Each subsections then provides a more detailed design of each individual components.  
@@ -280,12 +289,13 @@ The methods that check various parameters
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
 
-The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. The subclasses are:
+The `command` component consists of an abstract class `Command` and 10 subclasses that inherit from it. The subclasses are:
 1. AddCommand
 1. CapCommand
 1. DeleteCommand
 1. DoneCommand
 1. ExitCommand
+1. HelpCommand
 1. InfoCommand
 1. ListCommand
 1. ProgressCommand
@@ -311,6 +321,8 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author kewenlok-->
 
 ### **Model Component** ###
 
@@ -490,7 +502,7 @@ This section elaborates on some details about how certain features are implement
 ## **Implementation** ##
 This section describes some noteworthy details on how certain feature are implemented. 
 
-### ***UI*** ###
+### **UI** ###
 
 The Ui feature has 3 primary responsibilities: 
 1. Executes user command using [`Logic Component`](#logic-component)
@@ -573,8 +585,8 @@ Considerations were made for the adoption of third-party parser libraries. Howev
 
 ### **Command** ###
 
-The `command` package is responsible for executing the command from the user. The package contains the  abstract class 
-`Command` and 8 subclasses that inherit `Command`, one for each valid iGraduate command .
+The `command` package is responsible for executing the command from the user. The package contains the abstract class 
+`Command` and 10 subclasses that inherit `Command`, one for each valid iGraduate command .
 
 ***Details***<br>
 The abstract class `Command` contains only 1 method: `execute()`, which takes in 3 parameters: `moduleList`, `ui` and
@@ -587,6 +599,8 @@ The implementation for executing every command differs, and the implementation d
 elaborated below.
 
 ----
+
+<!--@@author kewenlok-->
 
 #### **Add Command** ####
 
@@ -643,7 +657,7 @@ list. The various information requested to update would be identified with their
 
 > ℹ️ **Note:** 
 > - The code and type of modules **cannot be modified** as they are identifiers of the modules.
-> - **Multiple module information** can be updated in a single command
+> - **Multiple module information** can be updated in a single command.
 > - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated.
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
@@ -676,10 +690,37 @@ Initially, it was decided that the parameters would be split into an `array` to 
 
 ----
 
+<!--@@author kewenlok-->
+
+#### **Info Command** ####
+
+The info command provides a feature for the user to view any module they added to the list regardless of
+the module type and status by specifying its module code. The command will only be executed if valid module
+code is provided by the user. All information of the specified module will be shown to the user to aid the
+planning of module. An example of info command execution flow is shown in the sequence diagram below.
+
+![archi](./images/InfoCommandSequenceDiagram.png)
+
+<sup>***Figure 1.18** Sequence diagram of `InfoCommand` in execution with `info CS1010` as user input*</sup>
+
+***Considerations***
+
+After receiving a feedback from a user stating that there are no ways for the user to view the prerequisites 
+information for any modules, the team consider to implement a prerequisites column for the `list command` as
+suggested by the user. However, through much consideration and discussion, the team feels that it will be too
+convoluted and cluttered for the `list command` results as there are simply too much information to show in one
+screen. Instead, the team decided to create a new `info command` for listing all information of the module which 
+the user wish to know.
+
+----
+
+<!--@@author ???-->
+
 #### **List Command** ####
 
 The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
 form of a parameter.
+
 The table below shows the scope of each options.  
 
 |List Parameter|Scope|
@@ -693,16 +734,16 @@ The table below shows the scope of each options.
 |`elec`|List all elective modules on the list|
 |`ge`|List all GE modules on the list|
 
-<sup>***Table 1.18.1*** Supported list functions and their scope</sup>
+<sup>***Table 1.19.1*** Supported list functions and their scope</sup>
 
 ![list](./images/ListCommandSequenceDiagram.png)
 
-<sup>***Figure 1.18.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
-
+<sup>***Figure 1.19.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
 
 ----
 
 <!--@@author fupernova-->
+
 #### **CAP Command** ####
 
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
@@ -710,7 +751,7 @@ command also displays the degree classification of the user. There are no flags 
 
 ![archi](./images/CapCommandSequenceDiagram.png)
 
-<sup>***Figure 1.19** Sequence diagram of `CapCommand` class.*</sup>
+<sup>***Figure 1.20** Sequence diagram of `CapCommand` class.*</sup>
 
 ----
 
@@ -727,7 +768,7 @@ parameter from user input, and there is 1 compulsory flag:
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
-<sup>***Figure 1.20** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
+<sup>***Figure 1.21** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
 
 ----
 
@@ -738,7 +779,7 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 1.21** Sequence diagram of `ProgressCommand` in execution.*</sup>
+<sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ----
 
@@ -751,6 +792,7 @@ The optional parameters are the list of commands from above:
 - `delete`
 - `update`
 - `list`
+- `info`
 - `done`
 - `progress`
 - `cap`
@@ -763,7 +805,7 @@ The figure below demonstrates the behaviour of the help command.
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
-<sup>***Figure 1.22** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
+<sup>***Figure 1.23** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
 
 ***Considerations & Alternatives***
 
@@ -789,6 +831,7 @@ The `module` component contains the class `module`, together with 4 child classe
 stored in iGraduate are instances of one of the 4 subclasses.
 
 ***Details***
+
 For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the
 parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
 grade and MCs. It also contains the lists that track the prerequisites of the module.
@@ -797,6 +840,7 @@ The implementation details of the subclasses are hence quite sparse, containing 
 in the `module` object.
 
 ***Considerations*** 
+
 To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
 be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
 module code and grade, the subclasses do not contain much information that is not already stored in their parent class. To
@@ -808,15 +852,36 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 ----
 
-<!--@@author ???-->
+<!--@@author kewenlok-->
+
 ### **ModuleList** ###
 
+The `moduleList` component acts as a temporary storage for storing module data while application is 
+running. All module data added to the application could be found under the `moduleList` storage.
+
+***Details***
+
+Since the `moduleList` is used for storing module data needed for running application, the module data 
+will be loaded from the disk when the application first started. After any data changing command is executed,
+the latest module data in the `moduleList` will be written to disk for permanent storage (unless the secondary
+memory is faulty). It also consists of utility methods which allows retrieval, manipulation and deletion of 
+module data in a centralised and consistent manner.
+
+***Considerations***
+
+At the start of project, an array is considered to be used as the underlying data structure for the `moduleList`
+component. However, after taking the scalability issue into consideration, the team decided to incorporate an
+`ArrayList` instead. Reason being `ArrayList` is a dynamically sized array along with standard methods such as 
+whether the list contains a specific module, search and removal of specified module. The size of the `ArrayList`
+is only limited by the user device's available memory size.
 
 <br> 
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ### **Storage** ###
 
@@ -888,6 +953,53 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 ----
 
+<!--@@author kewenlok-->
+
+## **Logging** ##
+
+The logging feature is implemented using the `java.util.logging` package. It is a default logging package included
+in the Java package. To learn more about the package, you may refer to [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/package-summary.html).
+To make use of logging feature, you will need to include the following line at the start of all the classes where logging
+feature is to be used.
+
+```
+private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+```
+
+When including the line above, remember to replace `ClassName` with the name of current class such as `iGraduate`. Once
+you have done instantiating the logger object with the code above, you can use the logger object to start logging. For
+more information on how logging works, refer to the [official documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/logging/overview.html).
+The logging configurations are specified in the `logger.properties` file located in `src/main/resources/logger.properties`.
+To change the logging configurations, simply modify the `logger.properties` file with the respective value. The current
+configuration logs all messages with level of `FINE` and above into a log file, `iGraduate-0.log`, under the same folder
+where the application resides.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **Documentation** ##
+
+All the documentations related to the application are stored under the `/docs` folder. There are currently three
+documentations, `AboutUs.md`, `UserGuide.md` and `DeveloperGuide.md`. The documentation tools used for developing these
+guides are:
+
+- [GitHub Markdown](https://guides.github.com/features/mastering-markdown/) syntax for formatting
+- [PlantUML](https://se-education.org/guides/tutorials/plantUml.html) for drawing diagrams
+- [Jekyll](https://jekyllrb.com/) for documentation static site generation
+  For more information on how to set up a documentation site using Jekyll, you may refer to
+  [Using Jekyll for project documentation](https://se-education.org/guides/tutorials/jekyll.html) guide.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<!--@@author ???-->
+
 ## **Appendix A: Product Scope** ##
 
 ### **Target User Profile** ###
@@ -936,8 +1048,6 @@ This app will help NUS students **majoring in Information Security** check his/h
 <br>
 
 [🡅 Back to Top](#table-of-contents)
-
-----
 
 ## **Appendix C: Non-Functional Requirements** ##
 

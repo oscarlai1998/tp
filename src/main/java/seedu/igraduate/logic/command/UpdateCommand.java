@@ -23,8 +23,7 @@ import seedu.igraduate.model.list.ModuleList;
 
 /**
  * Handles update command.
- * 
- * @author xseh
+ *
  */
 public class UpdateCommand extends Command {
     // Update information provided by the user
@@ -40,10 +39,10 @@ public class UpdateCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(UpdateCommand.class.getName());
 
+    //@@author xseh
     /**
      * Constructs a new UpdateCommand object.
-     * 
-     * @author xseh
+     *
      * @param moduleCode   Module code of target module.
      * @param commandFlags Flags containing all the information to update.
      */
@@ -55,8 +54,7 @@ public class UpdateCommand extends Command {
     /**
      * Updates the information of a module specified by the user. Prints the update
      * message after successfully updated the value.
-     * 
-     * @author        xseh
+     *
      * @param modules Module list consisting of all modules.
      * @param ui      User interface for printing result.
      * @param storage Storage for storing module list data.
@@ -105,8 +103,7 @@ public class UpdateCommand extends Command {
 
     /**
      * Updates the module name from commandFlags.
-     * 
-     * @author xseh
+     *
      * @param commandFlags List containing all flags and values.
      */
     private void updateModuleName(ArrayList<String> commandFlags) {
@@ -120,8 +117,7 @@ public class UpdateCommand extends Command {
 
     /**
      * Updates the module credit from commandFlags.
-     * 
-     * @author xseh
+     *
      * @param commandFlags List containing all flags and values.
      * @throws InputNotNumberException       If module credit is not an integer (or
      *                                       double).
@@ -140,8 +136,7 @@ public class UpdateCommand extends Command {
     /**
      * Updates module grade from commandFlags. If the module is incomplete, no
      * updates is done on the module grade.
-     * 
-     * @author xseh
+     *
      * @param commandFlags List containing all flags and values.
      * @throws ModuleNotCompleteException  If the module has not been marked as
      *                                     completed.
@@ -165,12 +160,12 @@ public class UpdateCommand extends Command {
         }
     }
 
+    //@@author fupernova
     /**
      * Updates prerequisites of a module from commandFlags. The method will
      * completely overwrite the existing list of prerequisites for a particular
      * module.
      *
-     * @author fupernova
      * @param commandFlags List containing all the flags and values.
      * @param moduleList   List of all modules.
      * @throws ModuleNotFoundException       If the module is not found.
@@ -210,7 +205,6 @@ public class UpdateCommand extends Command {
      * Extracts a list of prerequisites that are not taken from a list of all
      * prerequisites.
      *
-     * @author fupernova
      * @param moduleList    List of all modules.
      * @param prerequisites List of all prerequisites.
      * @return ArrayList of prerequisites not taken.
@@ -232,7 +226,6 @@ public class UpdateCommand extends Command {
      * Checks if user is adding the target module code to its own list of
      * prerequisites.
      *
-     * @author fupernova
      * @param module        The target module the user wants to update.
      * @param prerequisites List of new prerequisites user wants to add to module.
      * @return True if the module is adding to its own prerequisite, false
@@ -246,6 +239,7 @@ public class UpdateCommand extends Command {
         return false;
     }
 
+    //@@author xseh
     /**
      * {@inheritDoc}
      *

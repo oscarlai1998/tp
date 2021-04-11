@@ -8,6 +8,7 @@ public class InvalidListTypeException  extends Exception {
         + " entered is invalid. \nThe supported list types for list are: all, incomplete, complete"
         + ", available, core, elec, ge and math.";
 
+    //@@author oscarlai1998
     public InvalidListTypeException() {
         super(INVALID_LIST_TYPE_ERROR_MESSAGE);
     }

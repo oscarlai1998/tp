@@ -25,6 +25,7 @@ public class DeleteCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
 
+    //@@author oscarlai1998
     /**
      * Constructs a new DeleteCommand object.
      * 
@@ -65,6 +66,7 @@ public class DeleteCommand extends Command {
         }
     }
 
+    //@@author kewenlok
     /**
      * {@inheritDoc}
      *

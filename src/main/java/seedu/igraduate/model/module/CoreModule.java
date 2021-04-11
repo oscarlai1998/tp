@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Handles core modules. 
  */
 public class CoreModule extends Module {
+    //@@author kewenlok
     /**
      * Constructs a new CoreModule object.
      *

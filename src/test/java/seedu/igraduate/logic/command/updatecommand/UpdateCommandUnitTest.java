@@ -41,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UpdateCommandUnitTest {
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/updateCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();

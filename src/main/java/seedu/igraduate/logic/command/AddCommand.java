@@ -45,6 +45,7 @@ public class AddCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(AddCommand.class.getName());
 
+    //@@author kewenlok
     /**
      * Constructs a new AddCommand object.
      * 
@@ -65,6 +66,7 @@ public class AddCommand extends Command {
         this.untakenPreRequisites = untakenPrerequisites;
     }
 
+    //@@author LJ-37
     /**
      * Retrieves and return module code for the current module.
      *
@@ -150,6 +152,7 @@ public class AddCommand extends Command {
         return module;
     }
 
+    //@@author kewenlok
     /**
      * {@inheritDoc}
      *
