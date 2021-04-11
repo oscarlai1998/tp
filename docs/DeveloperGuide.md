@@ -683,10 +683,58 @@ list. The various information requested to update would be identified with their
 
 <sup>***Figure 1.17** Sequence diagram of `UpdateCommand` in execution with `update CS1010 -mc 2` as user input*</sup>
 
-***Considerations***
+***Considerations*** : Command behaviour
 
+The main considerations regarding the behaviour of the update command would be if multiple flags should be permitted in a single update command. 
 
 ***Alternatives***
+
+1. Restrict to single update flag
+    - Pros: 
+        - Simple to implement
+        - Easier error and exception handling
+    - Cons: 
+        - Inconvenient and unsuitable for target audience
+1. Allow multiple flags (current choice)
+    - Pros: 
+        - Suitable for target audience who ar fast typers
+        - Update less time consuming and troublesome
+    - Cons: 
+        - Complicated process when extracting flags
+        - More considerations needed for error and exception handling
+
+Having a single input would significantly simplify the code, as a simple switch statement will suffice. There is also easier error and exception handling as only two parameters are given. In the event of exception, simply retrace the command and throw exception. However, having only one flag at a time is inconvenient for fast typers, and is less optimized for their quick typing. 
+
+Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typers to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate less time consuming and troublesome. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
+
+***Considerations*** : Command error and exception handling management
+
+On the event of a failed flag, considerations have to made to determine how the update command would manage the rest of the flags. 
+
+***Alternatives***
+
+1. Abort entire command
+    - Pros:
+        - Simple to implement
+    - Cons:
+        - Major inconvenience to users
+1. Ignore failed flag
+    - Pros:
+        - More usable and convenient for users
+    - Cons:
+        - Extremely complex in error and exception handling
+1. Ignore failed grade flag (current choice)
+    - Pros:
+        - Compromise between convenience and code difficulty
+        - If grade flag generates an error, the other flags would still be updated
+    - Cons:
+        - Failure in other flags still results in aborting the entire command
+
+The first way is to completely abort the entire command, which lowers the usability aspect of the application, creating inconvenience when a small error is encountered. However, this makes coding straightforward and simple. 
+
+Another alternative is to simply ignore the failed flag and attempt to change the rest. This would make the update command more usable and convenient. However, the primary issue is the difficulty in designing and programming such behaviour, individual try and catch statements needs to be used. Each statements must be able to differentiate between having an invalid flag input or having a flag that does not exists (i.e. the user did not use the flag).  This behaviour makes the application significantly more complex to code and catch. 
+
+Finally, decisions were made to compromise between the two alternatives. After some discussions, it was determined that grade (the -g flag) is the most likely to fail since it depends on not just the user input but if the module has has been completed. Therefore, a dedicated try statement is used to ensure that, even in the event of errors associated with providing a grade to an incomplete module, the rest of the command would still be updated (the rest of the extracts and checking is in the finally clause). Unfortunately, if the other flags fail, the program will abort entirely. This alternative balances the complexity between error and exception handling and usability, allowing some flexibility in managing error while providing some convenience.
 
 ----
 
