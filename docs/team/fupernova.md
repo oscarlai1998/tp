@@ -52,8 +52,7 @@ regarding the proper usage of iGraduate, including the different commands and th
 
 Due to the large number of commands and features available in iGraduate, we decided to have separate help pages for each command,
  along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
-make the quick guide less cluttered and more targeted towards specific commands that users intend to look up. I focused on
-the first portion of parsing while Xin Ru focused on the second.
+make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
 
 ___
 ### Contributions to documentation
@@ -62,6 +61,8 @@ ___
 
 For the user guide, I added the segments for components I implemented, such as the Help command. I also added the segment for
  Add command.
+
+I also helped to update the FAQ, design the logo and rephrase the introduction.
 
 Apart from that, I made many edits to improve grammar, correct spelling and improve the phrasing of the guide to be more
  audience-centric and beginner-friendly.
@@ -80,6 +81,8 @@ ___
 I helped to edit non-feature specific portions of the UG and DG such as the introduction and the content pages for both.
 
 I also helped to review my teammates' code, in particular look out for the reasons for failed gradle builds.
+
+When we started with logging, I configured `.gitignore` to ignore all local logging files.
 
 After the PE dry run, I also helped to tag issues found and assign issues to myself and teammates.
 

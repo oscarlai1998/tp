@@ -1,3 +1,4 @@
+// @@author fupernova
 package seedu.igraduate.logic.command.exitcommand;
 
 import org.junit.jupiter.api.Test;

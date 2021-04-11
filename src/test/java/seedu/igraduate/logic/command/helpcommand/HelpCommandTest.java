@@ -1,3 +1,4 @@
+// @@ author fupernova
 package seedu.igraduate.logic.command.helpcommand;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,6 @@ import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.command.HelpCommand;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.model.module.CoreModule;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -33,7 +33,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
