@@ -14,6 +14,7 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
@@ -26,6 +27,7 @@ import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
@@ -52,7 +54,7 @@ public class UpdateCommandIntegrationTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "add Programming Methodology -mc 4 -t core -c cs1010";
         Command addModule = Parser.parseCommand(module);
         addModule.execute(moduleList, ui, storage);
@@ -67,13 +69,13 @@ public class UpdateCommandIntegrationTest {
             ExistingModuleException, InvalidModuleTypeException, PrerequisiteNotMetException, ModuleNotFoundException,
             InvalidListTypeException, AddSelfToPrereqException, SaveModuleFailException, InvalidCommandException,
             UnableToDeletePrereqModuleException, IncorrectParameterCountException, MarkCompletedModuleException,
-            IllegalParametersException {
+            IllegalParametersException, InvalidModuleCodeException {
         String line = "update CS1010 -g A- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         updateCommand.execute(moduleList, ui, storage);
         assertEquals("Nice! I've updated this module:" + System.lineSeparator() + "  "
-                + "[C][O] CS1010   Programming Methodology                                  A-   2 MC"
+                + "[C][O] CS1010    Programming Methodology                                  A-   2 MC"
                 + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
@@ -81,7 +83,8 @@ public class UpdateCommandIntegrationTest {
     @Test
     void executeUpdateCommand_nonexistentModule_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InvalidListTypeException, InputNotNumberException,
-            IncorrectParameterCountException, InvalidModularCreditException, IllegalParametersException {
+            IncorrectParameterCountException, InvalidModularCreditException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "update CS2040 -g A- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -92,7 +95,8 @@ public class UpdateCommandIntegrationTest {
     @Test
     void executeUpdateCommand_invalidGrade_exceptionThrown() throws InvalidCommandException, InvalidModuleTypeException,
             InvalidListTypeException, InputNotNumberException, IncorrectParameterCountException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "update CS1010 -g O- -mc 2";
         Command updateCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(InvalidModuleGradeException.class,
@@ -106,7 +110,7 @@ public class UpdateCommandIntegrationTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "Delete cs1010";
         Command deleteModule = Parser.parseCommand(module);
         deleteModule.execute(moduleList, ui, storage);

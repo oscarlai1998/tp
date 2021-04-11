@@ -8,6 +8,7 @@ import seedu.igraduate.ui.Ui;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.SaveModuleFailException;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,11 +16,9 @@ public class CapCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(CapCommand.class.getName());
 
-    protected float cap;
-    protected String degreeClassification;
-
     /**
-     * Execute the capCommand function.
+     * Iterates through the modules in module list and calculates the current cap.
+     * Prints cap message after cap is calculated.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -27,57 +26,22 @@ public class CapCommand extends Command {
      * @throws SaveModuleFailException If storage fail to save module data to disk.
      * @throws InvalidModuleGradeException If the module grade is invalid.
      */
-    public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws SaveModuleFailException, InvalidModuleGradeException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws SaveModuleFailException,
+            InvalidModuleGradeException {
 
         LOGGER.log(Level.INFO, "Executing CAP command...");
-
-        double totalCredit = 0;
-        double moduleCredit = 0;
-        float moduleCap = 0.0F;
-        float totalModuleCap = 0.0F;
-        cap = 0.0F;
-
-        for (int i = 0; i < moduleList.getModules().size(); i++) {
-            Module module = moduleList.getModules().get(i);
-            boolean completed = module.isDone();
-            boolean su = checkSu(module);
-            if (completed && !su) {
-                moduleCap = convertGradeToCap(module.getGrade());
-                moduleCredit = module.getCredit();
-                totalCredit += moduleCredit;
-                totalModuleCap += moduleCap * moduleCredit;
-            }
-        }
-        cap = calculateCap(totalCredit, totalModuleCap);
-        degreeClassification = getDegreeClassification(cap);
-        ui.printCap(cap, degreeClassification);
+        float cap = calculateCap(moduleList);
+        String degreeClassification = getDegreeClassification(cap);
+        ui.printCapMessage(cap, degreeClassification);
         LOGGER.log(Level.INFO, "Successfully calculated CAP.");
     }
 
-
-
     /**
-     * Check whether S/U option is exercised on the module.
+     * Converts grade into numeric cap score.
      *
-     * @param module module to be checked.
-     * @return true if S/U option is exercised, false if S/U option is not exercised.
-     */
-    private boolean checkSu(Module module) {
-        String grade = module.getGrade();
-        if (grade.equals("S") || grade.equals("U")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Convert grade into numeric cap score.
-     *
-     * @param grade grade that is being converted to cap.
-     * @return numeric cap score.
-     * @throws InvalidModuleGradeException if module grade does not fit any categories.
+     * @param grade Grade that is being converted to cap.
+     * @return Numeric cap score.
+     * @throws InvalidModuleGradeException If module grade is invalid.
      */
     private float convertGradeToCap(String grade) throws InvalidModuleGradeException {
         LOGGER.log(Level.INFO, "Converting grade to cap score...");
@@ -124,47 +88,60 @@ public class CapCommand extends Command {
     }
 
     /**
-     * Calculate cap.
+     * Calculates cap.
      *
-     * @param totalCredit total number of credits taken.
-     * @param totalModuleCap sum of of the numeric cap scores.
-     * @return final cap.
+     * @param moduleList Module list containing all modules.
+     * @return Resulting cap.
+     * @throws InvalidModuleGradeException If module grade is invalid.
      */
-    private float calculateCap(double totalCredit, float totalModuleCap) {
-        float cap;
-        if (totalCredit == 0) {
-            cap = 0.0F;
-        } else {
-            cap = (float) (totalModuleCap / totalCredit);
+    private float calculateCap(ModuleList moduleList) throws InvalidModuleGradeException {
+        double totalCredit = 0;
+        float totalGradePoint = 0.0F;
+        float cap = 0.0F;
+
+        ArrayList<Module> modules = moduleList.getModules();
+
+        for (Module module : modules) {
+            boolean isCompleted = module.isDone();
+            boolean isSu = module.isGradeSu();
+            if (isCompleted && !isSu) {
+                float moduleCap = convertGradeToCap(module.getGrade());
+                double modularCredit = module.getCredit();
+                totalCredit += modularCredit;
+                totalGradePoint += moduleCap * modularCredit;
+            }
         }
 
+        if (totalCredit != 0) {
+            cap = (float) (totalGradePoint / totalCredit);
+        }
         return cap;
     }
 
     /**
-     * Get the degree classification based on the cap.
+     * Gets the degree classification based on the cap.
      *
-     * @param cap current cap.
-     * @return current degree classification.
+     * @param cap Current cap.
+     * @return Current degree classification.
      */
     private String getDegreeClassification(float cap) {
-        String capClass;
+        String degreeClassification;
 
         if (cap >= 2.00 && cap <= 2.99) {
-            capClass = "Pass";
+            degreeClassification = "Pass";
         } else if (cap >= 3.00 && cap <= 3.49) {
-            capClass = "Honours";
+            degreeClassification = "Honours";
         } else if (cap >= 3.50 && cap <= 3.99) {
-            capClass = "Honours (Merit)";
+            degreeClassification = "Honours (Merit)";
         } else if (cap >= 4.00 && cap <= 4.49) {
-            capClass = "Honours (Distinction)";
+            degreeClassification = "Honours (Distinction)";
         } else if (cap >= 4.50) {
-            capClass = "Honours (Highest Distinction)";
+            degreeClassification = "Honours (Highest Distinction)";
         } else {
-            capClass = "Fail";
+            degreeClassification = "Fail";
         }
 
-        return capClass;
+        return degreeClassification;
     }
 
     @Override

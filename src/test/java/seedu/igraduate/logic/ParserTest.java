@@ -5,13 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.exception.IllegalParametersException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InputNotNumberException;
 import seedu.igraduate.exception.InvalidListTypeException;
+import seedu.igraduate.exception.IllegalParametersException;
 
 import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.DeleteCommand;
@@ -30,20 +32,41 @@ public class ParserTest {
     void parseCommand_emptyCommand_exceptionThrown() {
         String line = "";
         Exception exception = assertThrows(InvalidCommandException.class, () -> Parser.parseCommand(line));
-        assertEquals(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, exception.getMessage());
+        String expectedMessage = String.format(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE,
+                "You may type \"help\" to view manual for our available commands.");
+        assertEquals(expectedMessage, exception.getMessage());
     }
 
     @Test
     void parseCommand_invalidCommand_exceptionThrown() {
         String line = "search CS1010";
         Exception exception = assertThrows(InvalidCommandException.class, () -> Parser.parseCommand(line));
-        assertEquals(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, exception.getMessage());
+        String expectedMessage = String.format(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE,
+                "You may type \"help\" to view manual for our available commands.");
+        assertEquals(expectedMessage, exception.getMessage());
+    }
+
+    @Test
+    void parseCommand_addNegativeMC_exceptionThrown() {
+        String line = "add Computer Org -c cs2100 -mc -4 -t core";
+        Exception exception = assertThrows(InvalidModularCreditException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void parseCommand_addTooManyMC_exceptionThrown() {
+        String line = "add Computer Org -c cs2100 -mc 40 -t core";
+        Exception exception = assertThrows(InvalidModularCreditException.class,
+            () -> Parser.parseCommand(line));
+        assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
     }
 
     @Test
     void parseAddCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
 
         String line = "add Introduction to Operating Systems -t core -mc 4 -c CS2106 -p CS1010,CS2100";
         assertEquals("new AddCommand(CS2106, Introduction to Operating Systems, core, 4.00, [CS1010, CS2100], "
@@ -53,7 +76,8 @@ public class ParserTest {
     @Test
     void parseDeleteCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "delete CS1010";
         assertEquals("new DeleteCommand(CS1010)", ParserStub.parseCommandStub(line));
     }
@@ -61,7 +85,8 @@ public class ParserTest {
     @Test
     void parseListCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "list all";
         assertEquals("new ListCommand(all)", ParserStub.parseCommandStub(line));
     }
@@ -69,7 +94,8 @@ public class ParserTest {
     @Test
     void parseProgressCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "progress";
         assertEquals("new ProgressCommand()", ParserStub.parseCommandStub(line));
     }
@@ -77,7 +103,8 @@ public class ParserTest {
     @Test
     void parseDoneCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "done CS1010 -g A+";
         assertEquals("new DoneCommand(CS1010, A+)", ParserStub.parseCommandStub(line));
     }
@@ -85,7 +112,8 @@ public class ParserTest {
     @Test
     void parseUpdateCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "update CS2106 -n Intro to OS -mc 2 -g A- -p CS1010,CS2100";
         assertEquals("new UpdateCommand(CS2106, [-n, Intro, to, OS, -mc, 2, -g, A-, -p, CS1010,CS2100])",
                 ParserStub.parseCommandStub(line));
@@ -94,7 +122,8 @@ public class ParserTest {
     @Test
     void parseCapCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "cap";
         assertEquals("new CapCommand()", ParserStub.parseCommandStub(line));
     }
@@ -102,7 +131,8 @@ public class ParserTest {
     @Test
     void parseExitCommand_appropriateParameters_success()
             throws InvalidCommandException, IncorrectParameterCountException, InvalidModuleTypeException,
-            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException {
+            InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "exit";
         assertEquals("new ExitCommand()", ParserStub.parseCommandStub(line));
     }
@@ -113,7 +143,8 @@ public class ParserTest {
     @Test
     void createAddCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "add Programming Methodology -t core -mc 4 -c CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -121,7 +152,8 @@ public class ParserTest {
     @Test
     void createAddCommand_parametersWithSpacing_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "add Programming Methodology    -t      core       -mc      4      -c            CS1010";
         assertEquals(AddCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -152,7 +184,8 @@ public class ParserTest {
     @Test
     void createDeleteCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "Delete CS2107";
         assertEquals(DeleteCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -174,7 +207,8 @@ public class ParserTest {
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "done CS2107 -g A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -182,7 +216,8 @@ public class ParserTest {
     @Test
     void createDoneCommand_parametersWithSpacing_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "done      CS2107           -g                             A+";
         assertEquals(DoneCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -205,7 +240,8 @@ public class ParserTest {
     @Test
     void createProgressCommand_appropriateParameters_success() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
-            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "progress";
         assertEquals(ProgressCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -228,7 +264,8 @@ public class ParserTest {
     @Test
     void createListCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "list complete";
         assertEquals(ListCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -251,7 +288,8 @@ public class ParserTest {
     @Test
     void createCapCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "cap";
         assertEquals(CapCommand.class, Parser.parseCommand(line).getClass());
     }
@@ -274,7 +312,8 @@ public class ParserTest {
     @Test
     void createUpdateCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException {
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
         assertEquals(UpdateCommand.class, Parser.parseCommand(line).getClass());
     }

@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 
 import java.util.logging.Logger;
 
-import seedu.igraduate.exception.SaveModuleFailException;
 import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
@@ -34,7 +33,7 @@ public class IGraduate {
             InputStream inputStream = IGraduate.class.getClassLoader().getResourceAsStream("logger.properties");
             LogManager.getLogManager().readConfiguration(inputStream);
         } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "An error occur when trying to read logger configuration file.", e);
+            LOGGER.log(Level.WARNING, "An error occurred when trying to read logger configuration file.", e);
         }
     }
 
@@ -53,13 +52,14 @@ public class IGraduate {
             storage.saveModulesToFile(modules);
         } catch (Exception e) {
             ui.printErrorMessage(e);
+            LOGGER.log(Level.WARNING, "An error occurred when trying to read module data file.", e);
             modules = new ModuleList();
             LOGGER.info("A new module list is created.");
         } finally {
             LOGGER.info("All components initialised successfully.");
         }
 
-        assert modules.size() >= 0 : "Array not initialised properly. ";
+        assert modules.size() >= 0 : "Module list not initialised properly. ";
     }
 
     /**
@@ -77,7 +77,7 @@ public class IGraduate {
                 isExit = c.isExit();
             } catch (Exception e) {
                 ui.printErrorMessage(e);
-                LOGGER.log(Level.WARNING, "An error occur when trying to execute command.", e);
+                LOGGER.log(Level.WARNING, "An error occurred when trying to execute command.", e);
             } finally {
                 ui.printBorderLine();
             }

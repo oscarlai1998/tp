@@ -1,0 +1,42 @@
+@startuml
+hide footbox
+
+participant ":iGraduate" as iGraduate
+participant ":Parser" as Parser
+participant ":ListCommand" as ListCommand
+participant ":ModuleList" as ModuleList
+participant ":Storage" as Storage
+participant ":Ui" as Ui
+
+iGraduate -> Parser: parseCommand("list complete")
+activate Parser #FFBBBB
+
+Parser -> Parser: createListCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
+create ListCommand
+Parser -> ListCommand: ListCommand("CS1010")
+activate ListCommand
+ListCommand --> Parser: new ListCommand("CS1010")
+deactivate ListCommand
+deactivate Parser
+
+Parser --> iGraduate: new ListCommand("CS1010")
+deactivate Parser
+
+iGraduate -> ListCommand: execute(moduleList, ui, storage)
+activate ListCommand
+
+ListCommand -> ModuleList: getModules()
+activate ModuleList
+ModuleList --> ListCommand: modules
+deactivate ModuleList
+
+
+ListCommand -> Ui: printCompletedList(modules:ModuleList)
+activate Ui
+deactivate Ui
+
+deactivate ListCommand
+destroy ListCommand
+@enduml

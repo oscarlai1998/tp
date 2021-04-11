@@ -13,19 +13,30 @@ import java.util.logging.Logger;
  * Handles list command.
  */
 public class ListCommand extends Command {
+
     private static final Logger LOGGER = Logger.getLogger(ListCommand.class.getName());
+
+    /**
+     * Scope of the module list to be printed.
+     */
     private String scope;
 
+    /**
+     * Constructs a new ListCommand object.
+     *
+     * @param scope The scope of list command.
+     */
     public ListCommand(String scope) {
         this.scope = scope;
     }
 
     /**
-     * Prints list of all modules.
+     * Prints list of all modules based on the scope.
      *
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
      * @param storage Storage for storing module list data.
+     * @throws InvalidListTypeException If the list option provided is invalid.
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws InvalidListTypeException {

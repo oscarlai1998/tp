@@ -15,6 +15,7 @@ import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
 import seedu.igraduate.exception.InvalidModuleGradeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.UnableToDeletePrereqModuleException;
 import seedu.igraduate.exception.PrerequisiteNotFoundException;
 import seedu.igraduate.exception.ModuleNotFoundException;
@@ -55,7 +56,7 @@ public class UpdateCommandUnitTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "add Programming Methodology -mc 4 -t core -c cs1010";
         Command addModule = Parser.parseCommand(module);
         addModule.execute(moduleList, ui, storage);
@@ -75,7 +76,7 @@ public class UpdateCommandUnitTest {
         System.setOut(new PrintStream(outContent));
         updateCommand.execute(moduleList, ui, storage);
         assertEquals("Nice! I've updated this module:" + System.lineSeparator() + "  "
-                + "[C][O] CS1010   Programming Methodology                                  A-   2 MC"
+                + "[C][O] CS1010    Programming Methodology                                  A-   2 MC"
                 + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
@@ -104,7 +105,7 @@ public class UpdateCommandUnitTest {
             ModuleNotCompleteException, SaveModuleFailException, InvalidModuleGradeException,
             UnableToDeletePrereqModuleException, PrerequisiteNotFoundException, ModuleNotFoundException,
             InvalidListTypeException, PrerequisiteNotMetException, InvalidModularCreditException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "Delete cs1010";
         Command deleteModule = Parser.parseCommand(module);
         deleteModule.execute(moduleList, ui, storage);
