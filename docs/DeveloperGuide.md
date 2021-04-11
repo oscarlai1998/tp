@@ -481,7 +481,7 @@ There are 3 classifications of user input: **command, parameter and flags**.
 |`parameter`|the argument that comes after the command word and can vary depending on the command|specifies the identifier (module name or code or list type) for the modules. For example, the parameter for `add`command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specify the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands|specify the additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and prerequisites.|
 
-<sup>***Table 1.13** Terms used in differentiating the different parts of a user command </sup>
+<sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
 ***Considerations***<br>
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the large number of commands and the variance in parameter and flag types. In order to ensure that `Parser` satisfies *Single Responsibility Principle*, the class is implemented in a way that it does no validation check on the correctness or format of the parameter and flags, and is only responsible for validating the number of flags and parameters in user input for the given command before passing the parameters and flags to the relevant `Command` class to do further validation of the type and formatting of flags and parameters. 
