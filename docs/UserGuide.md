@@ -148,6 +148,8 @@ List of pre-requisites needed to take CS2106: CS2100
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Delete existing module: `delete`** ###
 
 Deletes an existing module from the list of modules via the module code. The delete function serves to 
@@ -187,6 +189,8 @@ amend any changes to the planning of modules.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Update module information: `update`** ###
 
 Updates relevant information (module name, MCs, prerequisites and/or grade) for the selected module on the list. The information can be arranged 
@@ -225,6 +229,8 @@ with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prereq
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Mark a module as complete: `done`** ###
 
@@ -268,6 +274,8 @@ done.*</sup>
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author kewenlok-->
 
@@ -325,6 +333,8 @@ Prerequisite for                      : []
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author ???-->
 
@@ -457,6 +467,8 @@ on the list.*</sup>
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author ???-->
 
 ### **Show academic progression: `progress`** ###
@@ -547,6 +559,8 @@ See you soon! Happy studying!
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Program Manual: `help`** ###
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
 do not remember the different commands available or their purpose and format.
@@ -611,6 +625,8 @@ intervention is required for storage of data.
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author kewenlok-->
 
