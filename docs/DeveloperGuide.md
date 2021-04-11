@@ -30,6 +30,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
     - [ModuleList](#modulelist)
     - [Storage](#storage)
     - [Exception](#exception)
+1. [Logging](#logging)
+1. [Documentation](#documentation)
 1. [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
@@ -51,6 +53,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author kewenlok-->
+
 ## **Introduction** ##
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -59,7 +63,9 @@ show the modules they have taken and can be taken, calculating their CAP and che
 progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
-<br> [🡅 Back to Top](#table-of-contents)
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
@@ -70,6 +76,7 @@ This developer guide is made for developers who wish to understand and/or develo
 further. This guide includes the setup steps, design, implementation, logging, testing, product scope,
 and other sections to give developers a better understanding of the application.
 
+<!--@@author kewenlok-->
 <br> The following symbols and formatting are used in this guide: 
 
 Symbols/Formatting | Description
@@ -162,6 +169,8 @@ What would you like to do today?
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ## **Design** ##
 The following section describes an overview of the design architecture. Each subsections then provides a more detailed design of each individual components.  
@@ -323,6 +332,8 @@ The data storing issues are split into two main categories - what data should be
 should be managed and stored.
 
 ----
+
+<!--@@author kewenlok-->
 
 #### **Module Package** ####
 
@@ -490,7 +501,7 @@ This section elaborates on some details about how certain features are implement
 ## **Implementation** ##
 This section describes some noteworthy details on how certain feature are implemented. 
 
-### ***UI*** ###
+### **UI** ###
 
 The Ui feature has 3 primary responsibilities: 
 1. Executes user command using [`Logic Component`](#logic-component)
@@ -586,6 +597,8 @@ The implementation for executing every command differs, and the implementation d
 elaborated below.
 
 ----
+
+<!--@@author kewenlok-->
 
 #### **Add Command** ####
 
@@ -751,6 +764,7 @@ The optional parameters are the list of commands from above:
 - `delete`
 - `update`
 - `list`
+- `info`
 - `done`
 - `progress`
 - `cap`
@@ -876,6 +890,53 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 ----
 
+<!--@@author kewenlok-->
+
+## **Logging** ##
+
+The logging feature is implemented using the `java.util.logging` package. It is a default logging package included
+in the Java package. To learn more about the package, you may refer to [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/package-summary.html).
+To make use of logging feature, you will need to include the following line at the start of all the classes where logging
+feature is to be used.
+
+```
+private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+```
+
+When including the line above, remember to replace `ClassName` with the name of current class such as `iGraduate`. Once
+you have done instantiating the logger object with the code above, you can use the logger object to start logging. For
+more information on how logging works, refer to the [official documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/logging/overview.html).
+The logging configurations are specified in the `logger.properties` file located in `src/main/resources/logger.properties`.
+To change the logging configurations, simply modify the `logger.properties` file with the respective value. The current
+configuration logs all messages with level of `FINE` and above into a log file, `iGraduate-0.log`, under the same folder
+where the application resides.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **Documentation** ##
+
+All the documentations related to the application are stored under the `/docs` folder. There are currently three
+documentations, `AboutUs.md`, `UserGuide.md` and `DeveloperGuide.md`. The documentation tools used for developing these
+guides are:
+
+- [GitHub Markdown](https://guides.github.com/features/mastering-markdown/) syntax for formatting
+- [PlantUML](https://se-education.org/guides/tutorials/plantUml.html) for drawing diagrams
+- [Jekyll](https://jekyllrb.com/) for documentation static site generation
+  For more information on how to set up a documentation site using Jekyll, you may refer to
+  [Using Jekyll for project documentation](https://se-education.org/guides/tutorials/jekyll.html) guide.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<!--@@author ???-->
+
 ## **Appendix A: Product Scope** ##
 
 ### **Target User Profile** ###
@@ -924,8 +985,6 @@ This app will help NUS students **majoring in Information Security** check his/h
 <br>
 
 [🡅 Back to Top](#table-of-contents)
-
-----
 
 ## **Appendix C: Non-Functional Requirements** ##
 
