@@ -44,7 +44,7 @@ public class ParserStub extends Parser {
     private static final int COMMAND_EXIT_LENGTH = 1;
 
     /**
-     * Stub for the createAddCommand in Parser
+     * Stub for the createAddCommand in Parser. 
      * 
      * @author xseh
      */
@@ -71,7 +71,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createDeleteCommand in Parser
+     * Stub for the createDeleteCommand in Parser. 
      * 
      * @author xseh
      */
@@ -90,7 +90,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createListCommand in Parser
+     * Stub for the createListCommand in Parser. 
      * 
      * @author xseh
      */
@@ -108,7 +108,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createProgressCommand in Parser
+     * Stub for the createProgressCommand in Parser. 
      * 
      * @author xseh
      */
@@ -125,7 +125,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createDoneCommand in Parser
+     * Stub for the createDoneCommand in Parser. 
      * 
      * @author xseh
      */
@@ -144,7 +144,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createUpdateCommand in Parser
+     * Stub for the createUpdateCommand in Parser. 
      * 
      * @author xseh
      */
@@ -162,7 +162,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createCapCommand in Parser
+     * Stub for the createCapCommand in Parser. 
      * 
      * @author xseh
      */
@@ -179,7 +179,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the createExitCommand in Parser
+     * Stub for the createExitCommand in Parser. 
      * 
      * @author xseh
      */
@@ -196,7 +196,7 @@ public class ParserStub extends Parser {
     }
 
     /**
-     * Stub for the parseCommand in Parser
+     * Stub for the parseCommand in Parser. 
      * 
      * @author xseh
      */
