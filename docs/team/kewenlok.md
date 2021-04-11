@@ -5,8 +5,8 @@
 `iGraduate` is a command line application that acts as a centralised hub for NUS students 
 majoring in Information Security to plan their academic journey. With tools like the 
 storing of modules, listing of modules that can be taken, an academic progression indicator 
-and a CAP calculator, iGraduate will help students check his/her graduation progress, view modules 
-taken based on programme requirements and make informed decisions about future modules.
+and a CAP calculator, iGraduate will help students check his/her graduation progress and make 
+informed decisions about future modules.
 
 ## Summary of Contributions
 
@@ -18,62 +18,61 @@ taken based on programme requirements and make informed decisions about future m
 
 1. Implemented `AddCommand` class with [Le Jun](#https://github.com/LJ-37).
     * Le Jun and I was tasked to implement the `AddCommand` for adding new modules to the application, which is a critical 
-    command for our application. I created methods that will be used by the command in `Ui` and `ModuleList` while Le Jun 
-    writes the logic code in `AddCommand`. I added prerequisites for the `AddCommand` at a later time when we decided to 
-    include prerequisites feature.
+      command for our application. I created methods that will be used by the command in `Ui` and `ModuleList` while Le Jun 
+      writes the logic code in `AddCommand`. I added prerequisites for the `AddCommand` at a later time when we decided to 
+      include prerequisites feature.
       
 1. Implemented `InfoCommand` class to show module information.
-    * After receiving a feedback from peers where it would be a feature bug if the users have no command to show their module
-    information in the list, I implemented `InfoCommand` that executes `info` command for users to view all the specified module 
-    information. I also created methods in `Ui`, `Parser` and `ModuleList` classes to aid the processing of user input, module 
-    data fetching and display the results to the user.
+    * To allow user to view their module information in the list, I implemented `InfoCommand` that executes `info` command for 
+      users to view all the specified module information. I also created methods in `Ui`, `Parser` and `ModuleList` classes to aid 
+      the processing of user input, module data fetching and display the results to the user.
       
 1. Implemented `DoneCommand` class for user to mark module as taken.
     * The `DoneCommand` class is responsible for executing the operations related to `done` feature. The `done` feature allows 
-    the user to update the module they have taken with a grade so that the application can update the prerequisite list of related
-    modules accordingly to show an accurate results on the module status and whether it can be taken next.
+      the user to update the module they have taken with a grade so that the application can update the prerequisite list of related
+      modules accordingly to show an accurate results on the module status and whether it can be taken next.
       
 1. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
-    * The `ListCommand` class is implemented to execute the operations related to `list` feature. It allows the user to view
-    the modules available in the current application on whether it is completed, incomplete, available for take and by module 
-    type. I programmed the `available` and list by `module type` options' logic. For the `available` option, I check through 
-    the untaken prerequisites of all modules and display only the modules where all their prerequisites are satisfied. As for 
-    the `module type` option, I filter out modules which matches the specified module type and display them to the user.
+    * The `ListCommand` class is implemented to execute the operations related to `list` feature. It allows the user to view 
+      the modules available in the current application based on provided options. I programmed the `available` and list by 
+      `module type` options' logic. For the `available` option, I check through the untaken prerequisites of all modules and 
+      display only the modules where all their prerequisites are satisfied. As for the `module type` option, I filter out 
+      modules which matches the specified module type and display them to the user.
       
 1. Designed and implemented underlying logic for prerequisites processing.
-    * Initially, the team have no plan of including the prerequisites feature as it seems to be too complicated given the time
-    we have is short. However, I managed to design and implement a logic for tracking the prerequisites for a module, untaken 
-    prerequisites for a module and the modules requiring a module as prerequisites. I added an `ArrayList` for the respective 
-    prerequisite information to track to each module for easier and more efficient processing. Each module can have multiple 
-    prerequisite module as long the prerequisite module exists in the current list, not the module itself and not each other's
-    prerequisite (which is not possible in reality). Once a module is marked as taken, it will be removed from the untaken 
-    prerequisites list of the modules in its required by list. Only modules with empty untaken prerequisites list are allowed 
-    to be taken next. Lastly, for deletion of module, the module requiring it as a prerequisite must be deleted first before 
-    it can be deleted.
+    * I added an `ArrayList` for the respective prerequisite information to track to each module for efficient processing. Each 
+      module can have multiple prerequisites as long the prerequisite module exists in the current list, not the module itself 
+      and not each other's prerequisite (which is not possible in reality). Once a module is marked as taken, it will be removed 
+      from the untaken prerequisites list of the modules in its required by list. Only modules with empty untaken prerequisites 
+      list are shown as available. Lastly, for module deletion, the module requiring it as a prerequisite must be deleted first 
+      before it can be deleted.
       
 1. Added enhancement to the `Storage` component by incorporating the ability to differentiate child module classes.
-    * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. For the
-    purpose of our application, we need to have distinction between the child classes to determine the module type of the 
-    module. As such, I read up on `Gson` official documentation and found that I will need to include `RuntimeTypeAdapterFactory`
-    and register the child module classes as the subtype of `Module` class `RuntimeTypeAdapterFactory` so that there will
-    be labels to differentiate different child module classes. The modified `Module` class `RuntimeTypeAdapterFactory` is 
-    then registered to GsonBuilder for it to generate the `Json` data with labels.
+    * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
+      I included `RuntimeTypeAdapterFactory` and register the child module classes as the subtype of `Module` class's 
+      `RuntimeTypeAdapterFactory` object. The modified `Module` class `RuntimeTypeAdapterFactory` is then registered to 
+      the GsonBuilder for it to generate the `Json` data with labels.
 
 ### Contributions to the UG
 
-1. Added [Show module information: `info`]() section.
-1. Added and updated [List modules: `list`]() section.
-1. Added [Manual Modification of Data]() instructions.
-1. Added and updated [Frequently Asked Questions]() and [Command Summary]() section.
+1. Added [Show module information: `info`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#show-module-information-info) 
+   and [Manual Modification of Data](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#manual-modification-of-data) section.
+1. Added and updated [List modules: `list`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#list-modules-list), 
+   [Frequently Asked Questions](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#frequently-asked-questions) 
+   and [Command Summary](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#command-summary) section.
 1. Restructuring, reformatting and maintenance of UG.
 
 ### Contributions to the DG
 
-1. Added [introduction]() and [setting up, getting started]() section.
-1. Added [`module` package]() and its class diagram under the design of model component.
+1. Added [introduction](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#1-introduction), 
+   [setting up, getting started](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#2-setting-up-getting-started), 
+   [logging](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#5-logging) 
+   and [documentation](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#6-documentation) section.
+1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#341-module-package) and its 
+   class diagram under the design of model component.
 1. Updated [`AddCommand`]() and added its sequence diagram under implementation.
-1. Added implementation for [`Module`]() and [`ModuleList`]().
-1. Added [logging]() and [documentation]() section.
+1. Added implementation for [`Module`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#44-module) 
+   and [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#45-modulelist).
 1. Restructuring, reformatting and maintenance of DG.
 
 ### Contributions to team-based tasks
@@ -105,13 +104,10 @@ I helped the team with giving implementation advise of some features and reviewi
 to ensure everything is in place and enhance the project's code quality.
 
 Here are some example of the pull requests where I reviewed and refactored the project code:
-* [#47](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/47)
-* [#55](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/55)
-* [#62](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/62)
-* [#66](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/66)
-* [#74](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/74)
-* [#213](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/213)
-* [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217)
+* [#47](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/47), [#55](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/55), 
+  [#62](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/62), [#66](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/66),
+  [#74](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/74), [#213](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/213),
+  [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217)
 
 ### Contributions beyond the project team
 

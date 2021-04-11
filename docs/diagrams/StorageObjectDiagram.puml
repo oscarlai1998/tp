@@ -1,0 +1,15 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+object "__:Storage__" as storage
+object "__modules:ModuleList__" as modules
+
+storage : arraySize = 1
+storage : lastIndex = 0
+
+modules : modules = {{'CS1010', 'Intro to Programming', ...}}
+modules : arraySize = 1
+
+storage -> modules
+@enduml

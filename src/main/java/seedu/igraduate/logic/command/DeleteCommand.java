@@ -18,21 +18,25 @@ import java.util.logging.Level;
  * Handles delete command.
  */
 public class DeleteCommand extends Command {
+    /**
+     * Module code of the module to be deleted.
+     */
     protected String moduleCode;
 
     private static final Logger LOGGER = Logger.getLogger(DeleteCommand.class.getName());
 
     /**
-     * Child class of the command class that contains the module code. 
+     * Constructs a new DeleteCommand object.
      * 
-     * @param moduleCode module code. 
+     * @param moduleCode Module code of module to be deleted.
      */
     public DeleteCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
     /**
-     * Deletes a module from moduleList.
+     * Retrieves module from module list based on module code and deletes the module.
+     * Prints module deleted message after deleting the module.
      * 
      * @param moduleList Module list consisting of all modules.
      * @param ui User interface for printing result.
@@ -43,16 +47,15 @@ public class DeleteCommand extends Command {
      * @throws UnableToDeletePrereqModuleException If module is a pre-requisite module for other modules.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage)
-            throws ModuleNotFoundException, SaveModuleFailException, PrerequisiteNotFoundException,
-            UnableToDeletePrereqModuleException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws ModuleNotFoundException,
+            SaveModuleFailException, PrerequisiteNotFoundException, UnableToDeletePrereqModuleException {
         LOGGER.log(Level.INFO, "Executing delete command...");
         try {
-            Module module = moduleList.getByCode(moduleCode);
+            Module module = moduleList.getModuleByCode(moduleCode);
             String moduleType = moduleList.getModuleType(module);
             moduleList.delete(module);
             storage.saveModulesToFile(moduleList);
-            ui.printDeletedModuleSuccess(moduleCode, moduleType);
+            ui.printDeleteModuleMessage(moduleCode, moduleType);
             LOGGER.log(Level.INFO, String.format("Successfully deleted %s module.", moduleCode));
         } catch (ModuleNotFoundException e) {
             LOGGER.log(Level.WARNING, "Failed to delete non-existence module.", e);

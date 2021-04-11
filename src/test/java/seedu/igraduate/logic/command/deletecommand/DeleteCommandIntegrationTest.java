@@ -29,6 +29,7 @@ import seedu.igraduate.exception.ModuleNotCompleteException;
 import seedu.igraduate.exception.IncorrectParameterCountException;
 import seedu.igraduate.exception.InvalidCommandException;
 import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.PrerequisiteNotMetException;
 import seedu.igraduate.exception.AddSelfToPrereqException;
@@ -62,7 +63,7 @@ public class DeleteCommandIntegrationTest {
                 preRequisites, untakenPreRequisites);
         firstModuleAddCommand.execute(moduleList, ui, storage);
         requiredByModules.add("CS2100");
-        Module module = moduleList.getModule("cs1010");
+        Module module = moduleList.getModuleByCode("cs1010");
         module.setRequiredByModules(requiredByModules);
         ArrayList<String> secondModulePreRequisites = new ArrayList<>();
         ArrayList<String> secondModuleUntakenPreRequisites = new ArrayList<>();
@@ -76,7 +77,8 @@ public class DeleteCommandIntegrationTest {
     @Test
     void executeDeleteCommand_nonexistentModule_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
-            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Delete Pigs (Three Different Ones)";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
@@ -88,7 +90,8 @@ public class DeleteCommandIntegrationTest {
     @Test
     void executeDeleteCommand_preRequisiteModule_exceptionThrown() throws InvalidCommandException,
             InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
-            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException {
+            InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
+            InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Delete CS1010";
         Command deleteCommand = Parser.parseCommand(line);
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
@@ -104,7 +107,7 @@ public class DeleteCommandIntegrationTest {
             InvalidModularCreditException, ModuleNotFoundException, PrerequisiteNotFoundException,
             ModuleNotCompleteException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException {
+            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "Delete cs2100";
         Command deleteCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
