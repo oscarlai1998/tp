@@ -66,7 +66,7 @@ public class ListCommand extends Command {
                 ui.printIncompleteListEmptyMessage();
                 LOGGER.log(Level.INFO, "No incomplete modules.");
             } else {
-                ui.printIncompletedList(moduleList.getModules());
+                ui.printIncompleteList(moduleList.getModules());
                 LOGGER.log(Level.INFO, "Printed incomplete modules.");
             }
             break;

@@ -47,8 +47,8 @@ public class IGraduate {
     public IGraduate(File filePath) {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
         ui = new Ui();
-        storage = Storage.getStorage(filePath);
         parser = new Parser();
+        storage = Storage.getStorage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
             storage.saveModulesToFile(modules);

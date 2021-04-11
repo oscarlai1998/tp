@@ -46,6 +46,7 @@ class ListCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -79,7 +80,7 @@ class ListCommandTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "list all";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module firstModule = moduleList.getModuleByCode("cs1010");
@@ -102,7 +103,7 @@ class ListCommandTest {
 
         // Execute list command
         String line = "list all";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_LIST_MESSAGE + System.lineSeparator();
@@ -123,10 +124,10 @@ class ListCommandTest {
         module.setGrade("A");
 
         String line = "list complete";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
-        String successMessage = ui.MODULES_TAKEN_MESSAGE + System.lineSeparator() + "1: " + module
+        String successMessage = Ui.MODULES_TAKEN_MESSAGE + System.lineSeparator() + "1: " + module
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -140,7 +141,7 @@ class ListCommandTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "list complete";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_COMPLETE_LIST_MESSAGE + System.lineSeparator();
@@ -161,11 +162,11 @@ class ListCommandTest {
         module.setGrade("A");
 
         String line = "list incomplete";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module incompletedModule = moduleList.getModuleByCode("cs2100");
-        String successMessage = ui.MODULES_LEFT_MESSAGE + System.lineSeparator() + "1: " + incompletedModule
+        String successMessage = Ui.MODULES_LEFT_MESSAGE + System.lineSeparator() + "1: " + incompletedModule
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -187,7 +188,7 @@ class ListCommandTest {
         secondModule.setGrade("A");
 
         String line = "list incomplete";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_INCOMPLETE_LIST_MESSAGE + System.lineSeparator();
@@ -209,11 +210,11 @@ class ListCommandTest {
         storage.saveModulesToFile(moduleList);
 
         String line = "list available";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module availableModule = moduleList.getModuleByCode("cs2100");
-        String successMessage = ui.MODULES_AVAILABLE_MESSAGE + System.lineSeparator() + "1: " + availableModule
+        String successMessage = Ui.MODULES_AVAILABLE_MESSAGE + System.lineSeparator() + "1: " + availableModule
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -235,7 +236,7 @@ class ListCommandTest {
         secondModule.setGrade("A");
 
         String line = "list available";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_AVAILABLE_LIST_MESSAGE + System.lineSeparator();
@@ -252,12 +253,12 @@ class ListCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
 
         String line = "list core";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module firstCoreModule = moduleList.getModuleByCode("cs1010");
         Module secondCoreModule = moduleList.getModuleByCode("cs2100");
-        String successMessage = ui.MODULES_CORE_MESSAGE + System.lineSeparator() + "1: " + firstCoreModule
+        String successMessage = Ui.MODULES_CORE_MESSAGE + System.lineSeparator() + "1: " + firstCoreModule
                 + System.lineSeparator() + "2: " + secondCoreModule + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -274,7 +275,7 @@ class ListCommandTest {
         moduleList = new ModuleList();
 
         String line = "list core";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_CORE_MODULE_LIST_MESSAGE + System.lineSeparator();
@@ -297,11 +298,11 @@ class ListCommandTest {
         addCommand.execute(moduleList, ui, storage);
 
         String line = "list elec";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module electiveModule = moduleList.getModuleByCode("LAJ1201");
-        String successMessage = ui.MODULES_ELECTIVE_MESSAGE + System.lineSeparator() + "1: " + electiveModule
+        String successMessage = Ui.MODULES_ELECTIVE_MESSAGE + System.lineSeparator() + "1: " + electiveModule
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -316,7 +317,7 @@ class ListCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
 
         String line = "list elec";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_ELECTIVE_MODULE_LIST_MESSAGE + System.lineSeparator();
@@ -339,11 +340,11 @@ class ListCommandTest {
         addCommand.execute(moduleList, ui, storage);
 
         String line = "list ge";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module geModule = moduleList.getModuleByCode("gEr1000");
-        String successMessage = ui.MODULES_GE_MESSAGE + System.lineSeparator() + "1: " + geModule
+        String successMessage = Ui.MODULES_GE_MESSAGE + System.lineSeparator() + "1: " + geModule
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -358,7 +359,7 @@ class ListCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
 
         String line = "list ge";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_GE_MODULE_LIST_MESSAGE + System.lineSeparator();
@@ -381,11 +382,11 @@ class ListCommandTest {
         addCommand.execute(moduleList, ui, storage);
 
         String line = "list math";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         Module mathModule = moduleList.getModuleByCode("mA1521");
-        String successMessage = ui.MODULES_MATH_MESSAGE + System.lineSeparator() + "1: " + mathModule
+        String successMessage = Ui.MODULES_MATH_MESSAGE + System.lineSeparator() + "1: " + mathModule
                 + System.lineSeparator();
         assertEquals(successMessage, outContent.toString());
         System.setOut(originalOut);
@@ -400,7 +401,7 @@ class ListCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
 
         String line = "list math";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         listCommand.execute(moduleList, ui, storage);
         String successMessage = Ui.EMPTY_MATH_MODULE_LIST_MESSAGE + System.lineSeparator();
@@ -413,7 +414,7 @@ class ListCommandTest {
             InputNotNumberException, InvalidListTypeException, InvalidModularCreditException, 
             IllegalParametersException, InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "list all";
-        Command listCommand = Parser.parseCommand(line);
+        Command listCommand = parser.parseCommand(line);
         assertEquals(false, listCommand.isExit());
     }
 

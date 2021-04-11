@@ -44,6 +44,7 @@ class InfoCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -68,7 +69,7 @@ class InfoCommandTest {
         moduleList.add(coreModule);
 
         String line = "info Cs1010";
-        Command infoCommand = Parser.parseCommand(line);
+        Command infoCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         infoCommand.execute(moduleList, ui, storage);
         ArrayList<String> requiredByModules = new ArrayList<>();
@@ -85,7 +86,7 @@ class InfoCommandTest {
             InvalidModularCreditException, InvalidListTypeException, IllegalParametersException,
             InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "info cs1111";
-        Command infoCommand = Parser.parseCommand(line);
+        Command infoCommand = parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> infoCommand.execute(moduleList, ui, storage));
         String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
@@ -97,7 +98,7 @@ class InfoCommandTest {
             InputNotNumberException, InvalidListTypeException, InvalidModularCreditException,
             IllegalParametersException, InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "info cs1010";
-        Command infoCommand = Parser.parseCommand(line);
+        Command infoCommand = parser.parseCommand(line);
         assertEquals(false, infoCommand.isExit());
     }
 }
