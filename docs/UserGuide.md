@@ -22,6 +22,8 @@ By: `W09-2` Latest update: `10 April 2021`
 * [Frequently Asked Questions](#frequently-asked-questions)
 * [Command Summary](#command-summary)
 
+----
+
 ## Introduction
 
 iGraduate is a command line application that acts as a centralised hub for <b>NUS students majoring in Information 
@@ -29,9 +31,13 @@ Security</b> to plan their academic journey. With tools like the storing of modu
 taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation 
 progress, view modules taken based on programme requirements and make informed decisions about future modules.
 
-<div style="page-break-after: always;"></div>
+<br> 
 
 [🡅 Back to Top](#igraduate-user-guide)
+
+----
+
+<div style="page-break-after: always;"></div>
 
 ## User Guide Usage
 
@@ -50,7 +56,11 @@ Symbols/Formatting | Description
 `[]`               | Optional parameter.
 `<>`               | Include only one compulsory value from choices.
 
+<br> 
+
 [🡅 Back to Top](#igraduate-user-guide)
+
+----
 
 ## Quick Start
 
@@ -76,9 +86,13 @@ What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
 
-<div style="page-break-after: always;"></div>
+<br>
 
 [🡅 Back to Top](#igraduate-user-guide)
+
+----
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
