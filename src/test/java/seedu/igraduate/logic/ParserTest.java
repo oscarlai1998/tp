@@ -5,15 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.igraduate.exception.IncorrectParameterCountException;
-import seedu.igraduate.exception.InvalidCommandException;
-import seedu.igraduate.exception.InvalidModuleTypeException;
 import seedu.igraduate.exception.InvalidModuleGradeException;
 import seedu.igraduate.exception.InvalidModuleCodeException;
 import seedu.igraduate.exception.InvalidModularCreditException;
 import seedu.igraduate.exception.InputNotNumberException;
-import seedu.igraduate.exception.InvalidListTypeException;
 import seedu.igraduate.exception.IllegalParametersException;
+import seedu.igraduate.exception.IncorrectParameterCountException;
+import seedu.igraduate.exception.InvalidCommandException;
+import seedu.igraduate.exception.InvalidModuleTypeException;
+import seedu.igraduate.exception.InvalidListTypeException;
 
 import seedu.igraduate.logic.command.AddCommand;
 import seedu.igraduate.logic.command.DeleteCommand;
@@ -66,7 +66,8 @@ public class ParserTest {
 
     /**
      * Test case where the module added is invalid (i.e. negative). 
-     * 
+     *
+     * @@author fupernova
      */
     @Test
     void parseCommand_addNegativeMC_exceptionThrown() {
@@ -78,7 +79,8 @@ public class ParserTest {
 
     /**
      * Test case where the module added is invalid (i.e. more than 32). 
-     * 
+     *
+     * @@author fupernova
      */
     @Test
     void parseCommand_addTooManyMC_exceptionThrown() {
@@ -246,6 +248,13 @@ public class ParserTest {
                 exception.getMessage());
     }
 
+    @Test
+    void createAddCommand_invalidModuleCode_exceptionThrown() {
+        String line = "add Python -mc 4 -t core -c W2342329A";
+        Exception exception = assertThrows(InvalidModuleCodeException.class, () -> parser.parseCommand(line));
+        assertEquals(InvalidModuleCodeException.INVALID_MODULE_CODE_ERROR_MESSAGE, exception.getMessage());
+    }
+
     /* Delete Command */
     @Test
     void createDeleteCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
@@ -270,6 +279,14 @@ public class ParserTest {
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
     }
 
+    @Test
+    void createDeleteCommand_invalidModuleCode_exceptionThrown() {
+        String line = "Delete CGXA12453QB";
+        Exception exception = assertThrows(InvalidModuleCodeException.class, () -> parser.parseCommand(line));
+        assertEquals(InvalidModuleCodeException.INVALID_MODULE_CODE_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    /* Done Command */
     @Test
     void createDoneCommand_appropriateParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, InvalidListTypeException,
@@ -300,6 +317,13 @@ public class ParserTest {
         String line = "done CS2107";
         Exception exception = assertThrows(IncorrectParameterCountException.class, () -> parser.parseCommand(line));
         assertEquals(IncorrectParameterCountException.INCORRECT_PARAMETER_COUNT_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void createDoneCommand_invalidGrade_exceptionThrown() {
+        String line = "done CS2107 -g Q";
+        Exception exception = assertThrows(InvalidModuleGradeException.class, () -> parser.parseCommand(line));
+        assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
 
     /* Progress Command */
@@ -382,5 +406,12 @@ public class ParserTest {
             InvalidModuleCodeException {
         String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
         assertEquals(UpdateCommand.class, parser.parseCommand(line).getClass());
+    }
+
+    @Test
+    void createUpdateCommand_incorrectMC_exceptionThrown() {
+        String line = "update CS2100 -n Introduction to Computer Organisation -mc -4";
+        Exception exception = assertThrows(InvalidModuleCodeException.class, () -> parser.parseCommand(line));
+        assertEquals(InvalidModuleCodeException.INVALID_MODULE_CODE_ERROR_MESSAGE, exception.getMessage());
     }
 }

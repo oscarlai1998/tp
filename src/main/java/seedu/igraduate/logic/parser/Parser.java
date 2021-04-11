@@ -239,7 +239,7 @@ public class Parser {
      * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createDeleteCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_DELETE_LENGTH);
         boolean isInvalidFlag = (commandFlags.get(FIRST_INDEX) != null);
 
@@ -250,6 +250,9 @@ public class Parser {
 
         assert commandParameters.size() == 2 : "COMMAND_DELETE_LENGTH should be 2";
         String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
 
         return new DeleteCommand(moduleCode);
@@ -265,7 +268,7 @@ public class Parser {
      * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createInfoCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_INFO_LENGTH);
         boolean isInvalidFlag = (commandFlags.get(FIRST_INDEX) != null);
 
@@ -276,6 +279,9 @@ public class Parser {
 
         assert commandParameters.size() == 2 : "COMMAND_INFO_LENGTH should be 2";
         String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         LOGGER.log(Level.INFO, "Valid parameters for info command.");
 
         return new InfoCommand(moduleCode);
@@ -341,7 +347,8 @@ public class Parser {
      * @throws InvalidModuleGradeException      If the module grade provided is not valid.
      */
     public static Command createDoneCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException {
+            throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_DONE_FLAG_LENGTH);
 
@@ -351,10 +358,14 @@ public class Parser {
         }
         assert commandFlags.size() == 2 : "COMMAND_DONE_LENGTH should be 2.";
 
+        String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         String moduleGrade = extractModuleGrade(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for done command.");
 
-        return new DoneCommand(commandParameters.get(SECOND_INDEX), moduleGrade);
+        return new DoneCommand(moduleCode, moduleGrade);
     }
 
     /**
@@ -369,7 +380,7 @@ public class Parser {
      * @throws IllegalParametersException       If the parameter includes -t or -c, which are illegal parameters.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, IllegalParametersException {
+            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
         boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
@@ -381,8 +392,12 @@ public class Parser {
             LOGGER.warning("Illegal parameters detected. ");
             throw new IllegalParametersException();
         }
+        String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
 
-        return new UpdateCommand(commandParameters.get(SECOND_INDEX), commandFlags);
+        return new UpdateCommand(moduleCode, commandFlags);
     }
 
     /**
@@ -412,6 +427,7 @@ public class Parser {
     /**
      * Creates new instance of HelpCommand class to execute.
      *
+     * @@author fupernova
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of HelpCommand class.

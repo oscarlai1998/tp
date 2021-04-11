@@ -90,7 +90,7 @@ public class AddCommandTest {
 
     /*------------- Integration tests -----------------*/
     @Test
-    void executeAddCommand_validParametersWithUi_success() throws InvalidCommandException, InvalidModuleTypeException,
+    void executeAddCommandWithParser_validParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
             InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
             ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
             InvalidModularCreditException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
@@ -105,5 +105,4 @@ public class AddCommandTest {
                 + Ui.INDENTATION + module + System.lineSeparator(), outContent.toString());
         System.setOut(originalOut);
     }
-
 }
