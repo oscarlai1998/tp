@@ -532,7 +532,8 @@ There are 3 classifications of user input: **command, parameter and flags**.
 
 <sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
-***Considerations***<br>
+***Considerations*** : How to implement parsing of user input<br>
+
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the 
 large number of commands and the variance in parameter and flag types. Another difficult problem to navigate was the
 validation of the format and values of the parameters and flags. Initially, no validation checks were put in `Parser`,
@@ -543,12 +544,7 @@ Hence, the validation of parameters and flags were moved to `Parser`. In this im
 and `Command` components are unaware of each other, instead relying on `Parser` for extracting and validating inputs. 
 This helps to eliminate the dependency between `Storage` and `Command`.
 
-<!--@@author xseh-->
-
 ***Alternatives***<br>
-
-**Summary**: How to implement parsing of user input
-
 1. Custom (current choice): Designing and implementing a custom parser for iGraduate
     - Pros: 
         - Better suited for target users (fast typists)
@@ -565,6 +561,27 @@ This helps to eliminate the dependency between `Storage` and `Command`.
         - Less suitable for iGraduate behaviour
 
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
+
+***Considerations*** : Format to store module information
+
+An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
+
+***Alternatives***
+1. ArrayList (current choice)
+    - Pros:
+        - Equipped with useful built-in class functions
+        - Significantly simplifies logic needed to parse flags and parameters
+    - Cons: 
+        - Less Memory efficient
+1. Array
+    - Pros: 
+        - Efficient memory allocation
+        - Fixed size, which uses less memory
+    - Cons: 
+        - Inefficient in extracting input flags
+        - Limited functionalities
+
+Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 <br> 
 
@@ -655,27 +672,8 @@ list. The various information requested to update would be identified with their
 
 ***Considerations***
 
-An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
 ***Alternatives***
-
-**Summary**: Format to store module information
-
-1. ArrayList (current choice)
-    - Pros:
-        - Equipped with useful built-in class functions
-        - Significantly simplifies logic needed to parse flags and parameters
-    - Cons: 
-        - Less Memory efficient
-1. Array
-    - Pros: 
-        - Efficient memory allocation
-        - Fixed size, which uses less memory
-    - Cons: 
-        - Inefficient in extracting input flags
-        - Limited functionalities
-
-Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 ----
 
