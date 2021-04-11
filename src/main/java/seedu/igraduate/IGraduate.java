@@ -22,6 +22,7 @@ public class IGraduate {
     private Storage storage;
     private ModuleList modules;
     private Ui ui;
+    private Parser parser;
 
     private static final Logger LOGGER = Logger.getLogger(IGraduate.class.getName());
 
@@ -46,6 +47,7 @@ public class IGraduate {
     public IGraduate(File filePath) {
         LOGGER.info("Initialising iGraduate Ui, Storage and ModuleList components...");
         ui = new Ui();
+        parser = new Parser();
         storage = Storage.getStorage(filePath);
         try {
             modules = new ModuleList(storage.loadModulesFromFile());
@@ -72,7 +74,7 @@ public class IGraduate {
             try {
                 String fullCommand = ui.getCommand();
                 ui.printBorderLine();
-                Command c = Parser.parseCommand(fullCommand);
+                Command c = parser.parseCommand(fullCommand);
                 c.execute(modules, ui, storage);
                 isExit = c.isExit();
             } catch (Exception e) {

@@ -44,6 +44,7 @@ public class ProgressCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -56,20 +57,20 @@ public class ProgressCommandTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
-        String secondModule = "add Algo and Strutures -mc 4 -t core -c cs2040c";
+        String secondModule = "add Algo and Structures -mc 4 -t core -c cs2040c";
         String thirdModule = "add Discrete Structures -mc 4 -t core -c cs1231s";
-        Command addFirst = Parser.parseCommand(firstModule);
+        Command addFirst = parser.parseCommand(firstModule);
         addFirst.execute(moduleList, ui, storage);
-        Command addSecond = Parser.parseCommand(secondModule);
+        Command addSecond = parser.parseCommand(secondModule);
         addSecond.execute(moduleList, ui, storage);
-        Command addThird = Parser.parseCommand(thirdModule);
+        Command addThird = parser.parseCommand(thirdModule);
         addThird.execute(moduleList, ui, storage);
         String setFirstToDone = "done cs1010 -g A+";
         String setSecondToDone = "done cs2040c -g A-";
         String setThirdToDone = "done cs1231s -g A";
-        Command doneFirst = Parser.parseCommand(setFirstToDone);
-        Command doneSecond = Parser.parseCommand(setSecondToDone);
-        Command doneThird = Parser.parseCommand(setThirdToDone);
+        Command doneFirst = parser.parseCommand(setFirstToDone);
+        Command doneSecond = parser.parseCommand(setSecondToDone);
+        Command doneThird = parser.parseCommand(setThirdToDone);
         doneFirst.execute(moduleList, ui, storage);
         doneSecond.execute(moduleList, ui, storage);
         doneThird.execute(moduleList, ui, storage);
@@ -102,9 +103,9 @@ public class ProgressCommandTest {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2040c";
         String thirdModule = "Delete cs1231s";
-        Command deleteFirst = Parser.parseCommand(firstModule);
-        Command deleteSecond = Parser.parseCommand(secondModule);
-        Command deleteThird = Parser.parseCommand(thirdModule);
+        Command deleteFirst = parser.parseCommand(firstModule);
+        Command deleteSecond = parser.parseCommand(secondModule);
+        Command deleteThird = parser.parseCommand(thirdModule);
         deleteFirst.execute(moduleList, ui, storage);
         deleteSecond.execute(moduleList, ui, storage);
         deleteThird.execute(moduleList, ui, storage);

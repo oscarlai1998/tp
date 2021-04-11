@@ -44,6 +44,7 @@ public class DeleteCommandUnitTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -57,9 +58,9 @@ public class DeleteCommandUnitTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c CS1010";
         String secondModule = "add Computer Org -mc 4 -t core -c CS2100 -p CS1010";
-        Command addFirst = Parser.parseCommand(firstModule);
+        Command addFirst = parser.parseCommand(firstModule);
         addFirst.execute(moduleList, ui, storage);
-        Command addSecond = Parser.parseCommand(secondModule);
+        Command addSecond = parser.parseCommand(secondModule);
         addSecond.execute(moduleList, ui, storage);
     }
 

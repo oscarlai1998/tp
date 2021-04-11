@@ -25,7 +25,6 @@ import seedu.igraduate.logic.command.Command;
 import seedu.igraduate.logic.command.HelpCommand;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.model.list.ModuleList;
-import seedu.igraduate.model.module.CoreModule;
 import seedu.igraduate.storage.Storage;
 import seedu.igraduate.ui.Ui;
 
@@ -33,7 +32,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -48,6 +46,7 @@ public class HelpCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -58,7 +57,7 @@ public class HelpCommandTest {
         System.setOut(new PrintStream(outContent));
         HelpCommand helpCommand = new HelpCommand("no params");
         helpCommand.execute(moduleList, ui, storage);
-        String expectedOutput = ui.HELP_INTRO + System.lineSeparator();
+        String expectedOutput = Ui.HELP_INTRO + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(originalOut);
     }
@@ -68,7 +67,7 @@ public class HelpCommandTest {
         System.setOut(new PrintStream(outContent));
         HelpCommand helpCommand = new HelpCommand("info");
         helpCommand.execute(moduleList, ui, storage);
-        String expectedOutput = ui.HELP_INFO + System.lineSeparator();
+        String expectedOutput = Ui.HELP_INFO + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(originalOut);
     }
@@ -91,10 +90,10 @@ public class HelpCommandTest {
             SaveModuleFailException, PrerequisiteNotFoundException, ExistingModuleException, AddSelfToPrereqException,
             MarkCompletedModuleException, ModuleNotCompleteException, ModuleNotFoundException {
         String line = "help add";
-        Command helpCommand = Parser.parseCommand(line);
+        Command helpCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         helpCommand.execute(moduleList, ui, storage);
-        String expectedOutput = ui.HELP_ADD + System.lineSeparator();
+        String expectedOutput = Ui.HELP_ADD + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(originalOut);
     }
@@ -108,10 +107,10 @@ public class HelpCommandTest {
             ExistingModuleException, AddSelfToPrereqException, MarkCompletedModuleException,
             ModuleNotCompleteException, ModuleNotFoundException {
         String line = "         help        add    ";
-        Command helpCommand = Parser.parseCommand(line);
+        Command helpCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         helpCommand.execute(moduleList, ui, storage);
-        String expectedOutput = ui.HELP_ADD + System.lineSeparator();
+        String expectedOutput = Ui.HELP_ADD + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(originalOut);
     }

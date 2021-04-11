@@ -22,8 +22,7 @@ public class Ui {
     public static final String GOODBYE_MESSAGE = "See you soon! Happy studying!";
 
     // Formatting messages
-    public static final String BORDER_LINE = "------------------------------------------------------------"
-            + "--------------------------";
+    public static final String BORDER_LINE = "-------------------------------------------".repeat(2);
     public static final String INDENTATION = "  ";
 
     // Add command message
@@ -184,7 +183,7 @@ public class Ui {
      *
      * @param modules Array list containing the modules.
      */
-    public void printIncompletedList(ArrayList<Module> modules) {
+    public void printIncompleteList(ArrayList<Module> modules) {
         System.out.println(MODULES_LEFT_MESSAGE);
         int count = 0;
         for (Module module : modules) {

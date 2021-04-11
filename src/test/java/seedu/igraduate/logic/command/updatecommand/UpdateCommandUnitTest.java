@@ -40,12 +40,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author xseh
+ */
 public class UpdateCommandUnitTest {
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -58,10 +62,10 @@ public class UpdateCommandUnitTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "add Programming Methodology -mc 4 -t core -c cs1010";
-        Command addModule = Parser.parseCommand(module);
+        Command addModule = parser.parseCommand(module);
         addModule.execute(moduleList, ui, storage);
         String setToDone = "done cs1010 -g A+";
-        Command doneModule = Parser.parseCommand(setToDone);
+        Command doneModule = parser.parseCommand(setToDone);
         doneModule.execute(moduleList, ui, storage);
     }
 
@@ -107,7 +111,7 @@ public class UpdateCommandUnitTest {
             InvalidListTypeException, PrerequisiteNotMetException, InvalidModularCreditException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String module = "Delete cs1010";
-        Command deleteModule = Parser.parseCommand(module);
+        Command deleteModule = parser.parseCommand(module);
         deleteModule.execute(moduleList, ui, storage);
     }
 }
