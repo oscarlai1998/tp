@@ -695,7 +695,7 @@ public class Parser {
      *         flags
      */
     private static boolean isFlagIllegal(ArrayList<String> commandFlags) {
-        Pattern pattern = Pattern.compile("^(?!(-t|-c|-mc|-n|-p|-g)$|[a-zA-Z0-9])");
+        Pattern pattern = Pattern.compile("^(?!(-t|-c|-mc|-n|-p|-g|-[0-9])$|[a-zA-Z0-9])");
         for (String commandFlag : commandFlags) {
             if (pattern.matcher(commandFlag).lookingAt()) {
                 return true;
