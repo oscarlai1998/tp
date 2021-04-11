@@ -213,7 +213,7 @@ required for the command from user input
 - `Command` then runs the command with the processed parameters and flags.
 
 ### **Parser** ###
-The `Parser` class is part of the [logic](#33-logic-component) component. 
+The `Parser` class is part of the [logic](#logic-component) component. 
 
 The `Parser` interprets user input and subsequently passes the properly processed user input to `Command` to execute the command.
 
@@ -355,6 +355,8 @@ status. For customized formatting of module printing messages, `toString` method
 
 ----
 
+<!--@@author fupernova-->
+
 ### **List Package** ###
 The `list` package contains an `ArrayList` of type `Module`, representing
 the entire list of `Module` objects added by the user. It also defines the methods used to modify the data of existing `Module` objects,
@@ -413,6 +415,7 @@ The following shows the process of marking a module named `existingModule` as do
 1. `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
 1. `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table from the list of modules that require `existingModule` as a prerequisite.
 
+<!--@@author ???-->
 ### **Storage Component** ###
 The storage component consists of the class `Storage`. The storage component is closely associated wtih the [ModuleList](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of modulelist. This includes adding, deleting and updating of modules, as well as marking a module as done. 
 
@@ -453,6 +456,8 @@ The Ui feature has 3 primary responsibilities:
 1. Listens to calls from Model data
 
 ____
+
+<!--@@author fupernova-->
 
 ### **Parser** ###
 
@@ -514,7 +519,7 @@ included in the flags of the user input. There are 3 compulsory flags and 1 opti
 1. module type
     - `-t <String>`
 1. (Optional) prerequisite modules
-    - `-p [>String>, ...]`
+    - `-p [<String>, ...]`
 
 > ℹ️ **Note:** The order of flags in user input does not matter.
 
@@ -523,7 +528,7 @@ The sequence diagram below shows the execution of add command in action:
 ![archi](./images/AddCommandSequenceDiagram.png)
 
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with *"add Programming Methodology -c CS1010 -mc 4 -t core"* as user input.*</sup>
-
+<!--@@author fupernova-->
 #### **Delete Command** ####
 
 The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
@@ -534,6 +539,7 @@ involved for deleting a module.
 ![archi](./images/DeleteCommandSequenceDiagram.png)
 <sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with "delete CS1010" as user input*</sup>
 
+<!--@@author ???-->
 #### **Update Command** ####
 
 The update commands allows modifications to the existing modules, identified by the module code. 
@@ -558,9 +564,11 @@ list. The various information requested to update would be identified with their
 <sup>***Figure 1.17*** Sequence diagram of `UpdateCommand` in execution with *update CS1010 -mc 2"* as user input</sup>
 
 ***Considerations***
+
 An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
 ***Alternative***
+
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 #### **List Command** ####
@@ -586,7 +594,7 @@ The table below shows the scope of each options.
 
 <sup>***Figure 1.18.2*** Sequence diagram of `ListCommand` in execution with *"list complete"* as user input</sup>
 
-
+<!--@@author fupernova-->
 #### **CAP Command** ####
 
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
@@ -668,7 +676,7 @@ module code and grade, the subclasses do not contain much information that is no
 better accommodate our *list by module type* feature, the subclass each module belongs to is determined by the module type.
 
 ____
-
+<!--@@author ???-->
 ### **ModuleList** ###
 
 
