@@ -398,7 +398,8 @@ public class Parser {
      * @throws InvalidCommandException          If unknown flags are found.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException, InvalidCommandException {
+            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException,
+            InvalidCommandException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
         boolean isDisallowedFlag = (commandFlags.contains("-c") || commandFlags.contains("-t"));
@@ -412,7 +413,8 @@ public class Parser {
             throw new IllegalParametersException();
         } else if (isIllegalFlag) {
             LOGGER.warning("Unknown flags detected.");
-            throw new InvalidCommandException("Unknown flags detected. The update command only accepts -[n|mc|g|p] as flags.");
+            throw new InvalidCommandException(
+                    "Unknown flags detected. The update command only accepts -[n|mc|g|p] as flags.");
         }
         String moduleCode = commandParameters.get(SECOND_INDEX);
         if (!isModuleCodeValid(moduleCode)) {
