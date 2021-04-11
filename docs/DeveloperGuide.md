@@ -3,6 +3,8 @@
 # **iGraduate Developer Guide** #
 Project by: `W09-2` Latest update: `11 April 2021`
 
+![logo](./images/logo.jpg)
+
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [Developer Guide Usage](#developer-guide-usage)
@@ -206,7 +208,7 @@ The UI is a public class that consists of **three components** that is made up `
 
 ***Behaviour***<br>
 - Executes user command using the [logic component](#logic-component).
-- Listens for calls from the [model momponent](#model-component), which will call the specific print method to print an output.
+- Listens for calls from the [model component](#model-component), which will call the specific print method to print an output.
 - Print method references `Constants` and prints them for user to see.
 
 ![archi](./images/UiClassDiagram.png)
@@ -847,7 +849,7 @@ In iGraduate, there are several exceptions that are thrown due to different cond
 
 Exception   | Description              
 --------|-------------------|
-AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to includethe module itself.
+AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to include the module itself.
 DataFileNotFoundException | The exception is thrown if module data file is not found.
 ExistingModuleException | The exception is thrown if the module code input already exists.             | 
 IllegalParametersException | The exception is thrown if the parameter includes any parameters not allowed in the command.
@@ -970,7 +972,7 @@ testers are expected to do more *exploratory* testing.
 
     - Download the jar file and copy into an empty folder
 
-    - Run the jar file on your command prompt with the by typing "java -jar iGradute.java" then enter. 
+    - Run the jar file on your command prompt with the by typing "java -jar iGraduate.java" then enter. 
     
 1. Shutdown
     
