@@ -67,7 +67,7 @@ public class ParserTest {
     /**
      * Test case where the module added is invalid (i.e. negative). 
      *
-     * @@author fupernova
+     * @author fupernova
      */
     @Test
     void parseCommand_addNegativeMC_exceptionThrown() {
@@ -80,7 +80,7 @@ public class ParserTest {
     /**
      * Test case where the module added is invalid (i.e. more than 32). 
      *
-     * @@author fupernova
+     * @author fupernova
      */
     @Test
     void parseCommand_addTooManyMC_exceptionThrown() {

@@ -1,4 +1,5 @@
 // @@author fupernova
+
 package seedu.igraduate.logic.command.addcommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -90,12 +91,13 @@ public class AddCommandTest {
 
     /*------------- Integration tests -----------------*/
     @Test
-    void executeAddCommandWithParser_validParameters_success() throws InvalidCommandException, InvalidModuleTypeException,
-            InputNotNumberException, IncorrectParameterCountException, ModuleNotFoundException, SaveModuleFailException,
-            ExistingModuleException, PrerequisiteNotFoundException, ModuleNotCompleteException,
-            InvalidModularCreditException, UnableToDeletePrereqModuleException, InvalidModuleGradeException,
-            InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
-            MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
+    void executeAddCommandWithParser_validParameters_success() throws InvalidCommandException,
+            InvalidModuleTypeException, InputNotNumberException, IncorrectParameterCountException,
+            ModuleNotFoundException, SaveModuleFailException, ExistingModuleException, PrerequisiteNotFoundException,
+            ModuleNotCompleteException, InvalidModularCreditException, UnableToDeletePrereqModuleException,
+            InvalidModuleGradeException, InvalidListTypeException, PrerequisiteNotMetException,
+            AddSelfToPrereqException, MarkCompletedModuleException, IllegalParametersException,
+            InvalidModuleCodeException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
         Command addCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
