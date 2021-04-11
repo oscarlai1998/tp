@@ -27,7 +27,7 @@ import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.stub.ParserStub;
 
 /**
- * Test cases for the Parser class 
+ * Test cases for the Parser class. 
  * 
  * @author xseh
  */

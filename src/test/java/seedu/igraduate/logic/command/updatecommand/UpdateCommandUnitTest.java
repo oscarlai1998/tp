@@ -40,9 +40,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- * @author xseh
- */
 public class UpdateCommandUnitTest {
     private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
 
