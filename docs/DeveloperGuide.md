@@ -33,9 +33,10 @@ Project by: `W09-2` Latest update: `11 April 2021`
 1. [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
-    - [User Stories](#user-stories)
-1. [Appendix B: Non-Functional Requires](#appendix-b-non-functional-requirements)
-1. [Appendix C: Instructions for Manual Testing](#appendix-c-instructions-for-manual-testing)
+1. [Appendix B: User Stories](#appendix-b-user-stories)
+1. [Appendix C: Non-Functional Requires](#appendix-c-non-functional-requirements)
+1. [Appendix D: Glossary](#appendix-d-glossary)
+1. [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
     - [Launch and Shutdown](#launch-and-shutdown)
     - [Adding a module](#adding-a-module)
     - [Deleting a module](#deleting-a-module)
@@ -486,7 +487,10 @@ This section elaborates on some details about how certain features are implement
 
 ----
 
-### **UI** ###
+## **Implementation** ##
+This section describes some noteworthy details on how certain feature are implemented. 
+
+### ***UI*** ###
 
 The Ui feature has 3 primary responsibilities: 
 1. Executes user command using [`Logic Component`](#logic-component)
@@ -531,6 +535,24 @@ From the start, it was known that `Parser` would be one of the more challenging 
 <!--@@author xseh-->
 
 ***Alternatives***<br>
+
+**Summary**: How to implement parsing of user input
+
+1. Custom (current choice): Designing and implementing a custom parser for iGraduate
+    - Pros: 
+        - Better suited for target users (fast typists)
+    - Cons: 
+        - Less sophisticated error and exception handling
+        - Higher risk of bugs
+        - More complicated to implement
+
+1. Outsource: Adopt third-party libraries to perform parsing
+    - Pros: 
+        - More resilient to error and exceptions
+        - Less design considerations
+    - Cons: 
+        - Less suitable for iGraduate behaviour
+
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
 
 <br> 
@@ -625,6 +647,22 @@ list. The various information requested to update would be identified with their
 An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
 ***Alternatives***
+
+**Summary**: Format to store module information
+
+1. ArrayList (current choice)
+    - Pros:
+        - Equipped with useful built-in class functions
+        - Significantly simplifies logic needed to parse flags and parameters
+    - Cons: 
+        - Less Memory efficient
+1. Array
+    - Pros: 
+        - Efficient memory allocation
+        - Fixed size, which uses less memory
+    - Cons: 
+        - Inefficient in extracting input flags
+        - Limited functionalities
 
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
@@ -848,7 +886,7 @@ Allows users to **manage modules faster** than a typical mouse/GUI driven app.iG
 
 This app will help NUS students **majoring in Information Security** check his/her graduation progress and modules taken in a **coherent manner** based on the program requirements. It also contains tools as mentioned above to help students make informed decisions about future modules to take.
 
-### **User Stories** ###
+## **Appendix B: User Stories** ##
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -880,7 +918,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 ----
 
-## **Appendix B: Non-Functional Requirements** ##
+## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 1. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
@@ -894,7 +932,23 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 ---
 
-## **Appendix C: Instructions for Manual Testing** ##
+## **Appendix D: Glossary** ##
+
+|Term|Definition|Usage/Example|
+|----------|-----------|---------|
+|`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](command) for the list of available commands|
+|`parameter`|specifies the identifier (module name or code or list type) for the modules. |For example, the parameter for `add` command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specifies the type of list (complete, incomplete or available)|
+|`flag`|comes after parameters and are available only for a few commands; specifies the additional information required for the command to run.| For `add`, flags would be for module code, module type, MCs and prerequisites.|
+
+<sup>***Table 1.26** Definitions and context of terms used in the developer guide*</sup>
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+---
+
+## **Appendix E: Instructions for Manual Testing** ##
 
 Given below are instructions to test the app manually.
 
@@ -945,8 +999,7 @@ Adding a module into the module list.
     ```
 
 1. `add Programming Methodology -t core -mc -c CS1010`<br>
-    **Expected**:
-    Error in adding module as there is incorrect number of parameters given,
+    **Expected**: Error in adding module as there is incorrect number of parameters given,
     which in this case number of mc is not given.
 
     ```
@@ -1244,11 +1297,39 @@ List modules in the modules list.
 
 Dealing with missing/corrupted data files.
 1. While not in iGraduate, delete json file under `/data` directory. Then start iGraduate. <br>
-    Expected: iGraduate accepts current content of files as empty and functions as per normal.
+    **Expected**: iGraduate accepts current content of files as empty and functions as per normal.
+    ```
+    Starting without existing module data...
+    Initializing new module list...
+    --------------------------------------------------------------------------------------
+    _  ____               _             _
+    (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
+    | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
+    | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
+    |_|\____|_|  \__,_|\__,_|\__,_|\__,_|\__\___|
+    iGraduate starting up...
+    Welcome to iGraduate, your one stop study planning service!
+    What would you like to do today?
+    --------------------------------------------------------------------------------------
+    ```
     
 1. While not in iGraduate, corrupt the json file under `/data` directory. Then start iGraduate. <br>
-    Expected: iGraduate senses the corrupted files, replace it with empty content and functions as per normal.
-
+    **Expected**: iGraduate senses the corrupted files, replace it with empty content and functions as per normal.
+    ```
+    Unsupported changes in storage file detected, using new storage file.
+    Note: If you wish to attempt to fix the configuration, exit program immediately.
+    Do not perform any commands or you will lose the original storage file.
+    --------------------------------------------------------------------------------------
+    _  ____               _             _
+    (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
+    | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
+    | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
+    |_|\____|_|  \__,_|\__,_|\__,_|\__,_|\__\___|
+    iGraduate starting up...
+    Welcome to iGraduate, your one stop study planning service!
+    What would you like to do today?
+    --------------------------------------------------------------------------------------
+    ```
 <br>
 
 [🡅 Back to Top](#table-of-contents)
