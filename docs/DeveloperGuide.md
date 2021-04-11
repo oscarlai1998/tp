@@ -574,11 +574,11 @@ This helps to eliminate the dependency between `Storage` and `Command`.
 
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
 
-***Considerations*** : Format to store module information
+***Considerations*** : Format to store module information<br>
 
 An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
 
-***Alternatives***
+***Alternatives***<br>
 1. ArrayList (current choice)
     - Pros:
         - Equipped with useful built-in class functions
@@ -683,11 +683,11 @@ list. The various information requested to update would be identified with their
 
 <sup>***Figure 1.17** Sequence diagram of `UpdateCommand` in execution with `update CS1010 -mc 2` as user input*</sup>
 
-***Considerations*** : Command behaviour
+***Considerations*** : Command behaviour<br>
 
 The main considerations regarding the behaviour of the update command would be if multiple flags should be permitted in a single update command. 
 
-***Alternatives***
+***Alternatives***<br>
 
 1. Restrict to single update flag
     - Pros: 
@@ -707,11 +707,11 @@ Having a single input would significantly simplify the code, as a simple switch 
 
 Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typers to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate less time consuming and troublesome. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
 
-***Considerations*** : Command error and exception handling management
+***Considerations*** : Command error and exception handling management<br>
 
 On the event of a failed flag, considerations have to made to determine how the update command would manage the rest of the flags. 
 
-***Alternatives***
+***Alternatives***<br>
 
 1. Abort entire command
     - Pros:
