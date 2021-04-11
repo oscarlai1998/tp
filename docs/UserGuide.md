@@ -3,7 +3,6 @@ By: `W09-2` Latest update: `10 April 2021`
 
 ![logo](./images/logo.jpg)
 
-
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [User Guide Usage](#user-guide-usage)
@@ -264,6 +263,8 @@ done.*</sup>
 
 ----
 
+<!--@@author kewenlok-->
+
 ### **Show module information: `info`** ###
 
 The info command shows the information of the specified module in a detailed manner. All information related to the
@@ -318,6 +319,8 @@ Prerequisite for                      : []
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ### **List modules: `list`** ###
 
@@ -393,6 +396,8 @@ Modules can be taken:
 <sup>***Figure 1.6.4** Expected results from listing `available` modules. The list includes the module information that 
 has been added and can be taken (with all prerequisites fulfiled).*</sup>
 
+<!--@@author kewenlok-->
+
 `list core`
 
 ```
@@ -445,6 +450,8 @@ on the list.*</sup>
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ### **Show academic progression: `progress`** ###
 
@@ -596,11 +603,15 @@ intervention is required for storage of data.
 
 ----
 
+<!--@@author kewenlok-->
+
 ## **Manual Modification of Data** ##
 
 > ℹ️ **Note:** 
 > - Please ensure that you modify only the value of module attributes if you are unsure of how the 
 `json` structure works.
+
+> ℹ️ **Note:**
 > - The application might not behave as the way it is expected to if you modify the application 
 data in an incorrect manner. For example, data corruption might occur.
 
@@ -610,11 +621,49 @@ You may notice a folder named `data` is created and there is a `modules.json` fi
 module, simply change the value of each attribute in the `json` file and save it. You are advised to add or 
 remove new module data manually only if you understand the application's logic and `json` format.
 
+The sample `Json` format for the module data file:
+<pre>
+[
+   {
+     "type": "core",                      <em>--> Module type (core/math/elec/ge)</em>
+     "code": "CS1010",                    <em>--> Module code</em>
+     "name": "Programming Methodology",   <em>--> Module name</em>
+     "credit": 4.0,                       <em>--> Modular credit</em>
+     "status": "not taken",               <em>--> Module status</em>
+     "grade": "NIL",                      <em>--> Module grade (NIL if not assigned)</em>
+     "prerequisites": [],                 <em>--> Prerequisites of the module</em>
+     "untakenPrerequisites": [],          <em>--> Unsatisfied prerequisites of the module</em>
+     "requiredByModules": [               <em>--> Modules required the current module as prerequisite</em>
+       "CS2100",
+       "CS2040C"
+     ]
+   },
+   {
+      ...
+   },
+   ...
+]
+</pre>
+
+> ℹ️ **Note:**
+> - All fields shown in the example `json` file format above are compulsory. Missing any fields above in the file will
+result in error shown in application.
+
+> ℹ️ **Note:**
+> - Please take note that you should fill in the `prerequisites`, `untakenPrerequisites` and `requiredByModules` field
+with caution. Any wrong information will result in application processing error when performing operations.
+
+> ℹ️ **Note:**
+> - Setting two or more modules in each other's `requiredByModules` is strongly discouraged as it does not reflect the
+module requirements logic in reality and might affect the application from giving accurate advice.
+
 <br>
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ## **Frequently Asked Questions** ##
 
@@ -628,31 +677,40 @@ remove new module data manually only if you understand the application's logic a
 **Q3**: Do I need internet connection when using iGraduate?
 > No. No internet is required as the application stores and retrieves modules information locally. 
 
+<!--@@author kewenlok-->
+
 **Q4**: I am a NUS student who is not majoring in Information Security. Can I use the application for module planning?
 > Yes, of course! Most of the features provided by the application are implemented in a generic way. However, features
 > such as progress is more targeted towards Information Security students. Support for other majors in NUS will be
 > implemented in the future. Stay tuned!
 
+<!--@@author ???-->
+
 **Q5**: Is the module list only in JSON format?
 > Yes! Currently, module list is only in JSON format. However, there are various platforms available online to convert 
 > the module list into a different format.
+
+<!--@@author kewenlok-->
 
 **Q6**: I noticed a `iGraduate-0.log` file is created after running the application. What is it for?
 > The `iGraduate-0.log` is a log file for recording the crashes, errors and anomalies occurred when running the 
 > application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
 > any error during your use of the application in order for the developers to look into the problem.
 
+<!--@@author ???-->
+
 **Q7**: I want to take more modules than my major's graduation requirements. Does iGraduate allow me to do so?
 > Yes! iGraduate does not limit the number of modules you can track. This means that you can add more modules even after 
 > reaching your graduation requirements. Do note that the progress bar under `progress` command will still display 100% even
 > if you exceed your graduation requirements.
->
 
 <br>
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author kewenlok-->
 
 ## **Command Summary** ##
 

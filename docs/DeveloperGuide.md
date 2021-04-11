@@ -153,7 +153,7 @@ What would you like to do today?
     Starting without existing module data...
     Initializing new module list...
     --------------------------------------------------------------------------------------
-    _  ____               _             _
+     _  ____               _             _
     (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
     | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
     | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
@@ -289,12 +289,13 @@ The methods that check various parameters
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
 
-The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. The subclasses are:
+The `command` component consists of an abstract class `Command` and 10 subclasses that inherit from it. The subclasses are:
 1. AddCommand
 1. CapCommand
 1. DeleteCommand
 1. DoneCommand
 1. ExitCommand
+1. HelpCommand
 1. InfoCommand
 1. ListCommand
 1. ProgressCommand
@@ -321,6 +322,8 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 
 ----
 
+<!--@@author kewenlok-->
+
 ### **Model Component** ###
 
 The `model` component consists of two main packages, `module` and `list`, which define and deal with data storing issues based on the information provided by the user input. 
@@ -332,8 +335,6 @@ The data storing issues are split into two main categories - what data should be
 should be managed and stored.
 
 ----
-
-<!--@@author kewenlok-->
 
 #### **Module Package** ####
 
@@ -584,8 +585,8 @@ Considerations were made for the adoption of third-party parser libraries. Howev
 
 ### **Command** ###
 
-The `command` package is responsible for executing the command from the user. The package contains the  abstract class 
-`Command` and 8 subclasses that inherit `Command`, one for each valid iGraduate command .
+The `command` package is responsible for executing the command from the user. The package contains the abstract class 
+`Command` and 10 subclasses that inherit `Command`, one for each valid iGraduate command .
 
 ***Details***<br>
 The abstract class `Command` contains only 1 method: `execute()`, which takes in 3 parameters: `moduleList`, `ui` and
@@ -656,7 +657,7 @@ list. The various information requested to update would be identified with their
 
 > ℹ️ **Note:** 
 > - The code and type of modules **cannot be modified** as they are identifiers of the modules.
-> - **Multiple module information** can be updated in a single command
+> - **Multiple module information** can be updated in a single command.
 > - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated.
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
@@ -689,10 +690,37 @@ Initially, it was decided that the parameters would be split into an `array` to 
 
 ----
 
+<!--@@author kewenlok-->
+
+#### **Info Command** ####
+
+The info command provides a feature for the user to view any module they added to the list regardless of
+the module type and status by specifying its module code. The command will only be executed if valid module
+code is provided by the user. All information of the specified module will be shown to the user to aid the
+planning of module. An example of info command execution flow is shown in the sequence diagram below.
+
+![archi](./images/InfoCommandSequenceDiagram.png)
+
+<sup>***Figure 1.18** Sequence diagram of `InfoCommand` in execution with `info CS1010` as user input*</sup>
+
+***Considerations***
+
+After receiving a feedback from a user stating that there are no ways for the user to view the prerequisites 
+information for any modules, the team consider to implement a prerequisites column for the `list command` as
+suggested by the user. However, through much consideration and discussion, the team feels that it will be too
+convoluted and cluttered for the `list command` results as there are simply too much information to show in one
+screen. Instead, the team decided to create a new `info command` for listing all information of the module which 
+the user wish to know.
+
+----
+
+<!--@@author ???-->
+
 #### **List Command** ####
 
 The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
 form of a parameter.
+
 The table below shows the scope of each options.  
 
 |List Parameter|Scope|
@@ -706,16 +734,16 @@ The table below shows the scope of each options.
 |`elec`|List all elective modules on the list|
 |`ge`|List all GE modules on the list|
 
-<sup>***Table 1.18.1*** Supported list functions and their scope</sup>
+<sup>***Table 1.19.1*** Supported list functions and their scope</sup>
 
 ![list](./images/ListCommandSequenceDiagram.png)
 
-<sup>***Figure 1.18.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
-
+<sup>***Figure 1.19.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
 
 ----
 
 <!--@@author fupernova-->
+
 #### **CAP Command** ####
 
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
@@ -723,7 +751,7 @@ command also displays the degree classification of the user. There are no flags 
 
 ![archi](./images/CapCommandSequenceDiagram.png)
 
-<sup>***Figure 1.19** Sequence diagram of `CapCommand` class.*</sup>
+<sup>***Figure 1.20** Sequence diagram of `CapCommand` class.*</sup>
 
 ----
 
@@ -740,7 +768,7 @@ parameter from user input, and there is 1 compulsory flag:
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
-<sup>***Figure 1.20** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
+<sup>***Figure 1.21** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
 
 ----
 
@@ -751,7 +779,7 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 1.21** Sequence diagram of `ProgressCommand` in execution.*</sup>
+<sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ----
 
@@ -777,7 +805,7 @@ The figure below demonstrates the behaviour of the help command.
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
-<sup>***Figure 1.22** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
+<sup>***Figure 1.23** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
 
 ***Considerations & Alternatives***
 
@@ -803,6 +831,7 @@ The `module` component contains the class `module`, together with 4 child classe
 stored in iGraduate are instances of one of the 4 subclasses.
 
 ***Details***
+
 For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the
 parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
 grade and MCs. It also contains the lists that track the prerequisites of the module.
@@ -811,6 +840,7 @@ The implementation details of the subclasses are hence quite sparse, containing 
 in the `module` object.
 
 ***Considerations*** 
+
 To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
 be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
 module code and grade, the subclasses do not contain much information that is not already stored in their parent class. To
@@ -822,15 +852,36 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 ----
 
-<!--@@author ???-->
+<!--@@author kewenlok-->
+
 ### **ModuleList** ###
 
+The `moduleList` component acts as a temporary storage for storing module data while application is 
+running. All module data added to the application could be found under the `moduleList` storage.
+
+***Details***
+
+Since the `moduleList` is used for storing module data needed for running application, the module data 
+will be loaded from the disk when the application first started. After any data changing command is executed,
+the latest module data in the `moduleList` will be written to disk for permanent storage (unless the secondary
+memory is faulty). It also consists of utility methods which allows retrieval, manipulation and deletion of 
+module data in a centralised and consistent manner.
+
+***Considerations***
+
+At the start of project, an array is considered to be used as the underlying data structure for the `moduleList`
+component. However, after taking the scalability issue into consideration, the team decided to incorporate an
+`ArrayList` instead. Reason being `ArrayList` is a dynamically sized array along with standard methods such as 
+whether the list contains a specific module, search and removal of specified module. The size of the `ArrayList`
+is only limited by the user device's available memory size.
 
 <br> 
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<!--@@author ???-->
 
 ### **Storage** ###
 
