@@ -19,7 +19,7 @@ Access my contribution on [RepoSense](https://nus-cs2113-ay2021s2.github.io/tp-d
 #### ***Storage*** ####
 
 I implemented the storage function of iGraduate, including the considerations, researching of third-party libraries and the development. 
-The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library.  We wanted a robust storage system that is resilient to bugs, especially arising from the use of custom delimiters. In the end, we decided that the use of Java libraries was the way to go, since it is more developed and comes fully equipped to handling parsing or modification of the storage files. From the various version of JSON, I ultimately decided on GSON since it is easier to understand and straightforward to use, and comes with the features flexible enough to accomodate the use of custom objects in a single function. The advantage applies to both the loading and saving of module list to and fro th storage file. I had to research on the limitations and different flavours of JSON, learn its usage and apply the library to the application. 
+The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library.  We wanted a robust storage system that is resilient to bugs, especially arising from the use of custom delimiters. In the end, we decided that the use of Java libraries was the way to go, since it is more developed and comes fully equipped to handling parsing or modification of the storage files. From the various version of JSON, I ultimately decided on GSON since it is easier to understand and straightforward to use, and comes with the features flexible enough to accommodate the use of custom objects in a single function. The advantage applies to both the loading and saving of module list to and fro th storage file. I had to research on the limitations and different flavours of JSON, learn its usage and apply the library to the application.
 
 #### ***Parser*** ####
 
@@ -27,7 +27,7 @@ I paired up with Fuxi to implement the Parser function. While he worked on the h
 
 Ultimately, I decided that the command should first be split into the command type (with its parameters) and the flags. Initially, I was using arrays to utilise the efficient memory allocation and standard size. Ultimately, the type was changed to an array list instead, to make use of its class functions (like indexOf() and size()). 
 
-After, I decided that the flags should be used to parse other parameters, using regex to identify and isolate them from the main command. Instead of keeping them as a string to search for the flags, I split them up according to their delimeters dashes and space ('-', ' ') and getting the value in the next index. This way, it would save the trouble of having a start and end index since the command flags (except -n) only allows one value (without spaces). 
+After, I decided that the flags should be used to parse other parameters, using regex to identify and isolate them from the main command. Instead of keeping them as a string to search for the flags, I split them up according to their delimiters dashes and space ('-', ' ') and getting the value in the next index. This way, it would save the trouble of having a start and end index since the command flags (except -n) only allows one value (without spaces). 
 
 <br>
 
@@ -81,7 +81,7 @@ I contributed to the following team-based tasks:
     - user stories (v1.0 and v2.0)
     - non-functional requirements
     - adding some of the icons used in the DG
-1. some refactoring and clean up of code
+
 <br>
 
 ### **Review/Mentoring Contributions** ###
