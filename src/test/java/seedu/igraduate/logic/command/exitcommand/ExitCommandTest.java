@@ -54,7 +54,7 @@ class ExitCommandTest {
     void executeExitCommand_success() {
         System.setOut(new PrintStream(output));
         exitCommand.execute(moduleList, ui, storage);
-        String expectedExitMessage = ui.GOODBYE_MESSAGE + System.lineSeparator();
+        String expectedExitMessage = Ui.GOODBYE_MESSAGE + System.lineSeparator();
         assertEquals(expectedExitMessage, output.toString());
         System.setOut(originalOut);
     }
@@ -94,7 +94,7 @@ class ExitCommandTest {
         Command exitCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(output));
         exitCommand.execute(moduleList, ui, storage);
-        String expectedExitMessage = ui.GOODBYE_MESSAGE + System.lineSeparator();
+        String expectedExitMessage = Ui.GOODBYE_MESSAGE + System.lineSeparator();
         assertEquals(expectedExitMessage, output.toString());
         System.setOut(originalOut);
     }
