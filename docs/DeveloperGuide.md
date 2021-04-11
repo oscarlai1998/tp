@@ -524,7 +524,7 @@ The sequence diagram below shows the execution of add command in action:
 
 #### 4.3.2 Delete Command
 
-The delete command allows for deletion of module from the module list, identified by the module code. There are no flags
+The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
 involved for deleting a module.
 
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.

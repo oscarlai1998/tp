@@ -1,6 +1,8 @@
 # iGraduate User Guide
 By: `W09-2` Latest update: `10 April 2021`
+
 ![logo](./images/logo.jpg)
+
 * [Introduction](#introduction)
 * [User Guide Usage](#user-guide-usage)
 * [Quick Start](#quick-start)
@@ -68,7 +70,7 @@ What would you like to do today?
 ```
 
 ## Features
-iGraduate works by tracking a list of modules you have taken, is taking or is intending to take. Different features can be performed on the list
+iGraduate works by tracking a list of modules you have taken, is taking or are intending to take. Different features can be performed on the list
 to help you track your academic journey. These features can be called by a list of commands. The following section outlines the various commands supported
 by the iGraduate, its proper usages and expected behaviours.
 
