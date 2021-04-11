@@ -77,21 +77,29 @@ public class Parser {
      * @param line User input directly from the input stream.
      * @return An object of the respective command class (e.g. deleteCommand,
      *         addCommand, etc.)
-     * @throws InvalidCommandException          If input does not contain a valid command.
-     * @throws IncorrectParameterCountException If the command input does not contain the right parameters.
-     * @throws IllegalParametersException       If the parameter includes -t or -c, which are illegal
-     *                                          parameters.
-     * @throws InputNotNumberException          If the expected integer input is not a number.
-     * @throws InvalidModuleTypeException       If the module type entered is not valid.
-     * @throws InvalidListTypeException         If the option for command is invalid.
-     * @throws InvalidModularCreditException    If the modular credit is not between 1 and 32 inclusive.
-     * @throws InvalidModuleGradeException      If the module grade provided is incorrect.
-     * @throws InvalidModuleCodeException       If the module code does not follow NUS standard.
+     * @throws InvalidCommandException          If input does not contain a valid
+     *                                          command.
+     * @throws IncorrectParameterCountException If the command input does not
+     *                                          contain the right parameters.
+     * @throws IllegalParametersException       If the parameter includes -t or -c,
+     *                                          which are illegal parameters.
+     * @throws InputNotNumberException          If the expected integer input is not
+     *                                          a number.
+     * @throws InvalidModuleTypeException       If the module type entered is not
+     *                                          valid.
+     * @throws InvalidListTypeException         If the option for command is
+     *                                          invalid.
+     * @throws InvalidModularCreditException    If the modular credit is not between
+     *                                          1 and 32 inclusive.
+     * @throws InvalidModuleGradeException      If the module grade provided is
+     *                                          incorrect.
+     * @throws InvalidModuleCodeException       If the module code does not follow
+     *                                          NUS standard.
      */
-    public Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
-            InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
-            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
-            InvalidModuleCodeException {
+    public Command parseCommand(String line)
+            throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
+            InvalidModuleTypeException, InvalidListTypeException, InvalidModularCreditException,
+            IllegalParametersException, InvalidModuleGradeException, InvalidModuleCodeException {
         if (line.trim().length() == 0) {
             throw new InvalidCommandException("You may type \"help\" to view manual for our available commands.");
         }
@@ -195,12 +203,17 @@ public class Parser {
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of AddCommand class.
-     * @throws InvalidCommandException          If input does not contain a valid command.
-     * @throws IncorrectParameterCountException If the command input does not contain the right parameters.
+     * @throws InvalidCommandException          If input does not contain a valid
+     *                                          command.
+     * @throws IncorrectParameterCountException If the command input does not
+     *                                          contain the right parameters.
      * @throws InputNotNumberException          If the expected input is not number.
-     * @throws InvalidModuleTypeException       If the specified module type is not valid.
-     * @throws InvalidModularCreditException    If the provided modular credit is invalid.
-     * @throws InvalidModuleCodeException       If the module code does not follow NUS standard.
+     * @throws InvalidModuleTypeException       If the specified module type is not
+     *                                          valid.
+     * @throws InvalidModularCreditException    If the provided modular credit is
+     *                                          invalid.
+     * @throws InvalidModuleCodeException       If the module code does not follow
+     *                                          NUS standard.
      */
     public static Command createAddCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
@@ -259,8 +272,8 @@ public class Parser {
     }
 
     /**
-     * Extracts relevant parameters and creates new instance of InfoCommand class
-     * to execute. Format: "Info [module code]"
+     * Extracts relevant parameters and creates new instance of InfoCommand class to
+     * execute. Format: "Info [module code]"
      *
      * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
@@ -295,7 +308,8 @@ public class Parser {
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of ListCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
-     * @throws InvalidListTypeException If the provided list option is invalid.
+     * @throws InvalidListTypeException         If the provided list option is
+     *                                          invalid.
      */
     public static Command createListCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidListTypeException {
@@ -343,8 +357,10 @@ public class Parser {
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of DoneCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
-     * @throws InvalidCommandException          If the command input does not contain the right parameters.
-     * @throws InvalidModuleGradeException      If the module grade provided is not valid.
+     * @throws InvalidCommandException          If the command input does not
+     *                                          contain the right parameters.
+     * @throws InvalidModuleGradeException      If the module grade provided is not
+     *                                          valid.
      */
     public static Command createDoneCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
             throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException,
@@ -377,20 +393,26 @@ public class Parser {
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of UpdateCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
-     * @throws IllegalParametersException       If the parameter includes -t or -c, which are illegal parameters.
+     * @throws IllegalParametersException       If the parameter includes -t or -c,
+     *                                          which are illegal parameters.
+     * @throws InvalidCommandException          If unknown flags are found.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException {
+            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException, InvalidCommandException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
-        boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
+        boolean isDisallowedFlag = (commandFlags.contains("-c") || commandFlags.contains("-t"));
+        boolean isIllegalFlag = isFlagIllegal(commandFlags);
 
         if (isInvalidPara || isInvalidFlag) {
             LOGGER.warning("Invalid number of parameters.");
             throw new IncorrectParameterCountException();
-        } else if (isIllegalFlag) {
-            LOGGER.warning("Illegal parameters detected. ");
+        } else if (isDisallowedFlag) {
+            LOGGER.warning("The module code and type cannot be changed.");
             throw new IllegalParametersException();
+        } else if (isIllegalFlag) {
+            LOGGER.warning("Unknown flags detected.");
+            throw new InvalidCommandException("Unknown flags detected. The update command only accepts -[n|mc|g|p] as flags.");
         }
         String moduleCode = commandParameters.get(SECOND_INDEX);
         if (!isModuleCodeValid(moduleCode)) {
@@ -477,11 +499,12 @@ public class Parser {
      * @author xseh
      * @param commands parameters of user input, excluding command flags.
      * @return module code.
-     * @throws InvalidModuleCodeException       If module code does not follow NUS standard.
-     * @throws InvalidCommandException          If module code parameter is not provided.
+     * @throws InvalidModuleCodeException If module code does not follow NUS
+     *                                    standard.
+     * @throws InvalidCommandException    If module code parameter is not provided.
      */
-    public static String extractModuleCode(ArrayList<String> commands) throws InvalidModuleCodeException,
-            InvalidCommandException {
+    public static String extractModuleCode(ArrayList<String> commands)
+            throws InvalidModuleCodeException, InvalidCommandException {
         assert commands.size() == COMMAND_ADD_FLAG_LENGTH || commands.size() == COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH
                 : "extractModuleCode should only be called for add";
         int index = commands.indexOf("-c");
@@ -568,11 +591,11 @@ public class Parser {
      * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return Module grade.
-     * @throws InvalidCommandException If -g flag is not found.
+     * @throws InvalidCommandException     If -g flag is not found.
      * @throws InvalidModuleGradeException If module grade provided is not valid.
      */
-    public static String extractModuleGrade(ArrayList<String> commandFlags) throws InvalidCommandException,
-            InvalidModuleGradeException {
+    public static String extractModuleGrade(ArrayList<String> commandFlags)
+            throws InvalidCommandException, InvalidModuleGradeException {
         int index = commandFlags.indexOf("-g");
         if (index == DEFAULT_INDEX) {
             LOGGER.warning("Missing module grade parameter.");
@@ -663,6 +686,23 @@ public class Parser {
     }
 
     /**
+     * Checks if there is invalid flags in the command input.
+     * 
+     * @param commandFlags The array list containing all
+     * @return True if one of the flags are invalid, false if all flags are valid
+     *         flags
+     */
+    private static boolean isFlagIllegal(ArrayList<String> commandFlags) {
+        Pattern pattern = Pattern.compile("^(?!(-t|-c|-mc|-n|-p|-g)$|[a-zA-Z0-9])");
+        for (String commandFlag : commandFlags) {
+            if (pattern.matcher(commandFlag).lookingAt()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Checks if the module code is valid according to school codes.
      * 
      * @author xseh
@@ -674,7 +714,8 @@ public class Parser {
     }
 
     /**
-     * Checks if the module grade is valid according to school module grade standard.
+     * Checks if the module grade is valid according to school module grade
+     * standard.
      *
      * @author xseh
      * @param moduleGrade Module grade entered by user.
@@ -683,17 +724,17 @@ public class Parser {
     public static boolean isModuleGradeValid(String moduleGrade) {
         switch (moduleGrade.toLowerCase()) {
         case "a+": // fallthrough
-        case "a":  // fallthrough
+        case "a": // fallthrough
         case "a-": // fallthrough
         case "b+": // fallthrough
-        case "b":  // fallthrough
+        case "b": // fallthrough
         case "b-": // fallthrough
         case "c+": // fallthrough
-        case "c":  // fallthrough
+        case "c": // fallthrough
         case "d+": // fallthrough
-        case "f":  // fallthrough
-        case "s":  // fallthrough
-        case "u":  // fallthrough
+        case "f": // fallthrough
+        case "s": // fallthrough
+        case "u": // fallthrough
         case "cs": // fallthrough
         case "cu": // fallthrough
         case "nil":
@@ -704,7 +745,8 @@ public class Parser {
     }
 
     /**
-     * Checks if the modular credit is valid according to school modular credit range.
+     * Checks if the modular credit is valid according to school modular credit
+     * range.
      *
      * @author xseh
      * @param modularCredit Modular credit value entered by user.
