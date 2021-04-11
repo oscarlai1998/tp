@@ -104,6 +104,18 @@ public class UpdateCommandIntegrationTest {
         assertEquals(InvalidModuleGradeException.INVALID_MODULE_GRADE_ERROR_MESSAGE, exception.getMessage());
     }
 
+    @Test
+    void executeUpdateCommand_incorrectMC_exceptionThrown() throws InvalidCommandException, InvalidModuleTypeException,
+            InvalidListTypeException, InputNotNumberException, IncorrectParameterCountException,
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
+        String line = "update CS1010 -n Introduction to Computer Organisation -mc -4";
+        Command updateCommand = parser.parseCommand(line);
+        Exception exception = assertThrows(InvalidModularCreditException.class,
+            () -> updateCommand.execute(moduleList, ui, storage));
+        assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
+    }
+
     @AfterEach
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,
             IncorrectParameterCountException, ExistingModuleException, InvalidModularCreditException,
