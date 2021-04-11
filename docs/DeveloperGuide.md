@@ -322,22 +322,11 @@ Each of the module classes consists of:
 
 #### **Module Class** ####
 
-`Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the attributes applicable to all modules. The attributes found in the `Module` class are relevant to NUS module information.
-
-Scope   | Type              | Variable             | Description | 
---------|-------------------|----------------------|-------------|
-private | String            | code                 | Module code of the module object.
-private | String            | name                 | Module name of the module object.
-private | double            | credit               | Modular credit of the module object.
-private | String            | status               | Status of the module, whether it is “taken”, “not taken” or “taking”.
-private | String            | grade                | The grade of taken modules.
-private | ArrayList<String> | preRequisites        | A list of prerequisite modules.
-private | ArrayList<String> | untakenPreRequisites | A list of unsatisfied prerequisite modules.
-private | ArrayList<String> | requiredByModules    | A list of modules requiring the current module as a prerequisite.
-
-<sup>***Table 1.8** Attributes and methods used to manipulate the attributes*</sup>
+`Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the 
+attributes applicable to all modules. The attributes found in the `Module` class are relevant to NUS module information.
 
 ***Behaviour***<br>
+
 The `Module` class also consists of methods that set and get the value of attributes shown in the table above. There are 
 four additional methods in the class, namely `removeUntakenPreRequisite`, `removeRequiredByModule`, `getStatusIcon`and `toString`
 . The `removeUntakenPreRequisite` and `removeRequiredByModule` methods are used to remove a single`untakenPreRequisites` module 
@@ -346,12 +335,12 @@ status. For customized formatting of module printing messages, `toString` method
 
 |Child Class|Behaviour|
 |-----------|---------|
-|`CoreModule`|initializes the core module object with the information needed and contains a `toString` method that overrides the format of core module printing.|
-|`GeModule`|initializes the general education module object with the information needed and contains a `toString` method that overrides the format of general education module printing.|
-|`ElectiveModule`|initializes the elective module object with the information needed and contains a `toString` method that overrides the format of elective module printing.|
-|`MathModule`|initializes the math module object with the information needed and contains a `toString` method that overrides the format of math module printing.|
+|`CoreModule`|Initializes the core module object with the information needed and contains a `toString` method that overrides the format of core module printing.|
+|`GeModule`|Initializes the general education module object with the information needed and contains a `toString` method that overrides the format of general education module printing.|
+|`ElectiveModule`|Initializes the elective module object with the information needed and contains a `toString` method that overrides the format of elective module printing.|
+|`MathModule`|Initializes the math module object with the information needed and contains a `toString` method that overrides the format of math module printing.|
 
-<sup>***Table 1.9** Child classes that inherited from the `Module` class*</sup>
+<sup>***Table 1.8** Child classes that inherited from the `Module` class*</sup>
 
 ----
 
