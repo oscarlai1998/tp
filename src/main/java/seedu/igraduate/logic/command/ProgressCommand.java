@@ -16,6 +16,7 @@ public class ProgressCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(ProgressCommand.class.getName());
 
+    //@@author oscarlai1998
     /**
      * Prints progress in percentage of MCs completed out of 160MCs.
      *
@@ -51,6 +52,7 @@ public class ProgressCommand extends Command {
         return completedPercentage;
     }
 
+    //@@author kewenlok
     /**
      * {@inheritDoc}
      *

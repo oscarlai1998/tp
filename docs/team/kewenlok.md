@@ -64,15 +64,16 @@ informed decisions about future modules.
 
 ### Contributions to the DG
 
-1. Added [introduction](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#1-introduction), 
-   [setting up, getting started](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#2-setting-up-getting-started), 
-   [logging](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#5-logging) 
-   and [documentation](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#6-documentation) section.
-1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#341-module-package) and its 
+1. Added [introduction](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#introduction), 
+   [setting up, getting started](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#setting-up-getting-started), 
+   [logging](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#logging) 
+   and [documentation](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#documentation) section.
+1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#module-package) and its 
    class diagram under the design of model component.
-1. Updated [`AddCommand`]() and added its sequence diagram under implementation.
-1. Added implementation for [`Module`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#44-module) 
-   and [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#45-modulelist).
+1. Added [`AddCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command), 
+   [`InfoCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command) and added their sequence 
+   diagrams under implementation.
+1. Added implementation for [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#modulelist).
 1. Restructuring, reformatting and maintenance of DG.
 
 ### Contributions to team-based tasks

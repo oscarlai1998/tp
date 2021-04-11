@@ -8,6 +8,7 @@ public class InvalidModuleGradeException extends Exception {
             + " entered is invalid. \nThe supported module types for add are: "
         + "A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU.";
 
+    //@@author LJ-37
     public InvalidModuleGradeException() {
         super(INVALID_MODULE_GRADE_ERROR_MESSAGE);
     }

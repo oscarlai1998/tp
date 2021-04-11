@@ -6,6 +6,7 @@ package seedu.igraduate.exception;
 public class AddSelfToPrereqException extends Exception {
     public static final String ADD_TO_SELF_MESSAGE = "Cannot add a module to its own list of prerequisites!!";
 
+    //@@author fupernova
     public AddSelfToPrereqException() {
         super(ADD_TO_SELF_MESSAGE);
     }

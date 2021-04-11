@@ -16,6 +16,7 @@ public class CapCommand extends Command {
 
     private static final Logger LOGGER = Logger.getLogger(CapCommand.class.getName());
 
+    //@@author LJ-37
     /**
      * Iterates through the modules in module list and calculates the current cap.
      * Prints cap message after cap is calculated.

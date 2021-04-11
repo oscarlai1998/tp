@@ -25,6 +25,7 @@ import seedu.igraduate.ui.Ui;
  * information applicable to all command-related classes.
  */
 public abstract class Command {
+    //@@author kewenlok
     /**
      * Executes command based on the corresponding command type.
      *
