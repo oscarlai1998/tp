@@ -1,3 +1,5 @@
+// @@author fupernova
+
 package seedu.igraduate.logic.command.exitcommand;
 
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,7 @@ class ExitCommandTest {
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
     private Storage storage = Storage.getStorage(FILEPATH);
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream output = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -71,7 +74,7 @@ class ExitCommandTest {
             AddSelfToPrereqException, MarkCompletedModuleException, ModuleNotCompleteException,
             ModuleNotFoundException {
         String line = "exit";
-        Command exitCommand = Parser.parseCommand(line);
+        Command exitCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(output));
         exitCommand.execute(moduleList, ui, storage);
         String expectedExitMessage = ui.GOODBYE_MESSAGE + System.lineSeparator();
@@ -88,7 +91,7 @@ class ExitCommandTest {
             ExistingModuleException, AddSelfToPrereqException, MarkCompletedModuleException,
             ModuleNotCompleteException, ModuleNotFoundException {
         String line = "          exit                               ";
-        Command exitCommand = Parser.parseCommand(line);
+        Command exitCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(output));
         exitCommand.execute(moduleList, ui, storage);
         String expectedExitMessage = ui.GOODBYE_MESSAGE + System.lineSeparator();

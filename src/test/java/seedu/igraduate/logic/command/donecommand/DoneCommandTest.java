@@ -48,6 +48,7 @@ public class DoneCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -58,7 +59,7 @@ public class DoneCommandTest {
             InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
             InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Done GES1036 -g A+";
-        Command doneCommand = Parser.parseCommand(line);
+        Command doneCommand = parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> doneCommand.execute(moduleList, ui, storage));
         assertEquals(ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE, exception.getMessage());
@@ -77,7 +78,7 @@ public class DoneCommandTest {
                 untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "Done CS1010 -g A";
-        Command doneCommand = Parser.parseCommand(line);
+        Command doneCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         Module module = moduleList.getModuleByCode("cs1010");
         doneCommand.execute(moduleList, ui, storage);
@@ -98,9 +99,9 @@ public class DoneCommandTest {
                 untakenPreRequisites);
         addCommand.execute(moduleList, ui, storage);
         String line = "Done CS1010 -g A";
-        Command doneCommand = Parser.parseCommand(line);
+        Command doneCommand = parser.parseCommand(line);
         doneCommand.execute(moduleList, ui, storage);
-        Command duplicateCommand = Parser.parseCommand(line);
+        Command duplicateCommand = parser.parseCommand(line);
         Exception exception = assertThrows(MarkCompletedModuleException.class,
             () -> duplicateCommand.execute(moduleList, ui, storage));
         assertEquals(MarkCompletedModuleException.MARK_COMPLETED_MODULE_ERROR_MESSAGE, exception.getMessage());

@@ -31,6 +31,8 @@ import java.util.logging.Level;
 /**
  * Represents an instance of a parser. A parser object corresponds to the
  * processing of one input by the user.
+ * 
+ * @author xseh
  */
 public class Parser {
     // Constants for command words
@@ -71,6 +73,7 @@ public class Parser {
     /**
      * Parses user input and identifies the command to be executed.
      * 
+     * @author xseh
      * @param line User input directly from the input stream.
      * @return An object of the respective command class (e.g. deleteCommand,
      *         addCommand, etc.)
@@ -85,7 +88,7 @@ public class Parser {
      * @throws InvalidModuleGradeException      If the module grade provided is incorrect.
      * @throws InvalidModuleCodeException       If the module code does not follow NUS standard.
      */
-    public static Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
+    public Command parseCommand(String line) throws InvalidCommandException, IncorrectParameterCountException,
             InputNotNumberException, InvalidModuleTypeException, InvalidListTypeException,
             InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
             InvalidModuleCodeException {
@@ -126,7 +129,7 @@ public class Parser {
             LOGGER.log(Level.INFO, "Input parsed to done command.");
             return createDoneCommand(commandParameters, commandFlags);
         case COMMAND_UPDATE:
-            LOGGER.log(Level.INFO, "Input parsed to udpate command.");
+            LOGGER.log(Level.INFO, "Input parsed to update command.");
             return createUpdateCommand(commandParameters, commandFlags);
         case COMMAND_CAP:
             LOGGER.log(Level.INFO, "Input parsed to cap command.");
@@ -146,6 +149,7 @@ public class Parser {
     /**
      * Split the user input into maximum of 2 parts, with '-' as delimiter.
      *
+     * @author xseh
      * @param line User input.
      * @return String array of user input split up.
      */
@@ -159,6 +163,7 @@ public class Parser {
      * Obtain a string array of length 2, with the first index containing name of
      * command and second index containing the first parameter.
      *
+     * @author xseh
      * @param commands User input split up using getCommand().
      * @return String array of command and first parameter separated.
      */
@@ -169,6 +174,7 @@ public class Parser {
     /**
      * Obtains the flags and their respective values.
      * 
+     * @author xseh
      * @param commands Array separating command name and parameters with command
      *                 flags and values.
      * @return Array containing the flags and values split with the delimiter (" ").
@@ -185,6 +191,7 @@ public class Parser {
      * execute. Format: "Add [module name] -c [module code] -t [module type] -mc
      * [modular credits] -p [pre-requisites]"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of AddCommand class.
@@ -226,12 +233,13 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of DeleteCommand class
      * to execute. Format: "Delete [module code]"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of DeleteCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createDeleteCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_DELETE_LENGTH);
         boolean isInvalidFlag = (commandFlags.get(FIRST_INDEX) != null);
 
@@ -242,6 +250,9 @@ public class Parser {
 
         assert commandParameters.size() == 2 : "COMMAND_DELETE_LENGTH should be 2";
         String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         LOGGER.log(Level.INFO, "Valid parameters for delete command.");
 
         return new DeleteCommand(moduleCode);
@@ -251,12 +262,13 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of InfoCommand class
      * to execute. Format: "Info [module code]"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of InfoCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
      */
     public static Command createInfoCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException {
+            throws IncorrectParameterCountException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_INFO_LENGTH);
         boolean isInvalidFlag = (commandFlags.get(FIRST_INDEX) != null);
 
@@ -267,6 +279,9 @@ public class Parser {
 
         assert commandParameters.size() == 2 : "COMMAND_INFO_LENGTH should be 2";
         String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         LOGGER.log(Level.INFO, "Valid parameters for info command.");
 
         return new InfoCommand(moduleCode);
@@ -276,6 +291,7 @@ public class Parser {
      * Extracts relevant parameters and creates new instance of ListCommand class to
      * execute. Format: "List"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of ListCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
@@ -299,6 +315,7 @@ public class Parser {
     /**
      * Creates new instance of ProgressCommand class to execute. Format: "Progress"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of ProgressCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
@@ -321,6 +338,7 @@ public class Parser {
      * Extracts relevant parameters and creates an instance of DoneCommand to
      * execute. Format: "done [module code] -g [grade]"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of DoneCommand class.
@@ -329,7 +347,8 @@ public class Parser {
      * @throws InvalidModuleGradeException      If the module grade provided is not valid.
      */
     public static Command createDoneCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException {
+            throws IncorrectParameterCountException, InvalidCommandException, InvalidModuleGradeException,
+            InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_DONE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() != COMMAND_DONE_FLAG_LENGTH);
 
@@ -339,16 +358,21 @@ public class Parser {
         }
         assert commandFlags.size() == 2 : "COMMAND_DONE_LENGTH should be 2.";
 
+        String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
         String moduleGrade = extractModuleGrade(commandFlags);
         LOGGER.log(Level.INFO, "Valid parameters for done command.");
 
-        return new DoneCommand(commandParameters.get(SECOND_INDEX), moduleGrade);
+        return new DoneCommand(moduleCode, moduleGrade);
     }
 
     /**
      * Extracts relevant parameters and creates an instance of UpdateCommand to
      * execute. Format: "update [module code] [-g|-mc|-n|-p] [value]"
      * 
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of UpdateCommand class.
@@ -356,7 +380,7 @@ public class Parser {
      * @throws IllegalParametersException       If the parameter includes -t or -c, which are illegal parameters.
      */
     public static Command createUpdateCommand(ArrayList<String> commandParameters, ArrayList<String> commandFlags)
-            throws IncorrectParameterCountException, IllegalParametersException {
+            throws IncorrectParameterCountException, IllegalParametersException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_UPDATE_PARAMETER_LENGTH);
         boolean isInvalidFlag = (commandFlags.size() < COMMAND_UPDATE_FLAG_LENGTH);
         boolean isIllegalFlag = (commandFlags.contains("-t") || commandFlags.contains("-c"));
@@ -368,14 +392,19 @@ public class Parser {
             LOGGER.warning("Illegal parameters detected. ");
             throw new IllegalParametersException();
         }
+        String moduleCode = commandParameters.get(SECOND_INDEX);
+        if (!isModuleCodeValid(moduleCode)) {
+            throw new InvalidModuleCodeException();
+        }
 
-        return new UpdateCommand(commandParameters.get(SECOND_INDEX), commandFlags);
+        return new UpdateCommand(moduleCode, commandFlags);
     }
 
     /**
      * Extracts relevant parameters and creates an instance of CapCommand to
      * execute. Format: "Cap"
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of CapCommand class.
@@ -398,6 +427,7 @@ public class Parser {
     /**
      * Creates new instance of HelpCommand class to execute.
      *
+     * @author fupernova
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of HelpCommand class.
@@ -422,6 +452,7 @@ public class Parser {
     /**
      * Creates new instance of ExitCommand class to execute.
      *
+     * @author xseh
      * @param commandParameters Parameters of user input, excluding command flags.
      * @return New instance of ExitCommand class.
      * @throws IncorrectParameterCountException If parameter count is not correct.
@@ -443,6 +474,7 @@ public class Parser {
     /**
      * Extracts module code from user input.
      *
+     * @author xseh
      * @param commands parameters of user input, excluding command flags.
      * @return module code.
      * @throws InvalidModuleCodeException       If module code does not follow NUS standard.
@@ -470,6 +502,7 @@ public class Parser {
     /**
      * Extracts module type from user input.
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return Module type.
      * @throws InvalidModuleTypeException If command format is not recognised.
@@ -498,6 +531,7 @@ public class Parser {
     /**
      * Extracts modular credits from user input.
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return Number of modular credits.
      * @throws NumberFormatException         If number is not given as modular
@@ -531,6 +565,7 @@ public class Parser {
     /**
      * Extracts module grade from user input.
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return Module grade.
      * @throws InvalidCommandException If -g flag is not found.
@@ -557,6 +592,7 @@ public class Parser {
     /**
      * Extracts module name from user input.
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return Module name.
      * @throws InvalidCommandException If the module name parameter is missing.
@@ -592,6 +628,7 @@ public class Parser {
      * Determines the option user selects if "List" command is run. Options are: 1.
      * List all modules 2. List modules taken 3. List modules not taken
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return The option user selects.
      * @throws InvalidListTypeException If list type given is invalid.
@@ -607,6 +644,7 @@ public class Parser {
     /**
      * Extracts prerequisite module codes from user input.
      *
+     * @author xseh
      * @param commandFlags Flags of commands from user input.
      * @return ArrayList containing extracted prerequisite module codes.
      */
@@ -627,6 +665,7 @@ public class Parser {
     /**
      * Checks if the module code is valid according to school codes.
      * 
+     * @author xseh
      * @param moduleCode Module code to be checked.
      * @return True if the code is valid, false otherwise.
      */
@@ -637,6 +676,7 @@ public class Parser {
     /**
      * Checks if the module grade is valid according to school module grade standard.
      *
+     * @author xseh
      * @param moduleGrade Module grade entered by user.
      * @return True if the module grade is valid, false otherwise.
      */
@@ -666,6 +706,7 @@ public class Parser {
     /**
      * Checks if the modular credit is valid according to school modular credit range.
      *
+     * @author xseh
      * @param modularCredit Modular credit value entered by user.
      * @return True if the modular credit falls in valid range, false otherwise.
      */
@@ -683,6 +724,7 @@ public class Parser {
     /**
      * Checks if the module type is valid.
      *
+     * @author xseh
      * @param moduleType Module type entered by user.
      * @return True if the module type is valid, false otherwise.
      */
@@ -701,6 +743,7 @@ public class Parser {
     /**
      * Checks if the list scope is valid.
      *
+     * @author xseh
      * @param scope Scope entered by user.
      * @return True if the list scope is valid, false otherwise.
      */

@@ -35,6 +35,8 @@ import java.util.logging.Logger;
 /**
  * Represents an instance of storage. A storage object corresponds to the saving
  * and loading of file.
+ * 
+ * @author xseh
  */
 public class Storage {
     // Storage information
@@ -52,6 +54,7 @@ public class Storage {
      * Creates a Singleton of Storage, which should only have one instance. If
      * storage has not been instantiated, create.
      * 
+     * @author xseh
      * @param filePath File opened for read.
      * @return Storage object.
      */
@@ -64,6 +67,7 @@ public class Storage {
 
     /**
      * Instantiates the storage object.
+     * @author xseh
      */
     private Storage(File filePath) {
         this.filePath = filePath;
@@ -72,6 +76,7 @@ public class Storage {
     /**
      * Prepares to load modules from file.
      * 
+     * @author xseh
      * @return The parsed array list containing all saved modules.
      * @throws LoadModuleFailException      If the module fails to load from file.
      * @throws DataFileNotFoundException    If the module data file does not exists.
@@ -104,6 +109,7 @@ public class Storage {
     /**
      * Checks if the module information imported is valid.
      *
+     * @author xseh
      * @param modules Distinct module list imported from data file.
      * @return True if all modules are valid, false otherwise.
      */
@@ -134,6 +140,7 @@ public class Storage {
     /**
      * Initialises empty prerequisites, untakenPrerequisites and requiredByModule list.
      *
+     * @author xseh
      * @param module Module object for checking and initialising empty array list.
      */
     private void initialiseEmptyArrayLists(Module module) {
@@ -157,6 +164,7 @@ public class Storage {
     /**
      * Removes all duplicate modules (identified by module code) from list.
      * 
+     * @author xseh
      * @param modules List of modules loaded into the application.
      * @return List of modules containing all distinct modules (if all distinct,
      *         return original module list)
@@ -168,6 +176,7 @@ public class Storage {
     /**
      * Loads the stored modules from json file.
      * 
+     * @author xseh
      * @param type     Module type.
      * @param jsonFile File opened for reading.
      * @return Parsed array list containing saved modules.
@@ -184,6 +193,7 @@ public class Storage {
     /**
      * Prepares to save the array list into a json format.
      * 
+     * @author xseh
      * @param modules Array list of all modules.
      * @throws SaveModuleFailException If the module fails to save to file.
      */
@@ -204,6 +214,7 @@ public class Storage {
     /**
      * Saves the array list to json file.
      * 
+     * @author xseh
      * @param jsonFile File opened for writing.
      * @param modules  Array list of all the modules.
      * @throws IOException If the file failed to be written.
