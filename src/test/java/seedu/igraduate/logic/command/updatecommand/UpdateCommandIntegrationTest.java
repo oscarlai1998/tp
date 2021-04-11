@@ -38,7 +38,7 @@ import java.io.PrintStream;
 import java.nio.file.Paths;
 
 public class UpdateCommandIntegrationTest {
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/updateCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
