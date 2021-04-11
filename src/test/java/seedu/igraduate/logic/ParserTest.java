@@ -26,11 +26,19 @@ import seedu.igraduate.logic.command.CapCommand;
 import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.stub.ParserStub;
 
+/**
+ * Test cases for the Parser class 
+ * 
+ * @author xseh
+ */
 public class ParserTest {
     private Parser parser = new Parser();
 
     /*-------------------- Unit tests --------------------*/
+
     /**
+     * Test case where the input is empty. 
+     * 
      * @author xseh
      */
     @Test
@@ -43,6 +51,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where an invalid command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -55,7 +65,8 @@ public class ParserTest {
     }
 
     /**
-     * @author xseh
+     * Test case where the module added is invalid (i.e. negative). 
+     * 
      */
     @Test
     void parseCommand_addNegativeMC_exceptionThrown() {
@@ -66,7 +77,8 @@ public class ParserTest {
     }
 
     /**
-     * @author xseh
+     * Test case where the module added is invalid (i.e. more than 32). 
+     * 
      */
     @Test
     void parseCommand_addTooManyMC_exceptionThrown() {
@@ -77,6 +89,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid add command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -91,6 +105,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid delete command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -103,6 +119,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid list command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -115,6 +133,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid progress command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -127,6 +147,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid done command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -139,6 +161,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid update command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -152,6 +176,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid cap command is inputted. 
+     * 
      * @author xseh
      */
     @Test
@@ -164,6 +190,8 @@ public class ParserTest {
     }
 
     /**
+     * Test case where a valid exit command is inputted. 
+     * 
      * @author xseh
      */
     @Test
