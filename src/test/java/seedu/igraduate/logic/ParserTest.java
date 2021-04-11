@@ -46,10 +46,17 @@ public class ParserTest {
         assertEquals(expectedMessage, exception.getMessage());
     }
 
-
     @Test
     void parseCommand_addNegativeMC_exceptionThrown() {
         String line = "add Computer Org -c cs2100 -mc -4 -t core";
+        Exception exception = assertThrows(InvalidModularCreditException.class,
+                () -> Parser.parseCommand(line));
+        assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
+    }
+
+    @Test
+    void parseCommand_addTooManyMC_exceptionThrown() {
+        String line = "add Computer Org -c cs2100 -mc 40 -t core";
         Exception exception = assertThrows(InvalidModularCreditException.class,
                 () -> Parser.parseCommand(line));
         assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
