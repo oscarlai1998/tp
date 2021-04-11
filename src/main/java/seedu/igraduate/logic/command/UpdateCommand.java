@@ -170,7 +170,7 @@ public class UpdateCommand extends Command {
      * completely overwrite the existing list of prerequisites for a particular
      * module.
      *
-     * @@author fupernova
+     * @author fupernova
      * @param commandFlags List containing all the flags and values.
      * @param moduleList   List of all modules.
      * @throws ModuleNotFoundException       If the module is not found.
@@ -210,7 +210,7 @@ public class UpdateCommand extends Command {
      * Extracts a list of prerequisites that are not taken from a list of all
      * prerequisites.
      *
-     * @@author fupernova
+     * @author fupernova
      * @param moduleList    List of all modules.
      * @param prerequisites List of all prerequisites.
      * @return ArrayList of prerequisites not taken.
@@ -232,7 +232,7 @@ public class UpdateCommand extends Command {
      * Checks if user is adding the target module code to its own list of
      * prerequisites.
      *
-     * @@author fupernova
+     * @author fupernova
      * @param module        The target module the user wants to update.
      * @param prerequisites List of new prerequisites user wants to add to module.
      * @return True if the module is adding to its own prerequisite, false

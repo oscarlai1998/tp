@@ -427,7 +427,7 @@ public class Parser {
     /**
      * Creates new instance of HelpCommand class to execute.
      *
-     * @@author fupernova
+     * @author fupernova
      * @param commandParameters Parameters of user input, excluding command flags.
      * @param commandFlags      Flags of commands from user input.
      * @return New instance of HelpCommand class.
