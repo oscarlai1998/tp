@@ -126,8 +126,8 @@ public class UpdateCommandIntegrationTest {
         Command updateCommand = parser.parseCommand(line);
         Exception exception = assertThrows(InvalidCommandException.class,
             () -> updateCommand.execute(moduleList, ui, storage));
-        assertEquals(String.format(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, "Unknown flags detected. The update command only accepts -[n|mc|g|p] as flags."),
-                exception.getMessage());
+        assertEquals(String.format(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, "Unknown flags" + 
+                "detected. The update command only accepts -[n|mc|g|p] as flags."), exception.getMessage());
     }*/
 
     @AfterEach
