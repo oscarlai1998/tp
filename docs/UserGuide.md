@@ -1,53 +1,48 @@
-# iGraduate User Guide
+# **iGraduate User Guide** #
 By: `W09-2` Latest update: `10 April 2021`
 
 ![logo](./images/logo.jpg)
 
-* [Introduction](#introduction)
-* [User Guide Usage](#user-guide-usage)
-* [Quick Start](#quick-start)
-* [Features](#features)
-    * [Add new module: `add`](#add-a-new-module-add)
-    * [Delete existing module: `delete`](#delete-existing-module-delete)
-    * [Update module information: `update`](#update-module-information-update)
-    * [Mark a module as complete: `done`](#mark-a-module-as-complete-done)
-    * [Show module information: `info`](#show-module-information-info)
-    * [List modules: `list`](#list-modules-list)
-    * [Show academic progression: `progress`](#show-academic-progression-progress)
-    * [Calculate CAP: `cap`](#calculate-cap-cap)
-    * [Exit the program: `exit`](#exit-the-program-exit)
-    * [Program manual: `help`](#program-manual-help)
-* [Storage of Data](#storage-of-data)
-* [Manual Modification of Data](#manual-modification-of-data)
-* [Frequently Asked Questions](#frequently-asked-questions)
-* [Command Summary](#command-summary)
 
-----
-
-## Introduction
-
-iGraduate is a command line application that acts as a centralised hub for <b>NUS students majoring in Information 
-Security</b> to plan their academic journey. With tools like the storing of modules, listing of modules that can be 
-taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation 
-progress, view modules taken based on programme requirements and make informed decisions about future modules.
-
-<br> 
-
-[🡅 Back to Top](#igraduate-user-guide)
+## **Table of Contents** ##
+1. [Introduction](#introduction)
+1. [User Guide Usage](#user-guide-usage)
+1. [Quick Start](#quick-start)
+1. [Features](#features)
+    - [Add new module: `add`](#add-a-new-module-add)
+    - [Delete existing module: `delete`](#delete-existing-module-delete)
+    - [Update module information: `update`](#update-module-information-update)
+    - [Mark a module as complete: `done`](#mark-a-module-as-complete-done)
+    - [Show module information: `info`](#show-module-information-info)
+    - [List modules: `list`](#list-modules-list)
+    - [Show academic progression: `progress`](#show-academic-progression-progress)
+    - [Calculate CAP: `cap`](#calculate-cap-cap)
+    - [Exit the program: `exit`](#exit-the-program-exit)
+    - [Program manual: `help`](#program-manual-help)
+1. [Storage of Data](#storage-of-data)
+1. [Manual Modification of Data](#manual-modification-of-data)
+1. [Frequently Asked Questions](#frequently-asked-questions)
+1. [Command Summary](#command-summary)
 
 ----
 
 <div style="page-break-after: always;"></div>
 
-## User Guide Usage
+## **Introduction** ##
 
-This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise 
-each feature, its proper formats and expected behaviours from different sample inputs. The User Guide also explains
-how modules are stored in the computer and how it can be access and modified. There is also a list of 
-frequently asked questions to answer any common queries. Finally, the user guide provides a command summary of all
-possible commands and the expected input for each command.
+iGraduate is a command line application that acts as a centralised hub for **NUS students majoring in Information Security** to plan their academic journey. With tools like the storing of modules, listing of modules that can be taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation progress, view modules taken based on programme requirements and make informed decisions about future modules.
 
-The following symbols are used in this user guide: 
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **User Guide Usage** ##
+
+This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise each feature, its proper formats and expected behaviours from different sample inputs. The User Guide also explains when modules are stored in the computer and how it can be access and modified. There is also a list of frequently asked questions to answer any common queries. Finally, the user guide provides a command summary of all possible commands and the expected input for each command.
+
+<br>The following symbols are used in this user guide: 
 
 Symbols/Formatting | Description
 -------------------|------------------------------------------
@@ -58,11 +53,11 @@ Symbols/Formatting | Description
 
 <br> 
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
-## Quick Start
+## **Quick Start** ##
 
 > ℹ️ **Note:** The recommended operating system for iGraduate is Windows 10
 
@@ -74,9 +69,11 @@ Symbols/Formatting | Description
 4. Run the program in command prompt using `java -jar iGraduate.jar` command.
 5. If successful, the programme would look like this:
 ```
+Starting without existing module data...
+Initializing new module list...
 --------------------------------------------------------------------------------------
- _  ____               _             _       
-(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___ 
+ _  ____               _             _
+(_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
 | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
 | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
 |_|\____|_|  \__,_|\__,_|\__,_|\__,_|\__\___|
@@ -88,19 +85,17 @@ What would you like to do today?
 
 <br>
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
-<div style="page-break-after: always;"></div>
-
-## Features
+## **Features** ##
 
 iGraduate works by tracking a list of modules you have taken, is taking or is intending to take. Different features can be performed on the list
 to help you track your academic journey. These features can be called by a list of commands. The following section outlines the various commands supported
 by the iGraduate, its proper usages and expected behaviours.
 
-### Add a new module: `add`
+### **Add a new module: `add`** ###
 
 Adds a new module to the list of modules. This module can be one that you have taken, is taking or intend to take. To add a module, information needed
 are the module's **name, module code, module type and number of MCs.** You can also add any prerequisites to the module.
@@ -109,14 +104,12 @@ are the module's **name, module code, module type and number of MCs.** You can a
 
 `add <name> -c <module code> -t <core|math|ue|ge> -mc <number of credits> [-p <prerequisite1,prerequisite2,...>]`
 
-> ℹ️ **Note:** If you have to add prerequisite modules, please ensure that all the prerequisite modules are already added before proceeding.
-
-> ℹ️ **Note:** The maximum MCs allowed for a single module in iGraduate is <b>32</b>.
-
-> ℹ️ **Note:** iGraduate only supports module codes that conform to NUS style module codes.
-> Examples of valid codes include `CS1010`, `MA1101R` and `UTC1102B`.
-
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same. 
+> ℹ️ **Note:** 
+> - If you have to add prerequisite modules, please ensure that all the prerequisite modules are already added before proceeding.
+> - The maximum MCs allowed for a single module in iGraduate is **32**.
+> - iGraduate only supports module codes that conform to NUS style module codes.
+>   - Examples of valid codes include `CS1010`, `MA1101R` and `UTC1102B`.
+> - Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same. 
 
 **Example of Usage(s) and Expected Outcome(s):**
 
@@ -131,8 +124,6 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
 Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
 
-<div style="page-break-after: always;"></div>
-
 `add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS2100`
 
 ```
@@ -146,9 +137,13 @@ List of pre-requisites needed to take CS2106: CS2100
 <sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
 `4` credit module with the code `CS2106`, with the prerequisite `CS2100`.*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-### Delete existing module: `delete`
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+### **Delete existing module: `delete`** ###
 
 Deletes an existing module from the list of modules via the module code. The delete function serves to 
 amend any changes to the planning of modules. 
@@ -157,9 +152,9 @@ amend any changes to the planning of modules.
 
 `delete <module code>`
 
-> ℹ️ **Note:** The module must not be a prerequisite of another module.
-
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
+> ℹ️ **Note:** 
+> - The module must not be a prerequisite of another module.
+> - Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
 **Example of Usage(s) and Expected Outcome(s):**
 
@@ -181,11 +176,13 @@ amend any changes to the planning of modules.
 ```
 <sup>***Figure 1.2.2** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
-<div style="page-break-after: always;"></div>
+<br>
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
-### Update module information: `update`
+----
+
+### **Update module information: `update`** ###
 
 Updates relevant information (module name, MCs, prerequisites and/or grade) for the selected module on the list. The information can be arranged 
 in any order and multiple information can be entered in one command. The command is used to make any changes 
@@ -195,16 +192,14 @@ to the module information in case of mistakes or unexpected changes to the modul
 
 `update <module code> [-n <name>] [-mc <credit>] [-g <grade>] [-p <prerequisite1,prerequisite2,...>]`
 
-> ℹ️ **Note:**  You cannot change the module type and code as iGraduate uses them to identify the modules. If you want to remove
+> ℹ️ **Note:**  
+> - You cannot change the module type and code as iGraduate uses them to identify the modules. If you want to remove
 the modules, use the [`delete` command](#delete-existing-module-delete) instead.
-
-> ℹ️ **Note:** Updating of grades is only permitted if the module has been completed (see
+> - Updating of grades is only permitted if the module has been completed (see
 [`done` command](#mark-a-module-as-complete-done)). If a grade is entered for an incomplete module, no grades
 will be added but the rest of the information (if any) will be updated.
-
-> ℹ️ **Note:** Although all parameters are optional, the update command requires at least 1 parameter to be used.
-
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
+> - Although all parameters are optional, the update command requires at least 1 parameter to be used.
+> - Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
 **Example of Usage(s) and Expected Outcome(s):**
 
@@ -220,11 +215,13 @@ Nice! I've updated this module:
 with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prerequisites to `CS1010` and 
 `CS2100`.*</sup>
 
-<div style="page-break-after: always;"></div>
+<br>
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
-### Mark a module as complete: `done`
+----
+
+### **Mark a module as complete: `done`** ###
 
 The done command marks a module on the list as completed. In addition, you must include the grade obtained to facilitate 
 the calculation of CAP. If you want to modify the grades, use the [`update` command](#update-module-information-update). 
@@ -235,7 +232,7 @@ the calculation of CAP. If you want to modify the grades, use the [`update` comm
 
 > ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
 
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
+> ℹ️ **Note:** Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
 **Example of Usage(s) and Expected Outcome(s):**
 
@@ -261,11 +258,13 @@ Nice! I've marked this module as done:
 <sup>***Figure 1.1.6** Expected results from marking the module with the code `GES1041` with the grade `S` as 
 done.*</sup>
 
-<div style="page-break-after: always;"></div>
+<br>
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
-### Show module information: `info`
+----
+
+### **Show module information: `info`** ###
 
 The info command shows the information of the specified module in a detailed manner. All information related to the
 specified module including its prerequisites will be shown to you.
@@ -274,7 +273,7 @@ specified module including its prerequisites will be shown to you.
 
 `info <module code>`
 
-> ℹ️ **Note:** Module codes are <b>case-insensitive</b>. This means that module codes like `CS2102` and `cs2102` are considered the same.
+> ℹ️ **Note:** Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same.
 
 **Example of Usage(s) and Expected Outcome(s):**
 
@@ -314,11 +313,13 @@ Prerequisite for                      : []
 ```
 <sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000` ge module.*</sup>
 
-<div style="page-break-after: always;"></div>
+<br>
 
-[🡅 Back to Top](#igraduate-user-guide)
+[🡅 Back to Top](#table-of-contents)
 
-### List modules: `list`
+----
+
+### **List modules: `list`** ###
 
 The list command lists modules based on the option you provided. There are four main options, `all`, `incomplete`, `complete` 
 and `available`. `all` lists all modules on your list, `complete` lists all modules that have been taken, `incomplete` lists 
@@ -439,9 +440,13 @@ Math modules in the list:
 <sup>***Figure 1.6.8** Expected results from listing `math` modules. This option will list out all `math` modules
 on the list.*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-### Show academic progression: `progress`
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+### **Show academic progression: `progress`** ###
 
 Displays a bar that represents the current progress of your academic career. The progress bar shows the percentage of 
 your total completed module credits against the total number of credits needed for graduation requirements. The bar will 
@@ -451,10 +456,10 @@ fill up as more modules are completed.
 
 `progress`
 
-> ℹ️ **Note:** The number of credits used to calculate the progress bar is `160`, the graduation requirement of an <b>NUS
-> single-degree Information Security undergraduate</b> student
-
-> ℹ️ **Note:**  If total completed MCs exceeds 160, the progress bar will still display `100%`.
+> ℹ️ **Note:** 
+> - The number of credits used to calculate the progress bar is `160`, the graduation requirement of an **NUS
+> single-degree Information Security undergraduate** student
+> - If total completed MCs exceeds 160, the progress bar will still display `100%`.
 > (See Q7 of [FAQ](#frequently-asked-questions))
 
 **Example of Usage(s) and Expected Outcome(s):**
@@ -470,9 +475,13 @@ Progress:
 ```
 <sup>***Figure 1.7.1** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-### Calculate CAP: `cap`
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+### **Calculate CAP: `cap`** ###
 
 Calculates your current Cumulative Average Point (CAP) according to the modules that have been completed with a graded 
 score (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
@@ -495,9 +504,13 @@ Current Degree Classification: Honours (Distinction)
 ```
 <sup>***Figure 1.8.1** Expected results from running the cap command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-### Exit the program: `exit`
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+### **Exit the program: `exit`** ###
 Exits the program. 
 
 **Format:**
@@ -515,9 +528,13 @@ See you soon! Happy studying!
 ```
 <sup>***Figure 1.9.1** Expected results from exiting the program*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-### Program Manual: `help`
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+### **Program Manual: `help`** ###
 The `help` command provides a quick reference guide on the description and format of the different commands in case you
 do not remember the different commands available or their purpose and format.
 
@@ -561,22 +578,30 @@ Syntax: delete <module code>
 ```
 <sup>***Figure 1.10.2** Expected results of `help` with `delete` as the optional parameter*</sup>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-## Storage of Data
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **Storage of Data** ##
 
 All data are stored automatically by iGraduate everytime a module is modified (i.e. added, deleted or 
 updated) and when exiting the program. The data will be automatically loaded in the next time of usage. No user
 intervention is required for storage of data.
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-## Manual Modification of Data
+[🡅 Back to Top](#table-of-contents)
 
-> ℹ️ **Note:** Please ensure that you modify only the value of module attributes if you are unsure of how the 
+----
+
+## **Manual Modification of Data** ##
+
+> ℹ️ **Note:** 
+> - Please ensure that you modify only the value of module attributes if you are unsure of how the 
 `json` structure works.
-
-> ℹ️ **Note:** The application might not behave as the way it is expected to if you modify the application 
+> - The application might not behave as the way it is expected to if you modify the application 
 data in an incorrect manner. For example, data corruption might occur.
 
 The IGraduate application data file is stored under the same folder where the IGraduate application resides. 
@@ -585,9 +610,13 @@ You may notice a folder named `data` is created and there is a `modules.json` fi
 module, simply change the value of each attribute in the `json` file and save it. You are advised to add or 
 remove new module data manually only if you understand the application's logic and `json` format.
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-## Frequently Asked Questions
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **Frequently Asked Questions** ##
 
 **Q1**: Can I use the application on my MacBook?
 > Yes! iGraduate is a cross-platform application that can be run on Windows, Linux or Mac.  
@@ -619,9 +648,13 @@ remove new module data manually only if you understand the application's logic a
 > if you exceed your graduation requirements.
 >
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
 
-## Command Summary
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+## **Command Summary** ##
 
 Command | Format
 --------|--------
@@ -636,4 +669,8 @@ cap    | `cap`
 exit     | `exit`
 help     | <code>help [add&#124;delete&#124;update&#124;done&#124;info&#124;list&#124;progress&#124;cap&#124;exit]</code>
 
-[🡅 Back to Top](#igraduate-user-guide)
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
