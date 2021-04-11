@@ -70,9 +70,8 @@ informed decisions about future modules.
    and [documentation](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#6-documentation) section.
 1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#341-module-package) and its 
    class diagram under the design of model component.
-1. Updated [`AddCommand`]() and added its sequence diagram under implementation.
-1. Added implementation for [`Module`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#44-module) 
-   and [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#45-modulelist).
+1. Added [`AddCommand`](), [`InfoCommand`]() and added their sequence diagrams under implementation.
+1. Added implementation for [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#45-modulelist).
 1. Restructuring, reformatting and maintenance of DG.
 
 ### Contributions to team-based tasks
