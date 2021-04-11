@@ -87,7 +87,7 @@ class ExitCommandTest {
             UnableToDeletePrereqModuleException, SaveModuleFailException, PrerequisiteNotFoundException,
             ExistingModuleException, AddSelfToPrereqException, MarkCompletedModuleException,
             ModuleNotCompleteException, ModuleNotFoundException {
-        String line = "          exit                            ";
+        String line = "          exit                               ";
         Command exitCommand = Parser.parseCommand(line);
         System.setOut(new PrintStream(output));
         exitCommand.execute(moduleList, ui, storage);
