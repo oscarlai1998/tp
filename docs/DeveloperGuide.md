@@ -5,6 +5,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 ![logo](./images/logo.jpg)
 
+<div style="page-break-after: always;"></div>
+
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [Developer Guide Usage](#developer-guide-usage)
@@ -94,6 +96,8 @@ Symbols/Formatting | Description
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ## **Setting Up, Getting Started** ##
 
 This section guides you through the process of setting up the project on your computer.
@@ -130,6 +134,8 @@ Welcome to iGraduate, your one stop study planning service!
 What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### **IntelliJ IDEA** ###
 
@@ -172,6 +178,8 @@ What would you like to do today?
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author ???-->
 
 ## **Design** ##
@@ -181,6 +189,8 @@ The following section describes an overview of the design architecture. Each sub
 ![archi](./images/ArchitectureDiagram.png)
 
 <sup>***Figure 1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### **Architecture** ###
 iGraduate has one class called `iGraduate` which contains a `main` and `run` method and `iGraduate` constructor. 
@@ -211,6 +221,8 @@ Each of the four components,
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **UI Component** ###
 
 The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` and `Print Methods`. The UI component mainly manages the retrieval of user command and display of user feedback, ranging from successful execution, execution results and exceptions. 
@@ -229,6 +241,8 @@ The UI is a public class that consists of **three components** that is made up `
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Logic Component** ###
 
@@ -288,6 +302,8 @@ The methods that check various parameters
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
 
@@ -323,6 +339,8 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author kewenlok-->
 
@@ -366,6 +384,8 @@ Each of the module classes consists of:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Module Class** ####
 
 `Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the 
@@ -389,6 +409,8 @@ status. For customized formatting of module printing messages, `toString` method
 <sup>***Table 1.8** Child classes that inherited from the `Module` class*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author fupernova-->
 
@@ -427,6 +449,8 @@ The `ModuleList` class:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Add a Module** ####
 
 The methods `add`, `addModuleRequiredBy` and `removeTakenByPrerequisites` are invoked to add a module. 
@@ -462,6 +486,8 @@ The following shows the process of marking a module named `existingModule` as do
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author xseh-->
 ### **Storage Component** ###
 The storage component consists of the class `Storage`. The storage component is closely associated with the [`ModuleList`](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of `ModuleList`. This includes adding, deleting and updating of modules, as well as marking a module as done. 
@@ -485,6 +511,8 @@ The `Storage` Component,
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Common Classes** ###
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown when an error occurs. The method catches the exceptions and prints out the respective error message. 
@@ -517,7 +545,10 @@ The Ui feature has 3 primary responsibilities:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
+<!--@@author xseh-->
 
 ### **Parser** ###
 
@@ -600,6 +631,9 @@ Initially, it was decided that the parameters would be split into an `array` to 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
 
 ### **Command** ###
@@ -645,6 +679,8 @@ The sequence diagram below shows the execution of add command in action:
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with `add Programming Methodology -c CS1010 -mc 4 -t core` as user input.*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Delete Command** ####
 
@@ -810,9 +846,9 @@ parameter from user input, and there is 1 compulsory flag:
 1. Grade obtained for module
     - `-g <String>`
 
-> ℹ️ **Note:** Only NUS recognised grades are permitted for the grade flag.
-
-> ℹ️ **Note:** iGraduate recognises and supports either 'S' grade or 'U' grade.
+> ℹ️ **Note:** 
+> - Only NUS recognised grades are permitted for the grade flag.
+> - iGraduate recognises and supports either 'S' grade or 'U' grade.
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
@@ -855,7 +891,7 @@ The figure below demonstrates the behaviour of the help command.
 
 <sup>***Figure 1.23** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
 
-***Considerations & Alternatives***
+***Considerations***
 
 A quick reference guide where users can check the list of commands and their formats can have many different implementations.
 One implementation considered was the format used for Linux `man` pages, where a single command line input displays all 
@@ -900,6 +936,8 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author kewenlok-->
 
 ### **ModuleList** ###
@@ -929,7 +967,9 @@ is only limited by the user device's available memory size.
 
 ----
 
-<!--@@author ???-->
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ### **Storage** ###
 
@@ -963,7 +1003,13 @@ The alternative storage format considered is the use of delimiters. However, the
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Exception** ###
 
@@ -1001,6 +1047,8 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author kewenlok-->
 
 ## **Logging** ##
@@ -1028,6 +1076,8 @@ where the application resides.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation** ##
 
 All the documentations related to the application are stored under the `/docs` folder. There are currently three
@@ -1046,7 +1096,9 @@ guides are:
 
 ----
 
-<!--@@author ???-->
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ## **Appendix A: Product Scope** ##
 
@@ -1066,6 +1118,14 @@ guides are:
 Allows users to **manage modules faster** than a typical mouse/GUI driven app.iGraduate Includes higher level features such as ability to **add modules** while ensuring user has **cleared all prerequisites** and to **list all modules taken**, **graduation progress** and **current CAP with degree classification**.
 
 This app will help NUS students **majoring in Information Security** check his/her graduation progress and modules taken in a **coherent manner** based on the program requirements. It also contains tools as mentioned above to help students make informed decisions about future modules to take.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: User Stories** ##
 
@@ -1097,6 +1157,10 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 [🡅 Back to Top](#table-of-contents)
 
+----
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -1109,7 +1173,9 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 [🡅 Back to Top](#table-of-contents)
 
----
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix D: Glossary** ##
 
@@ -1125,7 +1191,9 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 [🡅 Back to Top](#table-of-contents)
 
----
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix E: Instructions for Manual Testing** ##
 

@@ -12,7 +12,7 @@ iGraduate is a command line application for <b>NUS students majoring in Informat
 
 Access my contribution on [RepoSense](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=xseh&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=xseh&tabRepo=AY2021S2-CS2113T-W09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other). 
 
-<br>
+----
 
 ### **Enhancements Implemented** ###
 
@@ -29,8 +29,7 @@ Ultimately, I decided that the command should first be split into the command ty
 
 After, I decided that the flags should be used to parse other parameters, using regex to identify and isolate them from the main command. Instead of keeping them as a string to search for the flags, I split them up according to their delimiters dashes and space ('-', ' ') and getting the value in the next index. This way, it would save the trouble of having a start and end index since the command flags (except -n) only allows one value (without spaces). 
 
-<br>
-
+----
 ### **Contributions to UG** ###
 
 I documented the sections that was implemented by me, that is, the parser and storage. I also converted all the UG from a word document into GitHub markdown in the user guide file. 
@@ -42,7 +41,7 @@ Other contributions to the UG are:
     - frequently asked questions (FAQ)
     - command summary 
 
-<br>
+----
 
 ### **Contributions to the DG** ###
 
@@ -55,7 +54,7 @@ Other contributions to the DG are:
     - non-functional requirements
     - adding some of the icons used in the DG
 
-<br>
+----
 
 ### **Contributions to Team-based Tasks** ###
 
@@ -82,7 +81,7 @@ I contributed to the following team-based tasks:
     - non-functional requirements
     - adding some of the icons used in the DG
 
-<br>
+----
 
 ### **Review/Mentoring Contributions** ###
 
@@ -92,7 +91,7 @@ I contributed the following:
 1. implemented helper functions that are used throughout the application
 1. general formatting and readability of UG and DG, including navigation buttons and links
 
-<br>
+----
 
 ### **Contributions Beyond the Project Team** ###
 
@@ -101,3 +100,5 @@ I contributed the following:
 1. testing other's products including EasyLog, Finux, etc. 
 1. suggestions to bug fixes
 1. provided guidance with a description of my high-level implementation logic (based on what I have coded)
+
+----
