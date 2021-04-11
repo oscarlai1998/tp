@@ -407,11 +407,4 @@ public class ParserTest {
         String line = "update CS2100 -n Introduction to Computer Organisation -mc 4";
         assertEquals(UpdateCommand.class, parser.parseCommand(line).getClass());
     }
-
-    @Test
-    void createUpdateCommand_incorrectMC_exceptionThrown() {
-        String line = "update CS2100 -n Introduction to Computer Organisation -mc -4";
-        Exception exception = assertThrows(InvalidModuleCodeException.class, () -> parser.parseCommand(line));
-        assertEquals(InvalidModuleCodeException.INVALID_MODULE_CODE_ERROR_MESSAGE, exception.getMessage());
-    }
 }
