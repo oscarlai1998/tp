@@ -100,14 +100,14 @@ public class AddCommand extends Command {
             ui.printAddModuleMessage(module);
             LOGGER.log(Level.INFO, String.format("Successfully added %s module to module list.",
                     getModuleCode()));
-        } catch (InvalidModuleTypeException e) {
-            LOGGER.log(Level.WARNING, "Failed to add invalid module type.", e);
+        } catch (InvalidModuleTypeException exception) {
+            LOGGER.log(Level.WARNING, "Failed to add invalid module type.", exception);
             throw new InvalidModuleTypeException();
-        } catch (ExistingModuleException e) {
-            LOGGER.log(Level.WARNING, "Failed to add duplicated module to module list.", e);
+        } catch (ExistingModuleException exception) {
+            LOGGER.log(Level.WARNING, "Failed to add duplicated module to module list.", exception);
             throw new ExistingModuleException();
-        } catch (PrerequisiteNotFoundException e) {
-            LOGGER.log(Level.WARNING, "Failed to add non-existing prerequisite modules", e);
+        } catch (PrerequisiteNotFoundException exception) {
+            LOGGER.log(Level.WARNING, "Failed to add non-existing prerequisite modules", exception);
             throw new PrerequisiteNotFoundException();
         } finally {
             LOGGER.log(Level.INFO, "End of add command execution.");

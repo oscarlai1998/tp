@@ -50,6 +50,7 @@ public class DeleteCommandIntegrationTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -81,7 +82,7 @@ public class DeleteCommandIntegrationTest {
             InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
             InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Delete Pigs (Three Different Ones)";
-        Command deleteCommand = Parser.parseCommand(line);
+        Command deleteCommand = parser.parseCommand(line);
         Exception exception = assertThrows(ModuleNotFoundException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
         String exceptionMessage = ModuleNotFoundException.MODULE_NOT_FOUND_ERROR_MESSAGE;
@@ -94,7 +95,7 @@ public class DeleteCommandIntegrationTest {
             InvalidListTypeException, InvalidModularCreditException, IllegalParametersException,
             InvalidModuleGradeException, InvalidModuleCodeException {
         String line = "Delete CS1010";
-        Command deleteCommand = Parser.parseCommand(line);
+        Command deleteCommand = parser.parseCommand(line);
         Exception exception = assertThrows(UnableToDeletePrereqModuleException.class,
             () -> deleteCommand.execute(moduleList, ui, storage));
         String exceptionMessage = UnableToDeletePrereqModuleException.UNABLE_TO_DELETE_PREREQ_MODULE_ERROR_MESSAGE
@@ -110,7 +111,7 @@ public class DeleteCommandIntegrationTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "Delete cs2100";
-        Command deleteCommand = Parser.parseCommand(line);
+        Command deleteCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         deleteCommand.execute(moduleList, ui, storage);
         String successMessage = String.format(Ui.MODULE_DELETED_MESSAGE, "Core", "cs2100") + System.lineSeparator();

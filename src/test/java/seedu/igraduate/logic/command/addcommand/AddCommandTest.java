@@ -47,6 +47,7 @@ public class AddCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -96,7 +97,7 @@ public class AddCommandTest {
             InvalidListTypeException, PrerequisiteNotMetException, AddSelfToPrereqException,
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String line = "add Computer Org -c cs2100 -mc 4 -t core";
-        Command addCommand = Parser.parseCommand(line);
+        Command addCommand = parser.parseCommand(line);
         System.setOut(new PrintStream(outContent));
         addCommand.execute(moduleList, ui, storage);
         Module module = moduleList.getModuleByCode("cs2100");

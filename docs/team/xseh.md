@@ -81,7 +81,7 @@ I contributed to the following team-based tasks:
     - user stories (v1.0 and v2.0)
     - non-functional requirements
     - adding some of the icons used in the DG
-
+1. some refactoring and clean up of code
 <br>
 
 ### **Review/Mentoring Contributions** ###

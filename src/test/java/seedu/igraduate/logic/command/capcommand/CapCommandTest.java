@@ -44,6 +44,7 @@ public class CapCommandTest {
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
     private ModuleList moduleList = new ModuleList();
+    private Parser parser = new Parser();
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -57,14 +58,14 @@ public class CapCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String firstModule = "add Programming Methodology -mc 4 -t core -c cs1010";
         String secondModule = "add Computer Org -mc 4 -t core -c cs2100";
-        Command addFirst = Parser.parseCommand(firstModule);
+        Command addFirst = parser.parseCommand(firstModule);
         addFirst.execute(moduleList, ui, storage);
-        Command addSecond = Parser.parseCommand(secondModule);
+        Command addSecond = parser.parseCommand(secondModule);
         addSecond.execute(moduleList, ui, storage);
         String setFirstToDone = "done cs1010 -g A+";
         String setSecondToDone = "done cs2100 -g A-";
-        Command doneFirst = Parser.parseCommand(setFirstToDone);
-        Command doneSecond = Parser.parseCommand(setSecondToDone);
+        Command doneFirst = parser.parseCommand(setFirstToDone);
+        Command doneSecond = parser.parseCommand(setSecondToDone);
         doneFirst.execute(moduleList, ui, storage);
         doneSecond.execute(moduleList, ui, storage);
     }
@@ -94,8 +95,8 @@ public class CapCommandTest {
             MarkCompletedModuleException, IllegalParametersException, InvalidModuleCodeException {
         String firstModule = "Delete cs1010";
         String secondModule = "Delete cs2100";
-        Command deleteFirst = Parser.parseCommand(firstModule);
-        Command deleteSecond = Parser.parseCommand(secondModule);
+        Command deleteFirst = parser.parseCommand(firstModule);
+        Command deleteSecond = parser.parseCommand(secondModule);
         deleteFirst.execute(moduleList, ui, storage);
         deleteSecond.execute(moduleList, ui, storage);
     }

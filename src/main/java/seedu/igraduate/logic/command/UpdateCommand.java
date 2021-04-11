@@ -23,6 +23,8 @@ import seedu.igraduate.model.list.ModuleList;
 
 /**
  * Handles update command.
+ * 
+ * @author xseh
  */
 public class UpdateCommand extends Command {
     // Update information provided by the user
@@ -41,6 +43,7 @@ public class UpdateCommand extends Command {
     /**
      * Constructs a new UpdateCommand object.
      * 
+     * @author xseh
      * @param moduleCode   Module code of target module.
      * @param commandFlags Flags containing all the information to update.
      */
@@ -50,27 +53,34 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Updates the information of a module specified by the user.
-     * Prints the update message after successfully updated the value.
+     * Updates the information of a module specified by the user. Prints the update
+     * message after successfully updated the value.
      * 
+     * @author        xseh
      * @param modules Module list consisting of all modules.
      * @param ui      User interface for printing result.
      * @param storage Storage for storing module list data.
-     * @throws ModuleNotFoundException       If the module code is not found in module list.
-     * @throws InputNotNumberException       If module credit is not an integer (or double).
-     * @throws ModuleNotCompleteException    If the module has not been marked as completed.
+     * @throws ModuleNotFoundException       If the module code is not found in
+     *                                       module list.
+     * @throws InputNotNumberException       If module credit is not an integer (or
+     *                                       double).
+     * @throws ModuleNotCompleteException    If the module has not been marked as
+     *                                       completed.
      * @throws InvalidModuleGradeException   If the module grade is not valid.
      * @throws SaveModuleFailException       If the program fails to save changes.
-     * @throws AddSelfToPrereqException      If attempts to add the module as its own prerequisite.
+     * @throws AddSelfToPrereqException      If attempts to add the module as its
+     *                                       own prerequisite.
      * @throws InvalidModularCreditException If modular credit is not valid.
-     * @throws PrerequisiteNotMetException   If prerequisite of the module has not been completed.
-     * @throws PrerequisiteNotFoundException If any prerequisite is not found in module list.
+     * @throws PrerequisiteNotMetException   If prerequisite of the module has not
+     *                                       been completed.
+     * @throws PrerequisiteNotFoundException If any prerequisite is not found in
+     *                                       module list.
      */
     @Override
-    public void execute(ModuleList modules, Ui ui, Storage storage) throws ModuleNotFoundException,
-            InputNotNumberException, ModuleNotCompleteException, InvalidModuleGradeException,
-            SaveModuleFailException, AddSelfToPrereqException, InvalidModularCreditException,
-            PrerequisiteNotMetException, PrerequisiteNotFoundException {
+    public void execute(ModuleList modules, Ui ui, Storage storage)
+            throws ModuleNotFoundException, InputNotNumberException, ModuleNotCompleteException,
+            InvalidModuleGradeException, SaveModuleFailException, AddSelfToPrereqException,
+            InvalidModularCreditException, PrerequisiteNotMetException, PrerequisiteNotFoundException {
 
         LOGGER.log(Level.INFO, "Executing update command...");
 
@@ -87,7 +97,7 @@ public class UpdateCommand extends Command {
             updatePrerequisites(this.commandFlags, modules);
             storage.saveModulesToFile(modules);
         }
-        
+
         ui.printUpdateModuleMessage(targetModule);
 
         LOGGER.log(Level.INFO, "End of update command execution.");
@@ -96,6 +106,7 @@ public class UpdateCommand extends Command {
     /**
      * Updates the module name from commandFlags.
      * 
+     * @author xseh
      * @param commandFlags List containing all flags and values.
      */
     private void updateModuleName(ArrayList<String> commandFlags) {
@@ -110,12 +121,14 @@ public class UpdateCommand extends Command {
     /**
      * Updates the module credit from commandFlags.
      * 
+     * @author xseh
      * @param commandFlags List containing all flags and values.
-     * @throws InputNotNumberException If module credit is not an integer (or double).
+     * @throws InputNotNumberException       If module credit is not an integer (or
+     *                                       double).
      * @throws InvalidModularCreditException If module credit is not valid.
      */
-    private void updateModuleCredits(ArrayList<String> commandFlags) throws InputNotNumberException,
-            InvalidModularCreditException {
+    private void updateModuleCredits(ArrayList<String> commandFlags)
+            throws InputNotNumberException, InvalidModularCreditException {
         try {
             moduleCredit = Parser.extractModularCredit(commandFlags);
             targetModule.setCredit(moduleCredit);
@@ -128,12 +141,15 @@ public class UpdateCommand extends Command {
      * Updates module grade from commandFlags. If the module is incomplete, no
      * updates is done on the module grade.
      * 
+     * @author xseh
      * @param commandFlags List containing all flags and values.
-     * @throws ModuleNotCompleteException If the module has not been marked as completed.
-     * @throws InvalidModuleGradeException If the module grade provided is not valid.
+     * @throws ModuleNotCompleteException  If the module has not been marked as
+     *                                     completed.
+     * @throws InvalidModuleGradeException If the module grade provided is not
+     *                                     valid.
      */
-    private void updateModuleGrade(ArrayList<String> commandFlags) throws ModuleNotCompleteException,
-            InvalidModuleGradeException {
+    private void updateModuleGrade(ArrayList<String> commandFlags)
+            throws ModuleNotCompleteException, InvalidModuleGradeException {
         try {
             moduleGrade = Parser.extractModuleGrade(commandFlags);
             if (!targetModule.isDone()) {
@@ -154,12 +170,16 @@ public class UpdateCommand extends Command {
      * completely overwrite the existing list of prerequisites for a particular
      * module.
      *
+     * @author xseh
      * @param commandFlags List containing all the flags and values.
-     * @param moduleList      List of all modules.
-     * @throws ModuleNotFoundException     If the module is not found.
-     * @throws AddSelfToPrereqException    If attempts to add a module to its own prerequisite.
-     * @throws PrerequisiteNotMetException If the prerequisite of the module has not been completed.
-     * @throws PrerequisiteNotFoundException If any prerequisite is not found in module list.
+     * @param moduleList   List of all modules.
+     * @throws ModuleNotFoundException       If the module is not found.
+     * @throws AddSelfToPrereqException      If attempts to add a module to its own
+     *                                       prerequisite.
+     * @throws PrerequisiteNotMetException   If the prerequisite of the module has
+     *                                       not been completed.
+     * @throws PrerequisiteNotFoundException If any prerequisite is not found in
+     *                                       module list.
      */
     private void updatePrerequisites(ArrayList<String> commandFlags, ModuleList moduleList)
             throws ModuleNotFoundException, AddSelfToPrereqException, PrerequisiteNotMetException,
@@ -190,7 +210,8 @@ public class UpdateCommand extends Command {
      * Extracts a list of prerequisites that are not taken from a list of all
      * prerequisites.
      *
-     * @param moduleList       List of all modules.
+     * @author xseh
+     * @param moduleList    List of all modules.
      * @param prerequisites List of all prerequisites.
      * @return ArrayList of prerequisites not taken.
      * @throws ModuleNotFoundException If module is not found.
@@ -208,11 +229,14 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Checks if user is adding the target module code to its own list of prerequisites.
+     * Checks if user is adding the target module code to its own list of
+     * prerequisites.
      *
+     * @author xseh
      * @param module        The target module the user wants to update.
      * @param prerequisites List of new prerequisites user wants to add to module.
-     * @return True if the module is adding to its own prerequisite, false otherwise.
+     * @return True if the module is adding to its own prerequisite, false
+     *         otherwise.
      */
     private boolean isOwnPrerequisite(Module module, ArrayList<String> prerequisites) {
         String moduleCode = module.getCode();
