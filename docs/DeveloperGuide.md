@@ -3,6 +3,8 @@
 # **iGraduate Developer Guide** #
 Project by: `W09-2` Latest update: `11 April 2021`
 
+![logo](./images/logo.jpg)
+
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [Developer Guide Usage](#developer-guide-usage)
@@ -215,7 +217,7 @@ The UI is a public class that consists of **three components** that is made up `
 
 ***Behaviour***<br>
 - Executes user command using the [logic component](#logic-component).
-- Listens for calls from the [model momponent](#model-component), which will call the specific print method to print an output.
+- Listens for calls from the [model component](#model-component), which will call the specific print method to print an output.
 - Print method references `Constants` and prints them for user to see.
 
 ![archi](./images/UiClassDiagram.png)
@@ -542,7 +544,8 @@ There are 3 classifications of user input: **command, parameter and flags**.
 
 <sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
-***Considerations***<br>
+***Considerations*** : How to implement parsing of user input<br>
+
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the 
 large number of commands and the variance in parameter and flag types. Another difficult problem to navigate was the
 validation of the format and values of the parameters and flags. Initially, no validation checks were put in `Parser`,
@@ -553,12 +556,7 @@ Hence, the validation of parameters and flags were moved to `Parser`. In this im
 and `Command` components are unaware of each other, instead relying on `Parser` for extracting and validating inputs. 
 This helps to eliminate the dependency between `Storage` and `Command`.
 
-<!--@@author xseh-->
-
 ***Alternatives***<br>
-
-**Summary**: How to implement parsing of user input
-
 1. Custom (current choice): Designing and implementing a custom parser for iGraduate
     - Pros: 
         - Better suited for target users (fast typists)
@@ -575,6 +573,27 @@ This helps to eliminate the dependency between `Storage` and `Command`.
         - Less suitable for iGraduate behaviour
 
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
+
+***Considerations*** : Format to store module information<br>
+
+An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
+
+***Alternatives***<br>
+1. ArrayList (current choice)
+    - Pros:
+        - Equipped with useful built-in class functions
+        - Significantly simplifies logic needed to parse flags and parameters
+    - Cons: 
+        - Less Memory efficient
+1. Array
+    - Pros: 
+        - Efficient memory allocation
+        - Fixed size, which uses less memory
+    - Cons: 
+        - Inefficient in extracting input flags
+        - Limited functionalities
+
+Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 <br> 
 
@@ -664,29 +683,58 @@ list. The various information requested to update would be identified with their
 
 <sup>***Figure 1.17** Sequence diagram of `UpdateCommand` in execution with `update CS1010 -mc 2` as user input*</sup>
 
-***Considerations***
+***Considerations*** : Command behaviour<br>
 
-An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
+The main considerations regarding the behaviour of the update command would be if multiple flags should be permitted in a single update command. 
 
-***Alternatives***
+***Alternatives***<br>
 
-**Summary**: Format to store module information
-
-1. ArrayList (current choice)
-    - Pros:
-        - Equipped with useful built-in class functions
-        - Significantly simplifies logic needed to parse flags and parameters
-    - Cons: 
-        - Less Memory efficient
-1. Array
+1. Restrict to single update flag
     - Pros: 
-        - Efficient memory allocation
-        - Fixed size, which uses less memory
+        - Simple to implement
+        - Easier error and exception handling
     - Cons: 
-        - Inefficient in extracting input flags
-        - Limited functionalities
+        - Inconvenient and unsuitable for target audience
+1. Allow multiple flags (current choice)
+    - Pros: 
+        - Suitable for target audience who ar fast typers
+        - Update less time consuming and troublesome
+    - Cons: 
+        - Complicated process when extracting flags
+        - More considerations needed for error and exception handling
 
-Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+Having a single input would significantly simplify the code, as a simple switch statement will suffice. There is also easier error and exception handling as only two parameters are given. In the event of exception, simply retrace the command and throw exception. However, having only one flag at a time is inconvenient for fast typers, and is less optimized for their quick typing. 
+
+Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typers to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate less time consuming and troublesome. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
+
+***Considerations*** : Command error and exception handling management<br>
+
+On the event of a failed flag, considerations have to made to determine how the update command would manage the rest of the flags. 
+
+***Alternatives***<br>
+
+1. Abort entire command
+    - Pros:
+        - Simple to implement
+    - Cons:
+        - Major inconvenience to users
+1. Ignore failed flag
+    - Pros:
+        - More usable and convenient for users
+    - Cons:
+        - Extremely complex in error and exception handling
+1. Ignore failed grade flag (current choice)
+    - Pros:
+        - Compromise between convenience and code difficulty
+        - If grade flag generates an error, the other flags would still be updated
+    - Cons:
+        - Failure in other flags still results in aborting the entire command
+
+The first way is to completely abort the entire command, which lowers the usability aspect of the application, creating inconvenience when a small error is encountered. However, this makes coding straightforward and simple. 
+
+Another alternative is to simply ignore the failed flag and attempt to change the rest. This would make the update command more usable and convenient. However, the primary issue is the difficulty in designing and programming such behaviour, individual try and catch statements needs to be used. Each statements must be able to differentiate between having an invalid flag input or having a flag that does not exists (i.e. the user did not use the flag).  This behaviour makes the application significantly more complex to code and catch. 
+
+Finally, decisions were made to compromise between the two alternatives. After some discussions, it was determined that grade (the -g flag) is the most likely to fail since it depends on not just the user input but if the module has has been completed. Therefore, a dedicated try statement is used to ensure that, even in the event of errors associated with providing a grade to an incomplete module, the rest of the command would still be updated (the rest of the extracts and checking is in the finally clause). Unfortunately, if the other flags fail, the program will abort entirely. This alternative balances the complexity between error and exception handling and usability, allowing some flexibility in managing error while providing some convenience.
 
 ----
 
@@ -924,7 +972,7 @@ In iGraduate, there are several exceptions that are thrown due to different cond
 
 Exception   | Description              
 --------|-------------------|
-AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to includethe module itself.
+AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to include the module itself.
 DataFileNotFoundException | The exception is thrown if module data file is not found.
 ExistingModuleException | The exception is thrown if the module code input already exists.             | 
 IllegalParametersException | The exception is thrown if the parameter includes any parameters not allowed in the command.
@@ -1092,7 +1140,7 @@ testers are expected to do more *exploratory* testing.
 
     - Download the jar file and copy into an empty folder
 
-    - Run the jar file on your command prompt with the by typing "java -jar iGradute.java" then enter. 
+    - Run the jar file on your command prompt with the by typing "java -jar iGraduate.java" then enter. 
     
 1. Shutdown
     
