@@ -553,6 +553,7 @@ handling of the libraries, but within the context of the running application.
 [🡅 Back to Top](#table-of-contents)
 
 ----
+<!--@@author fupernova-->
 
 ### **Command** ###
 
@@ -595,8 +596,6 @@ The sequence diagram below shows the execution of add command in action:
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with `add Programming Methodology -c CS1010 -mc 4 -t core` as user input.*</sup>
 
 ----
-
-<!--@@author fupernova-->
 
 #### **Delete Command** ####
 
