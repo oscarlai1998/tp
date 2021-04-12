@@ -28,17 +28,16 @@ majoring in Information Security to plan their academic journey.
       modules accordingly to show an accurate results on the module status and whether it can be taken next.
       
 1. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
-    * I programmed the `available` and list by `module type` options' logic. For the `available` option, I check through the 
-      untaken prerequisites of all modules and display only the modules where all their prerequisites are satisfied. As for 
-      the `module type` option, I filter out modules which matches the specified module type and display them to the user.
+    * I programmed the `available` and list by `module type` options' logic. For the `available` option, I checked through 
+      all the modules and display only the modules where all their prerequisites are satisfied. As for the `module type` 
+      option, I filter out modules which matches the specified module type and display them to the user.
       
 1. Designed and implemented underlying logic for prerequisites processing.
-    * I added an `ArrayList` for the respective prerequisite information to track to each module for efficient processing. Each 
-      module can have multiple prerequisites as long the prerequisite module exists in the current list, not the module itself 
-      and not each other's prerequisite (which is not possible in reality). Once a module is marked as taken, it will be removed 
-      from the untaken prerequisites list of the modules in its required by list. Only modules with empty untaken prerequisites 
-      list are shown as available. Lastly, for module deletion, the module requiring it as a prerequisite must be deleted first 
-      before it can be deleted.
+    * I added three `ArrayList` for the respective prerequisite information to track to each module for efficient processing. Each 
+      module can have any prerequisites as long the prerequisite exists in the current list, not the module itself and not each 
+      other's prerequisite. Once a module is marked as taken, it will be removed from the untaken prerequisites list of the modules 
+      in its required by list. Only modules with empty untaken prerequisites list are shown as available. Lastly, for module 
+      deletion, the module requiring it as a prerequisite must be deleted first before it can be deleted.
       
 1. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
@@ -109,4 +108,4 @@ I reviewed and refactored the project code:
 1. Advised other teams on implementation of certain features such as data storage.
 1. Performed bug hunting on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
 1. Recommended possible fixes for bug found on other products.
-1. Reviewed UG and DG for other teams and provided constructive suggestions for improvement.
+1. Reviewed UG and DG for other teams and provided suggestions for improvement.
