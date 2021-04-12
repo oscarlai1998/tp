@@ -188,7 +188,7 @@ The following section describes an overview of the design architecture. Each sub
 ### **Architecture Diagram** ###
 ![archi](./images/ArchitectureDiagram.png)
 
-<sup>***Figure 1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
+<sup>***Figure 1.1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
 
 <div style="page-break-after: always;"></div>
 
@@ -214,7 +214,20 @@ The rest of the App consists of four components:
 Each of the four components,
 - Defines its API in an interface with the **same name** as the Component.
 - Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
-  
+
+Given below is the sequence diagram of the startup sequence of iGraduate until just before awaiting for user input.
+
+![archi](./images/StartupSequenceDiagram.png)
+
+<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before awaiting for first user input.*</sup>
+
+The startup sequence sets up all objects required for running commands, such as the `Ui` and fetching of stored data from `Storage`.
+Given below is the sequence diagram of how the architecture handles the flow of execution of commands and how the program exits.
+
+![archi](./images/ExecutionSequenceDiagram.png)
+
+<sup>***Figure 1.1.3** Sequence diagram of iGraduate from receiving the first user input until exit.*</sup>
+
 <br>
 
 [🡅 Back to Top](#table-of-contents)
@@ -222,6 +235,7 @@ Each of the four components,
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
 
 ### **UI Component** ###
 
@@ -324,7 +338,7 @@ The correct command is executed once the `Command` object is created by the pars
 The command execution can affect the `Model` (eg. adding a module).
 At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
-Below are the Command class diagrams, split into 2 diagrams for better readability.
+Below are the Command class diagrams, split into 3 diagrams for better readability.
 
 ![archi](images/CommandClassDiagram1.png)
 
@@ -333,6 +347,10 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 ![archi](./images/CommandClassDiagram2.png)
 
 <sup>***Figure 1.6.2** UML class diagram for Command class part 2*</sup>
+
+![archi](./images/CommandClassDiagram3.png)
+
+<sup>***Figure 1.6.3** UML class diagram for Command class part 3*</sup>
 
 <br>
 
@@ -1026,6 +1044,8 @@ Considerations were also given to use more unique delimiters (such as `\`, `|`, 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
+
 
 ### **Exception** ###
 

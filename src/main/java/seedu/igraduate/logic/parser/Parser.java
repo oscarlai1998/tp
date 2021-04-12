@@ -319,6 +319,7 @@ public class Parser {
         return new ListCommand(scope);
     }
 
+    //@@author fupernova
     /**
      * Creates new instance of ProgressCommand class to execute. Format: "Progress"
      *
@@ -375,6 +376,7 @@ public class Parser {
         return new DoneCommand(moduleCode, moduleGrade);
     }
 
+    //@@author xseh
     /**
      * Extracts relevant parameters and creates an instance of UpdateCommand to
      * execute. Format: "update [module code] [-g|-mc|-n|-p] [value]"
@@ -414,6 +416,7 @@ public class Parser {
         return new UpdateCommand(moduleCode, commandFlags);
     }
 
+    //@@author fupernova
     /**
      * Extracts relevant parameters and creates an instance of CapCommand to
      * execute. Format: "Cap"
@@ -437,7 +440,6 @@ public class Parser {
         return new CapCommand();
     }
 
-    //@@author fupernova
     /**
      * Creates new instance of HelpCommand class to execute.
      *
