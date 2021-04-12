@@ -69,7 +69,7 @@ for tracking. When listing the modules, the module type will be shown accordingl
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -92,7 +92,7 @@ Symbols/Formatting | Description
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -174,7 +174,7 @@ What would you like to do today?
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -230,7 +230,7 @@ Given below is the sequence diagram of how the architecture handles the flow of 
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -252,7 +252,7 @@ The UI is a public class that consists of **three components** that is made up `
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -354,7 +354,7 @@ Below are the Command class diagrams, split into 3 diagrams for better readabili
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -500,7 +500,7 @@ The following shows the process of marking a module named `existingModule` as do
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -526,7 +526,7 @@ The `Storage` Component,
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -543,7 +543,7 @@ This section elaborates on some details about how certain features are implement
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -559,7 +559,7 @@ The Ui feature has 3 primary responsibilities:
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -646,7 +646,7 @@ Initially, it was decided that the parameters would be split into an `array` to 
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -937,7 +937,7 @@ more about.
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -966,7 +966,7 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -997,7 +997,7 @@ is only limited by the user device's available memory size.
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1039,7 +1039,7 @@ Considerations were also given to use more unique delimiters (such as `\`, `|`, 
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1079,7 +1079,7 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1108,7 +1108,7 @@ where the application resides.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1128,7 +1128,7 @@ guides are:
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1157,7 +1157,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1191,7 +1191,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1207,7 +1207,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1225,7 +1225,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1630,6 +1630,6 @@ Dealing with missing/corrupted data files.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
