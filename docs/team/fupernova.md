@@ -116,12 +116,9 @@ ___
 I helped the team with repository maintenance, mostly about git (Pull Requests, Branches, Merge Conflicts etc).
 
 Here is a list of some non-trivial pull requests I helped to review and merge:
-- [#44](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/44)
-- [#58](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/58)
-- [#77](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/77)
-- [#82](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/82)
-- [#92](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/92)
-- [#98](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/98)
-- [#132](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/132)
-- [#167](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/167)
-- [#223](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/223)
+
+[#44](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/44), [#58](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/58), 
+[#77](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/77), [#82](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/82),
+[#92](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/92), [#98](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/98),
+[#132](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/132), [#167](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/167),
+[#223](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/223)
