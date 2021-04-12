@@ -29,7 +29,7 @@ The Progress Command is important to iGraduate because in essence, our app's mai
 progress towards graduation. Hence, the progress command was important so that we can display visually the graduation
 progress through a progress bar and ratio of MCs completed out of 160.
 
-#### Implemented `ListCommand` class of iGraduate with [Ke Wen]((https://github.com/kewenlok/))
+#### Implemented `ListCommand` class of iGraduate with [Ke Wen](https://github.com/kewenlok/)
 The ListCommand class is responsible for executing the `list` command, and allows an additional input parameter for
 users to choose which list they want to view. `all`, `complete`, `incomplete` , `available` . The list shows module
 details including the module `type`, `code`, `completetion status`, `name`, `grade` and
