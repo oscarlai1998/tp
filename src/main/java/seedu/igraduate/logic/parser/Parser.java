@@ -213,12 +213,18 @@ public class Parser {
             throws InvalidCommandException, IncorrectParameterCountException, InputNotNumberException,
             InvalidModuleTypeException, InvalidModularCreditException, InvalidModuleCodeException {
         boolean isInvalidPara = (commandParameters.size() != COMMAND_ADD_PARAMETER_LENGTH);
-        boolean isInvalidFlag = (commandFlags.size() != COMMAND_ADD_FLAG_LENGTH);
+        boolean isInvalidFlag = ((commandFlags.size() != COMMAND_ADD_FLAG_LENGTH));
         boolean isInvalidPrereqFlag = (commandFlags.size() != COMMAND_ADD_WITH_PREREQ_FLAG_LENGTH);
+        boolean isIllegalFlag = isFlagIllegal(commandFlags);
+        boolean isDisallowedFlag = (commandFlags.contains("-n") || commandFlags.contains("-g"));
 
         if (isInvalidPara || (isInvalidFlag && isInvalidPrereqFlag)) {
             LOGGER.warning("Invalid number of parameters");
             throw new IncorrectParameterCountException();
+        } else if (isIllegalFlag || isDisallowedFlag) {
+            LOGGER.warning("Unknown flags detected.");
+            throw new InvalidCommandException(
+                    "Unknown flags detected. The update command only accepts -[c|mc|t|p] as flags.");
         }
 
         assert commandParameters.size() == 2 : "Input for add should have 2 parameters (excluding flags)";
