@@ -10,8 +10,11 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("progress")
 activate Parser #FFBBBB
 
+Parser -> Parser: createProgressCommand(commandParameters, commandFlags)
+activate Parser #DarkSalmon
+
 create ProgressCommand
-Parser -> ProgressCommand: new
+Parser -> ProgressCommand: ProgressCommand()
 activate ProgressCommand
 ProgressCommand --> Parser: new ProgressCommand()
 deactivate ProgressCommand

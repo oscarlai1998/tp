@@ -69,7 +69,7 @@ for tracking. When listing the modules, the module type will be shown accordingl
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -92,7 +92,7 @@ Symbols/Formatting | Description
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -174,7 +174,7 @@ What would you like to do today?
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -230,11 +230,12 @@ Given below is the sequence diagram of how the architecture handles the flow of 
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
 
 ### **UI Component** ###
 
@@ -251,7 +252,7 @@ The UI is a public class that consists of **three components** that is made up `
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -316,6 +317,7 @@ The methods that check various parameters
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author LJ-37-->
 
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
@@ -353,7 +355,7 @@ Below are the Command class diagrams, split into 3 diagrams for better readabili
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -499,7 +501,7 @@ The following shows the process of marking a module named `existingModule` as do
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -525,7 +527,7 @@ The `Storage` Component,
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -542,7 +544,7 @@ This section elaborates on some details about how certain features are implement
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -558,7 +560,7 @@ The Ui feature has 3 primary responsibilities:
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -645,7 +647,7 @@ Initially, it was decided that the parameters would be split into an `array` to 
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -676,7 +678,9 @@ elaborated below.
 
 The add command allows a user to add a new module to the list of existing modules. The module name is part of the 
 parameters and is extracted directly from user input while the various information required to add a new module are 
-included in the flags of the user input. There are 3 compulsory flags and 1 optional flag for adding a module:
+included in the flags of the user input. 
+
+There are 3 compulsory flags and 1 optional flag for adding a module:
 
 1. module code
     - `-c <String>`
@@ -701,8 +705,8 @@ The sequence diagram below shows the execution of add command in action:
 
 #### **Delete Command** ####
 
-The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
-involved for deleting a module.
+The delete command allows for deletion of module from the module list, identified by the module code, which is extracted
+from user input as a parameter. There are no flags involved for deleting a module.
 
 > ℹ️ **Note:** Users cannot delete modules which are prerequisites for other modules.
 
@@ -722,8 +726,8 @@ The update commands allows modifications to the existing modules, identified by 
 The information that can be updated include module name, credits, prerequisites and grades (if the module is 
 marked as done). 
 
-The update function is executed if the user decides to edit some information regarding a module in the module
-list. The various information requested to update would be identified with their flags:
+The module code is extracted from user input as a parameter while the various information requested to update would be 
+identified with their flags:
 - name -> `-n <String>`
 - module credits -> `-mc <int>`
 - prerequisites -> `-p [<String>, ...]`
@@ -800,9 +804,13 @@ Finally, decisions were made to compromise between the two alternatives. After s
 #### **Info Command** ####
 
 The info command provides a feature for the user to view any module they added to the list regardless of
-the module type and status by specifying its module code. The command will only be executed if valid module
-code is provided by the user. All information of the specified module will be shown to the user to aid the
-planning of module. An example of info command execution flow is shown in the sequence diagram below.
+the module type and status by specifying its module code. The module code is extracted from user input as a parameter. 
+The command will only be executed if valid module code is provided by the user. All information of the specified module 
+will be shown to the user to aid the planning of module. 
+
+There are no flags required for this command.
+
+An example of info command execution flow is shown in the sequence diagram below.
 
 ![archi](./images/InfoCommandSequenceDiagram.png)
 
@@ -826,7 +834,7 @@ the user wish to know.
 #### **List Command** ####
 
 The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
-form of a parameter.
+form of a parameter that is extracted from user input.
 
 The table below shows the scope of each options.  
 
@@ -890,7 +898,7 @@ parameter from user input, and there is 1 compulsory flag:
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
-![archi](./images/ProgressSequenceDiagram.png)
+![archi](./images/ProgressCommandSequenceDiagram.png)
 
 <sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
@@ -900,9 +908,10 @@ additional flags are required for this command.
 
 #### **Help Command** ####
 
-The help command provides users with a quick reference guide to the list of available commands, their functions and the proper format for inputs. Users also have an optional parameter to find the reference guide for a specific command.
+The help command provides users with a quick reference guide to the list of available commands, their functions and the 
+proper format for inputs. Users also have an optional parameter to find the reference guide for a specific command.
 
-The optional parameters are the list of commands from above:
+The optional parameters are:
 - `add`
 - `delete`
 - `update`
@@ -936,7 +945,7 @@ more about.
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -965,7 +974,7 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -996,7 +1005,7 @@ is only limited by the user device's available memory size.
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1038,11 +1047,13 @@ Considerations were also given to use more unique delimiters (such as `\`, `|`, 
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
+
 
 ### **Exception** ###
 
@@ -1076,7 +1087,7 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1105,7 +1116,7 @@ where the application resides.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1125,7 +1136,7 @@ guides are:
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1135,6 +1146,7 @@ guides are:
 
 ## **Appendix A: Product Scope** ##
 
+<!--@@author LJ-37-->
 ### **Target User Profile** ###
 
 * is a NUS Information Security student
@@ -1146,6 +1158,7 @@ guides are:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+<!--@@author LJ-37-->
 ### **Value Proposition** ###
 
 Allows users to **manage modules faster** than a typical mouse/GUI driven app.iGraduate Includes higher level features such as ability to **add modules** while ensuring user has **cleared all prerequisites** and to **list all modules taken**, **graduation progress** and **current CAP with degree classification**.
@@ -1154,7 +1167,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1188,12 +1201,12 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
-
+<!--@@author LJ-37-->
 ## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -1204,7 +1217,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -1222,11 +1235,12 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author LJ-37-->
 
 ## **Appendix E: Instructions for Manual Testing** ##
 
@@ -1627,6 +1641,6 @@ Dealing with missing/corrupted data files.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----

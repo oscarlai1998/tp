@@ -35,7 +35,7 @@ iGraduate is a command line application that acts as a centralised hub for **NUS
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -54,7 +54,7 @@ Symbols/Formatting | Description
 
 <br> 
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -88,7 +88,7 @@ What would you like to do today?
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -144,7 +144,7 @@ List of pre-requisites needed to take CS2106: CS2100
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -185,7 +185,7 @@ amend any changes to the planning of modules.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -226,7 +226,7 @@ with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prereq
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -271,7 +271,7 @@ done.*</sup>
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -330,7 +330,7 @@ Prerequisite for                      : []
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -463,13 +463,13 @@ on the list.*</sup>
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author ??-->
 
 ### **Show academic progression: `progress`** ###
 
@@ -502,7 +502,7 @@ Progress:
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -531,7 +531,7 @@ Current Degree Classification: Honours (Distinction)
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -557,7 +557,7 @@ See you soon! Happy studying!
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -609,7 +609,7 @@ Syntax: delete <module code>
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -624,7 +624,7 @@ intervention is required for storage of data.
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -684,7 +684,7 @@ module requirements logic in reality and might affect the application from givin
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -733,7 +733,7 @@ module requirements logic in reality and might affect the application from givin
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
 
@@ -758,6 +758,6 @@ help     | <code>help [add&#124;delete&#124;update&#124;done&#124;info&#124;list
 
 <br>
 
-[🡅 Back to Top](#table-of-contents)
+[Back to Top](#table-of-contents)
 
 ----
