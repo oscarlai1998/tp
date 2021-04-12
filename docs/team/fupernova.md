@@ -21,27 +21,27 @@ information to the screen.
 
 *Considerations*
 
-Ui was challenging to implement as many methods depended on the implementations of other classes. I laid out skeleton 
-methods of the possible printing methods required in the `Ui` class so that my teammates would be able to access or edit
+Ui was challenging to implement as many methods in Ui depended on the implementations of other classes. I laid out skeleton 
+methods of all the possible printing methods required for other features in `Ui` so that my teammates would be able to access or edit
 the methods they required easily.
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
 
-The Parser class takes in user input, determines the type of command and extracts the information required to 
-execute the command before handing control back to the main program for the execution of the command.
+The Parser class takes in user input, determines the type of command, extracts the information required to 
+execute the command and creates a `Command` object before handing control back to the main program for the execution of the command.
 
 *Considerations*
 
-Coding the parser was challenging as all commands available in our program have a unique input format. We used a 
-two-tiered parsing system. Firstly, the user command is parsed. Secondly, parameters would be extracted based on command
-name.
+Coding the parser was challenging as all commands available in our program have a unique input format. We agreed on a 
+two-tiered parsing system. Firstly, the user command and parameter is parsed. Secondly, flags would be extracted based on command
+name. I worked on the first parse while Xin Ru worked on the second.
 
 #### Implemented `HelpCommand` class of iGraduate
-The  `help` command provides users with a quick reference guide regarding the proper usage of iGraduate.
+The `help` command provides users with a quick reference guide regarding the proper usage of iGraduate.
 
 *Considerations*
 
-We decided to have separate help pages for each command. This methodology helps make the quick guide less cluttered and 
+Due to the large number of commands and features available in iGraduate, we decided to have separate help pages for each command. This methodology helps make the quick guide less cluttered and 
 more targeted towards specific commands that users intend to look up.
 
 #### Implemented test code for multiple methods
@@ -51,7 +51,7 @@ as well as help us identify bugs that we missed out on. We focused on testing fo
 
 *Considerations*
 
-Unit and Integration testing for `Parser` and `Command` classes was priority as they deal with user input.  Unit tests 
+Unit and Integration testing for `Parser` and `Command` classes was priority as they deal with user input and were most prone to logic bugs. Unit tests 
 were implemented with possible inputs that would break the program. Integration tests were introduced to ensure that the
 core functionality was working.
 
