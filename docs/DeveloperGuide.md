@@ -116,7 +116,7 @@ directly from our [latest release](https://github.com/AY2021S2-CS2113T-W09-2/tp/
 ### **Terminal** ###
 
 1. Open a new terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
-   Windows platform or run `./gradlew run` on MacOS/Linux platform.
+   Windows platform or run `./gradlew run` on macOS/Linux platform.
    <br>
 1. You will see the following output in the console when the setup is successful:
 
@@ -214,13 +214,13 @@ The rest of the App consists of four components:
 
 Each of the four components,
 - Defines its API in an interface with the **same name** as the Component.
-- Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
+- Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.)
 
-Given below is the sequence diagram of the startup sequence of iGraduate until just before awaiting for user input.
+Given below is the sequence diagram of the startup sequence of iGraduate before any user input.
 
 ![archi](./images/StartupSequenceDiagram.png)
 
-<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before awaiting for first user input.*</sup>
+<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before first user input.*</sup>
 
 The startup sequence sets up all objects required for running commands, such as the `Ui` and fetching of stored data from `Storage`.
 Given below is the sequence diagram of how the architecture handles the flow of execution of commands and how the program exits.
@@ -464,7 +464,7 @@ The `ModuleList` class:
     1. [Add](#add-a-module) a module to the list
     1. [Delete](#delete-a-module) a module from the list
     1. [Mark](#mark-module-as-taken) a module as done
-- Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such as the entire list or an individual module from the list according to different parameters such as module code or index. 
+- Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve  individual modules from the list according to different parameters such as module code or index. 
 
 ----
 
@@ -590,7 +590,7 @@ There are 3 classifications of user input: **command, parameter and flags**.
 
 |User input|Description|Usage/Example|
 |----------|-----------|---------|
-|`command`|the type of command the user intends to run and is first word from the user input|dictates how `Parser` extracts the parameter and flags. Refer to [Command](command) for the list of available commands|
+|`command`|the type of command the user intends to run and is first word from the user input|dictates how `Parser` extracts the parameter and flags. Refer to [Command](#command) for the list of available commands|
 |`parameter`|the argument that comes after the command word and can vary depending on the command|specifies the identifier (module name or code or list type) for the modules. For example, the parameter for `add`command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specify the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands|specify the additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and prerequisites.|
 
@@ -645,7 +645,7 @@ An `arrayList` is used to store the parsed data from the user input instead of a
         - Inefficient in extracting input flags
         - Limited functionalities
 
-Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size because  arrays are more memory efficient. The parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 <br> 
 
@@ -931,7 +931,7 @@ The figure below demonstrates the behaviour of the help command.
 
 A quick reference guide where users can see the summary of commands and the different formats for each command.
 One implementation considered was the format used for Linux `man` pages, where a single command line input displays all 
-information about the command such as the functionality of the command and the types of parameters accepted. This was
+information about the functionality of the command and the types of parameters accepted. This was
 the most straightforward implementation due to the ease of parsing possible user inputs and there being only one kind of
 message to be displayed. This proved to be unfeasible from a User Experience point of view as there was too much information
 displayed at one go due to the number of commands the application has and their unique formats. Instead, the team opted to
@@ -1037,7 +1037,7 @@ In addition, the JSON format can be read across multiple different types of appl
 
 ***Alternatives***
 
-The alternative storage format considered is the use of delimiters. However, there are concerns regarding such usage; the most important being potential parsing failure from a valid module. With the use of common delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various module information and legitimate module names containing delimiters and may parse the portion of the module to a wrong variable, resulting in a corrupted results and a potential program crash. One example of such occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains dashes when the delimiters are used for separating various module information is also a dash. 
+The alternative storage format considered is the use of delimiters. However, there are concerns regarding such usage; the most important being potential parsing failure from a valid module. With the use of common delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various module information and legitimate module names containing delimiters and may parse the portion of the module to a wrong variable, resulting in a corrupted program. One example of such occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains dashes when the delimiters are used for separating various module information is also a dash. 
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing failures, but the problem still remained. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
@@ -1222,7 +1222,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 |Term|Definition|Usage/Example|
 |----------|-----------|---------|
-|`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](command) for the list of available commands|
+|`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](#command) for the list of available commands|
 |`parameter`|specifies the identifier (module name or code or list type) for the modules. |For example, the parameter for `add` command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specifies the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands; specifies the additional information required for the command to run.| For `add`, flags would be for module code, module type, MCs and prerequisites.|
 |`delimiters`| a sequence of one or more characters that specifies the boundary between different streams|
@@ -1351,7 +1351,7 @@ Deleting modules from a given module list.
     --------------------------------------------------------------------------------------
     ```
 1. `delete -g A CS1010` <br>
-    **Expected**: Error in deleting module as extra parameter, eg. -g A, is found.
+    **Expected**: Error in deleting module as extra parameter, e.g. -g A, is found.
 
     ```
     --------------------------------------------------------------------------------------
@@ -1400,7 +1400,7 @@ Masking modules as done with grade obtained after the semester.
     --------------------------------------------------------------------------------------
     ```
 1. `done CS1010`<br>
-    **Expected**: Error in marking module as done as incorrect number of parameters are given, eg. missing grade.
+    **Expected**: Error in marking module as done as incorrect number of parameters are given, e.g. missing grade.
     ```
     --------------------------------------------------------------------------------------
     The number of parameters provided is incorrect.
