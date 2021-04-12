@@ -2,7 +2,7 @@
 
 ### **Overview** ###
 
-iGraduate is a command-line application for <b>NUS students majoring in Information Security</b> to plan their academic journey. iGraduate comes equipped with tools such as module storage, a CAP calculator and academic progression indicators. This allows you to check your graduation progress, check program requirements and make more informed decisions about future modules to take. 
+iGraduate is a command-line application for <b>NUS students majoring in Information Security</b> to plan their academic journey. iGraduate comes equipped with tools such as module storage, a CAP calculator and academic progression indicators. This allows student to check their graduation progress, check program requirements and make more informed decisions about future modules to take. 
 
 ### **Summary of Contributions** ###
 
@@ -19,7 +19,7 @@ The most difficult portion of implementing the storage function was the use of e
 
 #### ***Parser*** with [Fuxi](https://github.com/fupernova) ####
 
-I implemented the Parser function. While he worked on the higher layers of the parser, I coded the foundational code for the parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. flags) used in the commands. The challenging portion would be designing the behaviour of the Parser. For instance, deciding on how to identify and split the input. The command was first split into the command type (with its parameters) and the flags. The initial arrays used (which were memory efficient) were changed to ArrayList, making use of its class functions (like indexOf() and size()). Another challenge was the use of regex to identify and isolate flags from the main command parameters. 
+I implemented the Parser function. While Fuxi worked on the higher layers of the parser, I coded the foundational code for the parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. parameters and flags) used in the commands. The challenging portion would be designing the behaviour of the `Parser`. For instance, deciding on how to identify and split the input. The command was first split into the command type (with its parameters) and the flags. The initial arrays used (which were memory efficient) were changed to ArrayList, making use of its class functions (like indexOf() and size()). Another challenge was the use of regex to identify and isolate flags from the main command parameters. 
 
 ### **Contributions to UG** ###
 
@@ -39,7 +39,7 @@ I implemented the Parser function. While he worked on the higher layers of the p
 1. [Value proposition](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#value-proposition)
 1. [Parser](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#parser)
 1. [Storage](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#storage-component)
-1. [Update](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command)
+1. [Update](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#update-command)
 1. [User stories (v1.0 and v2.0)](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#appendix-b-user-stories)
 1. [Non-functional requirements](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#appendix-c-non-functional-requirements)
 1. Adding some of the icons used in the DG (like the arrow, bulk and paper icons)
@@ -66,4 +66,4 @@ Access all my PRs on [GitHub](https://github.com/AY2021S2-CS2113T-W09-2/tp/pulls
 
 1. Testing other's products including EasyLog, Finux, etc. 
 1. Suggestions for bug fixes
-1. Guided with a description of my high-level implementation logic (based on what I have coded)
+1. Guided others with a description of my high-level implementation logic (based on what I have coded)
