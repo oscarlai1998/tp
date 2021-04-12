@@ -695,6 +695,8 @@ involved for deleting a module.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author xseh-->
 
 #### **Update Command** ####
@@ -774,6 +776,8 @@ Finally, decisions were made to compromise between the two alternatives. After s
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author kewenlok-->
 
 #### **Info Command** ####
@@ -797,6 +801,8 @@ screen. Instead, the team decided to create a new `info command` for listing all
 the user wish to know.
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author ???-->
 
@@ -826,6 +832,8 @@ The table below shows the scope of each options.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
 
 #### **CAP Command** ####
@@ -838,6 +846,8 @@ command also displays the degree classification of the user. There are no flags 
 <sup>***Figure 1.20** Sequence diagram of `CapCommand` class.*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Done Command** ####
 
@@ -856,6 +866,8 @@ parameter from user input, and there is 1 compulsory flag:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Progress Command** ####
 
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
@@ -866,6 +878,8 @@ additional flags are required for this command.
 <sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Help Command** ####
 
@@ -908,6 +922,8 @@ more about.
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Module** ###
 
@@ -1268,6 +1284,8 @@ Adding a module into the module list.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Deleting a Module** ###
 
 Deleting modules from a given module list.
@@ -1316,6 +1334,8 @@ Deleting modules from a given module list.
     ```
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Marking Modules as Done** ###
 
@@ -1370,6 +1390,8 @@ Masking modules as done with grade obtained after the semester.
     ```
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Updating the Module List** ###
 
@@ -1441,6 +1463,8 @@ Update the modules in module list with changes in module credits or module grade
        
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **CAP** ###
 
 Display current CAP and degree classification of user.
@@ -1467,6 +1491,8 @@ Display current CAP and degree classification of user.
     ````
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Progress** ###
 
@@ -1497,6 +1523,8 @@ Display user's progress towards graduation.
     ```
 
 ---- 
+
+<div style="page-break-after: always;"></div>
 
 ### **List Modules** ###
 
@@ -1540,6 +1568,8 @@ List modules in the modules list.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Saving Data** ###
 
 Dealing with missing/corrupted data files.
@@ -1577,6 +1607,7 @@ Dealing with missing/corrupted data files.
     What would you like to do today?
     --------------------------------------------------------------------------------------
     ```
+
 <br>
 
 [🡅 Back to Top](#table-of-contents)
