@@ -188,7 +188,7 @@ The following section describes an overview of the design architecture. Each sub
 ### **Architecture Diagram** ###
 ![archi](./images/ArchitectureDiagram.png)
 
-<sup>***Figure 1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
+<sup>***Figure 1.1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
 
 <div style="page-break-after: always;"></div>
 
@@ -214,7 +214,20 @@ The rest of the App consists of four components:
 Each of the four components,
 - Defines its API in an interface with the **same name** as the Component.
 - Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
-  
+
+Given below is the sequence diagram of the startup sequence of iGraduate until just before awaiting for user input.
+
+![archi](./images/StartupSequenceDiagram.png)
+
+<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before awaiting for first user input.*</sup>
+
+The startup sequence sets up all objects required for running commands, such as the `Ui` and fetching of stored data from `Storage`.
+Given below is the sequence diagram of how the architecture handles the flow of execution of commands and how the program exits.
+
+![archi](./images/ExecutionSequenceDiagram.png)
+
+<sup>***Figure 1.1.3** Sequence diagram of iGraduate from receiving the first user input until exit.*</sup>
+
 <br>
 
 [🡅 Back to Top](#table-of-contents)

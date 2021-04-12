@@ -1,0 +1,62 @@
+@startuml
+hide footbox
+
+Participant ":iGraduate" as iGraduate
+Participant ":Ui" as ui
+Participant ":Parser" as parser
+Participant ":Storage" as storage
+Participant ":ModuleList" as moduleList
+Participant ":Command" as command
+
+activate iGraduate
+
+iGraduate -> iGraduate: run()
+activate iGraduate #DarkSalmon
+
+iGraduate -> ui:printWelcomeMessage()
+activate ui
+return
+
+loop while !isExit
+    iGraduate -> ui: getCommand()
+    activate ui
+    return fullCommand:String
+
+    iGraduate -> ui: printBorderLine()
+    activate ui
+    return
+
+    iGraduate -> parser: parseCommand(fullCommand:String)
+    activate parser
+    parser -> parser: createCommand(commandParameters, commandFlags)
+    activate parser #DarkSalmon
+
+    create command
+    parser -> command: createCommand(commandParameters, commandFlags)
+    activate command
+    return c:Command
+    return
+    return c:Command
+
+    iGraduate -> command: execute(c:Command)
+    activate command
+    return
+
+    iGraduate -> command: isExit(c:Command)
+    activate command
+    return isExit:Boolean
+
+    iGraduate -> ui: printBorderLine()
+    activate ui
+    return
+end
+return
+
+iGraduate --[hidden]> iGraduate
+destroy iGraduate
+destroy ui
+destroy command
+destroy parser
+destroy storage
+destroy moduleList
+@enduml
