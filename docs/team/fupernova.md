@@ -23,10 +23,9 @@ information to the screen.
 
 *Considerations*
 
-Ui depended on the implementations of other classes, as each feature might have different considerations when printing
-information to the screen. So, we endeavoured to think of all the possible features that may require interaction
-with the user and laid out skeleton methods of them in the `Ui` class so that my teammates would be able to access or edit 
-the methods they required easily.
+Ui depends on the implementations of other classes, as each feature might have different considerations when printing
+information. I laid out skeleton methods of the possible printing methods required in the `Ui` class so that my 
+teammates would be able to access or edit the methods they required easily.
 ___
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
@@ -94,10 +93,9 @@ such as Parser and Help command. Apart from that, I also added the details for `
 ___
 ### Contributions to team-based tasks
 
-- Edit non-feature specific portions of the UG and DG such as the introduction and the content pages for both
-- Review my teammates' code, in particular look out for the reasons for failed gradle builds
-- Bug hunting through writing unit tests for `Parser` and `Command`
-- Tag issues found and assign issues to myself and teammates
+I edited non-feature specific portions of the UG and DG such as the introduction and the content pages for both. I also 
+reviewed my teammates' code, in particular look out for the reasons for failed gradle builds. I also hunted for bugs by
+writing unit tests for `Parser` and `Command`. I also tagged issues found and assign issues to myself and teammates.
 
 ___
 ### Reviews and PRs
