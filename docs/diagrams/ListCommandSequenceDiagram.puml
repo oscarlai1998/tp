@@ -11,7 +11,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("list complete")
 activate Parser #FFBBBB
 
-Parser -> Parser: createListCommand(commandParameters, commandFlags)
+Parser -> Parser: createListCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create ListCommand
@@ -29,7 +29,7 @@ activate ListCommand
 
 ListCommand -> ModuleList: getModules()
 activate ModuleList
-ModuleList --> ListCommand: modules
+ModuleList --> ListCommand: modules:ArrayList<Module>
 deactivate ModuleList
 
 
