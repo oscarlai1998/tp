@@ -14,7 +14,6 @@ can mark modules as completed and store prerequisites for each module.
 [Link to my code contribution.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=fupernova&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
 
-
 ### Enhancements implemented
 
 Given below are details of my contributions to the project.
@@ -38,10 +37,10 @@ execute the command before handing control back to the main program for the exec
 
 *Considerations*
 
-Implementing the parser was challenging due to all commands available in our program having a unique
-input format and parameters. We eventually settled on a
-two-tiered parsing system. Firstly, a general parse was done to the user command to split the command name and parameters.
-Secondly, depending on the command, the parameters would be extracted using other methods. Xin Ru worked on the second level
+Coding the parser was challenging as all commands available in our program have a unique
+input format. We eventually settled on a
+two-tiered parsing system. Firstly, a general parse was done to the user command to extract command name.
+Secondly, parameters would be extracted based on command name. Xin Ru worked on the second level
 while I worked on the first.
 
 
@@ -52,7 +51,7 @@ regarding the proper usage of iGraduate, including the different commands and th
 
 *Considerations*
 
-Due to the large number of commands and features available in iGraduate, we decided to have separate help pages for each command,
+We decided to have separate help pages for each command
  along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
 make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
 
@@ -88,7 +87,7 @@ Apart from that, I made many edits improve the phrasing of the guide to be more
 
 My main contributions to DG comes in the form of sequence diagrams. I created sequence
 diagrams and helped my teammates check and correct their sequence diagrams. I also contributed to the standardisation
-of sequence diagrams.  For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me.
+of sequence diagrams. I also contributed explanations for the components implemented by me. 
 Apart from that, I also added the details for `ModuleList` class, `Command` class and the `Add` command.
 
 
