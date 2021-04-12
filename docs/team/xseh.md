@@ -39,7 +39,7 @@ I implemented the Parser function. While Fuxi worked on the higher layers of the
 1. [Value proposition](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#value-proposition)
 1. [Parser](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#parser)
 1. [Storage](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#storage-component)
-1. [Update](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command)
+1. [Update](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#update-command)
 1. [User stories (v1.0 and v2.0)](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#appendix-b-user-stories)
 1. [Non-functional requirements](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#appendix-c-non-functional-requirements)
 1. Adding some of the icons used in the DG (like the arrow, bulk and paper icons)
