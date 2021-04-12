@@ -1,5 +1,5 @@
 # **iGraduate User Guide** #
-By: `W09-2` Latest update: `10 April 2021`
+By: `W09-2` Latest update: `12 April 2021`
 
 ![logo](./images/logo.jpg)
 
