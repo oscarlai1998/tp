@@ -686,6 +686,8 @@ The sequence diagram below shows the execution of add command in action:
 
 ----
 
+<!--@@author oscarlai1998-->
+
 <div style="page-break-after: always;"></div>
 
 #### **Delete Command** ####
