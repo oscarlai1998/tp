@@ -18,28 +18,30 @@ majoring in Information Security to plan their academic journey.
       information to the module's prerequisites, untaken prerequisites and each of the prerequisites' requiredByModules
       as it is quite complex.
       
-1. Implemented `InfoCommand` class to show module information.
+2. Implemented `InfoCommand` class to show module information.
     * The idea of implementing `InfoCommand` is to prevent convoluted view for the `ListCommand` by displaying all information
       of the specified module to the user.
       
-1. Implemented `DoneCommand` class for user to mark module as taken.
+3. Implemented `DoneCommand` class for user to mark module as taken.
     * The `DoneCommand` class is responsible for executing and providing the `done` feature to allow the user to update 
       the module they have taken with a grade so that the application can update the prerequisite list of related
       modules accordingly to show an accurate results on the module status and whether it can be taken next.
       
-1. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
+4. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
     * I programmed the `available` and list by `module type` options' logic. For the `available` option, I checked through 
       all the modules and display only the modules where all their prerequisites are satisfied. As for the `module type` 
       option, I filter out modules which matches the specified module type and display them to the user.
       
-1. Designed and implemented underlying logic for prerequisites processing.
+5. Designed and implemented underlying logic for prerequisites processing.
     * I added three `ArrayList` for the respective prerequisite information to track to each module for efficient processing. Each 
       module can have any prerequisites as long the prerequisite exists in the current list, not the module itself and not each 
       other's prerequisite. Once a module is marked as taken, it will be removed from the untaken prerequisites list of the modules 
       in its required by list. Only modules with empty untaken prerequisites list are shown as available. Lastly, for module 
       deletion, the module requiring it as a prerequisite must be deleted first before it can be deleted.
 
-1. Incorporated the ability to differentiate child module classes to the `Storage` component.
+<div style="page-break-after: always;"></div>
+
+6. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
       I researched on `RuntimeTypeAdapterFactory` and included it to generate the `Json` data with labels that distinguishes
       the child classes.
@@ -106,6 +108,4 @@ I reviewed and refactored the project code:
 ### Contributions beyond the project team
 
 1. Advised other teams on implementation of certain features such as data storage.
-1. Performed bug hunting on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
-1. Recommended possible fixes for bugs found on other products.
-1. Reviewed UG and DG for other teams and provided suggestions for improvement.
+1. Performed bug hunting, reviewed UG and DG on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
