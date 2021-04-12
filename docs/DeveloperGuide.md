@@ -1,7 +1,7 @@
 <!--@@author xseh-->
 
 # **iGraduate Developer Guide** #
-Project by: `W09-2` Latest update: `11 April 2021`
+Project by: `W09-2` Latest update: `12 April 2021`
 
 ![logo](./images/logo.jpg)
 
@@ -61,13 +61,12 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 ## **Introduction** ##
 
-iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
-students track and plan their graduation by allowing them to add, delete, update modules to the module list. There is 
-also a built-in CAP calculator and Progress Command to check their graduation progress. The users are allowed to add 
-Core, General Education (GE), Math and Elective modules for tracking. When listing the modules, the module type will be 
-shown accordingly.
+iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security students track and plan their
+graduation by allowing them to add, delete, update modules to the module list. The users are allowed to add Core, 
+General Education (GE), Math and Elective modules for tracking. There is also a built-in CAP calculator and Progress 
+Command to check their graduation progress. Users can also list down modules on the list. When listing the modules, the
+module type will be shown accordingly.
 
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -89,8 +88,6 @@ Symbols/Formatting | Description
 📝 **Tip:**        | Optional information that may be useful. 
 ⚠️ **Warning!**    | Important information that may resolve problems. 
 `Grey highlight`   | Code or terms related to the application.
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -172,8 +169,6 @@ What would you like to do today?
     --------------------------------------------------------------------------------------
     ```
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -229,8 +224,6 @@ Given below is the sequence diagram of how the architecture handles the flow of 
 
 <sup>***Figure 1.1.3** Sequence diagram of iGraduate from receiving the first user input until exit.*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -250,8 +243,6 @@ The UI is a public class that consists of **three components**: `Scanner`, `Cons
 ![archi](./images/UiClassDiagram.png)
 
 <sup>***Figure 1.2** UML class diagram for Ui class*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -356,8 +347,6 @@ Below are the Command class diagrams, split into 3 diagrams for better readabili
 ![archi](./images/CommandClassDiagram3.png)
 
 <sup>***Figure 1.6.3** UML class diagram for Command class part 3*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -503,8 +492,6 @@ The following shows the process of marking a module named `existingModule` as do
 1. `markAsTaken` calls `Module.setStatus` and sets the status of `existingModule` to "taken".
 1. `removeFromModuleUntakenPrerequisites` is called to remove `existingModule` from the prerequisitesUntaken table from the list of modules that require `existingModule` as a prerequisite.
 
-<br> 
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -529,8 +516,6 @@ The `Storage` Component,
 
 <sup>***Figure 1.11** UML object diagram for an instance of storage object*</sup>
 
-<br> 
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -548,8 +533,6 @@ The common class used by multiple components in this app are in the `exception` 
 
 This section elaborates on some details about how certain features are implemented.
 
-<br> 
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -563,8 +546,6 @@ The Ui feature has 3 primary responsibilities:
 1. Executes user command using [`Logic Component`](#logic-component)
 1. Prints resulting message
 1. Listens to calls from Model data
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -650,8 +631,6 @@ An `arrayList` is used to store the parsed data from the user input instead of a
         - Limited functionalities
 
 Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size because  arrays are more memory efficient. The parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -950,8 +929,6 @@ go for a more segmented implementation of the `help` command, with one command s
 while the other commands provide a readable reference guide to the user that targets the command that users want to know 
 more about.
 
-<br> 
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -978,8 +955,6 @@ To accommodate the wide range of operations available to the modules, the implem
 be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
 module code and grade, the subclasses do not contain much information that is not already stored in their parent class. To
 better accommodate our *list by module type* feature, the subclass each module belongs to is determined by the module type.
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -1009,8 +984,6 @@ component. However, after taking the scalability issue into consideration, the t
 `ArrayList` instead. Reason being `ArrayList` is a dynamically sized array along with standard methods such as 
 whether the list contains a specific module, search and removal of specified module. The size of the `ArrayList`
 is only limited by the user device's available memory size.
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -1052,8 +1025,6 @@ The alternative storage format considered is the use of delimiters. However, the
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing failures, but the problem still remained. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -1092,8 +1063,6 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 <sup>***Table 1.24** The Summary list of all exceptions used in iGraduate*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -1121,8 +1090,6 @@ To change the logging configurations, simply modify the `logger.properties` file
 configuration logs all messages with level of `FINE` and above into a log file, `iGraduate-0.log`, under the same folder
 where the application resides.
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -1140,8 +1107,6 @@ guides are:
 - [Jekyll](https://jekyllrb.com/) for documentation static site generation
   For more information on how to set up a documentation site using Jekyll, you may refer to
   [Using Jekyll for project documentation](https://se-education.org/guides/tutorials/jekyll.html) guide.
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -1172,13 +1137,13 @@ Allows users to **manage modules faster** than a typical mouse/GUI driven app.iG
 
 This app will help NUS students **majoring in Information Security** check his/her graduation progress and modules taken in a **coherent manner** based on the program requirements. It also contains tools as mentioned above to help students make informed decisions about future modules to take.
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ## **Appendix B: User Stories** ##
 
@@ -1206,13 +1171,12 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <sup>***Table 1.25** All user stories considered in the designing of iGraduate*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+
 <!--@@author LJ-37-->
 
 ## **Appendix C: Non-Functional Requirements** ##
@@ -1224,13 +1188,13 @@ This app will help NUS students **majoring in Information Security** check his/h
 1. A user should be someone studying in National University of Singapore.
 1. A beginner user without prior knowledge should be able to pick up the application comfortably.
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ## **Appendix D: Glossary** ##
 
@@ -1244,13 +1208,12 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <sup>***Table 1.26** Definitions and context of terms used in the developer guide*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
 
 <div style="page-break-after: always;"></div>
+
 <!--@@author LJ-37-->
 
 ## **Appendix E: Instructions for Manual Testing** ##
@@ -1649,8 +1612,6 @@ Dealing with missing/corrupted data files.
     What would you like to do today?
     --------------------------------------------------------------------------------------
     ```
-
-<br>
 
 [Back to Top](#table-of-contents)
 
