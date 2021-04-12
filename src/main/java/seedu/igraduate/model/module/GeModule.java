@@ -13,7 +13,7 @@ public class GeModule extends Module {
      * @param code                 Module code of the module object.
      * @param name                 Module name of the module object.
      * @param credit               Modular credit of the module object.
-     * @param status               Status of the module, whether it is “taken” or “not taken”.
+     * @param status               Status of the module, whether it is "taken" or "not taken".
      * @param grade                Default module grade when module is created.
      * @param prerequisites        Prerequisites for the module object.
      * @param untakenPrerequisites Unsatisfied prerequisites for module object.
