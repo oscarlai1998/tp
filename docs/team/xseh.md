@@ -2,7 +2,7 @@
 
 ### **Overview** ###
 
-iGraduate is a command line application for <b>NUS students majoring in Information Security</b> to plan their academic journey. iGraduate comes equipped with tools such as module storage, a CAP calculator and academic progression indicators. This allows you to check your graduation progress, check program requirements and make more informed decisions about future modules to take. 
+iGraduate is a command-line application for <b>NUS students majoring in Information Security</b> to plan their academic journey. iGraduate comes equipped with tools such as module storage, a CAP calculator and academic progression indicators. This allows you to check your graduation progress, check program requirements and make more informed decisions about future modules to take. 
 
 ### **Summary of Contributions** ###
 
@@ -15,11 +15,11 @@ Access my contribution on [RepoSense](https://nus-cs2113-ay2021s2.github.io/tp-d
 #### ***Storage*** with [Ke Wen](/team/kewenlok.md) ####
 
 Implemented the storage function of iGraduate, including the considerations, researching of third-party libraries and its development. 
-The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library. I had to research on the limitations and different flavours of JSON (settled on GSON at the end), learn its usage and apply the library to iGraduate. 
+The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library. I had to research the limitations and different flavours of JSON (settled on GSON at the end), learn its usage and apply the library to iGraduate. 
 
 #### ***Parser*** with [Fuxi](/team/fupernova.md) ####
 
-I implemented the Parser function. While he worked on the higher layers of parser, I coded the foundational code for parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. flags) used in the commands. The challenging portion would be designing the behaviour of the Parser. For instance, deciding on how to identify and split the input. The command was first split into the command type (with its parameters) and the flags. The initial arrays used (which were memory efficient) were changed to arrayList, making use of its class functions (like indexOf() and size()). Another challenge was the use of regex to identify and isolate flags from the main command parameters. 
+I implemented the Parser function. While he worked on the higher layers of the parser, I coded the foundational code for the parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. flags) used in the commands. The challenging portion would be designing the behaviour of the Parser. For instance, deciding on how to identify and split the input. The command was first split into the command type (with its parameters) and the flags. The initial arrays used (which were memory efficient) were changed to ArrayList, making use of its class functions (like indexOf() and size()). Another challenge was the use of regex to identify and isolate flags from the main command parameters. 
 
 ### **Contributions to UG** ###
 
@@ -48,7 +48,7 @@ I implemented the Parser function. While he worked on the higher layers of parse
 ### **Contributions to Team-based Tasks** ###
 
 1. Designing the overall code behaviour 
-1. Setting up the github
+1. Setting up the GitHub
 1. Making necessary general code enhancements
 1. Maintaining the issue tracker 
     - Assigning myself or others
@@ -64,5 +64,5 @@ I implemented the Parser function. While he worked on the higher layers of parse
 ### **Contributions Beyond the Project Team** ###
 
 1. Testing other's products including EasyLog, Finux, etc. 
-1. Suggestions to bug fixes
-1. Provided guidance with a description of my high-level implementation logic (based on what I have coded)
+1. Suggestions for bug fixes
+1. Guided with a description of my high-level implementation logic (based on what I have coded)
