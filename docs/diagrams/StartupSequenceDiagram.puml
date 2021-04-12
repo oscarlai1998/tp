@@ -30,7 +30,7 @@ activate storage
 return distinctModules:ArrayList<Module>
 
 create moduleList
-iGraduate -> moduleList: ModuleList(distinctModules)
+iGraduate -> moduleList: ModuleList(distinctModules:ArrayList<Module>)
 activate moduleList
 return
 
