@@ -21,6 +21,8 @@ Access my contribution on [RepoSense](https://nus-cs2113-ay2021s2.github.io/tp-d
 I implemented the storage function of iGraduate, including the considerations, researching of third-party libraries and the development. 
 The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library.  We wanted a robust storage system that is resilient to bugs, especially arising from the use of custom delimiters. In the end, we decided that the use of Java libraries was the way to go, since it is more developed and comes fully equipped to handling parsing or modification of the storage files. From the various version of JSON, I ultimately decided on GSON since it is easier to understand and straightforward to use, and comes with the features flexible enough to accommodate the use of custom objects in a single function. The advantage applies to both the loading and saving of module list to and fro th storage file. I had to research on the limitations and different flavours of JSON, learn its usage and apply the library to the application.
 
+<div style="page-break-after: always;"></div>
+
 #### ***Parser*** ####
 
 I paired up with Fuxi to implement the Parser function. While he worked on the higher layers of parser, I coded the foundational code for parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. flags) used in the commands. 
@@ -30,16 +32,17 @@ Ultimately, I decided that the command should first be split into the command ty
 After, I decided that the flags should be used to parse other parameters, using regex to identify and isolate them from the main command. Instead of keeping them as a string to search for the flags, I split them up according to their delimiters dashes and space ('-', ' ') and getting the value in the next index. This way, it would save the trouble of having a start and end index since the command flags (except -n) only allows one value (without spaces). 
 
 ----
+
 ### **Contributions to UG** ###
 
 I documented the sections that was implemented by me, that is, the parser and storage. I also converted all the UG from a word document into GitHub markdown in the user guide file. 
 
 Other contributions to the UG are:
-    - introduction
-    - UG usage
-    - quick start (only the sample output of a successful setup)
-    - frequently asked questions (FAQ)
-    - command summary 
+1. Introduction
+1. UG usage
+1. Quick start (only the sample output of a successful setup)
+1. Frequently Asked Questions (FAQ)
+1. Command Summary 
 
 ----
 
@@ -48,57 +51,59 @@ Other contributions to the UG are:
 I also documented the sections that was implemented by me, that is, the parser and storage function. This includes the UML class, object and sequence diagrams.
 
 Other contributions to the DG are: 
-    - introduction
-    - value proposition
-    - user stories (v1.0 and v2.0)
-    - non-functional requirements
-    - adding some of the icons used in the DG
+1. Introduction
+1. Value proposition
+1. User stories (v1.0 and v2.0)
+1. Non-functional requirements
+1. Adding some of the icons used in the DG
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Contributions to Team-based Tasks** ###
 
 I contributed to the following team-based tasks:
-1. designing the overall code behaviour 
-1. setting up the github
-1. making necessary general code enhancements
-1. maintaining the issue tracker 
-    - assigning myself or others
-    - creating user stories
-    - creating issues for bugs found
-    - reviewing the issues from the others  
-1. compilation of the java file for release in v2.0 (I did not officially release it)
-1. updating the UG docs that are not specific to a feature 
-    - introduction
+1. Designing the overall code behaviour 
+1. Setting up the github
+1. Making necessary general code enhancements
+1. Maintaining the issue tracker 
+    - Assigning myself or others
+    - Creating user stories
+    - Creating issues for bugs found
+    - Reviewing the issues from the others  
+1. Compilation of the java file for release in v2.0 (I did not officially release it)
+1. Updating the UG docs that are not specific to a feature 
+    - Introduction
     - UG usage
-    - quick start (only the sample output of a successful setup)
-    - Frequently asked questions (FAQ)
+    - Quick start (only the sample output of a successful setup)
+    - Frequently Asked Questions (FAQ)
     - Command summary 
 1. updating the DG docs that are not specific to a feature 
-    - introduction
-    - value proposition
-    - user stories (v1.0 and v2.0)
-    - non-functional requirements
-    - adding some of the icons used in the DG
+    - Introduction
+    - Value proposition
+    - User stories (v1.0 and v2.0)
+    - Non-functional requirements
+    - Adding some of the icons used in the DG
 
 ----
 
 ### **Review/Mentoring Contributions** ###
 
 I contributed the following: 
-1. bug fixes or suggestions to bug fixes
-1. edited, added and restructured other UG and DG portions
-1. implemented helper functions that are used throughout the application
-1. general formatting and readability of UG and DG, including navigation buttons and links
+1. Bug fixes or suggestions to bug fixes
+1. Edited, added and restructured other UG and DG portions
+1. Implemented helper functions that are used throughout the application
+1. General formatting and readability of UG and DG, including navigation buttons and links
 
 ----
 
 ### **Contributions Beyond the Project Team** ###
 
 I contributed the following: 
-1. bug hunting on other's products
-1. testing other's products including EasyLog, Finux, etc. 
-1. suggestions to bug fixes
-1. provided guidance with a description of my high-level implementation logic (based on what I have coded)
+1. Bug hunting on other's products
+1. Testing other's products including EasyLog, Finux, etc. 
+1. Suggestions to bug fixes
+1. Provided guidance with a description of my high-level implementation logic (based on what I have coded)
 
 ----
