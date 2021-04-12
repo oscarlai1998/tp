@@ -11,7 +11,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("done CS1010 -g A")
 activate Parser #FFBBBB
 
-Parser -> Parser: createDoneCommand(commandParameters, commandFlags)
+Parser -> Parser: createDoneCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create DoneCommand
@@ -29,7 +29,7 @@ activate DoneCommand
 
 DoneCommand -> ModuleList: getByCode("CS1010")
 activate ModuleList
-ModuleList --> DoneCommand: module
+ModuleList --> DoneCommand: module:Module
 deactivate ModuleList
 
 ModuleList -[hidden]-> ModuleList

@@ -12,7 +12,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("update CS1010 -mc 2")
 activate Parser #FFBBBB
 
-Parser -> Parser: createUpdateCommand(commandParameters, commandFlags)
+Parser -> Parser: createUpdateCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create UpdateCommand
@@ -30,7 +30,7 @@ activate UpdateCommand
 
 UpdateCommand -> ModuleList: getModule("CS1010")
 activate ModuleList
-ModuleList --> UpdateCommand: :Module
+ModuleList --> UpdateCommand: module:Module
 deactivate ModuleList
 
 UpdateCommand -> UpdateCommand: updateModuleCredits(["-mc", "2"])

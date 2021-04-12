@@ -13,6 +13,7 @@ activate AddCommand
 
 AddCommand -> AddCommand: createModuleByType()
 activate AddCommand #DarkSalmon
+create Module
 AddCommand -> Module: new Module("CS1010", "Programming Methodology", 4.0, "not taken", "nil", ArrayList<String> preRequisites, ArrayList<String> untakenPreRequisites)
 activate Module
 return module:Module

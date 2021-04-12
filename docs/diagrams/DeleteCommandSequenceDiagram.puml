@@ -11,7 +11,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("delete CS1010")
 activate Parser #FFBBBB
 
-Parser -> Parser: createDeleteCommand(commandParameters, commandFlags)
+Parser -> Parser: createDeleteCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create DeleteCommand
@@ -29,13 +29,13 @@ activate DeleteCommand
 
 DeleteCommand -> ModuleList: getByCode("CS1010")
 activate ModuleList
-ModuleList --> DeleteCommand: module
+ModuleList --> DeleteCommand: module:Module
 deactivate ModuleList
 
 ModuleList -[hidden]-> ModuleList
 DeleteCommand -> ModuleList: getModuleType(module)
 activate ModuleList
-ModuleList --> DeleteCommand: "core"
+ModuleList --> DeleteCommand: moduleType:String
 deactivate ModuleList
 
 ModuleList -[hidden]-> ModuleList

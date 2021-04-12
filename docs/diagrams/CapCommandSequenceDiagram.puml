@@ -10,7 +10,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("cap")
 activate Parser #FFBBBB
 
-Parser -> Parser: createCapCommand(commandParameters, commandFlags)
+Parser -> Parser: createCapCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create CapCommand

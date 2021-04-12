@@ -9,11 +9,11 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("help add")
 activate Parser #FFBBBB
 
-Parser -> Parser: createHelpCommand(commandParameters, commandFlags)
+Parser -> Parser: createHelpCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create HelpCommand
-Parser -> HelpCommand: HelpCommand("CS1010", "A")
+Parser -> HelpCommand: HelpCommand("add")
 activate HelpCommand
 HelpCommand --> Parser: new HelpCommand("add")
 deactivate HelpCommand
