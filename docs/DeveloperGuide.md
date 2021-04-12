@@ -235,6 +235,7 @@ Given below is the sequence diagram of how the architecture handles the flow of 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
 
 ### **UI Component** ###
 
@@ -1043,6 +1044,8 @@ Considerations were also given to use more unique delimiters (such as `\`, `|`, 
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author oscarlai1998-->
+
 
 ### **Exception** ###
 
