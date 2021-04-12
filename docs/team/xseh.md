@@ -12,12 +12,12 @@ Access my contribution on [RepoSense](https://nus-cs2113-ay2021s2.github.io/tp-d
 
 ### **Enhancements Implemented** ###
 
-#### ***Storage*** with [Ke Wen](/team/kewenlok.md) ####
+#### ***Storage*** with [Ke Wen](https://github.com/kewenlok) ####
 
 Implemented the storage function of iGraduate, including the considerations, researching of third-party libraries and its development. 
 The most difficult portion of implementing the storage function was the use of external libraries, specifically the JSON library. I had to research the limitations and different flavours of JSON (settled on GSON at the end), learn its usage and apply the library to iGraduate. 
 
-#### ***Parser*** with [Fuxi](/team/fupernova.md) ####
+#### ***Parser*** with [Fuxi](https://github.com/fupernova) ####
 
 I implemented the Parser function. While he worked on the higher layers of the parser, I coded the foundational code for the parser including the logic behind the parsing structure, the extraction method and the syntax (i.e. flags) used in the commands. The challenging portion would be designing the behaviour of the Parser. For instance, deciding on how to identify and split the input. The command was first split into the command type (with its parameters) and the flags. The initial arrays used (which were memory efficient) were changed to ArrayList, making use of its class functions (like indexOf() and size()). Another challenge was the use of regex to identify and isolate flags from the main command parameters. 
 
