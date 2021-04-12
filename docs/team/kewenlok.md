@@ -9,7 +9,7 @@ majoring in Information Security to plan their academic journey.
 
 ### Code contributed
 
-[Click here to View my code contribution on RepoSense.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=kewenlok&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-03-05&tabOpen=true&tabType=authorship&tabAuthor=kewenlok&tabRepo=AY2021S2-CS2113T-W09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other) 
+[Click here to view my code contribution on RepoSense.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=kewenlok&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-03-05&tabOpen=true&tabType=authorship&tabAuthor=kewenlok&tabRepo=AY2021S2-CS2113T-W09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other) 
 
 ### Enhancements implemented
 
