@@ -46,25 +46,16 @@ majoring in Information Security to plan their academic journey.
 
 ### Contributions to the UG
 
-1. Added [Show module information: `info`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#show-module-information-info) 
-   and [Manual Modification of Data](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#manual-modification-of-data) section.
-1. Added and updated [List modules: `list`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#list-modules-list), 
-   [FAQs](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#frequently-asked-questions) 
-   and [Command Summary](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#command-summary) section.
+1. Added `Show module information: info` and `Manual Modification of Data` section.
+1. Added and updated `List modules: list`, `FAQs` and `Command Summary` section.
 1. Restructuring, reformatting and maintenance of UG.
 
 ### Contributions to the DG
 
-1. Added [introduction](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#introduction), 
-   [setting up, getting started](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#setting-up-getting-started), 
-   [logging](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#logging) 
-   and [documentation](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#documentation) section.
-1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#module-package) and its 
-   class diagram under the design of model component.
-1. Added [`AddCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command), 
-   [`InfoCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command) and their sequence diagrams 
-   under implementation.
-1. Added implementation for [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#modulelist).
+1. Added `introduction`, `setting up, getting started`, `logging` and `documentation` section.
+1. Added `module package` and its class diagram under the design of model component.
+1. Added `AddCommand`, `InfoCommand` and their sequence diagrams under implementation.
+1. Added implementation for `ModuleList`.
 1. Restructuring, reformatting and maintenance of DG.
 
 ### Contributions to team-based tasks
