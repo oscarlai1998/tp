@@ -1,5 +1,5 @@
 # **iGraduate User Guide** #
-By: `W09-2` Latest update: `10 April 2021`
+By: `W09-2` Latest update: `12 April 2021`
 
 ![logo](./images/logo.jpg)
 
@@ -32,8 +32,6 @@ By: `W09-2` Latest update: `10 April 2021`
 ## **Introduction** ##
 
 iGraduate is a command line application that acts as a centralised hub for **NUS students Majoring in Information Security** to plan their academic journey. With tools like the storing of modules, listing of modules that can be taken, an academic progression indicator and a CAP calculator, iGraduate will help students check his/her graduation progress, view modules taken based on programme requirements and make informed decisions about future modules.
-
-<br> 
 
 [Back to Top](#table-of-contents)
 
@@ -86,8 +84,6 @@ Welcome to iGraduate, your one stop study planning service!
 What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -143,8 +139,6 @@ List of pre-requisites needed to take CS2106: CS2100
 <sup>***Figure 1.1.2** Expected results from adding the `core` module `Introduction to Operating Systems`, a 
 `4` credit module with the code `CS2106`, with the prerequisite `CS2100`.*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -185,8 +179,6 @@ The following section outlines some of the usages of the `delete` command and it
 ```
 <sup>***Figure 1.2.2** Expected results from deleting the `elective` module with the code `CP2201`.*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -222,8 +214,6 @@ Nice! I've updated this module:
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.3.1** Expected results from updating the `credit`, `grade` and `prerequisites` of the module with the code `CS2106`. The `credit` was updated to `4`, grade to `A` and prerequisites to `CS1010` and `CS2100`.*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -266,8 +256,6 @@ Nice! I've marked this module as done:
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.4.2** Expected results from marking the module with the code `GES1041` with the grade `S` as done.*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -326,8 +314,6 @@ Prerequisite for                      : []
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.5.2** Expected results from showing the detailed information of `GER1000`, a GE module.*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -460,8 +446,6 @@ Math modules in the list:
 ```
 <sup>***Figure 1.6.8** Expected results from listing `math` modules. This option will list out all `mathematics` modules on the list.*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -498,8 +482,6 @@ Progress:
 ```
 <sup>***Figure 1.7.1** Expected results when 8 out of the 160 MCs has been completed (5% completion)*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -530,8 +512,6 @@ Current Degree Classification: Honours (Distinction)
 ```
 <sup>***Figure 1.8.1** Expected results from running the `cap` command based on the modules in the previous sections (see [`list complete`](#list-modules-list) for the list of modules used to calculate this cap)*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -557,8 +537,6 @@ See you soon! Happy studying!
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.9.1** Expected results from exiting the program*</sup>
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -611,8 +589,6 @@ Syntax: delete <module code>
 ```
 <sup>***Figure 1.10.2** Expected results of `help` with `delete` as the parameter*</sup>
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -624,8 +600,6 @@ Syntax: delete <module code>
 ## **Storage of Data** ##
 
 All data are stored automatically by iGraduate every time a module is modified (i.e. added, deleted or updated). The data will automatically loaded in when you relaunch iGraduate. No intervention is required. 
-
-<br>
 
 [Back to Top](#table-of-contents)
 
@@ -683,8 +657,6 @@ with caution. Any wrong information will result in processing errors when perfor
 > - Setting two or more modules in each other's `requiredByModules` is strongly discouraged as it does not reflect the
 module requirements logic realistically and might prevent iGraduate from giving accurate advice.
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -732,8 +704,6 @@ module requirements logic realistically and might prevent iGraduate from giving 
 > reaching your graduation requirements. Do note that the progress bar under `progress` command will still display 100% even
 > if you exceed your graduation requirements.
 
-<br>
-
 [Back to Top](#table-of-contents)
 
 ----
@@ -756,8 +726,6 @@ progress | `progress`
 cap    | `cap`
 exit     | `exit`
 help     | `help [add\|delete\|update\|done\|info\|list\|progress\|cap\|exit]`
-
-<br>
 
 [Back to Top](#table-of-contents)
 
