@@ -3,16 +3,12 @@
 ## Overview
 
 `iGraduate` is a command line application that acts as a centralised hub for NUS students majoring in Information 
-Security to plan their academic journey. It is equipped with a module storage system where students
-can mark modules as completed and store prerequisites for each module.
-
-
+Security to plan their academic journey. It is equipped features to help students make informed decisions about their academic plans.
 
 ### Summary of Contributions
 <b>Code contributed</b>
 
 [Link to my code contribution.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=fupernova&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
-
 
 ### Enhancements implemented
 
@@ -26,9 +22,8 @@ information to the screen.
 *Considerations*
 
 Ui was challenging to implement as many methods depended on the implementations of other classes. I laid out skeleton 
-methods of the possible printing methods required in the `Ui` class so that my teammates would be able to access or edit the methods they required easily.
-
-
+methods of the possible printing methods required in the `Ui` class so that my teammates would be able to access or edit
+the methods they required easily.
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
 
@@ -37,25 +32,19 @@ execute the command before handing control back to the main program for the exec
 
 *Considerations*
 
-Coding the parser was challenging as all commands available in our program have a unique
-input format. We eventually settled on a
-two-tiered parsing system. Firstly, a general parse was done to the user command to extract command name.
-Secondly, parameters would be extracted based on command name. Xin Ru worked on the second level
-while I worked on the first.
-
-
+Coding the parser was challenging as all commands available in our program have a unique input format. We used a 
+two-tiered parsing system. Firstly, the user command is parsed. Secondly, parameters would be extracted based on command
+name. Xin Ru worked on the second level while I worked on the first.
 
 #### Implemented `HelpCommand` class of iGraduate
-The  `help` command provides users with a quick reference guide
-regarding the proper usage of iGraduate, including the different commands and their input formats.
+The  `help` command provides users with a quick reference guide regarding the proper usage of iGraduate, including the 
+different commands and their input formats.
 
 *Considerations*
 
-We decided to have separate help pages for each command
- along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
-make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
-
-
+We decided to have separate help pages for each command along with one help page listing down the commands available in 
+iGraduate in case users forget. This methodology helps make the quick guide less cluttered and more targeted towards 
+specific commands that users intend to look up.
 
 #### Implemented test code for multiple methods
 
@@ -64,47 +53,35 @@ as well as help us identify bugs that we missed out on. We focused on testing fo
 
 *Considerations*
 
-Testing for `Parser` and `Command` classes was priority as they deal with user input, 
-which is where many logic bugs can be introduced. Integration testing between `Parser` and `Command` was also important
-as these two classes worked together directly to extract parameters and execute commands. Unit tests were implemented 
-first with possible inputs that would break the program. Once the 
-two classes were tested separately, integration tests were introduced to ensure that the core functionality was working.
-
-
+Testing for `Parser` and `Command` classes was priority as they deal with user input. Integration testing between 
+`Parser` and `Command` was also important as these two classes worked together directly to execute commands. Unit tests 
+were implemented with possible inputs that would break the program. Integration tests were introduced to ensure that the
+core functionality was working.
 
 ### Contributions to documentation
 
 #### User Guide
 
-For the user guide, I added the segments for components I implemented. I also added the segment for Add command.
-I also helped to update the FAQ, design the logo and rephrase the introduction.
-Apart from that, I made many edits improve the phrasing of the guide to be more
- audience-centric and beginner-friendly.
-
-
+I added the segments for components I implemented to the UG. I also added the segment for Add command.
+I also helped to update the FAQ, design the logo and rephrase the introduction. Apart from that, I made many edits 
+improve the phrasing of the guide to be more audience-centric and beginner-friendly.
 
 ### Contributions to DG
 
-My main contributions to DG comes in the form of sequence diagrams. I created sequence
-diagrams and helped my teammates check and correct their sequence diagrams. I also contributed to the standardisation
-of sequence diagrams. I also contributed explanations for the components implemented by me. 
-Apart from that, I also added the details for `ModuleList` class, `Command` class and the `Add` command.
-
-
+My main contributions to DG comes in the form of sequence diagrams. I created sequence diagrams and helped check and 
+correct others' sequence diagrams. I also contributed to the standardisation of sequence diagrams. I also contributed 
+explanations for the components implemented by me. Apart from that, I also added the details for `ModuleList` class, 
+`Command` class and the `Add` command.
 
 ### Contributions to team-based tasks
 
-I edited non-feature specific portions of the UG and DG such as the introduction and the content pages for both. I also 
+I edited portions of the UG and DG such as the introduction and the content pages for both. I also 
 reviewed my teammates' code, in particular look out for the reasons for failed gradle builds. I also hunted for bugs by
 writing unit tests for `Parser` and `Command`. I also tagged issues found and assign issues to myself and teammates.
 
-
-
 ### Reviews and PRs
 
-I helped the team with repository maintenance, mostly about git (Pull Requests, Branches, Merge Conflicts etc).
-
-Here is a list of some non-trivial pull requests I helped to review and merge:
+I helped the team with repository maintenance, mostly about git (Pull Requests, Branches, Merge Conflicts etc). Here is a list of some non-trivial pull requests I helped to review and merge:
 
 [#44](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/44), [#58](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/58), 
 [#77](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/77), [#82](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/82),
