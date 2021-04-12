@@ -20,7 +20,7 @@ public abstract class Module {
      */
     private double credit;
     /**
-     * Status of the module, whether it is “taken” or “not taken”.
+     * Status of the module, whether it is "taken" or "not taken".
      */
     private String status;
     /**
