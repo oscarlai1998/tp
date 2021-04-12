@@ -317,6 +317,7 @@ The methods that check various parameters
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author LJ-37-->
 
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
