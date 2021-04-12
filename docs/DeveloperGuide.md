@@ -317,6 +317,7 @@ The methods that check various parameters
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author LJ-37-->
 
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
@@ -1138,6 +1139,7 @@ guides are:
 
 ## **Appendix A: Product Scope** ##
 
+<!--@@author LJ-37-->
 ### **Target User Profile** ###
 
 * is a NUS Information Security student
@@ -1149,6 +1151,7 @@ guides are:
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
+<!--@@author LJ-37-->
 ### **Value Proposition** ###
 
 Allows users to **manage modules faster** than a typical mouse/GUI driven app.iGraduate Includes higher level features such as ability to **add modules** while ensuring user has **cleared all prerequisites** and to **list all modules taken**, **graduation progress** and **current CAP with degree classification**.
@@ -1196,7 +1199,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 ----
 
 <div style="page-break-after: always;"></div>
-
+<!--@@author LJ-37-->
 ## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -1230,6 +1233,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 ----
 
 <div style="page-break-after: always;"></div>
+<!--@@author LJ-37-->
 
 ## **Appendix E: Instructions for Manual Testing** ##
 
