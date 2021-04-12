@@ -88,7 +88,8 @@ public class Ui {
             + "<number of credits> [-p <prerequisite1,prerequisite2,...>]";
     public static final String HELP_DELETE = "The Delete command deletes an existing module from the list of modules "
             + "added via the module code.\n\nSyntax: delete <module code>";
-    public static final String HELP_UPDATE = "The Update command updates relevant information (name, credit and grade)"
+    public static final String HELP_UPDATE = "The Update command updates relevant information (name, credit, grade"
+            + " and/or prerequisites)"
             + " for the selected module.\n\nSyntax: update <module code> [-n <name>] [-mc <credit>] [-g <grade>] "
             + "[-p <prerequisite1,prerequisite2,...>]";
     public static final String HELP_DONE = "The Done command marks a module as completed via its module code. "
@@ -107,7 +108,7 @@ public class Ui {
             + "-elec: Lists elective modules on the list\n"
             + "-ge: Lists general education modules on the list\n"
             + "-math: Lists math modules on the list\n\n"
-            + "Syntax: list all|incomplete|complete|available|core|elec|ge|math";
+            + "Syntax: list <all|incomplete|complete|available|core|elec|ge|math>";
     public static final String HELP_PROGRESS = "The Progress command displays a bar that represents the current "
             + "progress of your academic career. The progress bar shows the percentage of your total completed module "
             + "credits against the total number of credits needed for graduation requirements.\n\nSyntax: progress";

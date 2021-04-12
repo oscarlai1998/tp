@@ -259,6 +259,8 @@ The UI is a public class that consists of **three components** that is made up `
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author fupernova-->
+
 ### **Logic Component** ###
 
 The logic component consists of  the class `Parser` and the package `Command`. The classes work together to interpret user input, identify the right command to execute and the execution of the input command. 

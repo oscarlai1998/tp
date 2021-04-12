@@ -91,6 +91,8 @@ What would you like to do today?
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author fupernova-->
+
 ## **Features** ##
 
 iGraduate works by tracking the modules you have taken, is taking or intend to take and collating them into a list. iGraduate comes with various features that help you track your academic journey with the use of different commands. The following section outlines the various commands supported by iGraduate, its proper usages and expected behaviours. 
@@ -108,7 +110,7 @@ Adds a new module to the list of modules. This module can be one that you have t
 > - The *maximum* MCs allowed for a single module in iGraduate is **32**.
 > - The *minimum* MCs allowed for a single module in iGraduate is **1**. 
 > - iGraduate only supports module codes that conform to NUS style module codes.
->   - Examples of valid codes include `CS1010`, `MA1101R` and `UTC1102B`.
+>   - Examples of valid codes include `CS1010`, `MA1101R`, `UTC1102B` and `UIS3952CS`.
 > - Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same. 
 
 **Example of Usage(s) and Expected Outcome(s):**
@@ -184,6 +186,8 @@ The following section outlines some of the usages of the `delete` command and it
 ----
 
 <div style="page-break-after: always;"></div>
+
+<!--@@author ???-->
 
 ### **Update module information: `update`** ###
 
@@ -544,6 +548,8 @@ See you soon! Happy studying!
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author fupernova-->
+
 ### **Program Manual: `help`** ###
 
 The `help` command provides you a quick reference guide on the description and format of the different commands. The help command allows you to list the different commands available or their purpose and format. 
@@ -697,7 +703,7 @@ module requirements logic realistically and might prevent iGraduate from giving 
 > application. You may submit the file [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/issues) if you experienced
 > any error during your use of the application for the developers to fix the problem.
 
-<!--@@author ???-->
+<!--@@author fupernova-->
 
 **Q7**: I want to take more modules than my major's graduation requirements. Does iGraduate allow me to do so?
 > Yes! iGraduate does not limit the number of modules you can track. This means that you can add more modules even after 
