@@ -58,6 +58,7 @@ I implemented the Parser function. While he worked on the higher layers of the p
 
 ### **Review/Mentoring Contributions** ###
 
+Access all my PRs on [GitHub](https://github.com/AY2021S2-CS2113T-W09-2/tp/pulls?q=is%3Apr+is%3Aclosed+author%3Axseh+)
 1. Bug fixes or suggestions to bug fixes
 1. Implemented helper functions that are used throughout the application
 
