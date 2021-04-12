@@ -5,8 +5,7 @@
 `iGraduate` is a command line application that acts as a centralised hub for NUS students majoring in Information 
 Security to plan their academic journey. It is equipped with a module storage system where students
 can mark modules as completed and store prerequisites for each module. This allows students to check modules available 
-to take and help them make informed decisions about their academic plan. iGraduate also comes with a cap calculator and a 
-graduation progress tracker.
+to take and help them make informed decisions about their academic plan.
 ___
 ### Summary of Contributions
 <b>Code contributed</b>
@@ -38,8 +37,8 @@ for the execution of the command.
 
 *Considerations*
 
-The parser class was particularly challenging to tackle due to all 8 commands available in our program having a unique
-input format and parameters required. Many ways of extracting parameters were considered, and we eventually settled on a
+Implementing the parser class was challenging due to all commands available in our program having a unique
+input format and parameters. Many ways of extracting parameters were considered, and we eventually settled on a
 two-tiered parsing system. Firstly, a general parse was done to the user command to split the command name and parameters.
 Secondly, depending on the command, the parameters would be extracted using other methods. Xin Ru worked on the second level
 while I worked on the first.
@@ -64,13 +63,13 @@ by developers.
 
 *Considerations*
 
-The team's main priority for testing were the `Parser` and `Command` classes. It was important to ensure that these two
-classes were built correctly as they deal with user input, which is where many logic bugs can be introduced. Integration
-testing between `Parser` and `Command` were also important as these two classes worked together directly, with `Parser`
-extracting user input and `Command` executing the command given. Hence, unit tests for these two classes were implemented 
-first with team members thinking of possible inputs that would break the program. Once the two classes were amply tested
-separately, integration tests were introduced to ensure that the core functionality of parsing user inputs and creating the
-appropriate `Command` instance was working.
+The team's main priority for testing were the `Parser` and `Command` classes as they deal with user input, 
+which is where many logic bugs can be introduced. Integration testing between `Parser` and `Command` was also important
+as these two classes worked together directly to extract parameters and execute commands. Unit tests for these 
+two classes were implemented first with possible inputs that would break the program. Once the 
+two classes were amply tested separately, integration tests were introduced to ensure that the core functionality of 
+parsing user inputs and creating the appropriate `Command` instance was working.
+
 ____
 
 ### Contributions to documentation
@@ -95,7 +94,7 @@ such as Parser and Help command. Apart from that, I also added the details for `
 ___
 ### Contributions to team-based tasks
 
-- edit non-feature specific portions of the UG and DG such as the introduction and the content pages for both
+- Edit non-feature specific portions of the UG and DG such as the introduction and the content pages for both
 - Review my teammates' code, in particular look out for the reasons for failed gradle builds
 - Bug hunting through writing unit tests for `Parser` and `Command`
 - Tag issues found and assign issues to myself and teammates
