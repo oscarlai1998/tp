@@ -109,4 +109,4 @@ I reviewed and refactored the project code:
 1. Advised other teams on implementation of certain features such as data storage.
 1. Performed bug hunting on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
 1. Recommended possible fixes for bug found on other products.
-1. Reviewed User Guide and Developer Guide for other teams and provided constructive suggestions for improvement.
+1. Reviewed UG and DG for other teams and provided constructive suggestions for improvement.
