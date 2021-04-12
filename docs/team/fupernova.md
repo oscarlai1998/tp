@@ -6,12 +6,16 @@
 Security to plan their academic journey. It is equipped with a module storage system where students
 can mark modules as completed and store prerequisites for each module. This allows students to check modules available 
 to take and help them make informed decisions about their academic plan.
+
 ___
+
 ### Summary of Contributions
 <b>Code contributed</b>
 
 [Link to my code contribution.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=fupernova&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
+
 ___
+
 ### Enhancements implemented
 
 Given below are details of my contributions to the project.
@@ -26,6 +30,7 @@ information to the screen.
 Ui depends on the implementations of other classes, as each feature might have different considerations when printing
 information. I laid out skeleton methods of the possible printing methods required in the `Ui` class so that my 
 teammates would be able to access or edit the methods they required easily.
+
 ___
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
@@ -43,6 +48,7 @@ Secondly, depending on the command, the parameters would be extracted using othe
 while I worked on the first.
 
 ___
+
 #### Implemented `HelpCommand` class of iGraduate
 The HelpCommand class is responsible for executing the `help` command, which provides users with a quick reference guide
 regarding the proper usage of iGraduate, including the different commands and their input formats.
@@ -52,7 +58,9 @@ regarding the proper usage of iGraduate, including the different commands and th
 Due to the large number of commands and features available in iGraduate, we decided to have separate help pages for each command,
  along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
 make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
+
 ___
+
 #### Implemented test code for multiple methods
 
 Unit testing and integration testing was important to our project as it helped us to verify the correctness of the program
@@ -67,6 +75,7 @@ which is where many logic bugs can be introduced. Integration testing between `P
 as these two classes worked together directly to extract parameters and execute commands. Unit tests were implemented 
 first with possible inputs that would break the program. Once the 
 two classes were tested separately, integration tests were introduced to ensure that the core functionality was working.
+
 ____
 
 ### Contributions to documentation
@@ -79,7 +88,9 @@ I also helped to update the FAQ, design the logo and rephrase the introduction.
 
 Apart from that, I made many edits to improve grammar, correct spelling and improve the phrasing of the guide to be more
  audience-centric and beginner-friendly.
+
 ___
+
 ### Contributions to DG
 
 My main contributions to DG comes in the form of many of the sequence diagrams. I used PlantUML to create sequence
@@ -87,8 +98,11 @@ diagrams as well as help my teammates check and correct their sequence diagrams.
 of sequence diagrams.
 
 For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me,
-such as Parser and Help command. Apart from that, I also added the details for `ModuleList` class, `Command` class and the `Add` command.
+such as Parser and Help command. Apart from that, I also added the details for `ModuleList` class, `Command` class and
+the `Add` command.
+
 ___
+
 ### Contributions to team-based tasks
 
 I edited non-feature specific portions of the UG and DG such as the introduction and the content pages for both. I also 
@@ -96,6 +110,7 @@ reviewed my teammates' code, in particular look out for the reasons for failed g
 writing unit tests for `Parser` and `Command`. I also tagged issues found and assign issues to myself and teammates.
 
 ___
+
 ### Reviews and PRs
 
 I helped the team with repository maintenance, mostly about git (Pull Requests, Branches, Merge Conflicts etc).
