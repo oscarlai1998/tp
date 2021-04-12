@@ -12,15 +12,15 @@ Parser -> Parser: getCommand(line:String)
 activate Parser #DarkSalmon
 return command:String
 
-Parser -> Parser: getCommandParametersAndFlags(commands:String[])
+Parser -> Parser: getCommandParametersAndFlags(commands:ArrayList<String>)
 activate Parser #DarkSalmon
-return commandParameterAndFlags:String[]
+return commandParameterAndFlags:ArrayList<String>
 
-Parser -> Parser: createDoneCommand(commandParameters:String[], commandFlags:String[])
+Parser -> Parser: createDoneCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create DoneCommand
-Parser -> DoneCommand: new
+Parser -> DoneCommand: DoneCommand("CS1010", "A")
 activate DoneCommand
 DoneCommand --> Parser: new DoneCommand("CS1010", "A")
 deactivate DoneCommand

@@ -10,7 +10,7 @@ participant ":Ui" as Ui
 iGraduate -> Parser: parseCommand("progress")
 activate Parser #FFBBBB
 
-Parser -> Parser: createProgressCommand(commandParameters, commandFlags)
+Parser -> Parser: createProgressCommand(commandParameters:ArrayList<String>, commandFlags:ArrayList<String>)
 activate Parser #DarkSalmon
 
 create ProgressCommand
@@ -27,10 +27,9 @@ activate ProgressCommand
 
 ProgressCommand -> ModuleList: getTotalCompletedMCs()
 activate ModuleList
-ModuleList --> ProgressCommand: competedMCs
+ModuleList --> ProgressCommand: competedMCs:double
 deactivate ModuleList
 
-ProgressCommand -> Ui
 ProgressCommand -> Ui: printProgressBar(competedMCs)
 activate Ui
 deactivate Ui

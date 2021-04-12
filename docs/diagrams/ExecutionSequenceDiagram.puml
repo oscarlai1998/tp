@@ -26,11 +26,11 @@ loop while !isExit
 
     iGraduate -> parser: parseCommand(fullCommand:String)
     activate parser
-    parser -> parser: createCommand(commandParameters, commandFlags)
+    parser -> parser: createCommand()
     activate parser #DarkSalmon
 
     create command
-    parser -> command: createCommand(commandParameters, commandFlags)
+    parser -> command: createCommand()
     activate command
     return c:Command
     return

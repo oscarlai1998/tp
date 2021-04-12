@@ -61,10 +61,12 @@ Project by: `W09-2` Latest update: `12 April 2021`
 
 ## **Introduction** ##
 
-iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
-students track and plan their graduation by allowing them to add, delete, update modules to the module list. List shows the modules they have taken and can be taken. There is also a built-in CAP calculator and Progress Command to 
-check their graduation progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
-for tracking. When listing the modules, the module type will be shown accordingly.
+iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security students track and plan their
+graduation by allowing them to add, delete, update modules to the module list. The users are allowed to add Core, 
+General Education (GE), Math and Elective modules for tracking. There is also a built-in CAP calculator and Progress 
+Command to check their graduation progress. Users can also list down modules on the list. When listing the modules, the
+module type will be shown accordingly.
+
 
 [Back to Top](#table-of-contents)
 
@@ -231,11 +233,11 @@ Given below is the sequence diagram of how the architecture handles the flow of 
 
 ### **UI Component** ###
 
-The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` and `Print Methods`. The UI component mainly manages the retrieval of user command and display of user feedback, ranging from successful execution, execution results and exceptions. 
+The UI is a public class that consists of **three components**: `Scanner`, `Constants` and `Print Methods`. The UI component mainly manages the retrieval of user command and display of user feedback, ranging from successful execution, execution results and exceptions. 
 
 ***Behaviour***<br>
-- Executes user command using the [logic component](#logic-component).
-- Listens for calls from the [model component](#model-component), which will call the specific print method to print an output.
+
+- Listens for calls from the [logic component](#logic-component) and [model component](#model-component), which will call the specific print method to print an output.
 - Print method references `Constants` and prints them for user to see.
 
 ![archi](./images/UiClassDiagram.png)
@@ -274,7 +276,8 @@ Given below is the `Parser` class diagram showing the important methods that ret
 <sup>***Figure 1.3** UML class diagram for Parser class*</sup>
 
 ***Behaviour***<br>
-`parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input.
+
+ - `parseCommand()`extracts the command phrase entered by the user by extracting the first word of the user input.
  - Based on the type of command from the user, `parseCommand()` then calls different methods to extract parameters and flags from the user command that are relevant to the command. 
  - The parser then creates the relevant `Command` object and dispatches the control of the program to the created object. 
 
@@ -282,7 +285,7 @@ Given below is the `Parser` class diagram showing the important methods that ret
 > - Interpretation and checking of parameter validity occurs in the parser. 
 > - The Parser also contains checks that ensures the parameters passed are appropriate. 
 
-The different methods extract the various parameters and flags, which would be invoked based on the command word detected in the user input. 
+The methods that extract the various parameters and flags, which would be invoked based on the command word detected in the user input:
 
 |Method|Description|Invoked with|
 |------|-----------|------------|
@@ -298,13 +301,13 @@ The different methods extract the various parameters and flags, which would be i
 
 <br>
 
-The methods that check various parameters
+The method that check various parameters:
 
 |Method|Description|
 |------|-----------|
 |`isModuleCodeValid()`|Checks that the module code is a valid module code according to the standard for NUS modules. The method uses **regex** to check for the valid code. There are 2 overloading methods - one for checking a single instance and another for an array list to check through a list of module codes.|
 
-<sup>***Table 1.5** Methods invoked to check the validity of the `module code` inputted*</sup>
+<sup>***Table 1.5** Method invoked to check the validity of the `module code` inputted*</sup>
 
 ----
 
@@ -358,7 +361,7 @@ Below are the Command class diagrams, split into 3 diagrams for better readabili
 The `model` component consists of two main packages, `module` and `list`, which define and deal with data storing issues based on the information provided by the user input. 
 
 ***Behaviour***<br>
-The data storing issues are split into two main categories - what data should be included in for a module and a container managing the module objects. 
+The data storing issues are split into two main categories - what data should be included in a module and a container managing the module objects. 
 - `module` holds the information which acts as a blueprint for creating and manipulating module objects 
 - `list` consists of a class that defines the way the module objects 
 should be managed and stored.
@@ -380,7 +383,7 @@ A class diagram illustrating the relationship between the interaction of classes
 
 <sup>***Figure 1.7** UML class diagram for the Module package*</sup>
 
-The following child classes are created to handle different types of modules based on the generic module type available in the university:
+The following child classes handle different types of modules based on the generic module type available in the university:
 - `CoreModule`
 - `GeModule`
 - `ElectiveModule`
@@ -435,7 +438,7 @@ in `Storage`.
 
 ----
 
-#### **`ModuleList` Class** ####
+#### **ModuleList Class** ####
 
 The `ModuleList` class acts as an abstraction for the ArrayList that is used to store module objects created from any of the classes under the `module` package.
 
@@ -881,7 +884,7 @@ parameter from user input, and there is 1 compulsory flag:
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
-![archi](./images/ProgressCommandSequenceDiagram.png)
+![archi](./images/ProgressSequenceDiagram.png)
 
 <sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
