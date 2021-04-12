@@ -789,6 +789,7 @@ The `module` component contains the class `module`, together with 4 child classe
 stored in iGraduate are instances of one of the 4 subclasses.
 
 ***Details***
+
 For the implementation of modules in iGraduate, most of the information used to identify a module are contained in the
 parent class `module`. The class contains the setters and getters of all the data pertaining a module, such as the module code,
 grade and MCs. It also contains the lists that track the prerequisites of the module.
@@ -797,6 +798,7 @@ The implementation details of the subclasses are hence quite sparse, containing 
 in the `module` object.
 
 ***Considerations*** 
+
 To accommodate the wide range of operations available to the modules, the implementation of the `module` component had to
 be comprehensive in the data it stores. However, since every module shares the same categories of data to store, such as
 module code and grade, the subclasses do not contain much information that is not already stored in their parent class. To
