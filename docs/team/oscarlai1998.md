@@ -9,24 +9,21 @@ majoring in Information Security to plan their academic journey.
 
 * **Code contributed:** [RepoSense link](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=oscarlai1998&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
-### Enhancements implemented
-Given below are details of my contributions to the project.
+### Enhancements implemented:
 
 #### Implemented methods in `Ui` class of iGraduate
-*Considerations*
+*Considerations*:
 
 The initial concern was to think of all the possible features that may require interaction
 with the user. [Fuxi](https://github.com/fupernova) and [Ke Wen](https://github.com/kewenlok/) helped to implement
-skeleton methods to help me implement the specific methods based on the different command classes I implemented
-e.g. For ProgressCommand, I need to print the progress bar based on the number of
-MCs completed out of 160.
+skeleton methods to help me implement the specific methods based on the different command classes I implemented.
 
 #### Implemented `DeleteCommand` class of iGraduate
 The DeleteCommand class is responsible for executing the `delete` command, and takes in an additional parameter of 
 the module code. The module is then deleted from the Module List.
 
 #### Implemented `ProgressCommand` class of iGraduate
-*Considerations*
+*Considerations*:
 
 The Progress Command is important to iGraduate because in essence, our app's main focus is to help users know their
 progress towards graduation. Hence, the progress command was important so that we can display visually the graduation
@@ -38,7 +35,7 @@ users to choose which list they want to view. `all`, `complete`, `incomplete` , 
 details including the module `type`, `code`, `completetion status`, `name`, `grade` and
 `credits`.
 
-*Considerations*
+*Considerations*:
 
 List command was very challenging to implement because it required us to isolate the specific detail that 
 the user wants and list them out.
@@ -58,12 +55,9 @@ create the diagrams. e.g. **CapCommandSequenceDiagram** , **UiClassDiagram** and
 
 ### Contributions to team-based tasks
 
-* Maintaining Issue Tracker 
-    - Assigning myself and others issues
-    - Creating User Stories
+* Maintaining Issue Tracker : Assigning issues, creating user stories.
 * Setting up Github
 * Helping with Bug fixes 
-* Supplying ideas for features and possible exceptions to be caught
 * Implemented Exceptions: **PrerequisiteNotFoundException**, **InvalidModuleGradeException**, **InvalidModularCreditException**.
 
 ### Reviews and PRs
