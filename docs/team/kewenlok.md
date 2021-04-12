@@ -39,8 +39,6 @@ majoring in Information Security to plan their academic journey.
       in its required by list. Only modules with empty untaken prerequisites list are shown as available. Lastly, for module 
       deletion, the module requiring it as a prerequisite must be deleted first before it can be deleted.
 
-<br>
-
 1. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
       I researched on `RuntimeTypeAdapterFactory` and included it to generate the `Json` data with labels that distinguishes
