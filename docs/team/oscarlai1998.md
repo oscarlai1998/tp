@@ -5,12 +5,10 @@
 `iGraduate` is a command line application that acts as a centralised hub for NUS students
 majoring in Information Security to plan their academic journey. 
 
-___
 ## Summary of Contributions
 
 * **Code contributed:** [RepoSense link](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=oscarlai1998&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
-___
 ### Enhancements implemented
 Given below are details of my contributions to the project.
 
@@ -23,12 +21,10 @@ skeleton methods to help me implement the specific methods based on the differen
 e.g. For ProgressCommand, I need to print the progress bar based on the number of
 MCs completed out of 160.
 
-___
 #### Implemented `DeleteCommand` class of iGraduate
 The DeleteCommand class is responsible for executing the `delete` command, and takes in an additional parameter of 
 the module code. The module is then deleted from the Module List.
 
-___
 #### Implemented `ProgressCommand` class of iGraduate
 *Considerations*
 
@@ -36,7 +32,6 @@ The Progress Command is important to iGraduate because in essence, our app's mai
 progress towards graduation. Hence, the progress command was important so that we can display visually the graduation
 progress through a progress bar and ratio of MCs completed out of 160.
 
-___
 #### Implemented `ListCommand` class of iGraduate with [Ke Wen]((https://github.com/kewenlok/))
 The ListCommand class is responsible for executing the `list` command, and allows an additional input parameter for
 users to choose which list they want to view. `all`, `complete`, `incomplete` , `available` . The list shows module
@@ -48,21 +43,19 @@ details including the module `type`, `code`, `completetion status`, `name`, `gra
 List command was very challenging to implement because it required us to isolate the specific detail that 
 the user wants and list them out.
 
-___
 ### Contributions to documentation
 
 #### User Guide
 
 For the user guide, I made some minor edits to improve grammar, spelling and improve the phrasing of the guide to 
 audience-centric to our target audience.
-___
+
 ### Contributions to DG
 
 For the developer guide, my main contributions are the sequence and class diagrams in which I used PlantUML to
 create the diagrams. e.g. **CapCommandSequenceDiagram** , **UiClassDiagram** and
 **ProgressSequenceDiagram**. In addition, I wrote about Ui and Exception under Design
 
-___
 ### Contributions to team-based tasks
 
 * Maintaining Issue Tracker 
@@ -73,7 +66,6 @@ ___
 * Supplying ideas for features and possible exceptions to be caught
 * Implemented Exceptions: **PrerequisiteNotFoundException**, **InvalidModuleGradeException**, **InvalidModularCreditException**.
 
-___
 ### Reviews and PRs
 
 I helped the team with repository maintenance. 
@@ -95,7 +87,6 @@ Here is a list of pull requests I helped to review and merge:
 , [#165](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/165)
 , [#170](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/170)
 
-___
 ### Contributions beyond the project team
 
 - Performed bug hunting on such as [All-in-OneNUS](https://github.com/AY2021S2-CS2113-T09-3/tp) and recommended possible 
