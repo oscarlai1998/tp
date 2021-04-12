@@ -4,6 +4,7 @@
 
 `iGraduate` is a command line application that acts as a centralised hub for NUS students
 majoring in Information Security to plan their academic journey. 
+
 ___
 ## Summary of Contributions
 
@@ -19,13 +20,12 @@ information to the screen.
 
 *Considerations*
 
-Ui depends on the implementation of other classes, in which each feature might call the UI class to print information
-on screen. The initial concern was to think of all the possible features that may require interaction
+The initial concern was to think of all the possible features that may require interaction
 with the user. [Fuxi](https://github.com/fupernova) and [Ke Wen](https://github.com/kewenlok/) helped to implement
-some skeleton methods to help me implement the specific methods based on the different command classes I implemented
-In my case, my implementation of DeleteCommand, ProgressCommand and ListCommand requires
-specific information to be printed e.g. For ProgressCommand, I need to print the progress bar based on the number of
+skeleton methods to help me implement the specific methods based on the different command classes I implemented
+e.g. For ProgressCommand, I need to print the progress bar based on the number of
 MCs completed out of 160.
+
 ___
 #### Implemented `DeleteCommand` class of iGraduate
 The DeleteCommand class is responsible for executing the `delete` command, and takes in an additional parameter of 
@@ -49,15 +49,14 @@ The ListCommand class is responsible for executing the `list` command, and allow
 users to choose which list they want to view. `all` lists all modules on your list, `complete` lists all modules that 
 have been completed (i.e. marked as done), `incomplete` lists all modules that have been added into the system but has 
 not been completed(i.e. modules that you are currently taking or yet to take), `available` lists all modules that can be
-taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. You could also list
-specific type of modules by putting in the module type as option. The valid module types are `core`, `elec`, `ge` and
-`math`. The list shows module details including the module `type`, `code`, `completetion status`, `name`, `grade` and
+taken (with prerequisites fulfilled), but have not been taken, based on the completed modules. The list shows module
+details including the module `type`, `code`, `completetion status`, `name`, `grade` and
 `credits`.
 
 *Considerations*
 
 Due to large amount of modules where modules have a specific type e.g. (core, elec, ge) and they are either completed
-or incompleted, we decided to implement a list function to view the specific modules based on the list. On my part,
+or incomplete, we decided to implement a list function to view the specific modules based on the list. On my part,
 I implemented list all, incomplete and completed.
 
 ___
@@ -85,6 +84,7 @@ create the diagrams. Some Diagrams I contributed to is the **CapCommandSequenceD
 **ProgressSequenceDiagram**. I also contributed to Cap and Progress Command and the Ui
 component. In addition, I added information about Exceptions under Implementation including the summary of table of
 exceptions in iGraduate.
+
 ___
 ### Contributions to team-based tasks
 
@@ -117,6 +117,7 @@ Here is a list of pull requests I helped to review and merge:
 , [#162](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/162)
 , [#165](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/165)
 , [#170](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/170)
+
 ___
 ### Contributions beyond the project team
 
