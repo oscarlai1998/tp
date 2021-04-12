@@ -128,6 +128,8 @@ Added CP2201 Journey of the Innovator to the list. (2.0MCs)
 <sup>***Figure 1.1.1** Expected results from adding the `unrestricted elective` module `Journey of the 
 Innovator`, a `2` credit module with the code `CP2201`, without any prerequisites.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 `add Introduction to Operating Systems -c CS2106 -t core -mc 4 -p CS2100`
 
 ```
@@ -323,8 +325,6 @@ Prerequisite for                      : []
 
 ----
 
-<div style="page-break-after: always;"></div>
-
 <!--@@author LJ-37-->
 
 ### **List modules: `list`** ###
@@ -367,6 +367,8 @@ Module List:
 --------------------------------------------------------------------------------------
 ```
 <sup>***Figure 1.6.1** Expected results from listing `all` modules. The list includes all module information that has been added.*</sup>
+
+<div style="page-break-after: always;"></div>
 
 `list incomplete`
 
@@ -654,6 +656,8 @@ The sample `Json` format for the module data file:
 </pre>
 
 <sup>***Figure 1.11.1** Sample JSON file structure in modules.json*</sup>
+
+<div style="page-break-after: always;"></div>
 
 > ℹ️ **Note:**
 > - All fields shown in the example `json` file format above are compulsory. Missing any fields above in the file will
