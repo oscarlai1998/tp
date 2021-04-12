@@ -324,7 +324,7 @@ The correct command is executed once the `Command` object is created by the pars
 The command execution can affect the `Model` (eg. adding a module).
 At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
-Below are the Command class diagrams, split into 2 diagrams for better readability.
+Below are the Command class diagrams, split into 3 diagrams for better readability.
 
 ![archi](images/CommandClassDiagram1.png)
 
@@ -333,6 +333,10 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 ![archi](./images/CommandClassDiagram2.png)
 
 <sup>***Figure 1.6.2** UML class diagram for Command class part 2*</sup>
+
+![archi](./images/CommandClassDiagram3.png)
+
+<sup>***Figure 1.6.3** UML class diagram for Command class part 3*</sup>
 
 <br>
 

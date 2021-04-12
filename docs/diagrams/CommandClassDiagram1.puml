@@ -28,14 +28,7 @@ class "DeleteCommand" {
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
 }
 
-class "DoneCommand" {
-    #moduleCode:String
-    #moduleGrade:String
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-}
-
 "{abstract}\n<i>Command" <|-- "AddCommand"
 "{abstract}\n<i>Command" <|-- "CapCommand"
 "{abstract}\n<i>Command" <|-- "DeleteCommand"
-"{abstract}\n<i>Command" <|-- "DoneCommand"
 @enduml
