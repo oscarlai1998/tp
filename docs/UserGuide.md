@@ -535,6 +535,8 @@ Current Degree Classification: Honours (Distinction)
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Exit the program: `exit`** ###
 Exits the program. 
 
