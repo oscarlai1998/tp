@@ -4,8 +4,6 @@ hide footbox
 Participant ":iGraduate" as iGraduate
 Participant ":Ui" as ui
 Participant ":Parser" as parser
-Participant ":Storage" as storage
-Participant ":ModuleList" as moduleList
 Participant ":Command" as command
 
 activate iGraduate
@@ -49,14 +47,12 @@ loop while !isExit
     iGraduate -> ui: printBorderLine()
     activate ui
     return
+    destroy command
 end
 return
 
 iGraduate --[hidden]> iGraduate
 destroy iGraduate
 destroy ui
-destroy command
 destroy parser
-destroy storage
-destroy moduleList
 @enduml
