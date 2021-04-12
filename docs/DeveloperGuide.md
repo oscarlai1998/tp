@@ -1213,6 +1213,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 <div style="page-break-after: always;"></div>
 <!--@@author LJ-37-->
+
 ## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
