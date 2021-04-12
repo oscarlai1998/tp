@@ -63,7 +63,7 @@ by developers.
 
 *Considerations*
 
-The team's main priority for testing were the `Parser` and `Command` classes as they deal with user input, 
+Testing for `Parser` and `Command` classes were priority as they deal with user input, 
 which is where many logic bugs can be introduced. Integration testing between `Parser` and `Command` was also important
 as these two classes worked together directly to extract parameters and execute commands. Unit tests for these 
 two classes were implemented first with possible inputs that would break the program. Once the 
