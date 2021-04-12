@@ -2,11 +2,8 @@
 
 ## Overview
 
-`iGraduate` is a command line application that acts as a centralised hub for NUS students 
-majoring in Information Security to plan their academic journey. With tools like the 
-storing of modules, listing of modules that can be taken, an academic progression indicator 
-and a CAP calculator, iGraduate will help students check his/her graduation progress and make 
-informed decisions about future modules.
+`iGraduate` is a command line application written in `Java` that acts as a centralised hub for NUS students 
+majoring in Information Security to plan their academic journey.
 
 ## Summary of Contributions
 
@@ -17,15 +14,14 @@ informed decisions about future modules.
 ### Enhancements implemented
 
 1. Implemented `AddCommand` class with [Le Jun](#https://github.com/LJ-37).
-    * Le Jun and I was tasked to implement the `AddCommand` for adding new modules to the application, which is a critical 
-      command for our application. I created methods that will be used by the command in `Ui` and `ModuleList` while Le Jun 
-      writes the logic code in `AddCommand`. I added prerequisites for the `AddCommand` at a later time when we decided to 
-      include prerequisites feature.
+    * I created methods that will be used by the command in `Ui` and `ModuleList` while Le Jun writes the logic code in 
+      `AddCommand`. I added prerequisites for the `AddCommand` at a later time when we decided to include prerequisites 
+      feature.
       
 1. Implemented `InfoCommand` class to show module information.
-    * To allow user to view their module information in the list, I implemented `InfoCommand` that executes `info` command for 
-      users to view all the specified module information. I also created methods in `Ui`, `Parser` and `ModuleList` classes to aid 
-      the processing of user input, module data fetching and display the results to the user.
+    * I implemented `InfoCommand` that executes `info` command for users to view all the specified module information. 
+      I also created methods in `Ui`, `Parser` and `ModuleList` classes to aid the processing of user input, module 
+      data fetching and display the results to the user.
       
 1. Implemented `DoneCommand` class for user to mark module as taken.
     * The `DoneCommand` class is responsible for executing the operations related to `done` feature. The `done` feature allows 
@@ -47,7 +43,7 @@ informed decisions about future modules.
       list are shown as available. Lastly, for module deletion, the module requiring it as a prerequisite must be deleted first 
       before it can be deleted.
       
-1. Added enhancement to the `Storage` component by incorporating the ability to differentiate child module classes.
+1. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
       I included `RuntimeTypeAdapterFactory` and register the child module classes as the subtype of `Module` class's 
       `RuntimeTypeAdapterFactory` object. The modified `Module` class `RuntimeTypeAdapterFactory` is then registered to 
