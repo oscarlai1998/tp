@@ -53,8 +53,25 @@ regarding the proper usage of iGraduate, including the different commands and th
 Due to the large number of commands and features available in iGraduate, we decided to have separate help pages for each command,
  along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
 make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
-
 ___
+#### Implemented test code for multiple methods
+
+Unit testing and integration testing was important to our project as it helped us to verify the correctness of the program
+as well as help us identify bugs that we missed out on. In particular, special attention was given to tests for `Parser`
+and `Command` classes as these 2 classes primarily dealt with user input and hence are the most prone to bugs introduced
+by developers.
+
+*Considerations*
+
+The team's main priority for testing were the `Parser` and `Command` classes. It was important to ensure that these two
+classes were built correctly as they deal with user input, which is where many logic bugs can be introduced. Integration
+testing between `Parser` and `Command` were also important as these two classes worked together directly, with `Parser`
+extracting user input and `Command` executing the command given. Hence, unit tests for these two classes were implemented 
+first with team members thinking of possible inputs that would break the program. Once the two classes were amply tested
+separately, integration tests were introduced to ensure that the core functionality of parsing user inputs and creating the
+appropriate `Command` instance was working.
+____
+
 ### Contributions to documentation
 
 #### User Guide

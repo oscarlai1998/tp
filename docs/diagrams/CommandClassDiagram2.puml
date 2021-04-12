@@ -7,13 +7,6 @@ class "{abstract}\n<i>Command" {
     +<i>execute(ModuleList:moduleList, Ui:ui, Storage:storage)
 }
 
-class "ExitCommand" {
-}
-
-class "ListCommand" {
-    -scope:String
-    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
-}
 
 class "ProgressCommand" {
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
@@ -28,8 +21,12 @@ class "UpdateCommand" {
     +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
 }
 
-"{abstract}\n<i>Command" <|-- "ExitCommand"
-"{abstract}\n<i>Command" <|-- "ListCommand"
+class "HelpCommand" {
+    -helpType:String
+    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
+}
+
 "{abstract}\n<i>Command" <|-- "ProgressCommand"
 "{abstract}\n<i>Command" <|-- "UpdateCommand"
+"{abstract}\n<i>Command" <|-- "HelpCommand"
 @enduml
