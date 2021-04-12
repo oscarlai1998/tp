@@ -24,7 +24,7 @@ I implemented the Parser function. While he worked on the higher layers of the p
 ### **Contributions to UG** ###
 
 1. [Introduction](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#introduction)
-1. [User Guide usage](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#ug-guide-usage)
+1. [User Guide usage](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#user-guide-usage)
 1. [Quick start](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#quick-start) (only the sample output of a successful setup)
 1. [Update](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#update-module-information-update)
 1. [Storage](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#storage-of-data)
