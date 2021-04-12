@@ -13,7 +13,7 @@ majoring in Information Security to plan their academic journey.
 
 ### Enhancements implemented
 
-1. Implemented `AddCommand` class with [Le Jun](#https://github.com/LJ-37).
+1. Implemented `AddCommand` class with [Le Jun](https://github.com/LJ-37).
     * The implementation of `AddCommand` is generally doable except for the checking and inserting the prerequisites 
       information to the module's prerequisites, untaken prerequisites and each of the prerequisites' requiredByModules
       as it is quite complex.
@@ -23,8 +23,8 @@ majoring in Information Security to plan their academic journey.
       of the specified module to the user.
       
 1. Implemented `DoneCommand` class for user to mark module as taken.
-    * The `DoneCommand` class is responsible for executing the operations related to `done` feature. The `done` feature allows 
-      the user to update the module they have taken with a grade so that the application can update the prerequisite list of related
+    * The `DoneCommand` class is responsible for executing and providing the `done` feature to allow the user to update 
+      the module they have taken with a grade so that the application can update the prerequisite list of related
       modules accordingly to show an accurate results on the module status and whether it can be taken next.
       
 1. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
@@ -86,7 +86,9 @@ majoring in Information Security to plan their academic journey.
   [#66](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/66)
   [#74](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/74)
   [#213](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/213)
-  [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217))
+  [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217)
+  [#241](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/241)
+  [#253](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/253))
 1. Researched on third party libraries which could be used for the project and obtained permission from the lecturer 
   on behalf of the team. (Issues: [#31](https://github.com/nus-cs2113-AY2021S2/forum/issues/31)
   [#40](https://github.com/nus-cs2113-AY2021S2/forum/issues/40))
