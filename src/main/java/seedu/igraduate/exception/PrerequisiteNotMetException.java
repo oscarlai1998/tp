@@ -12,6 +12,7 @@ public class PrerequisiteNotMetException extends Exception {
     private final String moduleCode;
     private final ArrayList<String> prerequisites;
 
+    //@@author oscarlai1998
     public PrerequisiteNotMetException(String moduleCode, ArrayList<String> prerequisites) {
         super(String.format(PREREQUISITE_NOT_MET_ERROR_MESSAGE, moduleCode, moduleCode,
                 convertPrerequisiteListToString(prerequisites)));
@@ -20,6 +21,7 @@ public class PrerequisiteNotMetException extends Exception {
 
     }
 
+    //@@author fupernova
     /**
      * Converts all prerequisites not taken into string form with comma as separator.
      *

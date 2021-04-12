@@ -1,0 +1,48 @@
+@startuml
+hide footbox
+
+Participant ":iGraduate" as iGraduate
+Participant ":Ui" as ui
+Participant ":Parser" as parser
+Participant ":Storage" as storage
+Participant ":ModuleList" as moduleList
+
+ -> iGraduate : new iGraduate()
+activate iGraduate
+
+create ui
+iGraduate -> ui:Ui()
+activate ui
+return
+
+create parser
+iGraduate -> parser:Parser()
+activate parser
+return
+
+create storage
+iGraduate -> storage:Storage()
+activate storage
+return
+
+iGraduate -> storage:loadModulesFromFile()
+activate storage
+return distinctModules:ArrayList<Module>
+
+create moduleList
+iGraduate -> moduleList: ModuleList(distinctModules)
+activate moduleList
+return
+
+iGraduate -> storage:saveModulesToFile()
+activate storage
+return
+
+iGraduate -> iGraduate: run()
+activate iGraduate #DarkSalmon
+
+iGraduate -> ui:printWelcomeMessage()
+activate ui
+return
+
+@enduml

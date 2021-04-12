@@ -1,5 +1,3 @@
-// @@author fupernova
-
 package seedu.igraduate.logic.command;
 
 import seedu.igraduate.exception.InvalidCommandException;
@@ -20,6 +18,7 @@ public class HelpCommand extends Command {
      */
     private String helpType;
 
+    //@@author fupernova
     /**
      * Constructs a new HelpCommand object.
      *

@@ -40,6 +40,7 @@ public abstract class Module {
      */
     private ArrayList<String> requiredByModules;
 
+    //@@author kewenlok
     /**
      * Constructs a new Module object.
      * 
@@ -115,6 +116,7 @@ public abstract class Module {
         return status;
     }
 
+    //@@author oscarlai1998
     /**
      * Checks if the current module is done/taken.
      *
@@ -145,6 +147,7 @@ public abstract class Module {
         }
     }
 
+    //@@author kewenlok
     /**
      * Checks whether all the prerequisites are satisfied.
      *
@@ -201,6 +204,7 @@ public abstract class Module {
         }
     }
 
+    //@@author xseh
     /**
      * Creates a custom hashcode for comparison in streams. 
      */
@@ -217,6 +221,7 @@ public abstract class Module {
         return this.getCode().equals(((Module) module).getCode());
     }
 
+    //@@author kewenlok
     @Override
     public String toString() {
         return String.format("[%s] %-9s %-55s %3s %3s MC", getStatusIcon(), getCode(), getName(), getGrade(),

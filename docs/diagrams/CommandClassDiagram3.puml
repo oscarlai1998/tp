@@ -1,0 +1,35 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class "{abstract}\n<i>Command" {
+    +<i>execute(ModuleList:moduleList, Ui:ui, Storage:storage)
+}
+
+class "InfoCommand" {
+    #moduleCode:String
+    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
+}
+
+class "DoneCommand" {
+    #moduleCode:String
+    #moduleGrade:String
+    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
+}
+
+
+class "ExitCommand" {
+}
+
+class "ListCommand" {
+    -scope:String
+    +execute(ModuleList:moduleList, Ui:ui, Storage:storage)
+}
+
+"{abstract}\n<i>Command" <|-- "ExitCommand"
+"{abstract}\n<i>Command" <|-- "ListCommand"
+"{abstract}\n<i>Command" <|-- "DoneCommand"
+"{abstract}\n<i>Command" <|-- "InfoCommand"
+
+@enduml

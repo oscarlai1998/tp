@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public class ExitCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
 
+    //@@author oscarlai1998
     /**
      * Prints exit message.
      *
@@ -26,6 +27,7 @@ public class ExitCommand extends Command {
         ui.printExitMessage();
     }
 
+    //@@author kewenlok
     /**
      * {@inheritDoc}
      *

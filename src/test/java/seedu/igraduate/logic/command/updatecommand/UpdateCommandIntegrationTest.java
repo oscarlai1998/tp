@@ -38,7 +38,7 @@ import java.io.PrintStream;
 import java.nio.file.Paths;
 
 public class UpdateCommandIntegrationTest {
-    private static final File FILEPATH = Paths.get("./commandteststorage/deleteCommandData.json").toFile();
+    private static final File FILEPATH = Paths.get("./commandteststorage/updateCommandData.json").toFile();
 
     private Storage storage = Storage.getStorage(FILEPATH);
     private Ui ui = new Ui();
@@ -115,6 +115,20 @@ public class UpdateCommandIntegrationTest {
             () -> updateCommand.execute(moduleList, ui, storage));
         assertEquals(InvalidModularCreditException.INVALID_MODULAR_CREDIT_ERROR_MESSAGE, exception.getMessage());
     }
+
+    /*
+    @Test
+    void executeUpdateCommand_invalidFlag_ExceptionThrown() throws InvalidModuleTypeException,
+            InvalidListTypeException, InputNotNumberException, IncorrectParameterCountException,
+            InvalidModularCreditException, IllegalParametersException, InvalidModuleGradeException,
+            InvalidModuleCodeException, InvalidCommandException {
+        String line = "update CS1010 -n Introduction to Computer-Organisation -mc 4 -invalidTag testing";
+        Command updateCommand = parser.parseCommand(line);
+        Exception exception = assertThrows(InvalidCommandException.class,
+            () -> updateCommand.execute(moduleList, ui, storage));
+        assertEquals(String.format(InvalidCommandException.INVALID_COMMAND_ERROR_MESSAGE, "Unknown flags" + 
+                "detected. The update command only accepts -[n|mc|g|p] as flags."), exception.getMessage());
+    }*/
 
     @AfterEach
     void tearDownList() throws InvalidCommandException, InvalidModuleTypeException, InputNotNumberException,

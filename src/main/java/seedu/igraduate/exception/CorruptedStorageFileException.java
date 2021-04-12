@@ -9,6 +9,7 @@ public class CorruptedStorageFileException extends Exception {
             + "Note: If you wish to attempt to fix the configuration, exit program immediately. "
             + System.lineSeparator() + "Do not perform any commands or you will lose the original storage file. ";
 
+    //@@author xseh
     public CorruptedStorageFileException() {
         super(MODIFIED_STORAGE_FILE_EXCEPTION);
     }

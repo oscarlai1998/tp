@@ -23,6 +23,7 @@ public class InfoCommand extends Command {
      */
     protected String moduleCode;
 
+    //@@author kewenlok
     /**
      * Constructs a new InfoCommand object.
      *
