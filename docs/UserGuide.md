@@ -504,6 +504,8 @@ Progress:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Calculate CAP: `cap`** ###
 
 Calculates your current Cumulative Average Point (CAP) according to the modules you have completed with the grade obtained (i.e. A+ to F). The `cap` command also displays the current degree classification based on the CAP calculated. 
