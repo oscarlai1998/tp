@@ -62,9 +62,9 @@ Project by: `W09-2` Latest update: `11 April 2021`
 ## **Introduction** ##
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
-students track and plan their graduation by allowing them to add new modules for tracking,
-show the modules they have taken and can be taken, calculating their CAP and checking their graduation
-progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
+students track and plan their graduation by allowing them to add, delete, update modules to the module list. List  
+shows the modules they have taken and can be taken. There is also a built-in CAP calculator and Progress Command to 
+check their graduation progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
 <br> 
@@ -76,8 +76,8 @@ for tracking. When listing the modules, the module type will be shown accordingl
 <!--@@author xseh-->
 
 ## **Developer Guide Usage** ##
-This developer guide is made for developers who wish to understand and/or develop **iGraduate** 
-further. This guide includes the setup steps, design, implementation, logging, testing, product scope,
+This developer guide is made for developers who wish to further understand and/or develop **iGraduate**. 
+This guide includes the setup instructions, design, implementation, logging, testing, product scope,
 and other sections to give developers a better understanding of the application.
 
 <!--@@author kewenlok-->
@@ -87,7 +87,7 @@ Symbols/Formatting | Description
 -------------------|------------------------------------------
 ℹ️ **Note:**        | Information to take note of.
 📝 **Tip:**        | Optional information that may be useful. 
-⚠️ **Warning!**    | Contains important information that may resolve problems. 
+⚠️ **Warning!**    | Important information that may resolve problems. 
 `Grey highlight`   | Code or terms related to the application.
 
 <br> 
@@ -103,20 +103,20 @@ Symbols/Formatting | Description
 This section guides you through the process of setting up the project on your computer.
 
 > ℹ️ **Note:** This application is developed for users with `Java 11` installed on their computer. 
-> If you do not have it installed on your computer or you have other versions of it, follow this 
+> If you do not have it installed on your computer or if you have other versions of Java, follow this 
 > [link](https://openjdk.java.net/projects/jdk/11/) to download and install it before continuing 
 > with this section. 
 
 > 📝 **Tip:** To check if you have `Java 11` installed, type `java --version` into a command prompt
 
-Fork the [iGraduate repository](https://github.com/AY2021S2-CS2113T-W09-2/tp) to your github account and clone it to your local computer. 
+Fork the [iGraduate repository](https://github.com/AY2021S2-CS2113T-W09-2/tp) to your GitHub account and clone it to your local computer. 
 Alternatively, you could also download the source code of the application 
 directly from our [latest release](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
 
 ### **Terminal** ###
 
-1. Open a terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
-   Windows platform or run `./gradlew run` on MacOS/Linux platform.
+1. Open a new terminal in the folder/directory where the `build.gradle` resides, and run `gradlew.bat run` on 
+   Windows platform or run `./gradlew run` on macOS/Linux platform.
    <br>
 1. You will see the following output in the console when the setup is successful:
 
@@ -183,7 +183,8 @@ What would you like to do today?
 <!--@@author ???-->
 
 ## **Design** ##
-The following section describes an overview of the design architecture. Each subsections then provides a more detailed design of each individual components.  
+The following section is an overview of the design architecture. Each Sub-section provides a more detailed 
+explanation for the design of each individual components.  
 
 ### **Architecture Diagram** ###
 ![archi](./images/ArchitectureDiagram.png)
@@ -213,13 +214,13 @@ The rest of the App consists of four components:
 
 Each of the four components,
 - Defines its API in an interface with the **same name** as the Component.
-- Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.
+- Exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API interface mentioned in the previous point.)
 
-Given below is the sequence diagram of the startup sequence of iGraduate until just before awaiting for user input.
+Given below is the sequence diagram of the startup sequence of iGraduate before any user input.
 
 ![archi](./images/StartupSequenceDiagram.png)
 
-<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before awaiting for first user input.*</sup>
+<sup>***Figure 1.1.2** Sequence diagram of iGraduate from startup until before first user input.*</sup>
 
 The startup sequence sets up all objects required for running commands, such as the `Ui` and fetching of stored data from `Storage`.
 Given below is the sequence diagram of how the architecture handles the flow of execution of commands and how the program exits.
@@ -297,7 +298,7 @@ The different methods extract the various parameters and flags, which would be i
 |`extractModuleCode()`|Extracts the **module code** by checking for the `-c` flag. |`createAddCommand()`|
 |`extractModuleType()`|Extracts the **module type** by checking for the `-t` flag. |`createAddCommand()`|
 |`extractModuleCredits()`|Extracts the **module credits** by checking for the `-mc` flag. |`createAddCommand()`, `createUpdateCommand()`|
-|`extractModuleGrade()`|Extracts the module grade obtained by checking for the `-g` flag. |`createDoneCommand()`, `createUpdateCommand()`|
+|`extractModuleGrade()`|Extracts the **module grade** obtained by checking for the `-g` flag. |`createDoneCommand()`, `createUpdateCommand()`|
 |`extractModuleName()`|Extracts the **module name** by checking for the `-n` flag. |`createUpdateCommand()`|
 |`extractPreRequisites()`|Extracts the **module prerequisites** by checking for the `-p` flag. |`createAddCommand()`, `createUpdateCommand()`|
 |`extractListScope()`|Extracts the **list type**. Accepts all, complete,  incomplete or available as acceptable scopes. |`createListCommand()`|
@@ -336,7 +337,7 @@ The `command` component consists of an abstract class `Command` and 10 subclasse
 
 ***Behaviour***<br>
 The correct command is executed once the `Command` object is created by the parser by executing the `execute()` method in the correct subclass.
-The command execution can affect the `Model` (eg. adding a module).
+The command execution can affect the `Model` (e.g. adding a module).
 At the end of each command execution, different methods in the `Ui` will be called to perform certain actions, such as displaying the list of modules to the user.
 
 Below are the Command class diagrams, split into 3 diagrams for better readability.
@@ -464,7 +465,7 @@ The `ModuleList` class:
     1. [Add](#add-a-module) a module to the list
     1. [Delete](#delete-a-module) a module from the list
     1. [Mark](#mark-module-as-taken) a module as done
-- Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve values such as the entire list or an individual module from the list according to different parameters such as module code or index. 
+- Apart from these 3 operations, the `ModuleList` class also defines getter and setter methods to retrieve  individual modules from the list according to different parameters such as module code or index. 
 
 ----
 
@@ -533,6 +534,8 @@ The `Storage` Component,
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author oscarlai1998-->
+
 ### **Common Classes** ###
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown when an error occurs. The method catches the exceptions and prints out the respective error message. 
 
@@ -588,7 +591,7 @@ There are 3 classifications of user input: **command, parameter and flags**.
 
 |User input|Description|Usage/Example|
 |----------|-----------|---------|
-|`command`|the type of command the user intends to run and is first word from the user input|dictates how `Parser` extracts the parameter and flags. Refer to [Command](command) for the list of available commands|
+|`command`|the type of command the user intends to run and is first word from the user input|dictates how `Parser` extracts the parameter and flags. Refer to [Command](#command) for the list of available commands|
 |`parameter`|the argument that comes after the command word and can vary depending on the command|specifies the identifier (module name or code or list type) for the modules. For example, the parameter for `add`command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specify the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands|specify the additional information required for the command to run. For `add`, flags would be for module code, module type, MCs and prerequisites.|
 
@@ -597,8 +600,8 @@ There are 3 classifications of user input: **command, parameter and flags**.
 ***Considerations*** : How to implement parsing of user input<br>
 
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the 
-large number of commands and the variance in parameter and flag types. Another difficult problem to navigate was the
-validation of the format and values of the parameters and flags. Initially, no validation checks were put in `Parser`,
+large number of commands and the variance in parameter and flag types. Another difficult problem to navigate around was the
+validation of the format and values of the parameters and flags. Initially, no validation checks were implemented in `Parser`,
 with the respective `Command` subclasses doing the input validation for their specific parameters and flags. However, 
 the `Storage` component also requires the same checks as the `Command` component. As such, there was a dependency 
 between `Storage` and `Command`, which does not make sense as the responsibilities of the two are completely unlinked.
@@ -643,7 +646,7 @@ An `arrayList` is used to store the parsed data from the user input instead of a
         - Inefficient in extracting input flags
         - Limited functionalities
 
-Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size because  arrays are more memory efficient. The parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
 
 <br> 
 
@@ -722,7 +725,7 @@ from user input as a parameter. There are no flags involved for deleting a modul
 
 #### **Update Command** ####
 
-The update commands allows modifications to the existing modules, identified by the module code. 
+The update commands allows users to modify existing modules, identified by the module code. 
 The information that can be updated include module name, credits, prerequisites and grades (if the module is 
 marked as done). 
 
@@ -756,15 +759,15 @@ The main considerations regarding the behaviour of the update command would be i
         - Inconvenient and unsuitable for target audience
 1. Allow multiple flags (current choice)
     - Pros: 
-        - Suitable for target audience who ar fast typers
-        - Update less time consuming and troublesome
+        - Suitable for target audience who are fast typists
+        - Update Command makes it more convenient for users to change module information as compared to deleting a module and adding it again.
     - Cons: 
         - Complicated process when extracting flags
         - More considerations needed for error and exception handling
 
-Having a single input would significantly simplify the code, as a simple switch statement will suffice. There is also easier error and exception handling as only two parameters are given. In the event of exception, simply retrace the command and throw exception. However, having only one flag at a time is inconvenient for fast typers, and is less optimized for their quick typing. 
+Having a single input would significantly simplify the code, as a simple switch statement will suffice. There is also less error and exception handling as only two parameters are given. In the event of an exception, simply retrace the command and throw exception. However, having only one flag at a time is inconvenient for fast typists, and is less optimized for their quick typing. 
 
-Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typers to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate less time consuming and troublesome. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
+Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should be completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typists to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate more convenient. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
 
 ***Considerations*** : Command error and exception handling management<br>
 
@@ -791,9 +794,9 @@ On the event of a failed flag, considerations have to made to determine how the 
 
 The first way is to completely abort the entire command, which lowers the usability aspect of the application, creating inconvenience when a small error is encountered. However, this makes coding straightforward and simple. 
 
-Another alternative is to simply ignore the failed flag and attempt to change the rest. This would make the update command more usable and convenient. However, the primary issue is the difficulty in designing and programming such behaviour, individual try and catch statements needs to be used. Each statements must be able to differentiate between having an invalid flag input or having a flag that does not exists (i.e. the user did not use the flag).  This behaviour makes the application significantly more complex to code and catch. 
+Another alternative is to simply ignore the failed flag and attempt to change the rest. This would make the update command more usable and convenient. However, the primary issue is the difficulty in designing and programming such behaviour, individual try and catch statements needs to be used. Each statement must be able to differentiate between having an invalid flag input or having a flag that does not exist (i.e. the user did not use the flag).  This behaviour makes the application significantly more complex to code and catch. 
 
-Finally, decisions were made to compromise between the two alternatives. After some discussions, it was determined that grade (the -g flag) is the most likely to fail since it depends on not just the user input but if the module has has been completed. Therefore, a dedicated try statement is used to ensure that, even in the event of errors associated with providing a grade to an incomplete module, the rest of the command would still be updated (the rest of the extracts and checking is in the finally clause). Unfortunately, if the other flags fail, the program will abort entirely. This alternative balances the complexity between error and exception handling and usability, allowing some flexibility in managing error while providing some convenience.
+Finally, decisions were made to compromise between the two alternatives. After some discussions, it was determined that grade (the -g flag) is the most likely to fail since it depends on not just the user input but if the module has been completed. Therefore, a dedicated try statement is used to ensure that, even in the event of errors associated with providing a grade to an incomplete module, the rest of the command would still be updated (the rest of the extracts and checking is in the final clause). Unfortunately, if the other flags fail, the program will abort entirely. This alternative balances the complexity between error and exception handling and usability, allowing some flexibility in managing error while providing some convenience.
 
 ----
 
@@ -818,25 +821,25 @@ An example of info command execution flow is shown in the sequence diagram below
 
 ***Considerations***
 
-After receiving a feedback from a user stating that there are no ways for the user to view the prerequisites 
-information for any modules, the team consider to implement a prerequisites column for the `list command` as
-suggested by the user. However, through much consideration and discussion, the team feels that it will be too
+After receiving feedback from a user stating that there are no ways for the user to view the prerequisite 
+information for any modules, the team considered implementing a prerequisite column for the `list command` as
+suggested by the user. However, after much consideration and discussion, the team felt that it could become too
 convoluted and cluttered for the `list command` results as there are simply too much information to show in one
-screen. Instead, the team decided to create a new `info command` for listing all information of the module which 
-the user wish to know.
+screen. Instead, the team decided to create a new `info command` to list the information of the module based on the module
+code as specified by the user.
 
 ----
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author oscarlai1998-->
 
 #### **List Command** ####
 
 The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
 form of a parameter that is extracted from user input.
 
-The table below shows the scope of each options.  
+The table below is an overview of the list commands. 
 
 |List Parameter|Scope|
 |--------------|-----|
@@ -849,7 +852,7 @@ The table below shows the scope of each options.
 |`elec`|List all elective modules on the list|
 |`ge`|List all GE modules on the list|
 
-<sup>***Table 1.19.1*** Supported list functions and their scope</sup>
+<sup>***Table 1.19.1*** Overview of the List function</sup>
 
 ![list](./images/ListCommandSequenceDiagram.png)
 
@@ -880,10 +883,11 @@ The done command is used to mark a module as completed. To execute this command,
 parameter from user input, and there is 1 compulsory flag:
 1. Grade obtained for module
     - `-g <String>`
+   
+> ℹ️ **Note:** Only the following letter grades (A+, A, A-, B+, B, B-, C+, C, D+, D, F, S, U, CS, CU) are valid.
 
-> ℹ️ **Note:** 
-> - Only NUS recognised grades are permitted for the grade flag.
-> - iGraduate recognises and supports either 'S' grade or 'U' grade.
+> ℹ️ **Note:** Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same.
+
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
@@ -933,11 +937,11 @@ The figure below demonstrates the behaviour of the help command.
 
 ***Considerations***
 
-A quick reference guide where users can check the list of commands and their formats can have many different implementations.
+A quick reference guide where users can see the summary of commands and the different formats for each command.
 One implementation considered was the format used for Linux `man` pages, where a single command line input displays all 
-information about the command such as the functionality of the command and the types of parameters accepted. This was
+information about the functionality of the command and the types of parameters accepted. This was
 the most straightforward implementation due to the ease of parsing possible user inputs and there being only one kind of
-message to be displayed. This proved to be unfeasible from an User Experience point of view as there was too much information
+message to be displayed. This proved to be unfeasible from a User Experience point of view as there was too much information
 displayed at one go due to the number of commands the application has and their unique formats. Instead, the team opted to
 go for a more segmented implementation of the `help` command, with one command showing users how to use the reference guide
 while the other commands provide a readable reference guide to the user that targets the command that users want to know 
@@ -1032,8 +1036,8 @@ The figure below demonstrates the behaviour of the storage feature.
 
 ***Considerations***
 
-The main reason for using a JSON file instead of designing one is to allow a more robust error and exception 
-handling and management with regards to modified storage files. The parsing of JSON format is also more 
+The main reason in using a JSON file instead of designing one is to allow a more robust error and exception 
+handling and management with respect to modified storage files. The parsing of JSON format is also more 
 sophisticated and reliable. 
 
 In addition, the JSON format can be read across multiple different types of applications, allowing flexibility
@@ -1041,9 +1045,9 @@ In addition, the JSON format can be read across multiple different types of appl
 
 ***Alternatives***
 
-The alternative storage format considered is the use of delimiters. However, there are concerns regarding such usage; the most important being potential parsing failure from a valid module. With the use of common delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various module information and legitimate module names containing delimiters and may parse the portion of the module to a wrong variable, resulting in corrupted results and a potential program crash. One example of such occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains dashes when the delimiters are used for separating various module information is also a dash. 
+The alternative storage format considered is the use of delimiters. However, there are concerns regarding such usage; the most important being potential parsing failure from a valid module. With the use of common delimiters such as commas `,` and dashes `-`, the program is unable to differentiate between the various module information and legitimate module names containing delimiters and may parse the portion of the module to a wrong variable, resulting in a corrupted program. One example of such occurrence would be a module named `Software Engineering and Object-Oriented Programming`, which contains dashes when the delimiters are used for separating various module information is also a dash. 
 
-Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
+Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing failures, but the problem still remained. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
 <br>
 
@@ -1083,7 +1087,7 @@ PrerequisiteNotMetException | Exception is thrown if prerequisite of the module 
 SaveModuleFailException | This exception is thrown if the program fails to save data to file.
 UnableToDeletePrereqModuleException | This exception is thrown when user tries to delete a pre-requisite module.
 
-<sup>***Table 1.24** The exhaustive list of all exceptions used in iGraduate*</sup>
+<sup>***Table 1.24** The Summary list of all exceptions used in iGraduate*</sup>
 
 <br>
 
@@ -1213,6 +1217,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 1. Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
 1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 1. A user without online connection should still be able to use the application.
+1. A user should be someone studying in National University of Singapore.
 1. A beginner user without prior knowledge should be able to pick up the application comfortably.
 
 <br>
@@ -1227,9 +1232,11 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 |Term|Definition|Usage/Example|
 |----------|-----------|---------|
-|`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](command) for the list of available commands|
+|`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](#command) for the list of available commands|
 |`parameter`|specifies the identifier (module name or code or list type) for the modules. |For example, the parameter for `add` command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specifies the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands; specifies the additional information required for the command to run.| For `add`, flags would be for module code, module type, MCs and prerequisites.|
+|`delimiters`| a sequence of one or more characters that specifies the boundary between different streams|
+|`parsing`| the process of converting code into a more readable data format|
 
 <sup>***Table 1.26** Definitions and context of terms used in the developer guide*</sup>
 
@@ -1244,7 +1251,7 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 ## **Appendix E: Instructions for Manual Testing** ##
 
-Given below are instructions to test the app manually.
+Given below are instructions on how to test the app manually.
 
 > ℹ️ **Note:**  These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
@@ -1259,7 +1266,7 @@ testers are expected to do more *exploratory* testing.
     
 1. Shutdown
     
-    - Enter the command `exit` in iGraduate. The program will shutdown by itself.
+    - The program shutdowns automatically after entering the command `exit` in iGraduate.
 
 ----
 
@@ -1282,7 +1289,7 @@ Adding a module into the module list.
     --------------------------------------------------------------------------------------
     ```
 
-1. `add Programming Methodology -t cor -mc 4 -c CS1010`
+1. `add Programming Methodology -t core -mc 4 -c CS1010`
     **Expected**: Error in adding module as module type is invalid.
 
     ```
@@ -1355,7 +1362,7 @@ Deleting modules from a given module list.
     --------------------------------------------------------------------------------------
     ```
 1. `delete -g A CS1010` <br>
-    **Expected**: Error in deleting module as extra parameter, eg. -g A, is found.
+    **Expected**: Error in deleting module as extra parameter, e.g. -g A, is found.
 
     ```
     --------------------------------------------------------------------------------------
@@ -1404,7 +1411,7 @@ Masking modules as done with grade obtained after the semester.
     --------------------------------------------------------------------------------------
     ```
 1. `done CS1010`<br>
-    **Expected**: Error in marking module as done as incorrect number of parameters are given, eg. missing grade.
+    **Expected**: Error in marking module as done as incorrect number of parameters are given, e.g. missing grade.
     ```
     --------------------------------------------------------------------------------------
     The number of parameters provided is incorrect.
@@ -1452,7 +1459,7 @@ Update the modules in module list with changes in module credits or module grade
     --------------------------------------------------------------------------------------
     ```
 1. `update CS1010 -mc 2` <br>
-    **Expected**: Module module credits updated successfully.
+    **Expected**: Module credits updated successfully.
     ```
     --------------------------------------------------------------------------------------
     Nice! I've updated this module:
