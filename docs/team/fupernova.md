@@ -36,8 +36,8 @@ for the execution of the command.
 
 *Considerations*
 
-Implementing the parser class was challenging due to all commands available in our program having a unique
-input format and parameters. Many ways of extracting parameters were considered, and we eventually settled on a
+Implementing the parser was challenging due to all commands available in our program having a unique
+input format and parameters. We eventually settled on a
 two-tiered parsing system. Firstly, a general parse was done to the user command to split the command name and parameters.
 Secondly, depending on the command, the parameters would be extracted using other methods. Xin Ru worked on the second level
 while I worked on the first.
@@ -62,13 +62,11 @@ by developers.
 
 *Considerations*
 
-Testing for `Parser` and `Command` classes were priority as they deal with user input, 
+Testing for `Parser` and `Command` classes was priority as they deal with user input, 
 which is where many logic bugs can be introduced. Integration testing between `Parser` and `Command` was also important
-as these two classes worked together directly to extract parameters and execute commands. Unit tests for these 
-two classes were implemented first with possible inputs that would break the program. Once the 
-two classes were amply tested separately, integration tests were introduced to ensure that the core functionality of 
-parsing user inputs and creating the appropriate `Command` instance was working.
-
+as these two classes worked together directly to extract parameters and execute commands. Unit tests were implemented 
+first with possible inputs that would break the program. Once the 
+two classes were tested separately, integration tests were introduced to ensure that the core functionality was working.
 ____
 
 ### Contributions to documentation
