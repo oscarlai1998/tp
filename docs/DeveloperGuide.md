@@ -892,7 +892,7 @@ parameter from user input, and there is 1 compulsory flag:
 The progress command prints a progress bar as well as the user's graduation progress in the form of a percentage. No 
 additional flags are required for this command.
 
-![archi](./images/ProgressSequenceDiagram.png)
+![archi](./images/ProgressCommandSequenceDiagram.png)
 
 <sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
