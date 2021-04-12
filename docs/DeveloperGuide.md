@@ -1197,6 +1197,8 @@ This app will help NUS students **majoring in Information Security** check his/h
 <div style="page-break-after: always;"></div>
 
 <!--@@author xseh-->
+<!--@@author oscarlai1998-->
+
 
 ## **Appendix D: Glossary** ##
 
@@ -1205,8 +1207,8 @@ This app will help NUS students **majoring in Information Security** check his/h
 |`command`|the type of command the user intends to run and is first word from the user input; dictates how `Parser` extracts the parameter and flags. |Refer to [`Command`](#command) for the list of available commands|
 |`parameter`|specifies the identifier (module name or code or list type) for the modules. |For example, the parameter for `add` command would be the module name, but the parameter for `delete` would be the module code. For list, the parameters would specifies the type of list (complete, incomplete or available)|
 |`flag`|comes after parameters and are available only for a few commands; specifies the additional information required for the command to run.| For `add`, flags would be for module code, module type, MCs and prerequisites.|
-|`delimiters`| a sequence of one or more characters that specifies the boundary between different streams|
-|`parsing`| the process of converting code into a more readable data format|
+|`delimiters`| a sequence of one or more characters that specifies the boundary between different streams| The delimiters such as commas, and dashes are used to differentiate the parameters for parsing.
+|`parsing`| the process of converting code into a more readable data format| a command is parsed through the parser class to create different commands.
 
 <sup>***Table 1.26** Definitions and context of terms used in the developer guide*</sup>
 
