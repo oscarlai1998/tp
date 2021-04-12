@@ -175,7 +175,7 @@ What would you like to do today?
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author LJ-37-->
 
 ## **Design** ##
 The following section is an overview of the design architecture. Each Sub-section provides a more detailed 
@@ -685,6 +685,8 @@ The sequence diagram below shows the execution of add command in action:
 <sup>***Figure 1.14** Sequence diagram of `AddCommand` in execution with `add Programming Methodology -c CS1010 -mc 4 -t core` as user input.*</sup>
 
 ----
+
+<!--@@author oscarlai1998-->
 
 <div style="page-break-after: always;"></div>
 

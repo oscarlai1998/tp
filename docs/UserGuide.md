@@ -187,7 +187,7 @@ The following section outlines some of the usages of the `delete` command and it
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author LJ-37-->
 
 ### **Update module information: `update`** ###
 
@@ -325,7 +325,7 @@ Prerequisite for                      : []
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author LJ-37-->
 
 ### **List modules: `list`** ###
 

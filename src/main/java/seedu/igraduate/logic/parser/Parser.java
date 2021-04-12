@@ -680,9 +680,8 @@ public class Parser {
     /**
      * Checks if there is invalid flags in the command input.
      * 
-     * @param commandFlags The array list containing all
-     * @return True if one of the flags are invalid, false if all flags are valid
-     *         flags
+     * @param commandFlags The array list containing all.
+     * @return True if one of the flags are invalid, false if all flags are valid flags.
      */
     private static boolean isFlagIllegal(ArrayList<String> commandFlags) {
         Pattern pattern = Pattern.compile("^(?!(-t|-c|-mc|-n|-p|-g|-[0-9])$|[a-zA-Z0-9])");
