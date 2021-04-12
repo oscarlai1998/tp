@@ -6,14 +6,14 @@
 Security to plan their academic journey. It is equipped with a module storage system where students
 can mark modules as completed and store prerequisites for each module.
 
-___
+
 
 ### Summary of Contributions
 <b>Code contributed</b>
 
 [Link to my code contribution.](https://nus-cs2113-ay2021s2.github.io/tp-dashboard/?search=fupernova&sort=groupTitle&sortWithin=title&since=2021-03-05&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
-___
+
 
 ### Enhancements implemented
 
@@ -29,7 +29,7 @@ information to the screen.
 Ui was challenging to implement as many methods depended on the implementations of other classes. I laid out skeleton 
 methods of the possible printing methods required in the `Ui` class so that my teammates would be able to access or edit the methods they required easily.
 
-___
+
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
 
@@ -44,7 +44,7 @@ two-tiered parsing system. Firstly, a general parse was done to the user command
 Secondly, depending on the command, the parameters would be extracted using other methods. Xin Ru worked on the second level
 while I worked on the first.
 
-___
+
 
 #### Implemented `HelpCommand` class of iGraduate
 The  `help` command provides users with a quick reference guide
@@ -56,7 +56,7 @@ Due to the large number of commands and features available in iGraduate, we deci
  along with one help page listing down the commands available in iGraduate in case users forget. This methodology helps
 make the quick guide less cluttered and more targeted towards specific commands that users intend to look up.
 
-___
+
 
 #### Implemented test code for multiple methods
 
@@ -71,7 +71,7 @@ as these two classes worked together directly to extract parameters and execute 
 first with possible inputs that would break the program. Once the 
 two classes were tested separately, integration tests were introduced to ensure that the core functionality was working.
 
-____
+
 
 ### Contributions to documentation
 
@@ -79,22 +79,19 @@ ____
 
 For the user guide, I added the segments for components I implemented. I also added the segment for Add command.
 I also helped to update the FAQ, design the logo and rephrase the introduction.
-
 Apart from that, I made many edits improve the phrasing of the guide to be more
  audience-centric and beginner-friendly.
 
-___
+
 
 ### Contributions to DG
 
-My main contributions to DG comes in the form of many of the sequence diagrams. I created sequence
+My main contributions to DG comes in the form of sequence diagrams. I created sequence
 diagrams and helped my teammates check and correct their sequence diagrams. I also contributed to the standardisation
-of sequence diagrams.
-
-For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me.
+of sequence diagrams.  For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me.
 Apart from that, I also added the details for `ModuleList` class, `Command` class and the `Add` command.
 
-___
+
 
 ### Contributions to team-based tasks
 
@@ -102,7 +99,7 @@ I edited non-feature specific portions of the UG and DG such as the introduction
 reviewed my teammates' code, in particular look out for the reasons for failed gradle builds. I also hunted for bugs by
 writing unit tests for `Parser` and `Command`. I also tagged issues found and assign issues to myself and teammates.
 
-___
+
 
 ### Reviews and PRs
 
