@@ -175,7 +175,7 @@ What would you like to do today?
 
 <div style="page-break-after: always;"></div>
 
-<!--@@author ???-->
+<!--@@author LJ-37-->
 
 ## **Design** ##
 The following section is an overview of the design architecture. Each Sub-section provides a more detailed 
