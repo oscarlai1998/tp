@@ -38,7 +38,9 @@ majoring in Information Security to plan their academic journey.
       other's prerequisite. Once a module is marked as taken, it will be removed from the untaken prerequisites list of the modules 
       in its required by list. Only modules with empty untaken prerequisites list are shown as available. Lastly, for module 
       deletion, the module requiring it as a prerequisite must be deleted first before it can be deleted.
-      
+
+<div style="page-break-after: always;"></div>
+
 1. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
       I researched on `RuntimeTypeAdapterFactory` and included it to generate the `Json` data with labels that distinguishes
@@ -106,6 +108,4 @@ I reviewed and refactored the project code:
 ### Contributions beyond the project team
 
 1. Advised other teams on implementation of certain features such as data storage.
-1. Performed bug hunting on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
-1. Recommended possible fixes for bug found on other products.
-1. Reviewed UG and DG for other teams and provided suggestions for improvement.
+1. Performed bug hunting, reviewed UG and DG on other products such as [MojoHr](https://github.com/AY2021S2-CS2113-W10-2/tp).
