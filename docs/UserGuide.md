@@ -421,6 +421,8 @@ Core modules in the list:
 ```
 <sup>***Figure 1.6.5** Expected results from listing `core` modules. This option will list out all `core` modules on the list.*</sup>
 
+<div style="page-break-after: always;"></div>
+
 `list elec`
 
 ```
