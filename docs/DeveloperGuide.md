@@ -3,6 +3,10 @@
 # **iGraduate Developer Guide** #
 Project by: `W09-2` Latest update: `11 April 2021`
 
+![logo](./images/logo.jpg)
+
+<div style="page-break-after: always;"></div>
+
 ## **Table of Contents** ##
 1. [Introduction](#introduction)
 1. [Developer Guide Usage](#developer-guide-usage)
@@ -30,6 +34,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
     - [ModuleList](#modulelist)
     - [Storage](#storage)
     - [Exception](#exception)
+1. [Logging](#logging)
+1. [Documentation](#documentation)
 1. [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target User Profile](#target-user-profile)
     - [Value Proposition](#value-proposition)
@@ -51,6 +57,8 @@ Project by: `W09-2` Latest update: `11 April 2021`
 
 <div style="page-break-after: always;"></div>
 
+<!--@@author kewenlok-->
+
 ## **Introduction** ##
 
 iGraduate is a Command Line Interface (CLI) application that helps NUS Information Security
@@ -59,7 +67,9 @@ show the modules they have taken and can be taken, calculating their CAP and che
 progress. The users are allowed to add Core, General Education (GE), Math and Elective modules
 for tracking. When listing the modules, the module type will be shown accordingly.
 
-<br> [🡅 Back to Top](#table-of-contents)
+<br> 
+
+[🡅 Back to Top](#table-of-contents)
 
 ----
 
@@ -70,6 +80,7 @@ This developer guide is made for developers who wish to understand and/or develo
 further. This guide includes the setup steps, design, implementation, logging, testing, product scope,
 and other sections to give developers a better understanding of the application.
 
+<!--@@author kewenlok-->
 <br> The following symbols and formatting are used in this guide: 
 
 Symbols/Formatting | Description
@@ -84,6 +95,8 @@ Symbols/Formatting | Description
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ## **Setting Up, Getting Started** ##
 
@@ -122,6 +135,8 @@ What would you like to do today?
 --------------------------------------------------------------------------------------
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### **IntelliJ IDEA** ###
 
 1. Configure IntelliJ IDEA to use `JDK 11` by referring to the [IDEA set up guide](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk). 
@@ -146,7 +161,7 @@ What would you like to do today?
     Starting without existing module data...
     Initializing new module list...
     --------------------------------------------------------------------------------------
-    _  ____               _             _
+     _  ____               _             _
     (_)/ ___|_ __ __ _  __| |_   _  __ _| |_ ___
     | | |  _| '__/ _` |/ _` | | | |/ _` | __/ _ \
     | | |_| | | | (_| | (_| | |_| | (_| | ||  __/
@@ -163,6 +178,10 @@ What would you like to do today?
 
 ----
 
+<div style="page-break-after: always;"></div>
+
+<!--@@author ???-->
+
 ## **Design** ##
 The following section describes an overview of the design architecture. Each subsections then provides a more detailed design of each individual components.  
 
@@ -170,6 +189,8 @@ The following section describes an overview of the design architecture. Each sub
 ![archi](./images/ArchitectureDiagram.png)
 
 <sup>***Figure 1.1** Architecture diagram showing an overview of the main components in iGraduate*</sup>
+
+<div style="page-break-after: always;"></div>
 
 ### **Architecture** ###
 iGraduate has one class called `iGraduate` which contains a `main` and `run` method and `iGraduate` constructor. 
@@ -200,13 +221,15 @@ Each of the four components,
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **UI Component** ###
 
 The UI is a public class that consists of **three components** that is made up `Scanner`, `Constants` and `Print Methods`. The UI component mainly manages the retrieval of user command and display of user feedback, ranging from successful execution, execution results and exceptions. 
 
 ***Behaviour***<br>
 - Executes user command using the [logic component](#logic-component).
-- Listens for calls from the [model momponent](#model-component), which will call the specific print method to print an output.
+- Listens for calls from the [model component](#model-component), which will call the specific print method to print an output.
 - Print method references `Constants` and prints them for user to see.
 
 ![archi](./images/UiClassDiagram.png)
@@ -218,6 +241,8 @@ The UI is a public class that consists of **three components** that is made up `
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Logic Component** ###
 
@@ -277,15 +302,18 @@ The methods that check various parameters
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Command Package** ###
 The `command` component executes the correct command based on what the parser interprets.
 
-The `command` component consists of an abstract class `Command` and 9 subclasses that inherit from it. The subclasses are:
+The `command` component consists of an abstract class `Command` and 10 subclasses that inherit from it. The subclasses are:
 1. AddCommand
 1. CapCommand
 1. DeleteCommand
 1. DoneCommand
 1. ExitCommand
+1. HelpCommand
 1. InfoCommand
 1. ListCommand
 1. ProgressCommand
@@ -311,6 +339,10 @@ Below are the Command class diagrams, split into 2 diagrams for better readabili
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
+
+<!--@@author kewenlok-->
 
 ### **Model Component** ###
 
@@ -352,6 +384,8 @@ Each of the module classes consists of:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Module Class** ####
 
 `Module` class is an abstract class in the module package. It holds the attributes and methods for manipulating the 
@@ -375,6 +409,8 @@ status. For customized formatting of module printing messages, `toString` method
 <sup>***Table 1.8** Child classes that inherited from the `Module` class*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author fupernova-->
 
@@ -413,6 +449,8 @@ The `ModuleList` class:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Add a Module** ####
 
 The methods `add`, `addModuleRequiredBy` and `removeTakenByPrerequisites` are invoked to add a module. 
@@ -448,6 +486,8 @@ The following shows the process of marking a module named `existingModule` as do
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author xseh-->
 ### **Storage Component** ###
 The storage component consists of the class `Storage`. The storage component is closely associated with the [`ModuleList`](#modulelist) component to store latest module information (including completion, code, name, prerequisites, etc.) in a JSON format after every manipulation of `ModuleList`. This includes adding, deleting and updating of modules, as well as marking a module as done. 
@@ -472,6 +512,8 @@ The `Storage` Component,
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Common Classes** ###
 The common class used by multiple components in this app are in the `exception` package. The `exceptions` are thrown when an error occurs. The method catches the exceptions and prints out the respective error message. 
 
@@ -490,7 +532,7 @@ This section elaborates on some details about how certain features are implement
 ## **Implementation** ##
 This section describes some noteworthy details on how certain feature are implemented. 
 
-### ***UI*** ###
+### **UI** ###
 
 The Ui feature has 3 primary responsibilities: 
 1. Executes user command using [`Logic Component`](#logic-component)
@@ -503,7 +545,10 @@ The Ui feature has 3 primary responsibilities:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
+<!--@@author xseh-->
 
 ### **Parser** ###
 
@@ -530,7 +575,8 @@ There are 3 classifications of user input: **command, parameter and flags**.
 
 <sup>**Table 1.13** Terms used in differentiating the different parts of a user command </sup>
 
-***Considerations***<br>
+***Considerations*** : How to implement parsing of user input<br>
+
 From the start, it was known that `Parser` would be one of the more challenging components to implement due to the 
 large number of commands and the variance in parameter and flag types. Another difficult problem to navigate was the
 validation of the format and values of the parameters and flags. Initially, no validation checks were put in `Parser`,
@@ -541,12 +587,7 @@ Hence, the validation of parameters and flags were moved to `Parser`. In this im
 and `Command` components are unaware of each other, instead relying on `Parser` for extracting and validating inputs. 
 This helps to eliminate the dependency between `Storage` and `Command`.
 
-<!--@@author xseh-->
-
 ***Alternatives***<br>
-
-**Summary**: How to implement parsing of user input
-
 1. Custom (current choice): Designing and implementing a custom parser for iGraduate
     - Pros: 
         - Better suited for target users (fast typists)
@@ -564,17 +605,41 @@ This helps to eliminate the dependency between `Storage` and `Command`.
 
 Considerations were made for the adoption of third-party parser libraries. However, the third-party libraries obtained did not achieve the behaviour that was envisioned. Instead of keeping the application running when executing any commands, the command, parameters and flags would have to be directly piped in the command terminal, together with the application. This would create an instance of the iGraduate application before terminating after one command. Though this may provide a far superior parsing and error and exception handling, the behaviour does not support the target audience. Therefore, the decision was made against using a third-party library. Instead, attempts were made to mimic the behaviours and error handling of the libraries, but within the context of the running application. 
 
+***Considerations*** : Format to store module information<br>
+
+An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
+
+***Alternatives***<br>
+1. ArrayList (current choice)
+    - Pros:
+        - Equipped with useful built-in class functions
+        - Significantly simplifies logic needed to parse flags and parameters
+    - Cons: 
+        - Less Memory efficient
+1. Array
+    - Pros: 
+        - Efficient memory allocation
+        - Fixed size, which uses less memory
+    - Cons: 
+        - Inefficient in extracting input flags
+        - Limited functionalities
+
+Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+
 <br> 
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
 
 ### **Command** ###
 
-The `command` package is responsible for executing the command from the user. The package contains the  abstract class 
-`Command` and 8 subclasses that inherit `Command`, one for each valid iGraduate command .
+The `command` package is responsible for executing the command from the user. The package contains the abstract class 
+`Command` and 10 subclasses that inherit `Command`, one for each valid iGraduate command .
 
 ***Details***<br>
 The abstract class `Command` contains only 1 method: `execute()`, which takes in 3 parameters: `moduleList`, `ui` and
@@ -587,6 +652,8 @@ The implementation for executing every command differs, and the implementation d
 elaborated below.
 
 ----
+
+<!--@@author kewenlok-->
 
 #### **Add Command** ####
 
@@ -613,6 +680,8 @@ The sequence diagram below shows the execution of add command in action:
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 #### **Delete Command** ####
 
 The delete command allows for deletion of module from the module list, identified by the module code, which is a compulsory parameter. There are no flags
@@ -625,6 +694,8 @@ involved for deleting a module.
 <sup>***Figure 1.15** Sequence diagram of `DeleteCommand` in execution with `delete CS1010` as user input*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 <!--@@author xseh-->
 
@@ -643,43 +714,103 @@ list. The various information requested to update would be identified with their
 
 > ℹ️ **Note:** 
 > - The code and type of modules **cannot be modified** as they are identifiers of the modules.
-> - **Multiple module information** can be updated in a single command
+> - **Multiple module information** can be updated in a single command.
 > - The command **will not update grades** if the module requested has not been completed. The rest of the information parsed in the command (if any) will be updated.
 
 ![archi](./images/UpdateCommandSequenceDiagram.png)
 
 <sup>***Figure 1.17** Sequence diagram of `UpdateCommand` in execution with `update CS1010 -mc 2` as user input*</sup>
 
-***Considerations***
+***Considerations*** : Command behaviour<br>
 
-An `arrayList` is used to store the parsed data from the user input instead of an `array`. This is to make use of the built-in class functions (especially `indexOf()` and `size()`). The `array` class also lacks certain features that are of good use to the `parser` class. This includes the use of regex for checking against the values stored in each index without making the process too manual. For instance, `matches()` of `arrayList` automatically takes in a regex instead of having to manually create a regex object, then parsing into the `find()` function, which loops through the entire array to obtain the matches. This significantly simplifies the code in the `parser` function, and makes handling exceptions easier. 
+The main considerations regarding the behaviour of the update command would be if multiple flags should be permitted in a single update command. 
 
-***Alternatives***
+***Alternatives***<br>
 
-**Summary**: Format to store module information
-
-1. ArrayList (current choice)
-    - Pros:
-        - Equipped with useful built-in class functions
-        - Significantly simplifies logic needed to parse flags and parameters
-    - Cons: 
-        - Less Memory efficient
-1. Array
+1. Restrict to single update flag
     - Pros: 
-        - Efficient memory allocation
-        - Fixed size, which uses less memory
+        - Simple to implement
+        - Easier error and exception handling
     - Cons: 
-        - Inefficient in extracting input flags
-        - Limited functionalities
+        - Inconvenient and unsuitable for target audience
+1. Allow multiple flags (current choice)
+    - Pros: 
+        - Suitable for target audience who ar fast typers
+        - Update less time consuming and troublesome
+    - Cons: 
+        - Complicated process when extracting flags
+        - More considerations needed for error and exception handling
 
-Initially, it was decided that the parameters would be split into an `array` to utilise the efficient memory allocation and standard size. Since arrays are more memory efficient and the parsing does not modify any values in the array after the initial split to the arrays (i.e. no additions of removal of data needed). However, the process needed to extract the flags from the array is inefficient, and requires another method to locate. Furthermore, the array in limited in its capabilities, making the coding of some behaviour complicated (such as filtering with a regex value). Therefore, the array ultimately got changed into an `arrayList` type, since `arrayList` has more features that can be utilised to make the code more efficient.  
+Having a single input would significantly simplify the code, as a simple switch statement will suffice. There is also easier error and exception handling as only two parameters are given. In the event of exception, simply retrace the command and throw exception. However, having only one flag at a time is inconvenient for fast typers, and is less optimized for their quick typing. 
+
+Another alternative was to allow multiple flags, each with their own input and error handling. Extraction would be significantly more complex, as each flag has to be accounted for, extracted together with its trailing new value. Should one of the flag cause an exception, another consideration would be to determine if the command should completely aborted or just the failed flag. The greatest advantage of parsing multiple updating instances would be to allow fast typers to quickly make multiple changes in a single command line. This caters much more to the target audience, and makes using iGraduate less time consuming and troublesome. Ultimately, decision was made to allow multiple flags, individually parsed with their own checks and extraction methods, reused from the other commands. 
+
+***Considerations*** : Command error and exception handling management<br>
+
+On the event of a failed flag, considerations have to made to determine how the update command would manage the rest of the flags. 
+
+***Alternatives***<br>
+
+1. Abort entire command
+    - Pros:
+        - Simple to implement
+    - Cons:
+        - Major inconvenience to users
+1. Ignore failed flag
+    - Pros:
+        - More usable and convenient for users
+    - Cons:
+        - Extremely complex in error and exception handling
+1. Ignore failed grade flag (current choice)
+    - Pros:
+        - Compromise between convenience and code difficulty
+        - If grade flag generates an error, the other flags would still be updated
+    - Cons:
+        - Failure in other flags still results in aborting the entire command
+
+The first way is to completely abort the entire command, which lowers the usability aspect of the application, creating inconvenience when a small error is encountered. However, this makes coding straightforward and simple. 
+
+Another alternative is to simply ignore the failed flag and attempt to change the rest. This would make the update command more usable and convenient. However, the primary issue is the difficulty in designing and programming such behaviour, individual try and catch statements needs to be used. Each statements must be able to differentiate between having an invalid flag input or having a flag that does not exists (i.e. the user did not use the flag).  This behaviour makes the application significantly more complex to code and catch. 
+
+Finally, decisions were made to compromise between the two alternatives. After some discussions, it was determined that grade (the -g flag) is the most likely to fail since it depends on not just the user input but if the module has has been completed. Therefore, a dedicated try statement is used to ensure that, even in the event of errors associated with providing a grade to an incomplete module, the rest of the command would still be updated (the rest of the extracts and checking is in the finally clause). Unfortunately, if the other flags fail, the program will abort entirely. This alternative balances the complexity between error and exception handling and usability, allowing some flexibility in managing error while providing some convenience.
 
 ----
+
+<div style="page-break-after: always;"></div>
+
+<!--@@author kewenlok-->
+
+#### **Info Command** ####
+
+The info command provides a feature for the user to view any module they added to the list regardless of
+the module type and status by specifying its module code. The command will only be executed if valid module
+code is provided by the user. All information of the specified module will be shown to the user to aid the
+planning of module. An example of info command execution flow is shown in the sequence diagram below.
+
+![archi](./images/InfoCommandSequenceDiagram.png)
+
+<sup>***Figure 1.18** Sequence diagram of `InfoCommand` in execution with `info CS1010` as user input*</sup>
+
+***Considerations***
+
+After receiving a feedback from a user stating that there are no ways for the user to view the prerequisites 
+information for any modules, the team consider to implement a prerequisites column for the `list command` as
+suggested by the user. However, through much consideration and discussion, the team feels that it will be too
+convoluted and cluttered for the `list command` results as there are simply too much information to show in one
+screen. Instead, the team decided to create a new `info command` for listing all information of the module which 
+the user wish to know.
+
+----
+
+<div style="page-break-after: always;"></div>
+
+<!--@@author ???-->
 
 #### **List Command** ####
 
 The list command provides users with 8 options to list down the modules being tracked by iGraduate. The options come in the
 form of a parameter.
+
 The table below shows the scope of each options.  
 
 |List Parameter|Scope|
@@ -693,16 +824,18 @@ The table below shows the scope of each options.
 |`elec`|List all elective modules on the list|
 |`ge`|List all GE modules on the list|
 
-<sup>***Table 1.18.1*** Supported list functions and their scope</sup>
+<sup>***Table 1.19.1*** Supported list functions and their scope</sup>
 
 ![list](./images/ListCommandSequenceDiagram.png)
 
-<sup>***Figure 1.18.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
-
+<sup>***Figure 1.19.2** Sequence diagram of `ListCommand` in execution with `list complete` as user input*</sup>
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 <!--@@author fupernova-->
+
 #### **CAP Command** ####
 
 The CAP command calculates the current CAP of the user based on the grades of modules that are marked as done. The 
@@ -710,9 +843,11 @@ command also displays the degree classification of the user. There are no flags 
 
 ![archi](./images/CapCommandSequenceDiagram.png)
 
-<sup>***Figure 1.19** Sequence diagram of `CapCommand` class.*</sup>
+<sup>***Figure 1.20** Sequence diagram of `CapCommand` class.*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Done Command** ####
 
@@ -721,15 +856,17 @@ parameter from user input, and there is 1 compulsory flag:
 1. Grade obtained for module
     - `-g <String>`
 
-> ℹ️ **Note:** Only NUS recognised grades are permitted for the grade flag.
-
-> ℹ️ **Note:** iGraduate recognises and supports either 'S' grade or 'U' grade.
+> ℹ️ **Note:** 
+> - Only NUS recognised grades are permitted for the grade flag.
+> - iGraduate recognises and supports either 'S' grade or 'U' grade.
 
 ![archi](./images/DoneCommandSequenceDiagram.png)
 
-<sup>***Figure 1.20** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
+<sup>***Figure 1.21** Sequence diagram of `DoneCommand` in execution with `done CS1010 -g A` as user input*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Progress Command** ####
 
@@ -738,9 +875,11 @@ additional flags are required for this command.
 
 ![archi](./images/ProgressSequenceDiagram.png)
 
-<sup>***Figure 1.21** Sequence diagram of `ProgressCommand` in execution.*</sup>
+<sup>***Figure 1.22** Sequence diagram of `ProgressCommand` in execution.*</sup>
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 #### **Help Command** ####
 
@@ -751,6 +890,7 @@ The optional parameters are the list of commands from above:
 - `delete`
 - `update`
 - `list`
+- `info`
 - `done`
 - `progress`
 - `cap`
@@ -763,9 +903,9 @@ The figure below demonstrates the behaviour of the help command.
 
 ![archi](./images/HelpCommandSequenceDiagram.png)
 
-<sup>***Figure 1.22** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
+<sup>***Figure 1.23** Sequence diagram of `HelpCommand` in execution with `help add` as user input.*</sup>
 
-***Considerations & Alternatives***
+***Considerations***
 
 A quick reference guide where users can check the list of commands and their formats can have many different implementations.
 One implementation considered was the format used for Linux `man` pages, where a single command line input displays all 
@@ -782,6 +922,8 @@ more about.
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Module** ###
 
@@ -810,15 +952,40 @@ better accommodate our *list by module type* feature, the subclass each module b
 
 ----
 
-<!--@@author ???-->
+<div style="page-break-after: always;"></div>
+
+<!--@@author kewenlok-->
+
 ### **ModuleList** ###
 
+The `moduleList` component acts as a temporary storage for storing module data while application is 
+running. All module data added to the application could be found under the `moduleList` storage.
+
+***Details***
+
+Since the `moduleList` is used for storing module data needed for running application, the module data 
+will be loaded from the disk when the application first started. After any data changing command is executed,
+the latest module data in the `moduleList` will be written to disk for permanent storage (unless the secondary
+memory is faulty). It also consists of utility methods which allows retrieval, manipulation and deletion of 
+module data in a centralised and consistent manner.
+
+***Considerations***
+
+At the start of project, an array is considered to be used as the underlying data structure for the `moduleList`
+component. However, after taking the scalability issue into consideration, the team decided to incorporate an
+`ArrayList` instead. Reason being `ArrayList` is a dynamically sized array along with standard methods such as 
+whether the list contains a specific module, search and removal of specified module. The size of the `ArrayList`
+is only limited by the user device's available memory size.
 
 <br> 
 
 [🡅 Back to Top](#table-of-contents)
 
 ----
+
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
 
 ### **Storage** ###
 
@@ -852,7 +1019,13 @@ The alternative storage format considered is the use of delimiters. However, the
 
 Considerations were also given to use more unique delimiters (such as `\`, `|`, etc.) to avoid accidental parsing fails but the problem still remains. Attempting to fuzz characters would lead to a corrupted storage file and render the application useless. Ultimately, the idea was scrapped in favour of the JSON format with a third-party library, since the exception handling and parsing management lies in the library functions. 
 
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Exception** ###
 
@@ -861,7 +1034,7 @@ In iGraduate, there are several exceptions that are thrown due to different cond
 
 Exception   | Description              
 --------|-------------------|
-AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to includethe module itself.
+AddSelfToPrereqException |This exception is thrown when user updates a module's list of prerequisites to include the module itself.
 DataFileNotFoundException | The exception is thrown if module data file is not found.
 ExistingModuleException | The exception is thrown if the module code input already exists.             | 
 IllegalParametersException | The exception is thrown if the parameter includes any parameters not allowed in the command.
@@ -890,6 +1063,59 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 
 ----
 
+<div style="page-break-after: always;"></div>
+
+<!--@@author kewenlok-->
+
+## **Logging** ##
+
+The logging feature is implemented using the `java.util.logging` package. It is a default logging package included
+in the Java package. To learn more about the package, you may refer to [here](https://docs.oracle.com/en/java/javase/11/docs/api/java.logging/java/util/logging/package-summary.html).
+To make use of logging feature, you will need to include the following line at the start of all the classes where logging
+feature is to be used.
+
+```
+private static final Logger LOGGER = Logger.getLogger(ClassName.class.getName());
+```
+
+When including the line above, remember to replace `ClassName` with the name of current class such as `iGraduate`. Once
+you have done instantiating the logger object with the code above, you can use the logger object to start logging. For
+more information on how logging works, refer to the [official documentation](https://docs.oracle.com/javase/7/docs/technotes/guides/logging/overview.html).
+The logging configurations are specified in the `logger.properties` file located in `src/main/resources/logger.properties`.
+To change the logging configurations, simply modify the `logger.properties` file with the respective value. The current
+configuration logs all messages with level of `FINE` and above into a log file, `iGraduate-0.log`, under the same folder
+where the application resides.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<div style="page-break-after: always;"></div>
+
+## **Documentation** ##
+
+All the documentations related to the application are stored under the `/docs` folder. There are currently three
+documentations, `AboutUs.md`, `UserGuide.md` and `DeveloperGuide.md`. The documentation tools used for developing these
+guides are:
+
+- [GitHub Markdown](https://guides.github.com/features/mastering-markdown/) syntax for formatting
+- [PlantUML](https://se-education.org/guides/tutorials/plantUml.html) for drawing diagrams
+- [Jekyll](https://jekyllrb.com/) for documentation static site generation
+  For more information on how to set up a documentation site using Jekyll, you may refer to
+  [Using Jekyll for project documentation](https://se-education.org/guides/tutorials/jekyll.html) guide.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<div style="page-break-after: always;"></div>
+
+<!--@@author xseh-->
+
 ## **Appendix A: Product Scope** ##
 
 ### **Target User Profile** ###
@@ -908,6 +1134,14 @@ UnableToDeletePrereqModuleException | This exception is thrown when user tries t
 Allows users to **manage modules faster** than a typical mouse/GUI driven app.iGraduate Includes higher level features such as ability to **add modules** while ensuring user has **cleared all prerequisites** and to **list all modules taken**, **graduation progress** and **current CAP with degree classification**.
 
 This app will help NUS students **majoring in Information Security** check his/her graduation progress and modules taken in a **coherent manner** based on the program requirements. It also contains tools as mentioned above to help students make informed decisions about future modules to take.
+
+<br>
+
+[🡅 Back to Top](#table-of-contents)
+
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix B: User Stories** ##
 
@@ -941,6 +1175,8 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix C: Non-Functional Requirements** ##
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
@@ -953,7 +1189,9 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 [🡅 Back to Top](#table-of-contents)
 
----
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix D: Glossary** ##
 
@@ -969,7 +1207,9 @@ This app will help NUS students **majoring in Information Security** check his/h
 
 [🡅 Back to Top](#table-of-contents)
 
----
+----
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix E: Instructions for Manual Testing** ##
 
@@ -984,7 +1224,7 @@ testers are expected to do more *exploratory* testing.
 
     - Download the jar file and copy into an empty folder
 
-    - Run the jar file on your command prompt with the by typing "java -jar iGradute.java" then enter. 
+    - Run the jar file on your command prompt with the by typing "java -jar iGraduate.java" then enter. 
     
 1. Shutdown
     
@@ -1044,6 +1284,8 @@ Adding a module into the module list.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Deleting a Module** ###
 
 Deleting modules from a given module list.
@@ -1092,6 +1334,8 @@ Deleting modules from a given module list.
     ```
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Marking Modules as Done** ###
 
@@ -1146,6 +1390,8 @@ Masking modules as done with grade obtained after the semester.
     ```
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Updating the Module List** ###
 
@@ -1217,6 +1463,8 @@ Update the modules in module list with changes in module credits or module grade
        
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **CAP** ###
 
 Display current CAP and degree classification of user.
@@ -1243,6 +1491,8 @@ Display current CAP and degree classification of user.
     ````
 
 ----
+
+<div style="page-break-after: always;"></div>
 
 ### **Progress** ###
 
@@ -1273,6 +1523,8 @@ Display user's progress towards graduation.
     ```
 
 ---- 
+
+<div style="page-break-after: always;"></div>
 
 ### **List Modules** ###
 
@@ -1316,6 +1568,8 @@ List modules in the modules list.
 
 ----
 
+<div style="page-break-after: always;"></div>
+
 ### **Saving Data** ###
 
 Dealing with missing/corrupted data files.
@@ -1353,6 +1607,7 @@ Dealing with missing/corrupted data files.
     What would you like to do today?
     --------------------------------------------------------------------------------------
     ```
+
 <br>
 
 [🡅 Back to Top](#table-of-contents)

@@ -27,9 +27,7 @@ import seedu.igraduate.logic.parser.Parser;
 import seedu.igraduate.stub.ParserStub;
 
 /**
- * Test cases for the Parser class. 
- * 
- * @author xseh
+ * Test cases for the Parser class.
  */
 public class ParserTest {
     private Parser parser = new Parser();
@@ -37,9 +35,7 @@ public class ParserTest {
     /*-------------------- Unit tests --------------------*/
 
     /**
-     * Test case where the input is empty. 
-     * 
-     * @author xseh
+     * Test case where the input is empty.
      */
     @Test
     void parseCommand_emptyCommand_exceptionThrown() {
@@ -51,9 +47,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where an invalid command is inputted. 
-     * 
-     * @author xseh
+     * Test case where an invalid command is inputted.
      */
     @Test
     void parseCommand_invalidCommand_exceptionThrown() {
@@ -65,9 +59,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where the module added is invalid (i.e. negative). 
-     *
-     * @author fupernova
+     * Test case where the module added is invalid (i.e. negative).
      */
     @Test
     void parseCommand_addNegativeMC_exceptionThrown() {
@@ -78,9 +70,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where the module added is invalid (i.e. more than 32). 
-     *
-     * @author fupernova
+     * Test case where the module added is invalid (i.e. more than 32).
      */
     @Test
     void parseCommand_addTooManyMC_exceptionThrown() {
@@ -91,9 +81,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid add command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid add command is inputted.
      */
     @Test
     void parseAddCommand_appropriateParameters_success()
@@ -107,9 +95,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid delete command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid delete command is inputted.
      */
     @Test
     void parseDeleteCommand_appropriateParameters_success()
@@ -121,9 +107,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid list command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid list command is inputted.
      */
     @Test
     void parseListCommand_appropriateParameters_success()
@@ -135,9 +119,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid progress command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid progress command is inputted.
      */
     @Test
     void parseProgressCommand_appropriateParameters_success()
@@ -149,9 +131,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid done command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid done command is inputted.
      */
     @Test
     void parseDoneCommand_appropriateParameters_success()
@@ -163,9 +143,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid update command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid update command is inputted.
      */
     @Test
     void parseUpdateCommand_appropriateParameters_success()
@@ -178,9 +156,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid cap command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid cap command is inputted.
      */
     @Test
     void parseCapCommand_appropriateParameters_success()
@@ -192,9 +168,7 @@ public class ParserTest {
     }
 
     /**
-     * Test case where a valid exit command is inputted. 
-     * 
-     * @author xseh
+     * Test case where a valid exit command is inputted.
      */
     @Test
     void parseExitCommand_appropriateParameters_success()

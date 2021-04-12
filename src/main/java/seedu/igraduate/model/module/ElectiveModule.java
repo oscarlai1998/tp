@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Handles elective modules. 
  */
 public class ElectiveModule extends Module {
+    //@@author kewenlok
     /**
      * Constructs a new ElectiveModule object.
      *
