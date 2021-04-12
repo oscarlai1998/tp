@@ -14,14 +14,13 @@ majoring in Information Security to plan their academic journey.
 ### Enhancements implemented
 
 1. Implemented `AddCommand` class with [Le Jun](#https://github.com/LJ-37).
-    * I created methods that will be used by the command in `Ui` and `ModuleList` while Le Jun writes the logic code in 
-      `AddCommand`. I added prerequisites for the `AddCommand` at a later time when we decided to include prerequisites 
-      feature.
+    * The implementation of `AddCommand` is generally doable except for the checking and inserting the prerequisites 
+      information to the module's prerequisites, untaken prerequisites and each of the prerequisites' requiredByModules
+      as it is quite complex.
       
 1. Implemented `InfoCommand` class to show module information.
-    * I implemented `InfoCommand` that executes `info` command for users to view all the specified module information. 
-      I also created methods in `Ui`, `Parser` and `ModuleList` classes to aid the processing of user input, module 
-      data fetching and display the results to the user.
+    * The idea of implementing `InfoCommand` is to prevent convoluted view for the `ListCommand` by displaying all information
+      of the specified module to the user.
       
 1. Implemented `DoneCommand` class for user to mark module as taken.
     * The `DoneCommand` class is responsible for executing the operations related to `done` feature. The `done` feature allows 
@@ -29,11 +28,9 @@ majoring in Information Security to plan their academic journey.
       modules accordingly to show an accurate results on the module status and whether it can be taken next.
       
 1. Implemented `ListCommand` class with [Oscar](https://github.com/oscarlai1998).
-    * The `ListCommand` class is implemented to execute the operations related to `list` feature. It allows the user to view 
-      the modules available in the current application based on provided options. I programmed the `available` and list by 
-      `module type` options' logic. For the `available` option, I check through the untaken prerequisites of all modules and 
-      display only the modules where all their prerequisites are satisfied. As for the `module type` option, I filter out 
-      modules which matches the specified module type and display them to the user.
+    * I programmed the `available` and list by `module type` options' logic. For the `available` option, I check through the 
+      untaken prerequisites of all modules and display only the modules where all their prerequisites are satisfied. As for 
+      the `module type` option, I filter out modules which matches the specified module type and display them to the user.
       
 1. Designed and implemented underlying logic for prerequisites processing.
     * I added an `ArrayList` for the respective prerequisite information to track to each module for efficient processing. Each 
@@ -45,9 +42,8 @@ majoring in Information Security to plan their academic journey.
       
 1. Incorporated the ability to differentiate child module classes to the `Storage` component.
     * The default `Gson` method does not differentiate the parent class `Module` object with its child class object. As such, 
-      I included `RuntimeTypeAdapterFactory` and register the child module classes as the subtype of `Module` class's 
-      `RuntimeTypeAdapterFactory` object. The modified `Module` class `RuntimeTypeAdapterFactory` is then registered to 
-      the GsonBuilder for it to generate the `Json` data with labels.
+      I researched on `RuntimeTypeAdapterFactory` and included it to generate the `Json` data with labels that distinguishes
+      the child classes.
 
 ### Contributions to the UG
 
@@ -67,8 +63,8 @@ majoring in Information Security to plan their academic journey.
 1. Added [`module` package](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#module-package) and its 
    class diagram under the design of model component.
 1. Added [`AddCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command), 
-   [`InfoCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command) and added their sequence 
-   diagrams under implementation.
+   [`InfoCommand`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#command) and their sequence diagrams 
+   under implementation.
 1. Added implementation for [`ModuleList`](https://ay2021s2-cs2113t-w09-2.github.io/tp/DeveloperGuide.html#modulelist).
 1. Restructuring, reformatting and maintenance of DG.
 
@@ -98,9 +94,8 @@ majoring in Information Security to plan their academic journey.
 ### Review/mentoring contributions
 
 I helped the team with giving implementation advise of some features and reviewing code of the team in general
-to ensure everything is in place and enhance the project's code quality.
-
-Here are some example of the pull requests where I reviewed and refactored the project code:
+to ensure everything is in place and enhance the project's code quality. Here are some example of the pull requests where 
+I reviewed and refactored the project code:
 * [#47](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/47), [#55](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/55), 
   [#62](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/62), [#66](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/66),
   [#74](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/74), [#213](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/213),
