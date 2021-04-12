@@ -4,8 +4,7 @@
 
 `iGraduate` is a command line application that acts as a centralised hub for NUS students majoring in Information 
 Security to plan their academic journey. It is equipped with a module storage system where students
-can mark modules as completed and store prerequisites for each module. This allows students to check modules available 
-to take and help them make informed decisions about their academic plan.
+can mark modules as completed and store prerequisites for each module.
 
 ___
 
@@ -27,17 +26,15 @@ information to the screen.
 
 *Considerations*
 
-Ui depends on the implementations of other classes, as each feature might have different considerations when printing
-information. I laid out skeleton methods of the possible printing methods required in the `Ui` class so that my 
-teammates would be able to access or edit the methods they required easily.
+Ui was challenging to implement as many methods depended on the implementations of other classes. I laid out skeleton 
+methods of the possible printing methods required in the `Ui` class so that my teammates would be able to access or edit the methods they required easily.
 
 ___
 
 #### Implemented `Parser` class of iGraduate together with [Xin Ru](https://github.com/xseh/)
 
-The Parser class is responsible for making sense of user input. The class determines the type of command from user input
-and subsequently extracts the information required to execute the command before handing control back to the main program
-for the execution of the command.
+The Parser class takes in user input, determines the type of command and extracts the information required to 
+execute the command before handing control back to the main program for the execution of the command.
 
 *Considerations*
 
@@ -50,7 +47,7 @@ while I worked on the first.
 ___
 
 #### Implemented `HelpCommand` class of iGraduate
-The HelpCommand class is responsible for executing the `help` command, which provides users with a quick reference guide
+The  `help` command provides users with a quick reference guide
 regarding the proper usage of iGraduate, including the different commands and their input formats.
 
 *Considerations*
@@ -64,9 +61,7 @@ ___
 #### Implemented test code for multiple methods
 
 Unit testing and integration testing was important to our project as it helped us to verify the correctness of the program
-as well as help us identify bugs that we missed out on. In particular, special attention was given to tests for `Parser`
-and `Command` classes as these 2 classes primarily dealt with user input and hence are the most prone to bugs introduced
-by developers.
+as well as help us identify bugs that we missed out on. We focused on testing for `Parser` and `Command`.
 
 *Considerations*
 
@@ -82,24 +77,22 @@ ____
 
 #### User Guide
 
-For the user guide, I added the segments for components I implemented, such as the Help command. I also added the segment for
- Add command.
+For the user guide, I added the segments for components I implemented. I also added the segment for Add command.
 I also helped to update the FAQ, design the logo and rephrase the introduction.
 
-Apart from that, I made many edits to improve grammar, correct spelling and improve the phrasing of the guide to be more
+Apart from that, I made many edits improve the phrasing of the guide to be more
  audience-centric and beginner-friendly.
 
 ___
 
 ### Contributions to DG
 
-My main contributions to DG comes in the form of many of the sequence diagrams. I used PlantUML to create sequence
-diagrams as well as help my teammates check and correct their sequence diagrams. I also contributed to the standardisation
+My main contributions to DG comes in the form of many of the sequence diagrams. I created sequence
+diagrams and helped my teammates check and correct their sequence diagrams. I also contributed to the standardisation
 of sequence diagrams.
 
-For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me,
-such as Parser and Help command. Apart from that, I also added the details for `ModuleList` class, `Command` class and
-the `Add` command.
+For the <b>Design</b> and <b>Implementation</b> sections of the DG, I contributed for the components implemented by me.
+Apart from that, I also added the details for `ModuleList` class, `Command` class and the `Add` command.
 
 ___
 
