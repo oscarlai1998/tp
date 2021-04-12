@@ -50,7 +50,7 @@ majoring in Information Security to plan their academic journey.
 1. Added [Show module information: `info`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#show-module-information-info) 
    and [Manual Modification of Data](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#manual-modification-of-data) section.
 1. Added and updated [List modules: `list`](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#list-modules-list), 
-   [Frequently Asked Questions](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#frequently-asked-questions) 
+   [FAQs](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#frequently-asked-questions) 
    and [Command Summary](https://ay2021s2-cs2113t-w09-2.github.io/tp/UserGuide.html#command-summary) section.
 1. Restructuring, reformatting and maintenance of UG.
 
@@ -101,7 +101,8 @@ I reviewed and refactored the project code:
 * [#47](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/47), [#55](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/55), 
   [#62](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/62), [#66](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/66),
   [#74](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/74), [#213](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/213),
-  [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217)
+  [#217](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/217), [#241](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/241),
+  [#253](https://github.com/AY2021S2-CS2113T-W09-2/tp/pull/253)
 
 ### Contributions beyond the project team
 
