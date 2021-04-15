@@ -39,7 +39,7 @@ iGraduate is a command line application that acts as a centralised hub for **NUS
 
 ## **User Guide Usage** ##
 
-This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise each feature, its proper formats and expected behaviours based on different sample inputs. The User Guide also explains when modules are stored in the computer and how it can be accessed and modified. There is also a list of frequently asked questions to answer any common queries. Finally, the user guide provides a command summary of all possible commands and the expected input for each command. 
+This user guide serves as a quick introduction to the application as well as provide instructions on when to utilise each feature, the format for each command, and the expected behaviour based on different sample inputs. The User Guide also explains when modules are stored in the computer and how it can be accessed and modified. There is also a list of frequently asked questions to answer any common queries. Finally, the user guide provides a summary of all commands, and the expected input for each command. 
 
 <br>The following symbols are used in this user guide: 
 
@@ -66,7 +66,7 @@ Symbols/Formatting | Description
    you can install it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
    > ℹ️ **Note:** You can check your version of Java by entering the command `java -version`
    on a command line interface like Command Prompt. 
-1. Download `iGraduate.jar` from latest github release [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
+1. Download `iGraduate.jar` from the latest GitHub release [here](https://github.com/AY2021S2-CS2113T-W09-2/tp/releases).
 1. Copy the file to the folder you want to use as the home folder for your iGraduate program.
 1. Run the program in command prompt using `java -jar iGraduate.jar` command.
 1. If the set-up is successful, the programme would look like this:
@@ -115,7 +115,7 @@ Adds a new module to the list of modules. This module can be one that you have t
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `add` command and its expected output(s). 
+The following section outlines some usages of the `add` command and its expected output(s). 
 
 `add Journey of the Innovator -c CP2201 -t ue -mc 2`
 ```
@@ -161,7 +161,7 @@ Deletes an *existing* module from the list of modules via the module `code`. The
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `delete` command and its expected output(s). 
+The following section outlines some usages of the `delete` command and its expected output(s). 
 
 `delete CS2100`
 
@@ -201,13 +201,13 @@ Updates relevant information (module `name`, `MCs`, `prerequisites` and/or `grad
 > - You cannot change the module type and code as iGraduate uses them to identify the modules. If you would like to remove the modules, use the [`delete` command](#delete-existing-module-delete) instead. 
 > - You can only update a module's grade if the module has been completed (see
 [`done` command](#mark-a-module-as-complete-done)). 
-> - If a grade is entered for an incomplete module, no grades will be added but the rest of the information in the command (if any) will be updated.
+> - You cannot update the grade of an incomplete module. 
 > - Although all parameters are optional, the update command requires at least 1 parameter to be used. 
 > - Module codes are **case-insensitive**. This means that module codes like `CS2102` and `cs2102` are considered the same. 
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `update` command and its expected output(s). 
+The following section outlines some usages of the `update` command and its expected output(s). 
 
 `update CS2106 -n Introduction to Operating Systems -mc 4 -g A -p CS1010,CS2100`
 
@@ -239,7 +239,7 @@ The done command marks a module on the list as completed. In addition, you must 
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `done` command and its expected output(s). 
+The following section outlines some usages of the `done` command and its expected output(s). 
 
 `done CS2106 -g A`
 
@@ -281,7 +281,7 @@ The info command shows the information of the specified module in a detailed man
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `info` command and its expected output(s). 
+The following section outlines some usages of the `info` command and its expected output(s). 
 
 `info CS2106`
 
@@ -337,7 +337,7 @@ The list command lists modules based on the option you provided. There are four 
 1. `incomplete` 
     - lists all added modules that has not been completed (i.e. modules that you are currently taking or yet to take)
 1. `available`
-    - lists all modules that can be taken (with prerequisites fulfilled, but have not been taken). 
+    - lists all incomplete modules that can be taken based on prerequisites fulfilled.
 
 You could also list specific type of modules by specifying a valid module type, `core`, `elec`, `ge` or `math` as an option. The list shows all module details
 **excluding** the module prerequisites. 
@@ -350,7 +350,7 @@ You could also list specific type of modules by specifying a valid module type, 
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `list` command and its expected output(s). 
+The following section outlines some usages of the `list` command and its expected output(s). 
 
 `list all`
 
@@ -379,7 +379,7 @@ Modules you have yet to complete:
 4. [E][X] LAJ1201  Japanese 1                                              NIL   4 MC
 --------------------------------------------------------------------------------------
 ```
-<sup>***Figure 1.6.2** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed (indicated with a "X").*</sup>
+<sup>***Figure 1.6.2** Expected results from listing `incomplete` modules. The list includes the module information that has been added but has not been completed (indicated with an "X").*</sup>
 
 `list complete`
 
@@ -473,7 +473,7 @@ Displays a bar that represents the current progress of your academic career. The
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `progress` command and its expected output(s). 
+The following section outlines some usages of the `progress` command and its expected output(s). 
 
 `progress`
 
@@ -504,7 +504,7 @@ Calculates your current Cumulative Average Point (CAP) according to the modules 
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `cap` command and its expected output(s). 
+The following section outlines some usages of the `cap` command and its expected output(s). 
 
 `cap`
 
@@ -531,7 +531,7 @@ Exits the program.
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `exit` command and its expected output(s). 
+The following section outlines some usages of the `exit` command and its expected output(s). 
 
 `exit`
 
@@ -561,7 +561,7 @@ Format:
 
 **Example of Usage(s) and Expected Outcome(s):**
 
-The following section outlines some of the usages of the `help` command and its expected output(s). 
+The following section outlines some usages of the `help` command and its expected output(s). 
 
 `help`
 
@@ -627,7 +627,7 @@ The IGraduate application data file is stored under the same folder where the IG
 > ℹ️ **Note:** 
 > - You are advised to add or remove new module data manually **only** if you understand the iGraduate's logic and `json` format. 
 > - Otherwise, please ensure that you modify only the value of module attributes if you are unsure of how the `json` structure works. 
-> - The application might not behave the way it is expected to if you modify the application data in an incorrect manner. For example, data corruption might occur. 
+> - The application might not behave the way it is expected to if you modify the application data incorrectly. For example, data corruption might occur. 
 
 The sample `Json` format for the module data file:
 <pre>
